@@ -251,6 +251,9 @@
     #mob-menu { display:none; flex-direction:column; gap:0; background:rgba(6,14,31,.98); backdrop-filter:blur(20px); }
     #mob-menu.open { display:flex; }
 
+    /* ===== SPINNER ===== */
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     /* ===== SCROLLBAR ===== */
     ::-webkit-scrollbar { width:5px; }
     ::-webkit-scrollbar-track { background:#060E1F; }
@@ -508,13 +511,13 @@
         </div>
 
         <div class="grid grid-cols-2 gap-4 mb-4">
-          <div><p class="calc-label mb-1.5">Purchase Price (S$)</p><input type="number" id="c-price" class="calc-input" value="800000" oninput="onPriceChange()"></div>
+          <div><p class="calc-label mb-1.5">Purchase Price (S$)</p><input type="text" inputmode="numeric" id="c-price" class="calc-input" value="800,000" oninput="onPriceChange()"></div>
           <div>
             <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.375rem;">
               <p class="calc-label">Down Payment (S$)</p>
               <span id="dp-pct-badge" style="font-size:.68rem;font-weight:600;letter-spacing:.06em;padding:.15rem .55rem;border-radius:100px;background:rgba(196,151,59,.15);color:var(--gold-400);border:1px solid rgba(196,151,59,.25);">25.0%</span>
             </div>
-            <input type="number" id="c-down" class="calc-input" value="200000" oninput="onDownChange()">
+            <input type="text" inputmode="numeric" id="c-down" class="calc-input" value="200,000" oninput="onDownChange()">
             <div id="dp-warning" style="display:none;margin-top:.4rem;font-size:.73rem;color:#F87171;display:flex;align-items:center;gap:.35rem;">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               <span id="dp-warning-text"></span>
@@ -523,15 +526,15 @@
           </div>
         </div>
         <div class="grid grid-cols-2 gap-4 mb-5">
-          <div><p class="calc-label mb-1.5">Interest Rate (% p.a.)</p><input type="number" id="c-rate" class="calc-input" value="3.20" step="0.05" oninput="calc()"></div>
-          <div><p class="calc-label mb-1.5">Loan Tenure (Years)</p><input type="number" id="c-yrs" class="calc-input" value="25" min="1" max="35" oninput="calc()"></div>
+          <div><p class="calc-label mb-1.5">Interest Rate (% p.a.)</p><input type="number" id="c-rate" class="calc-input" value="2.00" step="0.05" oninput="calc()"></div>
+          <div><p class="calc-label mb-1.5">Loan Tenure (Years)</p><input type="number" id="c-yrs" class="calc-input" value="30" min="1" max="35" oninput="calc()"></div>
         </div>
 
         <!-- Affordability -->
         <div style="background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.15);border-radius:9px;padding:1.25rem;">
           <p class="calc-label mb-3">Affordability Check (TDSR / MSR)</p>
           <p class="calc-label mb-1.5">Gross Monthly Income (S$)</p>
-          <input type="number" id="c-income" class="calc-input" value="8000" oninput="calc()">
+          <input type="text" inputmode="numeric" id="c-income" class="calc-input" value="8,000" oninput="calc()">
           <div class="mt-4" id="ratio-area"></div>
         </div>
       </div>
@@ -672,17 +675,17 @@
       <div class="grid sm:grid-cols-2 gap-4 mb-4">
         <div>
           <p style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">Full Name *</p>
-          <input type="text" required class="f-input" placeholder="Your name">
+          <input type="text" name="name" required class="f-input" placeholder="Your name">
         </div>
         <div>
           <p style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">Contact Number *</p>
-          <input type="tel" required class="f-input" placeholder="+65 XXXX XXXX">
+          <input type="tel" name="phone" required class="f-input" placeholder="+65 XXXX XXXX">
         </div>
       </div>
       <div class="grid sm:grid-cols-2 gap-4 mb-4">
         <div>
           <p style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">Loan Purpose</p>
-          <select class="f-input f-select">
+          <select name="loan_purpose" class="f-input f-select">
             <option value="" style="background:#0B1C3A">Select purpose…</option>
             <option style="background:#0B1C3A">New Purchase — HDB</option>
             <option style="background:#0B1C3A">New Purchase — Private</option>
@@ -696,18 +699,25 @@
         </div>
         <div>
           <p style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">Loan Amount (S$)</p>
-          <input type="text" class="f-input" placeholder="e.g. 800,000">
+          <input type="text" name="loan_amount" class="f-input" placeholder="e.g. 800,000">
         </div>
       </div>
       <div class="mb-5">
         <p style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">Additional Notes</p>
-        <textarea rows="3" class="f-input" placeholder="Specific requirements, timeline, or questions…" style="resize:vertical;"></textarea>
+        <textarea name="notes" rows="3" class="f-input" placeholder="Specific requirements, timeline, or questions…" style="resize:vertical;"></textarea>
       </div>
       <p style="font-size:.73rem;color:rgba(250,247,242,.28);line-height:1.65;margin-bottom:1.25rem;">By submitting, you consent to us contacting you regarding your mortgage enquiry. Your personal data is protected under Singapore's PDPA.</p>
+
+      <!-- Error message -->
+      <div id="form-error" style="display:none;margin-bottom:1rem;padding:.75rem 1rem;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:7px;font-size:.85rem;color:#F87171;">
+        Something went wrong. Please try again or WhatsApp us directly.
+      </div>
+
       <div class="flex flex-col sm:flex-row gap-3">
-        <button type="submit" class="btn-gold flex-1 justify-center" style="display:flex;">
-          Submit Enquiry
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <button type="submit" id="submit-btn" class="btn-gold flex-1 justify-center" style="display:flex;">
+          <span id="submit-label">Submit Enquiry</span>
+          <span id="submit-spinner" style="display:none;width:16px;height:16px;border:2px solid rgba(11,28,58,.3);border-top-color:#0B1C3A;border-radius:50%;animation:spin .7s linear infinite;"></span>
+          <svg id="submit-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
         <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20mortgage%20consultation." target="_blank" class="btn-ghost flex-1 justify-center" style="display:flex;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -813,14 +823,43 @@ const fmtK = n => {
   return 'S$'+Math.round(n);
 };
 
+// ── Comma-formatting helpers ──────────────────────────────────────────────────
+// Strip commas/spaces and return plain number
+function raw(id) {
+  return +(document.getElementById(id).value.replace(/,/g,'')) || 0;
+}
+
+// Format a number string with thousand-separator commas
+function fmtInput(val) {
+  const digits = String(val).replace(/\D/g,'');
+  if (!digits) return '';
+  return digits.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+// Attach live comma-formatter to a text input; preserves cursor position
+function attachFormatter(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener('input', function() {
+    const pos   = this.selectionStart;
+    const raw   = this.value.replace(/,/g,'');
+    const commasBefore = (this.value.slice(0, pos).match(/,/g) || []).length;
+    const formatted = fmtInput(raw);
+    this.value   = formatted;
+    const commasAfter = (formatted.slice(0, pos).match(/,/g) || []).length;
+    const newPos = Math.max(0, pos + (commasAfter - commasBefore));
+    this.setSelectionRange(newPos, newPos);
+  });
+}
+
 // When price changes: auto-adjust down payment to maintain min 25%
 function onPriceChange() {
-  const price = +document.getElementById('c-price').value || 0;
-  const down  = +document.getElementById('c-down').value  || 0;
+  const price = raw('c-price');
+  const down  = raw('c-down');
   const minDP = Math.ceil(price * 0.25);
   // If current down payment is below minimum, auto-correct it
   if (price > 0 && down < minDP) {
-    document.getElementById('c-down').value = minDP;
+    document.getElementById('c-down').value = fmtInput(minDP);
   }
   validateDown();
   calc();
@@ -833,8 +872,8 @@ function onDownChange() {
 }
 
 function validateDown() {
-  const price  = +document.getElementById('c-price').value || 0;
-  const down   = +document.getElementById('c-down').value  || 0;
+  const price  = raw('c-price');
+  const down   = raw('c-down');
   const badge  = document.getElementById('dp-pct-badge');
   const warn   = document.getElementById('dp-warning');
   const warnTx = document.getElementById('dp-warning-text');
@@ -842,15 +881,13 @@ function validateDown() {
 
   if (price <= 0) return;
 
-  const pct    = (down / price) * 100;
-  const minDP  = price * 0.25;
+  const pct   = (down / price) * 100;
+  const minDP = price * 0.25;
 
   // Update % badge
   badge.textContent = pct.toFixed(1) + '%';
 
-  const isHDB = ptype === 'hdb';
   // MAS rules: min 25% for bank loans (both HDB and private)
-  // LTV cap: 75% (bank loan), max 80% (HDB loan — but we're comparing bank loans)
   const minPct = 25;
   const maxLTV = 75;
 
@@ -863,7 +900,6 @@ function validateDown() {
     const shortfall = Math.ceil(minDP - down).toLocaleString('en-SG');
     warnTx.textContent = `Below 25% minimum — need S$${shortfall} more`;
   } else if (pct > maxLTV) {
-    // Down payment so high that loan < 25% — that's fine, just note it
     badge.style.background = 'rgba(196,151,59,.15)';
     badge.style.color = 'var(--gold-400)';
     badge.style.borderColor = 'rgba(196,151,59,.25)';
@@ -873,25 +909,33 @@ function validateDown() {
     badge.style.background = 'rgba(74,222,128,.12)';
     badge.style.color = '#4ADE80';
     badge.style.borderColor = 'rgba(74,222,128,.3)';
-    inp.style.borderColor = 'rgba(196,151,59,.2)'; // reset
+    inp.style.borderColor = 'rgba(196,151,59,.2)';
     warn.style.display = 'none';
   }
 }
 
 function calc() {
-  const price  = +document.getElementById('c-price').value  || 0;
-  const down   = +document.getElementById('c-down').value   || 0;
+  const price  = raw('c-price');
+  const down   = raw('c-down');
   const annR   = +document.getElementById('c-rate').value   || 0;
   const yrs    = +document.getElementById('c-yrs').value    || 0;
-  const income = +document.getElementById('c-income').value || 0;
+  const income = raw('c-income');
 
   const loan = Math.max(0, price - down);
   const r    = annR / 100 / 12;
   const n    = yrs * 12;
 
+  // Actual monthly payment at user's input rate
   let monthly = 0;
   if (r > 0 && n > 0 && loan > 0)  monthly = loan * (r * Math.pow(1+r,n)) / (Math.pow(1+r,n) - 1);
   else if (n > 0 && loan > 0)      monthly = loan / n;
+
+  // MAS stress-test: affordability assessed at max(actual_rate, 4.0%)
+  const stressAnnR = Math.max(annR, 4.0);
+  const rS = stressAnnR / 100 / 12;
+  let stressMonthly = 0;
+  if (rS > 0 && n > 0 && loan > 0)  stressMonthly = loan * (rS * Math.pow(1+rS,n)) / (Math.pow(1+rS,n) - 1);
+  else if (n > 0 && loan > 0)       stressMonthly = loan / n;
 
   const totInt = monthly * n - loan;
 
@@ -899,20 +943,22 @@ function calc() {
   document.getElementById('r-interest').textContent = loan > 0 ? fmtK(totInt)  : '—';
   document.getElementById('r-loan').textContent     = loan > 0 ? fmtK(loan)    : '—';
 
-  updateRatios(monthly, income);
+  updateRatios(monthly, stressMonthly, income);
   buildTable(loan, r, monthly, n, yrs);
   drawChart(loan, r, monthly, n, yrs);
 }
 
-function updateRatios(monthly, income) {
+function updateRatios(monthly, stressMonthly, income) {
   const box = document.getElementById('ratio-area');
   if (!income || income <= 0 || monthly <= 0) {
     box.innerHTML = '<p style="font-size:.8rem;color:rgba(250,247,242,.32);">Enter your income above to check eligibility.</p>';
     return;
   }
-  const pct    = (monthly / income) * 100;
-  const tOk    = pct <= 55;
-  const mOk    = pct <= 30;
+
+  // TDSR / MSR bars use stress-test payment (MAS requirement)
+  const sPct   = (stressMonthly / income) * 100;
+  const tOk    = sPct <= 55;
+  const mOk    = sPct <= 30;
   const tColor = tOk  ? '#4ADE80' : '#F87171';
   const mColor = mOk  ? '#4ADE80' : '#F87171';
 
@@ -920,12 +966,12 @@ function updateRatios(monthly, income) {
     <div style="margin-bottom:.9rem;">
       <div style="display:flex;justify-content:space-between;margin-bottom:.35rem;">
         <span style="font-size:.73rem;color:rgba(250,247,242,.45);font-weight:500;">TDSR (max 55%)</span>
-        <span style="font-size:.73rem;font-weight:600;color:${tColor};">${pct.toFixed(1)}% ${tOk?'✓ OK':'✗ Exceeds limit'}</span>
+        <span style="font-size:.73rem;font-weight:600;color:${tColor};">${sPct.toFixed(1)}% ${tOk?'✓ OK':'✗ Exceeds limit'}</span>
       </div>
-      <div class="ratio-bar"><div class="ratio-fill" style="width:${Math.min(pct,100)}%;background:${tOk?'linear-gradient(90deg,#4ADE80,#22C55E)':'linear-gradient(90deg,#F87171,#EF4444)'};"></div></div>
+      <div class="ratio-bar"><div class="ratio-fill" style="width:${Math.min(sPct,100)}%;background:${tOk?'linear-gradient(90deg,#4ADE80,#22C55E)':'linear-gradient(90deg,#F87171,#EF4444)'};"></div></div>
       <div style="display:flex;justify-content:space-between;margin-top:.22rem;">
         <span style="font-size:.67rem;color:rgba(250,247,242,.22);">0%</span>
-        <span style="font-size:.67rem;color:rgba(250,247,242,.22);">55% limit</span>
+        <span style="font-size:.67rem;color:rgba(250,247,242,.22);">55% limit · stress-tested @ 4%</span>
       </div>
     </div>`;
 
@@ -934,12 +980,12 @@ function updateRatios(monthly, income) {
     <div>
       <div style="display:flex;justify-content:space-between;margin-bottom:.35rem;">
         <span style="font-size:.73rem;color:rgba(250,247,242,.45);font-weight:500;">MSR — HDB only (max 30%)</span>
-        <span style="font-size:.73rem;font-weight:600;color:${mColor};">${pct.toFixed(1)}% ${mOk?'✓ OK':'✗ Exceeds limit'}</span>
+        <span style="font-size:.73rem;font-weight:600;color:${mColor};">${sPct.toFixed(1)}% ${mOk?'✓ OK':'✗ Exceeds limit'}</span>
       </div>
-      <div class="ratio-bar"><div class="ratio-fill" style="width:${Math.min(pct,100)}%;background:${mOk?'linear-gradient(90deg,#4ADE80,#22C55E)':'linear-gradient(90deg,#F87171,#EF4444)'};"></div></div>
+      <div class="ratio-bar"><div class="ratio-fill" style="width:${Math.min(sPct,100)}%;background:${mOk?'linear-gradient(90deg,#4ADE80,#22C55E)':'linear-gradient(90deg,#F87171,#EF4444)'};"></div></div>
       <div style="display:flex;justify-content:space-between;margin-top:.22rem;">
         <span style="font-size:.67rem;color:rgba(250,247,242,.22);">0%</span>
-        <span style="font-size:.67rem;color:rgba(250,247,242,.22);">30% limit</span>
+        <span style="font-size:.67rem;color:rgba(250,247,242,.22);">30% limit · stress-tested @ 4%</span>
       </div>
     </div>`;
   }
@@ -1045,14 +1091,55 @@ function drawChart(loan, r, monthly, n, yrs) {
 }
 
 // ===== FORM =====
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
-  document.getElementById('lead-form').style.display = 'none';
-  document.getElementById('thankyou').style.display = 'block';
+  const form    = document.getElementById('lead-form');
+  const btn     = document.getElementById('submit-btn');
+  const label   = document.getElementById('submit-label');
+  const spinner = document.getElementById('submit-spinner');
+  const arrow   = document.getElementById('submit-arrow');
+  const errBox  = document.getElementById('form-error');
+
+  // Loading state
+  btn.disabled = true;
+  label.textContent = 'Sending…';
+  spinner.style.display = 'inline-block';
+  arrow.style.display   = 'none';
+  errBox.style.display  = 'none';
+
+  try {
+    const data = new FormData(form);
+    const res  = await fetch('https://formspree.io/f/xojpnjpn', {
+      method:  'POST',
+      body:    data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      // Success — show thank you
+      form.style.display = 'none';
+      document.getElementById('thankyou').style.display = 'block';
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (err) {
+    // Reset button and show error
+    btn.disabled = false;
+    label.textContent = 'Submit Enquiry';
+    spinner.style.display = 'none';
+    arrow.style.display   = 'inline-block';
+    errBox.style.display  = 'block';
+  }
 }
 
 // ===== INIT =====
-window.addEventListener('load', () => { validateDown(); calc(); });
+window.addEventListener('load', () => {
+  attachFormatter('c-price');
+  attachFormatter('c-down');
+  attachFormatter('c-income');
+  validateDown();
+  calc();
+});
 window.addEventListener('resize', () => { calc(); });
 </script>
 </body>
