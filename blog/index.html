@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property & Finance Insights | Nexus Mortgage SG</title>
+  <meta name="description" content="Expert analysis on Singapore mortgages, SME lending, and real estate strategy. In-depth guides on TDSR, MSR, HDB vs bank loans, and MAS regulations.">
+  <meta name="keywords" content="Singapore mortgage insights, MAS stress test, TDSR guide, HDB loan vs bank loan, SME caveat loan, property finance Singapore">
+  <meta property="og:title" content="Property & Finance Insights | Nexus Mortgage SG">
+  <meta property="og:description" content="Expert analysis on Singapore mortgages, SME lending, and real estate strategy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nexusmortgage.sg/blog/">
+  <link rel="canonical" href="https://nexusmortgage.sg/blog/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 950:'#060E1F', 900:'#0B1C3A', 800:'#122244', 700:'#1A2F55' },
+            gold: { 300:'#F0D98A', 400:'#E8C97A', 500:'#C4973B', 600:'#A67C2E' },
+            cream: { 50:'#FDFCFA', 100:'#FAF7F2', 200:'#F5F0E6', 300:'#EDE5D4' }
+          },
+          fontFamily: {
+            display: ['Cormorant Garamond','Georgia','serif'],
+            body: ['DM Sans','sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy-950: #060E1F;
+      --navy-900: #0B1C3A;
+      --navy-800: #122244;
+      --gold-500: #C4973B;
+      --gold-400: #E8C97A;
+      --gold-300: #F0D98A;
+      --cream-100: #FAF7F2;
+      --cream-200: #F5F0E6;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream-100); color: #1A1A2E; overflow-x: hidden; }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+
+    .gold-line { height:1px; background:linear-gradient(90deg,transparent,var(--gold-500),transparent); }
+    .gold-line-v { width:1px; background:linear-gradient(180deg,transparent,var(--gold-500),transparent); }
+
+    /* Reveal animations */
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.75s cubic-bezier(.25,.8,.25,1), transform 0.75s cubic-bezier(.25,.8,.25,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .delay-1 { transition-delay:.1s; } .delay-2 { transition-delay:.2s; }
+    .delay-3 { transition-delay:.3s; } .delay-4 { transition-delay:.4s; }
+
+    /* ===== NAVBAR ===== */
+    #navbar { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.35rem 0; transition:background .4s,box-shadow .4s,padding .4s; }
+    #navbar.scrolled { background:rgba(6,14,31,0.96); backdrop-filter:blur(16px); box-shadow:0 2px 40px rgba(0,0,0,.45); padding:.9rem 0; }
+    .nav-link { font-size:.8rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:rgba(250,247,242,.7); transition:color .25s; text-decoration:none; }
+    .nav-link:hover { color:var(--gold-400); }
+    .nav-link.active { color:var(--gold-400); }
+
+    .btn-gold {
+      display:inline-flex; align-items:center; gap:.6rem;
+      background:linear-gradient(135deg,#C4973B,#E8C97A);
+      color:#0B1C3A; font-weight:600; font-size:.85rem; letter-spacing:.04em;
+      padding:.9rem 2rem; border-radius:5px; border:none; cursor:pointer;
+      transition:transform .2s,box-shadow .2s; text-decoration:none;
+      box-shadow:0 4px 24px rgba(196,151,59,.35);
+    }
+    .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 36px rgba(196,151,59,.5); }
+    .btn-gold:active { transform:translateY(0); }
+
+    .btn-ghost {
+      display:inline-flex; align-items:center; gap:.6rem;
+      background:transparent; color:rgba(250,247,242,.8);
+      font-weight:500; font-size:.85rem; letter-spacing:.04em;
+      padding:.9rem 1.75rem; border-radius:5px;
+      border:1px solid rgba(250,247,242,.18); cursor:pointer;
+      transition:border-color .25s,color .25s,background .25s; text-decoration:none;
+    }
+    .btn-ghost:hover { border-color:rgba(196,151,59,.5); color:var(--gold-400); background:rgba(196,151,59,.06); }
+
+    /* ===== MOBILE MENU ===== */
+    #mob-menu { display:none; flex-direction:column; gap:0; background:rgba(6,14,31,.98); backdrop-filter:blur(20px); }
+    #mob-menu.open { display:flex; }
+
+    /* ===== SECTION LABELS ===== */
+    .sec-tag { font-size:.7rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--gold-500); display:block; margin-bottom:.875rem; }
+    .sec-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3.25rem); font-weight:400; line-height:1.08; letter-spacing:-.02em; }
+
+    /* ===== HERO ===== */
+    #blog-hero {
+      min-height: 52vh;
+      background: var(--navy-950);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg-blog {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(196,151,59,.07) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 80% at 80% 20%, rgba(18,34,68,.85) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 50% at 50% 100%, rgba(6,14,31,.8) 0%, transparent 80%);
+    }
+    /* Decorative ruled lines */
+    .hero-deco-blog {
+      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+    }
+    .hero-deco-blog::before {
+      content: ''; position: absolute;
+      bottom: -10%; left: -5%; width: 55%; height: 80%;
+      border: 1px solid rgba(196,151,59,.08); border-radius: 4px;
+      transform: rotate(-12deg);
+    }
+    .hero-deco-blog::after {
+      content: ''; position: absolute;
+      bottom: -20%; left: 8%; width: 38%; height: 60%;
+      border: 1px solid rgba(196,151,59,.05); border-radius: 4px;
+      transform: rotate(-12deg);
+    }
+    .hero-tag {
+      display:inline-flex; align-items:center; gap:.5rem;
+      background:rgba(196,151,59,.1); border:1px solid rgba(196,151,59,.28);
+      color:var(--gold-400); font-size:.72rem; font-weight:500;
+      letter-spacing:.13em; text-transform:uppercase;
+      padding:.35rem 1rem; border-radius:100px; margin-bottom:1.5rem;
+    }
+
+    /* ===== ARTICLE CARDS ===== */
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+    @media (min-width: 1024px) {
+      .article-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .article-card {
+      background: white;
+      border: 1px solid rgba(196,151,59,.15);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform .32s cubic-bezier(.25,.8,.25,1), box-shadow .32s, border-color .32s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .article-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 0 1px rgba(196,151,59,.38), 0 20px 60px rgba(11,28,58,.14), 0 8px 24px rgba(196,151,59,.12);
+      border-color: rgba(196,151,59,.42);
+    }
+    /* Gold glow on hover via box-shadow */
+    .article-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 14px;
+      box-shadow: inset 0 0 0 1px rgba(196,151,59,0);
+      transition: box-shadow .32s;
+      pointer-events: none;
+    }
+    .article-card:hover::after {
+      box-shadow: inset 0 0 30px 0px rgba(196,151,59,.07), 0 0 40px 0px rgba(196,151,59,.08);
+    }
+    /* Gold top accent line */
+    .article-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+      opacity: 0; transition: opacity .32s; z-index: 1;
+    }
+    .article-card:hover::before { opacity: 1; }
+
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--navy-800) 0%, var(--navy-950) 100%);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .card-thumb-inner {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: .5rem;
+    }
+    .card-thumb svg { opacity: .18; }
+    .card-thumb-label {
+      font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(250,247,242,.25); font-weight: 500;
+    }
+
+    .card-body {
+      padding: 1.5rem 1.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card-meta {
+      display: flex; flex-wrap: wrap; align-items: center; gap: .6rem;
+      margin-bottom: .9rem;
+    }
+    .card-tag {
+      font-size: .63rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gold-400); background: rgba(196,151,59,.1);
+      border: 1px solid rgba(196,151,59,.22);
+      padding: .22rem .65rem; border-radius: 100px;
+    }
+    .card-date {
+      font-size: .71rem; color: rgba(26,26,46,.38); letter-spacing: .03em;
+    }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.22rem; font-weight: 600; line-height: 1.25;
+      color: #0B1C3A; letter-spacing: -.01em;
+      margin-bottom: .65rem;
+    }
+    .card-excerpt {
+      font-size: .875rem; color: #6B7280; line-height: 1.68;
+      flex: 1;
+    }
+    .card-cta {
+      margin-top: 1.25rem;
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: linear-gradient(135deg,#C4973B,#E8C97A);
+      color: #0B1C3A; font-weight: 600; font-size: .78rem; letter-spacing: .05em;
+      padding: .6rem 1.3rem; border-radius: 5px;
+      box-shadow: 0 3px 16px rgba(196,151,59,.3);
+      transition: transform .2s, box-shadow .2s;
+      align-self: flex-start;
+    }
+    .article-card:hover .card-cta {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 26px rgba(196,151,59,.45);
+    }
+
+    /* Coming Soon card variant */
+    .article-card.coming-soon {
+      opacity: .72;
+      cursor: default;
+      pointer-events: none;
+    }
+    .coming-soon-badge {
+      position: absolute; top: 1rem; right: 1rem; z-index: 2;
+      font-size: .6rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      background: rgba(196,151,59,.14); border: 1px solid rgba(196,151,59,.3);
+      color: var(--gold-500); padding: .2rem .65rem; border-radius: 100px;
+    }
+    .card-cta.disabled {
+      background: rgba(180,180,180,.15);
+      color: rgba(26,26,46,.35);
+      box-shadow: none;
+      border: 1px solid rgba(26,26,46,.1);
+    }
+
+    /* ===== CTA STRIP ===== */
+    #cta-strip {
+      background: var(--navy-900);
+      border-top: 1px solid rgba(196,151,59,.14);
+      border-bottom: 1px solid rgba(196,151,59,.14);
+    }
+
+    /* ===== WHATSAPP FLOAT ===== */
+    #wa-float {
+      position:fixed; bottom:2rem; right:2rem; z-index:200;
+      width:58px; height:58px; background:#25D366; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 6px 28px rgba(37,211,102,.42); cursor:pointer;
+      transition:transform .2s,box-shadow .2s; text-decoration:none;
+    }
+    #wa-float:hover { transform:scale(1.1); box-shadow:0 10px 36px rgba(37,211,102,.55); }
+    #wa-float:active { transform:scale(.95); }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track { background:#060E1F; }
+    ::-webkit-scrollbar-thumb { background:rgba(196,151,59,.3); border-radius:3px; }
+  </style>
+</head>
+<body>
+
+<!-- =========== FLOATING WHATSAPP =========== -->
+<a id="wa-float" href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" rel="noopener" aria-label="WhatsApp Us">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- =========== NAVBAR =========== -->
+<nav id="navbar">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <a href="../" style="text-decoration:none; line-height:1; display:flex; flex-direction:column;">
+      <span style="font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:600; color:#FAF7F2; letter-spacing:-.01em;">NEXUS</span>
+      <span style="font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold-500); font-weight:500; margin-top:-1px;">MORTGAGE · SG</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-9">
+      <a href="../#services" class="nav-link">Services</a>
+      <a href="../#calculator" class="nav-link">Calculator</a>
+      <a href="../#banks" class="nav-link">Banks</a>
+      <a href="../#why" class="nav-link">Why Us</a>
+      <a href="../#contact" class="nav-link">Contact</a>
+      <a href="/blog/" class="nav-link active">Insights</a>
+    </div>
+
+    <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" class="hidden md:inline-flex btn-gold" style="padding:.6rem 1.4rem; font-size:.78rem;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Free Consultation
+    </a>
+
+    <button class="md:hidden p-1.5" onclick="toggleMenu()" style="background:none;border:none;cursor:pointer;color:#FAF7F2;">
+      <svg id="menu-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div id="mob-menu" class="mt-3 pb-4 px-6">
+    <a href="../#services" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)" onclick="toggleMenu()">Services</a>
+    <a href="../#calculator" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)" onclick="toggleMenu()">Calculator</a>
+    <a href="../#banks" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)" onclick="toggleMenu()">Banks</a>
+    <a href="../#why" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)" onclick="toggleMenu()">Why Us</a>
+    <a href="../#contact" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)" onclick="toggleMenu()">Contact</a>
+    <a href="/blog/" class="nav-link block py-3.5" style="color:var(--gold-400);border-bottom:1px solid rgba(196,151,59,.1)" onclick="toggleMenu()">Insights</a>
+    <a href="https://wa.me/6587520859" target="_blank" class="btn-gold mt-4 w-full justify-center" style="display:flex;">WhatsApp Us</a>
+  </div>
+</nav>
+
+<!-- =========== HERO =========== -->
+<section id="blog-hero">
+  <div class="hero-bg-blog"></div>
+  <div class="hero-deco-blog"></div>
+
+  <div class="max-w-7xl mx-auto px-6 w-full relative z-10" style="padding-top:9rem; padding-bottom:5rem;">
+    <div class="reveal">
+      <div class="hero-tag">
+        <span style="width:5px;height:5px;border-radius:50%;background:var(--gold-400);display:inline-block;flex-shrink:0;"></span>
+        Nexus Mortgage · Insights
+      </div>
+      <h1 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.6rem,6vw,5rem); font-weight:300; line-height:1.06; letter-spacing:-.025em; color:#FAF7F2; max-width:700px; margin-bottom:1.25rem;">
+        Property &amp; Finance<br><em style="font-style:italic; color:var(--gold-400);">Insights</em>
+      </h1>
+      <p style="font-size:1.0625rem; font-weight:300; line-height:1.8; color:rgba(250,247,242,.58); max-width:520px;">
+        Expert analysis on Singapore mortgages, SME lending, and real estate strategy.
+      </p>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="reveal delay-2" style="margin-top:2.5rem; display:flex; align-items:center; gap:.5rem;">
+      <a href="../" style="font-size:.72rem; color:rgba(250,247,242,.35); text-decoration:none; letter-spacing:.05em; transition:color .2s;" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.35)'">Home</a>
+      <span style="color:rgba(250,247,242,.2); font-size:.72rem;">/</span>
+      <span style="font-size:.72rem; color:var(--gold-400); letter-spacing:.05em;">Insights</span>
+    </div>
+  </div>
+
+  <!-- Bottom gold divider -->
+  <div class="gold-line" style="position:absolute; bottom:0; left:0; right:0; opacity:.35;"></div>
+</section>
+
+
+<!-- =========== ARTICLE GRID =========== -->
+<section style="background:var(--cream-100); padding:5rem 0 6rem;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- Section header -->
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 reveal">
+      <div>
+        <span class="sec-tag">All Articles</span>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.6rem,3vw,2.25rem); font-weight:400; color:#0B1C3A; line-height:1.1; letter-spacing:-.02em;">
+          In-Depth Guides &amp; <em style="font-style:italic; color:var(--gold-500);">Analysis</em>
+        </h2>
+      </div>
+      <p style="font-size:.875rem; color:#9CA3AF; max-width:340px; line-height:1.7;">
+        Practical, unbiased breakdowns of Singapore's mortgage regulations and lending landscape.
+      </p>
+    </div>
+
+    <!-- ── GRID ── -->
+    <div class="article-grid">
+
+      <!-- ── CARD 1: MAS Stress Test (FEATURED / LIVE) ── -->
+      <a href="./blog-mas-stress-test-2026.html" class="article-card reveal delay-1" id="card-mas-stress-test">
+        <!-- Thumbnail -->
+        <div class="card-thumb">
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0B1C3A 0%,#1A2F55 50%,#060E1F 100%);"></div>
+          <!-- Decorative radial glow -->
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70%;height:70%;background:radial-gradient(ellipse,rgba(196,151,59,.18) 0%,transparent 70%);"></div>
+          <div class="card-thumb-inner">
+            <!-- Icon: percent / stress test -->
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.55)" stroke-width="1.2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 14l8-4"/>
+              <circle cx="9.5" cy="9.5" r="1.5" fill="rgba(196,151,59,.45)" stroke="none"/>
+              <circle cx="14.5" cy="14.5" r="1.5" fill="rgba(196,151,59,.45)" stroke="none"/>
+            </svg>
+            <!-- Subtle label below icon -->
+            <span class="card-thumb-label">MAS Regulation</span>
+          </div>
+          <!-- Gold shimmer bar at bottom -->
+          <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(196,151,59,.6),transparent);"></div>
+        </div>
+
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-tag">MAS Regulation</span>
+            <span class="card-date">April 2026 &nbsp;·&nbsp; 6 min read</span>
+          </div>
+          <h3 class="card-title">Understanding the MAS 4% Stress Test</h3>
+          <p class="card-excerpt">
+            Learn how the 2026 MAS floor rate affects your TDSR and MSR eligibility before you buy. A must-read for every Singapore property purchaser.
+          </p>
+          <span class="card-cta">
+            Read More
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- ── CARD 2: HDB vs Bank Loans (COMING SOON) ── -->
+      <div class="article-card coming-soon reveal delay-2" id="card-hdb-vs-bank">
+        <span class="coming-soon-badge">Coming Soon</span>
+
+        <!-- Thumbnail -->
+        <div class="card-thumb">
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0D1F3A 0%,#122244 60%,#0B1C3A 100%);"></div>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:65%;height:65%;background:radial-gradient(ellipse,rgba(26,47,85,.7) 0%,transparent 70%);"></div>
+          <div class="card-thumb-inner">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.4)" stroke-width="1.2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span class="card-thumb-label">HDB & Home Loans</span>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(196,151,59,.35),transparent);"></div>
+        </div>
+
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-tag">Home Loans</span>
+            <span class="card-date">Coming Soon</span>
+          </div>
+          <h3 class="card-title">HDB vs Bank Loans: Which Is Right for You?</h3>
+          <p class="card-excerpt">
+            A definitive comparison of HDB concessionary loans and bank loans — eligibility, interest rates, flexibility, and the true cost of each over a 25-year tenure.
+          </p>
+          <span class="card-cta disabled">
+            Coming Soon
+          </span>
+        </div>
+      </div>
+
+      <!-- ── CARD 3: SME Caveat Loans (COMING SOON) ── -->
+      <div class="article-card coming-soon reveal delay-3" id="card-sme-caveat">
+        <span class="coming-soon-badge">Coming Soon</span>
+
+        <!-- Thumbnail -->
+        <div class="card-thumb">
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0A1830 0%,#152040 60%,#08131F 100%);"></div>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:65%;height:65%;background:radial-gradient(ellipse,rgba(196,151,59,.1) 0%,transparent 70%);"></div>
+          <div class="card-thumb-inner">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.4)" stroke-width="1.2">
+              <rect x="2" y="7" width="20" height="14" rx="2"/>
+              <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+              <line x1="12" y1="12" x2="12" y2="16"/>
+              <line x1="10" y1="14" x2="14" y2="14"/>
+            </svg>
+            <span class="card-thumb-label">SME Lending</span>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(196,151,59,.35),transparent);"></div>
+        </div>
+
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-tag">SME Lending</span>
+            <span class="card-date">Coming Soon</span>
+          </div>
+          <h3 class="card-title">SME Caveat Loans: How Property-Backed Financing Works</h3>
+          <p class="card-excerpt">
+            A plain-English guide to SME caveat loans in Singapore — how lenders calculate LTV against existing bank mortgages and CPF charges, and what business owners need to know.
+          </p>
+          <span class="card-cta disabled">
+            Coming Soon
+          </span>
+        </div>
+      </div>
+
+    </div><!-- /article-grid -->
+  </div>
+</section>
+
+
+<!-- =========== CTA STRIP =========== -->
+<section id="cta-strip" style="padding:4.5rem 0;">
+  <div class="max-w-4xl mx-auto px-6 text-center reveal">
+    <span class="sec-tag" style="justify-content:center; display:block;">Free Consultation</span>
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.9rem); font-weight:400; color:#FAF7F2; line-height:1.1; letter-spacing:-.02em; margin-bottom:1rem;">
+      Have a mortgage question?<br><em style="font-style:italic; color:var(--gold-400);">We'd love to help.</em>
+    </h2>
+    <p style="font-size:.9375rem; color:rgba(250,247,242,.45); line-height:1.8; max-width:480px; margin:0 auto 2rem;">
+      Our advisors compare every major Singapore bank — free of charge. Get a personalised rate assessment via WhatsApp today.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" class="btn-gold">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us Now
+      </a>
+      <a href="../#calculator" class="btn-ghost">
+        Try Mortgage Calculator
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========== FOOTER =========== -->
+<footer style="background:#060E1F; border-top:1px solid rgba(196,151,59,.14);">
+  <div class="max-w-7xl mx-auto px-6 py-14">
+    <div class="grid md:grid-cols-4 gap-10 mb-10">
+
+      <div class="md:col-span-2">
+        <div style="line-height:1;margin-bottom:1rem;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:600;color:#FAF7F2;display:block;">NEXUS</span>
+          <span style="font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-500);font-weight:500;">MORTGAGE · SINGAPORE</span>
+        </div>
+        <p style="font-size:.875rem;color:rgba(250,247,242,.38);line-height:1.78;max-width:300px;">Singapore's trusted mortgage broker. We compare all major bank packages to secure you the best home loan — free of charge.</p>
+        <a href="https://wa.me/6587520859" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin-top:1.25rem;background:rgba(255,255,255,.06);border:1px solid rgba(196,151,59,.2);border-radius:7px;color:rgba(250,247,242,.55);transition:all .25s;text-decoration:none;" onmouseover="this.style.borderColor='rgba(196,151,59,.5)';this.style.color='var(--gold-400)'" onmouseout="this.style.borderColor='rgba(196,151,59,.2)';this.style.color='rgba(250,247,242,.55)'">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </div>
+
+      <div>
+        <p style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">Services</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.45rem;">
+          <li><a href="../#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Residential Loan</a></li>
+          <li><a href="../#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Commercial Loan</a></li>
+          <li><a href="../#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Refinancing</a></li>
+          <li><a href="../#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Cash Out / Equity</a></li>
+          <li><a href="../#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Estate Planning</a></li>
+          <li><a href="/blog/" style="font-size:.875rem;color:rgba(196,151,59,.65);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(196,151,59,.65)'">Insights Hub</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">Contact</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.7rem;">
+          <li style="display:flex;align-items:flex-start;gap:.6rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.6)" stroke-width="1.5" style="margin-top:2px;flex-shrink:0;"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.5 2.18 2 2 0 012.5 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l.87-.87a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <a href="tel:+6587520859" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'"">+65 8752 0859</a>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:.6rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(196,151,59,.6)" style="margin-top:2px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <a href="https://wa.me/6587520859" target="_blank" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">WhatsApp Us</a>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:.6rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.6)" stroke-width="1.5" style="margin-top:2px;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span style="font-size:.875rem;color:rgba(250,247,242,.4);">Mon–Sat, 9am–7pm SGT</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="gold-line mb-5" style="opacity:.12;"></div>
+    <div class="flex flex-col md:flex-row justify-between items-start gap-4">
+      <p style="font-size:.73rem;color:rgba(250,247,242,.22);line-height:1.65;max-width:660px;">Nexus Mortgage SG is a licensed mortgage broker in Singapore. Interest rates shown are indicative and subject to change. All mortgage approvals are subject to individual bank credit assessment. TDSR/MSR figures are for reference only and do not constitute financial advice. Personal data collected is governed by Singapore's Personal Data Protection Act (PDPA).</p>
+      <p style="font-size:.73rem;color:rgba(250,247,242,.18);white-space:nowrap;">© 2026 nexusmortgage.sg</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== NAVBAR =====
+const nb = document.getElementById('navbar');
+window.addEventListener('scroll', () => nb.classList.toggle('scrolled', scrollY > 55), {passive:true});
+
+// ===== MOBILE MENU =====
+function toggleMenu() {
+  document.getElementById('mob-menu').classList.toggle('open');
+}
+
+// ===== SCROLL REVEAL =====
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+</body>
+</html>
