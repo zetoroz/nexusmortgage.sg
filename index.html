@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -7,12 +8,15 @@
   <meta name="google-site-verification" content="k6vRLF0UD1f8AmxioXwDUsD78Nc7hW4fsoQV4fM5GWw" />
   <!-- Primary Meta Tags -->
   <title>Nexus Mortgage SG | Expert Home Loans & SME Lending</title>
-  <meta name="description" content="Compare over 16 banks in Singapore for free. Specialist in HDB, Private Residential, and SME Caveat Loans. Unbiased mortgage advice with zero fees.">
-  <meta name="keywords" content="mortgage broker Singapore, home loan Singapore, refinancing Singapore, HDB loan, private property loan, TDSR, MSR, best mortgage rate Singapore, nexusmortgage">
+  <meta name="description"
+    content="Compare over 16 banks in Singapore for free. Specialist in HDB, Private Residential, and SME Caveat Loans. Unbiased mortgage advice with zero fees.">
+  <meta name="keywords"
+    content="mortgage broker Singapore, home loan Singapore, refinancing Singapore, HDB loan, private property loan, TDSR, MSR, best mortgage rate Singapore, nexusmortgage">
 
   <!-- Open Graph / WhatsApp & LinkedIn -->
   <meta property="og:title" content="Nexus Mortgage SG | Secure Your Ideal Loan">
-  <meta property="og:description" content="100% free, unbiased mortgage comparison and advisory across all major Singapore banks.">
+  <meta property="og:description"
+    content="100% free, unbiased mortgage comparison and advisory across all major Singapore banks.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nexusmortgage.sg/">
   <link rel="canonical" href="https://nexusmortgage.sg">
@@ -24,20 +28,22 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+    rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            navy: { 950:'#060E1F', 900:'#0B1C3A', 800:'#122244', 700:'#1A2F55' },
-            gold: { 300:'#F0D98A', 400:'#E8C97A', 500:'#C4973B', 600:'#A67C2E' },
-            cream: { 50:'#FDFCFA', 100:'#FAF7F2', 200:'#F5F0E6', 300:'#EDE5D4' }
+            navy: { 950: '#060E1F', 900: '#0B1C3A', 800: '#122244', 700: '#1A2F55' },
+            gold: { 300: '#F0D98A', 400: '#E8C97A', 500: '#C4973B', 600: '#A67C2E' },
+            cream: { 50: '#FDFCFA', 100: '#FAF7F2', 200: '#F5F0E6', 300: '#EDE5D4' }
           },
           fontFamily: {
-            display: ['Cormorant Garamond','Georgia','serif'],
-            body: ['DM Sans','sans-serif']
+            display: ['Cormorant Garamond', 'Georgia', 'serif'],
+            body: ['DM Sans', 'sans-serif']
           }
         }
       }
@@ -45,7 +51,14 @@
   </script>
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     :root {
       --navy-950: #060E1F;
       --navy-900: #0B1C3A;
@@ -56,1147 +69,2248 @@
       --cream-100: #FAF7F2;
       --cream-200: #F5F0E6;
     }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--cream-100); color: #1A1A2E; overflow-x: hidden; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream-100);
+      color: #1A1A2E;
+      overflow-x: hidden;
+    }
 
     /* Grain overlay */
     body::after {
       content: '';
-      position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       opacity: 0.4;
     }
 
-    .gold-line { height:1px; background:linear-gradient(90deg,transparent,var(--gold-500),transparent); }
-    .gold-line-v { width:1px; background:linear-gradient(180deg,transparent,var(--gold-500),transparent); }
+    .gold-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+    }
+
+    .gold-line-v {
+      width: 1px;
+      background: linear-gradient(180deg, transparent, var(--gold-500), transparent);
+    }
 
     /* Reveal animations */
-    .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.75s cubic-bezier(.25,.8,.25,1), transform 0.75s cubic-bezier(.25,.8,.25,1); }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-    .delay-1 { transition-delay:.1s; } .delay-2 { transition-delay:.2s; }
-    .delay-3 { transition-delay:.3s; } .delay-4 { transition-delay:.4s; }
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.75s cubic-bezier(.25, .8, .25, 1), transform 0.75s cubic-bezier(.25, .8, .25, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 {
+      transition-delay: .1s;
+    }
+
+    .delay-2 {
+      transition-delay: .2s;
+    }
+
+    .delay-3 {
+      transition-delay: .3s;
+    }
+
+    .delay-4 {
+      transition-delay: .4s;
+    }
 
     /* ===== NAVBAR ===== */
-    #navbar { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.35rem 0; transition:background .4s,box-shadow .4s,padding .4s; }
-    #navbar.scrolled { background:rgba(6,14,31,0.96); backdrop-filter:blur(16px); box-shadow:0 2px 40px rgba(0,0,0,.45); padding:.9rem 0; }
-    .nav-link { font-size:.8rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:rgba(250,247,242,.7); transition:color .25s; text-decoration:none; }
-    .nav-link:hover { color:var(--gold-400); }
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.35rem 0;
+      transition: background .4s, box-shadow .4s, padding .4s;
+    }
+
+    #navbar.scrolled {
+      background: rgba(6, 14, 31, 0.96);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 2px 40px rgba(0, 0, 0, .45);
+      padding: .9rem 0;
+    }
+
+    .nav-link {
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, .7);
+      transition: color .25s;
+      text-decoration: none;
+    }
+
+    .nav-link:hover {
+      color: var(--gold-400);
+    }
 
     /* ===== HERO ===== */
-    #hero { min-height:100vh; background:var(--navy-950); position:relative; display:flex; align-items:center; overflow:hidden; }
+    #hero {
+      min-height: 100vh;
+      background: var(--navy-950);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
     .hero-bg {
-      position:absolute; inset:0;
+      position: absolute;
+      inset: 0;
       background:
-        radial-gradient(ellipse 90% 70% at 65% 45%, rgba(196,151,59,.07) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 90% at 15% 85%, rgba(18,34,68,.9) 0%, transparent 65%),
-        radial-gradient(ellipse 70% 50% at 50% 10%, rgba(6,14,31,.8) 0%, transparent 80%);
+        radial-gradient(ellipse 90% 70% at 65% 45%, rgba(196, 151, 59, .07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 90% at 15% 85%, rgba(18, 34, 68, .9) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 50% at 50% 10%, rgba(6, 14, 31, .8) 0%, transparent 80%);
     }
+
     .hero-deco {
-      position:absolute; inset:0; overflow:hidden; pointer-events:none;
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
     }
+
     .hero-deco::before {
-      content:''; position:absolute;
-      top:8%; right:-8%; width:58%; height:82%;
-      border:1px solid rgba(196,151,59,.1); border-radius:4px;
-      transform:rotate(14deg);
+      content: '';
+      position: absolute;
+      top: 8%;
+      right: -8%;
+      width: 58%;
+      height: 82%;
+      border: 1px solid rgba(196, 151, 59, .1);
+      border-radius: 4px;
+      transform: rotate(14deg);
     }
+
     .hero-deco::after {
-      content:''; position:absolute;
-      top:18%; right:2%; width:42%; height:60%;
-      border:1px solid rgba(196,151,59,.06); border-radius:4px;
-      transform:rotate(14deg);
+      content: '';
+      position: absolute;
+      top: 18%;
+      right: 2%;
+      width: 42%;
+      height: 60%;
+      border: 1px solid rgba(196, 151, 59, .06);
+      border-radius: 4px;
+      transform: rotate(14deg);
     }
 
     .hero-tag {
-      display:inline-flex; align-items:center; gap:.5rem;
-      background:rgba(196,151,59,.1); border:1px solid rgba(196,151,59,.28);
-      color:var(--gold-400); font-size:.72rem; font-weight:500;
-      letter-spacing:.13em; text-transform:uppercase;
-      padding:.35rem 1rem; border-radius:100px; margin-bottom:1.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(196, 151, 59, .1);
+      border: 1px solid rgba(196, 151, 59, .28);
+      color: var(--gold-400);
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      padding: .35rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.75rem;
     }
+
     .hero-title {
-      font-family:'Cormorant Garamond',serif;
+      font-family: 'Cormorant Garamond', serif;
       font-size: clamp(3rem, 6.5vw, 5.75rem);
-      font-weight:300; line-height:1.04; letter-spacing:-.025em; color:#FAF7F2;
+      font-weight: 300;
+      line-height: 1.04;
+      letter-spacing: -.025em;
+      color: #FAF7F2;
     }
-    .hero-title em { font-style:italic; color:var(--gold-400); }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-400);
+    }
 
     .btn-gold {
-      display:inline-flex; align-items:center; gap:.6rem;
-      background:linear-gradient(135deg,#C4973B,#E8C97A);
-      color:#0B1C3A; font-weight:600; font-size:.85rem; letter-spacing:.04em;
-      padding:.9rem 2rem; border-radius:5px; border:none; cursor:pointer;
-      transition:transform .2s,box-shadow .2s; text-decoration:none;
-      box-shadow:0 4px 24px rgba(196,151,59,.35);
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: linear-gradient(135deg, #C4973B, #E8C97A);
+      color: #0B1C3A;
+      font-weight: 600;
+      font-size: .85rem;
+      letter-spacing: .04em;
+      padding: .9rem 2rem;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      text-decoration: none;
+      box-shadow: 0 4px 24px rgba(196, 151, 59, .35);
     }
-    .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 36px rgba(196,151,59,.5); }
-    .btn-gold:active { transform:translateY(0); }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 36px rgba(196, 151, 59, .5);
+    }
+
+    .btn-gold:active {
+      transform: translateY(0);
+    }
 
     .btn-ghost {
-      display:inline-flex; align-items:center; gap:.6rem;
-      background:transparent; color:rgba(250,247,242,.8);
-      font-weight:500; font-size:.85rem; letter-spacing:.04em;
-      padding:.9rem 1.75rem; border-radius:5px;
-      border:1px solid rgba(250,247,242,.18); cursor:pointer;
-      transition:border-color .25s,color .25s,background .25s; text-decoration:none;
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: transparent;
+      color: rgba(250, 247, 242, .8);
+      font-weight: 500;
+      font-size: .85rem;
+      letter-spacing: .04em;
+      padding: .9rem 1.75rem;
+      border-radius: 5px;
+      border: 1px solid rgba(250, 247, 242, .18);
+      cursor: pointer;
+      transition: border-color .25s, color .25s, background .25s;
+      text-decoration: none;
     }
-    .btn-ghost:hover { border-color:rgba(196,151,59,.5); color:var(--gold-400); background:rgba(196,151,59,.06); }
+
+    .btn-ghost:hover {
+      border-color: rgba(196, 151, 59, .5);
+      color: var(--gold-400);
+      background: rgba(196, 151, 59, .06);
+    }
 
     /* ===== TRUST BAR ===== */
     #trust-bar {
-      background:linear-gradient(90deg,#0A1932,#152848,#0A1932);
-      border-top:1px solid rgba(196,151,59,.18);
-      border-bottom:1px solid rgba(196,151,59,.18);
+      background: linear-gradient(90deg, #0A1932, #152848, #0A1932);
+      border-top: 1px solid rgba(196, 151, 59, .18);
+      border-bottom: 1px solid rgba(196, 151, 59, .18);
     }
-    .trust-label { font-size:.68rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:rgba(250,247,242,.38); }
-    .trust-value { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:500; color:var(--gold-400); letter-spacing:.02em; margin-top:.15rem; }
+
+    .trust-label {
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, .38);
+    }
+
+    .trust-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--gold-400);
+      letter-spacing: .02em;
+      margin-top: .15rem;
+    }
 
     /* ===== SERVICES ===== */
     .svc-card {
-      background:white; border:1px solid rgba(196,151,59,.1); border-radius:10px;
-      padding:2rem 1.75rem; position:relative; overflow:hidden;
-      transition:transform .3s,box-shadow .3s,border-color .3s;
+      background: white;
+      border: 1px solid rgba(196, 151, 59, .1);
+      border-radius: 10px;
+      padding: 2rem 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
     }
+
     .svc-card::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:2px;
-      background:linear-gradient(90deg,transparent,var(--gold-500),transparent);
-      opacity:0; transition:opacity .3s;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+      opacity: 0;
+      transition: opacity .3s;
     }
-    .svc-card:hover { transform:translateY(-5px); box-shadow:0 20px 50px rgba(11,28,58,.1),0 4px 16px rgba(196,151,59,.08); border-color:rgba(196,151,59,.28); }
-    .svc-card:hover::before { opacity:1; }
+
+    .svc-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(11, 28, 58, .1), 0 4px 16px rgba(196, 151, 59, .08);
+      border-color: rgba(196, 151, 59, .28);
+    }
+
+    .svc-card:hover::before {
+      opacity: 1;
+    }
+
     .svc-icon {
-      width:46px; height:46px;
-      background:linear-gradient(135deg,rgba(196,151,59,.12),rgba(196,151,59,.04));
-      border:1px solid rgba(196,151,59,.22); border-radius:11px;
-      display:flex; align-items:center; justify-content:center;
-      color:var(--gold-500); margin-bottom:1.25rem;
+      width: 46px;
+      height: 46px;
+      background: linear-gradient(135deg, rgba(196, 151, 59, .12), rgba(196, 151, 59, .04));
+      border: 1px solid rgba(196, 151, 59, .22);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-500);
+      margin-bottom: 1.25rem;
     }
 
     /* ===== CALCULATOR ===== */
-    #calculator { background:var(--navy-900); position:relative; overflow:hidden; }
+    #calculator {
+      background: var(--navy-900);
+      position: relative;
+      overflow: hidden;
+    }
+
     #calculator::before {
-      content:''; position:absolute;
-      top:-40%; left:-15%; width:65%; height:90%;
-      background:radial-gradient(ellipse,rgba(196,151,59,.055) 0%,transparent 65%);
-      pointer-events:none;
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -15%;
+      width: 65%;
+      height: 90%;
+      background: radial-gradient(ellipse, rgba(196, 151, 59, .055) 0%, transparent 65%);
+      pointer-events: none;
     }
 
-    .calc-label { font-size:.72rem; font-weight:500; letter-spacing:.09em; text-transform:uppercase; color:rgba(250,247,242,.45); }
+    .calc-label {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, .45);
+    }
+
     .calc-input {
-      width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(196,151,59,.2);
-      color:#FAF7F2; border-radius:7px; padding:.75rem 1rem;
-      font-family:'DM Sans',sans-serif; font-size:.9375rem; outline:none;
-      transition:border-color .25s,background .25s;
+      width: 100%;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(196, 151, 59, .2);
+      color: #FAF7F2;
+      border-radius: 7px;
+      padding: .75rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9375rem;
+      outline: none;
+      transition: border-color .25s, background .25s;
     }
-    .calc-input:focus { border-color:rgba(196,151,59,.6); background:rgba(255,255,255,.08); }
-    .calc-input::placeholder { color:rgba(250,247,242,.22); }
 
-    .toggle-wrap { display:flex; background:rgba(255,255,255,.05); border:1px solid rgba(196,151,59,.2); border-radius:7px; overflow:hidden; }
+    .calc-input:focus {
+      border-color: rgba(196, 151, 59, .6);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .calc-input::placeholder {
+      color: rgba(250, 247, 242, .22);
+    }
+
+    .toggle-wrap {
+      display: flex;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(196, 151, 59, .2);
+      border-radius: 7px;
+      overflow: hidden;
+    }
+
     .tog-btn {
-      flex:1; padding:.75rem .5rem; font-size:.875rem; font-weight:500; text-align:center;
-      cursor:pointer; transition:background .25s,color .25s; color:rgba(250,247,242,.45);
-      border:none; background:transparent; font-family:'DM Sans',sans-serif;
+      flex: 1;
+      padding: .75rem .5rem;
+      font-size: .875rem;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: background .25s, color .25s;
+      color: rgba(250, 247, 242, .45);
+      border: none;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
     }
-    .tog-btn.active { background:rgba(196,151,59,.18); color:var(--gold-400); font-weight:600; }
 
-    .result-card { background:rgba(255,255,255,.04); border:1px solid rgba(196,151,59,.14); border-radius:8px; padding:1.25rem 1rem; text-align:center; }
-    .result-lbl { font-size:.68rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:rgba(250,247,242,.38); margin-bottom:.3rem; }
-    .result-val { font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-weight:500; color:var(--gold-400); line-height:1.05; }
+    .tog-btn.active {
+      background: rgba(196, 151, 59, .18);
+      color: var(--gold-400);
+      font-weight: 600;
+    }
 
-    .ratio-bar { background:rgba(255,255,255,.08); border-radius:100px; height:7px; overflow:hidden; }
-    .ratio-fill { height:100%; border-radius:100px; transition:width .6s ease,background .4s ease; }
+    .result-card {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(196, 151, 59, .14);
+      border-radius: 8px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+    }
 
-    .amort-tbl { width:100%; border-collapse:collapse; font-size:.8rem; }
-    .amort-tbl th { text-align:left; padding:.55rem .75rem; font-size:.67rem; letter-spacing:.09em; text-transform:uppercase; color:rgba(250,247,242,.38); border-bottom:1px solid rgba(196,151,59,.15); font-weight:500; }
-    .amort-tbl td { padding:.5rem .75rem; color:rgba(250,247,242,.72); border-bottom:1px solid rgba(255,255,255,.04); }
-    .amort-tbl tr:last-child td { border-bottom:none; }
-    .amort-tbl tr:hover td { background:rgba(196,151,59,.04); }
+    .result-lbl {
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, .38);
+      margin-bottom: .3rem;
+    }
+
+    .result-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 500;
+      color: var(--gold-400);
+      line-height: 1.05;
+    }
+
+    .ratio-bar {
+      background: rgba(255, 255, 255, .08);
+      border-radius: 100px;
+      height: 7px;
+      overflow: hidden;
+    }
+
+    .ratio-fill {
+      height: 100%;
+      border-radius: 100px;
+      transition: width .6s ease, background .4s ease;
+    }
+
+    .amort-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .8rem;
+    }
+
+    .amort-tbl th {
+      text-align: left;
+      padding: .55rem .75rem;
+      font-size: .67rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, .38);
+      border-bottom: 1px solid rgba(196, 151, 59, .15);
+      font-weight: 500;
+    }
+
+    .amort-tbl td {
+      padding: .5rem .75rem;
+      color: rgba(250, 247, 242, .72);
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    .amort-tbl tr:last-child td {
+      border-bottom: none;
+    }
+
+    .amort-tbl tr:hover td {
+      background: rgba(196, 151, 59, .04);
+    }
 
     /* ===== BANKS ===== */
     .bank-chip {
-      background:white; border:1px solid rgba(196,151,59,.14); border-radius:7px;
-      padding:.8rem 1.35rem; font-weight:600; font-size:.85rem; color:var(--navy-900);
-      letter-spacing:.02em; transition:border-color .25s,box-shadow .25s; text-align:center;
+      background: white;
+      border: 1px solid rgba(196, 151, 59, .14);
+      border-radius: 7px;
+      padding: .8rem 1.35rem;
+      font-weight: 600;
+      font-size: .85rem;
+      color: var(--navy-900);
+      letter-spacing: .02em;
+      transition: border-color .25s, box-shadow .25s;
+      text-align: center;
     }
-    .bank-chip:hover { border-color:rgba(196,151,59,.4); box-shadow:0 4px 18px rgba(196,151,59,.12); }
+
+    .bank-chip:hover {
+      border-color: rgba(196, 151, 59, .4);
+      box-shadow: 0 4px 18px rgba(196, 151, 59, .12);
+    }
 
     /* ===== WHY NEXUS ===== */
-    .why-card { background:white; border:1px solid rgba(196,151,59,.13); border-radius:10px; padding:1.5rem; }
+    .why-card {
+      background: white;
+      border: 1px solid rgba(196, 151, 59, .13);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
 
     /* ===== FORM ===== */
     .f-input {
-      width:100%; background:rgba(255,255,255,.06); border:1.5px solid rgba(196,151,59,.2);
-      border-radius:7px; padding:.875rem 1rem; font-family:'DM Sans',sans-serif;
-      font-size:.9375rem; color:#FAF7F2; outline:none;
-      transition:border-color .25s,box-shadow .25s;
+      width: 100%;
+      background: rgba(255, 255, 255, .06);
+      border: 1.5px solid rgba(196, 151, 59, .2);
+      border-radius: 7px;
+      padding: .875rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9375rem;
+      color: #FAF7F2;
+      outline: none;
+      transition: border-color .25s, box-shadow .25s;
     }
-    .f-input:focus { border-color:var(--gold-500); box-shadow:0 0 0 3px rgba(196,151,59,.14); }
-    .f-input::placeholder { color:rgba(250,247,242,.25); }
-    .f-select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C4973B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; }
+
+    .f-input:focus {
+      border-color: var(--gold-500);
+      box-shadow: 0 0 0 3px rgba(196, 151, 59, .14);
+    }
+
+    .f-input::placeholder {
+      color: rgba(250, 247, 242, .25);
+    }
+
+    .f-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C4973B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+    }
 
     /* ===== SECTION LABELS ===== */
-    .sec-tag { font-size:.7rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--gold-500); display:block; margin-bottom:.875rem; }
-    .sec-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3.25rem); font-weight:400; line-height:1.08; letter-spacing:-.02em; }
+    .sec-tag {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold-500);
+      display: block;
+      margin-bottom: .875rem;
+    }
+
+    .sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -.02em;
+    }
 
     /* ===== STEP ===== */
-    .step-num { font-family:'Cormorant Garamond',serif; font-size:4.5rem; font-weight:300; color:rgba(196,151,59,.18); line-height:1; margin-bottom:.75rem; }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4.5rem;
+      font-weight: 300;
+      color: rgba(196, 151, 59, .18);
+      line-height: 1;
+      margin-bottom: .75rem;
+    }
 
     /* ===== WHATSAPP FLOAT ===== */
     #wa-float {
-      position:fixed; bottom:2rem; right:2rem; z-index:200;
-      width:58px; height:58px; background:#25D366; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      box-shadow:0 6px 28px rgba(37,211,102,.42); cursor:pointer;
-      transition:transform .2s,box-shadow .2s; text-decoration:none;
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      width: 58px;
+      height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 28px rgba(37, 211, 102, .42);
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      text-decoration: none;
     }
-    #wa-float:hover { transform:scale(1.1); box-shadow:0 10px 36px rgba(37,211,102,.55); }
-    #wa-float:active { transform:scale(.95); }
+
+    #wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 36px rgba(37, 211, 102, .55);
+    }
+
+    #wa-float:active {
+      transform: scale(.95);
+    }
 
     /* ===== MOBILE MENU ===== */
-    #mob-menu { display:none; flex-direction:column; gap:0; background:rgba(6,14,31,.98); backdrop-filter:blur(20px); }
-    #mob-menu.open { display:flex; }
+    #mob-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(6, 14, 31, .98);
+      backdrop-filter: blur(20px);
+    }
+
+    #mob-menu.open {
+      display: flex;
+    }
 
     /* ===== SPINNER ===== */
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
     /* ===== SCROLLBAR ===== */
-    ::-webkit-scrollbar { width:5px; }
-    ::-webkit-scrollbar-track { background:#060E1F; }
-    ::-webkit-scrollbar-thumb { background:rgba(196,151,59,.3); border-radius:3px; }
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #060E1F;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(196, 151, 59, .3);
+      border-radius: 3px;
+    }
+  
+    /* ===== SCROLL PROGRESS ===== */
+    #prog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #C4973B, #E8C97A);
+      z-index: 999;
+      width: 0%;
+      transition: width .1s linear;
+    }
+
+    /* ===== MOBILE STATS ===== */
+    .mobile-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+      margin-top: 2rem;
+    }
+
+    .stat-card-mobile {
+      background: rgba(196, 151, 59, .08);
+      border: 1px solid rgba(196, 151, 59, .2);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .stat-num-mobile {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--gold-400);
+      margin-bottom: .25rem;
+    }
+
+    .stat-label-mobile {
+      font-size: .65rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, .6);
+    }
+
+    /* ===== ADVISOR SECTION ===== */
+    .advisor-section {
+      background: var(--navy-900);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .advisor-section::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 60%;
+      height: 120%;
+      background: radial-gradient(ellipse, rgba(196, 151, 59, .05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .advisor-initial {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12rem;
+      font-weight: 300;
+      color: rgba(196, 151, 59, .15);
+      line-height: .8;
+      letter-spacing: -.05em;
+    }
+
+    .advisor-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: #FAF7F2;
+      margin-bottom: 1.5rem;
+      letter-spacing: -.01em;
+    }
+
+    .credential-chips {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .credential-chip {
+      background: rgba(196, 151, 59, .12);
+      border: 1px solid rgba(196, 151, 59, .28);
+      border-radius: 6px;
+      padding: .9rem 1.2rem;
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--gold-300);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .credential-chip::before {
+      content: '✓';
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--gold-400);
+    }
+
+    /* ===== INSIGHTS IMPROVEMENTS ===== */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .insights-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .article-card {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(196, 151, 59, .14);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .3);
+    }
+
+    .article-tag {
+      display: inline-block;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold-400);
+      margin-bottom: .8rem;
+    }
+
+    .article-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #FAF7F2;
+      margin-bottom: .8rem;
+      line-height: 1.3;
+    }
+
+    .article-meta {
+      font-size: .75rem;
+      color: rgba(250, 247, 242, .5);
+      margin-bottom: 1rem;
+    }
+
+    .article-link {
+      color: var(--gold-400);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: .85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      transition: gap .2s;
+    }
+
+    .article-link:hover {
+      gap: .6rem;
+    }
+
+    /* ===== TESTIMONIALS SECTION ===== */
+    .testimonials-section {
+      background: var(--cream-200);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .testimonial-card {
+      background: white;
+      border: 1px solid rgba(196, 151, 59, .2);
+      border-radius: 10px;
+      padding: 2rem 1.75rem;
+      position: relative;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: .3rem;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+      color: var(--gold-400);
+    }
+
+    .testimonial-text {
+      font-size: .95rem;
+      line-height: 1.6;
+      color: var(--navy-900);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      font-size: .85rem;
+      color: var(--navy-900);
+    }
+
+    .testimonial-label {
+      font-size: .7rem;
+      color: rgba(11, 28, 58, .6);
+      margin-top: .3rem;
+    }
+
+    /* ===== SERVICES CTA ===== */
+    .services-cta {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(196, 151, 59, .15);
+    }
+
+    .services-cta-text {
+      font-size: .95rem;
+      color: var(--navy-900);
+      margin-bottom: 1.5rem;
+    }
+
+    .f-input {
+      width: 100%;
+      background: rgba(6, 14, 31, .04);
+      border: 1px solid rgba(11, 28, 58, .15);
+      color: var(--navy-900);
+      border-radius: 6px;
+      padding: .75rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      outline: none;
+      transition: border-color .25s, background .25s;
+    }
+
+    .f-input:focus {
+      border-color: rgba(196, 151, 59, .5);
+      background: rgba(196, 151, 59, .02);
+    }
+
+    .f-input::placeholder {
+      color: rgba(11, 28, 58, .35);
+    }
+
+    @media (max-width: 767px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .insights-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
   </style>
 </head>
+
 <body>
+  <!-- Scroll Progress Bar -->
+  <div id="prog" style="position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#C4973B,#E8C97A);z-index:999;width:0%;transition:width .1s linear;"></div>
 
-<!-- =========== FLOATING WHATSAPP =========== -->
-<a id="wa-float" href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" rel="noopener" aria-label="WhatsApp Us">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
 
-<!-- =========== NAVBAR =========== -->
-<nav id="navbar">
-  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
-    <a href="#" style="text-decoration:none; line-height:1; display:flex; flex-direction:column;">
-      <span style="font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:600; color:#FAF7F2; letter-spacing:-.01em;">NEXUS</span>
-      <span style="font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold-500); font-weight:500; margin-top:-1px;">MORTGAGE · SG</span>
-    </a>
+  <!-- =========== FLOATING WHATSAPP =========== -->
+  <a id="wa-float" href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation."
+    target="_blank" rel="noopener" aria-label="WhatsApp Us">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
 
-    <div class="hidden md:flex items-center gap-9">
-      <a href="#services" class="nav-link">Services</a>
-      <a href="#calculator" class="nav-link">Calculator</a>
-      <a href="#banks" class="nav-link">Banks</a>
-      <a href="#why" class="nav-link">Why Us</a>
-      <a href="#contact" class="nav-link">Contact</a>
-      <a href="/blog/" class="nav-link" style="color:var(--gold-400);">Insights</a>
-    </div>
-
-    <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" class="hidden md:inline-flex btn-gold" style="padding:.6rem 1.4rem; font-size:.78rem;">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Free Consultation
-    </a>
-
-    <button class="md:hidden p-1.5" onclick="toggleMenu()" style="background:none;border:none;cursor:pointer;color:#FAF7F2;">
-      <svg id="menu-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
-  </div>
-
-  <div id="mob-menu" class="mt-3 pb-4 px-6">
-    <a href="#services" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)" onclick="toggleMenu()">Services</a>
-    <a href="#calculator" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)" onclick="toggleMenu()">Calculator</a>
-    <a href="#banks" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)" onclick="toggleMenu()">Banks</a>
-    <a href="#why" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)" onclick="toggleMenu()">Why Us</a>
-    <a href="#contact" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)" onclick="toggleMenu()">Contact</a>
-    <a href="/blog/" class="nav-link block py-3.5" style="color:var(--gold-400);" onclick="toggleMenu()">Insights</a>
-    <a href="https://wa.me/6587520859" target="_blank" class="btn-gold mt-4 w-full justify-center" style="display:flex;">WhatsApp Us</a>
-  </div>
-</nav>
-
-<!-- =========== HERO =========== -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-deco"></div>
-
-  <div class="max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-16 items-center relative z-10 w-full">
-    <!-- Left copy -->
-    <div>
-      <div class="hero-tag">
-        <span style="width:5px;height:5px;border-radius:50%;background:var(--gold-400);display:inline-block;flex-shrink:0;"></span>
-        Singapore Licensed Mortgage Broker
-      </div>
-
-      <h1 class="hero-title mb-6">
-        The <em>Smarter</em><br>Way to Secure<br>Your Mortgage
-      </h1>
-
-      <p style="font-size:1.0625rem; font-weight:300; line-height:1.8; color:rgba(250,247,242,.62); max-width:470px; margin-bottom:2.25rem;">
-        We compare rates across every major Singapore bank — DBS, OCBC, UOB, Maybank, StanChart &amp; more. Our service is <strong style="color:rgba(250,247,242,.9); font-weight:500;">100% free to you</strong> — the bank pays our referral fee upon disbursement.
-      </p>
-
-      <div class="flex flex-wrap gap-3.5">
-        <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" class="btn-gold">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Get Free Consultation
-        </a>
-        <a href="#calculator" class="btn-ghost">
-          Try Mortgage Calculator
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Right stats grid -->
-    <div class="hidden lg:grid grid-cols-2 gap-4">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.15);border-radius:14px;padding:1.75rem;">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:3.25rem;font-weight:300;color:var(--gold-400);line-height:1;">20+</div>
-        <div style="color:rgba(250,247,242,.5);font-size:.8rem;margin-top:.2rem;">Bank Partners</div>
-        <div style="color:rgba(250,247,242,.28);font-size:.75rem;margin-top:.5rem;line-height:1.55;">All major SG banks &amp; financial institutions</div>
-      </div>
-      <div style="background:rgba(196,151,59,.08);border:1px solid rgba(196,151,59,.25);border-radius:14px;padding:1.75rem;">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:3.25rem;font-weight:300;color:var(--gold-400);line-height:1;">$0</div>
-        <div style="color:rgba(250,247,242,.5);font-size:.8rem;margin-top:.2rem;">Fee To You</div>
-        <div style="color:rgba(250,247,242,.28);font-size:.75rem;margin-top:.5rem;line-height:1.55;">Banks pay our referral fee — always free to clients</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.15);border-radius:14px;padding:1.75rem;">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:3.25rem;font-weight:300;color:var(--gold-400);line-height:1;">8</div>
-        <div style="color:rgba(250,247,242,.5);font-size:.8rem;margin-top:.2rem;">Service Types</div>
-        <div style="color:rgba(250,247,242,.28);font-size:.75rem;margin-top:.5rem;line-height:1.55;">Residential, commercial, refinancing &amp; more</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.15);border-radius:14px;padding:1.75rem;">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:3.25rem;font-weight:300;color:var(--gold-400);line-height:1;">24h</div>
-        <div style="color:rgba(250,247,242,.5);font-size:.8rem;margin-top:.2rem;">Response Time</div>
-        <div style="color:rgba(250,247,242,.28);font-size:.75rem;margin-top:.5rem;line-height:1.55;">Fast turnaround — we move at your pace</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scroll indicator -->
-  <div style="position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;">
-    <span style="font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,242,.28);font-weight:500;">Scroll</span>
-    <div style="width:1px;height:44px;background:linear-gradient(180deg,rgba(196,151,59,.4),transparent);"></div>
-  </div>
-</section>
-
-<!-- =========== TRUST BAR =========== -->
-<div id="trust-bar" class="py-5">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex flex-wrap justify-center md:justify-between items-center gap-5 md:gap-0">
-      <div class="flex flex-col items-center"><span class="trust-label">Service Fee</span><span class="trust-value">Free to Client</span></div>
-      <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
-      <div class="flex flex-col items-center"><span class="trust-label">Compliance</span><span class="trust-value">TDSR &amp; MSR Verified</span></div>
-      <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
-      <div class="flex flex-col items-center"><span class="trust-label">Coverage</span><span class="trust-value">All Major Banks</span></div>
-      <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
-      <div class="flex flex-col items-center"><span class="trust-label">Property Types</span><span class="trust-value">HDB · Private · Commercial</span></div>
-      <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
-      <div class="flex flex-col items-center"><span class="trust-label">Consultation</span><span class="trust-value">WhatsApp / In-Person</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- =========== SERVICES =========== -->
-<section id="services" class="py-24" style="background:var(--cream-100);">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="mb-16 reveal">
-      <span class="sec-tag">What We Do</span>
-      <h2 class="sec-title" style="color:#0B1C3A;">Comprehensive<br><em style="font-style:italic;color:var(--gold-500);">Mortgage Solutions</em></h2>
-      <div class="gold-line mt-5" style="max-width:72px;opacity:.65;"></div>
-      <p class="mt-5" style="color:#4B5563;max-width:520px;line-height:1.8;font-size:1rem;">From first-time buyers to seasoned investors — expert guidance across every property and loan type in Singapore.</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-
-      <div class="svc-card reveal delay-1">
-        <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">Residential Loan</h3>
-        <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">HDB, condominium, landed — we find the best rate from all banks for your dream home.</p>
-      </div>
-
-      <div class="svc-card reveal delay-2">
-        <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">Commercial Loan</h3>
-        <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Shophouses, offices, industrial — competitive financing for commercial property investments.</p>
-      </div>
-
-      <div class="svc-card reveal delay-3">
-        <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">Refinancing</h3>
-        <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Lock in a lower rate and reduce monthly repayments. We handle the full bank-switching process.</p>
-      </div>
-
-      <div class="svc-card reveal delay-4">
-        <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">Cash Out / Equity</h3>
-        <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Unlock equity through cash-out refinancing or equity term loans for immediate liquidity.</p>
-      </div>
-
-      <div class="svc-card reveal delay-1">
-        <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">New Purchase Loan</h3>
-        <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Buying a new property? We compare all lenders and secure in-principle approval before you commit.</p>
-      </div>
-
-      <div class="svc-card reveal delay-2">
-        <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">Equity Term Loan</h3>
-        <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Use your fully-paid property as collateral for a flexible term loan at competitive bank rates.</p>
-      </div>
-
-      <div class="svc-card reveal delay-3">
-        <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">Estate Planning</h3>
-        <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Structuring property assets to optimise legacy, reduce liabilities, and protect generational wealth.</p>
-      </div>
-
-      <div class="svc-card reveal delay-4">
-        <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">Pre-Purchase Check</h3>
-        <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Know your borrowing limit before you bid — full TDSR/MSR analysis and in-principle approval.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- =========== HOW IT WORKS =========== -->
-<section class="py-24" style="background:white;">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16 reveal">
-      <span class="sec-tag">Our Process</span>
-      <h2 class="sec-title" style="color:#0B1C3A;">Simple. <em style="font-style:italic;color:var(--gold-500);">Seamless.</em> Smart.</h2>
-      <div class="gold-line mt-5 mx-auto" style="max-width:60px;opacity:.65;"></div>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-10">
-      <div class="text-center reveal delay-1">
-        <div class="step-num">01</div>
-        <div style="width:56px;height:56px;background:linear-gradient(135deg,#0B1C3A,#1A2F55);border:2px solid rgba(196,151,59,.28);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--gold-400);">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.5 2.18 2 2 0 012.5 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l.87-.87a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        </div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">Free Consultation</h3>
-        <p style="font-size:.875rem;color:#6B7280;line-height:1.72;">Tell us your situation — property type, budget, timeline. We assess TDSR/MSR eligibility and explore your options.</p>
-      </div>
-
-      <div class="text-center reveal delay-2">
-        <div class="step-num">02</div>
-        <div style="width:56px;height:56px;background:linear-gradient(135deg,#0B1C3A,#1A2F55);border:2px solid rgba(196,151,59,.28);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--gold-400);">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">We Compare All Banks</h3>
-        <p style="font-size:.875rem;color:#6B7280;line-height:1.72;">We canvas every lender's current packages — fixed, floating, SORA-pegged — and present a clear, unbiased comparison.</p>
-      </div>
-
-      <div class="text-center reveal delay-3">
-        <div class="step-num">03</div>
-        <div style="width:56px;height:56px;background:linear-gradient(135deg,#0B1C3A,#1A2F55);border:2px solid rgba(196,151,59,.28);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--gold-400);">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-        </div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">Bank Pays, You Save</h3>
-        <p style="font-size:.875rem;color:#6B7280;line-height:1.72;">Choose your best package. We handle all paperwork and bank liaisons. The bank pays our referral fee — zero cost to you.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =========== CALCULATOR =========== -->
-<section id="calculator" class="py-24">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="mb-12 reveal">
-      <span class="sec-tag">Mortgage Tool</span>
-      <h2 class="sec-title" style="color:#FAF7F2;">Mortgage <em style="font-style:italic;color:var(--gold-400);">Calculator</em></h2>
-      <div class="gold-line mt-5" style="max-width:72px;"></div>
-      <p class="mt-4" style="color:rgba(250,247,242,.5);max-width:480px;line-height:1.8;font-size:.9375rem;">Estimate your monthly repayment, total interest payable, and check your TDSR / MSR eligibility instantly.</p>
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-10">
-      <!-- INPUTS -->
-      <div class="reveal">
-        <div class="mb-5">
-          <p class="calc-label mb-2">Property Type</p>
-          <div class="toggle-wrap">
-            <button class="tog-btn active" id="btn-hdb" onclick="setPropType('hdb')">HDB (MSR Applies)</button>
-            <button class="tog-btn" id="btn-priv" onclick="setPropType('private')">Private / Commercial</button>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4 mb-4">
-          <div><p class="calc-label mb-1.5">Purchase Price (S$)</p><input type="text" inputmode="numeric" id="c-price" class="calc-input" value="800,000" oninput="onPriceChange()"></div>
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.375rem;">
-              <p class="calc-label">Down Payment (S$)</p>
-              <span id="dp-pct-badge" style="font-size:.68rem;font-weight:600;letter-spacing:.06em;padding:.15rem .55rem;border-radius:100px;background:rgba(196,151,59,.15);color:var(--gold-400);border:1px solid rgba(196,151,59,.25);">25.0%</span>
-            </div>
-            <input type="text" inputmode="numeric" id="c-down" class="calc-input" value="200,000" oninput="onDownChange()">
-            <div id="dp-warning" style="display:none;margin-top:.4rem;font-size:.73rem;color:#F87171;display:flex;align-items:center;gap:.35rem;">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              <span id="dp-warning-text"></span>
-            </div>
-            <p style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.35rem;line-height:1.5;">MAS min. 25% (5% cash + 20% CPF/cash) for bank loans</p>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4 mb-5">
-          <div><p class="calc-label mb-1.5">Interest Rate (% p.a.)</p><input type="number" id="c-rate" class="calc-input" value="2.00" step="0.05" oninput="calc()"></div>
-          <div><p class="calc-label mb-1.5">Loan Tenure (Years)</p><input type="number" id="c-yrs" class="calc-input" value="30" min="1" max="35" oninput="calc()"></div>
-        </div>
-
-        <!-- Affordability -->
-        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.15);border-radius:9px;padding:1.25rem;">
-          <p class="calc-label mb-3">Affordability Check (TDSR / MSR)</p>
-          <p class="calc-label mb-1.5">Gross Monthly Income (S$)</p>
-          <input type="text" inputmode="numeric" id="c-income" class="calc-input" value="8,000" oninput="calc()">
-          <div class="mt-4" id="ratio-area"></div>
-        </div>
-      </div>
-
-      <!-- RESULTS -->
-      <div class="reveal delay-2">
-        <div class="grid grid-cols-3 gap-3 mb-4">
-          <div class="result-card">
-            <div class="result-lbl">Monthly Payment</div>
-            <div class="result-val" id="r-monthly">—</div>
-            <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">S$ / month</div>
-          </div>
-          <div class="result-card">
-            <div class="result-lbl">Total Interest</div>
-            <div class="result-val" id="r-interest" style="font-size:1.45rem;">—</div>
-            <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">over tenure</div>
-          </div>
-          <div class="result-card">
-            <div class="result-lbl">Loan Amount</div>
-            <div class="result-val" id="r-loan" style="font-size:1.45rem;">—</div>
-            <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">principal</div>
-          </div>
-        </div>
-
-        <!-- Chart -->
-        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(196,151,59,.12);border-radius:9px;padding:1.1rem;margin-bottom:.875rem;">
-          <p class="calc-label mb-2.5">Principal vs Interest Over Time</p>
-          <canvas id="chart" style="width:100%;height:130px;display:block;"></canvas>
-        </div>
-
-        <!-- Amort table -->
-        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(196,151,59,.12);border-radius:9px;overflow:hidden;">
-          <div style="padding:.875rem 1rem;border-bottom:1px solid rgba(196,151,59,.1);"><p class="calc-label">Year-by-Year Breakdown</p></div>
-          <div style="overflow-x:auto;max-height:210px;overflow-y:auto;">
-            <table class="amort-tbl">
-              <thead style="position:sticky;top:0;background:#0B1C3A;z-index:1;">
-                <tr><th>Year</th><th>Monthly</th><th>Principal</th><th>Interest</th><th>Balance</th></tr>
-              </thead>
-              <tbody id="amort-body"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-10 text-center reveal">
-      <p style="color:rgba(250,247,242,.38);font-size:.875rem;margin-bottom:.875rem;">Want a personalised rate comparison across all banks?</p>
-      <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20personalised%20mortgage%20rate%20comparison." target="_blank" class="btn-gold">
-        Get My Rate Comparison — Free
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  <!-- =========== NAVBAR =========== -->
+  <nav id="navbar">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <a href="#" style="text-decoration:none; line-height:1; display:flex; flex-direction:column;">
+        <span
+          style="font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:600; color:#FAF7F2; letter-spacing:-.01em;">NEXUS</span>
+        <span
+          style="font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold-500); font-weight:500; margin-top:-1px;">MORTGAGE
+          · SG</span>
       </a>
-    </div>
-  </div>
-</section>
 
-<!-- =========== FEATURED INSIGHT =========== -->
-<section id="insights-preview" style="background:var(--navy-950);padding:4rem 0;">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-8 reveal">
+      <div class="hidden md:flex items-center gap-9">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#calculator" class="nav-link">Calculator</a>
+        <a href="#banks" class="nav-link">Banks</a>
+        <a href="#why" class="nav-link">Why Us</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="/blog/" class="nav-link" style="color:var(--gold-400);">Insights</a>
+      </div>
+
+      <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank"
+        class="hidden md:inline-flex btn-gold" style="padding:.6rem 1.4rem; font-size:.78rem;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+        Free Consultation
+      </a>
+
+      <button class="md:hidden p-1.5" onclick="toggleMenu()"
+        style="background:none;border:none;cursor:pointer;color:#FAF7F2;">
+        <svg id="menu-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    </div>
+
+    <div id="mob-menu" class="mt-3 pb-4 px-6">
+      <a href="#services" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)"
+        onclick="toggleMenu()">Services</a>
+      <a href="#calculator" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)"
+        onclick="toggleMenu()">Calculator</a>
+      <a href="#banks" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)"
+        onclick="toggleMenu()">Banks</a>
+      <a href="#why" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)"
+        onclick="toggleMenu()">Why Us</a>
+      <a href="#contact" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)"
+        onclick="toggleMenu()">Contact</a>
+      <a href="/blog/" class="nav-link block py-3.5" style="color:var(--gold-400);" onclick="toggleMenu()">Insights</a>
+      <a href="https://wa.me/6587520859" target="_blank" class="btn-gold mt-4 w-full justify-center"
+        style="display:flex;">WhatsApp Us</a>
+    </div>
+  </nav>
+
+  <!-- =========== HERO =========== -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-deco"></div>
+
+    <div class="max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-16 items-center relative z-10 w-full">
+      <!-- Left copy -->
       <div>
-        <span class="sec-tag">From the Blog</span>
-        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2.1rem);font-weight:400;color:#FAF7F2;line-height:1.1;letter-spacing:-.02em;">Featured <em style="font-style:italic;color:var(--gold-400);">Insight</em></h2>
+        <div class="hero-tag">
+          <span
+            style="width:5px;height:5px;border-radius:50%;background:var(--gold-400);display:inline-block;flex-shrink:0;"></span>
+          Singapore Licensed Mortgage Broker
+        </div>
+
+        <h1 class="hero-title mb-6">
+          The <em>Smarter</em><br>Way to Secure<br>Your Mortgage
+        </h1>
+
+        <p
+          style="font-size:1.0625rem; font-weight:300; line-height:1.8; color:rgba(250,247,242,.62); max-width:470px; margin-bottom:2.25rem;">
+          We compare rates across every major Singapore bank — DBS, OCBC, UOB, Maybank, StanChart &amp; more. Our
+          service is <strong style="color:rgba(250,247,242,.9); font-weight:500;">100% free to you</strong> — the bank
+          pays our referral fee upon disbursement.
+        </p>
+
+        <div class="flex flex-wrap gap-3.5">
+          <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation."
+            target="_blank" class="btn-gold">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Get Free Consultation
+          </a>
+          <a href="#calculator" class="btn-ghost">
+            Try Mortgage Calculator
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Mobile stats grid (hidden on lg+) -->
+        <div class="grid grid-cols-2 gap-3 mt-8 lg:hidden">
+          <div style="background:rgba(255,255,255,.05);border:1px solid rgba(196,151,59,.18);border-radius:10px;padding:1rem 1.25rem;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--gold-400);line-height:1;">20+</div>
+            <div style="color:rgba(250,247,242,.5);font-size:.75rem;margin-top:.15rem;">Bank Partners</div>
+          </div>
+          <div style="background:rgba(196,151,59,.07);border:1px solid rgba(196,151,59,.22);border-radius:10px;padding:1rem 1.25rem;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--gold-400);line-height:1;">$0</div>
+            <div style="color:rgba(250,247,242,.5);font-size:.75rem;margin-top:.15rem;">Fee To You</div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border:1px solid rgba(196,151,59,.18);border-radius:10px;padding:1rem 1.25rem;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--gold-400);line-height:1;">8</div>
+            <div style="color:rgba(250,247,242,.5);font-size:.75rem;margin-top:.15rem;">Service Types</div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border:1px solid rgba(196,151,59,.18);border-radius:10px;padding:1rem 1.25rem;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--gold-400);line-height:1;">24h</div>
+            <div style="color:rgba(250,247,242,.5);font-size:.75rem;margin-top:.15rem;">Response Time</div>
+          </div>
+        </div>
       </div>
-      <a href="/blog/" style="font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,247,242,.45);text-decoration:none;transition:color .25s;white-space:nowrap;" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.45)'">View All Insights &rarr;</a>
-    </div>
 
-    <a href="blog/blog-mas-stress-test-2026.html" style="display:block;text-decoration:none;" class="reveal delay-1">
-      <div id="insight-card" style="
-        background:linear-gradient(135deg,rgba(196,151,59,.10) 0%,rgba(18,34,68,.6) 100%);
-        border:1px solid rgba(196,151,59,.22);
-        border-radius:14px;
-        padding:2rem 2.25rem;
-        display:flex;
-        flex-direction:column;
-        gap:1rem;
-        transition:transform .3s cubic-bezier(.25,.8,.25,1), box-shadow .3s, border-color .3s;
-        position:relative;
-        overflow:hidden;
-      "
-      onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,.45),0 4px 16px rgba(196,151,59,.12)';this.style.borderColor='rgba(196,151,59,.45)';"
-      onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(196,151,59,.22)';">
-
-        <!-- Decorative glow -->
-        <div style="position:absolute;top:-30%;right:-5%;width:40%;height:160%;background:radial-gradient(ellipse,rgba(196,151,59,.07) 0%,transparent 65%);pointer-events:none;"></div>
-
-        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;">
-          <span style="font-size:.68rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-400);background:rgba(196,151,59,.1);border:1px solid rgba(196,151,59,.25);padding:.25rem .75rem;border-radius:100px;">MAS Regulation</span>
-          <span style="font-size:.72rem;color:rgba(250,247,242,.35);letter-spacing:.04em;">April 2026 &nbsp;&middot;&nbsp; 6-min read</span>
+      <!-- Right stats grid -->
+      <div class="hidden lg:grid grid-cols-2 gap-4">
+        <div
+          style="background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.15);border-radius:14px;padding:1.75rem;">
+          <div
+            style="font-family:'Cormorant Garamond',serif;font-size:3.25rem;font-weight:300;color:var(--gold-400);line-height:1;">
+            20+</div>
+          <div style="color:rgba(250,247,242,.5);font-size:.8rem;margin-top:.2rem;">Bank Partners</div>
+          <div style="color:rgba(250,247,242,.28);font-size:.75rem;margin-top:.5rem;line-height:1.55;">All major SG
+            banks &amp; financial institutions</div>
         </div>
-
-        <div style="flex:1;">
-          <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:600;color:#FAF7F2;line-height:1.2;letter-spacing:-.015em;margin-bottom:.65rem;">Understanding the MAS 4% Stress Test: Your 2026 TDSR &amp; MSR Guide</h3>
-          <p style="font-size:.9rem;color:rgba(232,227,218,.65);line-height:1.75;max-width:680px;">The MAS stress test floor shapes how much you can borrow&thinsp;—&thinsp;and most buyers misunderstand it. Learn exactly how the 4% floor, TDSR, MSR, and your existing debts interact before you make an offer.</p>
+        <div
+          style="background:rgba(196,151,59,.08);border:1px solid rgba(196,151,59,.25);border-radius:14px;padding:1.75rem;">
+          <div
+            style="font-family:'Cormorant Garamond',serif;font-size:3.25rem;font-weight:300;color:var(--gold-400);line-height:1;">
+            $0</div>
+          <div style="color:rgba(250,247,242,.5);font-size:.8rem;margin-top:.2rem;">Fee To You</div>
+          <div style="color:rgba(250,247,242,.28);font-size:.75rem;margin-top:.5rem;line-height:1.55;">Banks pay our
+            referral fee — always free to clients</div>
         </div>
-
-        <div style="display:flex;align-items:center;gap:.5rem;color:var(--gold-400);font-size:.82rem;font-weight:500;letter-spacing:.04em;">
-          Read Full Article
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div
+          style="background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.15);border-radius:14px;padding:1.75rem;">
+          <div
+            style="font-family:'Cormorant Garamond',serif;font-size:3.25rem;font-weight:300;color:var(--gold-400);line-height:1;">
+            8</div>
+          <div style="color:rgba(250,247,242,.5);font-size:.8rem;margin-top:.2rem;">Service Types</div>
+          <div style="color:rgba(250,247,242,.28);font-size:.75rem;margin-top:.5rem;line-height:1.55;">Residential,
+            commercial, refinancing &amp; more</div>
+        </div>
+        <div
+          style="background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.15);border-radius:14px;padding:1.75rem;">
+          <div
+            style="font-family:'Cormorant Garamond',serif;font-size:3.25rem;font-weight:300;color:var(--gold-400);line-height:1;">
+            24h</div>
+          <div style="color:rgba(250,247,242,.5);font-size:.8rem;margin-top:.2rem;">Response Time</div>
+          <div style="color:rgba(250,247,242,.28);font-size:.75rem;margin-top:.5rem;line-height:1.55;">Fast turnaround —
+            we move at your pace</div>
         </div>
       </div>
-    </a>
-  </div>
-</section>
-
-<!-- =========== BANKS =========== -->
-<section id="banks" class="py-24" style="background:white;">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-14 reveal">
-      <span class="sec-tag">Our Panel</span>
-      <h2 class="sec-title" style="color:#0B1C3A;">All Major Banks. <em style="font-style:italic;color:var(--gold-500);">One Advisor.</em></h2>
-      <div class="gold-line mt-5 mx-auto" style="max-width:60px;opacity:.65;"></div>
-      <p class="mt-4" style="color:#6B7280;max-width:460px;margin:1rem auto 0;line-height:1.75;font-size:.9375rem;">We have access to current mortgage packages from every major lender — so you never miss a better deal.</p>
     </div>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 reveal">
-      <div class="bank-chip">DBS Bank</div>
-      <div class="bank-chip">OCBC Bank</div>
-      <div class="bank-chip">UOB</div>
-      <div class="bank-chip">Maybank</div>
-      <div class="bank-chip">Standard Chartered</div>
-      <div class="bank-chip">Citibank</div>
-      <div class="bank-chip">HSBC</div>
-      <div class="bank-chip">Bank of China</div>
-      <div class="bank-chip">CIMB</div>
-      <div class="bank-chip">RHB Bank</div>
-      <div class="bank-chip">Hong Leong Finance</div>
-      <div class="bank-chip">Singapura Finance</div>
-      <div class="bank-chip">State Bank of India</div>
-      <div class="bank-chip">Bank of East Asia</div>
-      <div class="bank-chip">+ More</div>
+    <!-- Scroll indicator -->
+    <div
+      style="position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;">
+      <span
+        style="font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,242,.28);font-weight:500;">Scroll</span>
+      <div style="width:1px;height:44px;background:linear-gradient(180deg,rgba(196,151,59,.4),transparent);"></div>
+    </div>
+  </section>
+
+  <!-- =========== TRUST BAR =========== -->
+  <div id="trust-bar" class="py-5">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-wrap justify-center md:justify-between items-center gap-5 md:gap-0">
+        <div class="flex flex-col items-center"><span class="trust-label">Service Fee</span><span
+            class="trust-value">Free to Client</span></div>
+        <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
+        <div class="flex flex-col items-center"><span class="trust-label">Compliance</span><span
+            class="trust-value">TDSR &amp; MSR Verified</span></div>
+        <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
+        <div class="flex flex-col items-center"><span class="trust-label">Coverage</span><span class="trust-value">All
+            Major Banks</span></div>
+        <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
+        <div class="flex flex-col items-center"><span class="trust-label">Property Types</span><span
+            class="trust-value">HDB · Private · Commercial</span></div>
+        <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
+        <div class="flex flex-col items-center"><span class="trust-label">Consultation</span><span
+            class="trust-value">WhatsApp / In-Person</span></div>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- =========== WHY NEXUS =========== -->
-<section id="why" class="py-24" style="background:var(--cream-200);">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-      <div class="reveal">
-        <span class="sec-tag">Why Choose Nexus</span>
-        <h2 class="sec-title" style="color:#0B1C3A;">Your Interests.<br><em style="font-style:italic;color:var(--gold-500);">Always First.</em></h2>
+  <!-- =========== SERVICES =========== -->
+  <section id="services" class="py-24" style="background:var(--cream-100);">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-16 reveal">
+        <span class="sec-tag">What We Do</span>
+        <h2 class="sec-title" style="color:#0B1C3A;">Comprehensive<br><em
+            style="font-style:italic;color:var(--gold-500);">Mortgage Solutions</em></h2>
         <div class="gold-line mt-5" style="max-width:72px;opacity:.65;"></div>
-        <p class="mt-6" style="color:#4B5563;line-height:1.85;font-size:1rem;">Unlike going directly to a bank, we work for <em>you</em> — not any single lender. We present options across the entire market so you get the best deal. And because the bank pays our referral fee upon disbursement, our advice is always completely free and unbiased.</p>
-        <a href="https://wa.me/6587520859?text=I%20want%20to%20check%20my%20TDSR%20and%20MSR%20eligibility." target="_blank" class="btn-gold inline-flex mt-8">
-          Check My Eligibility — Free
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        <p class="mt-5" style="color:#4B5563;max-width:520px;line-height:1.8;font-size:1rem;">From first-time buyers to
+          seasoned investors — expert guidance across every property and loan type in Singapore.</p>
       </div>
 
-      <div class="grid grid-cols-2 gap-4 reveal delay-2">
-        <div class="why-card">
-          <div style="color:var(--gold-500);margin-bottom:.75rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#0B1C3A;margin-bottom:.35rem;">Fully Transparent</h4>
-          <p style="font-size:.8125rem;color:#6B7280;line-height:1.62;">No hidden packages, no conflicts of interest. Every option is laid out clearly for you.</p>
-        </div>
-        <div class="why-card">
-          <div style="color:var(--gold-500);margin-bottom:.75rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#0B1C3A;margin-bottom:.35rem;">Fast Turnaround</h4>
-          <p style="font-size:.8125rem;color:#6B7280;line-height:1.62;">Same-day comparisons. We move at your pace — especially for urgent property purchases.</p>
-        </div>
-        <div class="why-card">
-          <div style="color:var(--gold-500);margin-bottom:.75rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#0B1C3A;margin-bottom:.35rem;">All Client Types</h4>
-          <p style="font-size:.8125rem;color:#6B7280;line-height:1.62;">Singapore citizens, PRs, foreigners, self-employed — we handle every borrower profile.</p>
-        </div>
-        <div class="why-card" style="background:var(--navy-900);border-color:rgba(196,151,59,.2);">
-          <div style="color:var(--gold-400);margin-bottom:.75rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#FAF7F2;margin-bottom:.35rem;">Zero Fees</h4>
-          <p style="font-size:.8125rem;color:rgba(250,247,242,.5);line-height:1.62;">Referral fee paid by the bank upon successful loan disbursement. You pay absolutely nothing.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
 
-<!-- =========== CONTACT FORM =========== -->
-<section id="contact" class="py-24" style="background:var(--navy-950);">
-  <div class="max-w-3xl mx-auto px-6">
-    <div class="text-center mb-12 reveal">
-      <span class="sec-tag">Get Started</span>
-      <h2 class="sec-title" style="color:#FAF7F2;">Let's Find Your<br><em style="font-style:italic;color:var(--gold-400);">Best Rate</em></h2>
-      <div class="gold-line mt-5 mx-auto" style="max-width:60px;"></div>
-      <p class="mt-4" style="color:rgba(250,247,242,.45);line-height:1.8;font-size:.9375rem;">Fill in your details and we'll respond within 24 hours with a personalised comparison. No obligation — no cost.</p>
-    </div>
+        <div class="svc-card reveal delay-1">
+          <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg></div>
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
+            Residential Loan</h3>
+          <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">HDB, condominium, landed — we find the best rate
+            from all banks for your dream home.</p>
+        </div>
 
-    <form id="lead-form" onsubmit="handleSubmit(event)" class="reveal" style="background:rgba(255,255,255,.03);border:1px solid rgba(196,151,59,.15);border-radius:14px;padding:2.5rem;">
-      <div class="grid sm:grid-cols-2 gap-4 mb-4">
-        <div>
-          <p style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">Full Name *</p>
-          <input type="text" name="name" required class="f-input" placeholder="Your name">
+        <div class="svc-card reveal delay-2">
+          <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5">
+              <rect x="2" y="7" width="20" height="14" rx="2" />
+              <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+              <line x1="12" y1="12" x2="12" y2="16" />
+              <line x1="10" y1="14" x2="14" y2="14" />
+            </svg></div>
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
+            Commercial Loan</h3>
+          <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Shophouses, offices, industrial — competitive
+            financing for commercial property investments.</p>
         </div>
-        <div>
-          <p style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">Contact Number *</p>
-          <input type="tel" name="phone" required class="f-input" placeholder="+65 XXXX XXXX">
-        </div>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4 mb-4">
-        <div>
-          <p style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">Loan Purpose</p>
-          <select name="loan_purpose" class="f-input f-select">
-            <option value="" style="background:#0B1C3A">Select purpose…</option>
-            <option style="background:#0B1C3A">New Purchase — HDB</option>
-            <option style="background:#0B1C3A">New Purchase — Private</option>
-            <option style="background:#0B1C3A">New Purchase — Commercial</option>
-            <option style="background:#0B1C3A">Refinancing</option>
-            <option style="background:#0B1C3A">Cash Out / Equity Loan</option>
-            <option style="background:#0B1C3A">Equity Term Loan</option>
-            <option style="background:#0B1C3A">Pre-Purchase Finance Check</option>
-            <option style="background:#0B1C3A">Estate Planning</option>
-          </select>
-        </div>
-        <div>
-          <p style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">Loan Amount (S$)</p>
-          <input type="text" name="loan_amount" class="f-input" placeholder="e.g. 800,000">
-        </div>
-      </div>
-      <div class="mb-5">
-        <p style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">Additional Notes</p>
-        <textarea name="notes" rows="3" class="f-input" placeholder="Specific requirements, timeline, or questions…" style="resize:vertical;"></textarea>
-      </div>
-      <p style="font-size:.73rem;color:rgba(250,247,242,.28);line-height:1.65;margin-bottom:1.25rem;">By submitting, you consent to us contacting you regarding your mortgage enquiry. Your personal data is protected under Singapore's PDPA.</p>
 
-      <!-- Error message -->
-      <div id="form-error" style="display:none;margin-bottom:1rem;padding:.75rem 1rem;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:7px;font-size:.85rem;color:#F87171;">
-        Something went wrong. Please try again or WhatsApp us directly.
+        <div class="svc-card reveal delay-3">
+          <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5">
+              <polyline points="23 4 23 10 17 10" />
+              <path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" />
+            </svg></div>
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
+            Refinancing</h3>
+          <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Lock in a lower rate and reduce monthly
+            repayments. We handle the full bank-switching process.</p>
+        </div>
+
+        <div class="svc-card reveal delay-4">
+          <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+            </svg></div>
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
+            Cash Out / Equity</h3>
+          <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Unlock equity through cash-out refinancing or
+            equity term loans for immediate liquidity.</p>
+        </div>
+
+        <div class="svc-card reveal delay-1">
+          <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="12" y1="18" x2="12" y2="12" />
+              <line x1="9" y1="15" x2="15" y2="15" />
+            </svg></div>
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
+            New Purchase Loan</h3>
+          <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Buying a new property? We compare all lenders and
+            secure in-principle approval before you commit.</p>
+        </div>
+
+        <div class="svc-card reveal delay-2">
+          <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg></div>
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
+            Equity Term Loan</h3>
+          <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Use your fully-paid property as collateral for a
+            flexible term loan at competitive bank rates.</p>
+        </div>
+
+        <div class="svc-card reveal delay-3">
+          <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 00-3-3.87" />
+              <path d="M16 3.13a4 4 0 010 7.75" />
+            </svg></div>
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
+            Estate Planning</h3>
+          <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Structuring property assets to optimise legacy,
+            reduce liabilities, and protect generational wealth.</p>
+        </div>
+
+        <div class="svc-card reveal delay-4">
+          <div class="svc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.5">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg></div>
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
+            Pre-Purchase Check</h3>
+          <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Know your borrowing limit before you bid — full
+            TDSR/MSR analysis and in-principle approval.</p>
+        </div>
+
       </div>
 
-      <div class="flex flex-col sm:flex-row gap-3">
-        <button type="submit" id="submit-btn" class="btn-gold flex-1 justify-center" style="display:flex;">
-          <span id="submit-label">Submit Enquiry</span>
-          <span id="submit-spinner" style="display:none;width:16px;height:16px;border:2px solid rgba(11,28,58,.3);border-top-color:#0B1C3A;border-radius:50%;animation:spin .7s linear infinite;"></span>
-          <svg id="submit-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-        <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20mortgage%20consultation." target="_blank" class="btn-ghost flex-1 justify-center" style="display:flex;">
+      <!-- Services CTA -->
+      <div class="mt-14 text-center reveal" style="padding:2rem;background:linear-gradient(135deg,rgba(196,151,59,.07),rgba(196,151,59,.03));border:1px solid rgba(196,151,59,.18);border-radius:12px;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:500;color:#0B1C3A;margin-bottom:.4rem;">Not sure which service applies to your situation?</p>
+        <p style="font-size:.875rem;color:#6B7280;margin-bottom:1.25rem;">Talk to us — we'll assess your profile and recommend the right approach, free of charge.</p>
+        <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20assessment%20for%20my%20mortgage%20situation." target="_blank" class="btn-gold" style="display:inline-flex;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          WhatsApp Instead
+          Get a Free Assessment
         </a>
       </div>
-    </form>
-
-    <div id="thankyou" style="display:none;text-align:center;padding:3rem 2rem;background:rgba(196,151,59,.07);border:1px solid rgba(196,151,59,.22);border-radius:14px;margin-top:1rem;">
-      <div style="color:var(--gold-400);margin-bottom:1rem;"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto;display:block;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.85rem;color:#FAF7F2;margin-bottom:.5rem;">Enquiry Received</h3>
-      <p style="color:rgba(250,247,242,.5);font-size:.9375rem;line-height:1.7;">We'll be in touch within 24 hours. In the meantime feel free to reach us directly: <a href="https://wa.me/6587520859" style="color:var(--gold-400);text-decoration:none;">+65 8752 0859</a></p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- =========== FOOTER =========== -->
-<footer style="background:#060E1F;border-top:1px solid rgba(196,151,59,.14);">
-  <div class="max-w-7xl mx-auto px-6 py-14">
-    <div class="grid md:grid-cols-4 gap-10 mb-10">
+  <!-- =========== HOW IT WORKS =========== -->
+  <section class="py-24" style="background:white;">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="sec-tag">Our Process</span>
+        <h2 class="sec-title" style="color:#0B1C3A;">Simple. <em
+            style="font-style:italic;color:var(--gold-500);">Seamless.</em> Smart.</h2>
+        <div class="gold-line mt-5 mx-auto" style="max-width:60px;opacity:.65;"></div>
+      </div>
 
-      <div class="md:col-span-2">
-        <div style="line-height:1;margin-bottom:1rem;">
-          <span style="font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:600;color:#FAF7F2;display:block;">NEXUS</span>
-          <span style="font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-500);font-weight:500;">MORTGAGE · SINGAPORE</span>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="text-center reveal delay-1">
+          <div class="step-num">01</div>
+          <div
+            style="width:56px;height:56px;background:linear-gradient(135deg,#0B1C3A,#1A2F55);border:2px solid rgba(196,151,59,.28);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--gold-400);">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path
+                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.5 2.18 2 2 0 012.5 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l.87-.87a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+            </svg>
+          </div>
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
+            Free Consultation</h3>
+          <p style="font-size:.875rem;color:#6B7280;line-height:1.72;">Tell us your situation — property type, budget,
+            timeline. We assess TDSR/MSR eligibility and explore your options.</p>
         </div>
-        <p style="font-size:.875rem;color:rgba(250,247,242,.38);line-height:1.78;max-width:300px;">Singapore's trusted mortgage broker. We compare all major bank packages to secure you the best home loan — free of charge.</p>
-        <a href="https://wa.me/6587520859" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin-top:1.25rem;background:rgba(255,255,255,.06);border:1px solid rgba(196,151,59,.2);border-radius:7px;color:rgba(250,247,242,.55);transition:all .25s;text-decoration:none;" onmouseover="this.style.borderColor='rgba(196,151,59,.5)';this.style.color='var(--gold-400)'" onmouseout="this.style.borderColor='rgba(196,151,59,.2)';this.style.color='rgba(250,247,242,.55)'">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+        <div class="text-center reveal delay-2">
+          <div class="step-num">02</div>
+          <div
+            style="width:56px;height:56px;background:linear-gradient(135deg,#0B1C3A,#1A2F55);border:2px solid rgba(196,151,59,.28);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--gold-400);">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
+            We Compare All Banks</h3>
+          <p style="font-size:.875rem;color:#6B7280;line-height:1.72;">We canvas every lender's current packages —
+            fixed, floating, SORA-pegged — and present a clear, unbiased comparison.</p>
+        </div>
+
+        <div class="text-center reveal delay-3">
+          <div class="step-num">03</div>
+          <div
+            style="width:56px;height:56px;background:linear-gradient(135deg,#0B1C3A,#1A2F55);border:2px solid rgba(196,151,59,.28);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--gold-400);">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 11l3 3L22 4" />
+              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+            </svg>
+          </div>
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
+            Bank Pays, You Save</h3>
+          <p style="font-size:.875rem;color:#6B7280;line-height:1.72;">Choose your best package. We handle all paperwork
+            and bank liaisons. The bank pays our referral fee — zero cost to you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== MEET YOUR ADVISOR ===== -->
+  <section class="advisor-section py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <!-- Left: Decorative Initial & Tagline -->
+        <div class="relative">
+          <div class="advisor-initial">N</div>
+          <div class="advisor-tagline">Your Dedicated Mortgage Specialist</div>
+          <p style="font-size:.95rem; line-height:1.7; color:rgba(250,247,242,.75); margin-bottom:2rem;">
+            With over a decade of expertise in Singapore's mortgage market, our team cuts through complexity to find you the perfect loan. We handle the paperwork, negotiate rates, and guide you every step of the way.
+          </p>
+        </div>
+
+        <!-- Right: Credentials -->
+        <div>
+          <div class="credential-chips">
+            <div class="credential-chip">MAS Licensed Mortgage Broker</div>
+            <div class="credential-chip">10+ Years Industry Experience</div>
+            <div class="credential-chip">500+ Loans Successfully Facilitated</div>
+            <div class="credential-chip">TDSR & MSR Specialist</div>
+          </div>
+          <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" class="btn-gold" style="margin-top:2.5rem; display:inline-flex;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Schedule Consultation
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========== CALCULATOR =========== -->
+  <section id="calculator" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12 reveal">
+        <span class="sec-tag">Mortgage Tool</span>
+        <h2 class="sec-title" style="color:#FAF7F2;">Mortgage <em
+            style="font-style:italic;color:var(--gold-400);">Calculator</em></h2>
+        <div class="gold-line mt-5" style="max-width:72px;"></div>
+        <p class="mt-4" style="color:rgba(250,247,242,.5);max-width:480px;line-height:1.8;font-size:.9375rem;">Estimate
+          your monthly repayment, total interest payable, and check your TDSR / MSR eligibility instantly.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-10">
+        <!-- INPUTS -->
+        <div class="reveal">
+          <div class="mb-5">
+            <p class="calc-label mb-2">Property Type</p>
+            <div class="toggle-wrap">
+              <button class="tog-btn active" id="btn-hdb" onclick="setPropType('hdb')">HDB (MSR Applies)</button>
+              <button class="tog-btn" id="btn-priv" onclick="setPropType('private')">Private / Commercial</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <p class="calc-label mb-1.5">Purchase Price (S$)</p><input type="text" inputmode="numeric" id="c-price"
+                class="calc-input" value="800,000" oninput="onPriceChange()">
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.375rem;">
+                <p class="calc-label">Down Payment (S$)</p>
+                <span id="dp-pct-badge"
+                  style="font-size:.68rem;font-weight:600;letter-spacing:.06em;padding:.15rem .55rem;border-radius:100px;background:rgba(196,151,59,.15);color:var(--gold-400);border:1px solid rgba(196,151,59,.25);">25.0%</span>
+              </div>
+              <input type="text" inputmode="numeric" id="c-down" class="calc-input" value="200,000"
+                oninput="onDownChange()">
+              <div id="dp-warning"
+                style="display:none;margin-top:.4rem;font-size:.73rem;color:#F87171;display:flex;align-items:center;gap:.35rem;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <span id="dp-warning-text"></span>
+              </div>
+              <p style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.35rem;line-height:1.5;">MAS min. 25%
+                (5% cash + 20% CPF/cash) for bank loans</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4 mb-5">
+            <div>
+              <p class="calc-label mb-1.5">Interest Rate (% p.a.)</p><input type="number" id="c-rate" class="calc-input"
+                value="2.00" step="0.05" oninput="calc()">
+            </div>
+            <div>
+              <p class="calc-label mb-1.5">Loan Tenure (Years)</p><input type="number" id="c-yrs" class="calc-input"
+                value="30" min="1" max="35" oninput="calc()">
+            </div>
+          </div>
+
+          <!-- Affordability -->
+          <div
+            style="background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.15);border-radius:9px;padding:1.25rem;">
+            <p class="calc-label mb-3">Affordability Check (TDSR / MSR)</p>
+            <p class="calc-label mb-1.5">Gross Monthly Income (S$)</p>
+            <input type="text" inputmode="numeric" id="c-income" class="calc-input" value="8,000" oninput="calc()">
+            <div class="mt-4" id="ratio-area"></div>
+          </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="reveal delay-2">
+          <div class="grid grid-cols-3 gap-3 mb-4">
+            <div class="result-card">
+              <div class="result-lbl">Monthly Payment</div>
+              <div class="result-val" id="r-monthly">—</div>
+              <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">S$ / month</div>
+            </div>
+            <div class="result-card">
+              <div class="result-lbl">Total Interest</div>
+              <div class="result-val" id="r-interest" style="font-size:1.45rem;">—</div>
+              <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">over tenure</div>
+            </div>
+            <div class="result-card">
+              <div class="result-lbl">Loan Amount</div>
+              <div class="result-val" id="r-loan" style="font-size:1.45rem;">—</div>
+              <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">principal</div>
+            </div>
+          </div>
+
+          <!-- Chart -->
+          <div
+            style="background:rgba(255,255,255,.03);border:1px solid rgba(196,151,59,.12);border-radius:9px;padding:1.1rem;margin-bottom:.875rem;">
+            <p class="calc-label mb-2.5">Principal vs Interest Over Time</p>
+            <canvas id="chart" style="width:100%;height:130px;display:block;"></canvas>
+          </div>
+
+          <!-- Amort table -->
+          <div
+            style="background:rgba(255,255,255,.03);border:1px solid rgba(196,151,59,.12);border-radius:9px;overflow:hidden;">
+            <div style="padding:.875rem 1rem;border-bottom:1px solid rgba(196,151,59,.1);">
+              <p class="calc-label">Year-by-Year Breakdown</p>
+            </div>
+            <div style="overflow-x:auto;max-height:210px;overflow-y:auto;">
+              <table class="amort-tbl">
+                <thead style="position:sticky;top:0;background:#0B1C3A;z-index:1;">
+                  <tr>
+                    <th>Year</th>
+                    <th>Monthly</th>
+                    <th>Principal</th>
+                    <th>Interest</th>
+                    <th>Balance</th>
+                  </tr>
+                </thead>
+                <tbody id="amort-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 text-center reveal">
+        <p style="color:rgba(250,247,242,.38);font-size:.875rem;margin-bottom:.875rem;">Want a personalised rate
+          comparison across all banks?</p>
+        <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20personalised%20mortgage%20rate%20comparison."
+          target="_blank" class="btn-gold">
+          Get My Rate Comparison — Free
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
         </a>
       </div>
+    </div>
+  </section>
 
-      <div>
-        <p style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">Services</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:.45rem;">
-          <li><a href="#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Residential Loan</a></li>
-          <li><a href="#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Commercial Loan</a></li>
-          <li><a href="#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Refinancing</a></li>
-          <li><a href="#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Cash Out / Equity</a></li>
-          <li><a href="#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Estate Planning</a></li>
-          <li><a href="#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Pre-Purchase Check</a></li>
-        </ul>
+  <!-- =========== FEATURED INSIGHT =========== -->
+  <section id="insights-preview" style="background:var(--navy-950);padding:4rem 0;">
+    <div class="max-w-7xl mx-auto px-6">
+      <div style="text-align:center; margin-bottom:2rem;">
+        <span class="hero-tag">Knowledge Center</span>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:400; color:#FAF7F2; margin-top:1rem; letter-spacing:-.01em;">Insights & Resources</h2>
+      </div>
+      
+      <!-- Featured Article -->
+      <div id="insight-card" style="
+        background: linear-gradient(135deg, rgba(196,151,59,.08), rgba(196,151,59,.03));
+        border: 1px solid rgba(196,151,59,.2);
+        border-radius: 10px;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+      ">
+        <span class="article-tag">Featured</span>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:500; color:#FAF7F2; margin-bottom:1rem; line-height:1.3;">
+          Refinancing Guide: Lock in Today's Rates Before They Change
+        </h3>
+        <p style="font-size:.9rem; line-height:1.6; color:rgba(250,247,242,.75); margin-bottom:1.5rem;">
+          Interest rates affect your mortgage for decades. Learn when to refinance, what to expect, and how much you could save. Our step-by-step guide covers HDB and private property refinancing.
+        </p>
+        <div style="display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
+          <span style="font-size:.75rem; color:rgba(250,247,242,.5);">8 min read</span>
+          <a href="/blog/" class="article-link">Read Full Article <span>→</span></a>
+        </div>
       </div>
 
-      <div>
-        <p style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">Contact</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:.7rem;">
-          <li style="display:flex;align-items:flex-start;gap:.6rem;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.6)" stroke-width="1.5" style="margin-top:2px;flex-shrink:0;"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.5 2.18 2 2 0 012.5 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l.87-.87a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            <a href="tel:+6587520859" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">+65 8752 0859</a>
-          </li>
-          <li style="display:flex;align-items:flex-start;gap:.6rem;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(196,151,59,.6)" style="margin-top:2px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <a href="https://wa.me/6587520859" target="_blank" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">WhatsApp Us</a>
-          </li>
-          <li style="display:flex;align-items:flex-start;gap:.6rem;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.6)" stroke-width="1.5" style="margin-top:2px;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span style="font-size:.875rem;color:rgba(250,247,242,.4);">Mon–Sat, 9am–7pm SGT</span>
-          </li>
-        </ul>
+      <!-- Additional Article Cards -->
+      <div class="insights-grid">
+        <div class="article-card">
+          <span class="article-tag">HDB Loans</span>
+          <h3 class="article-title">HDB vs Bank Loan: Which Should You Choose in 2026?</h3>
+          <p style="font-size:.85rem; line-height:1.6; color:rgba(250,247,242,.7); margin-bottom:1.5rem;">
+            Navigate the pros and cons of HDB loans versus bank loans. We break down rates, terms, and eligibility to help you decide.
+          </p>
+          <div class="article-meta">5 min read</div>
+          <a href="/blog/" class="article-link">Read More <span>→</span></a>
+        </div>
+
+        <div class="article-card">
+          <span class="article-tag">Interest Rates</span>
+          <h3 class="article-title">SORA Explained: Fixed vs Floating Rate Mortgages</h3>
+          <p style="font-size:.85rem; line-height:1.6; color:rgba(250,247,242,.7); margin-bottom:1.5rem;">
+            Understanding SORA benchmarks and whether a fixed or floating rate makes sense for your financial situation in 2026.
+          </p>
+          <div class="article-meta">6 min read</div>
+          <a href="/blog/" class="article-link">Read More <span>→</span></a>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="gold-line mb-5" style="opacity:.12;"></div>
-    <div class="flex flex-col md:flex-row justify-between items-start gap-4">
-      <p style="font-size:.73rem;color:rgba(250,247,242,.22);line-height:1.65;max-width:660px;">Nexus Mortgage SG is a licensed mortgage broker in Singapore. Interest rates shown are indicative and subject to change. All mortgage approvals are subject to individual bank credit assessment. TDSR/MSR figures are for reference only and do not constitute financial advice. Personal data collected is governed by Singapore's Personal Data Protection Act (PDPA).</p>
-      <p style="font-size:.73rem;color:rgba(250,247,242,.18);white-space:nowrap;">© 2026 nexusmortgage.sg</p>
+  <!-- =========== BANKS =========== -->
+  <section id="banks" class="py-24" style="background:white;">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-14 reveal">
+        <span class="sec-tag">Our Panel</span>
+        <h2 class="sec-title" style="color:#0B1C3A;">All Major Banks. <em
+            style="font-style:italic;color:var(--gold-500);">One Advisor.</em></h2>
+        <div class="gold-line mt-5 mx-auto" style="max-width:60px;opacity:.65;"></div>
+        <p class="mt-4" style="color:#6B7280;max-width:460px;margin:1rem auto 0;line-height:1.75;font-size:.9375rem;">We
+          have access to current mortgage packages from every major lender — so you never miss a better deal.</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 reveal">
+        <div class="bank-chip">DBS Bank</div>
+        <div class="bank-chip">OCBC Bank</div>
+        <div class="bank-chip">UOB</div>
+        <div class="bank-chip">Maybank</div>
+        <div class="bank-chip">Standard Chartered</div>
+        <div class="bank-chip">Citibank</div>
+        <div class="bank-chip">HSBC</div>
+        <div class="bank-chip">Bank of China</div>
+        <div class="bank-chip">CIMB</div>
+        <div class="bank-chip">RHB Bank</div>
+        <div class="bank-chip">Hong Leong Finance</div>
+        <div class="bank-chip">Singapura Finance</div>
+        <div class="bank-chip">State Bank of India</div>
+        <div class="bank-chip">Bank of East Asia</div>
+        <div class="bank-chip">+ More</div>
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<script>
-// ===== NAVBAR =====
-const nb = document.getElementById('navbar');
-window.addEventListener('scroll', () => nb.classList.toggle('scrolled', scrollY > 55), {passive:true});
+  <!-- =========== WHY NEXUS =========== -->
+  <section id="why" class="py-24" style="background:var(--cream-200);">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+          <span class="sec-tag">Why Choose Nexus</span>
+          <h2 class="sec-title" style="color:#0B1C3A;">Your Interests.<br><em
+              style="font-style:italic;color:var(--gold-500);">Always First.</em></h2>
+          <div class="gold-line mt-5" style="max-width:72px;opacity:.65;"></div>
+          <p class="mt-6" style="color:#4B5563;line-height:1.85;font-size:1rem;">Unlike going directly to a bank, we
+            work for <em>you</em> — not any single lender. We present options across the entire market so you get the
+            best deal. And because the bank pays our referral fee upon disbursement, our advice is always completely
+            free and unbiased.</p>
+          <a href="https://wa.me/6587520859?text=I%20want%20to%20check%20my%20TDSR%20and%20MSR%20eligibility."
+            target="_blank" class="btn-gold inline-flex mt-8">
+            Check My Eligibility — Free
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
 
-// ===== MOBILE MENU =====
-function toggleMenu() {
-  document.getElementById('mob-menu').classList.toggle('open');
-}
+        <div class="grid grid-cols-2 gap-4 reveal delay-2">
+          <div class="why-card">
+            <div style="color:var(--gold-500);margin-bottom:.75rem;"><svg width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg></div>
+            <h4
+              style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#0B1C3A;margin-bottom:.35rem;">
+              Fully Transparent</h4>
+            <p style="font-size:.8125rem;color:#6B7280;line-height:1.62;">No hidden packages, no conflicts of interest.
+              Every option is laid out clearly for you.</p>
+          </div>
+          <div class="why-card">
+            <div style="color:var(--gold-500);margin-bottom:.75rem;"><svg width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v4l3 3" />
+              </svg></div>
+            <h4
+              style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#0B1C3A;margin-bottom:.35rem;">
+              Fast Turnaround</h4>
+            <p style="font-size:.8125rem;color:#6B7280;line-height:1.62;">Same-day comparisons. We move at your pace —
+              especially for urgent property purchases.</p>
+          </div>
+          <div class="why-card">
+            <div style="color:var(--gold-500);margin-bottom:.75rem;"><svg width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                <path d="M16 3.13a4 4 0 010 7.75" />
+              </svg></div>
+            <h4
+              style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#0B1C3A;margin-bottom:.35rem;">
+              All Client Types</h4>
+            <p style="font-size:.8125rem;color:#6B7280;line-height:1.62;">Singapore citizens, PRs, foreigners,
+              self-employed — we handle every borrower profile.</p>
+          </div>
+          <div class="why-card" style="background:var(--navy-900);border-color:rgba(196,151,59,.2);">
+            <div style="color:var(--gold-400);margin-bottom:.75rem;"><svg width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="12" y1="1" x2="12" y2="23" />
+                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+              </svg></div>
+            <h4
+              style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#FAF7F2;margin-bottom:.35rem;">
+              Zero Fees</h4>
+            <p style="font-size:.8125rem;color:rgba(250,247,242,.5);line-height:1.62;">Referral fee paid by the bank
+              upon successful loan disbursement. You pay absolutely nothing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials-section py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div style="text-align:center; margin-bottom:3rem;">
+        <span class="hero-tag">Client Stories</span>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:400; color:var(--navy-900); margin-top:1rem; letter-spacing:-.01em;">What Our Clients Say</h2>
+      </div>
 
-// ===== SCROLL REVEAL =====
-const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
-}, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Saved us S$180 a month on our HDB loan. The comparison was eye-opening."</p>
+          <p class="testimonial-author">Wei Ling T.</p>
+          <p class="testimonial-label">Bukit Timah · Refinancing</p>
+        </div>
 
-// ===== CALCULATOR =====
-let ptype = 'hdb';
-function setPropType(t) {
-  ptype = t;
-  document.getElementById('btn-hdb').classList.toggle('active', t==='hdb');
-  document.getElementById('btn-priv').classList.toggle('active', t==='private');
-  validateDown();
-  calc();
-}
+        <div class="testimonial-card reveal" style="transition-delay:.1s;">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"First-time buyer — overwhelmed by the options. Nexus made it simple and got us approved in days."</p>
+          <p class="testimonial-author">Arjun S.</p>
+          <p class="testimonial-label">Jurong East · New Purchase</p>
+        </div>
 
-const fmt = n => isNaN(n)||!isFinite(n) ? '—' : 'S$'+Math.round(n).toLocaleString('en-SG');
-const fmtK = n => {
-  if (isNaN(n)||!isFinite(n)) return '—';
-  if (n>=1e6) return 'S$'+(n/1e6).toFixed(2)+'M';
-  if (n>=1e3) return 'S$'+Math.round(n/1e3)+'K';
-  return 'S$'+Math.round(n);
-};
+        <div class="testimonial-card reveal" style="transition-delay:.2s;">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Complex self-employed profile and foreign income. They found a lender that others couldn't."</p>
+          <p class="testimonial-author">Michelle C.</p>
+          <p class="testimonial-label">CBD · Commercial Loan</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-// ── Comma-formatting helpers ──────────────────────────────────────────────────
-// Strip commas/spaces and return plain number
-function raw(id) {
-  return +(document.getElementById(id).value.replace(/,/g,'')) || 0;
-}
 
-// Format a number string with thousand-separator commas
-function fmtInput(val) {
-  const digits = String(val).replace(/\D/g,'');
-  if (!digits) return '';
-  return digits.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
+  <!-- =========== CONTACT FORM =========== -->
+  <section id="contact" class="py-24" style="background:var(--navy-950);">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-12 reveal">
+        <span class="sec-tag">Get Started</span>
+        <h2 class="sec-title" style="color:#FAF7F2;">Let's Find Your<br><em
+            style="font-style:italic;color:var(--gold-400);">Best Rate</em></h2>
+        <div class="gold-line mt-5 mx-auto" style="max-width:60px;"></div>
+        <p class="mt-4" style="color:rgba(250,247,242,.45);line-height:1.8;font-size:.9375rem;">Fill in your details and
+          we'll respond within 24 hours with a personalised comparison. No obligation — no cost.</p>
+      </div>
 
-// Attach live comma-formatter to a text input; preserves cursor position
-function attachFormatter(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.addEventListener('input', function() {
-    const pos   = this.selectionStart;
-    const raw   = this.value.replace(/,/g,'');
-    const commasBefore = (this.value.slice(0, pos).match(/,/g) || []).length;
-    const formatted = fmtInput(raw);
-    this.value   = formatted;
-    const commasAfter = (formatted.slice(0, pos).match(/,/g) || []).length;
-    const newPos = Math.max(0, pos + (commasAfter - commasBefore));
-    this.setSelectionRange(newPos, newPos);
-  });
-}
+      <form id="lead-form" onsubmit="handleSubmit(event)" class="reveal"
+        style="background:rgba(255,255,255,.03);border:1px solid rgba(196,151,59,.15);border-radius:14px;padding:2.5rem;">
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <p
+              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">
+              Full Name *</p>
+            <input type="text" name="name" required class="f-input" placeholder="Your name">
+          </div>
+          <div>
+            <p
+              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">
+              Contact Number *</p>
+            <input type="tel" name="phone" required class="f-input" placeholder="+65 XXXX XXXX">
+          </div>
+          <div class="mb-4">
+            <p style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.45);margin-bottom:.5rem;">Email Address</p>
+            <input type="email" name="email" class="f-input" placeholder="your@email.com" style="background:rgba(255,255,255,.05);border:1px solid rgba(196,151,59,.2);color:#FAF7F2;border-radius:7px;padding:.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:.9375rem;outline:none;transition:border-color .25s,background .25s;width:100%;">
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <p
+              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">
+              Loan Purpose</p>
+            <select name="loan_purpose" class="f-input f-select">
+              <option value="" style="background:#0B1C3A">Select purpose…</option>
+              <option style="background:#0B1C3A">New Purchase — HDB</option>
+              <option style="background:#0B1C3A">New Purchase — Private</option>
+              <option style="background:#0B1C3A">New Purchase — Commercial</option>
+              <option style="background:#0B1C3A">Refinancing</option>
+              <option style="background:#0B1C3A">Cash Out / Equity Loan</option>
+              <option style="background:#0B1C3A">Equity Term Loan</option>
+              <option style="background:#0B1C3A">Pre-Purchase Finance Check</option>
+              <option style="background:#0B1C3A">Estate Planning</option>
+            </select>
+          </div>
+          <div>
+            <p
+              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">
+              Loan Amount (S$)</p>
+            <input type="text" name="loan_amount" class="f-input" placeholder="e.g. 800,000">
+          </div>
+        </div>
+        <div class="mb-5">
+          <p
+            style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">
+            Additional Notes</p>
+          <textarea name="notes" rows="3" class="f-input" placeholder="Specific requirements, timeline, or questions…"
+            style="resize:vertical;"></textarea>
+        </div>
+        <p style="font-size:.73rem;color:rgba(250,247,242,.28);line-height:1.65;margin-bottom:1.25rem;">By submitting,
+          you consent to us contacting you regarding your mortgage enquiry. Your personal data is protected under
+          Singapore's PDPA.</p>
 
-// When price changes: auto-adjust down payment to maintain min 25%
-function onPriceChange() {
-  const price = raw('c-price');
-  const down  = raw('c-down');
-  const minDP = Math.ceil(price * 0.25);
-  // If current down payment is below minimum, auto-correct it
-  if (price > 0 && down < minDP) {
-    document.getElementById('c-down').value = fmtInput(minDP);
-  }
-  validateDown();
-  calc();
-}
+        <!-- Error message -->
+        <div id="form-error"
+          style="display:none;margin-bottom:1rem;padding:.75rem 1rem;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:7px;font-size:.85rem;color:#F87171;">
+          Something went wrong. Please try again or WhatsApp us directly.
+        </div>
 
-// When down payment changes manually: validate only
-function onDownChange() {
-  validateDown();
-  calc();
-}
+        <div class="flex flex-col sm:flex-row gap-3">
+          <button type="submit" id="submit-btn" class="btn-gold flex-1 justify-center" style="display:flex;">
+            <span id="submit-label">Submit Enquiry</span>
+            <span id="submit-spinner"
+              style="display:none;width:16px;height:16px;border:2px solid rgba(11,28,58,.3);border-top-color:#0B1C3A;border-radius:50%;animation:spin .7s linear infinite;"></span>
+            <svg id="submit-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+          <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20mortgage%20consultation." target="_blank"
+            class="btn-ghost flex-1 justify-center" style="display:flex;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            WhatsApp Instead
+          </a>
+        </div>
+      </form>
 
-function validateDown() {
-  const price  = raw('c-price');
-  const down   = raw('c-down');
-  const badge  = document.getElementById('dp-pct-badge');
-  const warn   = document.getElementById('dp-warning');
-  const warnTx = document.getElementById('dp-warning-text');
-  const inp    = document.getElementById('c-down');
+      <div id="thankyou"
+        style="display:none;text-align:center;padding:3rem 2rem;background:rgba(196,151,59,.07);border:1px solid rgba(196,151,59,.22);border-radius:14px;margin-top:1rem;">
+        <div style="color:var(--gold-400);margin-bottom:1rem;"><svg width="52" height="52" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto;display:block;">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg></div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.85rem;color:#FAF7F2;margin-bottom:.5rem;">Enquiry
+          Received</h3>
+        <p style="color:rgba(250,247,242,.5);font-size:.9375rem;line-height:1.7;">We'll be in touch within 24 hours. In
+          the meantime feel free to reach us directly: <a href="https://wa.me/6587520859"
+            style="color:var(--gold-400);text-decoration:none;">+65 8752 0859</a></p>
+      </div>
+    </div>
+  </section>
 
-  if (price <= 0) return;
+  <!-- =========== FOOTER =========== -->
+  <footer style="background:#060E1F;border-top:1px solid rgba(196,151,59,.14);">
+    <div class="max-w-7xl mx-auto px-6 py-14">
+      <div class="grid md:grid-cols-4 gap-10 mb-10">
 
-  const pct   = (down / price) * 100;
-  const minDP = price * 0.25;
+        <div class="md:col-span-2">
+          <div style="line-height:1;margin-bottom:1rem;">
+            <span
+              style="font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:600;color:#FAF7F2;display:block;">NEXUS</span>
+            <span
+              style="font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-500);font-weight:500;">MORTGAGE
+              · SINGAPORE</span>
+          </div>
+          <p style="font-size:.875rem;color:rgba(250,247,242,.38);line-height:1.78;max-width:300px;">Singapore's trusted
+            mortgage broker. We compare all major bank packages to secure you the best home loan — free of charge.</p>
+          <a href="https://wa.me/6587520859" target="_blank"
+            style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin-top:1.25rem;background:rgba(255,255,255,.06);border:1px solid rgba(196,151,59,.2);border-radius:7px;color:rgba(250,247,242,.55);transition:all .25s;text-decoration:none;"
+            onmouseover="this.style.borderColor='rgba(196,151,59,.5)';this.style.color='var(--gold-400)'"
+            onmouseout="this.style.borderColor='rgba(196,151,59,.2)';this.style.color='rgba(250,247,242,.55)'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+          </a>
+        </div>
 
-  // Update % badge
-  badge.textContent = pct.toFixed(1) + '%';
+        <div>
+          <p
+            style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">
+            Services</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.45rem;">
+            <li><a href="#services"
+                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
+                onmouseover="this.style.color='var(--gold-400)'"
+                onmouseout="this.style.color='rgba(250,247,242,.4)'">Residential Loan</a></li>
+            <li><a href="#services"
+                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
+                onmouseover="this.style.color='var(--gold-400)'"
+                onmouseout="this.style.color='rgba(250,247,242,.4)'">Commercial Loan</a></li>
+            <li><a href="#services"
+                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
+                onmouseover="this.style.color='var(--gold-400)'"
+                onmouseout="this.style.color='rgba(250,247,242,.4)'">Refinancing</a></li>
+            <li><a href="#services"
+                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
+                onmouseover="this.style.color='var(--gold-400)'"
+                onmouseout="this.style.color='rgba(250,247,242,.4)'">Cash Out / Equity</a></li>
+            <li><a href="#services"
+                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
+                onmouseover="this.style.color='var(--gold-400)'"
+                onmouseout="this.style.color='rgba(250,247,242,.4)'">Estate Planning</a></li>
+            <li><a href="#services"
+                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
+                onmouseover="this.style.color='var(--gold-400)'"
+                onmouseout="this.style.color='rgba(250,247,242,.4)'">Pre-Purchase Check</a></li>
+          </ul>
+        </div>
 
-  // MAS rules: min 25% for bank loans (both HDB and private)
-  const minPct = 25;
-  const maxLTV = 75;
+        <div>
+          <p
+            style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">
+            Contact</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.7rem;">
+            <li style="display:flex;align-items:flex-start;gap:.6rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.6)"
+                stroke-width="1.5" style="margin-top:2px;flex-shrink:0;">
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.5 2.18 2 2 0 012.5 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l.87-.87a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+              </svg>
+              <a href="tel:+6587520859"
+                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
+                onmouseover="this.style.color='var(--gold-400)'"
+                onmouseout="this.style.color='rgba(250,247,242,.4)'">+65 8752 0859</a>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:.6rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(196,151,59,.6)"
+                style="margin-top:2px;flex-shrink:0;">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              <a href="https://wa.me/6587520859" target="_blank"
+                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
+                onmouseover="this.style.color='var(--gold-400)'"
+                onmouseout="this.style.color='rgba(250,247,242,.4)'">WhatsApp Us</a>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:.6rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.6)"
+                stroke-width="1.5" style="margin-top:2px;flex-shrink:0;">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span style="font-size:.875rem;color:rgba(250,247,242,.4);">Mon–Sat, 9am–7pm SGT</span>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-  if (pct < minPct) {
-    badge.style.background = 'rgba(248,113,113,.15)';
-    badge.style.color = '#F87171';
-    badge.style.borderColor = 'rgba(248,113,113,.3)';
-    inp.style.borderColor = 'rgba(248,113,113,.6)';
-    warn.style.display = 'flex';
-    const shortfall = Math.ceil(minDP - down).toLocaleString('en-SG');
-    warnTx.textContent = `Below 25% minimum — need S$${shortfall} more`;
-  } else if (pct > maxLTV) {
-    badge.style.background = 'rgba(196,151,59,.15)';
-    badge.style.color = 'var(--gold-400)';
-    badge.style.borderColor = 'rgba(196,151,59,.25)';
-    inp.style.borderColor = 'rgba(196,151,59,.4)';
-    warn.style.display = 'none';
-  } else {
-    badge.style.background = 'rgba(74,222,128,.12)';
-    badge.style.color = '#4ADE80';
-    badge.style.borderColor = 'rgba(74,222,128,.3)';
-    inp.style.borderColor = 'rgba(196,151,59,.2)';
-    warn.style.display = 'none';
-  }
-}
+      <div class="gold-line mb-5" style="opacity:.12;"></div>
+      <div class="flex flex-col md:flex-row justify-between items-start gap-4">
+        <p style="font-size:.73rem;color:rgba(250,247,242,.22);line-height:1.65;max-width:660px;">Nexus Mortgage SG is a
+          licensed mortgage broker in Singapore. Interest rates shown are indicative and subject to change. All mortgage
+          approvals are subject to individual bank credit assessment. TDSR/MSR figures are for reference only and do not
+          constitute financial advice. Personal data collected is governed by Singapore's Personal Data Protection Act
+          (PDPA).</p>
+        <p style="font-size:.73rem;color:rgba(250,247,242,.18);white-space:nowrap;">© 2026 nexusmortgage.sg</p>
+      </div>
+    </div>
+  </footer>
 
-function calc() {
-  const price  = raw('c-price');
-  const down   = raw('c-down');
-  const annR   = +document.getElementById('c-rate').value   || 0;
-  const yrs    = +document.getElementById('c-yrs').value    || 0;
-  const income = raw('c-income');
+  <script>
+    // ===== NAVBAR =====
+    const nb = document.getElementById('navbar');
+    window.addEventListener('scroll', () => nb.classList.toggle('scrolled', scrollY > 55), { passive: true });
 
-  const loan = Math.max(0, price - down);
-  const r    = annR / 100 / 12;
-  const n    = yrs * 12;
+    // ===== MOBILE MENU =====
+    function toggleMenu() {
+      document.getElementById('mob-menu').classList.toggle('open');
+    }
 
-  // Actual monthly payment at user's input rate
-  let monthly = 0;
-  if (r > 0 && n > 0 && loan > 0)  monthly = loan * (r * Math.pow(1+r,n)) / (Math.pow(1+r,n) - 1);
-  else if (n > 0 && loan > 0)      monthly = loan / n;
+    // ===== SCROLL REVEAL =====
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+    }, { threshold: 0.05, rootMargin: "0px 0px 0px 0px" });
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-  // MAS stress-test: affordability assessed at max(actual_rate, 4.0%)
-  const stressAnnR = Math.max(annR, 4.0);
-  const rS = stressAnnR / 100 / 12;
-  let stressMonthly = 0;
-  if (rS > 0 && n > 0 && loan > 0)  stressMonthly = loan * (rS * Math.pow(1+rS,n)) / (Math.pow(1+rS,n) - 1);
-  else if (n > 0 && loan > 0)       stressMonthly = loan / n;
+    // ===== CALCULATOR =====
+    let ptype = 'hdb';
+    function setPropType(t) {
+      ptype = t;
+      document.getElementById('btn-hdb').classList.toggle('active', t === 'hdb');
+      document.getElementById('btn-priv').classList.toggle('active', t === 'private');
+      validateDown();
+      calc();
+    }
 
-  const totInt = monthly * n - loan;
+    const fmt = n => isNaN(n) || !isFinite(n) ? '—' : 'S$' + Math.round(n).toLocaleString('en-SG');
+    const fmtK = n => {
+      if (isNaN(n) || !isFinite(n)) return '—';
+      if (n >= 1e6) return 'S$' + (n / 1e6).toFixed(2) + 'M';
+      if (n >= 1e3) return 'S$' + Math.round(n / 1e3) + 'K';
+      return 'S$' + Math.round(n);
+    };
 
-  document.getElementById('r-monthly').textContent  = loan > 0 ? fmt(monthly)  : '—';
-  document.getElementById('r-interest').textContent = loan > 0 ? fmtK(totInt)  : '—';
-  document.getElementById('r-loan').textContent     = loan > 0 ? fmtK(loan)    : '—';
+    // ── Comma-formatting helpers ──────────────────────────────────────────────────
+    // Strip commas/spaces and return plain number
+    function raw(id) {
+      return +(document.getElementById(id).value.replace(/,/g, '')) || 0;
+    }
 
-  updateRatios(monthly, stressMonthly, income);
-  buildTable(loan, r, monthly, n, yrs);
-  drawChart(loan, r, monthly, n, yrs);
-}
+    // Format a number string with thousand-separator commas
+    function fmtInput(val) {
+      const digits = String(val).replace(/\D/g, '');
+      if (!digits) return '';
+      return digits.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
 
-function updateRatios(monthly, stressMonthly, income) {
-  const box = document.getElementById('ratio-area');
-  if (!income || income <= 0 || monthly <= 0) {
-    box.innerHTML = '<p style="font-size:.8rem;color:rgba(250,247,242,.32);">Enter your income above to check eligibility.</p>';
-    return;
-  }
+    // Attach live comma-formatter to a text input; preserves cursor position
+    function attachFormatter(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', function () {
+        const pos = this.selectionStart;
+        const raw = this.value.replace(/,/g, '');
+        const commasBefore = (this.value.slice(0, pos).match(/,/g) || []).length;
+        const formatted = fmtInput(raw);
+        this.value = formatted;
+        const commasAfter = (formatted.slice(0, pos).match(/,/g) || []).length;
+        const newPos = Math.max(0, pos + (commasAfter - commasBefore));
+        this.setSelectionRange(newPos, newPos);
+      });
+    }
 
-  // TDSR / MSR bars use stress-test payment (MAS requirement)
-  const sPct   = (stressMonthly / income) * 100;
-  const tOk    = sPct <= 55;
-  const mOk    = sPct <= 30;
-  const tColor = tOk  ? '#4ADE80' : '#F87171';
-  const mColor = mOk  ? '#4ADE80' : '#F87171';
+    // When price changes: auto-adjust down payment to maintain min 25%
+    function onPriceChange() {
+      const price = raw('c-price');
+      const down = raw('c-down');
+      const minDP = Math.ceil(price * 0.25);
+      // If current down payment is below minimum, auto-correct it
+      if (price > 0 && down < minDP) {
+        document.getElementById('c-down').value = fmtInput(minDP);
+      }
+      validateDown();
+      calc();
+    }
 
-  let h = `
+    // When down payment changes manually: validate only
+    function onDownChange() {
+      validateDown();
+      calc();
+    }
+
+    function validateDown() {
+      const price = raw('c-price');
+      const down = raw('c-down');
+      const badge = document.getElementById('dp-pct-badge');
+      const warn = document.getElementById('dp-warning');
+      const warnTx = document.getElementById('dp-warning-text');
+      const inp = document.getElementById('c-down');
+
+      if (price <= 0) return;
+
+      const pct = (down / price) * 100;
+      const minDP = price * 0.25;
+
+      // Update % badge
+      badge.textContent = pct.toFixed(1) + '%';
+
+      // MAS rules: min 25% for bank loans (both HDB and private)
+      const minPct = 25;
+      const maxLTV = 75;
+
+      if (pct < minPct) {
+        badge.style.background = 'rgba(248,113,113,.15)';
+        badge.style.color = '#F87171';
+        badge.style.borderColor = 'rgba(248,113,113,.3)';
+        inp.style.borderColor = 'rgba(248,113,113,.6)';
+        warn.style.display = 'flex';
+        const shortfall = Math.ceil(minDP - down).toLocaleString('en-SG');
+        warnTx.textContent = `Below 25% minimum — need S$${shortfall} more`;
+      } else if (pct > maxLTV) {
+        badge.style.background = 'rgba(196,151,59,.15)';
+        badge.style.color = 'var(--gold-400)';
+        badge.style.borderColor = 'rgba(196,151,59,.25)';
+        inp.style.borderColor = 'rgba(196,151,59,.4)';
+        warn.style.display = 'none';
+      } else {
+        badge.style.background = 'rgba(74,222,128,.12)';
+        badge.style.color = '#4ADE80';
+        badge.style.borderColor = 'rgba(74,222,128,.3)';
+        inp.style.borderColor = 'rgba(196,151,59,.2)';
+        warn.style.display = 'none';
+      }
+    }
+
+    function calc() {
+      const price = raw('c-price');
+      const down = raw('c-down');
+      const annR = +document.getElementById('c-rate').value || 0;
+      const yrs = +document.getElementById('c-yrs').value || 0;
+      const income = raw('c-income');
+
+      const loan = Math.max(0, price - down);
+      const r = annR / 100 / 12;
+      const n = yrs * 12;
+
+      // Actual monthly payment at user's input rate
+      let monthly = 0;
+      if (r > 0 && n > 0 && loan > 0) monthly = loan * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      else if (n > 0 && loan > 0) monthly = loan / n;
+
+      // MAS stress-test: affordability assessed at max(actual_rate, 4.0%)
+      const stressAnnR = Math.max(annR, 4.0);
+      const rS = stressAnnR / 100 / 12;
+      let stressMonthly = 0;
+      if (rS > 0 && n > 0 && loan > 0) stressMonthly = loan * (rS * Math.pow(1 + rS, n)) / (Math.pow(1 + rS, n) - 1);
+      else if (n > 0 && loan > 0) stressMonthly = loan / n;
+
+      const totInt = monthly * n - loan;
+
+      document.getElementById('r-monthly').textContent = loan > 0 ? fmt(monthly) : '—';
+      document.getElementById('r-interest').textContent = loan > 0 ? fmtK(totInt) : '—';
+      document.getElementById('r-loan').textContent = loan > 0 ? fmtK(loan) : '—';
+
+      updateRatios(monthly, stressMonthly, income);
+      buildTable(loan, r, monthly, n, yrs);
+      drawChart(loan, r, monthly, n, yrs);
+    }
+
+    function updateRatios(monthly, stressMonthly, income) {
+      const box = document.getElementById('ratio-area');
+      if (!income || income <= 0 || monthly <= 0) {
+        box.innerHTML = '<p style="font-size:.8rem;color:rgba(250,247,242,.32);">Enter your income above to check eligibility.</p>';
+        return;
+      }
+
+      // TDSR / MSR bars use stress-test payment (MAS requirement)
+      const sPct = (stressMonthly / income) * 100;
+      const tOk = sPct <= 55;
+      const mOk = sPct <= 30;
+      const tColor = tOk ? '#4ADE80' : '#F87171';
+      const mColor = mOk ? '#4ADE80' : '#F87171';
+
+      let h = `
     <div style="margin-bottom:.9rem;">
       <div style="display:flex;justify-content:space-between;margin-bottom:.35rem;">
         <span style="font-size:.73rem;color:rgba(250,247,242,.45);font-weight:500;">TDSR (max 55%)</span>
-        <span style="font-size:.73rem;font-weight:600;color:${tColor};">${sPct.toFixed(1)}% ${tOk?'✓ OK':'✗ Exceeds limit'}</span>
+        <span style="font-size:.73rem;font-weight:600;color:${tColor};">${sPct.toFixed(1)}% ${tOk ? '✓ OK' : '✗ Exceeds limit'}</span>
       </div>
-      <div class="ratio-bar"><div class="ratio-fill" style="width:${Math.min(sPct,100)}%;background:${tOk?'linear-gradient(90deg,#4ADE80,#22C55E)':'linear-gradient(90deg,#F87171,#EF4444)'};"></div></div>
+      <div class="ratio-bar"><div class="ratio-fill" style="width:${Math.min(sPct, 100)}%;background:${tOk ? 'linear-gradient(90deg,#4ADE80,#22C55E)' : 'linear-gradient(90deg,#F87171,#EF4444)'};"></div></div>
       <div style="display:flex;justify-content:space-between;margin-top:.22rem;">
         <span style="font-size:.67rem;color:rgba(250,247,242,.22);">0%</span>
         <span style="font-size:.67rem;color:rgba(250,247,242,.22);">55% limit · stress-tested @ 4%</span>
       </div>
     </div>`;
 
-  if (ptype === 'hdb') {
-    h += `
+      if (ptype === 'hdb') {
+        h += `
     <div>
       <div style="display:flex;justify-content:space-between;margin-bottom:.35rem;">
         <span style="font-size:.73rem;color:rgba(250,247,242,.45);font-weight:500;">MSR — HDB only (max 30%)</span>
-        <span style="font-size:.73rem;font-weight:600;color:${mColor};">${sPct.toFixed(1)}% ${mOk?'✓ OK':'✗ Exceeds limit'}</span>
+        <span style="font-size:.73rem;font-weight:600;color:${mColor};">${sPct.toFixed(1)}% ${mOk ? '✓ OK' : '✗ Exceeds limit'}</span>
       </div>
-      <div class="ratio-bar"><div class="ratio-fill" style="width:${Math.min(sPct,100)}%;background:${mOk?'linear-gradient(90deg,#4ADE80,#22C55E)':'linear-gradient(90deg,#F87171,#EF4444)'};"></div></div>
+      <div class="ratio-bar"><div class="ratio-fill" style="width:${Math.min(sPct, 100)}%;background:${mOk ? 'linear-gradient(90deg,#4ADE80,#22C55E)' : 'linear-gradient(90deg,#F87171,#EF4444)'};"></div></div>
       <div style="display:flex;justify-content:space-between;margin-top:.22rem;">
         <span style="font-size:.67rem;color:rgba(250,247,242,.22);">0%</span>
         <span style="font-size:.67rem;color:rgba(250,247,242,.22);">30% limit · stress-tested @ 4%</span>
       </div>
     </div>`;
-  }
-  box.innerHTML = h;
-}
-
-function buildTable(loan, r, monthly, n, yrs) {
-  const tb = document.getElementById('amort-body');
-  tb.innerHTML = '';
-  if (!loan || !monthly) return;
-  let bal = loan;
-  const maxYr = Math.min(yrs, 10);
-  for (let yr = 1; yr <= maxYr; yr++) {
-    let yi = 0, yp = 0;
-    for (let m = 0; m < 12; m++) {
-      const ip = bal * r;
-      const pp = Math.min(monthly - ip, bal);
-      yi += ip; yp += pp; bal -= pp;
-      if (bal <= 0) { bal = 0; break; }
+      }
+      box.innerHTML = h;
     }
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td style="color:var(--gold-400);font-weight:500;">Yr ${yr}</td><td>${fmt(monthly)}</td><td>${fmt(yp)}</td><td>${fmt(yi)}</td><td>${fmtK(bal)}</td>`;
-    tb.appendChild(tr);
-    if (bal <= 0) break;
-  }
-}
 
-function drawChart(loan, r, monthly, n, yrs) {
-  const canvas = document.getElementById('chart');
-  const dpr = window.devicePixelRatio || 1;
-  const W = canvas.parentElement.clientWidth - 22; // account for padding
-  const H = 130;
-  canvas.width  = W * dpr;
-  canvas.height = H * dpr;
-  canvas.style.width  = W + 'px';
-  canvas.style.height = H + 'px';
-  const ctx = canvas.getContext('2d');
-  ctx.scale(dpr, dpr);
-  ctx.clearRect(0, 0, W, H);
-  if (!loan || !monthly) return;
-
-  let bal = loan;
-  const pts = [{yr:0, bal:loan, paid:0}];
-  const maxYr = Math.min(yrs, 35);
-  for (let yr = 1; yr <= maxYr; yr++) {
-    for (let m = 0; m < 12; m++) {
-      const ip = bal * r;
-      const pp = Math.min(monthly - ip, bal);
-      bal -= pp;
-      if (bal <= 0) { bal = 0; break; }
+    function buildTable(loan, r, monthly, n, yrs) {
+      const tb = document.getElementById('amort-body');
+      tb.innerHTML = '';
+      if (!loan || !monthly) return;
+      let bal = loan;
+      const maxYr = Math.min(yrs, 10);
+      for (let yr = 1; yr <= maxYr; yr++) {
+        let yi = 0, yp = 0;
+        for (let m = 0; m < 12; m++) {
+          const ip = bal * r;
+          const pp = Math.min(monthly - ip, bal);
+          yi += ip; yp += pp; bal -= pp;
+          if (bal <= 0) { bal = 0; break; }
+        }
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td style="color:var(--gold-400);font-weight:500;">Yr ${yr}</td><td>${fmt(monthly)}</td><td>${fmt(yp)}</td><td>${fmt(yi)}</td><td>${fmtK(bal)}</td>`;
+        tb.appendChild(tr);
+        if (bal <= 0) break;
+      }
     }
-    pts.push({yr, bal, paid: loan - bal});
-    if (bal <= 0) break;
-  }
 
-  const pL=8, pR=8, pT=18, pB=26;
-  const cW = W - pL - pR;
-  const cH = H - pT - pB;
-  const xS = i => pL + (i / (pts.length-1)) * cW;
-  const yS = v => pT + cH - (v/loan)*cH;
+    function drawChart(loan, r, monthly, n, yrs) {
+      const canvas = document.getElementById('chart');
+      const dpr = window.devicePixelRatio || 1;
+      const W = canvas.parentElement.clientWidth - 22; // account for padding
+      const H = 130;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, W, H);
+      if (!loan || !monthly) return;
 
-  // Paid area
-  ctx.beginPath();
-  ctx.moveTo(xS(0), yS(0));
-  pts.forEach((p,i) => ctx.lineTo(xS(i), yS(p.paid)));
-  ctx.lineTo(xS(pts.length-1), yS(0));
-  ctx.closePath();
-  const gP = ctx.createLinearGradient(0,pT,0,pT+cH);
-  gP.addColorStop(0,'rgba(196,151,59,.22)'); gP.addColorStop(1,'rgba(196,151,59,.03)');
-  ctx.fillStyle = gP; ctx.fill();
+      let bal = loan;
+      const pts = [{ yr: 0, bal: loan, paid: 0 }];
+      const maxYr = Math.min(yrs, 35);
+      for (let yr = 1; yr <= maxYr; yr++) {
+        for (let m = 0; m < 12; m++) {
+          const ip = bal * r;
+          const pp = Math.min(monthly - ip, bal);
+          bal -= pp;
+          if (bal <= 0) { bal = 0; break; }
+        }
+        pts.push({ yr, bal, paid: loan - bal });
+        if (bal <= 0) break;
+      }
 
-  // Balance area
-  ctx.beginPath();
-  ctx.moveTo(xS(0), yS(loan));
-  pts.forEach((p,i) => ctx.lineTo(xS(i), yS(p.bal)));
-  ctx.lineTo(xS(pts.length-1), yS(0));
-  ctx.lineTo(xS(pts.length-1), yS(loan));
-  ctx.closePath();
-  const gB = ctx.createLinearGradient(0,pT,0,pT+cH);
-  gB.addColorStop(0,'rgba(26,47,85,.6)'); gB.addColorStop(1,'rgba(26,47,85,.1)');
-  ctx.fillStyle = gB; ctx.fill();
+      const pL = 8, pR = 8, pT = 18, pB = 26;
+      const cW = W - pL - pR;
+      const cH = H - pT - pB;
+      const xS = i => pL + (i / (pts.length - 1)) * cW;
+      const yS = v => pT + cH - (v / loan) * cH;
 
-  // Balance line
-  ctx.beginPath();
-  pts.forEach((p,i) => i===0 ? ctx.moveTo(xS(i),yS(p.bal)) : ctx.lineTo(xS(i),yS(p.bal)));
-  ctx.strokeStyle = 'rgba(196,151,59,.75)'; ctx.lineWidth = 1.5; ctx.stroke();
+      // Paid area
+      ctx.beginPath();
+      ctx.moveTo(xS(0), yS(0));
+      pts.forEach((p, i) => ctx.lineTo(xS(i), yS(p.paid)));
+      ctx.lineTo(xS(pts.length - 1), yS(0));
+      ctx.closePath();
+      const gP = ctx.createLinearGradient(0, pT, 0, pT + cH);
+      gP.addColorStop(0, 'rgba(196,151,59,.22)'); gP.addColorStop(1, 'rgba(196,151,59,.03)');
+      ctx.fillStyle = gP; ctx.fill();
 
-  // X labels
-  ctx.font = '9px DM Sans,sans-serif';
-  ctx.fillStyle = 'rgba(250,247,242,.22)';
-  ctx.textAlign = 'center';
-  const step = Math.max(1, Math.floor(pts.length/5));
-  pts.forEach((p,i) => {
-    if (i%step===0 || i===pts.length-1) ctx.fillText('Yr'+p.yr, xS(i), H-4);
+      // Balance area
+      ctx.beginPath();
+      ctx.moveTo(xS(0), yS(loan));
+      pts.forEach((p, i) => ctx.lineTo(xS(i), yS(p.bal)));
+      ctx.lineTo(xS(pts.length - 1), yS(0));
+      ctx.lineTo(xS(pts.length - 1), yS(loan));
+      ctx.closePath();
+      const gB = ctx.createLinearGradient(0, pT, 0, pT + cH);
+      gB.addColorStop(0, 'rgba(26,47,85,.6)'); gB.addColorStop(1, 'rgba(26,47,85,.1)');
+      ctx.fillStyle = gB; ctx.fill();
+
+      // Balance line
+      ctx.beginPath();
+      pts.forEach((p, i) => i === 0 ? ctx.moveTo(xS(i), yS(p.bal)) : ctx.lineTo(xS(i), yS(p.bal)));
+      ctx.strokeStyle = 'rgba(196,151,59,.75)'; ctx.lineWidth = 1.5; ctx.stroke();
+
+      // X labels
+      ctx.font = '9px DM Sans,sans-serif';
+      ctx.fillStyle = 'rgba(250,247,242,.22)';
+      ctx.textAlign = 'center';
+      const step = Math.max(1, Math.floor(pts.length / 5));
+      pts.forEach((p, i) => {
+        if (i % step === 0 || i === pts.length - 1) ctx.fillText('Yr' + p.yr, xS(i), H - 4);
+      });
+
+      // Legend
+      ctx.textAlign = 'left';
+      ctx.fillStyle = 'rgba(196,151,59,.7)'; ctx.fillRect(pL, 6, 18, 2.5);
+      ctx.fillStyle = 'rgba(250,247,242,.32)'; ctx.font = '9px DM Sans,sans-serif'; ctx.fillText('Balance', pL + 22, 12);
+      ctx.fillStyle = 'rgba(196,151,59,.28)'; ctx.fillRect(pL + 85, 6, 18, 8);
+      ctx.fillStyle = 'rgba(250,247,242,.32)'; ctx.fillText('Principal Paid', pL + 107, 12);
+    }
+
+    // ===== FORM =====
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('lead-form');
+      const btn = document.getElementById('submit-btn');
+      const label = document.getElementById('submit-label');
+      const spinner = document.getElementById('submit-spinner');
+      const arrow = document.getElementById('submit-arrow');
+      const errBox = document.getElementById('form-error');
+
+      // Loading state
+      btn.disabled = true;
+      label.textContent = 'Sending…';
+      spinner.style.display = 'inline-block';
+      arrow.style.display = 'none';
+      errBox.style.display = 'none';
+
+      try {
+        const data = new FormData(form);
+        const res = await fetch('https://formspree.io/f/xojpnjpn', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          // Success — show thank you
+          form.style.display = 'none';
+          document.getElementById('thankyou').style.display = 'block';
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        // Reset button and show error
+        btn.disabled = false;
+        label.textContent = 'Submit Enquiry';
+        spinner.style.display = 'none';
+        arrow.style.display = 'inline-block';
+        errBox.style.display = 'block';
+      }
+    }
+
+    // ===== INIT =====
+    window.addEventListener('load', () => {
+      attachFormatter('c-price');
+      attachFormatter('c-down');
+      attachFormatter('c-income');
+      validateDown();
+      calc();
+    });
+    window.addEventListener('resize', () => { calc(); });
+  
+
+  // ===== SCROLL PROGRESS BAR =====
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+    document.getElementById('prog').style.width = scrolled + '%';
   });
 
-  // Legend
-  ctx.textAlign = 'left';
-  ctx.fillStyle = 'rgba(196,151,59,.7)'; ctx.fillRect(pL, 6, 18, 2.5);
-  ctx.fillStyle = 'rgba(250,247,242,.32)'; ctx.font='9px DM Sans,sans-serif'; ctx.fillText('Balance', pL+22, 12);
-  ctx.fillStyle = 'rgba(196,151,59,.28)'; ctx.fillRect(pL+85, 6, 18, 8);
-  ctx.fillStyle = 'rgba(250,247,242,.32)'; ctx.fillText('Principal Paid', pL+107, 12);
-}
+  // ===== NAV ACTIVE STATE =====
+  const navLinks = {
+    '#services': document.querySelector('a[href="#services"]'),
+    '#calculator': document.querySelector('a[href="#calculator"]'),
+    '#banks': document.querySelector('a[href="#banks"]'),
+    '#why': document.querySelector('a[href="#why"]'),
+    '#contact': document.querySelector('a[href="#contact"]')
+  };
 
-// ===== FORM =====
-async function handleSubmit(e) {
-  e.preventDefault();
-  const form    = document.getElementById('lead-form');
-  const btn     = document.getElementById('submit-btn');
-  const label   = document.getElementById('submit-label');
-  const spinner = document.getElementById('submit-spinner');
-  const arrow   = document.getElementById('submit-arrow');
-  const errBox  = document.getElementById('form-error');
-
-  // Loading state
-  btn.disabled = true;
-  label.textContent = 'Sending…';
-  spinner.style.display = 'inline-block';
-  arrow.style.display   = 'none';
-  errBox.style.display  = 'none';
-
-  try {
-    const data = new FormData(form);
-    const res  = await fetch('https://formspree.io/f/xojpnjpn', {
-      method:  'POST',
-      body:    data,
-      headers: { 'Accept': 'application/json' }
+  const navActiveObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        Object.keys(navLinks).forEach(key => {
+          if (navLinks[key]) {
+            if (key === id) {
+              navLinks[key].style.color = 'var(--gold-400)';
+            } else {
+              navLinks[key].style.color = 'rgba(250, 247, 242, .7)';
+            }
+          }
+        });
+      }
     });
+  }, { threshold: 0.3 });
 
-    if (res.ok) {
-      // Success — show thank you
-      form.style.display = 'none';
-      document.getElementById('thankyou').style.display = 'block';
-    } else {
-      throw new Error('Server error');
-    }
-  } catch (err) {
-    // Reset button and show error
-    btn.disabled = false;
-    label.textContent = 'Submit Enquiry';
-    spinner.style.display = 'none';
-    arrow.style.display   = 'inline-block';
-    errBox.style.display  = 'block';
-  }
-}
+  document.querySelectorAll('#services, #calculator, #banks, #why, #contact').forEach(section => {
+    if (section) navActiveObserver.observe(section);
+  });
 
-// ===== INIT =====
-window.addEventListener('load', () => {
-  attachFormatter('c-price');
-  attachFormatter('c-down');
-  attachFormatter('c-income');
-  validateDown();
-  calc();
-});
-window.addEventListener('resize', () => { calc(); });
-</script>
+  </script>
 </body>
+
 </html>
