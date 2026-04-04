@@ -1419,13 +1419,17 @@
         <h2 class="sec-title" style="color:#FAF7F2;">Mortgage <em
             style="font-style:italic;color:var(--gold-400);">Calculator</em></h2>
         <div class="gold-line mt-5" style="max-width:72px;"></div>
-        <p class="mt-4" style="color:rgba(250,247,242,.5);max-width:480px;line-height:1.8;font-size:.9375rem;">Estimate
-          your monthly repayment, total interest payable, and check your TDSR / MSR eligibility instantly.</p>
+        <p class="mt-4" style="color:rgba(250,247,242,.5);max-width:520px;line-height:1.8;font-size:.9375rem;">Estimate
+          your monthly repayment and check TDSR / MSR eligibility — or switch to <strong
+            style="color:var(--gold-400);font-weight:500;">Advanced</strong> for a full 2026 joint-borrower assessment
+          with IWAA stress-test diagnosis.</p>
       </div>
 
       <div class="grid lg:grid-cols-2 gap-10">
-        <!-- INPUTS -->
+        <!-- ── INPUTS ── -->
         <div class="reveal">
+
+          <!-- Property Type -->
           <div class="mb-5">
             <p class="calc-label mb-2">Property Type</p>
             <div class="toggle-wrap">
@@ -1434,10 +1438,12 @@
             </div>
           </div>
 
+          <!-- Price / Down Payment -->
           <div class="grid grid-cols-2 gap-4 mb-4">
             <div>
-              <p class="calc-label mb-1.5">Purchase Price (S$)</p><input type="text" inputmode="numeric" id="c-price"
-                class="calc-input" value="800,000" oninput="onPriceChange()">
+              <p class="calc-label mb-1.5">Purchase Price (S$)</p>
+              <input type="text" inputmode="numeric" id="c-price" class="calc-input" value="800,000"
+                oninput="onPriceChange()">
             </div>
             <div>
               <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.375rem;">
@@ -1448,11 +1454,10 @@
               <input type="text" inputmode="numeric" id="c-down" class="calc-input" value="200,000"
                 oninput="onDownChange()">
               <div id="dp-warning"
-                style="display:none;margin-top:.4rem;font-size:.73rem;color:#F87171;display:flex;align-items:center;gap:.35rem;">
+                style="display:none;margin-top:.4rem;font-size:.73rem;color:#F87171;align-items:center;gap:.35rem;">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="12" y1="8" x2="12" y2="12" />
-                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                  <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16"
+                    x2="12.01" y2="16" />
                 </svg>
                 <span id="dp-warning-text"></span>
               </div>
@@ -1460,39 +1465,166 @@
                 (5% cash + 20% CPF/cash) for bank loans</p>
             </div>
           </div>
+
+          <!-- Rate / Tenure -->
           <div class="grid grid-cols-2 gap-4 mb-5">
             <div>
-              <p class="calc-label mb-1.5">Interest Rate (% p.a.)</p><input type="number" id="c-rate" class="calc-input"
-                value="2.00" step="0.05" oninput="calc()">
+              <p class="calc-label mb-1.5">Interest Rate (% p.a.)</p>
+              <input type="number" id="c-rate" class="calc-input" value="2.00" step="0.05" oninput="calc()">
             </div>
             <div>
-              <p class="calc-label mb-1.5">Loan Tenure (Years)</p><input type="number" id="c-yrs" class="calc-input"
-                value="30" min="1" max="35" oninput="calc()">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.375rem;">
+                <p class="calc-label">Loan Tenure (Years)</p>
+                <span id="tenure-cap-badge"
+                  style="display:none;font-size:.68rem;font-weight:600;letter-spacing:.06em;padding:.15rem .55rem;border-radius:100px;background:rgba(248,113,113,.15);color:#F87171;border:1px solid rgba(248,113,113,.3);">Capped</span>
+              </div>
+              <input type="number" id="c-yrs" class="calc-input" value="30" min="1" max="35" oninput="calc()">
+              <p id="tenure-cap-note"
+                style="display:none;font-size:.68rem;color:#F87171;margin-top:.35rem;line-height:1.5;"></p>
             </div>
           </div>
 
-          <!-- Affordability -->
+          <!-- ── Affordability Box ── -->
           <div
             style="background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.15);border-radius:9px;padding:1.25rem;">
-            <p class="calc-label mb-3">Affordability Check (TDSR / MSR)</p>
-            <p class="calc-label mb-1.5">Gross Monthly Income (S$)</p>
-            <input type="text" inputmode="numeric" id="c-income" class="calc-input" value="8,000" oninput="calc()">
+
+            <!-- Mode Toggle Header -->
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;">
+              <p class="calc-label">Affordability Check</p>
+              <div style="display:flex;align-items:center;gap:.55rem;">
+                <span id="lbl-simple"
+                  style="font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-400);">Simple</span>
+                <button id="mode-toggle-btn" onclick="toggleCalcMode()" role="switch" aria-checked="false"
+                  style="position:relative;width:42px;height:22px;border-radius:100px;background:rgba(255,255,255,.12);border:1px solid rgba(196,151,59,.25);cursor:pointer;padding:0;transition:background .25s cubic-bezier(.4,0,.2,1);"
+                  title="Toggle Simple / Advanced">
+                  <span id="mode-knob"
+                    style="position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--gold-400);box-shadow:0 1px 4px rgba(0,0,0,.4);transition:transform .25s cubic-bezier(.4,0,.2,1);display:block;"></span>
+                </button>
+                <span id="lbl-adv"
+                  style="font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(250,247,242,.3);">Advanced</span>
+              </div>
+            </div>
+
+            <!-- ── SIMPLE PANEL ── -->
+            <div id="simple-panel">
+              <p class="calc-label mb-1.5">Gross Monthly Income (S$)</p>
+              <input type="text" inputmode="numeric" id="c-income" class="calc-input" value="8,000" oninput="calc()">
+            </div>
+
+            <!-- ── ADVANCED PANEL ── -->
+            <div id="adv-panel" style="display:none;">
+
+              <!-- Applicant 1 -->
+              <div style="margin-bottom:1rem;">
+                <p
+                  style="font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gold-400);margin-bottom:.65rem;display:flex;align-items:center;gap:.4rem;">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                  </svg>Applicant 1
+                </p>
+                <div class="grid grid-cols-3 gap-3">
+                  <div>
+                    <p class="calc-label mb-1.5">Fixed Salary (S$)</p>
+                    <input type="text" inputmode="numeric" id="a1-fixed" class="calc-input" value="6,000"
+                      oninput="calc()">
+                  </div>
+                  <div>
+                    <p class="calc-label mb-1.5">Variable Income (S$)</p>
+                    <input type="text" inputmode="numeric" id="a1-var" class="calc-input" value="0" oninput="calc()">
+                  </div>
+                  <div>
+                    <p class="calc-label mb-1.5">Age</p>
+                    <input type="number" id="a1-age" class="calc-input" value="35" min="21" max="75" oninput="calc()">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Applicant 2 -->
+              <div style="margin-bottom:1rem;">
+                <p
+                  style="font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(196,151,59,.55);margin-bottom:.65rem;display:flex;align-items:center;gap:.4rem;">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                  </svg>Applicant 2 <span style="font-weight:400;opacity:.7;">(Optional)</span>
+                </p>
+                <div class="grid grid-cols-3 gap-3">
+                  <div>
+                    <p class="calc-label mb-1.5">Fixed Salary (S$)</p>
+                    <input type="text" inputmode="numeric" id="a2-fixed" class="calc-input" value="0" oninput="calc()">
+                  </div>
+                  <div>
+                    <p class="calc-label mb-1.5">Variable Income (S$)</p>
+                    <input type="text" inputmode="numeric" id="a2-var" class="calc-input" value="0" oninput="calc()">
+                  </div>
+                  <div>
+                    <p class="calc-label mb-1.5">Age</p>
+                    <input type="number" id="a2-age" class="calc-input" value="0" min="0" max="75" oninput="calc()">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Debts -->
+              <div style="border-top:1px solid rgba(196,151,59,.12);padding-top:.9rem;margin-bottom:1rem;">
+                <p
+                  style="font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,247,242,.45);margin-bottom:.65rem;">
+                  Monthly Debt Obligations</p>
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <p class="calc-label mb-1.5">Car / Personal Loans (S$)</p>
+                    <input type="text" inputmode="numeric" id="c-debts" class="calc-input" value="0" oninput="calc()">
+                  </div>
+                  <div>
+                    <p class="calc-label mb-1.5">No. of Credit Cards</p>
+                    <input type="number" id="c-cards" class="calc-input" value="0" min="0" max="30" oninput="calc()">
+                  </div>
+                </div>
+                <p style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.45rem;line-height:1.5;">Each credit
+                  card = S$50/month (Nexus CC Rule)</p>
+              </div>
+
+              <!-- IWAA Computed Display -->
+              <div id="iwaa-display"
+                style="display:none;background:rgba(196,151,59,.06);border:1px solid rgba(196,151,59,.18);border-radius:7px;padding:.85rem;">
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;text-align:center;">
+                  <div>
+                    <div
+                      style="font-size:.65rem;color:rgba(250,247,242,.38);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.3rem;">
+                      Effective Income</div>
+                    <div id="disp-income" style="font-size:.9rem;font-weight:600;color:var(--gold-400);">—</div>
+                  </div>
+                  <div
+                    style="border-left:1px solid rgba(196,151,59,.15);border-right:1px solid rgba(196,151,59,.15);">
+                    <div
+                      style="font-size:.65rem;color:rgba(250,247,242,.38);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.3rem;">
+                      IWAA</div>
+                    <div id="disp-iwaa" style="font-size:.9rem;font-weight:600;color:var(--gold-400);">—</div>
+                  </div>
+                  <div>
+                    <div
+                      style="font-size:.65rem;color:rgba(250,247,242,.38);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.3rem;">
+                      Max Tenure</div>
+                    <div id="disp-tenure-cap" style="font-size:.9rem;font-weight:600;color:var(--gold-400);">—</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TDSR / MSR Bars (shared by both modes) -->
             <div class="mt-4" id="ratio-area"></div>
           </div>
         </div>
 
-        <!-- RESULTS -->
+        <!-- ── RESULTS ── -->
         <div class="reveal delay-2">
-          <div class="grid grid-cols-3 gap-3 mb-4">
+
+          <!-- Result Cards — 2 only (no Total Interest) -->
+          <div class="grid grid-cols-2 gap-3 mb-4">
             <div class="result-card">
               <div class="result-lbl">Monthly Payment</div>
               <div class="result-val" id="r-monthly">—</div>
               <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">S$ / month</div>
-            </div>
-            <div class="result-card">
-              <div class="result-lbl">Total Interest</div>
-              <div class="result-val" id="r-interest" style="font-size:1.45rem;">—</div>
-              <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">over tenure</div>
             </div>
             <div class="result-card">
               <div class="result-lbl">Loan Amount</div>
@@ -1510,7 +1642,7 @@
 
           <!-- Amort table -->
           <div
-            style="background:rgba(255,255,255,.03);border:1px solid rgba(196,151,59,.12);border-radius:9px;overflow:hidden;">
+            style="background:rgba(255,255,255,.03);border:1px solid rgba(196,151,59,.12);border-radius:9px;overflow:hidden;margin-bottom:.875rem;">
             <div style="padding:.875rem 1rem;border-bottom:1px solid rgba(196,151,59,.1);">
               <p class="calc-label">Year-by-Year Breakdown</p>
             </div>
@@ -1529,19 +1661,11 @@
               </table>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="mt-10 text-center reveal">
-        <p style="color:rgba(250,247,242,.38);font-size:.875rem;margin-bottom:.875rem;">Want a personalised rate
-          comparison across all banks?</p>
-        <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20personalised%20mortgage%20rate%20comparison."
-          target="_blank" class="btn-gold">
-          Get My Rate Comparison — Free
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
+          <!-- ── Diagnosis Panel ── -->
+          <div id="diagnosis-panel" style="display:none;"></div>
+
+        </div>
       </div>
     </div>
   </section>
@@ -2012,11 +2136,29 @@
 
     // ===== CALCULATOR =====
     let ptype = 'hdb';
+    let calcMode = 'simple'; // 'simple' | 'advanced'
+
     function setPropType(t) {
       ptype = t;
       document.getElementById('btn-hdb').classList.toggle('active', t === 'hdb');
       document.getElementById('btn-priv').classList.toggle('active', t === 'private');
       validateDown();
+      calc();
+    }
+
+    function toggleCalcMode() {
+      calcMode = calcMode === 'simple' ? 'advanced' : 'simple';
+      const isAdv = calcMode === 'advanced';
+      document.getElementById('simple-panel').style.display = isAdv ? 'none' : 'block';
+      document.getElementById('adv-panel').style.display = isAdv ? 'block' : 'none';
+      const btn = document.getElementById('mode-toggle-btn');
+      const knob = document.getElementById('mode-knob');
+      btn.setAttribute('aria-checked', isAdv ? 'true' : 'false');
+      btn.style.background = isAdv ? 'var(--gold-500)' : 'rgba(255,255,255,.12)';
+      knob.style.transform = isAdv ? 'translateX(20px)' : 'translateX(0)';
+      document.getElementById('lbl-simple').style.color = isAdv ? 'rgba(250,247,242,.3)' : 'var(--gold-400)';
+      document.getElementById('lbl-adv').style.color = isAdv ? 'var(--gold-400)' : 'rgba(250,247,242,.3)';
+      if (!isAdv) document.getElementById('iwaa-display').style.display = 'none';
       calc();
     }
 
@@ -2028,28 +2170,26 @@
       return 'S$' + Math.round(n);
     };
 
-    // ── Comma-formatting helpers ──────────────────────────────────────────────────
-    // Strip commas/spaces and return plain number
+    // ── Comma-formatting helpers ─────────────────────────────────────────────────
     function raw(id) {
-      return +(document.getElementById(id).value.replace(/,/g, '')) || 0;
+      const el = document.getElementById(id);
+      return el ? (+(el.value.replace(/,/g, '')) || 0) : 0;
     }
 
-    // Format a number string with thousand-separator commas
     function fmtInput(val) {
       const digits = String(val).replace(/\D/g, '');
       if (!digits) return '';
       return digits.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
-    // Attach live comma-formatter to a text input; preserves cursor position
     function attachFormatter(id) {
       const el = document.getElementById(id);
       if (!el) return;
       el.addEventListener('input', function () {
         const pos = this.selectionStart;
-        const raw = this.value.replace(/,/g, '');
+        const rawVal = this.value.replace(/,/g, '');
         const commasBefore = (this.value.slice(0, pos).match(/,/g) || []).length;
-        const formatted = fmtInput(raw);
+        const formatted = fmtInput(rawVal);
         this.value = formatted;
         const commasAfter = (formatted.slice(0, pos).match(/,/g) || []).length;
         const newPos = Math.max(0, pos + (commasAfter - commasBefore));
@@ -2057,12 +2197,10 @@
       });
     }
 
-    // When price changes: auto-adjust down payment to maintain min 25%
     function onPriceChange() {
       const price = raw('c-price');
       const down = raw('c-down');
       const minDP = Math.ceil(price * 0.25);
-      // If current down payment is below minimum, auto-correct it
       if (price > 0 && down < minDP) {
         document.getElementById('c-down').value = fmtInput(minDP);
       }
@@ -2070,7 +2208,6 @@
       calc();
     }
 
-    // When down payment changes manually: validate only
     function onDownChange() {
       validateDown();
       calc();
@@ -2088,15 +2225,9 @@
 
       const pct = (down / price) * 100;
       const minDP = price * 0.25;
-
-      // Update % badge
       badge.textContent = pct.toFixed(1) + '%';
 
-      // MAS rules: min 25% for bank loans (both HDB and private)
-      const minPct = 25;
-      const maxLTV = 75;
-
-      if (pct < minPct) {
+      if (pct < 25) {
         badge.style.background = 'rgba(248,113,113,.15)';
         badge.style.color = '#F87171';
         badge.style.borderColor = 'rgba(248,113,113,.3)';
@@ -2104,7 +2235,7 @@
         warn.style.display = 'flex';
         const shortfall = Math.ceil(minDP - down).toLocaleString('en-SG');
         warnTx.textContent = `Below 25% minimum — need S$${shortfall} more`;
-      } else if (pct > maxLTV) {
+      } else if (pct > 75) {
         badge.style.background = 'rgba(196,151,59,.15)';
         badge.style.color = 'var(--gold-400)';
         badge.style.borderColor = 'rgba(196,151,59,.25)';
@@ -2123,45 +2254,113 @@
       const price = raw('c-price');
       const down = raw('c-down');
       const annR = +document.getElementById('c-rate').value || 0;
-      const yrs = +document.getElementById('c-yrs').value || 0;
-      const income = raw('c-income');
+      let yrs = +document.getElementById('c-yrs').value || 0;
 
       const loan = Math.max(0, price - down);
+
+      // ── Advanced mode: compute IWAA, income, debts ─────────────────────────────
+      let income = 0;
+      let totalDebt = 0;
+
+      if (calcMode === 'advanced') {
+        // Variable income: 30% haircut (× 0.7)
+        const eff1 = raw('a1-fixed') + raw('a1-var') * 0.7;
+        const eff2 = raw('a2-fixed') + raw('a2-var') * 0.7;
+        const a1age = +document.getElementById('a1-age').value || 0;
+        const a2age = +document.getElementById('a2-age').value || 0;
+        income = eff1 + eff2;
+
+        // IWAA — Income Weighted Average Age
+        let iwaa = null;
+        if (income > 0) {
+          if (eff2 > 0 && a2age > 0) {
+            iwaa = ((a1age * eff1) + (a2age * eff2)) / income;
+          } else if (eff1 > 0 && a1age > 0) {
+            iwaa = a1age;
+          }
+        }
+
+        // Tenure cap from IWAA
+        const tenureCapBadge = document.getElementById('tenure-cap-badge');
+        const tenureCapNote = document.getElementById('tenure-cap-note');
+        const tenureEl = document.getElementById('c-yrs');
+        const iwaaDisp = document.getElementById('iwaa-display');
+
+        if (iwaa !== null) {
+          const maxBaseAge = ptype === 'hdb' ? 65 : 75;
+          const tenureCap = Math.max(1, Math.min(35, Math.floor(maxBaseAge - iwaa)));
+
+          iwaaDisp.style.display = 'block';
+          document.getElementById('disp-income').textContent = fmt(income) + '/mo';
+          document.getElementById('disp-iwaa').textContent = iwaa.toFixed(1) + ' yrs';
+          document.getElementById('disp-tenure-cap').textContent = tenureCap + ' yrs';
+
+          if (yrs > tenureCap) {
+            yrs = tenureCap;
+            tenureEl.style.borderColor = 'rgba(248,113,113,.6)';
+            tenureCapBadge.style.display = 'inline-block';
+            tenureCapNote.style.display = 'block';
+            tenureCapNote.textContent = `Capped at ${tenureCap} yrs (${ptype === 'hdb' ? '65' : '75'} − IWAA ${iwaa.toFixed(1)})`;
+          } else {
+            tenureEl.style.borderColor = 'rgba(196,151,59,.2)';
+            tenureCapBadge.style.display = 'none';
+            tenureCapNote.style.display = 'none';
+          }
+        } else {
+          iwaaDisp.style.display = 'none';
+          document.getElementById('tenure-cap-badge').style.display = 'none';
+          document.getElementById('tenure-cap-note').style.display = 'none';
+        }
+
+        // Debts: car/personal loans + Nexus CC Rule (S$50 per card)
+        const numCards = +document.getElementById('c-cards').value || 0;
+        totalDebt = raw('c-debts') + (numCards * 50);
+
+      } else {
+        // Simple mode
+        income = raw('c-income');
+        document.getElementById('tenure-cap-badge').style.display = 'none';
+        document.getElementById('tenure-cap-note').style.display = 'none';
+        document.getElementById('c-yrs').style.borderColor = 'rgba(196,151,59,.2)';
+      }
+
+      // ── Core mortgage math ────────────────────────────────────────────────────
       const r = annR / 100 / 12;
       const n = yrs * 12;
 
-      // Actual monthly payment at user's input rate
       let monthly = 0;
       if (r > 0 && n > 0 && loan > 0) monthly = loan * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
       else if (n > 0 && loan > 0) monthly = loan / n;
 
-      // MAS stress-test: affordability assessed at max(actual_rate, 4.0%)
+      // MAS stress-test floor: 4.0% p.a.
       const stressAnnR = Math.max(annR, 4.0);
       const rS = stressAnnR / 100 / 12;
       let stressMonthly = 0;
       if (rS > 0 && n > 0 && loan > 0) stressMonthly = loan * (rS * Math.pow(1 + rS, n)) / (Math.pow(1 + rS, n) - 1);
       else if (n > 0 && loan > 0) stressMonthly = loan / n;
 
-      const totInt = monthly * n - loan;
-
       document.getElementById('r-monthly').textContent = loan > 0 ? fmt(monthly) : '—';
-      document.getElementById('r-interest').textContent = loan > 0 ? fmtK(totInt) : '—';
       document.getElementById('r-loan').textContent = loan > 0 ? fmtK(loan) : '—';
 
-      updateRatios(monthly, stressMonthly, income);
+      updateRatios(monthly, stressMonthly, income, totalDebt);
       buildTable(loan, r, monthly, n, yrs);
       drawChart(loan, r, monthly, n, yrs);
     }
 
-    function updateRatios(monthly, stressMonthly, income) {
+    function updateRatios(monthly, stressMonthly, income, totalDebt) {
+      totalDebt = totalDebt || 0;
       const box = document.getElementById('ratio-area');
+      const diagPanel = document.getElementById('diagnosis-panel');
+
       if (!income || income <= 0 || monthly <= 0) {
         box.innerHTML = '<p style="font-size:.8rem;color:rgba(250,247,242,.32);">Enter your income above to check eligibility.</p>';
+        diagPanel.style.display = 'none';
         return;
       }
 
-      // TDSR / MSR bars use stress-test payment (MAS requirement)
-      const sPct = (stressMonthly / income) * 100;
+      // TDSR = (stress-test mortgage + existing debts) / income
+      const tdsrNum = stressMonthly + totalDebt;
+      const sPct = (tdsrNum / income) * 100;
       const tOk = sPct <= 55;
       const mOk = sPct <= 30;
       const tColor = tOk ? '#4ADE80' : '#F87171';
@@ -2195,6 +2394,49 @@
     </div>`;
       }
       box.innerHTML = h;
+
+      // ── Diagnosis Panel ────────────────────────────────────────────────────────
+      const waIcon = `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
+
+      diagPanel.style.display = 'block';
+
+      if (!tOk) {
+        // ── FAIL: TDSR > 55% ──
+        diagPanel.innerHTML = `
+        <div style="background:rgba(248,113,113,.07);border:1.5px solid rgba(248,113,113,.3);border-radius:10px;padding:1.25rem 1.375rem;">
+          <div style="display:flex;align-items:center;gap:.65rem;margin-bottom:.8rem;">
+            <span style="display:inline-flex;align-items:center;gap:.35rem;background:rgba(248,113,113,.15);color:#F87171;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .8rem;border-radius:100px;border:1px solid rgba(248,113,113,.3);">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              Action Required
+            </span>
+          </div>
+          <p style="font-size:.875rem;color:rgba(250,247,242,.78);line-height:1.8;margin-bottom:1rem;">Your debt-to-income ratio exceeds MAS 55% limits based on your joint IWAA. We may need to restructure your debts to qualify.</p>
+          <a href="https://wa.me/6587520859?text=Hi%20Dan%2C%20I%20need%20help%20to%20strategise%20my%20loan.%20My%20TDSR%20exceeds%2055%25%20and%20I%20need%20to%20restructure." target="_blank"
+            style="display:inline-flex;align-items:center;gap:.6rem;background:var(--gold-500);color:#060E1F;font-size:.875rem;font-weight:700;padding:.7rem 1.3rem;border-radius:7px;text-decoration:none;letter-spacing:.01em;border:none;cursor:pointer;transition:opacity .2s ease;"
+            onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            ${waIcon}
+            WhatsApp Dan Ler: Strategise My Loan
+          </a>
+        </div>`;
+      } else {
+        // ── PASS: TDSR ≤ 55% ──
+        diagPanel.innerHTML = `
+        <div style="background:rgba(74,222,128,.05);border:1.5px solid rgba(74,222,128,.22);border-radius:10px;padding:1.25rem 1.375rem;">
+          <div style="display:flex;align-items:center;gap:.65rem;margin-bottom:.8rem;">
+            <span style="display:inline-flex;align-items:center;gap:.35rem;background:rgba(74,222,128,.12);color:#4ADE80;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .8rem;border-radius:100px;border:1px solid rgba(74,222,128,.25);">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Healthy Profile
+            </span>
+          </div>
+          <p style="font-size:.875rem;color:rgba(250,247,242,.78);line-height:1.8;margin-bottom:1rem;">Your joint profile is within MAS limits. You are likely eligible for the best 2026 market rates.</p>
+          <a href="https://wa.me/6587520859?text=Hi%20Dan%2C%20my%20TDSR%20is%20within%2055%25%20and%20I%20want%20to%20lock%20in%20the%20best%202026%20mortgage%20rate." target="_blank"
+            style="display:inline-flex;align-items:center;gap:.6rem;background:var(--gold-500);color:#060E1F;font-size:.875rem;font-weight:700;padding:.7rem 1.3rem;border-radius:7px;text-decoration:none;letter-spacing:.01em;border:none;cursor:pointer;transition:opacity .2s ease;"
+            onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            ${waIcon}
+            WhatsApp Dan Ler: Lock in My Rate
+          </a>
+        </div>`;
+      }
     }
 
     function buildTable(loan, r, monthly, n, yrs) {
@@ -2342,6 +2584,12 @@
       attachFormatter('c-price');
       attachFormatter('c-down');
       attachFormatter('c-income');
+      // Advanced mode formatters (safe — attachFormatter checks for element existence)
+      attachFormatter('a1-fixed');
+      attachFormatter('a1-var');
+      attachFormatter('a2-fixed');
+      attachFormatter('a2-var');
+      attachFormatter('c-debts');
       validateDown();
       calc();
     });
