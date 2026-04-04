@@ -91,6 +91,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden; /* belt-and-suspenders with body overflow-x:hidden */
     }
 
     body {
@@ -379,6 +380,17 @@
       justify-content: center;
       color: var(--gold-500);
       margin-bottom: 1.25rem;
+    }
+
+    /* ===== CANVAS — prevent chart from blowing out layout on mobile ===== */
+    #chart {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Prevent grid children from exceeding their track width on mobile */
+    #calculator .grid > * {
+      min-width: 0;
     }
 
     /* ===== CALCULATOR ===== */
@@ -2488,7 +2500,11 @@
     function drawChart(loan, r, monthly, n, yrs) {
       const canvas = document.getElementById('chart');
       const dpr = window.devicePixelRatio || 1;
-      const W = canvas.parentElement.clientWidth - 22; // account for padding
+      // Clamp to viewport width to prevent mobile layout overflow.
+      // canvas.parentElement.clientWidth can return a stale desktop value during
+      // initial Tailwind CDN rendering on mobile — window.innerWidth is reliable.
+      const maxAllowed = window.innerWidth - 48; // subtract section px-6 padding (24px × 2)
+      const W = Math.min(canvas.parentElement.clientWidth - 22, maxAllowed);
       const H = 130;
       canvas.width = W * dpr;
       canvas.height = H * dpr;
