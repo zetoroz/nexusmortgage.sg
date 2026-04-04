@@ -1,0 +1,35 @@
+[
+  {
+    "slug": "blog-mas-stress-test-2026",
+    "title": "Understanding the MAS 4% Stress Test",
+    "excerpt": "Learn how the 2026 MAS floor rate affects your TDSR and MSR eligibility before you buy. A must-read for every Singapore property purchaser.",
+    "tag": "MAS Regulation",
+    "date": "April 2026",
+    "readTime": "6 min read",
+    "thumbnail": "blog-images/mas-stress-test-thumb.png",
+    "thumbnailAlt": "MAS 4% Stress Test — Singapore mortgage regulation guide",
+    "status": "live"
+  },
+  {
+    "slug": null,
+    "title": "HDB vs Bank Loans: Which Is Right for You?",
+    "excerpt": "A definitive comparison of HDB concessionary loans and bank loans — eligibility, interest rates, flexibility, and the true cost of each over a 25-year tenure.",
+    "tag": "Home Loans",
+    "date": "Coming Soon",
+    "readTime": null,
+    "thumbnail": "blog-images/hdb-vs-bank-thumb.png",
+    "thumbnailAlt": "HDB vs Bank Loans — Singapore home loan comparison",
+    "status": "coming-soon"
+  },
+  {
+    "slug": null,
+    "title": "SME Caveat Loans: How Property-Backed Financing Works",
+    "excerpt": "A plain-English guide to SME caveat loans in Singapore — how lenders calculate LTV against existing bank mortgages and CPF charges, and what business owners need to know.",
+    "tag": "SME Lending",
+    "date": "Coming Soon",
+    "readTime": null,
+    "thumbnail": "blog-images/sme-caveat-thumb.png",
+    "thumbnailAlt": "SME Caveat Loans — Property-backed SME financing in Singapore",
+    "status": "coming-soon"
+  }
+]
