@@ -2596,10 +2596,11 @@
 
       try {
         const data = new FormData(form);
-        const res = await fetch('https://formspree.io/f/xojpnjpn', {
+        // Direct integration with Make.com Webhook
+        const res = await fetch('https://hook.us2.make.com/hunu1e89qu3y2ilij55jq7vy2kznl9uu', {
           method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
+          body: JSON.stringify(Object.fromEntries(data)),
+          headers: { 'Content-Type': 'application/json' }
         });
 
         if (res.ok) {
