@@ -390,97 +390,69 @@
       </p>
     </div>
 
-    <!-- ── GRID ── -->
-    <div class="article-grid">
-
-      <!-- ── CARD 1: MAS Stress Test (FEATURED / LIVE) ── -->
-      <a href="./blog-mas-stress-test-2026.html" class="article-card reveal delay-1" id="card-mas-stress-test">
-        <!-- Thumbnail -->
-        <div class="card-thumb">
-          <img
-            src="blog-images/mas-stress-test-thumb.png"
-            alt="MAS 4% Stress Test — Singapore mortgage regulation guide"
-            style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
-          >
-          <!-- Gold shimmer bar at bottom -->
-          <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(196,151,59,.6),transparent);z-index:1;"></div>
-        </div>
-
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-tag">MAS Regulation</span>
-            <span class="card-date">April 2026 &nbsp;·&nbsp; 6 min read</span>
-          </div>
-          <h3 class="card-title">Understanding the MAS 4% Stress Test</h3>
-          <p class="card-excerpt">
-            Learn how the 2026 MAS floor rate affects your TDSR and MSR eligibility before you buy. A must-read for every Singapore property purchaser.
-          </p>
-          <span class="card-cta">
-            Read More
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <!-- ── CARD 2: HDB vs Bank Loans (COMING SOON) ── -->
-      <div class="article-card coming-soon reveal delay-2" id="card-hdb-vs-bank">
-        <span class="coming-soon-badge">Coming Soon</span>
-
-        <!-- Thumbnail -->
-        <div class="card-thumb">
-          <img
-            src="blog-images/hdb-vs-bank-thumb.png"
-            alt="HDB vs Bank Loans — Singapore home loan comparison"
-            style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
-          >
-          <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(196,151,59,.35),transparent);z-index:1;"></div>
-        </div>
-
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-tag">Home Loans</span>
-            <span class="card-date">Coming Soon</span>
-          </div>
-          <h3 class="card-title">HDB vs Bank Loans: Which Is Right for You?</h3>
-          <p class="card-excerpt">
-            A definitive comparison of HDB concessionary loans and bank loans — eligibility, interest rates, flexibility, and the true cost of each over a 25-year tenure.
-          </p>
-          <span class="card-cta disabled">
-            Coming Soon
-          </span>
-        </div>
-      </div>
-
-      <!-- ── CARD 3: SME Caveat Loans (COMING SOON) ── -->
-      <div class="article-card coming-soon reveal delay-3" id="card-sme-caveat">
-        <span class="coming-soon-badge">Coming Soon</span>
-
-        <!-- Thumbnail -->
-        <div class="card-thumb">
-          <img
-            src="blog-images/sme-caveat-thumb.png"
-            alt="SME Caveat Loans — Property-backed SME financing in Singapore"
-            style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
-          >
-          <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(196,151,59,.35),transparent);z-index:1;"></div>
-        </div>
-
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-tag">SME Lending</span>
-            <span class="card-date">Coming Soon</span>
-          </div>
-          <h3 class="card-title">SME Caveat Loans: How Property-Backed Financing Works</h3>
-          <p class="card-excerpt">
-            A plain-English guide to SME caveat loans in Singapore — how lenders calculate LTV against existing bank mortgages and CPF charges, and what business owners need to know.
-          </p>
-          <span class="card-cta disabled">
-            Coming Soon
-          </span>
-        </div>
-      </div>
-
+    <!-- ── GRID — auto-populated from articles.json ── -->
+    <div class="article-grid" id="article-grid">
+      <!-- Cards injected by script below -->
     </div><!-- /article-grid -->
+
+    <script>
+    (function(){
+      fetch('./articles.json')
+        .then(function(r){ return r.json(); })
+        .then(function(articles){
+          var grid = document.getElementById('article-grid');
+          var delays = ['delay-1','delay-2','delay-3','delay-4'];
+
+          grid.innerHTML = articles.map(function(a, i){
+            var delay = delays[i] || '';
+            var shimmerOpacity = a.status === 'live' ? '.6' : '.35';
+            var thumbHtml =
+              '<div class="card-thumb">' +
+                '<img src="' + a.thumbnail + '" alt="' + a.thumbnailAlt + '" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">' +
+                '<div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(196,151,59,' + shimmerOpacity + '),transparent);z-index:1;"></div>' +
+              '</div>';
+
+            var dateStr = a.status === 'live' && a.readTime
+              ? a.date + ' &nbsp;·&nbsp; ' + a.readTime
+              : a.date;
+
+            var bodyHtml =
+              '<div class="card-body">' +
+                '<div class="card-meta">' +
+                  '<span class="card-tag">' + a.tag + '</span>' +
+                  '<span class="card-date">' + dateStr + '</span>' +
+                '</div>' +
+                '<h3 class="card-title">' + a.title + '</h3>' +
+                '<p class="card-excerpt">' + a.excerpt + '</p>' +
+                (a.status === 'live'
+                  ? '<span class="card-cta">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>'
+                  : '<span class="card-cta disabled">Coming Soon</span>') +
+              '</div>';
+
+            if(a.status === 'live'){
+              return '<a href="./' + a.slug + '.html" class="article-card reveal ' + delay + '">' +
+                thumbHtml + bodyHtml +
+              '</a>';
+            } else {
+              return '<div class="article-card coming-soon reveal ' + delay + '">' +
+                '<span class="coming-soon-badge">Coming Soon</span>' +
+                thumbHtml + bodyHtml +
+              '</div>';
+            }
+          }).join('');
+
+          // Re-run reveal observer on newly injected cards
+          if(window._revealObserver){
+            grid.querySelectorAll('.reveal').forEach(function(el){
+              window._revealObserver.observe(el);
+            });
+          }
+        })
+        .catch(function(err){
+          console.error('articles.json load failed:', err);
+        });
+    })();
+    </script>
   </div>
 </section>
 
@@ -579,6 +551,7 @@ const ro = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
 }, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+window._revealObserver = ro; // exposed for dynamically injected cards
 </script>
 </body>
 </html>
