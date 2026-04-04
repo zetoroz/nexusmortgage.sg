@@ -946,6 +946,31 @@
         grid-template-columns: 1fr;
       }
     }
+
+    @media (max-width: 640px) {
+      /* IWAA 3-col display → stack vertically on mobile */
+      #iwaa-display > div {
+        grid-template-columns: 1fr !important;
+      }
+      #iwaa-display > div > div:nth-child(2) {
+        border-left: none !important;
+        border-right: none !important;
+        border-top: 1px solid rgba(196,151,59,.15);
+        border-bottom: 1px solid rgba(196,151,59,.15);
+        padding: .4rem 0;
+      }
+
+      /* Affordability toggle header — allow wrap on very small screens */
+      #mode-toggle-btn ~ span,
+      #lbl-simple, #lbl-adv {
+        font-size: .62rem;
+      }
+
+      /* Result cards — keep 2-col but tighten font */
+      .result-val {
+        font-size: 1.5rem;
+      }
+    }
   </style>
 </head>
 
@@ -1439,7 +1464,7 @@
           </div>
 
           <!-- Price / Down Payment -->
-          <div class="grid grid-cols-2 gap-4 mb-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
               <p class="calc-label mb-1.5">Purchase Price (S$)</p>
               <input type="text" inputmode="numeric" id="c-price" class="calc-input" value="800,000"
@@ -1467,7 +1492,7 @@
           </div>
 
           <!-- Rate / Tenure -->
-          <div class="grid grid-cols-2 gap-4 mb-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
             <div>
               <p class="calc-label mb-1.5">Interest Rate (% p.a.)</p>
               <input type="number" id="c-rate" class="calc-input" value="2.00" step="0.05" oninput="calc()">
@@ -1523,7 +1548,7 @@
                     <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                   </svg>Applicant 1
                 </p>
-                <div class="grid grid-cols-3 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
                     <p class="calc-label mb-1.5">Fixed Salary (S$)</p>
                     <input type="text" inputmode="numeric" id="a1-fixed" class="calc-input" value="6,000"
@@ -1549,7 +1574,7 @@
                     <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                   </svg>Applicant 2 <span style="font-weight:400;opacity:.7;">(Optional)</span>
                 </p>
-                <div class="grid grid-cols-3 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
                     <p class="calc-label mb-1.5">Fixed Salary (S$)</p>
                     <input type="text" inputmode="numeric" id="a2-fixed" class="calc-input" value="0" oninput="calc()">
@@ -1570,7 +1595,7 @@
                 <p
                   style="font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,247,242,.45);margin-bottom:.65rem;">
                   Monthly Debt Obligations</p>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <p class="calc-label mb-1.5">Car / Personal Loans (S$)</p>
                     <input type="text" inputmode="numeric" id="c-debts" class="calc-input" value="0" oninput="calc()">
