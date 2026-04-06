@@ -22,6 +22,50 @@
     "status": "live"
   },
   {
+    "slug": "blog-tdsr-msr-explained",
+    "title": "TDSR vs MSR: How Much Can You Actually Borrow?",
+    "excerpt": "Plain-English breakdown of Singapore’s TDSR 55% and MSR 30% rules in 2026 — what they mean, how they are calculated, and how much mortgage you can take.",
+    "tag": "MAS Regulation",
+    "date": "April 2026",
+    "readTime": "5 min read",
+    "thumbnail": "blog-images/mas-stress-test-thumb.png",
+    "thumbnailAlt": "TDSR vs MSR — Singapore borrowing limit guide",
+    "status": "live"
+  },
+  {
+    "slug": "blog-cpf-oa-hdb-guide",
+    "title": "How to Use Your CPF OA to Buy an HDB Flat",
+    "excerpt": "A clear 2026 guide to using your CPF Ordinary Account for your HDB purchase — down payment, monthly repayments, the 120% withdrawal limit, and accrued interest explained.",
+    "tag": "CPF & Home Financing",
+    "date": "April 2026",
+    "readTime": "4 min read",
+    "thumbnail": "blog-images/hdb-vs-bank-thumb.png",
+    "thumbnailAlt": "CPF OA HDB purchase guide Singapore",
+    "status": "live"
+  },
+  {
+    "slug": "blog-when-to-refinance-singapore",
+    "title": "When to Refinance Your Singapore Home Loan",
+    "excerpt": "Timing, lock-in penalties, and a clear checklist for refinancing or repricing your Singapore mortgage in 2026 — know exactly when to act.",
+    "tag": "Refinancing",
+    "date": "April 2026",
+    "readTime": "4 min read",
+    "thumbnail": "blog-images/hdb-vs-bank-thumb.png",
+    "thumbnailAlt": "Singapore home loan refinancing timing guide",
+    "status": "live"
+  },
+  {
+    "slug": "blog-first-time-hdb-buyer-guide",
+    "title": "First-Time HDB Buyer in 2026? Step-by-Step Guide",
+    "excerpt": "From HFE Letter to key collection — a clear step-by-step guide for first-time HDB flat buyers in Singapore in 2026, with mortgage and CPF checkpoints at every stage.",
+    "tag": "First-Time Buyers",
+    "date": "April 2026",
+    "readTime": "5 min read",
+    "thumbnail": "blog-images/hdb-vs-bank-thumb.png",
+    "thumbnailAlt": "First-time HDB buyer guide Singapore 2026",
+    "status": "live"
+  },
+  {
     "slug": null,
     "title": "SME Caveat Loans: How Property-Backed Financing Works",
     "excerpt": "A plain-English guide to SME caveat loans in Singapore — how lenders calculate LTV against existing bank mortgages and CPF charges, and what business owners need to know.",
