@@ -28,7 +28,7 @@
     "tag": "First-Time Buyers",
     "date": "April 2026",
     "readTime": "5 min read",
-    "thumbnail": "blog-images/hdb-vs-bank-thumb.png",
+    "thumbnail": "blog-images/first-time-buyer-thumb.png",
     "thumbnailAlt": "First-time HDB buyer guide Singapore 2026",
     "status": "live"
   },
@@ -39,7 +39,7 @@
     "tag": "MAS Regulation",
     "date": "Coming Soon",
     "readTime": null,
-    "thumbnail": "blog-images/mas-stress-test-thumb.png",
+    "thumbnail": "blog-images/tdsr-msr-thumb.png",
     "thumbnailAlt": "TDSR vs MSR — Singapore borrowing limit guide",
     "status": "coming-soon"
   },
@@ -50,7 +50,7 @@
     "tag": "CPF & Home Financing",
     "date": "Coming Soon",
     "readTime": null,
-    "thumbnail": "blog-images/hdb-vs-bank-thumb.png",
+    "thumbnail": "blog-images/cpf-oa-thumb.png",
     "thumbnailAlt": "CPF OA HDB purchase guide Singapore",
     "status": "coming-soon"
   },
@@ -61,7 +61,7 @@
     "tag": "Refinancing",
     "date": "Coming Soon",
     "readTime": null,
-    "thumbnail": "blog-images/hdb-vs-bank-thumb.png",
+    "thumbnail": "blog-images/refinance-thumb.png",
     "thumbnailAlt": "Singapore home loan refinancing timing guide",
     "status": "coming-soon"
   },
