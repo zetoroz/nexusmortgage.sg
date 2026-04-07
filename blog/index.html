@@ -294,9 +294,138 @@
     ::-webkit-scrollbar { width:5px; }
     ::-webkit-scrollbar-track { background:#060E1F; }
     ::-webkit-scrollbar-thumb { background:rgba(196,151,59,.3); border-radius:3px; }
+
+    /* ===== SKIP LINK ===== */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--gold-500);
+      color: #0B1C3A;
+      padding: .5rem 1.25rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: .875rem;
+      z-index: 10001;
+      text-decoration: none;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ===== FOCUS-VISIBLE STATES ===== */
+    .btn-gold:focus-visible {
+      outline: 2px solid var(--gold-300);
+      outline-offset: 3px;
+    }
+    .btn-ghost:active {
+      background: rgba(196, 151, 59, .1);
+      color: var(--gold-400);
+      border-color: rgba(196, 151, 59, .6);
+    }
+    .btn-ghost:focus-visible {
+      outline: 2px solid rgba(196, 151, 59, .7);
+      outline-offset: 3px;
+    }
+    .nav-link:focus-visible {
+      outline: 2px solid var(--gold-400);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    #wa-float:focus-visible {
+      outline: 2px solid #4ADE80;
+      outline-offset: 3px;
+    }
+    .article-card:focus-visible {
+      outline: 2px solid var(--gold-400);
+      outline-offset: 3px;
+    }
+
+    /* ===== TOUCH IMPROVEMENTS ===== */
+    .btn-gold,
+    .btn-ghost,
+    #wa-float {
+      touch-action: manipulation;
+    }
+
+    /* ===== BREADCRUMB LINK ===== */
+    .breadcrumb-link {
+      font-size: .72rem;
+      color: rgba(250, 247, 242, .35);
+      text-decoration: none;
+      letter-spacing: .05em;
+      transition: color .2s;
+    }
+    .breadcrumb-link:hover,
+    .breadcrumb-link:focus-visible {
+      color: var(--gold-400);
+    }
+    .breadcrumb-link:focus-visible {
+      outline: 1px solid rgba(196, 151, 59, .5);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    /* ===== FOOTER CSS-BASED HOVER ===== */
+    .footer-link {
+      font-size: .875rem;
+      color: rgba(250, 247, 242, .4);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-link:hover,
+    .footer-link:focus-visible {
+      color: var(--gold-400);
+    }
+    .footer-link:focus-visible {
+      outline: 1px solid rgba(196, 151, 59, .5);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+    .footer-icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      margin-top: 1.25rem;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(196, 151, 59, .2);
+      border-radius: 7px;
+      color: rgba(250, 247, 242, .55);
+      transition: border-color .25s, color .25s;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .footer-icon-btn:hover,
+    .footer-icon-btn:focus-visible {
+      border-color: rgba(196, 151, 59, .5);
+      color: var(--gold-400);
+    }
+    .footer-icon-btn:focus-visible {
+      outline: 2px solid rgba(196, 151, 59, .5);
+      outline-offset: 2px;
+    }
+
+    /* ===== REDUCED MOTION ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
   </style>
 </head>
 <body>
+<!-- Skip to main content (keyboard accessibility) -->
+<a href="#blog-hero" class="skip-link">Skip to main content</a>
 
 <!-- =========== FLOATING WHATSAPP =========== -->
 <a id="wa-float" href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" rel="noopener" aria-label="WhatsApp Us">
@@ -342,7 +471,7 @@
 </nav>
 
 <!-- =========== HERO =========== -->
-<section id="blog-hero">
+<section id="blog-hero" tabindex="-1">
   <div class="hero-bg-blog"></div>
   <div class="hero-deco-blog"></div>
 
@@ -362,7 +491,7 @@
 
     <!-- Breadcrumb -->
     <div class="reveal delay-2" style="margin-top:2.5rem; display:flex; align-items:center; gap:.5rem;">
-      <a href="../" style="font-size:.72rem; color:rgba(250,247,242,.35); text-decoration:none; letter-spacing:.05em; transition:color .2s;" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.35)'">Home</a>
+      <a href="../" class="breadcrumb-link">Home</a>
       <span style="color:rgba(250,247,242,.2); font-size:.72rem;">/</span>
       <span style="font-size:.72rem; color:var(--gold-400); letter-spacing:.05em;">Insights</span>
     </div>
@@ -492,7 +621,7 @@
           <span style="font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-500);font-weight:500;">MORTGAGE · SINGAPORE</span>
         </div>
         <p style="font-size:.875rem;color:rgba(250,247,242,.38);line-height:1.78;max-width:300px;">Singapore's trusted mortgage broker. We compare all major bank packages to secure you the best home loan — free of charge.</p>
-        <a href="https://wa.me/6587520859" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin-top:1.25rem;background:rgba(255,255,255,.06);border:1px solid rgba(196,151,59,.2);border-radius:7px;color:rgba(250,247,242,.55);transition:all .25s;text-decoration:none;" onmouseover="this.style.borderColor='rgba(196,151,59,.5)';this.style.color='var(--gold-400)'" onmouseout="this.style.borderColor='rgba(196,151,59,.2)';this.style.color='rgba(250,247,242,.55)'">
+        <a href="https://wa.me/6587520859" target="_blank" rel="noopener" aria-label="WhatsApp Nexus Mortgage" class="footer-icon-btn">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </a>
       </div>
@@ -500,12 +629,12 @@
       <div>
         <p style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">Services</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:.45rem;">
-          <li><a href="../#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Residential Loan</a></li>
-          <li><a href="../#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Commercial Loan</a></li>
-          <li><a href="../#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Refinancing</a></li>
-          <li><a href="../#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Cash Out / Equity</a></li>
-          <li><a href="../#services" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">Estate Planning</a></li>
-          <li><a href="/blog/" style="font-size:.875rem;color:rgba(196,151,59,.65);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(196,151,59,.65)'">Insights Hub</a></li>
+          <li><a href="../#services" class="footer-link">Residential Loan</a></li>
+          <li><a href="../#services" class="footer-link">Commercial Loan</a></li>
+          <li><a href="../#services" class="footer-link">Refinancing</a></li>
+          <li><a href="../#services" class="footer-link">Cash Out / Equity</a></li>
+          <li><a href="../#services" class="footer-link">Estate Planning</a></li>
+          <li><a href="/blog/" class="footer-link" style="color:rgba(196,151,59,.65);">Insights Hub</a></li>
         </ul>
       </div>
 
@@ -514,11 +643,11 @@
         <ul style="list-style:none;display:flex;flex-direction:column;gap:.7rem;">
           <li style="display:flex;align-items:flex-start;gap:.6rem;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.6)" stroke-width="1.5" style="margin-top:2px;flex-shrink:0;"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.5 2.18 2 2 0 012.5 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l.87-.87a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            <a href="tel:+6587520859" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'"">+65 8752 0859</a>
+            <a href="tel:+6587520859" class="footer-link">+65 8752 0859</a>
           </li>
           <li style="display:flex;align-items:flex-start;gap:.6rem;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(196,151,59,.6)" style="margin-top:2px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <a href="https://wa.me/6587520859" target="_blank" style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold-400)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">WhatsApp Us</a>
+            <a href="https://wa.me/6587520859" target="_blank" rel="noopener" class="footer-link">WhatsApp Us</a>
           </li>
           <li style="display:flex;align-items:flex-start;gap:.6rem;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.6)" stroke-width="1.5" style="margin-top:2px;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -547,11 +676,19 @@ function toggleMenu() {
 }
 
 // ===== SCROLL REVEAL =====
-const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
-}, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-window._revealObserver = ro; // exposed for dynamically injected cards
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (prefersReducedMotion) {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  window._revealObserver = {
+    observe: function(el) { el.classList.add('visible'); }
+  };
+} else {
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+  window._revealObserver = ro; // exposed for dynamically injected cards
+}
 </script>
 </body>
 </html>
