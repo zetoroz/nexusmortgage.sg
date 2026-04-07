@@ -428,10 +428,33 @@
                 padding: .6rem .7rem;
             }
         }
+
+        /* ── Reading progress bar ── */
+        #reading-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #c4973b, #e8c97a); z-index: 9999; transition: width .1s linear; pointer-events: none; }
+
+        /* ── Back to top ── */
+        #btt { position: fixed; bottom: 2rem; right: 1.5rem; width: 44px; height: 44px; border-radius: 50%; background: #c4973b; color: #0d1117; display: flex; align-items: center; justify-content: center; text-decoration: none; opacity: 0; transform: translateY(12px); transition: opacity .25s cubic-bezier(.25,.8,.25,1), transform .25s cubic-bezier(.25,.8,.25,1); pointer-events: none; box-shadow: 0 4px 16px rgba(196,151,59,.35); }
+        #btt.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        #btt:hover { background: #e0b86a; }
+        #btt:focus-visible { outline: 2px solid #c4973b; outline-offset: 3px; }
+
+        /* ── Focus visible ── */
+        .back-link:focus-visible, .cta-btn:focus-visible { outline: 2px solid #c4973b; outline-offset: 3px; }
+
+        /* ── Touch targets ── */
+        .cta-btn, .back-link { touch-action: manipulation; }
+        .cta-btn { display: inline-flex; align-items: center; gap: .5rem; }
+
+        /* ── Reduced motion ── */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+            #reading-progress, #btt { transition: none !important; }
+        }
     </style>
 </head>
 
 <body>
+<div id="reading-progress"></div>
     <article class="blog-wrap">
 
         <a href="/blog/" class="back-link">&#8592; Back to Insights</a>
@@ -527,7 +550,7 @@
 
         <img src="blog-images/hdb-vs-bank-choice.png"
             alt="HDB flat model with golden key versus mortgage document, representing the choice between HDB loan and bank loan"
-            class="blog-img">
+            class="blog-img" loading="lazy">
         <p class="img-caption">The two paths: an HDB concessionary loan offers simplicity and zero cash down; a bank
             loan offers a lower rate but requires active management and a minimum 5% cash component.</p>
 
@@ -703,6 +726,22 @@
                 financial decisions. For official HDB loan eligibility criteria, visit <a href="https://www.hdb.gov.sg/residential/buying-a-flat/working-out-your-flat-budget/credit-to-finance-a-flat-purchase" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">HDB: Credit to Finance a Flat Purchase</a>. For MAS TDSR guidelines, visit <a href="https://www.mas.gov.sg/regulation/explainers/tdsr-for-property-loans" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS: TDSR for Property Loans</a>.</em></p>
 
     </article>
+
+<a id="btt" href="#" aria-label="Back to top" title="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+</a>
+<script>
+(function(){
+  var prog = document.getElementById('reading-progress');
+  var btt = document.getElementById('btt');
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    prog.style.width = (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    btt.classList.toggle('visible', window.scrollY > 400);
+  }, {passive: true});
+  btt.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
 </body>
 
 </html>
