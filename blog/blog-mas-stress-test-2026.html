@@ -212,9 +212,25 @@
     @media (max-width: 520px) {
       .stat-row { grid-template-columns: 1fr; }
     }
+
+    /* ── Reading progress bar ── */
+    #reading-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#c4973b,#e8c97a);z-index:9999;transition:width .1s linear;pointer-events:none}
+    /* ── Back to top ── */
+    #btt{position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:#c4973b;color:#0d1117;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .25s cubic-bezier(.25,.8,.25,1),transform .25s cubic-bezier(.25,.8,.25,1);pointer-events:none;box-shadow:0 4px 16px rgba(196,151,59,.35)}
+    #btt.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+    #btt:hover{background:#e0b86a}
+    #btt:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
+    /* ── Focus visible ── */
+    .back-link:focus-visible,.cta-btn:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
+    /* ── Touch targets ── */
+    .cta-btn,.back-link{touch-action:manipulation}
+    .cta-btn{display:inline-flex;align-items:center;gap:.5rem}
+    /* ── Reduced motion ── */
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#reading-progress,#btt{transition:none!important}}
   </style>
 </head>
 <body>
+<div id="reading-progress"></div>
 
 <article class="blog-wrap">
 
@@ -294,7 +310,7 @@
 
   <p>This is the area where many aspiring homeowners encounter a rude surprise. A car loan, a personal credit line, or even the minimum payment obligations on credit card balances are all factored into your TDSR calculation. The impact can be substantial.</p>
 
-  <img src="blog-images/existing-debts.png" alt="Car key, credit card and house model on a desk — representing how existing debts reduce mortgage eligibility" class="blog-img">
+  <img src="blog-images/existing-debts.png" alt="Car key, credit card and house model on a desk — representing how existing debts reduce mortgage eligibility" class="blog-img" loading="lazy">
   <p class="img-caption">Existing commitments — car loans, credit cards, personal lines — all eat into your TDSR headroom before a single dollar of mortgage is counted.</p>
 
   <div class="pullquote">
@@ -339,6 +355,21 @@
 
 </article>
 
+<a id="btt" href="#" aria-label="Back to top" title="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+</a>
+<script>
+(function(){
+  var prog = document.getElementById('reading-progress');
+  var btt = document.getElementById('btt');
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    prog.style.width = (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    btt.classList.toggle('visible', window.scrollY > 400);
+  }, {passive: true});
+  btt.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
 </body>
 </html>
 
