@@ -963,10 +963,155 @@
         font-size: 1.5rem;
       }
     }
+
+    /* ===== SKIP LINK ===== */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--gold-500);
+      color: #0B1C3A;
+      padding: .5rem 1.25rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: .875rem;
+      z-index: 10001;
+      text-decoration: none;
+      transition: top .2s;
+    }
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* ===== FOCUS-VISIBLE STATES ===== */
+    .btn-gold:focus-visible {
+      outline: 2px solid var(--gold-300);
+      outline-offset: 3px;
+    }
+    .btn-ghost:active {
+      background: rgba(196, 151, 59, .1);
+      color: var(--gold-400);
+      border-color: rgba(196, 151, 59, .6);
+    }
+    .btn-ghost:focus-visible {
+      outline: 2px solid rgba(196, 151, 59, .7);
+      outline-offset: 3px;
+    }
+    .nav-link:focus-visible {
+      outline: 2px solid var(--gold-400);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    .calc-input:focus-visible {
+      outline: none;
+    }
+    .f-input:focus-visible {
+      outline: none;
+    }
+    #wa-float:focus-visible {
+      outline: 2px solid #4ADE80;
+      outline-offset: 3px;
+    }
+    #mode-toggle-btn:focus-visible {
+      outline: 2px solid var(--gold-400);
+      outline-offset: 2px;
+    }
+
+    /* ===== TOUCH IMPROVEMENTS ===== */
+    .btn-gold,
+    .btn-ghost,
+    .tog-btn,
+    #wa-float {
+      touch-action: manipulation;
+    }
+
+    /* ===== WHY-CARD HOVER ===== */
+    .why-card {
+      transition: transform .3s cubic-bezier(.25, .8, .25, 1), box-shadow .3s cubic-bezier(.25, .8, .25, 1), border-color .3s;
+    }
+    .why-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 36px rgba(11, 28, 58, .13), 0 2px 8px rgba(196, 151, 59, .09);
+      border-color: rgba(196, 151, 59, .28);
+    }
+
+    /* ===== TESTIMONIAL CARD QUOTE ACCENT ===== */
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      line-height: 1;
+      color: rgba(196, 151, 59, .1);
+      pointer-events: none;
+    }
+
+    /* ===== FOOTER CSS-BASED HOVER (replaces inline JS) ===== */
+    .footer-link {
+      font-size: .875rem;
+      color: rgba(250, 247, 242, .4);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-link:hover,
+    .footer-link:focus-visible {
+      color: var(--gold-400);
+    }
+    .footer-link:focus-visible {
+      outline: 1px solid rgba(196, 151, 59, .5);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+    .footer-icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      margin-top: 1.25rem;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(196, 151, 59, .2);
+      border-radius: 7px;
+      color: rgba(250, 247, 242, .55);
+      transition: border-color .25s, color .25s;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .footer-icon-btn:hover,
+    .footer-icon-btn:focus-visible {
+      border-color: rgba(196, 151, 59, .5);
+      color: var(--gold-400);
+    }
+    .footer-icon-btn:focus-visible {
+      outline: 2px solid rgba(196, 151, 59, .5);
+      outline-offset: 2px;
+    }
+
+    /* ===== REDUCED MOTION ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <!-- Skip to main content (keyboard accessibility) -->
+  <a href="#hero" class="skip-link">Skip to main content</a>
+
   <!-- Scroll Progress Bar -->
   <div id="prog"
     style="position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#C4973B,#E8C97A);z-index:999;width:0%;transition:width .1s linear;">
@@ -1040,7 +1185,7 @@
   </nav>
 
   <!-- =========== HERO =========== -->
-  <section id="hero">
+  <section id="hero" tabindex="-1">
     <div class="hero-bg"></div>
     <div class="hero-deco"></div>
 
@@ -1878,14 +2023,14 @@
 
       <div class="testimonials-grid">
         <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
           <p class="testimonial-text">"Saved us S$180 a month on our HDB loan. The comparison was eye-opening."</p>
           <p class="testimonial-author">Wei Ling T.</p>
           <p class="testimonial-label">Bukit Timah · Refinancing</p>
         </div>
 
         <div class="testimonial-card reveal" style="transition-delay:.1s;">
-          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
           <p class="testimonial-text">"First-time buyer — overwhelmed by the options. Nexus made it simple and got us
             approved in days."</p>
           <p class="testimonial-author">Arjun S.</p>
@@ -1893,7 +2038,7 @@
         </div>
 
         <div class="testimonial-card reveal" style="transition-delay:.2s;">
-          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
           <p class="testimonial-text">"Complex self-employed profile and foreign income. They found a lender that others
             couldn't."</p>
           <p class="testimonial-author">Michelle C.</p>
@@ -1920,31 +2065,31 @@
         style="background:rgba(255,255,255,.03);border:1px solid rgba(196,151,59,.15);border-radius:14px;padding:2.5rem;">
         <div class="grid sm:grid-cols-2 gap-4 mb-4">
           <div>
-            <p
-              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">
-              Full Name *</p>
-            <input type="text" name="name" required class="f-input" placeholder="Your name">
+            <label for="form-name"
+              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.45);margin-bottom:.5rem;display:block;">
+              Full Name *</label>
+            <input type="text" id="form-name" name="name" required class="f-input" placeholder="Your name" autocomplete="name">
           </div>
           <div>
-            <p
-              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">
-              Contact Number *</p>
-            <input type="tel" name="phone" required class="f-input" placeholder="+65 XXXX XXXX">
+            <label for="form-phone"
+              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.45);margin-bottom:.5rem;display:block;">
+              Contact Number *</label>
+            <input type="tel" id="form-phone" name="phone" required class="f-input" placeholder="+65 XXXX XXXX" autocomplete="tel">
           </div>
           <div class="mb-4">
-            <p
-              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.45);margin-bottom:.5rem;">
-              Email Address</p>
-            <input type="email" name="email" class="f-input" placeholder="your@email.com"
+            <label for="form-email"
+              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.45);margin-bottom:.5rem;display:block;">
+              Email Address</label>
+            <input type="email" id="form-email" name="email" class="f-input" placeholder="your@email.com" autocomplete="email"
               style="background:rgba(255,255,255,.05);border:1px solid rgba(196,151,59,.2);color:#FAF7F2;border-radius:7px;padding:.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:.9375rem;outline:none;transition:border-color .25s,background .25s;width:100%;">
           </div>
         </div>
         <div class="grid sm:grid-cols-2 gap-4 mb-4">
           <div>
-            <p
-              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">
-              Loan Purpose</p>
-            <select name="loan_purpose" class="f-input f-select">
+            <label for="form-purpose"
+              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.45);margin-bottom:.5rem;display:block;">
+              Loan Purpose</label>
+            <select id="form-purpose" name="loan_purpose" class="f-input f-select">
               <option value="" style="background:#0B1C3A">Select purpose…</option>
               <option style="background:#0B1C3A">New Purchase — HDB</option>
               <option style="background:#0B1C3A">New Purchase — Private</option>
@@ -1957,17 +2102,17 @@
             </select>
           </div>
           <div>
-            <p
-              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">
-              Loan Amount (S$)</p>
-            <input type="text" name="loan_amount" class="f-input" placeholder="e.g. 800,000">
+            <label for="form-amount"
+              style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.45);margin-bottom:.5rem;display:block;">
+              Loan Amount (S$)</label>
+            <input type="text" id="form-amount" name="loan_amount" class="f-input" placeholder="e.g. 800,000" inputmode="numeric">
           </div>
         </div>
         <div class="mb-5">
-          <p
-            style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:.5rem;">
-            Additional Notes</p>
-          <textarea name="notes" rows="3" class="f-input" placeholder="Specific requirements, timeline, or questions…"
+          <label for="form-notes"
+            style="font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.45);margin-bottom:.5rem;display:block;">
+            Additional Notes</label>
+          <textarea id="form-notes" name="notes" rows="3" class="f-input" placeholder="Specific requirements, timeline, or questions…"
             style="resize:vertical;"></textarea>
         </div>
         <p style="font-size:.73rem;color:rgba(250,247,242,.28);line-height:1.65;margin-bottom:1.25rem;">By submitting,
@@ -1975,7 +2120,7 @@
           Singapore's PDPA.</p>
 
         <!-- Error message -->
-        <div id="form-error"
+        <div id="form-error" role="alert" aria-live="assertive"
           style="display:none;margin-bottom:1rem;padding:.75rem 1rem;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:7px;font-size:.85rem;color:#F87171;">
           Something went wrong. Please try again or WhatsApp us directly.
         </div>
@@ -2001,7 +2146,7 @@
         </div>
       </form>
 
-      <div id="thankyou"
+      <div id="thankyou" role="status" aria-live="polite"
         style="display:none;text-align:center;padding:3rem 2rem;background:rgba(196,151,59,.07);border:1px solid rgba(196,151,59,.22);border-radius:14px;margin-top:1rem;">
         <div style="color:var(--gold-400);margin-bottom:1rem;"><svg width="52" height="52" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto;display:block;">
@@ -2032,10 +2177,7 @@
           </div>
           <p style="font-size:.875rem;color:rgba(250,247,242,.38);line-height:1.78;max-width:300px;">Singapore's trusted
             mortgage broker. We compare all major bank packages to secure you the best home loan — free of charge.</p>
-          <a href="https://wa.me/6587520859" target="_blank"
-            style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin-top:1.25rem;background:rgba(255,255,255,.06);border:1px solid rgba(196,151,59,.2);border-radius:7px;color:rgba(250,247,242,.55);transition:all .25s;text-decoration:none;"
-            onmouseover="this.style.borderColor='rgba(196,151,59,.5)';this.style.color='var(--gold-400)'"
-            onmouseout="this.style.borderColor='rgba(196,151,59,.2)';this.style.color='rgba(250,247,242,.55)'">
+          <a href="https://wa.me/6587520859" target="_blank" rel="noopener" aria-label="WhatsApp Nexus Mortgage" class="footer-icon-btn">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -2048,30 +2190,12 @@
             style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">
             Services</p>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:.45rem;">
-            <li><a href="#services"
-                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
-                onmouseover="this.style.color='var(--gold-400)'"
-                onmouseout="this.style.color='rgba(250,247,242,.4)'">Residential Loan</a></li>
-            <li><a href="#services"
-                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
-                onmouseover="this.style.color='var(--gold-400)'"
-                onmouseout="this.style.color='rgba(250,247,242,.4)'">Commercial Loan</a></li>
-            <li><a href="#services"
-                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
-                onmouseover="this.style.color='var(--gold-400)'"
-                onmouseout="this.style.color='rgba(250,247,242,.4)'">Refinancing</a></li>
-            <li><a href="#services"
-                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
-                onmouseover="this.style.color='var(--gold-400)'"
-                onmouseout="this.style.color='rgba(250,247,242,.4)'">Cash Out / Equity</a></li>
-            <li><a href="#services"
-                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
-                onmouseover="this.style.color='var(--gold-400)'"
-                onmouseout="this.style.color='rgba(250,247,242,.4)'">Estate Planning</a></li>
-            <li><a href="#services"
-                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
-                onmouseover="this.style.color='var(--gold-400)'"
-                onmouseout="this.style.color='rgba(250,247,242,.4)'">Pre-Purchase Check</a></li>
+            <li><a href="#services" class="footer-link">Residential Loan</a></li>
+            <li><a href="#services" class="footer-link">Commercial Loan</a></li>
+            <li><a href="#services" class="footer-link">Refinancing</a></li>
+            <li><a href="#services" class="footer-link">Cash Out / Equity</a></li>
+            <li><a href="#services" class="footer-link">Estate Planning</a></li>
+            <li><a href="#services" class="footer-link">Pre-Purchase Check</a></li>
           </ul>
         </div>
 
@@ -2086,7 +2210,7 @@
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              <a href="https://maps.google.com/?q=39A+Jalan+Pemimpin+Halcyon+1+Singapore+577183" target="_blank" rel="noopener noreferrer" style="font-size:.875rem;color:rgba(250,247,242,.4);line-height:1.55;text-decoration:none;transition:color .2s" onmouseover="this.style.color='rgba(196,151,59,.9)'" onmouseout="this.style.color='rgba(250,247,242,.4)'">39A Jalan Pemimpin<br>#06-02B, Halcyon 1<br>Singapore 577183</a>
+              <a href="https://maps.google.com/?q=39A+Jalan+Pemimpin+Halcyon+1+Singapore+577183" target="_blank" rel="noopener noreferrer" class="footer-link" style="line-height:1.55;">39A Jalan Pemimpin<br>#06-02B, Halcyon 1<br>Singapore 577183</a>
             </li>
             <li style="display:flex;align-items:flex-start;gap:.6rem;">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.6)"
@@ -2094,10 +2218,7 @@
                 <path
                   d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.5 2.18 2 2 0 012.5 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l.87-.87a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
               </svg>
-              <a href="tel:+6587520859"
-                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
-                onmouseover="this.style.color='var(--gold-400)'"
-                onmouseout="this.style.color='rgba(250,247,242,.4)'">+65 8752 0859</a>
+              <a href="tel:+6587520859" class="footer-link">+65 8752 0859</a>
             </li>
             <li style="display:flex;align-items:flex-start;gap:.6rem;">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(196,151,59,.6)"
@@ -2105,10 +2226,7 @@
                 <path
                   d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
               </svg>
-              <a href="https://wa.me/6587520859" target="_blank"
-                style="font-size:.875rem;color:rgba(250,247,242,.4);text-decoration:none;transition:color .2s"
-                onmouseover="this.style.color='var(--gold-400)'"
-                onmouseout="this.style.color='rgba(250,247,242,.4)'">WhatsApp Us</a>
+              <a href="https://wa.me/6587520859" target="_blank" rel="noopener" class="footer-link">WhatsApp Us</a>
             </li>
             <li style="display:flex;align-items:flex-start;gap:.6rem;">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,.6)"
@@ -2145,10 +2263,29 @@
     }
 
     // ===== SCROLL REVEAL =====
-    const ro = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
-    }, { threshold: 0.05, rootMargin: "0px 0px 0px 0px" });
-    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      // Instantly show all reveal elements; skip observer
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    } else {
+      const ro = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+      }, { threshold: 0.05, rootMargin: "0px 0px 0px 0px" });
+      document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+    }
+
+    // ===== MODE TOGGLE KEYBOARD SUPPORT =====
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggleBtn = document.getElementById('mode-toggle-btn');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleCalcMode();
+          }
+        });
+      }
+    });
 
     // ===== CALCULATOR =====
     let ptype = 'hdb';
