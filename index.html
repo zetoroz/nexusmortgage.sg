@@ -19,7 +19,10 @@
     content="Find the best home loan in Singapore. Compare fixed &amp; SORA rates from 16 banks — HDB, private, refinancing. Free advice, zero fees.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nexusmortgage.sg/">
-  <link rel="canonical" href="https://nexusmortgage.sg">
+  <meta property="og:image" content="https://nexusmortgage.sg/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="canonical" href="https://nexusmortgage.sg/">
 
   <!-- Schema.org -->
   <script type="application/ld+json">
@@ -28,7 +31,12 @@
   "@type": "MortgageBroker",
   "name": "Nexus Mortgage SG",
   "url": "https://nexusmortgage.sg/",
-  "logo": "https://nexusmortgage.sg/favicon.ico",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://nexusmortgage.sg/og-image.png",
+    "width": 1200,
+    "height": 630
+  },
   "description": "Best home loan comparison in Singapore. We compare fixed and SORA-pegged home loan rates from 16 banks — HDB loans, private property, and refinancing. Free service, zero fees.",
   "address": {
     "@type": "PostalAddress",
@@ -50,7 +58,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
     rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
   <script>
     tailwind.config = {
       theme: {
@@ -230,6 +238,17 @@
       border: 1px solid rgba(196, 151, 59, .06);
       border-radius: 4px;
       transform: rotate(14deg);
+    }
+
+    .hero-hex-bg {
+      position: absolute;
+      top: -8%;
+      right: -6%;
+      width: 52%;
+      max-width: 560px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: .85;
     }
 
     .hero-tag {
@@ -1130,15 +1149,11 @@
   <!-- =========== NAVBAR =========== -->
   <nav id="navbar">
     <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
-      <a href="#" style="text-decoration:none; line-height:1; display:flex; flex-direction:column;">
-        <span
-          style="font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:600; color:#FAF7F2; letter-spacing:-.01em;">NEXUS</span>
-        <span
-          style="font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold-500); font-weight:500; margin-top:-1px;">MORTGAGE
-          · SG</span>
+      <a href="#" style="text-decoration:none; display:flex; align-items:center;">
+        <img src="nexus logo/nexus-logo-dark-square.png" alt="Nexus Mortgage SG" style="height:42px; width:auto; border-radius:5px;">
       </a>
 
-      <div class="hidden md:flex items-center gap-9">
+      <div class="hidden md:flex items-center gap-7">
         <a href="#services" class="nav-link">Services</a>
         <a href="#rates" class="nav-link">Rates</a>
         <a href="#calculator" class="nav-link">Calculator</a>
@@ -1191,6 +1206,37 @@
   <section id="hero" tabindex="-1">
     <div class="hero-bg"></div>
     <div class="hero-deco"></div>
+
+    <!-- Brand hexagon motif -->
+    <div class="hero-hex-bg" aria-hidden="true">
+      <svg viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outermost ring -->
+        <polygon points="300,70 542,210 542,490 300,630 58,490 58,210"
+          stroke="rgba(196,151,59,0.08)" stroke-width="1" fill="none"/>
+        <!-- Ring 2 -->
+        <polygon points="300,120 499,235 499,465 300,580 101,465 101,235"
+          stroke="rgba(196,151,59,0.09)" stroke-width="1" fill="none"/>
+        <!-- Ring 3 -->
+        <polygon points="300,170 456,260 456,440 300,530 144,440 144,260"
+          stroke="rgba(196,151,59,0.1)" stroke-width="1" fill="none"/>
+        <!-- Ring 4 -->
+        <polygon points="300,220 413,285 413,415 300,480 187,415 187,285"
+          stroke="rgba(196,151,59,0.13)" stroke-width="1.5" fill="none"/>
+        <!-- Ring 5 — tighter glow ring -->
+        <polygon points="300,270 369,310 369,390 300,430 231,390 231,310"
+          stroke="rgba(196,151,59,0.22)" stroke-width="1.5" fill="rgba(196,151,59,0.025)"/>
+        <!-- Innermost core -->
+        <polygon points="300,320 326,335 326,365 300,380 274,365 274,335"
+          stroke="rgba(196,151,59,0.45)" stroke-width="2" fill="rgba(196,151,59,0.07)"/>
+        <!-- Radial spokes from center to ring 4 corners -->
+        <line x1="300" y1="350" x2="300" y2="220" stroke="rgba(196,151,59,0.04)" stroke-width="1"/>
+        <line x1="300" y1="350" x2="413" y2="285" stroke="rgba(196,151,59,0.04)" stroke-width="1"/>
+        <line x1="300" y1="350" x2="413" y2="415" stroke="rgba(196,151,59,0.04)" stroke-width="1"/>
+        <line x1="300" y1="350" x2="300" y2="480" stroke="rgba(196,151,59,0.04)" stroke-width="1"/>
+        <line x1="300" y1="350" x2="187" y2="415" stroke="rgba(196,151,59,0.04)" stroke-width="1"/>
+        <line x1="300" y1="350" x2="187" y2="285" stroke="rgba(196,151,59,0.04)" stroke-width="1"/>
+      </svg>
+    </div>
 
     <div class="max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-16 items-center relative z-10 w-full">
       <!-- Left copy -->
@@ -1316,20 +1362,30 @@
   <div id="trust-bar" class="py-5">
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex flex-wrap justify-center md:justify-between items-center gap-5 md:gap-0">
-        <div class="flex flex-col items-center"><span class="trust-label">Service Fee</span><span
-            class="trust-value">Free to Client</span></div>
+        <div class="flex items-center gap-2.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,0.5)" stroke-width="1.5" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="flex flex-col"><span class="trust-label">Service Fee</span><span class="trust-value">Free to Client</span></div>
+        </div>
         <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
-        <div class="flex flex-col items-center"><span class="trust-label">Compliance</span><span
-            class="trust-value">TDSR &amp; MSR Verified</span></div>
+        <div class="flex items-center gap-2.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,0.5)" stroke-width="1.5" style="flex-shrink:0;"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          <div class="flex flex-col"><span class="trust-label">Compliance</span><span class="trust-value">TDSR &amp; MSR Verified</span></div>
+        </div>
         <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
-        <div class="flex flex-col items-center"><span class="trust-label">Coverage</span><span class="trust-value">All
-            Major Banks</span></div>
+        <div class="flex items-center gap-2.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,0.5)" stroke-width="1.5" style="flex-shrink:0;"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <div class="flex flex-col"><span class="trust-label">Coverage</span><span class="trust-value">All Major Banks</span></div>
+        </div>
         <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
-        <div class="flex flex-col items-center"><span class="trust-label">Property Types</span><span
-            class="trust-value">HDB · Private · Commercial</span></div>
+        <div class="flex items-center gap-2.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,0.5)" stroke-width="1.5" style="flex-shrink:0;"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <div class="flex flex-col"><span class="trust-label">Property Types</span><span class="trust-value">HDB · Private · Commercial</span></div>
+        </div>
         <div class="hidden md:block gold-line-v" style="height:34px;opacity:.28;"></div>
-        <div class="flex flex-col items-center"><span class="trust-label">Consultation</span><span
-            class="trust-value">WhatsApp / In-Person</span></div>
+        <div class="flex items-center gap-2.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(196,151,59,0.5)" stroke-width="1.5" style="flex-shrink:0;"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <div class="flex flex-col"><span class="trust-label">Consultation</span><span class="trust-value">WhatsApp / In-Person</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1729,9 +1785,39 @@
   <section class="advisor-section py-24">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <!-- Left: Decorative Initial & Tagline -->
+        <!-- Left: Brand Hexagon & Tagline -->
         <div class="relative">
-          <div class="advisor-initial">N</div>
+          <!-- Brand hexagon graphic replacing generic "N" initial -->
+          <div style="position:relative; margin-bottom:2rem; display:inline-block;">
+            <!-- Glow bloom behind hexagon -->
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;background:radial-gradient(ellipse,rgba(196,151,59,0.12),transparent 70%);border-radius:50%;pointer-events:none;"></div>
+            <svg width="200" height="228" viewBox="0 0 300 340" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Outermost -->
+              <polygon points="150,10 289,90 289,250 150,330 11,250 11,90"
+                stroke="rgba(196,151,59,0.18)" stroke-width="1" fill="none"/>
+              <!-- Ring 2 -->
+              <polygon points="150,38 263,104 263,236 150,302 37,236 37,104"
+                stroke="rgba(196,151,59,0.16)" stroke-width="1" fill="none"/>
+              <!-- Ring 3 -->
+              <polygon points="150,67 237,119 237,221 150,273 63,221 63,119"
+                stroke="rgba(196,151,59,0.14)" stroke-width="1" fill="none"/>
+              <!-- Ring 4 -->
+              <polygon points="150,95 211,134 211,206 150,245 89,206 89,134"
+                stroke="rgba(196,151,59,0.2)" stroke-width="1.5" fill="rgba(196,151,59,0.02)"/>
+              <!-- Inner glow ring -->
+              <polygon points="150,122 185,143 185,197 150,218 115,197 115,143"
+                stroke="rgba(196,151,59,0.45)" stroke-width="2" fill="rgba(196,151,59,0.07)"/>
+              <!-- Center dot -->
+              <circle cx="150" cy="170" r="7" fill="rgba(196,151,59,0.55)"/>
+              <!-- Radial spokes -->
+              <line x1="150" y1="170" x2="150" y2="95" stroke="rgba(196,151,59,0.06)" stroke-width="1"/>
+              <line x1="150" y1="170" x2="211" y2="134" stroke="rgba(196,151,59,0.06)" stroke-width="1"/>
+              <line x1="150" y1="170" x2="211" y2="206" stroke="rgba(196,151,59,0.06)" stroke-width="1"/>
+              <line x1="150" y1="170" x2="150" y2="245" stroke="rgba(196,151,59,0.06)" stroke-width="1"/>
+              <line x1="150" y1="170" x2="89" y2="206" stroke="rgba(196,151,59,0.06)" stroke-width="1"/>
+              <line x1="150" y1="170" x2="89" y2="134" stroke="rgba(196,151,59,0.06)" stroke-width="1"/>
+            </svg>
+          </div>
           <div class="advisor-tagline">Your Dedicated Mortgage Specialist</div>
           <p style="font-size:.95rem; line-height:1.7; color:rgba(250,247,242,.75); margin-bottom:2rem;">
             With over a decade of expertise in Singapore's mortgage market, our team cuts through complexity to find you
@@ -2356,12 +2442,8 @@
       <div class="grid md:grid-cols-4 gap-10 mb-10">
 
         <div class="md:col-span-2">
-          <div style="line-height:1;margin-bottom:1rem;">
-            <span
-              style="font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:600;color:#FAF7F2;display:block;">NEXUS</span>
-            <span
-              style="font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-500);font-weight:500;">MORTGAGE
-              · SINGAPORE</span>
+          <div style="margin-bottom:1rem;">
+            <img src="nexus logo/nexus-logo-dark-square.png" alt="Nexus Mortgage SG" style="height:46px; width:auto; border-radius:5px;">
           </div>
           <p style="font-size:.875rem;color:rgba(250,247,242,.38);line-height:1.78;max-width:300px;">Singapore's trusted
             mortgage broker. We compare all major bank packages to secure you the best home loan — free of charge.</p>

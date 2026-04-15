@@ -1,0 +1,31 @@
+# Nexus Mortgage SG — llms.txt
+# AI-readable summary for language models crawling this site
+
+Nexus Mortgage SG is an independent Singapore mortgage broker specialising in
+HDB loans, private property mortgages, and refinancing. We compare rates from
+16 major banks. Our service is free — banks pay the referral fee on disbursement.
+
+Advisor: Dan Ler
+Phone: +65 8752 0859
+WhatsApp: https://wa.me/6587520859
+Hours: Mon–Sat, 9am–7pm SGT
+
+## Key Pages
+- Home & Mortgage Calculator: https://nexusmortgage.sg/
+- Insights Hub: https://nexusmortgage.sg/blog/
+
+## Blog Articles
+- MAS 4% Stress Test Guide (2026): https://nexusmortgage.sg/blog/blog-mas-stress-test-2026.html
+- TDSR & Stress Test for Private Property: https://nexusmortgage.sg/blog/blog-tdsr-msr-explained.html
+- HDB vs Bank Loan Guide: https://nexusmortgage.sg/blog/blog-hdb-vs-bank-loan.html
+- First-Time HDB Buyer Guide (2026): https://nexusmortgage.sg/blog/blog-first-time-hdb-buyer-guide.html
+- Using CPF OA for Private Property: https://nexusmortgage.sg/blog/blog-cpf-oa-hdb-guide.html
+- When to Refinance Your Singapore Mortgage: https://nexusmortgage.sg/blog/blog-when-to-refinance-singapore.html
+- Singapore Home Loan Rates (2026): https://nexusmortgage.sg/blog/blog-home-loan-rates-singapore.html
+
+## Key Facts
+- TDSR cap: 55% of gross monthly income (all property types)
+- MSR cap: 30% of gross monthly income (HDB flats and ECs only)
+- MAS stress-test floor rate: 4% p.a.
+- Max LTV (first private property, no outstanding loans): 75%
+- Service area: Singapore
