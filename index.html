@@ -2140,10 +2140,14 @@
 
       <script>
       (function(){
-        fetch('/blog/articles.json')
+        fetch('/blog/articles.json?v=' + new Date().getTime())
           .then(function(r){ return r.json(); })
           .then(function(articles){
             var live = articles.filter(function(a){ return a.status === 'live'; });
+            var comingSoon = articles.filter(function(a){ return a.status !== 'live'; });
+            live.reverse(); // Put newest articles first (assuming appended at the bottom)
+            var sortedArticles = live.concat(comingSoon);
+            
             var featured = live[0] || null;
 
             // ── Featured card ──
@@ -2162,7 +2166,7 @@
             }
 
             // ── Preview cards — next 2 articles after featured ──
-            var previews = articles.filter(function(a){ return a !== featured; }).slice(0,2);
+            var previews = sortedArticles.filter(function(a){ return a !== featured; }).slice(0,2);
             var grid = document.getElementById('insight-preview-grid');
             grid.innerHTML = previews.map(function(a){
               var cta = a.status === 'live'
