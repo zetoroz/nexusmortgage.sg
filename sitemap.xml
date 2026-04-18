@@ -62,7 +62,14 @@
 
   <url>
     <loc>https://nexusmortgage.sg/blog/blog-home-loan-rates-singapore.html</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nexusmortgage.sg/blog/blog-best-home-loan-first-time-buyer.html</loc>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
