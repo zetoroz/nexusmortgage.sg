@@ -16,24 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            navy: { 950:'#060E1F', 900:'#0B1C3A', 800:'#122244', 700:'#1A2F55' },
-            gold: { 300:'#F0D98A', 400:'#E8C97A', 500:'#C4973B', 600:'#A67C2E' },
-            cream: { 50:'#FDFCFA', 100:'#FAF7F2', 200:'#F5F0E6', 300:'#EDE5D4' }
-          },
-          fontFamily: {
-            display: ['Cormorant Garamond','Georgia','serif'],
-            body: ['DM Sans','sans-serif']
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="../styles.min.css">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -527,23 +510,91 @@
       </p>
     </div>
 
-    <!-- ── GRID — auto-populated from articles.json ── -->
+    <!-- ── GRID — static HTML for SEO; JS enhances with thumbnails and animations ── -->
     <div class="article-grid" id="article-grid">
-      <!-- Cards injected by script below -->
+      <a href="./blog-mas-stress-test-2026.html" class="article-card">
+        <div class="card-thumb"><div class="card-thumb-inner"><span class="card-thumb-label">MAS Regulation</span></div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">MAS Regulation</span><span class="card-date">April 2026 &nbsp;·&nbsp; 6 min read</span></div>
+          <h3 class="card-title">MAS 4% Stress Test Singapore: 2026 Mortgage Guide</h3>
+          <p class="card-excerpt">Learn how the MAS 4% stress test caps your borrowing in Singapore. A clear 2026 guide to TDSR, MSR, and how to calculate your exact home loan eligibility.</p>
+          <span class="card-cta">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+      <a href="./blog-hdb-vs-bank-loan.html" class="article-card">
+        <div class="card-thumb"><div class="card-thumb-inner"><span class="card-thumb-label">Home Loans</span></div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">Home Loans</span><span class="card-date">April 2026 &nbsp;·&nbsp; 8 min read</span></div>
+          <h3 class="card-title">HDB Home Loan vs Bank Loan: Which Is Right for You?</h3>
+          <p class="card-excerpt">Choosing the right HDB home loan can save you thousands. A definitive 2026 comparison of rates, LTV limits, CPF rules, and the true cost over a 25-year tenure.</p>
+          <span class="card-cta">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+      <a href="./blog-first-time-hdb-buyer-guide.html" class="article-card">
+        <div class="card-thumb"><div class="card-thumb-inner"><span class="card-thumb-label">First-Time Buyers</span></div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">First-Time Buyers</span><span class="card-date">April 2026 &nbsp;·&nbsp; 5 min read</span></div>
+          <h3 class="card-title">How to Buy HDB in Singapore: 2026 Step-by-Step Guide</h3>
+          <p class="card-excerpt">From HFE Letter to key collection — a clear step-by-step guide for first-time buyers in Singapore in 2026, covering CPF, loan options, and TDSR at every stage.</p>
+          <span class="card-cta">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+      <a href="./blog-tdsr-msr-explained.html" class="article-card">
+        <div class="card-thumb"><div class="card-thumb-inner"><span class="card-thumb-label">Private Property</span></div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">Private Property</span><span class="card-date">April 2026 &nbsp;·&nbsp; 6 min read</span></div>
+          <h3 class="card-title">TDSR Private Property Singapore: What Buyers Must Know</h3>
+          <p class="card-excerpt">Buying private property in Singapore? TDSR 55% caps your loan — MSR does not apply. Full 2026 breakdown with worked calculation examples and free advice.</p>
+          <span class="card-cta">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+      <a href="./blog-best-home-loan-first-time-buyer.html" class="article-card">
+        <div class="card-thumb"><div class="card-thumb-inner"><span class="card-thumb-label">Private Property</span></div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">Private Property</span><span class="card-date">April 2026 &nbsp;·&nbsp; 12 min read</span></div>
+          <h3 class="card-title">Best Home Loan for Condo &amp; Private Property in Singapore (2026)</h3>
+          <p class="card-excerpt">Buying a condo or landed property? Compare fixed vs SORA rates from 16 banks, understand TDSR limits, ABSD rules, and down payment requirements for private property in 2026.</p>
+          <span class="card-cta">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+      <a href="./blog-cpf-oa-hdb-guide.html" class="article-card">
+        <div class="card-thumb"><div class="card-thumb-inner"><span class="card-thumb-label">CPF &amp; Home Financing</span></div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">CPF &amp; Home Financing</span><span class="card-date">April 2026 &nbsp;·&nbsp; 7 min read</span></div>
+          <h3 class="card-title">CPF Home Loan Singapore: Using Your OA for Property</h3>
+          <p class="card-excerpt">CPF home loan rules in Singapore explained for 2026 — OA withdrawal limits, the Basic Retirement Sum rule, accrued interest, and what private property buyers must know.</p>
+          <span class="card-cta">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+      <a href="./blog-when-to-refinance-singapore.html" class="article-card">
+        <div class="card-thumb"><div class="card-thumb-inner"><span class="card-thumb-label">Refinancing</span></div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">Refinancing</span><span class="card-date">April 2026 &nbsp;·&nbsp; 6 min read</span></div>
+          <h3 class="card-title">Refinance Home Loan Singapore: When &amp; How to Save in 2026</h3>
+          <p class="card-excerpt">Refinance your home loan in Singapore at the right time and save up to S$60,000. 2026 guide on lock-in timing, SORA vs fixed rates, legal fees, and free advice.</p>
+          <span class="card-cta">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+      <a href="./blog-home-loan-rates-singapore.html" class="article-card">
+        <div class="card-thumb"><div class="card-thumb-inner"><span class="card-thumb-label">Home Loans</span></div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">Home Loans</span><span class="card-date">April 2026 &nbsp;·&nbsp; 6 min read</span></div>
+          <h3 class="card-title">Best Home Loan Rates Singapore 2026: Fixed vs SORA Compared</h3>
+          <p class="card-excerpt">Fixed rates from 1.40% p.a. vs SORA-linked at ~1.65–1.85%. What the best home loan rates in Singapore look like right now, and how to secure one across all 16+ lenders.</p>
+          <span class="card-cta">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+      <div class="article-card coming-soon">
+        <span class="coming-soon-badge">Coming Soon</span>
+        <div class="card-thumb"><div class="card-thumb-inner"><span class="card-thumb-label">SME Lending</span></div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">SME Lending</span><span class="card-date">Coming Soon</span></div>
+          <h3 class="card-title">SME Caveat Loans: How Property-Backed Financing Works</h3>
+          <p class="card-excerpt">A plain-English guide to SME caveat loans in Singapore — how lenders calculate LTV against existing bank mortgages and CPF charges, and what business owners need to know.</p>
+          <span class="card-cta disabled">Coming Soon</span>
+        </div>
+      </div>
     </div><!-- /article-grid -->
-
-    <!-- noscript fallback: ensures Googlebot can discover articles without JS rendering -->
-    <noscript>
-      <ul style="list-style:none;">
-        <li><a href="./blog-mas-stress-test-2026.html">Understanding the MAS 4% Stress Test (2026)</a></li>
-        <li><a href="./blog-hdb-vs-bank-loan.html">HDB Home Loan vs Bank Loan: Which Is Right for You?</a></li>
-        <li><a href="./blog-first-time-hdb-buyer-guide.html">First-Time HDB Buyer in 2026? Step-by-Step Guide</a></li>
-        <li><a href="./blog-tdsr-msr-explained.html">TDSR &amp; the 4% Stress Test: What Private Property Buyers Must Know</a></li>
-        <li><a href="./blog-cpf-oa-hdb-guide.html">Using CPF OA to Buy a Private Property in Singapore</a></li>
-        <li><a href="./blog-when-to-refinance-singapore.html">When to Refinance Your Private Property Loan in Singapore</a></li>
-        <li><a href="./blog-home-loan-rates-singapore.html">Best Home Loan Rates Singapore 2026</a></li>
-      </ul>
-    </noscript>
 
     <script>
     (function(){
