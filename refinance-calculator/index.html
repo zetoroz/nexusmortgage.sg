@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="k6vRLF0UD1f8AmxioXwDUsD78Nc7hW4fsoQV4fM5GWw" />
+
+  <!-- Primary Meta -->
+  <title>Refinance Home Loan Calculator Singapore 2026 | Nexus Mortgage</title>
+  <meta name="description"
+    content="Calculate how much you save by refinancing your Singapore home loan. Compare current vs new rate, monthly savings, and break-even point. Free tool by Nexus Mortgage.">
+  <meta name="keywords"
+    content="refinance home loan Singapore, refinance calculator Singapore, mortgage refinance savings, home loan refinance break even, SORA refinancing Singapore, fixed rate refinance">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Refinance Home Loan Calculator Singapore 2026 | Nexus Mortgage">
+  <meta property="og:description"
+    content="See your monthly &amp; lifetime savings, break-even point, and best refinance rates from 16 banks. Free tool — independent advice.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nexusmortgage.sg/refinance-calculator/">
+  <meta property="og:image" content="https://nexusmortgage.sg/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="canonical" href="https://nexusmortgage.sg/refinance-calculator/">
+
+  <!-- Schema: WebPage -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Refinance Home Loan Calculator Singapore 2026",
+  "url": "https://nexusmortgage.sg/refinance-calculator/",
+  "description": "Free Singapore refinance calculator. Compare current vs new rate, see monthly and lifetime savings, and the break-even point on switching costs.",
+  "inLanguage": "en-SG",
+  "isPartOf": { "@type": "WebSite", "name": "Nexus Mortgage SG", "url": "https://nexusmortgage.sg/" },
+  "about": [
+    { "@type": "Thing", "name": "Home Loan Refinancing in Singapore" },
+    { "@type": "Thing", "name": "SORA-pegged mortgages" },
+    { "@type": "Thing", "name": "Lock-in periods" }
+  ],
+  "publisher": {
+    "@type": "MortgageBroker",
+    "name": "Nexus Mortgage SG",
+    "url": "https://nexusmortgage.sg/"
+  }
+}
+</script>
+
+  <!-- Schema: BreadcrumbList -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nexusmortgage.sg/" },
+    { "@type": "ListItem", "position": 2, "name": "Refinance Calculator", "item": "https://nexusmortgage.sg/refinance-calculator/" }
+  ]
+}
+</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../styles.min.css">
+
+  <style>
+    :root {
+      --navy-950: #060E1F; --navy-900: #0B1C3A; --navy-800: #122244;
+      --gold-500: #C4973B; --gold-400: #E8C97A; --gold-300: #F0D98A;
+      --cream-100: #FAF7F2; --cream-200: #F5F0E6;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: 'DM Sans', system-ui, -apple-system, sans-serif; background: var(--cream-100); color: var(--navy-900); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    .skip-link { position: absolute; left: -9999px; top: 0; background: var(--navy-900); color: var(--gold-400); padding: .75rem 1.25rem; z-index: 1000; text-decoration: none; }
+    .skip-link:focus { left: 1rem; top: 1rem; }
+
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(11,28,58,.92); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(196,151,59,.12); padding: .9rem 0; }
+    .nav-link { color: rgba(250,247,242,.7); font-size: .8rem; letter-spacing: .04em; font-weight: 500; text-decoration: none; transition: color .25s; }
+    .nav-link:hover, .nav-link:focus-visible { color: var(--gold-400); outline: none; }
+    .nav-link:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
+    .tools-dd-item { display: block; padding: .6rem 1rem; color: rgba(250,247,242,.7); font-size: .8rem; font-weight: 500; letter-spacing: .05em; text-decoration: none; border-radius: 6px; transition: background .2s, color .2s; }
+    .tools-dd-item:hover { background: rgba(196,151,59,.12); color: var(--gold-400); }
+    .tools-dd-item:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 2px; }
+
+    #mob-menu { display: none; background: rgba(11,28,58,.97); backdrop-filter: blur(14px); }
+    #mob-menu.open { display: block; }
+
+    .btn-gold { background: var(--gold-500); color: var(--navy-950); font-weight: 700; font-size: .8rem; padding: .8rem 1.5rem; border-radius: 7px; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; transition: transform .2s, box-shadow .25s, background .25s; min-height: 44px; }
+    .btn-gold:hover { background: var(--gold-400); transform: translateY(-1px); box-shadow: 0 12px 28px rgba(196,151,59,.3); }
+    .btn-gold:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 3px; }
+    .btn-ghost { background: transparent; color: var(--gold-400); border: 1px solid rgba(196,151,59,.4); font-weight: 600; font-size: .8rem; padding: .8rem 1.5rem; border-radius: 7px; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; transition: background .25s, border-color .25s, color .25s; min-height: 44px; }
+    .btn-ghost:hover { background: rgba(196,151,59,.08); border-color: var(--gold-400); color: var(--gold-300); }
+
+    #wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 52px; height: 52px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 28px rgba(37,211,102,.36); z-index: 998; transition: transform .25s; }
+    #wa-float:hover { transform: scale(1.07); }
+    #wa-float:focus-visible { outline: 3px solid var(--gold-400); outline-offset: 3px; }
+
+    #prog { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--gold-500), var(--gold-400)); z-index: 999; width: 0%; transition: width .1s linear; }
+
+    .page-hero {
+      background:
+        radial-gradient(ellipse at 80% 0%, rgba(196,151,59,.14), transparent 55%),
+        radial-gradient(ellipse at 10% 30%, rgba(196,151,59,.08), transparent 50%),
+        var(--navy-950);
+      color: var(--cream-100); padding: 9rem 0 5rem; position: relative;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.769 0 0 0 0 0.592 0 0 0 0 0.231 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none; opacity: .5;
+    }
+    .page-hero > * { position: relative; z-index: 1; }
+    .breadcrumb { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(250,247,242,.45); display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: rgba(250,247,242,.6); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover, .breadcrumb a:focus-visible { color: var(--gold-400); }
+    .breadcrumb-sep { color: rgba(196,151,59,.4); }
+
+    h1.page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 400; letter-spacing: -.02em; line-height: 1.05; margin: 1rem 0 1.25rem; }
+    h1.page-title em { font-style: italic; color: var(--gold-400); }
+    .lede { font-size: 1.0625rem; line-height: 1.75; color: rgba(250,247,242,.72); max-width: 640px; }
+
+    .calc-shell { background: white; border: 1px solid rgba(196,151,59,.18); border-radius: 18px; padding: 2.5rem; box-shadow: 0 30px 80px rgba(11,28,58,.08), 0 4px 16px rgba(196,151,59,.06); }
+    @media (max-width: 640px) { .calc-shell { padding: 1.5rem; border-radius: 14px; } }
+
+    .field-label { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: rgba(11,28,58,.6); display: block; margin-bottom: .45rem; }
+    .field-input { width: 100%; background: var(--cream-200); border: 1px solid rgba(11,28,58,.08); border-radius: 8px; padding: .75rem 1rem; font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--navy-900); transition: border-color .2s, background .2s; min-height: 44px; }
+    .field-input:focus { outline: none; border-color: var(--gold-500); background: white; box-shadow: 0 0 0 3px rgba(196,151,59,.15); }
+    .field-helper { font-size: .72rem; color: rgba(11,28,58,.45); margin-top: .35rem; line-height: 1.5; }
+
+    /* Result */
+    .result-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+    .result-card {
+      background: linear-gradient(160deg, var(--navy-900), var(--navy-800));
+      color: var(--cream-100); padding: 1.25rem; border-radius: 10px;
+      border: 1px solid rgba(196,151,59,.18);
+      position: relative; overflow: hidden;
+    }
+    .result-card.gold-border { border-color: rgba(196,151,59,.4); }
+    .result-card .label {
+      font-size: .65rem; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(250,247,242,.45); font-weight: 600;
+    }
+    .result-card .value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem; font-weight: 500;
+      color: var(--gold-300);
+      letter-spacing: -.01em; line-height: 1.05;
+      margin-top: .35rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .result-card .sublabel { font-size: .68rem; color: rgba(250,247,242,.45); margin-top: .25rem; }
+
+    .summary-band {
+      background: linear-gradient(160deg, var(--navy-900), var(--navy-950));
+      color: var(--cream-100);
+      border-radius: 14px;
+      padding: 2rem;
+      position: relative; overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .summary-band::before {
+      content: ''; position: absolute; top: -40%; right: -20%;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(196,151,59,.18), transparent 65%);
+      pointer-events: none;
+    }
+    .summary-band > * { position: relative; }
+    .summary-headline { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(250,247,242,.45); font-weight: 500; }
+    .summary-amount { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 3.4rem); font-weight: 500; color: var(--gold-300); letter-spacing: -.02em; line-height: 1.05; margin-top: .35rem; font-variant-numeric: tabular-nums; }
+    .summary-sub { font-size: .85rem; color: rgba(250,247,242,.55); margin-top: .35rem; }
+
+    .recommendation-pill {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .75rem; font-weight: 600; letter-spacing: .04em;
+      padding: .5rem .9rem; border-radius: 100px;
+      margin-top: 1rem;
+    }
+    .recommendation-pill.go    { background: rgba(74,222,128,.1); color: #4ADE80; border: 1px solid rgba(74,222,128,.35); }
+    .recommendation-pill.maybe { background: rgba(196,151,59,.1); color: var(--gold-300); border: 1px solid rgba(196,151,59,.35); }
+    .recommendation-pill.no    { background: rgba(248,113,113,.08); color: #FCA5A5; border: 1px solid rgba(248,113,113,.3); }
+
+    .cta-block { margin-top: 1.5rem; padding: 1.25rem; background: rgba(196,151,59,.06); border: 1px solid rgba(196,151,59,.22); border-radius: 10px; }
+
+    /* Content sections */
+    .content-section { padding: 4.5rem 0; }
+    .content-section.dark { background: var(--navy-950); color: var(--cream-100); }
+    .content-section.cream { background: var(--cream-100); }
+    .content-section.cream-200 { background: var(--cream-200); }
+
+    .sec-tag { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--gold-500); border: 1px solid rgba(196,151,59,.3); padding: .35rem .75rem; border-radius: 100px; display: inline-block; }
+    .sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 400; letter-spacing: -.015em; line-height: 1.1; margin: .9rem 0 1rem; }
+    .sec-title em { font-style: italic; color: var(--gold-500); }
+    .content-section.dark .sec-title em { color: var(--gold-400); }
+
+    .when-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+    .when-card {
+      background: white; border: 1px solid rgba(196,151,59,.14);
+      border-radius: 12px; padding: 1.5rem;
+      position: relative;
+    }
+    .when-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-500), var(--gold-400));
+      color: var(--navy-950);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700; font-size: 1.15rem;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: .9rem;
+    }
+    .when-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--navy-900); margin: 0 0 .4rem; }
+    .when-card p { font-size: .9rem; line-height: 1.7; color: rgba(11,28,58,.65); margin: 0; }
+
+    /* Footer */
+    footer { background: #060E1F; border-top: 1px solid rgba(196,151,59,.14); }
+    .footer-link { color: rgba(250,247,242,.42); font-size: .85rem; text-decoration: none; transition: color .2s; }
+    .footer-link:hover, .footer-link:focus-visible { color: var(--gold-400); }
+    .footer-icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.04); color: var(--gold-400); margin-top: 1rem; transition: background .2s, transform .2s; }
+    .footer-icon-btn:hover { background: rgba(196,151,59,.18); transform: translateY(-2px); }
+    .gold-line { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, var(--gold-500), transparent); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    .container-narrow { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="prog"></div>
+
+  <a id="wa-float" href="https://wa.me/6587520859?text=Hi%2C+I+want+to+check+refinancing+options+to+save+on+my+home+loan." target="_blank" rel="noopener" aria-label="WhatsApp Nexus Mortgage">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- ===== NAV ===== -->
+  <nav id="navbar" aria-label="Primary">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <a href="/" style="text-decoration:none;display:flex;align-items:center;" aria-label="Nexus Mortgage SG home">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" style="height:60px;width:auto;" role="img" aria-label="Nexus Mortgage SG">
+          <g transform="translate(45,45)">
+            <polygon points="0,-36 31,-18 31,18 0,36 -31,18 -31,-18" fill="none" stroke="#C4973B" stroke-width="3.5" stroke-linejoin="round"/>
+            <polygon points="0,-24 20,-7 0,24 -20,-7" fill="none" stroke="#C4973B" stroke-width="2.8" stroke-linejoin="round"/>
+            <polygon points="20,7 0,-24 -20,7 0,24" fill="none" stroke="#C4973B" stroke-width="2.8" stroke-linejoin="round"/>
+            <circle cx="0" cy="0" r="5.5" fill="#C4973B"/>
+          </g>
+          <text x="96" y="56" font-family="'Cormorant Garamond',Georgia,serif" font-size="46" font-weight="700" fill="#FAF7F2" letter-spacing="-0.5">NEXUS</text>
+          <text x="99" y="74" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#C4973B" letter-spacing="4" font-weight="500">MORTGAGE · SG</text>
+        </svg>
+      </a>
+      <div class="hidden md:flex items-center gap-7">
+        <a href="/#services" class="nav-link">Services</a>
+        <a href="/mortgage-rates/" class="nav-link">Rates</a>
+        <a href="/#calculator" class="nav-link">Calculator</a>
+        <div class="nav-tools-wrap" style="position:relative;">
+          <button class="nav-link" type="button" aria-haspopup="true" aria-expanded="false" id="tools-btn"
+            style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:.3rem;font:inherit;padding:0;">
+            Tools
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div id="tools-dropdown" role="menu"
+            style="display:none;position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);background:rgba(11,28,58,.97);backdrop-filter:blur(16px);border:1px solid rgba(196,151,59,.22);border-radius:10px;padding:.5rem;min-width:220px;z-index:200;box-shadow:0 16px 40px rgba(0,0,0,.4);">
+            <a href="/#calculator" class="tools-dd-item" role="menuitem">Mortgage Calculator</a>
+            <a href="/affordability/" class="tools-dd-item" role="menuitem">Affordability Check</a>
+            <a href="/refinance-calculator/" class="tools-dd-item" role="menuitem" aria-current="page" style="color:var(--gold-400);">Refinance Savings</a>
+            <a href="/mortgage-rates/" class="tools-dd-item" role="menuitem">Current Rates</a>
+          </div>
+        </div>
+        <a href="/#banks" class="nav-link">Banks</a>
+        <a href="/#contact" class="nav-link">Contact</a>
+        <a href="/blog/" class="nav-link" style="color:var(--gold-400);">Insights</a>
+      </div>
+      <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+a+free+mortgage+consultation." target="_blank" rel="noopener" class="hidden md:inline-flex btn-gold" style="padding:.6rem 1.4rem;font-size:.78rem;">Free Consultation</a>
+      <button class="md:hidden p-1.5" type="button" onclick="toggleMenu()" aria-label="Toggle menu" aria-controls="mob-menu" aria-expanded="false" style="background:none;border:none;cursor:pointer;color:#FAF7F2;min-width:44px;min-height:44px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="mob-menu" class="mt-3 pb-4 px-6">
+      <a href="/#services" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Services</a>
+      <a href="/mortgage-rates/" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Rates</a>
+      <a href="/#calculator" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Calculator</a>
+      <a href="/affordability/" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Affordability</a>
+      <a href="/refinance-calculator/" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1);color:var(--gold-400);" aria-current="page">Refinance Calculator</a>
+      <a href="/equity-loan/" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Equity Loan</a>
+      <a href="/#contact" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Contact</a>
+      <a href="/blog/" class="nav-link block py-3.5" onclick="toggleMenu()" style="color:var(--gold-400);">Insights</a>
+      <a href="https://wa.me/6587520859" target="_blank" rel="noopener" class="btn-gold mt-4 w-full" style="display:flex;justify-content:center;">WhatsApp Us</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="container-narrow">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="breadcrumb-sep" aria-hidden="true">/</span>
+          <span aria-current="page">Refinance Calculator</span>
+        </nav>
+        <h1 class="page-title">Refinance Savings <em>Calculator Singapore</em></h1>
+        <p class="lede">
+          Switching just 0.3% lower on a S$800,000 loan saves about S$2,400 a year. This tool shows
+          your monthly savings, the break-even point on switching costs, and total interest saved
+          over the remaining tenure — at today's best Singapore rates.
+        </p>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.75rem;">
+          <a href="#calc" class="btn-gold">Calculate My Savings →</a>
+          <a href="https://wa.me/6587520859?text=Hi%2C+I+want+to+check+refinancing+options+to+save+on+my+home+loan." target="_blank" rel="noopener" class="btn-ghost">Talk to a Specialist</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALCULATOR -->
+    <section id="calc" class="content-section cream">
+      <div class="container-narrow">
+        <div class="calc-shell">
+          <div class="grid lg:grid-cols-5 gap-10">
+
+            <div class="lg:col-span-3">
+              <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:600;color:var(--navy-900);margin:0 0 .35rem;">Your Current Loan</h2>
+              <p style="font-size:.85rem;color:rgba(11,28,58,.55);margin:0 0 1.5rem;">Inputs update results live. We never store your numbers.</p>
+
+              <div style="margin-bottom:1.25rem;">
+                <label class="field-label" for="r-balance">Current Outstanding Balance (S$)</label>
+                <input type="text" id="r-balance" class="field-input" inputmode="numeric" value="600,000">
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4 mb-5">
+                <div>
+                  <label class="field-label" for="r-curr-rate">Current Rate (% p.a.)</label>
+                  <input type="number" id="r-curr-rate" class="field-input" value="2.60" step="0.05" min="0">
+                </div>
+                <div>
+                  <label class="field-label" for="r-new-rate">New Rate (% p.a.)</label>
+                  <input type="number" id="r-new-rate" class="field-input" value="1.45" step="0.05" min="0">
+                </div>
+              </div>
+
+              <div style="margin-bottom:1.25rem;">
+                <label class="field-label" for="r-tenure">Remaining Tenure (Years)</label>
+                <input type="number" id="r-tenure" class="field-input" value="25" min="1" max="35" style="max-width:200px;">
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4 mb-3">
+                <div>
+                  <label class="field-label" for="r-costs">Switching Costs (S$)</label>
+                  <input type="text" id="r-costs" class="field-input" inputmode="numeric" value="3,000" aria-describedby="r-costs-help">
+                  <p class="field-helper" id="r-costs-help">Legal, valuation, and bank admin fees.</p>
+                </div>
+                <div>
+                  <label class="field-label" for="r-subsidy">Bank Subsidy (S$)</label>
+                  <input type="text" id="r-subsidy" class="field-input" inputmode="numeric" value="2,500" aria-describedby="r-subsidy-help">
+                  <p class="field-helper" id="r-subsidy-help">Most refinance packages subsidise up to S$2,500 in legal &amp; valuation fees.</p>
+                </div>
+              </div>
+
+              <!-- Net out-of-pocket display -->
+              <div id="r-net-cost-row" style="display:flex;justify-content:space-between;align-items:baseline;background:rgba(196,151,59,.08);border:1px solid rgba(196,151,59,.22);border-radius:8px;padding:.7rem 1rem;font-size:.85rem;margin-bottom:1.25rem;">
+                <span style="color:rgba(11,28,58,.65);font-weight:500;">Net out-of-pocket cost</span>
+                <strong id="r-net-cost" style="color:var(--navy-900);font-size:1rem;font-variant-numeric:tabular-nums;">S$500</strong>
+              </div>
+
+              <div style="background:var(--cream-200);border:1px solid rgba(196,151,59,.18);border-radius:10px;padding:1rem 1.2rem;margin-top:1.5rem;font-size:.85rem;line-height:1.7;color:rgba(11,28,58,.7);">
+                <strong style="color:var(--navy-900);">Tip:</strong> If you're inside your lock-in period, switching usually triggers a 1.5% prepayment penalty on the outstanding balance — add that to switching costs above.
+              </div>
+            </div>
+
+            <aside class="lg:col-span-2" aria-labelledby="result-heading">
+              <div class="summary-band">
+                <span class="summary-headline" id="result-heading">Total savings over tenure</span>
+                <div class="summary-amount" id="rr-total" aria-live="polite">—</div>
+                <p class="summary-sub" id="rr-tenure-line">After deducting switching costs.</p>
+                <span class="recommendation-pill" id="rec-pill" style="display:none;"></span>
+              </div>
+
+              <div class="result-grid">
+                <div class="result-card">
+                  <div class="label">Monthly Savings</div>
+                  <div class="value" id="rr-monthly">—</div>
+                  <div class="sublabel">S$ / month</div>
+                </div>
+                <div class="result-card">
+                  <div class="label">Annual Savings</div>
+                  <div class="value" id="rr-annual">—</div>
+                  <div class="sublabel">S$ / year</div>
+                </div>
+                <div class="result-card">
+                  <div class="label">Break-even</div>
+                  <div class="value" id="rr-breakeven">—</div>
+                  <div class="sublabel">months to recoup</div>
+                </div>
+                <div class="result-card gold-border">
+                  <div class="label">New Monthly Payment</div>
+                  <div class="value" id="rr-new-mo">—</div>
+                  <div class="sublabel">vs <span id="rr-curr-mo">—</span> now</div>
+                </div>
+              </div>
+
+              <div id="refi-cta-panel" class="cta-block" style="display:none;">
+                <p style="font-size:.85rem;line-height:1.7;color:rgba(11,28,58,.78);margin:0 0 .9rem;">
+                  Refinancing looks worthwhile. We'll send a personalised bank comparison within 24 hours — independent, free.
+                </p>
+                <a href="https://wa.me/6587520859?text=Hi%2C+I+want+to+check+refinancing+options+to+save+on+my+home+loan." target="_blank" rel="noopener" class="btn-gold" style="width:100%;justify-content:center;">
+                  Get My Free Bank Comparison →
+                </a>
+              </div>
+            </aside>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHEN TO REFINANCE -->
+    <section class="content-section cream-200">
+      <div class="container-narrow">
+        <div style="text-align:center;max-width:700px;margin:0 auto 1rem;">
+          <span class="sec-tag">Strategy</span>
+          <h2 class="sec-title">When Is The <em>Right Time</em> To Refinance?</h2>
+          <p style="color:rgba(11,28,58,.65);font-size:1rem;line-height:1.75;margin-top:.5rem;">
+            The right window is narrower than most homeowners think. These are the three signals every Singapore mortgage broker watches.
+          </p>
+        </div>
+        <div class="when-grid">
+          <article class="when-card">
+            <div class="when-num">1</div>
+            <h3>Your lock-in is ending</h3>
+            <p>Most packages have a 2- or 3-year lock-in. The sweet spot to negotiate a new package is the 4–6 months before lock-in expiry. Outside this window, prepayment penalties usually wipe out the savings.</p>
+          </article>
+          <article class="when-card">
+            <div class="when-num">2</div>
+            <h3>Rate spread is 0.3% or more</h3>
+            <p>As a rule of thumb, a refinance pays off when the new rate is at least 0.3% lower than your current rate, holding tenure constant. Below 0.3%, switching costs and admin friction usually erase the gain.</p>
+          </article>
+          <article class="when-card">
+            <div class="when-num">3</div>
+            <h3>You have ≥ 5 years left</h3>
+            <p>The shorter your remaining tenure, the smaller the absolute savings. Below 5 years remaining, refinancing rarely makes sense unless you also need to extend tenure or unlock equity.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="content-section cream">
+      <div class="container-narrow">
+        <div class="grid md:grid-cols-2 gap-12 items-start">
+          <div>
+            <span class="sec-tag">The Process</span>
+            <h2 class="sec-title" style="color:var(--navy-900);">A Singapore Refinance, <em>End To End</em></h2>
+            <p style="font-size:.95rem;line-height:1.85;color:rgba(11,28,58,.7);">
+              From the day you say yes to the day your new package starts, a Nexus-managed refinance typically takes 4–6 weeks.
+              We coordinate the bank, lawyer, valuer, and your existing lender on your behalf.
+            </p>
+            <p style="font-size:.85rem;color:rgba(11,28,58,.55);margin-top:1rem;line-height:1.7;">
+              You sign two main documents — the new bank's letter of offer and the law firm's mortgage instructions — and we handle the rest.
+            </p>
+          </div>
+          <ol style="list-style:none;padding:0;margin:0;counter-reset:step;">
+            <li style="counter-increment:step;display:flex;gap:1rem;padding:1rem;background:white;border:1px solid rgba(196,151,59,.14);border-radius:10px;margin-bottom:.75rem;">
+              <div style="flex-shrink:0;width:34px;height:34px;border-radius:50%;background:rgba(196,151,59,.12);color:var(--gold-500);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.95rem;">1</div>
+              <div>
+                <strong style="display:block;color:var(--navy-900);font-size:.95rem;margin-bottom:.2rem;">Bank comparison (Day 1–3)</strong>
+                <span style="font-size:.85rem;color:rgba(11,28,58,.65);line-height:1.6;">We benchmark your profile against current packages from all 16 banks and shortlist 2–3 best-fit options.</span>
+              </div>
+            </li>
+            <li style="counter-increment:step;display:flex;gap:1rem;padding:1rem;background:white;border:1px solid rgba(196,151,59,.14);border-radius:10px;margin-bottom:.75rem;">
+              <div style="flex-shrink:0;width:34px;height:34px;border-radius:50%;background:rgba(196,151,59,.12);color:var(--gold-500);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.95rem;">2</div>
+              <div>
+                <strong style="display:block;color:var(--navy-900);font-size:.95rem;margin-bottom:.2rem;">Letter of offer (Week 2)</strong>
+                <span style="font-size:.85rem;color:rgba(11,28,58,.65);line-height:1.6;">Submit documents and receive the formal Letter of Offer. We negotiate spread cushions and legal subsidies on your behalf.</span>
+              </div>
+            </li>
+            <li style="counter-increment:step;display:flex;gap:1rem;padding:1rem;background:white;border:1px solid rgba(196,151,59,.14);border-radius:10px;margin-bottom:.75rem;">
+              <div style="flex-shrink:0;width:34px;height:34px;border-radius:50%;background:rgba(196,151,59,.12);color:var(--gold-500);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.95rem;">3</div>
+              <div>
+                <strong style="display:block;color:var(--navy-900);font-size:.95rem;margin-bottom:.2rem;">Lawyer + redemption (Weeks 3–5)</strong>
+                <span style="font-size:.85rem;color:rgba(11,28,58,.65);line-height:1.6;">Solicitor sends redemption notice to your current bank, prepares mortgage documents, and coordinates valuation.</span>
+              </div>
+            </li>
+            <li style="counter-increment:step;display:flex;gap:1rem;padding:1rem;background:white;border:1px solid rgba(196,151,59,.14);border-radius:10px;">
+              <div style="flex-shrink:0;width:34px;height:34px;border-radius:50%;background:rgba(196,151,59,.12);color:var(--gold-500);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.95rem;">4</div>
+              <div>
+                <strong style="display:block;color:var(--navy-900);font-size:.95rem;margin-bottom:.2rem;">Drawdown (Week 6)</strong>
+                <span style="font-size:.85rem;color:rgba(11,28,58,.65);line-height:1.6;">New loan is disbursed, old loan is redeemed, and your first repayment under the new package starts the following month.</span>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA STRIP -->
+    <section class="content-section dark" style="padding:3.5rem 0;">
+      <div class="container-narrow" style="text-align:center;max-width:680px;">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:400;color:var(--cream-100);margin:0 0 1rem;letter-spacing:-.01em;">Ready to lock in a better rate?</h2>
+        <p style="color:rgba(250,247,242,.65);font-size:1rem;line-height:1.7;margin:0 0 1.5rem;">We'll do the bank comparison, paperwork, and timeline coordination — at zero cost to you.</p>
+        <a href="https://wa.me/6587520859?text=Hi%2C+I+want+to+check+refinancing+options+to+save+on+my+home+loan." target="_blank" rel="noopener" class="btn-gold">WhatsApp Us →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="max-w-7xl mx-auto px-6 py-14">
+      <div class="grid md:grid-cols-4 gap-10 mb-10">
+        <div class="md:col-span-2">
+          <div style="margin-bottom:1rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" style="height:56px;width:auto;" role="img" aria-label="Nexus Mortgage SG">
+              <g transform="translate(45,45)">
+                <polygon points="0,-36 31,-18 31,18 0,36 -31,18 -31,-18" fill="none" stroke="#C4973B" stroke-width="3.5" stroke-linejoin="round"/>
+                <polygon points="0,-24 20,-7 0,24 -20,-7" fill="none" stroke="#C4973B" stroke-width="2.8" stroke-linejoin="round"/>
+                <polygon points="20,7 0,-24 -20,7 0,24" fill="none" stroke="#C4973B" stroke-width="2.8" stroke-linejoin="round"/>
+                <circle cx="0" cy="0" r="5.5" fill="#C4973B"/>
+              </g>
+              <text x="96" y="56" font-family="'Cormorant Garamond',Georgia,serif" font-size="46" font-weight="700" fill="#FAF7F2" letter-spacing="-0.5">NEXUS</text>
+              <text x="99" y="74" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#C4973B" letter-spacing="4" font-weight="500">MORTGAGE · SG</text>
+            </svg>
+          </div>
+          <p style="font-size:.875rem;color:rgba(250,247,242,.38);line-height:1.78;max-width:300px;">Singapore's trusted mortgage broker. We compare all major bank packages to secure you the best home loan — free of charge.</p>
+          <a href="https://wa.me/6587520859" target="_blank" rel="noopener" aria-label="WhatsApp Nexus Mortgage" class="footer-icon-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+        <div>
+          <p style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">Tools</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.45rem;padding:0;margin:0;">
+            <li><a href="/#calculator" class="footer-link">Mortgage Calculator</a></li>
+            <li><a href="/affordability/" class="footer-link">Affordability Check</a></li>
+            <li><a href="/refinance-calculator/" class="footer-link" aria-current="page">Refinance Calculator</a></li>
+            <li><a href="/equity-loan/" class="footer-link">Equity Loan</a></li>
+            <li><a href="/mortgage-rates/" class="footer-link">Current Rates</a></li>
+            <li><a href="/blog/" class="footer-link">Insights</a></li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">Contact</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.7rem;padding:0;margin:0;">
+            <li><a href="tel:+6587520859" class="footer-link">+65 8752 0859</a></li>
+            <li><a href="https://wa.me/6587520859" target="_blank" rel="noopener" class="footer-link">WhatsApp Us</a></li>
+            <li><span style="color:rgba(250,247,242,.4);font-size:.85rem;">Mon–Sat, 9am–7pm SGT</span></li>
+            <li><a href="https://maps.google.com/?q=39A+Jalan+Pemimpin+Halcyon+1+Singapore+577183" target="_blank" rel="noopener" class="footer-link" style="line-height:1.55;">39A Jalan Pemimpin<br>#06-02B, Halcyon 1<br>Singapore 577183</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="gold-line" style="margin-bottom:1.25rem;opacity:.12;"></div>
+      <div class="flex flex-col md:flex-row justify-between items-start gap-4">
+        <p style="font-size:.73rem;color:rgba(250,247,242,.22);line-height:1.65;max-width:660px;">Calculator outputs are estimates based on inputs you provide and assume a constant new rate over the remaining tenure. Actual results depend on each bank's pricing structure (fixed, hybrid, or floating SORA-pegged) and your credit profile.</p>
+        <p style="font-size:.73rem;color:rgba(250,247,242,.18);white-space:nowrap;">© 2026 nexusmortgage.sg</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Progress bar
+    window.addEventListener('scroll', () => {
+      const sy = window.scrollY;
+      const dh = document.documentElement.scrollHeight - window.innerHeight;
+      const p = dh > 0 ? (sy / dh) * 100 : 0;
+      const el = document.getElementById('prog');
+      if (el) el.style.width = p + '%';
+    }, { passive: true });
+
+    // Mobile menu
+    function toggleMenu() {
+      const m = document.getElementById('mob-menu');
+      const btn = document.querySelector('button[aria-controls="mob-menu"]');
+      if (!m) return;
+      const open = m.classList.toggle('open');
+      if (btn) btn.setAttribute('aria-expanded', String(open));
+    }
+
+    // Tools dropdown
+    (function () {
+      const btn = document.getElementById('tools-btn');
+      const dd  = document.getElementById('tools-dropdown');
+      if (!btn || !dd) return;
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = dd.style.display === 'block';
+        dd.style.display = open ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+      document.addEventListener('click', () => { dd.style.display = 'none'; btn.setAttribute('aria-expanded', 'false'); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { dd.style.display = 'none'; btn.setAttribute('aria-expanded', 'false'); } });
+    })();
+
+    // Comma formatter
+    function rawNum(id) {
+      const el = document.getElementById(id);
+      if (!el) return 0;
+      const v = String(el.value).replace(/,/g, '');
+      const n = +v;
+      return isFinite(n) ? n : 0;
+    }
+    function attachFormatter(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', () => {
+        const cursor = el.selectionStart;
+        const before = el.value;
+        const digits = before.replace(/[^\d]/g, '');
+        const formatted = digits ? Number(digits).toLocaleString('en-SG') : '';
+        el.value = formatted;
+        const diff = formatted.length - before.length;
+        try { el.setSelectionRange(Math.max(0, cursor + diff), Math.max(0, cursor + diff)); } catch (_) {}
+        calcRefi();
+      });
+    }
+
+    // Refinance calculator
+    function monthlyPmt(P, annR, n) {
+      if (n <= 0 || P <= 0) return 0;
+      if (annR === 0) return P / n;
+      const r = annR / 100 / 12;
+      return P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    }
+    function fmtSGD(v) {
+      if (!isFinite(v) || v <= 0) return '—';
+      return 'S$' + Math.round(v).toLocaleString('en-SG');
+    }
+
+    function calcRefi() {
+      const bal = rawNum('r-balance');
+      const cR  = +(document.getElementById('r-curr-rate')?.value) || 0;
+      const nR  = +(document.getElementById('r-new-rate')?.value)  || 0;
+      const yrs = +(document.getElementById('r-tenure')?.value) || 0;
+      const cost    = rawNum('r-costs');
+      const subsidy = rawNum('r-subsidy');
+      const netCost = Math.max(0, cost - subsidy);
+      const months = yrs * 12;
+
+      // Update the live "Net out-of-pocket" line
+      const netCostEl = document.getElementById('r-net-cost');
+      if (netCostEl) netCostEl.textContent = 'S$' + Math.round(netCost).toLocaleString('en-SG');
+
+      const currMo = monthlyPmt(bal, cR, months);
+      const newMo  = monthlyPmt(bal, nR, months);
+      const moSave = currMo - newMo;
+      const yrSave = moSave * 12;
+      const totalSave = moSave * months - netCost;
+      const breakEven = moSave > 0 ? Math.ceil(netCost / moSave) : null;
+
+      document.getElementById('rr-monthly').textContent  = moSave > 0 ? fmtSGD(moSave) : '—';
+      document.getElementById('rr-annual').textContent   = yrSave > 0 ? fmtSGD(yrSave) : '—';
+      document.getElementById('rr-total').textContent    = totalSave > 0 ? fmtSGD(totalSave) : '—';
+      // Break-even: 0 means costs already covered by subsidy (instant)
+      document.getElementById('rr-breakeven').textContent =
+        moSave <= 0 ? '—' : (breakEven === 0 ? 'Day 1' : breakEven + ' mo');
+      document.getElementById('rr-new-mo').textContent   = fmtSGD(newMo);
+      document.getElementById('rr-curr-mo').textContent  = fmtSGD(currMo);
+
+      // Tenure line + recommendation pill
+      const tenureLine = document.getElementById('rr-tenure-line');
+      const pill = document.getElementById('rec-pill');
+      if (totalSave > 0 && moSave > 0) {
+        const subsidyNote = subsidy > 0 ? ' (S$' + Math.round(subsidy).toLocaleString('en-SG') + ' subsidy applied)' : '';
+        tenureLine.textContent = 'Over ' + yrs + ' yrs, after S$' + Math.round(netCost).toLocaleString('en-SG') + ' net switching cost' + subsidyNote + '.';
+      } else {
+        tenureLine.textContent = 'No net savings at this rate spread.';
+      }
+
+      if (cR - nR >= 0.3 && totalSave > 0) {
+        pill.style.display = 'inline-flex';
+        pill.className = 'recommendation-pill go';
+        pill.textContent = '✓ Refinance recommended';
+      } else if (cR - nR > 0 && totalSave > 0) {
+        pill.style.display = 'inline-flex';
+        pill.className = 'recommendation-pill maybe';
+        pill.textContent = '~ Marginal — speak to us';
+      } else if (totalSave <= 0 && bal > 0) {
+        pill.style.display = 'inline-flex';
+        pill.className = 'recommendation-pill no';
+        pill.textContent = '✕ Not worth switching';
+      } else {
+        pill.style.display = 'none';
+      }
+
+      const cta = document.getElementById('refi-cta-panel');
+      if (cta) cta.style.display = (moSave > 0 && totalSave > 0) ? 'block' : 'none';
+    }
+
+    window.addEventListener('load', () => {
+      ['r-balance', 'r-costs', 'r-subsidy'].forEach(attachFormatter);
+      ['r-curr-rate', 'r-new-rate', 'r-tenure'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', calcRefi);
+      });
+      calcRefi();
+    });
+  </script>
+</body>
+
+</html>

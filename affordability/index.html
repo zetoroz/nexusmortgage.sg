@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="k6vRLF0UD1f8AmxioXwDUsD78Nc7hW4fsoQV4fM5GWw" />
+
+  <!-- Primary Meta -->
+  <title>Home Loan Affordability Calculator Singapore 2026 | Nexus Mortgage</title>
+  <meta name="description"
+    content="Free TDSR &amp; MSR affordability calculator for Singapore home loans. Know your exact borrowing limit in 30 seconds — HDB and private property. Updated 2026.">
+  <meta name="keywords"
+    content="affordability calculator Singapore, TDSR calculator, MSR calculator, home loan eligibility Singapore, how much home loan can I borrow Singapore, HDB loan calculator, MAS stress test calculator">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Home Loan Affordability Calculator Singapore 2026 | Nexus Mortgage">
+  <meta property="og:description"
+    content="Free TDSR &amp; MSR check for Singapore home loans. Find your exact borrowing limit in 30 seconds — HDB &amp; private property.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nexusmortgage.sg/affordability/">
+  <meta property="og:image" content="https://nexusmortgage.sg/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="canonical" href="https://nexusmortgage.sg/affordability/">
+
+  <!-- Schema: WebPage -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Home Loan Affordability Calculator Singapore 2026",
+  "url": "https://nexusmortgage.sg/affordability/",
+  "description": "Free TDSR & MSR affordability calculator for Singapore home loans. Compute your maximum borrowing limit instantly using the MAS 4% stress test.",
+  "inLanguage": "en-SG",
+  "isPartOf": { "@type": "WebSite", "name": "Nexus Mortgage SG", "url": "https://nexusmortgage.sg/" },
+  "about": [
+    { "@type": "Thing", "name": "TDSR — Total Debt Servicing Ratio" },
+    { "@type": "Thing", "name": "MSR — Mortgage Servicing Ratio" },
+    { "@type": "Thing", "name": "MAS Stress Test 4% p.a." }
+  ],
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://nexusmortgage.sg/og-image.png"
+  },
+  "publisher": {
+    "@type": "MortgageBroker",
+    "name": "Nexus Mortgage SG",
+    "url": "https://nexusmortgage.sg/"
+  }
+}
+</script>
+
+  <!-- Schema: BreadcrumbList -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nexusmortgage.sg/" },
+    { "@type": "ListItem", "position": 2, "name": "Affordability Calculator", "item": "https://nexusmortgage.sg/affordability/" }
+  ]
+}
+</script>
+
+  <!-- Schema: FAQPage -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is TDSR in Singapore?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TDSR (Total Debt Servicing Ratio) is a MAS rule that caps total monthly debt repayments — including the new mortgage stress-tested at 4% p.a. — at 55% of your gross monthly income. It applies to both HDB and private property purchases."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is MSR and when does it apply?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MSR (Mortgage Servicing Ratio) is an additional cap of 30% of gross income that applies only to HDB flats and Executive Condominiums. It is calculated alongside TDSR, and the lower of the two limits determines your maximum loan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is variable income treated in the affordability calculation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Banks haircut variable and self-employed income to 70% of the declared figure under MAS guidelines. Bonuses, commissions, rental income, and freelance income are all treated as variable. Fixed salary is used at 100%."
+      }
+    }
+  ]
+}
+</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../styles.min.css">
+
+  <style>
+    :root {
+      --navy-950: #060E1F;
+      --navy-900: #0B1C3A;
+      --navy-800: #122244;
+      --gold-500: #C4973B;
+      --gold-400: #E8C97A;
+      --gold-300: #F0D98A;
+      --cream-100: #FAF7F2;
+      --cream-200: #F5F0E6;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--cream-100);
+      color: var(--navy-900);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+    .skip-link {
+      position: absolute; left: -9999px; top: 0;
+      background: var(--navy-900); color: var(--gold-400);
+      padding: .75rem 1.25rem; z-index: 1000; text-decoration: none;
+    }
+    .skip-link:focus { left: 1rem; top: 1rem; }
+
+    /* ===== Navbar ===== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(11,28,58,.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(196,151,59,.12);
+      padding: .9rem 0;
+    }
+    .nav-link {
+      color: rgba(250,247,242,.7); font-size: .8rem;
+      letter-spacing: .04em; font-weight: 500;
+      text-decoration: none;
+      transition: color .25s;
+    }
+    .nav-link:hover, .nav-link:focus-visible { color: var(--gold-400); outline: none; }
+    .nav-link:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
+
+    .tools-dd-item {
+      display: block; padding: .6rem 1rem;
+      color: rgba(250,247,242,.7);
+      font-size: .8rem; font-weight: 500; letter-spacing: .05em;
+      text-decoration: none; border-radius: 6px;
+      transition: background .2s, color .2s;
+    }
+    .tools-dd-item:hover { background: rgba(196,151,59,.12); color: var(--gold-400); }
+    .tools-dd-item:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 2px; }
+
+    #mob-menu { display: none; background: rgba(11,28,58,.97); backdrop-filter: blur(14px); }
+    #mob-menu.open { display: block; }
+
+    .btn-gold {
+      background: var(--gold-500); color: var(--navy-950);
+      font-weight: 700; font-size: .8rem;
+      padding: .8rem 1.5rem; border-radius: 7px;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: .5rem;
+      transition: transform .2s, box-shadow .25s, background .25s;
+      min-height: 44px;
+    }
+    .btn-gold:hover { background: var(--gold-400); transform: translateY(-1px); box-shadow: 0 12px 28px rgba(196,151,59,.3); }
+    .btn-gold:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 3px; }
+
+    .btn-ghost {
+      background: transparent; color: var(--gold-400);
+      border: 1px solid rgba(196,151,59,.4);
+      font-weight: 600; font-size: .8rem;
+      padding: .8rem 1.5rem; border-radius: 7px;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: .5rem;
+      transition: background .25s, border-color .25s, color .25s;
+      min-height: 44px;
+    }
+    .btn-ghost:hover { background: rgba(196,151,59,.08); border-color: var(--gold-400); color: var(--gold-300); }
+
+    /* ===== Floating WhatsApp ===== */
+    #wa-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 28px rgba(37,211,102,.36);
+      z-index: 998;
+      transition: transform .25s;
+    }
+    #wa-float:hover { transform: scale(1.07); }
+    #wa-float:focus-visible { outline: 3px solid var(--gold-400); outline-offset: 3px; }
+
+    /* ===== Scroll progress ===== */
+    #prog {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold-500), var(--gold-400));
+      z-index: 999; width: 0%;
+      transition: width .1s linear;
+    }
+
+    /* ===== Hero ===== */
+    .page-hero {
+      background:
+        radial-gradient(ellipse at 20% 0%, rgba(196,151,59,.14), transparent 55%),
+        radial-gradient(ellipse at 90% 30%, rgba(196,151,59,.08), transparent 50%),
+        var(--navy-950);
+      color: var(--cream-100);
+      padding: 9rem 0 5rem;
+      position: relative;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.769 0 0 0 0 0.592 0 0 0 0 0.231 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none; opacity: .5;
+    }
+    .page-hero > * { position: relative; z-index: 1; }
+    .breadcrumb {
+      font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(250,247,242,.45);
+      display: flex; gap: .5rem; align-items: center; flex-wrap: wrap;
+    }
+    .breadcrumb a { color: rgba(250,247,242,.6); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover, .breadcrumb a:focus-visible { color: var(--gold-400); }
+    .breadcrumb-sep { color: rgba(196,151,59,.4); }
+
+    h1.page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 400;
+      letter-spacing: -.02em;
+      line-height: 1.05;
+      margin: 1rem 0 1.25rem;
+    }
+    h1.page-title em { font-style: italic; color: var(--gold-400); }
+
+    .lede {
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      color: rgba(250,247,242,.72);
+      max-width: 640px;
+    }
+
+    /* ===== Calculator ===== */
+    .calc-shell {
+      background: white;
+      border: 1px solid rgba(196,151,59,.18);
+      border-radius: 18px;
+      padding: 2.5rem;
+      box-shadow: 0 30px 80px rgba(11,28,58,.08), 0 4px 16px rgba(196,151,59,.06);
+    }
+    @media (max-width: 640px) {
+      .calc-shell { padding: 1.5rem; border-radius: 14px; }
+    }
+
+    .field-label {
+      font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+      font-weight: 600; color: rgba(11,28,58,.6);
+      display: block; margin-bottom: .45rem;
+    }
+    .field-input {
+      width: 100%;
+      background: var(--cream-200);
+      border: 1px solid rgba(11,28,58,.08);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--navy-900);
+      transition: border-color .2s, background .2s;
+      min-height: 44px;
+    }
+    .field-input:focus { outline: none; border-color: var(--gold-500); background: white; box-shadow: 0 0 0 3px rgba(196,151,59,.15); }
+    .field-helper { font-size: .72rem; color: rgba(11,28,58,.45); margin-top: .35rem; line-height: 1.5; }
+
+    .toggle-prop { display: flex; gap: .35rem; background: var(--cream-200); padding: .3rem; border-radius: 9px; }
+    .toggle-prop button {
+      flex: 1; padding: .65rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .8rem; font-weight: 600; letter-spacing: .04em;
+      color: rgba(11,28,58,.55);
+      background: transparent; border: none; border-radius: 6px; cursor: pointer;
+      transition: background .25s, color .25s;
+      min-height: 40px;
+    }
+    .toggle-prop button.active { background: var(--navy-900); color: var(--gold-400); }
+    .toggle-prop button:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 2px; }
+
+    .applicant-card {
+      background: var(--cream-200);
+      border: 1px solid rgba(196,151,59,.14);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .applicant-card h4 {
+      font-size: .8rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold-500); font-weight: 600;
+      margin: 0 0 .9rem;
+    }
+
+    .toggle-add-btn {
+      background: none; border: 1px dashed rgba(196,151,59,.5);
+      color: var(--gold-500);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem; font-weight: 600;
+      padding: .7rem 1.1rem; border-radius: 8px;
+      cursor: pointer; transition: background .2s, border-color .2s, color .2s;
+      width: 100%;
+      min-height: 44px;
+    }
+    .toggle-add-btn:hover { background: rgba(196,151,59,.06); border-color: var(--gold-500); color: var(--navy-900); }
+
+    /* ===== Result panel ===== */
+    .result-panel {
+      background: linear-gradient(160deg, var(--navy-900), var(--navy-800));
+      color: var(--cream-100);
+      border-radius: 14px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .result-panel::before {
+      content: ''; position: absolute; top: -40%; right: -20%;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(196,151,59,.18), transparent 65%);
+      pointer-events: none;
+    }
+    .result-panel > * { position: relative; }
+    .max-loan-headline {
+      font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(250,247,242,.45); font-weight: 500;
+    }
+    .max-loan-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 3.4rem);
+      font-weight: 500;
+      color: var(--gold-300);
+      letter-spacing: -.02em;
+      line-height: 1.05;
+      margin-top: .35rem;
+    }
+    .max-loan-sub {
+      font-size: .8rem; color: rgba(250,247,242,.55); margin-top: .35rem;
+    }
+
+    .ratio-row {
+      display: grid; grid-template-columns: 100px 1fr auto;
+      align-items: center; gap: .9rem;
+      padding: .75rem 0;
+      border-bottom: 1px solid rgba(196,151,59,.1);
+    }
+    .ratio-row:last-child { border-bottom: none; }
+    .ratio-label { font-size: .78rem; letter-spacing: .08em; color: rgba(250,247,242,.65); font-weight: 500; }
+    .ratio-bar { height: 8px; background: rgba(255,255,255,.06); border-radius: 100px; overflow: hidden; }
+    .ratio-fill { height: 100%; border-radius: 100px; transition: width .5s cubic-bezier(.4,0,.2,1), background .3s; }
+    .ratio-fill.green  { background: linear-gradient(90deg, #4ADE80, #22C55E); }
+    .ratio-fill.amber  { background: linear-gradient(90deg, var(--gold-400), var(--gold-500)); }
+    .ratio-fill.red    { background: linear-gradient(90deg, #F87171, #EF4444); }
+    .ratio-value { font-size: .85rem; font-weight: 600; min-width: 48px; text-align: right; font-variant-numeric: tabular-nums; }
+    .ratio-value.green  { color: #4ADE80; }
+    .ratio-value.amber  { color: var(--gold-300); }
+    .ratio-value.red    { color: #FCA5A5; }
+
+    .secondary-stat {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: .5rem 0; font-size: .85rem;
+      color: rgba(250,247,242,.65);
+    }
+    .secondary-stat strong { color: var(--cream-100); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+    .cta-block {
+      margin-top: 1.5rem; padding: 1.25rem;
+      background: rgba(196,151,59,.06);
+      border: 1px solid rgba(196,151,59,.22);
+      border-radius: 10px;
+    }
+
+    /* ===== Content sections ===== */
+    .content-section { padding: 4.5rem 0; }
+    .content-section.dark { background: var(--navy-950); color: var(--cream-100); }
+    .content-section.cream { background: var(--cream-100); }
+    .content-section.cream-200 { background: var(--cream-200); }
+
+    .sec-tag {
+      font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+      font-weight: 600; color: var(--gold-500);
+      border: 1px solid rgba(196,151,59,.3);
+      padding: .35rem .75rem; border-radius: 100px;
+      display: inline-block;
+    }
+    .sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 400; letter-spacing: -.015em; line-height: 1.1;
+      margin: .9rem 0 1rem;
+    }
+    .sec-title em { font-style: italic; color: var(--gold-500); }
+    .content-section.dark .sec-title em { color: var(--gold-400); }
+
+    .info-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .info-card {
+      background: white; border: 1px solid rgba(196,151,59,.14);
+      border-radius: 12px; padding: 1.5rem;
+    }
+    .content-section.dark .info-card {
+      background: rgba(255,255,255,.03);
+      border-color: rgba(196,151,59,.18);
+    }
+    .info-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600;
+      color: var(--navy-900); margin: 0 0 .5rem;
+    }
+    .content-section.dark .info-card h3 { color: var(--cream-100); }
+    .info-card p { font-size: .9rem; line-height: 1.7; color: rgba(11,28,58,.65); margin: 0; }
+    .content-section.dark .info-card p { color: rgba(250,247,242,.6); }
+
+    .info-card .badge {
+      font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gold-500); font-weight: 600;
+      margin-bottom: .5rem; display: block;
+    }
+
+    /* FAQ */
+    .faq-item { border: 1px solid rgba(196,151,59,.18); border-radius: 10px; overflow: hidden; margin-bottom: .75rem; }
+    .faq-q {
+      width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      background: rgba(255,255,255,.03);
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .94rem; font-weight: 500;
+      color: var(--cream-100); text-align: left;
+      transition: background .25s;
+      min-height: 56px;
+    }
+    .faq-q:hover { background: rgba(196,151,59,.07); }
+    .faq-q:focus-visible { outline: 2px solid var(--gold-400); outline-offset: -2px; }
+    .faq-chevron { color: var(--gold-400); transition: transform .3s; flex-shrink: 0; }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s cubic-bezier(.4,0,.2,1);
+      padding: 0 1.4rem;
+    }
+    .faq-a p { font-size: .9375rem; color: rgba(250,247,242,.6); line-height: 1.8; padding-bottom: 1.1rem; margin: 0; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-item.open .faq-a { max-height: 400px; }
+
+    /* Footer mirrors homepage */
+    footer { background: #060E1F; border-top: 1px solid rgba(196,151,59,.14); }
+    .footer-link {
+      color: rgba(250,247,242,.42); font-size: .85rem;
+      text-decoration: none; transition: color .2s;
+    }
+    .footer-link:hover, .footer-link:focus-visible { color: var(--gold-400); }
+    .footer-icon-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,.04); color: var(--gold-400);
+      margin-top: 1rem;
+      transition: background .2s, transform .2s;
+    }
+    .footer-icon-btn:hover { background: rgba(196,151,59,.18); transform: translateY(-2px); }
+
+    .gold-line {
+      height: 1px; width: 100%;
+      background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Container helper */
+    .container-narrow { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Result-warning when over limit */
+    .warn-box {
+      background: rgba(248,113,113,.06);
+      border: 1px solid rgba(248,113,113,.3);
+      color: #FCA5A5;
+      padding: .8rem 1rem; border-radius: 8px;
+      font-size: .82rem; line-height: 1.55;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="prog"></div>
+
+  <a id="wa-float" href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+a+free+TDSR+%2F+MSR+affordability+check." target="_blank" rel="noopener" aria-label="WhatsApp Nexus Mortgage">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <!-- ===== NAV ===== -->
+  <nav id="navbar" aria-label="Primary">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <a href="/" style="text-decoration:none;display:flex;align-items:center;" aria-label="Nexus Mortgage SG home">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" style="height:60px;width:auto;" role="img" aria-label="Nexus Mortgage SG">
+          <g transform="translate(45,45)">
+            <polygon points="0,-36 31,-18 31,18 0,36 -31,18 -31,-18" fill="none" stroke="#C4973B" stroke-width="3.5" stroke-linejoin="round"/>
+            <polygon points="0,-24 20,-7 0,24 -20,-7" fill="none" stroke="#C4973B" stroke-width="2.8" stroke-linejoin="round"/>
+            <polygon points="20,7 0,-24 -20,7 0,24" fill="none" stroke="#C4973B" stroke-width="2.8" stroke-linejoin="round"/>
+            <circle cx="0" cy="0" r="5.5" fill="#C4973B"/>
+          </g>
+          <text x="96" y="56" font-family="'Cormorant Garamond',Georgia,serif" font-size="46" font-weight="700" fill="#FAF7F2" letter-spacing="-0.5">NEXUS</text>
+          <text x="99" y="74" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#C4973B" letter-spacing="4" font-weight="500">MORTGAGE · SG</text>
+        </svg>
+      </a>
+
+      <div class="hidden md:flex items-center gap-7">
+        <a href="/#services" class="nav-link">Services</a>
+        <a href="/mortgage-rates/" class="nav-link">Rates</a>
+        <a href="/#calculator" class="nav-link">Calculator</a>
+        <div class="nav-tools-wrap" style="position:relative;">
+          <button class="nav-link" type="button" aria-haspopup="true" aria-expanded="false" id="tools-btn"
+            style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:.3rem;font:inherit;padding:0;">
+            Tools
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div id="tools-dropdown" role="menu"
+            style="display:none;position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);background:rgba(11,28,58,.97);backdrop-filter:blur(16px);border:1px solid rgba(196,151,59,.22);border-radius:10px;padding:.5rem;min-width:220px;z-index:200;box-shadow:0 16px 40px rgba(0,0,0,.4);">
+            <a href="/#calculator" class="tools-dd-item" role="menuitem">Mortgage Calculator</a>
+            <a href="/affordability/" class="tools-dd-item" role="menuitem" aria-current="page" style="color:var(--gold-400);">Affordability Check</a>
+            <a href="/refinance-calculator/" class="tools-dd-item" role="menuitem">Refinance Savings</a>
+            <a href="/mortgage-rates/" class="tools-dd-item" role="menuitem">Current Rates</a>
+          </div>
+        </div>
+        <a href="/#banks" class="nav-link">Banks</a>
+        <a href="/#contact" class="nav-link">Contact</a>
+        <a href="/blog/" class="nav-link" style="color:var(--gold-400);">Insights</a>
+      </div>
+
+      <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+a+free+mortgage+consultation." target="_blank" rel="noopener"
+        class="hidden md:inline-flex btn-gold" style="padding:.6rem 1.4rem;font-size:.78rem;">
+        Free Consultation
+      </a>
+
+      <button class="md:hidden p-1.5" type="button" onclick="toggleMenu()" aria-label="Toggle menu" aria-controls="mob-menu" aria-expanded="false"
+        style="background:none;border:none;cursor:pointer;color:#FAF7F2;min-width:44px;min-height:44px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mob-menu" class="mt-3 pb-4 px-6">
+      <a href="/#services" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Services</a>
+      <a href="/mortgage-rates/" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Rates</a>
+      <a href="/#calculator" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Calculator</a>
+      <a href="/affordability/" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1);color:var(--gold-400);" aria-current="page">Affordability</a>
+      <a href="/refinance-calculator/" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Refinance Calculator</a>
+      <a href="/equity-loan/" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Equity Loan</a>
+      <a href="/#contact" class="nav-link block py-3.5" onclick="toggleMenu()" style="border-bottom:1px solid rgba(196,151,59,.1)">Contact</a>
+      <a href="/blog/" class="nav-link block py-3.5" onclick="toggleMenu()" style="color:var(--gold-400);">Insights</a>
+      <a href="https://wa.me/6587520859" target="_blank" rel="noopener" class="btn-gold mt-4 w-full" style="display:flex;justify-content:center;">WhatsApp Us</a>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- ===== HERO ===== -->
+    <section class="page-hero">
+      <div class="container-narrow">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="breadcrumb-sep" aria-hidden="true">/</span>
+          <span aria-current="page">Affordability Calculator</span>
+        </nav>
+        <h1 class="page-title">Home Loan Affordability <em>Calculator Singapore</em></h1>
+        <p class="lede">
+          Know your exact borrowing limit before you place an OTP. This free tool runs the
+          MAS 4% stress test, applies the 30% MSR cap for HDB, and 70% haircut on variable income —
+          the same maths every Singapore bank uses to assess your home loan.
+        </p>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.75rem;">
+          <a href="#calc" class="btn-gold">Start the Check →</a>
+          <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+a+free+TDSR+%2F+MSR+affordability+check." target="_blank" rel="noopener" class="btn-ghost">Talk to a Specialist</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CALCULATOR ===== -->
+    <section id="calc" class="content-section cream">
+      <div class="container-narrow">
+
+        <div class="calc-shell">
+          <div class="grid lg:grid-cols-5 gap-10">
+
+            <!-- Inputs (left, col-span-3) -->
+            <div class="lg:col-span-3">
+              <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:600;color:var(--navy-900);margin:0 0 .35rem;">Your Profile</h2>
+              <p style="font-size:.85rem;color:rgba(11,28,58,.55);margin:0 0 1.5rem;">All fields update the result live. Nothing is stored or sent.</p>
+
+              <!-- Property Type -->
+              <div style="margin-bottom:1.25rem;">
+                <span class="field-label">Property Type</span>
+                <div class="toggle-prop" role="tablist" aria-label="Property type">
+                  <button id="prop-hdb" class="active" type="button" onclick="setProp('hdb')" aria-pressed="true">HDB / EC (MSR Applies)</button>
+                  <button id="prop-priv" type="button" onclick="setProp('priv')" aria-pressed="false">Private / Commercial</button>
+                </div>
+              </div>
+
+              <!-- Applicant 1 -->
+              <div class="applicant-card">
+                <h4>Applicant 1</h4>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="field-label" for="a1-fixed">Fixed Monthly Income (S$)</label>
+                    <input type="text" id="a1-fixed" class="field-input" inputmode="numeric" value="8,000" aria-describedby="a1-fixed-help">
+                    <p class="field-helper" id="a1-fixed-help">Basic salary, allowances</p>
+                  </div>
+                  <div>
+                    <label class="field-label" for="a1-var">Variable Income (S$)</label>
+                    <input type="text" id="a1-var" class="field-input" inputmode="numeric" value="0" aria-describedby="a1-var-help">
+                    <p class="field-helper" id="a1-var-help">Bonus, commission — 70% counted</p>
+                  </div>
+                  <div>
+                    <label class="field-label" for="a1-age">Age (years)</label>
+                    <input type="number" id="a1-age" class="field-input" min="21" max="75" value="35" aria-describedby="a1-age-help">
+                    <p class="field-helper" id="a1-age-help">Used for IWAA tenure cap</p>
+                  </div>
+                  <div>
+                    <label class="field-label" for="a1-debt">Existing Debt Repayments (S$/mo)</label>
+                    <input type="text" id="a1-debt" class="field-input" inputmode="numeric" value="0" aria-describedby="a1-debt-help">
+                    <p class="field-helper" id="a1-debt-help">Car, personal, student loans</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Add applicant 2 -->
+              <div style="margin-top:1rem;" id="add-applicant-wrap">
+                <button class="toggle-add-btn" type="button" onclick="toggleApplicant2()" id="add-applicant-btn" aria-expanded="false" aria-controls="applicant-2">
+                  + Add Joint Applicant
+                </button>
+              </div>
+
+              <div id="applicant-2" class="applicant-card" style="display:none;">
+                <h4 style="display:flex;justify-content:space-between;align-items:center;">
+                  Applicant 2
+                  <button type="button" onclick="toggleApplicant2()" aria-label="Remove applicant 2"
+                    style="background:none;border:none;color:rgba(196,151,59,.7);font-size:.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline;">Remove</button>
+                </h4>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="field-label" for="a2-fixed">Fixed Monthly Income (S$)</label>
+                    <input type="text" id="a2-fixed" class="field-input" inputmode="numeric" value="0">
+                  </div>
+                  <div>
+                    <label class="field-label" for="a2-var">Variable Income (S$)</label>
+                    <input type="text" id="a2-var" class="field-input" inputmode="numeric" value="0">
+                  </div>
+                  <div>
+                    <label class="field-label" for="a2-age">Age (years)</label>
+                    <input type="number" id="a2-age" class="field-input" min="21" max="75" value="35">
+                  </div>
+                  <div>
+                    <label class="field-label" for="a2-debt">Existing Debt Repayments (S$/mo)</label>
+                    <input type="text" id="a2-debt" class="field-input" inputmode="numeric" value="0">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Credit cards -->
+              <div style="margin-top:1.25rem;">
+                <label class="field-label" for="cc-limit">Total Credit Card Limits (S$)</label>
+                <input type="text" id="cc-limit" class="field-input" inputmode="numeric" value="0" aria-describedby="cc-help">
+                <p class="field-helper" id="cc-help">3% of total card limits is treated as monthly debt under MAS rules.</p>
+              </div>
+            </div>
+
+            <!-- Result (right, col-span-2) -->
+            <aside class="lg:col-span-2" aria-labelledby="result-heading">
+              <div class="result-panel">
+                <span class="max-loan-headline" id="result-heading">Your maximum home loan</span>
+                <div class="max-loan-amount" id="r-max-loan" aria-live="polite">S$0</div>
+                <p class="max-loan-sub" id="r-max-loan-sub">Stress-tested at 4.0% p.a.</p>
+
+                <div style="margin-top:1.75rem;">
+                  <div class="ratio-row">
+                    <span class="ratio-label">TDSR</span>
+                    <div class="ratio-bar"><div class="ratio-fill amber" id="bar-tdsr" style="width:0%;"></div></div>
+                    <span class="ratio-value amber" id="val-tdsr">0%</span>
+                  </div>
+                  <div class="ratio-row" id="row-msr">
+                    <span class="ratio-label">MSR</span>
+                    <div class="ratio-bar"><div class="ratio-fill amber" id="bar-msr" style="width:0%;"></div></div>
+                    <span class="ratio-value amber" id="val-msr">0%</span>
+                  </div>
+                </div>
+
+                <div style="margin-top:1.5rem;border-top:1px solid rgba(196,151,59,.1);padding-top:1rem;">
+                  <div class="secondary-stat"><span>Stress-tested monthly cap</span><strong id="r-mo-cap">S$0</strong></div>
+                  <div class="secondary-stat"><span>Tenure used (years)</span><strong id="r-tenure">25</strong></div>
+                  <div class="secondary-stat"><span>Total stressed income</span><strong id="r-income">S$0</strong></div>
+                </div>
+
+                <div id="warn-area"></div>
+
+                <div class="cta-block">
+                  <p style="font-size:.85rem;line-height:1.7;color:rgba(250,247,242,.78);margin:0 0 .9rem;">
+                    Want a free tailored breakdown by lender? We'll send you a side-by-side bank comparison within 24 hours.
+                  </p>
+                  <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+a+free+TDSR+%2F+MSR+affordability+check." target="_blank" rel="noopener" class="btn-gold" style="width:100%;justify-content:center;">
+                    Get My Free Bank Comparison →
+                  </a>
+                </div>
+              </div>
+            </aside>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TDSR / MSR EXPLAINER ===== -->
+    <section class="content-section cream-200">
+      <div class="container-narrow">
+        <div style="text-align:center;max-width:680px;margin:0 auto 1rem;">
+          <span class="sec-tag">The Numbers Behind The Tool</span>
+          <h2 class="sec-title">How Singapore Banks Decide <em>How Much You Can Borrow</em></h2>
+          <p style="color:rgba(11,28,58,.65);font-size:1rem;line-height:1.75;margin-top:.5rem;">
+            Three MAS rules govern every home loan in Singapore. The lower of the three caps wins — and that's usually the surprise.
+          </p>
+        </div>
+        <div class="info-grid">
+          <article class="info-card">
+            <span class="badge">Rule 1</span>
+            <h3>TDSR — 55% Cap</h3>
+            <p>Total monthly debt repayments (mortgage at the 4% stress rate <em>plus</em> all other loans) cannot exceed 55% of your gross monthly income. Variable income is haircut to 70%. Self-employed applicants face the same haircut on declared income.</p>
+          </article>
+          <article class="info-card">
+            <span class="badge">Rule 2 (HDB &amp; EC only)</span>
+            <h3>MSR — 30% Cap</h3>
+            <p>For HDB flats and Executive Condominiums, the new mortgage payment alone cannot exceed 30% of gross income. This rule is stricter than TDSR for most buyers and usually decides the loan size.</p>
+          </article>
+          <article class="info-card">
+            <span class="badge">Rule 3</span>
+            <h3>Tenure Cap (IWAA)</h3>
+            <p>HDB tenure caps at 25 years; private at 30 years. Banks also cap tenure at age 65 (HDB) or 75 (private) using Income-Weighted Average Age across joint borrowers, which can shorten the loan term and reduce your maximum loan.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXAMPLE ===== -->
+    <section class="content-section cream">
+      <div class="container-narrow">
+        <div style="display:grid;grid-template-columns:1fr;gap:2.5rem;" class="md:grid-cols-2">
+          <div>
+            <span class="sec-tag">Worked Example</span>
+            <h2 class="sec-title" style="color:var(--navy-900);">A Single Applicant <em>Buying an HDB Resale</em></h2>
+            <p style="font-size:.95rem;line-height:1.85;color:rgba(11,28,58,.7);">
+              Mr. Tan, 38, earns S$7,500 fixed plus S$2,000 variable monthly. He has a S$450/month car loan and S$30,000 in card limits.
+              For an HDB resale flat, he wants to know his maximum bank loan.
+            </p>
+            <ul style="font-size:.9rem;line-height:1.85;color:rgba(11,28,58,.7);margin-top:1rem;padding-left:1.2rem;">
+              <li>Stress income: S$7,500 + (70% × S$2,000) = <strong>S$8,900/mo</strong></li>
+              <li>Card debt: 3% × S$30,000 = <strong>S$900/mo</strong></li>
+              <li>TDSR room: 55% × 8,900 − 450 − 900 = <strong>S$3,545/mo</strong></li>
+              <li>MSR room: 30% × 8,900 = <strong>S$2,670/mo</strong> (tighter)</li>
+              <li>At 4% stress, 25-year tenure → max loan ≈ <strong>S$505,000</strong></li>
+            </ul>
+            <p style="font-size:.85rem;color:rgba(11,28,58,.55);margin-top:1.5rem;line-height:1.7;">
+              Notice the card limits silently knock S$900/month off TDSR — even with zero balance. We frequently see buyers cancel cards before applying to recover S$60–80k of borrowing power.
+            </p>
+          </div>
+          <aside aria-labelledby="quick-tips">
+            <h3 id="quick-tips" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--navy-900);margin:0 0 1rem;">Three quick tips before you apply</h3>
+            <ol style="counter-reset:tip;list-style:none;padding:0;margin:0;">
+              <li style="counter-increment:tip;display:flex;gap:1rem;padding:1rem;background:white;border:1px solid rgba(196,151,59,.14);border-radius:10px;margin-bottom:.75rem;">
+                <div style="flex-shrink:0;width:32px;height:32px;border-radius:50%;background:rgba(196,151,59,.12);color:var(--gold-500);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem;">1</div>
+                <div>
+                  <strong style="display:block;color:var(--navy-900);font-size:.95rem;margin-bottom:.2rem;">Cancel unused cards</strong>
+                  <span style="font-size:.85rem;color:rgba(11,28,58,.65);line-height:1.6;">Each S$10k of card limit costs S$300/month of TDSR room — even if your balance is zero.</span>
+                </div>
+              </li>
+              <li style="counter-increment:tip;display:flex;gap:1rem;padding:1rem;background:white;border:1px solid rgba(196,151,59,.14);border-radius:10px;margin-bottom:.75rem;">
+                <div style="flex-shrink:0;width:32px;height:32px;border-radius:50%;background:rgba(196,151,59,.12);color:var(--gold-500);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem;">2</div>
+                <div>
+                  <strong style="display:block;color:var(--navy-900);font-size:.95rem;margin-bottom:.2rem;">Document your variable income</strong>
+                  <span style="font-size:.85rem;color:rgba(11,28,58,.65);line-height:1.6;">12-month bank credits or 2 years of NOA give the strongest variable-income proof. Banks may further haircut undocumented income.</span>
+                </div>
+              </li>
+              <li style="counter-increment:tip;display:flex;gap:1rem;padding:1rem;background:white;border:1px solid rgba(196,151,59,.14);border-radius:10px;">
+                <div style="flex-shrink:0;width:32px;height:32px;border-radius:50%;background:rgba(196,151,59,.12);color:var(--gold-500);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem;">3</div>
+                <div>
+                  <strong style="display:block;color:var(--navy-900);font-size:.95rem;margin-bottom:.2rem;">Get IPA before you OTP</strong>
+                  <span style="font-size:.85rem;color:rgba(11,28,58,.65);line-height:1.6;">An In-Principle Approval locks the bank's view of your numbers for 30 days, reducing the risk of OTP loss.</span>
+                </div>
+              </li>
+            </ol>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="content-section dark">
+      <div class="container-narrow" style="max-width:760px;">
+        <div style="text-align:center;margin-bottom:2.5rem;">
+          <span class="sec-tag" style="color:var(--gold-400);border-color:rgba(196,151,59,.3);">Common Questions</span>
+          <h2 class="sec-title">Affordability <em>FAQ</em></h2>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>What is TDSR in Singapore?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>TDSR (Total Debt Servicing Ratio) is a MAS rule that caps total monthly debt repayments — including the new mortgage stress-tested at 4% p.a. — at 55% of your gross monthly income. It applies to both HDB and private property purchases.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>What is MSR and when does it apply?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>MSR (Mortgage Servicing Ratio) is an additional cap of 30% of gross income that applies <em>only</em> to HDB flats and Executive Condominiums. It's calculated alongside TDSR, and the lower of the two limits determines your maximum loan.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>How is variable income treated in the affordability calculation?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Banks haircut variable and self-employed income to 70% of the declared figure under MAS guidelines. Bonuses, commissions, rental income, and freelance income are all treated as variable. Fixed salary is used at 100%.</p>
+          </div>
+        </div>
+
+        <div style="text-align:center;margin-top:2.5rem;">
+          <p style="color:rgba(250,247,242,.55);font-size:.95rem;margin-bottom:1rem;">Got a more specific situation? We've seen it before.</p>
+          <a href="https://wa.me/6587520859?text=Hi%2C+I+have+a+question+about+my+TDSR+%2F+MSR." target="_blank" rel="noopener" class="btn-gold">WhatsApp Us →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="max-w-7xl mx-auto px-6 py-14">
+      <div class="grid md:grid-cols-4 gap-10 mb-10">
+        <div class="md:col-span-2">
+          <div style="margin-bottom:1rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" style="height:56px;width:auto;" role="img" aria-label="Nexus Mortgage SG">
+              <g transform="translate(45,45)">
+                <polygon points="0,-36 31,-18 31,18 0,36 -31,18 -31,-18" fill="none" stroke="#C4973B" stroke-width="3.5" stroke-linejoin="round"/>
+                <polygon points="0,-24 20,-7 0,24 -20,-7" fill="none" stroke="#C4973B" stroke-width="2.8" stroke-linejoin="round"/>
+                <polygon points="20,7 0,-24 -20,7 0,24" fill="none" stroke="#C4973B" stroke-width="2.8" stroke-linejoin="round"/>
+                <circle cx="0" cy="0" r="5.5" fill="#C4973B"/>
+              </g>
+              <text x="96" y="56" font-family="'Cormorant Garamond',Georgia,serif" font-size="46" font-weight="700" fill="#FAF7F2" letter-spacing="-0.5">NEXUS</text>
+              <text x="99" y="74" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#C4973B" letter-spacing="4" font-weight="500">MORTGAGE · SG</text>
+            </svg>
+          </div>
+          <p style="font-size:.875rem;color:rgba(250,247,242,.38);line-height:1.78;max-width:300px;">Singapore's trusted mortgage broker. We compare all major bank packages to secure you the best home loan — free of charge.</p>
+          <a href="https://wa.me/6587520859" target="_blank" rel="noopener" aria-label="WhatsApp Nexus Mortgage" class="footer-icon-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+        <div>
+          <p style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">Tools</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.45rem;padding:0;margin:0;">
+            <li><a href="/#calculator" class="footer-link">Mortgage Calculator</a></li>
+            <li><a href="/affordability/" class="footer-link" aria-current="page">Affordability Check</a></li>
+            <li><a href="/refinance-calculator/" class="footer-link">Refinance Calculator</a></li>
+            <li><a href="/equity-loan/" class="footer-link">Equity Loan</a></li>
+            <li><a href="/mortgage-rates/" class="footer-link">Current Rates</a></li>
+            <li><a href="/blog/" class="footer-link">Insights</a></li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:.875rem;">Contact</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.7rem;padding:0;margin:0;">
+            <li><a href="tel:+6587520859" class="footer-link">+65 8752 0859</a></li>
+            <li><a href="https://wa.me/6587520859" target="_blank" rel="noopener" class="footer-link">WhatsApp Us</a></li>
+            <li><span style="color:rgba(250,247,242,.4);font-size:.85rem;">Mon–Sat, 9am–7pm SGT</span></li>
+            <li><a href="https://maps.google.com/?q=39A+Jalan+Pemimpin+Halcyon+1+Singapore+577183" target="_blank" rel="noopener" class="footer-link" style="line-height:1.55;">39A Jalan Pemimpin<br>#06-02B, Halcyon 1<br>Singapore 577183</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="gold-line" style="margin-bottom:1.25rem;opacity:.12;"></div>
+      <div class="flex flex-col md:flex-row justify-between items-start gap-4">
+        <p style="font-size:.73rem;color:rgba(250,247,242,.22);line-height:1.65;max-width:660px;">Affordability figures are MAS-rule estimates only and do not constitute a loan offer. Final approval is subject to each bank's credit assessment. Variable income haircuts and tenure caps may differ between banks.</p>
+        <p style="font-size:.73rem;color:rgba(250,247,242,.18);white-space:nowrap;">© 2026 nexusmortgage.sg</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Progress bar =====
+    window.addEventListener('scroll', () => {
+      const sy = window.scrollY;
+      const dh = document.documentElement.scrollHeight - window.innerHeight;
+      const p = dh > 0 ? (sy / dh) * 100 : 0;
+      const el = document.getElementById('prog');
+      if (el) el.style.width = p + '%';
+    }, { passive: true });
+
+    // ===== Mobile menu =====
+    function toggleMenu() {
+      const m = document.getElementById('mob-menu');
+      const btn = document.querySelector('button[aria-controls="mob-menu"]');
+      if (!m) return;
+      const open = m.classList.toggle('open');
+      if (btn) btn.setAttribute('aria-expanded', String(open));
+    }
+
+    // ===== Tools dropdown =====
+    (function () {
+      const btn = document.getElementById('tools-btn');
+      const dd  = document.getElementById('tools-dropdown');
+      if (!btn || !dd) return;
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = dd.style.display === 'block';
+        dd.style.display = open ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+      document.addEventListener('click', () => { dd.style.display = 'none'; btn.setAttribute('aria-expanded', 'false'); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { dd.style.display = 'none'; btn.setAttribute('aria-expanded', 'false'); } });
+    })();
+
+    // ===== FAQ =====
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      if (!item) return;
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        const q = i.querySelector('.faq-q'); if (q) q.setAttribute('aria-expanded', 'false');
+      });
+      if (!open) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    }
+
+    // ===== Comma formatter for numeric inputs =====
+    function rawNum(id) {
+      const el = document.getElementById(id);
+      if (!el) return 0;
+      const v = String(el.value).replace(/,/g, '');
+      const n = +v;
+      return isFinite(n) ? n : 0;
+    }
+    function attachFormatter(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', (e) => {
+        const cursor = el.selectionStart;
+        const before = el.value;
+        const digits = before.replace(/[^\d]/g, '');
+        const formatted = digits ? Number(digits).toLocaleString('en-SG') : '';
+        el.value = formatted;
+        const diff = formatted.length - before.length;
+        try { el.setSelectionRange(Math.max(0, cursor + diff), Math.max(0, cursor + diff)); } catch (_) {}
+        calc();
+      });
+    }
+
+    // ===== Property toggle =====
+    let propType = 'hdb';
+    function setProp(t) {
+      propType = t;
+      document.getElementById('prop-hdb').classList.toggle('active', t === 'hdb');
+      document.getElementById('prop-priv').classList.toggle('active', t === 'priv');
+      document.getElementById('prop-hdb').setAttribute('aria-pressed', t === 'hdb');
+      document.getElementById('prop-priv').setAttribute('aria-pressed', t === 'priv');
+      const msrRow = document.getElementById('row-msr');
+      if (msrRow) msrRow.style.display = t === 'hdb' ? '' : 'none';
+      calc();
+    }
+
+    // ===== Joint applicant toggle =====
+    let appl2On = false;
+    function toggleApplicant2() {
+      appl2On = !appl2On;
+      const card = document.getElementById('applicant-2');
+      const btn  = document.getElementById('add-applicant-btn');
+      if (card) card.style.display = appl2On ? '' : 'none';
+      if (btn) {
+        btn.setAttribute('aria-expanded', String(appl2On));
+        btn.textContent = appl2On ? '− Remove Joint Applicant' : '+ Add Joint Applicant';
+      }
+      calc();
+    }
+
+    // ===== Core affordability calc =====
+    const STRESS_RATE = 4.0;       // MAS stress test %
+    const VAR_HAIRCUT = 0.70;      // 70% of variable income
+    const CC_FACTOR   = 0.03;      // 3% of card limits as monthly debt
+    const TDSR_CAP    = 0.55;
+    const MSR_CAP     = 0.30;
+
+    function tenureCap(propType, ages, incomes) {
+      // IWAA: income-weighted average age
+      const totalInc = incomes.reduce((s, x) => s + x, 0);
+      let iwaa;
+      if (totalInc <= 0) iwaa = ages[0] || 35;
+      else iwaa = ages.reduce((s, a, i) => s + a * incomes[i], 0) / totalInc;
+      const ageCapMax = propType === 'hdb' ? 65 : 75;
+      const tenureMax = propType === 'hdb' ? 25 : 30;
+      return Math.max(5, Math.min(tenureMax, Math.floor(ageCapMax - iwaa)));
+    }
+
+    function loanFromMonthly(monthly, annRate, years) {
+      if (monthly <= 0 || years <= 0) return 0;
+      if (annRate === 0) return monthly * years * 12;
+      const r = annRate / 100 / 12;
+      const n = years * 12;
+      // Inverse of payment formula: P = M * (1 - (1+r)^-n) / r
+      return monthly * (1 - Math.pow(1 + r, -n)) / r;
+    }
+
+    function fmtSGD(v) {
+      if (!isFinite(v) || v <= 0) return 'S$0';
+      return 'S$' + Math.round(v).toLocaleString('en-SG');
+    }
+
+    function setBar(barId, valId, pct, capPct) {
+      const bar = document.getElementById(barId);
+      const val = document.getElementById(valId);
+      if (!bar || !val) return;
+      const ratio = capPct > 0 ? pct / capPct : 0;
+      const w = Math.max(0, Math.min(100, ratio * 100));
+      bar.style.width = w + '%';
+      let cls = 'amber';
+      if (w >= 100) cls = 'red';
+      else if (w >= 80) cls = 'amber';
+      else cls = 'green';
+      bar.className = 'ratio-fill ' + cls;
+      val.className = 'ratio-value ' + cls;
+      val.textContent = (pct * 100).toFixed(1) + '%';
+    }
+
+    function calc() {
+      const a1f = rawNum('a1-fixed');
+      const a1v = rawNum('a1-var');
+      const a1a = +(document.getElementById('a1-age')?.value) || 35;
+      const a1d = rawNum('a1-debt');
+
+      const a2f = appl2On ? rawNum('a2-fixed') : 0;
+      const a2v = appl2On ? rawNum('a2-var') : 0;
+      const a2a = appl2On ? (+(document.getElementById('a2-age')?.value) || 35) : 0;
+      const a2d = appl2On ? rawNum('a2-debt') : 0;
+
+      const cc  = rawNum('cc-limit');
+      const ccDebt = cc * CC_FACTOR;
+
+      const stressIncome1 = a1f + a1v * VAR_HAIRCUT;
+      const stressIncome2 = a2f + a2v * VAR_HAIRCUT;
+      const stressIncome  = stressIncome1 + stressIncome2;
+
+      const totalDebt     = a1d + a2d + ccDebt;
+
+      const tdsrCap = stressIncome * TDSR_CAP;
+      const tdsrRoom = Math.max(0, tdsrCap - totalDebt);
+
+      const msrCap = stressIncome * MSR_CAP;
+      const msrRoom = msrCap;
+
+      // Tenure
+      const ages = appl2On ? [a1a, a2a] : [a1a];
+      const inc  = appl2On ? [stressIncome1, stressIncome2] : [stressIncome1];
+      const yrs  = tenureCap(propType, ages, inc);
+
+      const monthlyCap = propType === 'hdb' ? Math.min(tdsrRoom, msrRoom) : tdsrRoom;
+      const maxLoan    = loanFromMonthly(monthlyCap, STRESS_RATE, yrs);
+
+      // Update display
+      document.getElementById('r-max-loan').textContent = fmtSGD(maxLoan);
+      document.getElementById('r-max-loan-sub').textContent =
+        'Stress-tested at ' + STRESS_RATE.toFixed(1) + '% p.a. • ' + yrs + '-yr tenure';
+      document.getElementById('r-mo-cap').textContent  = fmtSGD(monthlyCap);
+      document.getElementById('r-tenure').textContent  = yrs;
+      document.getElementById('r-income').textContent  = fmtSGD(stressIncome);
+
+      // Ratios — display present-tense at maximum loan
+      const tdsrPct = stressIncome > 0 ? (totalDebt + monthlyCap) / stressIncome : 0;
+      const msrPct  = stressIncome > 0 ? monthlyCap / stressIncome : 0;
+      setBar('bar-tdsr', 'val-tdsr', tdsrPct, TDSR_CAP);
+      if (propType === 'hdb') setBar('bar-msr', 'val-msr', msrPct, MSR_CAP);
+
+      // Warn
+      const warnEl = document.getElementById('warn-area');
+      warnEl.innerHTML = '';
+      if (stressIncome > 0 && totalDebt >= tdsrCap) {
+        warnEl.innerHTML = '<div class="warn-box">Your existing debts already exceed the 55% TDSR cap. We can help restructure before you apply — WhatsApp us to discuss.</div>';
+      }
+    }
+
+    // Init
+    window.addEventListener('load', () => {
+      ['a1-fixed','a1-var','a1-debt','a2-fixed','a2-var','a2-debt','cc-limit'].forEach(attachFormatter);
+      ['a1-age','a2-age'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', calc);
+      });
+      calc();
+    });
+  </script>
+</body>
+
+</html>

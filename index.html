@@ -67,11 +67,70 @@
 }
 </script>
 
+  <!-- Schema.org: FAQ -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much can I borrow for a home loan in Singapore?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your maximum loan depends on TDSR (Total Debt Servicing Ratio), capped at 55% of gross income under the MAS stress test at 4% p.a. For HDB flats, an additional MSR cap of 30% applies. Use our Affordability Calculator or WhatsApp us for a free personalised assessment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between fixed and SORA rates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fixed rate home loans lock in an interest rate for 1–3 years, giving certainty on monthly payments. SORA-linked (floating) loans track the Singapore Overnight Rate Average — currently around 1.06% — plus a bank spread. SORA packages often start lower but can rise. Nexus compares both to find the best fit for your situation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I refinance my home loan in Singapore?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The best time to refinance is when your lock-in period ends (typically 2–3 years after taking the loan). Switching just 0.3% lower on a S$800,000 loan saves roughly S$2,400 per year. Nexus provides a free refinance savings analysis — contact us to find out how much you can save."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does using Nexus Mortgage cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our service is 100% free to borrowers. Banks pay us a referral fee when a loan is successfully placed. You receive independent advice, a full market comparison, and full application support at zero cost."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is TDSR and how does it affect my loan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TDSR (Total Debt Servicing Ratio) is a MAS rule that limits total monthly debt repayments (including the new mortgage, stress-tested at 4% p.a.) to 55% of gross income. For HDB flats, MSR (Mortgage Servicing Ratio) further limits the home loan portion to 30% of income. Our free Affordability Check calculates your exact position."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does home loan approval take in Singapore?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In-principle approval (IPA) typically takes 3–5 business days once documents are submitted. Full formal loan approval follows within 1–2 weeks. Nexus handles all bank submissions and follows up on your behalf to keep the process fast."
+      }
+    }
+  ]
+}
+</script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
     rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.min.css">
 
   <style>
@@ -1121,6 +1180,184 @@
         transform: none !important;
       }
     }
+
+    /* ==== Tools dropdown items ==== */
+    .tools-dd-item {
+      display: block;
+      padding: .6rem 1rem;
+      color: rgba(250, 247, 242, .7);
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background .2s, color .2s;
+    }
+    .tools-dd-item:hover { background: rgba(196, 151, 59, .12); color: var(--gold-400); }
+    .tools-dd-item:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 2px; }
+
+    /* ==== Hero intent tiles ==== */
+    .intent-tile {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(196, 151, 59, .22);
+      color: rgba(250, 247, 242, .75);
+      text-decoration: none;
+      font-size: .8rem; font-weight: 500; letter-spacing: .04em;
+      padding: .6rem 1.2rem;
+      border-radius: 100px;
+      transition: background .25s, border-color .25s, color .25s, transform .2s;
+      white-space: nowrap;
+    }
+    .intent-tile:hover {
+      background: rgba(196, 151, 59, .14);
+      border-color: rgba(196, 151, 59, .55);
+      color: var(--gold-400);
+      transform: translateY(-2px);
+    }
+    .intent-tile:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 3px; }
+    .intent-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(196, 151, 59, .12);
+      border: 1px solid rgba(196, 151, 59, .25);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold-500); flex-shrink: 0;
+    }
+
+    /* ==== Quick Action cards ==== */
+    .qa-card {
+      display: flex; flex-direction: column; gap: .75rem;
+      background: white;
+      border: 1px solid rgba(196, 151, 59, .14);
+      border-radius: 14px;
+      padding: 1.75rem 1.5rem;
+      text-decoration: none;
+      position: relative; overflow: hidden;
+      transition: transform .3s cubic-bezier(.25, .8, .25, 1), box-shadow .3s, border-color .3s;
+      cursor: pointer;
+    }
+    .qa-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+      opacity: 0; transition: opacity .3s;
+    }
+    .qa-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(196, 151, 59, .35);
+      box-shadow: 0 20px 50px rgba(11, 28, 58, .1), 0 4px 16px rgba(196, 151, 59, .1);
+    }
+    .qa-card:hover::before { opacity: 1; }
+    .qa-card:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 4px; }
+    .qa-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(196, 151, 59, .12), rgba(196, 151, 59, .04));
+      border: 1px solid rgba(196, 151, 59, .22);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold-500);
+    }
+    .qa-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 600;
+      color: #0B1C3A; line-height: 1.2;
+    }
+    .qa-desc { font-size: .85rem; color: #6B7280; line-height: 1.65; flex: 1; }
+    .qa-cta {
+      font-size: .8rem; font-weight: 600;
+      color: var(--gold-500);
+      letter-spacing: .04em; margin-top: .25rem;
+      display: inline-flex; align-items: center;
+      transition: letter-spacing .2s;
+    }
+    .qa-card:hover .qa-cta { letter-spacing: .08em; }
+
+    /* ==== Calculator tab buttons ==== */
+    .calc-tab-btn {
+      flex: 1; padding: .65rem 1rem;
+      font-size: .8rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: rgba(250, 247, 242, .4);
+      background: transparent;
+      border: none; border-radius: 6px; cursor: pointer;
+      transition: background .25s, color .25s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .calc-tab-btn:hover { color: rgba(250, 247, 242, .7); }
+    .calc-tab-btn.active-tab { background: rgba(196, 151, 59, .18); color: var(--gold-400); }
+    .calc-tab-btn:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 2px; }
+
+    /* ==== Service card enquire CTA ==== */
+    .svc-enquire {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-size: .78rem; font-weight: 600;
+      color: var(--gold-500);
+      text-decoration: none;
+      margin-top: 1rem;
+      letter-spacing: .03em;
+      transition: gap .2s, color .2s;
+    }
+    .svc-enquire:hover { gap: .7rem; color: var(--gold-400); }
+
+    /* ==== Testimonials carousel ==== */
+    .tcarousel-wrap {
+      overflow: hidden; position: relative;
+      mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+    .tcarousel-track {
+      display: flex; gap: 1.5rem;
+      animation: tscroll 60s linear infinite;
+      width: max-content;
+    }
+    .tcarousel-wrap:hover .tcarousel-track { animation-play-state: paused; }
+    @keyframes tscroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .tcard {
+      background: white;
+      border: 1px solid rgba(196, 151, 59, .2);
+      border-radius: 12px;
+      padding: 2rem 1.75rem;
+      min-width: 300px; max-width: 320px;
+      position: relative; flex-shrink: 0;
+    }
+    .tcard::before {
+      content: '\201C';
+      position: absolute; top: 1rem; right: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; font-weight: 300; line-height: 1;
+      color: rgba(196, 151, 59, .1);
+      pointer-events: none;
+    }
+
+    /* ==== FAQ accordion ==== */
+    .faq-item { border: 1px solid rgba(196, 151, 59, .18); border-radius: 10px; overflow: hidden; }
+    .faq-q {
+      width: 100%;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      background: rgba(255, 255, 255, .03);
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9375rem; font-weight: 500;
+      color: #FAF7F2;
+      text-align: left;
+      transition: background .25s;
+    }
+    .faq-q:hover { background: rgba(196, 151, 59, .07); }
+    .faq-q:focus-visible { outline: 2px solid var(--gold-400); outline-offset: -2px; }
+    .faq-chevron { flex-shrink: 0; color: var(--gold-400); transition: transform .3s; }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s cubic-bezier(.4, 0, .2, 1), padding .3s;
+      padding: 0 1.5rem;
+    }
+    .faq-a p {
+      font-size: .9375rem; color: rgba(250, 247, 242, .6);
+      line-height: 1.8; padding-bottom: 1.25rem;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-item.open .faq-a { max-height: 600px; }
   </style>
 </head>
 
@@ -1163,6 +1400,21 @@
         <a href="#services" class="nav-link">Services</a>
         <a href="/mortgage-rates/" class="nav-link">Rates</a>
         <a href="#calculator" class="nav-link">Calculator</a>
+        <div class="nav-tools-wrap" style="position:relative;">
+          <button class="nav-link nav-tools-btn"
+            style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:.3rem;font:inherit;padding:0;"
+            aria-haspopup="true" aria-expanded="false" id="tools-btn">
+            Tools
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div id="tools-dropdown"
+            style="display:none;position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);background:rgba(11,28,58,0.97);backdrop-filter:blur(16px);border:1px solid rgba(196,151,59,.22);border-radius:10px;padding:.5rem;min-width:220px;z-index:200;box-shadow:0 16px 40px rgba(0,0,0,.4);">
+            <a href="#calculator" class="tools-dd-item">Mortgage Calculator</a>
+            <a href="/affordability/" class="tools-dd-item">Affordability Check</a>
+            <a href="/refinance-calculator/" class="tools-dd-item">Refinance Savings</a>
+            <a href="/mortgage-rates/" class="tools-dd-item">Current Rates</a>
+          </div>
+        </div>
         <a href="#banks" class="nav-link">Banks</a>
         <a href="#why" class="nav-link">Why Us</a>
         <a href="#contact" class="nav-link">Contact</a>
@@ -1196,6 +1448,8 @@
         onclick="toggleMenu()">Rates</a>
       <a href="#calculator" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)"
         onclick="toggleMenu()">Calculator</a>
+      <a href="/affordability/" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)"
+        onclick="toggleMenu()">Affordability</a>
       <a href="#banks" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)"
         onclick="toggleMenu()">Banks</a>
       <a href="#why" class="nav-link block py-3.5" style="border-bottom:1px solid rgba(196,151,59,.1)"
@@ -1355,6 +1609,43 @@
       </div>
     </div>
 
+    <!-- ── Intent Picker ── -->
+    <div id="intent-picker" style="position:relative;z-index:5;width:100%;padding-top:3rem;padding-bottom:2.5rem;">
+      <p style="font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,242,.38);font-weight:500;margin-bottom:1.25rem;text-align:center;">What brings you here?</p>
+      <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;">
+        <a href="#calculator" class="intent-tile">
+          <div class="intent-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span>New Purchase</span>
+        </a>
+        <a href="/refinance-calculator/" class="intent-tile">
+          <div class="intent-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          </div>
+          <span>Refinance</span>
+        </a>
+        <a href="/equity-loan/" class="intent-tile">
+          <div class="intent-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <span>Cash Out / Equity</span>
+        </a>
+        <a href="/affordability/" class="intent-tile">
+          <div class="intent-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <span>Check Affordability</span>
+        </a>
+        <a href="/mortgage-rates/" class="intent-tile">
+          <div class="intent-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <span>Compare Rates</span>
+        </a>
+      </div>
+    </div>
+
     <!-- Scroll indicator -->
     <div
       style="position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;">
@@ -1395,6 +1686,67 @@
       </div>
     </div>
   </div>
+
+  <!-- =========== QUICK ACTION =========== -->
+  <section id="quick-action" style="background:var(--cream-100);padding:5rem 0;">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+        <span class="sec-tag">How Can We Help?</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;color:#0B1C3A;margin-top:.75rem;letter-spacing:-.015em;line-height:1.1;">
+          Your Mortgage, <em style="font-style:italic;color:var(--gold-500);">Simplified</em>
+        </h2>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;">
+
+        <a href="#calculator" class="qa-card reveal" aria-label="New Home Purchase">
+          <div class="qa-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3 class="qa-title">New Home Purchase</h3>
+          <p class="qa-desc">HDB or private property — compare all 16 banks and secure the best rate before you commit.</p>
+          <span class="qa-cta">Get Started →</span>
+        </a>
+
+        <a href="/refinance-calculator/" class="qa-card reveal delay-1" aria-label="Refinance My Loan">
+          <div class="qa-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          </div>
+          <h3 class="qa-title">Refinance My Loan</h3>
+          <p class="qa-desc">Lock-in ending? Calculate how much you save by switching to a better rate today.</p>
+          <span class="qa-cta">Calculate Savings →</span>
+        </a>
+
+        <a href="/equity-loan/" class="qa-card reveal delay-2" aria-label="Cash Out / Equity Loan">
+          <div class="qa-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <h3 class="qa-title">Cash Out / Equity</h3>
+          <p class="qa-desc">Unlock your property's equity at competitive bank rates — for investment, renovation, or liquidity.</p>
+          <span class="qa-cta">Explore Options →</span>
+        </a>
+
+        <a href="/affordability/" class="qa-card reveal delay-3" aria-label="Check Affordability">
+          <div class="qa-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          </div>
+          <h3 class="qa-title">Affordability Check</h3>
+          <p class="qa-desc">Know your exact TDSR/MSR limits and maximum borrowing power before you place an OTP.</p>
+          <span class="qa-cta">Check Now →</span>
+        </a>
+
+        <a href="/mortgage-rates/" class="qa-card reveal delay-4" aria-label="Compare Current Rates">
+          <div class="qa-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3 class="qa-title">Compare Rates</h3>
+          <p class="qa-desc">Fixed from 1.40% p.a. — see today's best rates from every bank side by side, updated monthly.</p>
+          <span class="qa-cta">See Rates →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
 
   <!-- =========== INTRO / WHY CHOOSE NEXUS =========== -->
   <section id="why-nexus" class="py-20" style="background:var(--cream-100);">
@@ -1534,6 +1886,8 @@
             style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
             Residential Home Loan</h3>
           <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">HDB, condominium, landed — we find the best home loan rate from all 16 banks for your dream property.</p>
+          <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+to+find+the+best+home+loan+rate+for+my+property."
+            target="_blank" rel="noopener" class="svc-enquire">Enquire →</a>
         </div>
 
         <div class="svc-card reveal delay-2">
@@ -1549,6 +1903,8 @@
             Commercial Loan</h3>
           <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Shophouses, offices, industrial — competitive
             financing for commercial property investments.</p>
+          <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+to+enquire+about+commercial+property+financing."
+            target="_blank" rel="noopener" class="svc-enquire">Enquire →</a>
         </div>
 
         <div class="svc-card reveal delay-3">
@@ -1561,6 +1917,8 @@
             style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
             Home Loan Refinancing</h3>
           <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Lock in a lower SORA or fixed rate and cut monthly repayments. We handle the full bank-switching process at no cost.</p>
+          <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+to+check+how+much+I+can+save+by+refinancing."
+            target="_blank" rel="noopener" class="svc-enquire">Enquire →</a>
         </div>
 
         <div class="svc-card reveal delay-4">
@@ -1574,6 +1932,8 @@
             Cash Out / Equity</h3>
           <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Unlock equity through cash-out refinancing or
             equity term loans for immediate liquidity.</p>
+          <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+to+unlock+equity+from+my+property."
+            target="_blank" rel="noopener" class="svc-enquire">Enquire →</a>
         </div>
 
         <div class="svc-card reveal delay-1">
@@ -1588,6 +1948,8 @@
             style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
             New Property Home Loan</h3>
           <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Buying a new property? We compare all lenders, advise on HDB vs bank loan, and secure in-principle approval before you commit.</p>
+          <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+a+pre-purchase+home+loan+check+before+placing+an+OTP."
+            target="_blank" rel="noopener" class="svc-enquire">Enquire →</a>
         </div>
 
         <div class="svc-card reveal delay-2">
@@ -1601,6 +1963,8 @@
             Equity Term Loan</h3>
           <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Use your fully-paid property as collateral for a
             flexible term loan at competitive bank rates.</p>
+          <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+to+enquire+about+an+equity+term+loan."
+            target="_blank" rel="noopener" class="svc-enquire">Enquire →</a>
         </div>
 
         <div class="svc-card reveal delay-3">
@@ -1616,6 +1980,8 @@
             Estate Planning</h3>
           <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Structuring property assets to optimise legacy,
             reduce liabilities, and protect generational wealth.</p>
+          <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+to+discuss+property+estate+planning."
+            target="_blank" rel="noopener" class="svc-enquire">Enquire →</a>
         </div>
 
         <div class="svc-card reveal delay-4">
@@ -1628,6 +1994,8 @@
             style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#0B1C3A;margin-bottom:.5rem;">
             Pre-Purchase Home Loan Check</h3>
           <p style="font-size:.875rem;color:#6B7280;line-height:1.65;">Know your home loan borrowing limit before you bid — full TDSR/MSR analysis and in-principle approval from your chosen bank.</p>
+          <a href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+a+free+TDSR+check+before+I+commit."
+            target="_blank" rel="noopener" class="svc-enquire">Enquire →</a>
         </div>
 
       </div>
@@ -1818,10 +2186,10 @@
         <!-- Right: Credentials -->
         <div>
           <div class="credential-chips">
-            <div class="credential-chip">Independent Mortgage Specialist</div>
             <div class="credential-chip">10+ Years Industry Experience</div>
             <div class="credential-chip">500+ Loans Successfully Facilitated</div>
-            <div class="credential-chip">TDSR & MSR Specialist</div>
+            <div class="credential-chip">TDSR &amp; MSR Specialist</div>
+            <div class="credential-chip">MAS Compliant — All 16 Major Banks</div>
           </div>
           <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation."
             target="_blank" class="btn-gold" style="margin-top:2.5rem; display:inline-flex;">
@@ -1851,6 +2219,13 @@
           with IWAA stress-test diagnosis.</p>
       </div>
 
+      <!-- ── Calculator Tabs ── -->
+      <div id="calc-tabs" class="reveal" style="display:flex;gap:.5rem;margin-bottom:2rem;background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.18);border-radius:9px;padding:.35rem;max-width:480px;">
+        <button id="tab-mortgage" class="calc-tab-btn active-tab" type="button" onclick="switchCalcTab('mortgage')">Mortgage Payment</button>
+        <button id="tab-refi" class="calc-tab-btn" type="button" onclick="switchCalcTab('refi')">Refinance Savings</button>
+      </div>
+
+      <div id="calc-panel-mortgage">
       <div class="grid lg:grid-cols-2 gap-10">
         <!-- ── INPUTS ── -->
         <div class="reveal">
@@ -2093,6 +2468,89 @@
 
         </div>
       </div>
+      </div><!-- /#calc-panel-mortgage -->
+
+      <!-- ── Refinance Savings Panel ── -->
+      <div id="calc-panel-refi" style="display:none;">
+        <div class="grid lg:grid-cols-2 gap-10">
+          <!-- Inputs -->
+          <div class="reveal">
+            <div class="mb-5">
+              <p class="calc-label mb-1.5">Current Loan Balance (S$)</p>
+              <input type="text" inputmode="numeric" id="r-balance" class="calc-input" value="600,000" oninput="calcRefi()">
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-5">
+              <div>
+                <p class="calc-label mb-1.5">Current Rate (% p.a.)</p>
+                <input type="number" id="r-curr-rate" class="calc-input" value="2.60" step="0.05" oninput="calcRefi()">
+              </div>
+              <div>
+                <p class="calc-label mb-1.5">New Rate (% p.a.)</p>
+                <input type="number" id="r-new-rate" class="calc-input" value="1.45" step="0.05" oninput="calcRefi()">
+              </div>
+            </div>
+            <div class="mb-5">
+              <p class="calc-label mb-1.5">Remaining Tenure (Years)</p>
+              <input type="number" id="r-tenure" class="calc-input" value="25" min="1" max="35" oninput="calcRefi()" style="max-width:200px;">
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-3">
+              <div>
+                <p class="calc-label mb-1.5">Switching Costs (S$)</p>
+                <input type="text" inputmode="numeric" id="r-costs" class="calc-input" value="3,000" oninput="calcRefi()">
+                <p style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.35rem;">Legal &amp; valuation fees.</p>
+              </div>
+              <div>
+                <p class="calc-label mb-1.5">Bank Subsidy (S$)</p>
+                <input type="text" inputmode="numeric" id="r-subsidy" class="calc-input" value="2,500" oninput="calcRefi()">
+                <p style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.35rem;">Most packages subsidise up to S$2,500.</p>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;background:rgba(196,151,59,.08);border:1px solid rgba(196,151,59,.22);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;margin-bottom:1rem;">
+              <span style="color:rgba(250,247,242,.65);font-weight:500;">Net out-of-pocket</span>
+              <strong id="r-net-cost" style="color:var(--gold-300);font-size:.95rem;font-variant-numeric:tabular-nums;">S$500</strong>
+            </div>
+            <p style="font-size:.78rem;color:rgba(250,247,242,.42);line-height:1.7;margin-top:1.5rem;">
+              Refinancing typically makes sense once your lock-in period ends and the new rate is at least 0.3% lower than your current rate. Use the break-even figure below to see how many months it takes to recoup switching costs.
+            </p>
+          </div>
+          <!-- Results -->
+          <div class="reveal delay-1">
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div class="result-card">
+                <div class="result-lbl">Monthly Savings</div>
+                <div class="result-val" id="rr-monthly">—</div>
+                <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">S$ / month</div>
+              </div>
+              <div class="result-card">
+                <div class="result-lbl">Annual Savings</div>
+                <div class="result-val" id="rr-annual" style="font-size:1.45rem;">—</div>
+                <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">S$ / year</div>
+              </div>
+              <div class="result-card">
+                <div class="result-lbl">Break-Even</div>
+                <div class="result-val" id="rr-breakeven" style="font-size:1.45rem;">—</div>
+                <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">months to recoup</div>
+              </div>
+              <div class="result-card" style="border-color:rgba(196,151,59,.3);">
+                <div class="result-lbl">Total Savings</div>
+                <div class="result-val" id="rr-total" style="color:var(--gold-300);">—</div>
+                <div style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.2rem;">over full tenure</div>
+              </div>
+            </div>
+            <div id="refi-cta-panel" style="display:none;background:rgba(74,222,128,.05);border:1.5px solid rgba(74,222,128,.22);border-radius:10px;padding:1.25rem 1.375rem;">
+              <p style="font-size:.875rem;color:rgba(250,247,242,.78);line-height:1.8;margin-bottom:1rem;">
+                Refinancing looks worthwhile. WhatsApp us and we'll send you a free bank comparison within 24 hours.
+              </p>
+              <a href="https://wa.me/6587520859?text=Hi%2C+I+want+to+check+refinancing+options+to+save+on+my+home+loan."
+                target="_blank" rel="noopener"
+                style="display:inline-flex;align-items:center;gap:.6rem;background:var(--gold-500);color:#060E1F;font-size:.875rem;font-weight:700;padding:.7rem 1.3rem;border-radius:7px;text-decoration:none;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Get Free Refinance Comparison
+              </a>
+            </div>
+          </div>
+        </div>
+      </div><!-- /#calc-panel-refi -->
     </div>
   </section>
 
@@ -2168,6 +2626,89 @@
           });
       })();
       </script>
+    </div>
+  </section>
+
+  <!-- =========== FAQ =========== -->
+  <section id="faq" style="background:var(--navy-950);padding:5rem 0;">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+        <span class="sec-tag" style="color:var(--gold-400);border-color:rgba(196,151,59,.3);">Common Questions</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:400;color:#FAF7F2;margin-top:.75rem;letter-spacing:-.015em;line-height:1.1;">
+          Frequently Asked <em style="font-style:italic;color:var(--gold-400);">Questions</em>
+        </h2>
+      </div>
+
+      <div id="faq-list" style="display:flex;flex-direction:column;gap:.75rem;">
+
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>How much can I borrow for a home loan in Singapore?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Your maximum loan depends on TDSR (Total Debt Servicing Ratio), capped at 55% of gross income under the MAS stress test at 4% p.a. For HDB flats, an additional MSR cap of 30% applies. Use our Affordability Calculator or WhatsApp us for a free personalised assessment.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-1">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>What is the difference between fixed and SORA rates?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Fixed rate home loans lock in an interest rate for 1–3 years, giving certainty on monthly payments. SORA-linked (floating) loans track the Singapore Overnight Rate Average — currently around 1.06% — plus a bank spread. SORA packages often start lower but can rise. Nexus compares both to find the best fit for your situation.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-2">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>When should I refinance my home loan in Singapore?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>The best time to refinance is when your lock-in period ends (typically 2–3 years after taking the loan). Switching just 0.3% lower on a S$800,000 loan saves roughly S$2,400 per year. Nexus provides a free refinance savings analysis — contact us to find out how much you can save.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-3">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>How much does using Nexus Mortgage cost?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Our service is 100% free to borrowers. Banks pay us a referral fee when a loan is successfully placed. You receive independent advice, a full market comparison, and full application support at zero cost.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-4">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>What is TDSR and how does it affect my loan?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>TDSR (Total Debt Servicing Ratio) is a MAS rule that limits total monthly debt repayments (including the new mortgage, stress-tested at 4% p.a.) to 55% of gross income. For HDB flats, MSR (Mortgage Servicing Ratio) further limits the home loan portion to 30% of income. Our free Affordability Check calculates your exact position.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-1">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>How long does home loan approval take in Singapore?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>In-principle approval (IPA) typically takes 3–5 business days once documents are submitted. Full formal loan approval follows within 1–2 weeks. Nexus handles all bank submissions and follows up on your behalf to keep the process fast.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="reveal" style="text-align:center;margin-top:3rem;">
+        <p style="font-size:.9375rem;color:rgba(250,247,242,.5);margin-bottom:1.25rem;">Still have questions?</p>
+        <a href="https://wa.me/6587520859?text=Hi%2C+I+have+a+mortgage+question." target="_blank" rel="noopener" class="btn-gold" style="display:inline-flex;">
+          WhatsApp Us →
+        </a>
+      </div>
     </div>
   </section>
 
@@ -2280,38 +2821,119 @@
     </div>
   </section>
   <!-- ===== TESTIMONIALS ===== -->
-  <section class="testimonials-section py-24">
+  <section class="testimonials-section py-24" style="overflow:hidden;">
     <div class="max-w-7xl mx-auto px-6">
-      <div style="text-align:center; margin-bottom:3rem;">
+      <div class="reveal" style="text-align:center; margin-bottom:3rem;">
         <span class="hero-tag">Client Stories</span>
         <h2
           style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:400; color:var(--navy-900); margin-top:1rem; letter-spacing:-.01em;">
           What Our Clients Say</h2>
       </div>
+    </div>
 
-      <div class="testimonials-grid">
-        <div class="testimonial-card reveal">
-          <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="testimonial-text">"Saved us S$180 a month on our HDB loan. The comparison was eye-opening."</p>
-          <p class="testimonial-author">Wei Ling T.</p>
-          <p class="testimonial-label">Bukit Timah · Refinancing</p>
+    <!-- Auto-scroll carousel (8 unique cards × 2 for seamless loop) -->
+    <div class="tcarousel-wrap" aria-label="Client testimonials">
+      <div class="tcarousel-track" id="tcarousel">
+
+        <div class="tcard">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"Saved us S$180 a month on our HDB loan. The comparison was eye-opening — we had no idea we were overpaying."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Wei Ling T.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Bukit Timah · Refinancing</p>
+        </div>
+        <div class="tcard">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"First-time buyer — overwhelmed by the options. Nexus made it simple and got us approved in days."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Arjun S.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Jurong East · New Purchase</p>
+        </div>
+        <div class="tcard">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"Complex self-employed profile and foreign income. They found a lender that others couldn't. Absolutely worth it."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Michelle C.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">CBD · Complex Profile</p>
+        </div>
+        <div class="tcard">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"Dan compared 8 banks and found me a rate I didn't know existed. Saved over S$22,000 in total interest."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">James T.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Clementi · HDB Refinancing</p>
+        </div>
+        <div class="tcard">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"As a PR buying my first private property, I had no idea where to start. They walked me through every step from ABSD to lock-in periods."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Sarah L.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Bishan · Private Condo</p>
+        </div>
+        <div class="tcard">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"Upgrading from HDB to condo with two incomes and a car loan made TDSR tricky. They solved it seamlessly."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Kevin &amp; Diana W.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Tampines · HDB Upgrade</p>
+        </div>
+        <div class="tcard">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"Needed to unlock equity from my condo for a business move. They secured a 1.65% cash-out package — better than I found anywhere."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Raymond H.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Orchard · Cash-Out</p>
+        </div>
+        <div class="tcard">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"They ran my TDSR numbers before I placed the OTP. Saved me from overcommitting. The free check is genuinely useful."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Priya N.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Toa Payoh · Affordability Check</p>
         </div>
 
-        <div class="testimonial-card reveal" style="transition-delay:.1s;">
-          <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="testimonial-text">"First-time buyer — overwhelmed by the options. Nexus made it simple and got us
-            approved in days."</p>
-          <p class="testimonial-author">Arjun S.</p>
-          <p class="testimonial-label">Jurong East · New Purchase</p>
+        <!-- ── Duplicate set for seamless infinite loop ── -->
+        <div class="tcard" aria-hidden="true">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"Saved us S$180 a month on our HDB loan. The comparison was eye-opening — we had no idea we were overpaying."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Wei Ling T.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Bukit Timah · Refinancing</p>
+        </div>
+        <div class="tcard" aria-hidden="true">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"First-time buyer — overwhelmed by the options. Nexus made it simple and got us approved in days."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Arjun S.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Jurong East · New Purchase</p>
+        </div>
+        <div class="tcard" aria-hidden="true">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"Complex self-employed profile and foreign income. They found a lender that others couldn't. Absolutely worth it."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Michelle C.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">CBD · Complex Profile</p>
+        </div>
+        <div class="tcard" aria-hidden="true">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"Dan compared 8 banks and found me a rate I didn't know existed. Saved over S$22,000 in total interest."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">James T.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Clementi · HDB Refinancing</p>
+        </div>
+        <div class="tcard" aria-hidden="true">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"As a PR buying my first private property, I had no idea where to start. They walked me through every step from ABSD to lock-in periods."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Sarah L.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Bishan · Private Condo</p>
+        </div>
+        <div class="tcard" aria-hidden="true">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"Upgrading from HDB to condo with two incomes and a car loan made TDSR tricky. They solved it seamlessly."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Kevin &amp; Diana W.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Tampines · HDB Upgrade</p>
+        </div>
+        <div class="tcard" aria-hidden="true">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"Needed to unlock equity from my condo for a business move. They secured a 1.65% cash-out package — better than I found anywhere."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Raymond H.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Orchard · Cash-Out</p>
+        </div>
+        <div class="tcard" aria-hidden="true">
+          <div style="display:flex;gap:.25rem;margin-bottom:1.2rem;color:var(--gold-400);letter-spacing:.1em;">★★★★★</div>
+          <p style="font-size:.9375rem;line-height:1.65;color:var(--navy-900);font-style:italic;margin-bottom:1.5rem;">"They ran my TDSR numbers before I placed the OTP. Saved me from overcommitting. The free check is genuinely useful."</p>
+          <p style="font-weight:600;font-size:.875rem;color:var(--navy-900);">Priya N.</p>
+          <p style="font-size:.75rem;color:rgba(11,28,58,.55);margin-top:.2rem;">Toa Payoh · Affordability Check</p>
         </div>
 
-        <div class="testimonial-card reveal" style="transition-delay:.2s;">
-          <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="testimonial-text">"Complex self-employed profile and foreign income. They found a lender that others
-            couldn't."</p>
-          <p class="testimonial-author">Michelle C.</p>
-          <p class="testimonial-label">CBD · Commercial Loan</p>
-        </div>
       </div>
     </div>
   </section>
@@ -2466,9 +3088,11 @@
             <li><a href="#services" class="footer-link">Residential Loan</a></li>
             <li><a href="#services" class="footer-link">Commercial Loan</a></li>
             <li><a href="#services" class="footer-link">Refinancing</a></li>
-            <li><a href="#services" class="footer-link">Cash Out / Equity</a></li>
+            <li><a href="/equity-loan/" class="footer-link">Equity Loan</a></li>
             <li><a href="#services" class="footer-link">Estate Planning</a></li>
             <li><a href="#services" class="footer-link">Pre-Purchase Check</a></li>
+            <li><a href="/affordability/" class="footer-link">Affordability Calculator</a></li>
+            <li><a href="/refinance-calculator/" class="footer-link">Refinance Calculator</a></li>
           </ul>
         </div>
 
@@ -3017,8 +3641,13 @@
       attachFormatter('a2-fixed');
       attachFormatter('a2-var');
       attachFormatter('c-debts');
+      // Refinance Savings tab formatters
+      attachFormatter('r-balance');
+      attachFormatter('r-costs');
+      attachFormatter('r-subsidy');
       validateDown();
       calc();
+      if (typeof calcRefi === 'function') calcRefi();
     });
     window.addEventListener('resize', () => { calc(); });
 
@@ -3060,6 +3689,107 @@
     document.querySelectorAll('#services, #calculator, #banks, #why, #contact').forEach(section => {
       if (section) navActiveObserver.observe(section);
     });
+
+    // ===== TOOLS DROPDOWN =====
+    (function () {
+      const toolsBtn = document.getElementById('tools-btn');
+      const toolsDd = document.getElementById('tools-dropdown');
+      if (!toolsBtn || !toolsDd) return;
+      toolsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = toolsDd.style.display === 'block';
+        toolsDd.style.display = open ? 'none' : 'block';
+        toolsBtn.setAttribute('aria-expanded', String(!open));
+      });
+      document.addEventListener('click', () => {
+        toolsDd.style.display = 'none';
+        toolsBtn.setAttribute('aria-expanded', 'false');
+      });
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          toolsDd.style.display = 'none';
+          toolsBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+
+    // ===== CALCULATOR TABS =====
+    function switchCalcTab(tab) {
+      const mortPanel = document.getElementById('calc-panel-mortgage');
+      const refiPanel = document.getElementById('calc-panel-refi');
+      const tabMort = document.getElementById('tab-mortgage');
+      const tabRefi = document.getElementById('tab-refi');
+      if (!mortPanel || !refiPanel || !tabMort || !tabRefi) return;
+      const isMort = tab === 'mortgage';
+      mortPanel.style.display = isMort ? '' : 'none';
+      refiPanel.style.display = isMort ? 'none' : '';
+      tabMort.classList.toggle('active-tab', isMort);
+      tabRefi.classList.toggle('active-tab', !isMort);
+    }
+
+    // ===== REFINANCE SAVINGS CALCULATOR =====
+    function rawId(id) {
+      const el = document.getElementById(id);
+      return el ? (+(String(el.value).replace(/,/g, '')) || 0) : 0;
+    }
+
+    function calcRefi() {
+      const bal     = rawId('r-balance');
+      const currR   = +(document.getElementById('r-curr-rate')?.value) || 0;
+      const newR    = +(document.getElementById('r-new-rate')?.value) || 0;
+      const yrs     = +(document.getElementById('r-tenure')?.value) || 0;
+      const costs   = rawId('r-costs');
+      const subsidy = rawId('r-subsidy');
+      const netCost = Math.max(0, costs - subsidy);
+      const n       = yrs * 12;
+
+      function monthlyPmt(principal, annRate, months) {
+        if (months <= 0 || principal <= 0) return 0;
+        if (annRate === 0) return principal / months;
+        const r = annRate / 100 / 12;
+        return principal * (r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+      }
+
+      const currMo    = monthlyPmt(bal, currR, n);
+      const newMo     = monthlyPmt(bal, newR, n);
+      const moSave    = currMo - newMo;
+      const yrSave    = moSave * 12;
+      const totalSave = moSave * n - netCost;
+      const breakEven = moSave > 0 ? Math.ceil(netCost / moSave) : null;
+
+      const fmt2 = v => isNaN(v) || !isFinite(v) ? '—' : 'S$' + Math.round(v).toLocaleString('en-SG');
+
+      const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+
+      // Net out-of-pocket pill (always show, even when 0)
+      setText('r-net-cost', 'S$' + Math.round(netCost).toLocaleString('en-SG'));
+
+      setText('rr-monthly',  moSave > 0 ? fmt2(moSave) : '—');
+      setText('rr-annual',   yrSave > 0 ? fmt2(yrSave) : '—');
+      setText('rr-total',    totalSave > 0 ? fmt2(totalSave) : '—');
+      // Break-even: 0 means subsidy already covers switching costs (instant payback)
+      setText('rr-breakeven', moSave <= 0 ? '—' : (breakEven === 0 ? 'Day 1' : breakEven + ' mo'));
+
+      const panel = document.getElementById('refi-cta-panel');
+      if (panel) panel.style.display = (moSave > 0 && totalSave > 0) ? 'block' : 'none';
+    }
+
+    // ===== FAQ ACCORDION =====
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      if (!item) return;
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        const q = i.querySelector('.faq-q');
+        if (q) q.setAttribute('aria-expanded', 'false');
+      });
+      if (!open) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
 
   </script>
 </body>
