@@ -525,7 +525,7 @@
     lastUpdated : "April 2026",
 
     // ── Reference rates (update when these change) ──
-    soraRate3M  : 1.121,   // Current 3-Month SORA %
+    soraRate3M  : 1.122,   // Current 3-Month SORA %
     fhr6Rate    : 0.80,    // Current FHR6 %
 
     // ─────────────────────────────────────────────────
@@ -550,24 +550,21 @@
         tiers  : [
           { loan:"≥ $800,000",   rate:1.45, best:true  },
           { loan:"≥ $500,000",   rate:1.55              },
-          { loan:"≥ $200,000",   rate:1.65              },
-          { loan:"Standard",     rate:1.70              },
+          { loan:"≥ $200,000",   rate:1.60              },
+          { loan:"≥ $100,000",   rate:1.80              },
         ],
         lockin     : "2-year lock-in",
-        afterFixed : "1M SORA + 1.50%",
+        afterFixed : "3M SORA + 1.00%",
       },
       {
         id     : "f3y",
         label  : "3 Year Fixed",
         tiers  : [
-          { loan:"≥ $2,000,000", rate:1.83, best:true  },
-          { loan:"≥ $1,500,000", rate:1.85              },
-          { loan:"≥ $1,000,000", rate:1.88              },
-          { loan:"≥ $500,000",   rate:1.90              },
-          { loan:"≥ $200,000",   rate:1.95              },
+          { loan:"≥ $500,000",   rate:1.60, best:true  },
+          { loan:"≥ $200,000",   rate:1.65              },
           { loan:"≥ $100,000",   rate:2.00              },
         ],
-        lockin     : "3-year lock-in · Free conversion after 36 months",
+        lockin     : "3-year lock-in · Free conversion available · Waiver due to sale",
         afterFixed : "3M SORA + 1.00%",
       },
       {
@@ -599,24 +596,25 @@
         label   : "3M SORA",
         refKey  : "sora3m",
         tiers   : [
-          { loan:"≥ $2,000,000", spread:0.20, best:true  },
-          { loan:"≥ $1,500,000", spread:0.25              },
-          { loan:"≥ $1,000,000", spread:0.30              },
-          { loan:"≥ $500,000",   spread:0.35              },
-          { loan:"≥ $100,000",   spread:0.75              },
+          { loan:"≥ $1,000,000", spread:0.00, best:true  },
+          { loan:"≥ $500,000",   spread:0.00              },
+          { loan:"≥ $300,000",   spread:0.35              },
+          { loan:"≥ $200,000",   spread:0.75              },
         ],
-        lockin  : "2-year lock-in · Free conversion after 12 months · Waiver due to sale",
+        lockin  : "2-year lock-in · Year 1 spread shown — steps up from Year 2 · Free conversion after 12 months",
+        afterRate: "Yr 2 (≥$1M): +0.30% · Yr 2 (≥$500K): +0.35% · Yr 3+: +0.60–0.75%",
       },
       {
         id      : "cpl-s1m",
         label   : "1M SORA",
         refKey  : "sora3m",
         tiers   : [
-          { loan:"≥ $1,000,000", spread:0.20, best:true  },
-          { loan:"≥ $500,000",   spread:0.30              },
-          { loan:"≥ $200,000",   spread:0.35              },
+          { loan:"≥ $1,000,000", spread:0.00, best:true  },
+          { loan:"≥ $500,000",   spread:0.00              },
+          { loan:"≥ $200,000",   spread:0.75              },
         ],
-        lockin  : "2-year lock-in · Free conversion available",
+        lockin  : "2-year lock-in · Year 1 spread shown — steps up from Year 2 · Free conversion available",
+        afterRate: "Yr 2 (≥$1M): +0.30% · Yr 2 (≥$500K): +0.35% · Yr 3+: +0.60–0.75%",
       },
       {
         id       : "cpl-fhr6",
