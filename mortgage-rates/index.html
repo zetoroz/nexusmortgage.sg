@@ -354,6 +354,12 @@
         <!-- Reference rates bar -->
         <div class="ref-bar">
           <div class="ref-item">
+            <span class="ref-lbl">1M SORA</span>
+            <span class="ref-val" id="r1m"></span>
+            <span class="ref-lbl">% p.a.</span>
+          </div>
+          <span class="ref-sep">·</span>
+          <div class="ref-item">
             <span class="ref-lbl">3M SORA</span>
             <span class="ref-val" id="r3m"></span>
             <span class="ref-lbl">% p.a.</span>
@@ -526,6 +532,7 @@
 
     // ── Reference rates (update when these change) ──
     soraRate3M  : 1.122,   // Current 3-Month SORA %
+    soraRate1M  : 1.076,   // Current 1-Month SORA %
     fhr6Rate    : 0.80,    // Current FHR6 %
 
     // ─────────────────────────────────────────────────
@@ -596,24 +603,24 @@
         label   : "3M SORA",
         refKey  : "sora3m",
         tiers   : [
-          { loan:"≥ $1,000,000", spread:0.00, best:true  },
-          { loan:"≥ $500,000",   spread:0.00              },
-          { loan:"≥ $300,000",   spread:0.35              },
+          { loan:"≥ $1,500,000", spread:0.20, best:true  },
+          { loan:"≥ $1,000,000", spread:0.25              },
+          { loan:"≥ $700,000",   spread:0.28              },
+          { loan:"≥ $500,000",   spread:0.35              },
           { loan:"≥ $200,000",   spread:0.75              },
         ],
-        lockin  : "2-year lock-in · Year 1 spread shown — steps up from Year 2 · Free conversion after 12 months",
-        afterRate: "Yr 2 (≥$1M): +0.30% · Yr 2 (≥$500K): +0.35% · Yr 3+: +0.60–0.75%",
+        lockin  : "2-year lock-in · Free conversion after 12 months · Waiver due to sale",
       },
       {
         id      : "cpl-s1m",
         label   : "1M SORA",
-        refKey  : "sora3m",
+        refKey  : "sora1m",
         tiers   : [
           { loan:"≥ $1,000,000", spread:0.00, best:true  },
           { loan:"≥ $500,000",   spread:0.00              },
           { loan:"≥ $200,000",   spread:0.75              },
         ],
-        lockin  : "2-year lock-in · Year 1 spread shown — steps up from Year 2 · Free conversion available",
+        lockin  : "2-year lock-in · Year 1 spread only — steps up from Year 2 · Free conversion available",
         afterRate: "Yr 2 (≥$1M): +0.30% · Yr 2 (≥$500K): +0.35% · Yr 3+: +0.60–0.75%",
       },
       {
@@ -656,6 +663,7 @@
 
   function refRate(key) {
     if (key === 'sora3m') return CFG.soraRate3M;
+    if (key === 'sora1m') return CFG.soraRate1M;
     if (key === 'fhr6')   return CFG.fhr6Rate;
     return 0;
   }
@@ -682,7 +690,7 @@
 
   function buildFloatCard(item, isBUC) {
     const ref      = refRate(item.refKey);
-    const refLabel = item.refKey === 'fhr6' ? 'FHR6' : (isBUC ? '1M/3M SORA' : '3M SORA');
+    const refLabel = item.refKey === 'fhr6' ? 'FHR6' : item.refKey === 'sora1m' ? '1M SORA' : (isBUC ? '1M/3M SORA' : '3M SORA');
     const rows = item.tiers.map(t => {
       const tot = (ref + t.spread).toFixed(3);
       const noteHtml = t.note ? `<span style="font-size:.68rem;color:var(--cream-dim);opacity:.7;margin-left:6px">(${t.note})</span>` : '';
@@ -747,6 +755,7 @@
 
   // Init
   document.getElementById('updLabel').textContent = CFG.lastUpdated;
+  document.getElementById('r1m').textContent  = CFG.soraRate1M.toFixed(3);
   document.getElementById('r3m').textContent  = CFG.soraRate3M.toFixed(3);
   document.getElementById('rfhr').textContent = CFG.fhr6Rate.toFixed(2);
   buildSubTabs(CFG.fixed,    'stabs-fixed', 'scontent-fixed', buildFixedCard, false);
