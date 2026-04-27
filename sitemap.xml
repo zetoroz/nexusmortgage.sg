@@ -4,7 +4,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://nexusmortgage.sg/</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,6 +15,30 @@
     <lastmod>2026-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- Affordability calculator -->
+  <url>
+    <loc>https://nexusmortgage.sg/affordability/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Refinance savings calculator -->
+  <url>
+    <loc>https://nexusmortgage.sg/refinance-calculator/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Equity / Cash-Out Loan -->
+  <url>
+    <loc>https://nexusmortgage.sg/equity-loan/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <!-- Blog index -->
