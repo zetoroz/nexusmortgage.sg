@@ -68,12 +68,19 @@
   <!-- Blog index -->
   <url>
     <loc>https://nexusmortgage.sg/blog/</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Blog posts (live only) -->
+  <url>
+    <loc>https://nexusmortgage.sg/blog/blog-hdb-resale-q1-2026-mortgage.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <url>
     <loc>https://nexusmortgage.sg/blog/blog-decoupling-private-property-singapore.html</loc>
     <lastmod>2026-04-22</lastmod>
