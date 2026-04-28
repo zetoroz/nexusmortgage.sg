@@ -1,0 +1,41 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Build artifacts
+styles.min.css
+*.map
+
+# Temporary files
+"temporary screenshots"/
+*.tmp
+
+# WordPress migration artifacts (not part of the static site)
+*.zip
+nexus-blog-posts.xml
+nexus-redirects.csv
+elementor-homepage.html
+homepage-rates-snippet.html
+rates-widget-wordpress.html
+rates-widget.html
+WordPress\ Migration\ Pack.md
+
+# Backup folder
+Backup/
+
+# Local dev scratch files
+index-old.html
+blog/index-old.html
+zi2FQSBP
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo

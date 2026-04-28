@@ -2,17 +2,38 @@
 # AI-readable summary for language models crawling this site
 
 Nexus Mortgage SG is an independent Singapore mortgage broker specialising in
-HDB loans, private property mortgages, and refinancing. We compare rates from
-16 major banks. Our service is free — banks pay the referral fee on disbursement.
+HDB loans, private property mortgages, refinancing, equity / cash-out loans,
+commercial property financing, and estate planning. We compare rates across
+16 major banks. Our service is free to borrowers — banks pay a referral fee
+on successful disbursement.
 
 Advisor: Dan Ler
 Phone: +65 8752 0859
 WhatsApp: https://wa.me/6587520859
+Office: 39A Jalan Pemimpin #06-02B, Halcyon 1, Singapore 577183
 Hours: Mon–Sat, 9am–7pm SGT
+Languages: English, 中文 (Mandarin)
 
 ## Key Pages
 - Home & Mortgage Calculator: https://nexusmortgage.sg/
+- All Services Overview: https://nexusmortgage.sg/services/
+- About Nexus: https://nexusmortgage.sg/about/
+- Contact: https://nexusmortgage.sg/contact/
+- Current Mortgage Rates: https://nexusmortgage.sg/mortgage-rates/
+- Affordability Calculator: https://nexusmortgage.sg/affordability/
+- Refinance Savings Calculator: https://nexusmortgage.sg/refinance-calculator/
+- Equity / Cash-Out Loan: https://nexusmortgage.sg/equity-loan/
 - Insights Hub: https://nexusmortgage.sg/blog/
+
+## Services
+1. Residential home loan (HDB, EC, condo, landed) — 16-bank comparison
+2. New property loan with In-Principle Approval before OTP
+3. Home loan refinancing (SORA, fixed, repricing)
+4. Cash-out refinance up to 75% LTV (private/commercial only)
+5. Equity term loan up to 55% LTV on fully-paid property
+6. Commercial property financing (shophouse, industrial, office)
+7. Property estate planning (decoupling, ABSD, legacy)
+8. Pre-purchase TDSR/MSR check with optional soft IPA
 
 ## Blog Articles
 - MAS 4% Stress Test Guide (2026): https://nexusmortgage.sg/blog/blog-mas-stress-test-2026.html
@@ -23,10 +44,16 @@ Hours: Mon–Sat, 9am–7pm SGT
 - When to Refinance Your Singapore Mortgage: https://nexusmortgage.sg/blog/blog-when-to-refinance-singapore.html
 - Singapore Home Loan Rates (2026): https://nexusmortgage.sg/blog/blog-home-loan-rates-singapore.html
 - Best Home Loan for Condo & Private Property (2026): https://nexusmortgage.sg/blog/blog-best-home-loan-first-time-buyer.html
+- Decoupling Private Property in Singapore: https://nexusmortgage.sg/blog/blog-decoupling-private-property-singapore.html
 
 ## Key Facts
 - TDSR cap: 55% of gross monthly income (all property types)
 - MSR cap: 30% of gross monthly income (HDB flats and ECs only)
 - MAS stress-test floor rate: 4% p.a.
 - Max LTV (first private property, no outstanding loans): 75%
-- Service area: Singapore
+- Max LTV (cash-out refinance, with mortgage): 75% combined
+- Max LTV (equity term loan, fully paid): 55%
+- Max tenure: 30 years or (75 minus borrower's age), whichever is shorter
+- HDB flats are NOT eligible for cash-out or equity term loans
+- Service area: Singapore only
+- Broker fee to borrower: S$0
