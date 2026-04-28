@@ -615,8 +615,7 @@
 
           var live = articles.filter(function(a){ return a.status === 'live'; });
           var comingSoon = articles.filter(function(a){ return a.status !== 'live'; });
-          live.reverse(); // Newest first (assuming appended at the bottom)
-          var sortedArticles = live.concat(comingSoon);
+          var sortedArticles = live.concat(comingSoon); // JSON order is descending (newest first)
 
           grid.innerHTML = sortedArticles.map(function(a, i){
             var delay = delays[i] || '';
