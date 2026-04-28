@@ -689,9 +689,17 @@
 
               <!-- Credit cards -->
               <div style="margin-top:1.25rem;">
-                <label class="field-label" for="cc-limit">Total Credit Card Limits (S$)</label>
-                <input type="text" id="cc-limit" class="field-input" inputmode="numeric" value="0" aria-describedby="cc-help">
-                <p class="field-helper" id="cc-help">3% of total card limits is treated as monthly debt under MAS rules.</p>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="field-label" for="cc-balance">Card Outstanding Balance (S$)</label>
+                    <input type="text" id="cc-balance" class="field-input" inputmode="numeric" value="0" aria-describedby="cc-help">
+                  </div>
+                  <div>
+                    <label class="field-label" for="cc-count">Number of Cards</label>
+                    <input type="number" id="cc-count" class="field-input" inputmode="numeric" min="0" step="1" value="0" aria-describedby="cc-help">
+                  </div>
+                </div>
+                <p class="field-helper" id="cc-help">Under MAS rules, monthly card debt = <strong>5% of total balance</strong> OR <strong>S$50 per card</strong>, whichever is higher.</p>
               </div>
             </div>
 
@@ -777,18 +785,18 @@
             <span class="sec-tag">Worked Example</span>
             <h2 class="sec-title" style="color:var(--navy-900);">A Single Applicant <em>Buying an HDB Resale</em></h2>
             <p style="font-size:.95rem;line-height:1.85;color:rgba(11,28,58,.7);">
-              Mr. Tan, 38, earns S$7,500 fixed plus S$2,000 variable monthly. He has a S$450/month car loan and S$30,000 in card limits.
+              Mr. Tan, 38, earns S$7,500 fixed plus S$2,000 variable monthly. He has a S$450/month car loan and S$30,000 outstanding across 3 credit cards.
               For an HDB resale flat, he wants to know his maximum bank loan.
             </p>
             <ul style="font-size:.9rem;line-height:1.85;color:rgba(11,28,58,.7);margin-top:1rem;padding-left:1.2rem;">
               <li>Stress income: S$7,500 + (70% × S$2,000) = <strong>S$8,900/mo</strong></li>
-              <li>Card debt: 3% × S$30,000 = <strong>S$900/mo</strong></li>
-              <li>TDSR room: 55% × 8,900 − 450 − 900 = <strong>S$3,545/mo</strong></li>
+              <li>Card debt: max(5% × S$30,000, 3 × S$50) = <strong>S$1,500/mo</strong></li>
+              <li>TDSR room: 55% × 8,900 − 450 − 1,500 = <strong>S$2,945/mo</strong></li>
               <li>MSR room: 30% × 8,900 = <strong>S$2,670/mo</strong> (tighter)</li>
               <li>At 4% stress, 25-year tenure → max loan ≈ <strong>S$505,000</strong></li>
             </ul>
             <p style="font-size:.85rem;color:rgba(11,28,58,.55);margin-top:1.5rem;line-height:1.7;">
-              Notice the card limits silently knock S$900/month off TDSR — even with zero balance. We frequently see buyers cancel cards before applying to recover S$60–80k of borrowing power.
+              For HDB, MSR usually bites first — so Mr. Tan's card balance doesn't change the answer here. But for private property where only TDSR applies, paying down that S$30,000 balance recovers S$1,500/month of TDSR room — roughly S$300k of borrowing power at 30-year tenure.
             </p>
           </div>
           <aside aria-labelledby="quick-tips">
@@ -797,8 +805,8 @@
               <li style="counter-increment:tip;display:flex;gap:1rem;padding:1rem;background:white;border:1px solid rgba(196,151,59,.14);border-radius:10px;margin-bottom:.75rem;">
                 <div style="flex-shrink:0;width:32px;height:32px;border-radius:50%;background:rgba(196,151,59,.12);color:var(--gold-500);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem;">1</div>
                 <div>
-                  <strong style="display:block;color:var(--navy-900);font-size:.95rem;margin-bottom:.2rem;">Cancel unused cards</strong>
-                  <span style="font-size:.85rem;color:rgba(11,28,58,.65);line-height:1.6;">Each S$10k of card limit costs S$300/month of TDSR room — even if your balance is zero.</span>
+                  <strong style="display:block;color:var(--navy-900);font-size:.95rem;margin-bottom:.2rem;">Pay down card balances first</strong>
+                  <span style="font-size:.85rem;color:rgba(11,28,58,.65);line-height:1.6;">Each S$10k of outstanding balance costs S$500/month of TDSR room. Per-card S$50 floor adds up too — fewer cards, less drag.</span>
                 </div>
               </li>
               <li style="counter-increment:tip;display:flex;gap:1rem;padding:1rem;background:white;border:1px solid rgba(196,151,59,.14);border-radius:10px;margin-bottom:.75rem;">
@@ -1018,7 +1026,8 @@
     // ===== Core affordability calc =====
     const STRESS_RATE = 4.0;       // MAS stress test %
     const VAR_HAIRCUT = 0.70;      // 70% of variable income
-    const CC_FACTOR   = 0.03;      // 3% of card limits as monthly debt
+    const CC_BALANCE_FACTOR = 0.05; // 5% of outstanding balance
+    const CC_PER_CARD_MIN   = 50;   // S$50 minimum per card
     const TDSR_CAP    = 0.55;
     const MSR_CAP     = 0.30;
 
@@ -1074,8 +1083,9 @@
       const a2a = appl2On ? (+(document.getElementById('a2-age')?.value) || 35) : 0;
       const a2d = appl2On ? rawNum('a2-debt') : 0;
 
-      const cc  = rawNum('cc-limit');
-      const ccDebt = cc * CC_FACTOR;
+      const ccBalance = rawNum('cc-balance');
+      const ccCount   = Math.max(0, +(document.getElementById('cc-count')?.value) || 0);
+      const ccDebt    = Math.max(ccBalance * CC_BALANCE_FACTOR, ccCount * CC_PER_CARD_MIN);
 
       const stressIncome1 = a1f + a1v * VAR_HAIRCUT;
       const stressIncome2 = a2f + a2v * VAR_HAIRCUT;
@@ -1121,8 +1131,8 @@
 
     // Init
     window.addEventListener('load', () => {
-      ['a1-fixed','a1-var','a1-debt','a2-fixed','a2-var','a2-debt','cc-limit'].forEach(attachFormatter);
-      ['a1-age','a2-age'].forEach(id => {
+      ['a1-fixed','a1-var','a1-debt','a2-fixed','a2-var','a2-debt','cc-balance'].forEach(attachFormatter);
+      ['a1-age','a2-age','cc-count'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener('input', calc);
       });
