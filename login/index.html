@@ -1,0 +1,3242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Mortgage Console — Dan Ler</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        display: ['Fraunces', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
+    },
+  },
+};
+</script>
+
+<style>
+  :root {
+    --bg: #F6F7F9;
+    --surface: #FFFFFF;
+    --surface-2: #F1F3F5;
+    --surface-3: #E9ECEF;
+    --border: #E5E7EB;
+    --border-strong: #CBD5E1;
+    --ink: #0B1220;
+    --ink-2: #1F2937;
+    --muted: #56657A;
+    --faint: #94A3B8;
+    --accent: #059669;
+    --accent-strong: #047857;
+    --accent-soft: #ECFDF5;
+    --accent-line: rgba(5,150,105,.18);
+    --fail: #DC2626;
+    --fail-soft: #FEF2F2;
+    --warn: #D97706;
+    --warn-soft: #FFFBEB;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: radial-gradient(circle, rgba(11,18,32,.045) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 12px 12px;
+    mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+  }
+
+  .num { font-feature-settings: 'tnum' 1, 'lnum' 1; font-variant-numeric: tabular-nums lining-nums; }
+  .display { font-family: 'Fraunces', serif; font-optical-sizing: auto; letter-spacing: -0.02em; }
+  .display-num { font-family: 'Fraunces', serif; font-feature-settings: 'tnum' 1, 'lnum' 1; font-variant-numeric: tabular-nums lining-nums; }
+
+  /* ── Auth gate ─── */
+  #auth-gate {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+  }
+  #auth-gate::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(5,150,105,.06) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(5,150,105,.04) 0%, transparent 40%);
+  }
+  .auth-card {
+    position: relative; z-index: 1;
+    width: 380px; max-width: 92vw;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 40px 36px 32px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 24px 48px -28px rgba(11,18,32,.18);
+  }
+  .auth-mark {
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+
+  /* ── Inputs ─── */
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .field-label .normal { font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--faint); margin-left: 4px; }
+  .field-hint { font-size: 11.5px; color: var(--faint); margin-top: 2px; }
+  .input-wrap { position: relative; }
+  .input-prefix, .input-suffix {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    color: var(--faint); font-size: 13px; pointer-events: none;
+    font-feature-settings: 'tnum' 1;
+  }
+  .input-prefix { left: 12px; }
+  .input-suffix { right: 12px; }
+  .field-input, .field-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    font-size: 14px;
+    color: var(--ink);
+    font-family: inherit;
+    font-feature-settings: 'tnum' 1;
+    transition: border-color .15s, box-shadow .15s, background .15s;
+  }
+  .field-input.has-prefix { padding-left: 28px; }
+  .field-input.has-suffix { padding-right: 32px; }
+  .field-input:hover, .field-select:hover { border-color: var(--border-strong); }
+  .field-input:focus, .field-select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(5,150,105,.13);
+  }
+  .field-select {
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2356657A' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+  }
+
+  /* ── Buttons ─── */
+  .btn-primary {
+    background: var(--accent); color: white;
+    padding: 10px 16px; border-radius: 8px;
+    font-weight: 600; font-size: 13.5px;
+    display: inline-flex; align-items: center; gap: 8px;
+    cursor: pointer; border: 1px solid var(--accent);
+    transition: background .15s, border-color .15s, transform .1s;
+  }
+  .btn-primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+  .btn-primary:active { transform: translateY(1px); }
+  .btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn-secondary {
+    background: var(--surface); color: var(--ink);
+    padding: 8px 14px; border-radius: 8px;
+    font-weight: 500; font-size: 13px;
+    border: 1px solid var(--border);
+    cursor: pointer; transition: background .15s, border-color .15s;
+  }
+  .btn-secondary:hover { background: var(--surface-2); border-color: var(--border-strong); }
+  .btn-ghost {
+    color: var(--muted); padding: 8px 12px; border-radius: 6px;
+    font-size: 13px; cursor: pointer; background: transparent;
+    border: 1px solid transparent;
+  }
+  .btn-ghost:hover { background: var(--surface-2); color: var(--ink); }
+
+  /* ── Sidebar ─── */
+  .nav-group-label {
+    font-size: 10.5px; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--faint);
+    padding: 0 14px; margin-bottom: 6px;
+  }
+  .nav-item {
+    position: relative;
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 14px;
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 13.5px; font-weight: 500;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+    user-select: none;
+  }
+  .nav-item:hover { background: var(--surface-2); color: var(--ink); }
+  .nav-item.active { color: var(--ink); background: var(--surface); }
+  .nav-item.active::before {
+    content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 2px; background: var(--accent); border-radius: 2px;
+  }
+  .nav-item .nav-ico {
+    width: 16px; height: 16px; color: currentColor; flex-shrink: 0;
+  }
+  .nav-item.active .nav-ico { color: var(--accent); }
+
+  /* ── Cards ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .card-pad { padding: 24px; }
+  .card-pad-sm { padding: 18px; }
+
+  .sec-tag {
+    font-size: 10.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--faint);
+    font-weight: 600;
+  }
+  .divider { height: 1px; background: var(--border); width: 100%; }
+  .divider-dashed { border-top: 1px dashed var(--border); width: 100%; }
+
+  /* ── Borrower cards ─── */
+  .borrower-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    background: var(--surface-2);
+  }
+  .borrower-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px;
+  }
+  .borrower-title {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink);
+  }
+  .borrower-card .field-input { background: var(--surface); }
+  .btn-rm-borrower {
+    font-size: 11px; color: var(--muted);
+    background: transparent; border: 0;
+    cursor: pointer; padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .btn-rm-borrower:hover { background: var(--fail-soft); color: var(--fail); }
+  .btn-add-borrower {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 12.5px; font-weight: 500;
+    color: var(--accent-strong);
+    background: transparent;
+    border: 1px dashed rgba(5,150,105,.4);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-add-borrower:hover { background: var(--accent-soft); border-color: var(--accent); }
+  .btn-add-borrower:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .boost-details {
+    margin-top: 12px;
+    border-top: 1px dashed var(--border-strong);
+    padding-top: 10px;
+  }
+  .boost-details summary {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted);
+    cursor: pointer;
+    list-style: none;
+    display: flex; align-items: center; gap: 6px;
+    user-select: none;
+  }
+  .boost-details summary::before {
+    content: '+';
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 14px; height: 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: 3px;
+    font-size: 12px; color: var(--muted);
+    line-height: 1;
+  }
+  .boost-details[open] summary::before { content: '−'; }
+  .boost-details summary::-webkit-details-marker { display: none; }
+
+  .iwaa-summary {
+    display: flex; gap: 22px; flex-wrap: wrap;
+    margin-top: 12px; padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 12.5px;
+    align-items: baseline;
+  }
+  .iwaa-summary > div {
+    display: flex; gap: 5px; align-items: baseline;
+  }
+  .iwaa-summary .label {
+    font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--faint);
+  }
+  .iwaa-summary .value {
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-feature-settings: 'tnum' 1; font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+
+  /* ── Status pills ─── */
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 4px 10px; border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .pill.pass { color: var(--accent-strong); border-color: rgba(5,150,105,.35); background: var(--accent-soft); }
+  .pill.fail { color: var(--fail); border-color: rgba(220,38,38,.3); background: var(--fail-soft); }
+  .pill.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: var(--warn-soft); }
+
+  /* ── Result row ─── */
+  .res-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .res-row:last-child { border-bottom: 0; }
+  .res-label { font-size: 13px; color: var(--muted); }
+  .res-sublabel { font-size: 11.5px; color: var(--faint); margin-top: 1px; }
+  .res-value { font-size: 16px; font-weight: 500; color: var(--ink); }
+  .res-value.big {
+    font-size: 30px; line-height: 1;
+    font-family: 'Fraunces', serif;
+    font-weight: 500; letter-spacing: -0.01em;
+  }
+  .res-value.bigger {
+    font-size: 40px; line-height: 1;
+    font-family: 'Fraunces', serif;
+    font-weight: 500; letter-spacing: -0.015em;
+  }
+
+  /* ── Topbar ─── */
+  .topbar {
+    height: 60px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center;
+    padding: 0 24px;
+  }
+  .brand-mark {
+    width: 30px; height: 30px;
+    border: 1px solid var(--accent);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 9px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--surface);
+  }
+
+  /* ── Calculator panels ─── */
+  .calc-panel { display: none; }
+  .calc-panel.active { display: block; animation: panel-rev .35s cubic-bezier(.4,0,.2,1); }
+  @keyframes panel-rev {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .panel-title {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .panel-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  /* ── Stat tile ─── */
+  .stat-tile {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: var(--surface);
+  }
+  .stat-tile .stat-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .stat-tile .stat-value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; line-height: 1.1;
+    font-weight: 500;
+    margin-top: 6px;
+    color: var(--ink);
+  }
+  .stat-tile.accent { background: var(--accent-soft); border-color: var(--accent-line); }
+  .stat-tile.accent .stat-value { color: var(--accent-strong); }
+
+  /* ── Progress bar ─── */
+  .ratio-bar {
+    position: relative;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--surface-3);
+    overflow: hidden;
+  }
+  .ratio-bar .fill {
+    position: absolute; top: 0; left: 0; bottom: 0;
+    background: var(--accent); border-radius: 4px;
+    transition: width .35s cubic-bezier(.4,0,.2,1), background .25s;
+  }
+  .ratio-bar.over .fill { background: var(--fail); }
+
+  /* Affordability LTV scenario toggle */
+  .ltv-toggle {
+    display: inline-flex; padding: 3px;
+    border: 1px solid var(--border); border-radius: 8px;
+    background: var(--surface-2);
+  }
+  .ltv-toggle .opt {
+    padding: 6px 12px; font-size: 12px; font-weight: 500;
+    border-radius: 6px; color: var(--muted);
+    cursor: pointer; user-select: none;
+  }
+  .ltv-toggle .opt:hover { color: var(--ink); }
+  .ltv-toggle .opt.active { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(11,18,32,.06); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; border: 2px solid var(--bg); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+  /* ── PDF report ─── */
+  #report {
+    position: absolute; left: -99999px; top: 0;
+    width: 210mm;
+    background: white;
+    color: #0B1220;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .pdf-page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 18mm 16mm;
+    background: white;
+    page-break-after: always;
+    position: relative;
+  }
+  .pdf-page:last-child { page-break-after: auto; }
+  .pdf-h1 { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+  .pdf-h2 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em; }
+  .pdf-h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #56657A; }
+  .pdf-num { font-family: 'Fraunces', serif; font-feature-settings: 'tnum' 1, 'lnum' 1; font-variant-numeric: tabular-nums lining-nums; }
+  .pdf-table { width: 100%; border-collapse: collapse; }
+  .pdf-table td { padding: 9px 0; border-bottom: 1px dashed #E5E7EB; font-size: 13px; vertical-align: top; }
+  .pdf-table td:last-child { text-align: right; font-feature-settings: 'tnum' 1; font-variant-numeric: tabular-nums; }
+  .pdf-cover-mark { width: 44px; height: 44px; border: 1.5px solid #059669; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; color: #059669; font-family: 'Fraunces', serif; font-size: 22px; }
+  .pdf-borrower-row td { font-size: 12px; padding: 6px 0; }
+
+  .ink-2 { color: var(--ink-2); }
+  .muted { color: var(--muted); }
+  .faint { color: var(--faint); }
+  .accent-text { color: var(--accent-strong); }
+  .fail-text { color: var(--fail); }
+  .grid-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-form-1 { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+  .toast {
+    position: fixed; right: 20px; bottom: 20px; z-index: 50;
+    background: var(--ink); color: white;
+    padding: 10px 16px; border-radius: 8px; font-size: 13px;
+    box-shadow: 0 12px 32px -12px rgba(11,18,32,.4);
+    transform: translateY(60px); opacity: 0;
+    transition: transform .3s, opacity .3s;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  .gen-overlay {
+    position: fixed; inset: 0; z-index: 60;
+    background: rgba(11,18,32,.55);
+    backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center;
+  }
+  .gen-overlay.show { display: flex; }
+  .gen-card { background: var(--surface); border-radius: 12px; padding: 28px 32px; display: flex; align-items: center; gap: 14px; box-shadow: 0 24px 64px -32px rgba(11,18,32,.4); }
+  .spinner { width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Rate picker (modal + standalone) ─── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 70;
+    background: rgba(11,18,32,.55);
+    backdrop-filter: blur(6px);
+    display: none; align-items: center; justify-content: center;
+    padding: 32px;
+  }
+  .modal-overlay.show { display: flex; animation: fade-in .2s ease-out; }
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  .modal-shell {
+    background: var(--surface);
+    border-radius: 14px;
+    width: 100%; max-width: 1200px;
+    max-height: calc(100vh - 64px);
+    display: flex; flex-direction: column;
+    box-shadow: 0 32px 80px -24px rgba(11,18,32,.45);
+    overflow: hidden;
+  }
+  .modal-header {
+    padding: 20px 24px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 16px;
+  }
+  .modal-body { flex: 1; overflow: auto; padding: 0; }
+  .modal-footer {
+    padding: 14px 24px; border-top: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+    background: var(--surface-2);
+  }
+  .modal-close {
+    margin-left: auto;
+    background: transparent; border: 0;
+    color: var(--muted); cursor: pointer;
+    padding: 6px; border-radius: 6px;
+    display: inline-flex;
+  }
+  .modal-close:hover { background: var(--surface-2); color: var(--ink); }
+
+  /* ── Rate filters bar ─── */
+  .filters-bar {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    padding: 14px 24px; border-bottom: 1px solid var(--border);
+    background: var(--surface-2); align-items: center;
+  }
+  .filter-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 12px; font-weight: 500; color: var(--muted);
+    cursor: pointer; transition: all .15s;
+    user-select: none;
+  }
+  .filter-chip:hover { border-color: var(--border-strong); color: var(--ink); }
+  .filter-chip.active {
+    background: var(--accent-soft); color: var(--accent-strong);
+    border-color: var(--accent-line);
+  }
+  .filter-chip .count {
+    font-size: 10.5px; padding: 1px 6px;
+    border-radius: 100px;
+    background: var(--surface-3); color: var(--muted);
+  }
+  .filter-chip.active .count { background: rgba(5,150,105,.15); color: var(--accent-strong); }
+  .filter-search {
+    margin-left: auto; min-width: 200px;
+  }
+  .filter-search input {
+    width: 100%; padding: 7px 12px 7px 32px;
+    border: 1px solid var(--border); border-radius: 8px;
+    background: var(--surface);
+    font-size: 13px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+  }
+  .filter-search input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(5,150,105,.13); }
+
+  /* ── Rate table ─── */
+  .rate-table-wrap { padding: 0 24px 24px; }
+  .rate-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  .rate-table thead th {
+    position: sticky; top: 0; z-index: 1;
+    background: var(--surface);
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--border);
+    font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+    white-space: nowrap;
+  }
+  .rate-table thead th.sortable { cursor: pointer; user-select: none; }
+  .rate-table thead th.sortable:hover { color: var(--ink); }
+  .rate-table thead th.sorted { color: var(--accent-strong); }
+  .rate-table thead th.sortable::after {
+    content: ' ↕'; opacity: 0.4; font-size: 10px;
+  }
+  .rate-table thead th.sort-asc::after { content: ' ↑'; opacity: 1; color: var(--accent-strong); }
+  .rate-table thead th.sort-desc::after { content: ' ↓'; opacity: 1; color: var(--accent-strong); }
+  .rate-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .12s;
+  }
+  .rate-table tbody tr:hover { background: var(--surface-2); }
+  .rate-table tbody tr.selected {
+    background: var(--accent-soft);
+  }
+  .rate-table tbody tr.selected:hover { background: rgba(5,150,105,.12); }
+  .rate-table tbody tr.disabled { opacity: 0.42; cursor: not-allowed; }
+  .rate-table tbody tr.disabled:hover { background: transparent; }
+  .rate-table td {
+    padding: 11px 10px;
+    color: var(--ink);
+    vertical-align: top;
+    font-feature-settings: 'tnum' 1;
+  }
+  .rate-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .rate-table td .lender-tag {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 22px; padding: 0 8px;
+    border-radius: 5px;
+    font-size: 11px; font-weight: 600;
+    background: var(--surface-2); border: 1px solid var(--border);
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .rate-table td .sec-badge {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+    padding: 2px 6px; border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .sec-badge.var { background: rgba(217,119,6,.1); color: var(--warn); }
+  .sec-badge.fix { background: rgba(5,150,105,.12); color: var(--accent-strong); }
+  .sec-badge.combo { background: rgba(11,18,32,.08); color: var(--ink-2); }
+  .rate-table td .sub-tag {
+    font-size: 11px; color: var(--muted);
+  }
+  .rate-table .check-cell {
+    width: 36px; padding-left: 14px;
+  }
+  .rate-table .check-box {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface);
+    color: white;
+  }
+  .rate-table tr.selected .check-box {
+    background: var(--accent); border-color: var(--accent);
+  }
+  .rate-table tr.selected .check-box::after {
+    content: '✓'; font-size: 11px; line-height: 1;
+  }
+
+  /* Selected-rate chip on calc cards */
+  .rate-pick-trigger {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 14px;
+    border: 1px dashed rgba(5,150,105,.45);
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    font-size: 12.5px; font-weight: 500;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .rate-pick-trigger:hover { background: rgba(5,150,105,.14); border-color: var(--accent); }
+  .rate-pick-trigger.has-picks { border-style: solid; }
+  .rate-pick-trigger .pick-count {
+    background: var(--accent); color: white;
+    font-size: 10.5px; font-weight: 700;
+    padding: 1px 7px; border-radius: 100px;
+  }
+
+  .rate-chip-list {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 10px;
+  }
+  .rate-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 4px 4px 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 11.5px;
+    color: var(--ink);
+  }
+  .rate-chip .x {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--surface-3);
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--muted);
+    transition: background .12s, color .12s;
+  }
+  .rate-chip .x:hover { background: var(--fail); color: white; }
+  .rate-chip .lender-tag-mini {
+    font-size: 10.5px; font-weight: 600;
+    padding: 1px 6px; border-radius: 4px;
+    background: var(--surface-2); border: 1px solid var(--border);
+  }
+
+  /* Rates tab — empty/loading */
+  .rates-status {
+    text-align: center; padding: 80px 20px;
+    color: var(--muted); font-size: 14px;
+  }
+  .rates-status .spinner { display: inline-block; margin-right: 10px; vertical-align: middle; }
+
+  /* PDF rates page */
+  .pdf-rate-row td { font-size: 11px; padding: 7px 4px; }
+  .pdf-rate-row .lender { font-weight: 600; }
+</style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     AUTH GATE
+     ═══════════════════════════════════════════════════════════════ -->
+<div id="auth-gate">
+  <form class="auth-card" onsubmit="return tryAuth(event)">
+    <div class="auth-mark">N</div>
+    <div class="display" style="font-size: 22px; font-weight: 500;">Mortgage Console</div>
+    <div class="muted" style="font-size: 13px; margin-top: 4px;">Internal use — Dan Ler</div>
+    <div style="margin-top: 24px;">
+      <label class="field-label" for="auth-pw">Passcode</label>
+      <input id="auth-pw" type="password" class="field-input" autocomplete="off" autofocus style="margin-top: 6px;">
+      <div id="auth-error" class="fail-text" style="display:none; font-size: 12.5px; margin-top: 8px;">Incorrect passcode.</div>
+    </div>
+    <button type="submit" class="btn-primary" style="margin-top: 18px; width: 100%; justify-content: center;">Unlock</button>
+    <div class="faint" style="font-size: 11px; margin-top: 16px; text-align: center;">Console v1.1 · SG mortgage rules · Apr 2026</div>
+  </form>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     APP SHELL
+     ═══════════════════════════════════════════════════════════════ -->
+<div id="app" style="display: none; min-height: 100vh; position: relative; z-index: 1;">
+
+  <header class="topbar">
+    <div class="flex items-center gap-3">
+      <div class="brand-mark">N</div>
+      <div>
+        <div class="display" style="font-size: 16px; font-weight: 500; line-height: 1;">Mortgage Console</div>
+        <div class="faint" style="font-size: 11px; letter-spacing: 0.06em; margin-top: 2px;">DAN LER · NEXUS MORTGAGE SG</div>
+      </div>
+    </div>
+    <div class="ml-auto flex items-center gap-3">
+      <div class="hidden md:flex items-center gap-2">
+        <span class="field-label" style="margin-right: 4px;">Client</span>
+        <input id="client-name" class="field-input" placeholder="e.g. Tan W.K." style="width: 180px; padding: 7px 10px; font-size: 13px;">
+      </div>
+      <div class="hidden lg:flex items-center gap-2">
+        <span class="field-label" style="margin-right: 4px;">Date</span>
+        <input id="client-date" class="field-input" type="date" style="width: 150px; padding: 7px 10px; font-size: 13px;">
+      </div>
+      <button id="btn-pdf" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
+        Generate PDF
+      </button>
+      <button class="btn-ghost" onclick="logOut()" title="Log out">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div style="display: grid; grid-template-columns: 268px 1fr; min-height: calc(100vh - 60px);">
+
+    <!-- SIDEBAR -->
+    <aside style="border-right: 1px solid var(--border); padding: 24px 16px; background: rgba(255,255,255,.5);">
+      <div class="nav-group-label">Calculators</div>
+      <nav class="flex flex-col gap-0.5" id="nav">
+        <div class="nav-item active" data-tab="affordability">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/><path d="M12 6v2m0 8v2"/></svg>
+          Affordability
+        </div>
+        <div class="nav-item" data-tab="purchase-hdb">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
+          Purchase · HDB
+        </div>
+        <div class="nav-item" data-tab="purchase-private">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="1"/><path d="M5 11V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6"/><path d="M9 21v-4h6v4"/></svg>
+          Purchase · Private
+        </div>
+        <div class="nav-item" data-tab="sell-purchase">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          Sell &amp; Purchase
+        </div>
+        <div class="nav-item" data-tab="refinance">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Refinance
+        </div>
+        <div class="nav-item" data-tab="rates">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 11 10 15 14 21 8"/></svg>
+          Rates
+        </div>
+      </nav>
+
+      <div class="divider" style="margin: 22px 4px;"></div>
+      <div class="nav-group-label">Active Rules</div>
+      <div style="padding: 0 14px; font-size: 12.5px;">
+        <div class="flex justify-between" style="padding: 5px 0;"><span class="muted">TDSR ceiling</span><span class="num">55.0 %</span></div>
+        <div class="flex justify-between" style="padding: 5px 0;"><span class="muted">MSR (HDB / EC)</span><span class="num">30.0 %</span></div>
+        <div class="flex justify-between" style="padding: 5px 0;"><span class="muted">Stress test rate</span><span class="num">4.00 %</span></div>
+        <div class="flex justify-between" style="padding: 5px 0;"><span class="muted">CPF accrual</span><span class="num">2.60 %</span></div>
+        <div class="flex justify-between" style="padding: 5px 0;"><span class="muted">HDB full-LTV tenure</span><span class="num">25 yrs</span></div>
+        <div class="flex justify-between" style="padding: 5px 0;"><span class="muted">Private full-LTV tenure</span><span class="num">30 yrs</span></div>
+      </div>
+      <div class="divider" style="margin: 22px 4px;"></div>
+      <div class="faint" style="font-size: 10.5px; padding: 0 14px; line-height: 1.6;">
+        Last reviewed Apr&nbsp;2026.<br>
+        BSD: 1–6 % bands. ABSD revised 27&nbsp;Apr&nbsp;2023.<br>
+        IWAA = Σ(age×income) ÷ Σ(income).<br>
+        Pledged ÷ 48 mths · Show × 30 % ÷ 48 mths.
+      </div>
+    </aside>
+
+    <!-- CANVAS -->
+    <section style="padding: 32px 36px 80px; max-width: 1400px;">
+
+      <!-- ════════ AFFORDABILITY ════════ -->
+      <div class="calc-panel active" data-panel="affordability">
+        <div class="flex items-end justify-between" style="margin-bottom: 28px;">
+          <div>
+            <div class="sec-tag" style="margin-bottom: 6px;">Calculator · 01</div>
+            <div class="panel-title">Affordability</div>
+            <div class="panel-sub">Maximum loan and property price from MAS TDSR (55 %), MSR (30 % HDB) at 4 % stress, with IWAA, show / pledged funds.</div>
+          </div>
+          <div class="hidden md:block chip">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg>
+            Live
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 480px 1fr; gap: 28px;">
+
+          <!-- FORM -->
+          <div class="card card-pad">
+            <div class="flex justify-between items-center" style="margin-bottom: 14px;">
+              <div class="sec-tag">Inputs</div>
+              <div class="ltv-toggle" data-ltv-toggle="affordability">
+                <div class="opt active" data-ltv="full">Full LTV 75 %</div>
+                <div class="opt" data-ltv="reduced">Reduced LTV 55 %</div>
+              </div>
+            </div>
+
+            <div class="field" style="margin-bottom: 16px;">
+              <label class="field-label">Property type</label>
+              <select class="field-select" data-bind="affordability.propertyType">
+                <option value="hdb">HDB / EC (MSR applies)</option>
+                <option value="private">Private (no MSR)</option>
+              </select>
+            </div>
+
+            <div data-borrowers="affordability"></div>
+
+            <div class="grid-form" style="margin-top: 18px;">
+              <div class="field" style="grid-column: 1 / -1;">
+                <label class="field-label">Other monthly debt commitments</label>
+                <div class="input-wrap">
+                  <span class="input-prefix">$</span>
+                  <input type="number" class="field-input has-prefix" data-bind="affordability.commitments" min="0" step="50">
+                </div>
+                <div class="field-hint">Car, credit-card minimums, personal loans, existing mortgages.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">Cash on hand</label>
+                <div class="input-wrap">
+                  <span class="input-prefix">$</span>
+                  <input type="number" class="field-input has-prefix" data-bind="affordability.cash" min="0" step="1000">
+                </div>
+              </div>
+              <div class="field">
+                <label class="field-label">CPF OA available</label>
+                <div class="input-wrap">
+                  <span class="input-prefix">$</span>
+                  <input type="number" class="field-input has-prefix" data-bind="affordability.cpf" min="0" step="1000">
+                </div>
+              </div>
+            </div>
+
+            <div class="divider" style="margin: 18px 0;"></div>
+            <div class="sec-tag" style="margin-bottom: 10px;">Rate packages for report</div>
+            <button type="button" class="rate-pick-trigger" onclick="openRateModal('affordability')" data-pick-trigger="affordability">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 11 10 15 14 21 8"/></svg>
+              <span>Pick rates</span>
+              <span class="pick-count" data-pick-count="affordability">0 / 4</span>
+            </button>
+            <div class="rate-chip-list" data-pick-chips="affordability"></div>
+          </div>
+
+          <!-- RESULTS -->
+          <div class="flex flex-col gap-4">
+            <div class="card card-pad" style="background: linear-gradient(180deg, var(--accent-soft) 0%, var(--surface) 60%);">
+              <div class="sec-tag accent-text">Maximum property price</div>
+              <div class="display-num" data-out="aff.maxPropertyPrice" style="font-size: 56px; font-weight: 500; line-height: 1; margin-top: 8px; letter-spacing: -0.02em; color: var(--ink);">$ 0</div>
+              <div class="muted" style="font-size: 13px; margin-top: 6px;" data-out="aff.maxPropertyNote">Enter income to compute.</div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="stat-tile">
+                <div class="stat-label">Max loan amount</div>
+                <div class="stat-value" data-out="aff.maxLoan">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="aff.maxLoanNote">at 4 % stress</div>
+              </div>
+              <div class="stat-tile">
+                <div class="stat-label">Eligible monthly</div>
+                <div class="stat-value" data-out="aff.eligibleMonthly">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;">For mortgage servicing</div>
+              </div>
+              <div class="stat-tile">
+                <div class="stat-label">Cash component (min)</div>
+                <div class="stat-value" data-out="aff.cashMin">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="aff.cashMinNote">5 % of price</div>
+              </div>
+              <div class="stat-tile">
+                <div class="stat-label">CPF + cash balance</div>
+                <div class="stat-value" data-out="aff.cpfBalance">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="aff.cpfBalanceNote">20 % of price</div>
+              </div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Compliance — at 4 % stress, fully utilised</div>
+              <div style="margin-bottom: 16px;">
+                <div class="flex justify-between items-baseline" style="margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 500;">TDSR — total debt servicing</span>
+                  <span class="num" data-out="aff.tdsrLabel" style="font-size: 12.5px;">0 / 55 %</span>
+                </div>
+                <div class="ratio-bar" data-bar="aff.tdsr"><div class="fill" style="width: 0;"></div></div>
+              </div>
+              <div data-show="aff.msrShow">
+                <div class="flex justify-between items-baseline" style="margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 500;">MSR — mortgage servicing</span>
+                  <span class="num" data-out="aff.msrLabel" style="font-size: 12.5px;">0 / 30 %</span>
+                </div>
+                <div class="ratio-bar" data-bar="aff.msr"><div class="fill" style="width: 0;"></div></div>
+              </div>
+              <div class="divider-dashed" style="margin: 16px 0;"></div>
+              <div class="flex gap-2 flex-wrap">
+                <span class="pill pass" data-pill="aff.tdsr"><span class="dot"></span>TDSR pass</span>
+                <span class="pill pass" data-pill="aff.msr" data-show="aff.msrShow"><span class="dot"></span>MSR pass</span>
+              </div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 8px;">Effective income build-up</div>
+              <div class="res-row"><div><div class="res-label">Fixed income (all borrowers)</div></div><div class="res-value num" data-out="aff.fixed">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Variable income — after 30 % haircut</div></div><div class="res-value num" data-out="aff.variable">$ 0</div></div>
+              <div class="res-row" data-show="aff.boostShow"><div><div class="res-label">Pledged funds boost</div><div class="res-sublabel">100 % &divide; 48 mths</div></div><div class="res-value num accent-text" data-out="aff.pledgedBoost">+ $ 0</div></div>
+              <div class="res-row" data-show="aff.boostShow"><div><div class="res-label">Show funds boost</div><div class="res-sublabel">30 % &divide; 48 mths</div></div><div class="res-value num accent-text" data-out="aff.showBoost">+ $ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Less: other monthly commitments</div></div><div class="res-value num" data-out="aff.commit">- $ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Available for mortgage</div></div><div class="res-value num accent-text" data-out="aff.available" style="font-weight: 600;">$ 0</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ NEW PURCHASE — HDB ════════ -->
+      <div class="calc-panel" data-panel="purchase-hdb">
+        <div class="flex items-end justify-between" style="margin-bottom: 28px;">
+          <div>
+            <div class="sec-tag" style="margin-bottom: 6px;">Calculator · 02</div>
+            <div class="panel-title">New Purchase — HDB</div>
+            <div class="panel-sub">Stamp duty, monthly installment, TDSR / MSR, full cash-on-hand requirement. Full LTV 75 % requires tenure ≤ 25 y and IWAA + tenure ≤ 65.</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 480px 1fr; gap: 28px;">
+          <div class="card card-pad">
+            <div class="sec-tag" style="margin-bottom: 14px;">Property &amp; loan</div>
+            <div class="grid-form-1" style="margin-bottom: 12px;">
+              <div class="field">
+                <label class="field-label">Property price</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchaseHdb.price" min="0" step="1000"></div>
+              </div>
+            </div>
+            <div class="grid-form">
+              <div class="field">
+                <label class="field-label">Loan tenure</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="purchaseHdb.tenure" min="1" max="30" step="1"><span class="input-suffix">yrs</span></div>
+                <div class="field-hint">Cap 30 y. Full LTV ≤ 25 y.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">Interest rate</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="purchaseHdb.rate" min="0" max="10" step="0.05"><span class="input-suffix">% p.a.</span></div>
+              </div>
+              <div class="field">
+                <label class="field-label">Citizenship</label>
+                <select class="field-select" data-bind="purchaseHdb.citizenship">
+                  <option value="citizen">SG Citizen</option>
+                  <option value="pr">SG Permanent Resident</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label">Property count (incl. this)</label>
+                <select class="field-select" data-bind="purchaseHdb.propertyCount">
+                  <option value="1">1st property</option>
+                  <option value="2">2nd property</option>
+                  <option value="3">3rd or more</option>
+                </select>
+              </div>
+              <div class="field" style="grid-column: 1 / -1;">
+                <label class="field-label">Existing CPF for down-payment</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchaseHdb.cpfAvailable" min="0" step="1000"></div>
+              </div>
+            </div>
+
+            <div class="divider" style="margin: 18px 0;"></div>
+            <div data-borrowers="purchaseHdb"></div>
+
+            <div class="grid-form" style="margin-top: 14px;">
+              <div class="field" style="grid-column: 1 / -1;">
+                <label class="field-label">Other monthly commitments</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchaseHdb.commitments" min="0" step="50"></div>
+              </div>
+            </div>
+
+            <div class="divider" style="margin: 18px 0;"></div>
+            <div class="sec-tag" style="margin-bottom: 10px;">Rate packages for report</div>
+            <button type="button" class="rate-pick-trigger" onclick="openRateModal('purchaseHdb')" data-pick-trigger="purchaseHdb">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 11 10 15 14 21 8"/></svg>
+              <span>Pick rates</span>
+              <span class="pick-count" data-pick-count="purchaseHdb">0 / 4</span>
+            </button>
+            <div class="rate-chip-list" data-pick-chips="purchaseHdb"></div>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <div class="grid grid-cols-2 gap-3">
+              <div class="stat-tile accent">
+                <div class="stat-label">Monthly installment</div>
+                <div class="stat-value display-num" data-out="hdb.monthly">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="hdb.monthlyNote">at entered rate</div>
+              </div>
+              <div class="stat-tile">
+                <div class="stat-label">Loan amount</div>
+                <div class="stat-value display-num" data-out="hdb.loan">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="hdb.ltvNote">75 % LTV</div>
+              </div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Stamp duty</div>
+              <div class="res-row"><div><div class="res-label">BSD — Buyer's Stamp Duty</div><div class="res-sublabel">1–6 % progressive</div></div><div class="res-value num" data-out="hdb.bsd">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">ABSD</div><div class="res-sublabel" data-out="hdb.absdNote">SG citizen · 1st</div></div><div class="res-value num" data-out="hdb.absd">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total duty payable</div></div><div class="res-value num" data-out="hdb.totalDuty" style="font-weight: 600;">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Up-front cash &amp; CPF</div>
+              <div class="res-row"><div><div class="res-label">Cash down-payment</div><div class="res-sublabel" data-out="hdb.cashDownNote">5 % cash</div></div><div class="res-value num" data-out="hdb.cashDown">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">CPF / cash down-payment</div><div class="res-sublabel" data-out="hdb.cpfDownNote">20 % CPF or cash</div></div><div class="res-value num" data-out="hdb.cpfDown">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Stamp duty (BSD + ABSD)</div></div><div class="res-value num" data-out="hdb.dutyLine">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Legal &amp; valuation fees</div></div><div class="res-value num" data-out="hdb.legalFees">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total cash + CPF needed</div></div><div class="res-value num accent-text" data-out="hdb.totalUpfront" style="font-weight: 600;">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Compliance — at 4 % stress</div>
+              <div style="margin-bottom: 14px;">
+                <div class="flex justify-between items-baseline" style="margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 500;">TDSR (55 % cap)</span>
+                  <span class="num" data-out="hdb.tdsrLabel" style="font-size: 12.5px;">0 / 55 %</span>
+                </div>
+                <div class="ratio-bar" data-bar="hdb.tdsr"><div class="fill" style="width: 0;"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between items-baseline" style="margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 500;">MSR (30 % cap)</span>
+                  <span class="num" data-out="hdb.msrLabel" style="font-size: 12.5px;">0 / 30 %</span>
+                </div>
+                <div class="ratio-bar" data-bar="hdb.msr"><div class="fill" style="width: 0;"></div></div>
+              </div>
+              <div class="divider-dashed" style="margin: 16px 0;"></div>
+              <div class="flex gap-2 flex-wrap">
+                <span class="pill pass" data-pill="hdb.tdsr"><span class="dot"></span>TDSR pass</span>
+                <span class="pill pass" data-pill="hdb.msr"><span class="dot"></span>MSR pass</span>
+                <span class="pill pass" data-pill="hdb.ltv"><span class="dot"></span>Full LTV 75 %</span>
+              </div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Amortization</div>
+              <div style="height: 200px;"><canvas id="chart-hdb-amort"></canvas></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ NEW PURCHASE — PRIVATE ════════ -->
+      <div class="calc-panel" data-panel="purchase-private">
+        <div class="flex items-end justify-between" style="margin-bottom: 28px;">
+          <div>
+            <div class="sec-tag" style="margin-bottom: 6px;">Calculator · 03</div>
+            <div class="panel-title">New Purchase — Private</div>
+            <div class="panel-sub">Condo, landed, EC (post MOP). Full LTV 75 % requires tenure ≤ 30 y and IWAA + tenure ≤ 65; otherwise reduced LTV 55 %.</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 480px 1fr; gap: 28px;">
+          <div class="card card-pad">
+            <div class="sec-tag" style="margin-bottom: 14px;">Property &amp; loan</div>
+            <div class="grid-form-1" style="margin-bottom: 12px;">
+              <div class="field">
+                <label class="field-label">Property price</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchasePrivate.price" min="0" step="10000"></div>
+              </div>
+            </div>
+            <div class="grid-form">
+              <div class="field">
+                <label class="field-label">Loan tenure</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="purchasePrivate.tenure" min="1" max="35" step="1"><span class="input-suffix">yrs</span></div>
+                <div class="field-hint">Cap 35 y. Full LTV ≤ 30 y.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">Interest rate</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="purchasePrivate.rate" min="0" max="10" step="0.05"><span class="input-suffix">% p.a.</span></div>
+              </div>
+              <div class="field">
+                <label class="field-label">Citizenship</label>
+                <select class="field-select" data-bind="purchasePrivate.citizenship">
+                  <option value="citizen">SG Citizen</option>
+                  <option value="pr">SG Permanent Resident</option>
+                  <option value="foreigner">Foreigner</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label">Property count (incl. this)</label>
+                <select class="field-select" data-bind="purchasePrivate.propertyCount">
+                  <option value="1">1st property</option>
+                  <option value="2">2nd property</option>
+                  <option value="3">3rd or more</option>
+                </select>
+              </div>
+              <div class="field" style="grid-column: 1 / -1;">
+                <label class="field-label">Existing CPF for down-payment</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchasePrivate.cpfAvailable" min="0" step="1000"></div>
+              </div>
+            </div>
+
+            <div class="divider" style="margin: 18px 0;"></div>
+            <div data-borrowers="purchasePrivate"></div>
+
+            <div class="grid-form" style="margin-top: 14px;">
+              <div class="field" style="grid-column: 1 / -1;">
+                <label class="field-label">Other monthly commitments</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchasePrivate.commitments" min="0" step="50"></div>
+              </div>
+            </div>
+
+            <div class="divider" style="margin: 18px 0;"></div>
+            <div class="sec-tag" style="margin-bottom: 10px;">Rate packages for report</div>
+            <button type="button" class="rate-pick-trigger" onclick="openRateModal('purchasePrivate')" data-pick-trigger="purchasePrivate">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 11 10 15 14 21 8"/></svg>
+              <span>Pick rates</span>
+              <span class="pick-count" data-pick-count="purchasePrivate">0 / 4</span>
+            </button>
+            <div class="rate-chip-list" data-pick-chips="purchasePrivate"></div>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <div class="grid grid-cols-2 gap-3">
+              <div class="stat-tile accent">
+                <div class="stat-label">Monthly installment</div>
+                <div class="stat-value display-num" data-out="pvt.monthly">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="pvt.monthlyNote">at entered rate</div>
+              </div>
+              <div class="stat-tile">
+                <div class="stat-label">Loan amount</div>
+                <div class="stat-value display-num" data-out="pvt.loan">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="pvt.ltvNote">75 % LTV</div>
+              </div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Stamp duty</div>
+              <div class="res-row"><div><div class="res-label">BSD — Buyer's Stamp Duty</div><div class="res-sublabel">1–6 % progressive</div></div><div class="res-value num" data-out="pvt.bsd">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">ABSD</div><div class="res-sublabel" data-out="pvt.absdNote">SG citizen · 1st</div></div><div class="res-value num" data-out="pvt.absd">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total duty payable</div></div><div class="res-value num" data-out="pvt.totalDuty" style="font-weight: 600;">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Up-front cash &amp; CPF</div>
+              <div class="res-row"><div><div class="res-label">Cash down-payment</div><div class="res-sublabel" data-out="pvt.cashDownNote">5 % cash</div></div><div class="res-value num" data-out="pvt.cashDown">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">CPF / cash down-payment</div><div class="res-sublabel" data-out="pvt.cpfDownNote">20 % CPF or cash</div></div><div class="res-value num" data-out="pvt.cpfDown">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Stamp duty (BSD + ABSD)</div></div><div class="res-value num" data-out="pvt.dutyLine">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Legal &amp; valuation fees</div></div><div class="res-value num" data-out="pvt.legalFees">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total cash + CPF needed</div></div><div class="res-value num accent-text" data-out="pvt.totalUpfront" style="font-weight: 600;">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Compliance — at 4 % stress</div>
+              <div>
+                <div class="flex justify-between items-baseline" style="margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 500;">TDSR (55 % cap)</span>
+                  <span class="num" data-out="pvt.tdsrLabel" style="font-size: 12.5px;">0 / 55 %</span>
+                </div>
+                <div class="ratio-bar" data-bar="pvt.tdsr"><div class="fill" style="width: 0;"></div></div>
+              </div>
+              <div class="divider-dashed" style="margin: 16px 0;"></div>
+              <div class="flex gap-2 flex-wrap">
+                <span class="pill pass" data-pill="pvt.tdsr"><span class="dot"></span>TDSR pass</span>
+                <span class="pill pass" data-pill="pvt.ltv"><span class="dot"></span>Full LTV 75 %</span>
+              </div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Amortization</div>
+              <div style="height: 200px;"><canvas id="chart-pvt-amort"></canvas></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ SELL & PURCHASE ════════ -->
+      <div class="calc-panel" data-panel="sell-purchase">
+        <div class="flex items-end justify-between" style="margin-bottom: 28px;">
+          <div>
+            <div class="sec-tag" style="margin-bottom: 6px;">Calculator · 04</div>
+            <div class="panel-title">Sell &amp; Purchase</div>
+            <div class="panel-sub">Net proceeds after CPF refund (2.6 % accrual) + agent / legal. ABSD remission window if replacement is bought before sale completes.</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 480px 1fr; gap: 28px;">
+          <div class="card card-pad">
+            <div class="sec-tag" style="margin-bottom: 14px;">Sell — existing property</div>
+            <div class="grid-form">
+              <div class="field" style="grid-column: 1 / -1;">
+                <label class="field-label">Sale price</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="sellPurchase.salePrice" min="0" step="10000"></div>
+              </div>
+              <div class="field">
+                <label class="field-label">Outstanding loan</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="sellPurchase.outstandingLoan" min="0" step="1000"></div>
+              </div>
+              <div class="field">
+                <label class="field-label">CPF principal used</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="sellPurchase.cpfUsed" min="0" step="1000"></div>
+              </div>
+              <div class="field">
+                <label class="field-label">CPF used for years</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="sellPurchase.cpfYears" min="0" max="40" step="1"><span class="input-suffix">yrs</span></div>
+                <div class="field-hint">2.6 % p.a. accrual.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">Agent commission</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="sellPurchase.agentRate" min="0" max="5" step="0.1"><span class="input-suffix">%</span></div>
+                <div class="field-hint">+ 9 % GST.</div>
+              </div>
+            </div>
+
+            <div class="divider" style="margin: 18px 0;"></div>
+            <div class="sec-tag" style="margin-bottom: 14px;">Purchase — replacement property</div>
+            <div class="grid-form">
+              <div class="field" style="grid-column: 1 / -1;">
+                <label class="field-label">New property price</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="sellPurchase.newPrice" min="0" step="10000"></div>
+              </div>
+              <div class="field">
+                <label class="field-label">Property type</label>
+                <select class="field-select" data-bind="sellPurchase.newType">
+                  <option value="hdb">HDB</option>
+                  <option value="private">Private</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label">Citizenship</label>
+                <select class="field-select" data-bind="sellPurchase.newCitizenship">
+                  <option value="citizen">SG Citizen</option>
+                  <option value="pr">SG Permanent Resident</option>
+                  <option value="foreigner">Foreigner</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label">Bought before sale completes?</label>
+                <select class="field-select" data-bind="sellPurchase.bridgingNeeded">
+                  <option value="no">No — sell first</option>
+                  <option value="yes">Yes — pay ABSD upfront, claim remission</option>
+                </select>
+                <div class="field-hint">Citizens get ABSD remission if existing sold within 6 mths.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">New loan tenure</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="sellPurchase.newTenure" min="1" max="35" step="1"><span class="input-suffix">yrs</span></div>
+              </div>
+              <div class="field">
+                <label class="field-label">New loan rate</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="sellPurchase.newRate" min="0" max="10" step="0.05"><span class="input-suffix">% p.a.</span></div>
+              </div>
+            </div>
+
+            <div class="divider" style="margin: 18px 0;"></div>
+            <div data-borrowers="sellPurchase"></div>
+
+            <div class="grid-form" style="margin-top: 14px;">
+              <div class="field" style="grid-column: 1 / -1;">
+                <label class="field-label">Other monthly commitments</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="sellPurchase.commitments" min="0" step="50"></div>
+              </div>
+            </div>
+
+            <div class="divider" style="margin: 18px 0;"></div>
+            <div class="sec-tag" style="margin-bottom: 10px;">Rate packages for report</div>
+            <button type="button" class="rate-pick-trigger" onclick="openRateModal('sellPurchase')" data-pick-trigger="sellPurchase">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 11 10 15 14 21 8"/></svg>
+              <span>Pick rates</span>
+              <span class="pick-count" data-pick-count="sellPurchase">0 / 4</span>
+            </button>
+            <div class="rate-chip-list" data-pick-chips="sellPurchase"></div>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <div class="grid grid-cols-2 gap-3">
+              <div class="stat-tile">
+                <div class="stat-label">Net cash from sale</div>
+                <div class="stat-value display-num" data-out="sp.netCash">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;">After loan, CPF refund, fees</div>
+              </div>
+              <div class="stat-tile accent">
+                <div class="stat-label">Cash needed for new</div>
+                <div class="stat-value display-num" data-out="sp.cashNeeded">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="sp.gapNote">Top-up after sale proceeds</div>
+              </div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Sale waterfall</div>
+              <div class="res-row"><div><div class="res-label">Sale price</div></div><div class="res-value num" data-out="sp.salePriceOut">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Less: outstanding loan</div></div><div class="res-value num" data-out="sp.lessOutstanding">- $ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Less: CPF refund (principal + 2.6 % accrued)</div><div class="res-sublabel" data-out="sp.cpfRefundNote">CPF used + accrued</div></div><div class="res-value num" data-out="sp.lessCpfRefund">- $ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Less: agent commission (incl. GST)</div></div><div class="res-value num" data-out="sp.lessAgent">- $ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Less: legal &amp; conveyancing</div></div><div class="res-value num" data-out="sp.lessLegal">- $ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Net cash to seller</div></div><div class="res-value num accent-text" data-out="sp.netCashOut" style="font-weight: 600;">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label muted">CPF restored to OA</div></div><div class="res-value num muted" data-out="sp.cpfRestored">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">New purchase — financial requirement</div>
+              <div class="res-row"><div><div class="res-label">Property price</div></div><div class="res-value num" data-out="sp.newPriceOut">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Loan @ <span data-out="sp.newLtvLabel">75 %</span> LTV</div></div><div class="res-value num" data-out="sp.newLoan">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Down-payment</div><div class="res-sublabel" data-out="sp.newDownNote">25 % cash + CPF</div></div><div class="res-value num" data-out="sp.newDownpay">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">BSD</div></div><div class="res-value num" data-out="sp.newBsd">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">ABSD payable upfront</div><div class="res-sublabel" data-out="sp.absdUpfrontNote"></div></div><div class="res-value num" data-out="sp.absdUpfront">$ 0</div></div>
+              <div class="res-row" data-show="sp.absdRefundShow"><div><div class="res-label">ABSD remission (refundable)</div><div class="res-sublabel">Sell within 6 months to claim</div></div><div class="res-value num accent-text" data-out="sp.absdRefund">- $ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Legal &amp; valuation fees</div></div><div class="res-value num" data-out="sp.newLegal">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total upfront for new property</div></div><div class="res-value num" data-out="sp.newTotalUpfront" style="font-weight: 600;">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Less: net cash + CPF from sale</div></div><div class="res-value num accent-text" data-out="sp.fundingFromSale">- $ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Cash gap to top-up</div></div><div class="res-value num" data-out="sp.cashGap" style="font-weight: 600; font-size: 18px;">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">New mortgage &amp; servicing</div>
+              <div class="res-row"><div><div class="res-label">Monthly installment</div></div><div class="res-value num" data-out="sp.newMonthly">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Total interest over tenure</div></div><div class="res-value num" data-out="sp.newTotalInterest">$ 0</div></div>
+              <div style="margin-top: 14px;">
+                <div class="flex justify-between items-baseline" style="margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 500;">TDSR (55 % cap, 4 % stress)</span>
+                  <span class="num" data-out="sp.tdsrLabel" style="font-size: 12.5px;">0 / 55 %</span>
+                </div>
+                <div class="ratio-bar" data-bar="sp.tdsr"><div class="fill" style="width: 0;"></div></div>
+              </div>
+              <div data-show="sp.msrShow" style="margin-top: 12px;">
+                <div class="flex justify-between items-baseline" style="margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 500;">MSR (30 % cap)</span>
+                  <span class="num" data-out="sp.msrLabel" style="font-size: 12.5px;">0 / 30 %</span>
+                </div>
+                <div class="ratio-bar" data-bar="sp.msr"><div class="fill" style="width: 0;"></div></div>
+              </div>
+              <div class="divider-dashed" style="margin: 14px 0;"></div>
+              <div class="flex gap-2 flex-wrap">
+                <span class="pill pass" data-pill="sp.tdsr"><span class="dot"></span>TDSR pass</span>
+                <span class="pill pass" data-pill="sp.msr" data-show="sp.msrShow"><span class="dot"></span>MSR pass</span>
+                <span class="pill pass" data-pill="sp.ltv"><span class="dot"></span>Full LTV 75 %</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ REFINANCE ════════ -->
+      <div class="calc-panel" data-panel="refinance">
+        <div class="flex items-end justify-between" style="margin-bottom: 28px;">
+          <div>
+            <div class="sec-tag" style="margin-bottom: 6px;">Calculator · 05</div>
+            <div class="panel-title">Refinance</div>
+            <div class="panel-sub">Compare current vs. new package — break-even, lifetime savings net of redemption penalty and legal subsidy clawback.</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 480px 1fr; gap: 28px;">
+          <div class="card card-pad">
+            <div class="sec-tag" style="margin-bottom: 14px;">Current loan</div>
+            <div class="grid-form">
+              <div class="field" style="grid-column: 1 / -1;">
+                <label class="field-label">Outstanding loan</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="refinance.outstanding" min="0" step="1000"></div>
+              </div>
+              <div class="field">
+                <label class="field-label">Current rate</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="refinance.currentRate" min="0" max="10" step="0.05"><span class="input-suffix">% p.a.</span></div>
+              </div>
+              <div class="field">
+                <label class="field-label">Remaining tenure</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="refinance.remainingTenure" min="1" max="35" step="1"><span class="input-suffix">yrs</span></div>
+              </div>
+              <div class="field">
+                <label class="field-label">Lock-in remaining</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="refinance.lockinMonths" min="0" max="60" step="1"><span class="input-suffix">mths</span></div>
+                <div class="field-hint">Redemption penalty applies if &gt; 0.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">Redemption penalty</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="refinance.redemptionPct" min="0" max="5" step="0.05"><span class="input-suffix">%</span></div>
+                <div class="field-hint">Of outstanding, 0 if past lock-in.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">Subsidy clawback</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="refinance.clawback" min="0" step="100"></div>
+                <div class="field-hint">If within 3 yr clawback period.</div>
+              </div>
+            </div>
+
+            <div class="divider" style="margin: 18px 0;"></div>
+            <div class="sec-tag" style="margin-bottom: 14px;">New package</div>
+            <div class="grid-form">
+              <div class="field">
+                <label class="field-label">New rate</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="refinance.newRate" min="0" max="10" step="0.05"><span class="input-suffix">% p.a.</span></div>
+              </div>
+              <div class="field">
+                <label class="field-label">New tenure</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="refinance.newTenure" min="1" max="35" step="1"><span class="input-suffix">yrs</span></div>
+                <div class="field-hint">Reset or keep remaining.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">New legal fees</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="refinance.newLegal" min="0" step="100"></div>
+                <div class="field-hint">0 if subsidised.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">Comparison horizon</label>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="refinance.horizon" min="1" max="35" step="1"><span class="input-suffix">yrs</span></div>
+              </div>
+            </div>
+
+            <div class="divider" style="margin: 18px 0;"></div>
+            <div class="sec-tag" style="margin-bottom: 10px;">Rate packages for report</div>
+            <button type="button" class="rate-pick-trigger" onclick="openRateModal('refinance')" data-pick-trigger="refinance">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 11 10 15 14 21 8"/></svg>
+              <span>Pick rates</span>
+              <span class="pick-count" data-pick-count="refinance">0 / 4</span>
+            </button>
+            <div class="rate-chip-list" data-pick-chips="refinance"></div>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <div class="grid grid-cols-3 gap-3">
+              <div class="stat-tile">
+                <div class="stat-label">Current monthly</div>
+                <div class="stat-value display-num" data-out="rf.currentMonthly">$ 0</div>
+              </div>
+              <div class="stat-tile accent">
+                <div class="stat-label">New monthly</div>
+                <div class="stat-value display-num" data-out="rf.newMonthly">$ 0</div>
+              </div>
+              <div class="stat-tile">
+                <div class="stat-label">Monthly savings</div>
+                <div class="stat-value display-num" data-out="rf.monthlySaving">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="rf.monthlySavingNote"></div>
+              </div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Switching cost &amp; break-even</div>
+              <div class="res-row"><div><div class="res-label">Redemption penalty</div></div><div class="res-value num" data-out="rf.penalty">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Subsidy clawback</div></div><div class="res-value num" data-out="rf.clawbackOut">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">New legal fees</div></div><div class="res-value num" data-out="rf.legalOut">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total switching cost</div></div><div class="res-value num" data-out="rf.totalCost" style="font-weight: 600;">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Break-even</div></div><div class="res-value num" data-out="rf.breakeven" style="font-weight: 600;">— mths</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Net savings</div>
+              <div class="res-row"><div><div class="res-label">Year 1</div></div><div class="res-value num" data-out="rf.save1">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Year 3</div></div><div class="res-value num" data-out="rf.save3">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label" data-out="rf.saveHorizonLabel">Year 5</div></div><div class="res-value num accent-text" data-out="rf.saveHorizon" style="font-weight: 600;">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Cumulative net savings</div>
+              <div style="height: 220px;"><canvas id="chart-refi"></canvas></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ RATES (standalone) ════════ -->
+      <div class="calc-panel" data-panel="rates">
+        <div class="flex items-end justify-between" style="margin-bottom: 28px;">
+          <div>
+            <div class="sec-tag" style="margin-bottom: 6px;">Calculator · 06</div>
+            <div class="panel-title">Rate Library</div>
+            <div class="panel-sub" data-out="ratesPanelSub">Loading rates from spreadsheet…</div>
+          </div>
+          <div class="hidden md:flex items-center gap-2">
+            <span class="chip" data-out="ratesPanelStamp">—</span>
+            <button class="btn-secondary" onclick="reloadRates()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline; vertical-align: -2px; margin-right: 6px;"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              Reload
+            </button>
+          </div>
+        </div>
+        <div class="card" style="overflow: hidden;">
+          <div id="rates-panel-host"></div>
+        </div>
+      </div>
+
+      <div class="faint" style="font-size: 11px; margin-top: 48px; line-height: 1.6; max-width: 720px;">
+        Indicative figures only. Subject to bank credit assessment, valuation, and prevailing IRAS / MAS / HDB rules. Stress-test rate of 4 % is the MAS minimum for residential TDSR / MSR computations. ABSD reflects rates effective 27 Apr 2023.
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     RATE PICKER MODAL
+     ═══════════════════════════════════════════════════════════════ -->
+<div id="rate-modal" class="modal-overlay" onclick="if(event.target===this) closeRateModal()">
+  <div class="modal-shell">
+    <div class="modal-header">
+      <div>
+        <div class="display" style="font-size: 22px; font-weight: 500;">Pick rate packages</div>
+        <div class="muted" style="font-size: 12.5px; margin-top: 2px;" id="rate-modal-sub">Up to 4 will appear in the client report.</div>
+      </div>
+      <button class="modal-close" onclick="closeRateModal()" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div id="rate-picker-host"></div>
+    </div>
+    <div class="modal-footer">
+      <span class="muted" style="font-size: 12.5px;" id="rate-modal-count">0 / 4 selected</span>
+      <button class="btn-ghost" onclick="clearPicks()" type="button">Clear all</button>
+      <button class="btn-secondary" style="margin-left: auto;" onclick="closeRateModal()" type="button">Close</button>
+      <button class="btn-primary" onclick="closeRateModal()" type="button">Apply</button>
+    </div>
+  </div>
+</div>
+
+<div id="report"></div>
+
+<div id="gen-overlay" class="gen-overlay">
+  <div class="gen-card">
+    <div class="spinner"></div>
+    <div>
+      <div style="font-weight: 600; font-size: 14px;">Generating PDF…</div>
+      <div class="muted" style="font-size: 12px; margin-top: 2px;">Rendering report</div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   SINGAPORE MORTGAGE RULES — last reviewed Apr 2026
+   ═══════════════════════════════════════════════════════════════ */
+const RULES = {
+  bsd: [
+    { width: 180000, rate: 0.01 },
+    { width: 180000, rate: 0.02 },
+    { width: 640000, rate: 0.03 },
+    { width: 500000, rate: 0.04 },
+    { width: 1500000, rate: 0.05 },
+    { width: Infinity, rate: 0.06 },
+  ],
+  absd: {
+    citizen:   [0.00, 0.20, 0.30],
+    pr:        [0.05, 0.30, 0.35],
+    foreigner: [0.60, 0.60, 0.60],
+  },
+  tdsr: 0.55,
+  msr: 0.30,
+  stressRate: 0.04,
+  variableHaircut: 0.30,
+  cpfAccrual: 0.026,                 // 2.5 % OA + 0.1 % effective accrued rate
+  ltv: {
+    fullFirst: 0.75,
+    reducedFirst: 0.55,
+    fullSecond: 0.45,
+    reducedSecond: 0.25,
+    fullThirdPlus: 0.35,
+    reducedThirdPlus: 0.15,
+  },
+  cashMin: {
+    fullFirst: 0.05,
+    reducedFirst: 0.10,
+    secondPlus: 0.25,
+  },
+  // Absolute hard caps
+  maxTenure:        { hdb: 30, private: 35 },
+  // Caps for full LTV (75 %); past these, LTV drops to 55 %
+  maxTenureFullLtv: { hdb: 25, private: 30 },
+  retireAge: 65,
+  defaultLegalFees: 2800,
+  defaultValuationFee: 400,
+  defaultAgentRate: 0.02,
+  gst: 0.09,
+  absdRemissionMonths: 6,
+  // Fund boosters
+  pledgedDivisor: 48,                // 4 yrs
+  showHaircut: 0.30,
+  maxBorrowers: 4,
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════════════════════════ */
+function defaultBorrower(seed = {}) {
+  return Object.assign(
+    { age: 35, fixedIncome: 0, variableIncome: 0, pledgedFunds: 0, showFunds: 0 },
+    seed
+  );
+}
+
+const state = {
+  client: { name: '', date: new Date().toISOString().slice(0,10) },
+  active: 'affordability',
+  affordability: {
+    propertyType: 'private',
+    ltvScenario: 'full',           // 'full' | 'reduced'
+    borrowers: [defaultBorrower({ age: 35, fixedIncome: 12000 })],
+    commitments: 500, cash: 200000, cpf: 150000,
+  },
+  purchaseHdb: {
+    price: 700000, tenure: 25, rate: 3.0,
+    citizenship: 'citizen', propertyCount: '1',
+    cpfAvailable: 100000,
+    borrowers: [defaultBorrower({ age: 35, fixedIncome: 8000 })],
+    commitments: 300,
+  },
+  purchasePrivate: {
+    price: 1800000, tenure: 30, rate: 3.5,
+    citizenship: 'citizen', propertyCount: '1',
+    cpfAvailable: 200000,
+    borrowers: [defaultBorrower({ age: 38, fixedIncome: 18000 })],
+    commitments: 800,
+  },
+  sellPurchase: {
+    salePrice: 1100000, outstandingLoan: 380000,
+    cpfUsed: 220000, cpfYears: 12,
+    agentRate: 2.0,
+    newPrice: 1900000, newType: 'private', newCitizenship: 'citizen',
+    bridgingNeeded: 'no',
+    newTenure: 28, newRate: 3.5,
+    borrowers: [defaultBorrower({ age: 42, fixedIncome: 18000 })],
+    commitments: 800,
+  },
+  refinance: {
+    outstanding: 800000, currentRate: 4.0, remainingTenure: 22,
+    lockinMonths: 0, redemptionPct: 0, clawback: 0,
+    newRate: 2.65, newTenure: 22, newLegal: 0, horizon: 5,
+  },
+  // Selected rate package indices (into RATES.packages) per calculator
+  picks: {
+    affordability: [],
+    purchaseHdb: [],
+    purchasePrivate: [],
+    sellPurchase: [],
+    refinance: [],
+  },
+  // Rate-picker UI state
+  pickerCtx: null,    // active calc key when modal is open, or 'standalone'
+  rateFilters: {
+    section: 'all',   // 'all' | 'VARIABLE RATES' | 'FIXED RATES' | 'COMBO'
+    lender: 'all',
+    search: '',
+    sortKey: 'y1',    // y1, y2, y3, lender, lockIn
+    sortDir: 'asc',
+  },
+};
+
+// Rates data, populated by loadRates()
+const RATES = { packages: [], dateStamp: '', sora: {}, loaded: false, error: '' };
+
+/* ═══════════════════════════════════════════════════════════════
+   FORMATTERS & HELPERS
+   ═══════════════════════════════════════════════════════════════ */
+const fmt = {
+  money: (n, d=0) => {
+    if (!isFinite(n)) return '$ 0';
+    const s = Math.abs(n).toLocaleString('en-SG', { minimumFractionDigits: d, maximumFractionDigits: d });
+    return (n < 0 ? '- ' : '') + '$ ' + s;
+  },
+  pct: (n, d=2) => (isFinite(n) ? (n*100).toFixed(d) + ' %' : '— %'),
+  num: (n, d=0) => (isFinite(n) ? n.toLocaleString('en-SG', { minimumFractionDigits: d, maximumFractionDigits: d }) : '—'),
+};
+const $  = (sel, root=document) => root.querySelector(sel);
+const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+function getPath(obj, path) {
+  return path.split('.').reduce((a,k) => (a == null ? a : a[k]), obj);
+}
+function setPath(obj, path, val) {
+  const ks = path.split('.');
+  const last = ks.pop();
+  const t = ks.reduce((a,k) => a[k], obj);
+  t[last] = val;
+}
+function num(v) {
+  const n = Number(v);
+  return isFinite(n) ? n : 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FINANCIAL FUNCTIONS
+   ═══════════════════════════════════════════════════════════════ */
+function pmt(principal, annualRate, years) {
+  if (principal <= 0 || years <= 0) return 0;
+  const r = annualRate / 12;
+  const n = years * 12;
+  if (r === 0) return principal / n;
+  return principal * r * Math.pow(1+r, n) / (Math.pow(1+r, n) - 1);
+}
+function loanFromMonthly(monthly, annualRate, years) {
+  if (monthly <= 0 || years <= 0) return 0;
+  const r = annualRate / 12;
+  const n = years * 12;
+  if (r === 0) return monthly * n;
+  return monthly * (Math.pow(1+r, n) - 1) / (r * Math.pow(1+r, n));
+}
+function bsd(price) {
+  let remaining = Math.max(0, price);
+  let total = 0;
+  for (const band of RULES.bsd) {
+    if (remaining <= 0) break;
+    const taxable = Math.min(remaining, band.width);
+    total += taxable * band.rate;
+    remaining -= taxable;
+  }
+  return total;
+}
+function absdRate(citizenship, propertyCount) {
+  const idx = Math.min(2, Math.max(0, propertyCount - 1));
+  return RULES.absd[citizenship][idx];
+}
+function cpfRefund(used, years) {
+  return num(used) * Math.pow(1 + RULES.cpfAccrual, num(years));
+}
+// Income-Weighted Average Age. If all incomes are zero, falls back to simple mean.
+function computeIwaa(borrowers) {
+  let totalIncome = 0, weightedAge = 0;
+  borrowers.forEach(b => {
+    const inc = num(b.fixedIncome) + num(b.variableIncome);
+    weightedAge += num(b.age) * inc;
+    totalIncome += inc;
+  });
+  if (totalIncome > 0) return weightedAge / totalIncome;
+  if (borrowers.length === 0) return 35;
+  return borrowers.reduce((a, b) => a + num(b.age), 0) / borrowers.length;
+}
+// Effective income across all borrowers, after variable-income haircut
+function totalEffectiveIncome(borrowers) {
+  return borrowers.reduce((sum, b) =>
+    sum + num(b.fixedIncome) + num(b.variableIncome) * (1 - RULES.variableHaircut),
+  0);
+}
+// Per-month income boost from pledged + show funds
+function totalFundsBoost(borrowers) {
+  return borrowers.reduce((sum, b) =>
+    sum + (num(b.pledgedFunds) * 1.0 + num(b.showFunds) * RULES.showHaircut) / RULES.pledgedDivisor,
+  0);
+}
+function pledgedBoost(borrowers) {
+  return borrowers.reduce((sum, b) => sum + num(b.pledgedFunds) / RULES.pledgedDivisor, 0);
+}
+function showBoost(borrowers) {
+  return borrowers.reduce((sum, b) => sum + num(b.showFunds) * RULES.showHaircut / RULES.pledgedDivisor, 0);
+}
+// LTV (first loan) — full if BOTH within full-LTV tenure cap AND age + tenure ≤ 65
+function ltvForFirstLoan(tenure, iwaa, propType) {
+  const fullLtvCap = propType === 'hdb' ? RULES.maxTenureFullLtv.hdb : RULES.maxTenureFullLtv.private;
+  const tooLong = tenure > fullLtvCap;
+  const tooOld = (iwaa + tenure) > RULES.retireAge;
+  return (tooLong || tooOld) ? RULES.ltv.reducedFirst : RULES.ltv.fullFirst;
+}
+function cashMinForFirst(ltv) {
+  return ltv === RULES.ltv.reducedFirst ? RULES.cashMin.reducedFirst : RULES.cashMin.fullFirst;
+}
+// Best tenure for a target LTV scenario, given IWAA
+function tenureForScenario(propType, iwaa, scenario) {
+  const ageRoom = RULES.retireAge - iwaa;
+  if (scenario === 'reduced') {
+    const cap = propType === 'hdb' ? RULES.maxTenure.hdb : RULES.maxTenure.private;
+    return Math.max(5, Math.min(cap, 35));
+  }
+  // full LTV scenario
+  const fullCap = propType === 'hdb' ? RULES.maxTenureFullLtv.hdb : RULES.maxTenureFullLtv.private;
+  return Math.max(5, Math.min(fullCap, ageRoom));
+}
+function amortSeries(principal, annualRate, years) {
+  const m = pmt(principal, annualRate, years);
+  const r = annualRate / 12;
+  let balance = principal;
+  const series = [];
+  for (let y = 1; y <= years; y++) {
+    let interestY = 0, principalY = 0;
+    for (let mo = 0; mo < 12; mo++) {
+      const interest = balance * r;
+      const principalP = m - interest;
+      interestY += interest;
+      principalY += principalP;
+      balance -= principalP;
+      if (balance < 0) balance = 0;
+    }
+    series.push({ year: y, principal: principalY, interest: interestY, balance });
+  }
+  return series;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BORROWER CARDS — dynamic render + bind
+   ═══════════════════════════════════════════════════════════════ */
+function renderBorrowers(calcKey) {
+  const calc = state[calcKey];
+  if (!calc || !calc.borrowers) return;
+  const container = $('[data-borrowers="' + calcKey + '"]');
+  if (!container) return;
+
+  let html = '<div class="sec-tag" style="margin-bottom: 14px;">Borrowers</div>';
+
+  calc.borrowers.forEach((b, idx) => {
+    const removable = idx > 0;
+    const boostOpen = (num(b.pledgedFunds) > 0 || num(b.showFunds) > 0);
+    html += `
+      <div class="borrower-card" data-borrower-idx="${idx}">
+        <div class="borrower-header">
+          <span class="borrower-title">Borrower ${idx + 1}</span>
+          ${removable ? `<button type="button" class="btn-rm-borrower" onclick="removeBorrower('${calcKey}', ${idx})">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Remove
+          </button>` : ''}
+        </div>
+        <div class="grid-form">
+          <div class="field">
+            <label class="field-label">Age</label>
+            <div class="input-wrap">
+              <input type="number" class="field-input has-suffix" data-borrower="${calcKey}.${idx}.age" min="21" max="75" step="1" value="${b.age}">
+              <span class="input-suffix">yrs</span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">Fixed monthly income</label>
+            <div class="input-wrap">
+              <span class="input-prefix">$</span>
+              <input type="number" class="field-input has-prefix" data-borrower="${calcKey}.${idx}.fixedIncome" min="0" step="100" value="${b.fixedIncome}">
+            </div>
+          </div>
+          <div class="field" style="grid-column: 1 / -1;">
+            <label class="field-label">Variable income <span class="normal">(30 % haircut)</span></label>
+            <div class="input-wrap">
+              <span class="input-prefix">$</span>
+              <input type="number" class="field-input has-prefix" data-borrower="${calcKey}.${idx}.variableIncome" min="0" step="100" value="${b.variableIncome}">
+            </div>
+          </div>
+        </div>
+
+        <details class="boost-details" ${boostOpen ? 'open' : ''}>
+          <summary>Cash flow boosters <span class="faint" style="font-weight:400; letter-spacing:0; text-transform:none; margin-left:4px;">(optional)</span></summary>
+          <div class="grid-form" style="margin-top: 10px;">
+            <div class="field">
+              <label class="field-label">Pledged funds <span class="normal">(4 y+)</span></label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" class="field-input has-prefix" data-borrower="${calcKey}.${idx}.pledgedFunds" min="0" step="1000" value="${b.pledgedFunds || 0}">
+              </div>
+              <div class="field-hint">100 % &divide; 48 mths</div>
+            </div>
+            <div class="field">
+              <label class="field-label">Show funds</label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" class="field-input has-prefix" data-borrower="${calcKey}.${idx}.showFunds" min="0" step="1000" value="${b.showFunds || 0}">
+              </div>
+              <div class="field-hint">30 % &divide; 48 mths</div>
+            </div>
+          </div>
+        </details>
+      </div>`;
+  });
+
+  const canAdd = calc.borrowers.length < RULES.maxBorrowers;
+  html += `<button type="button" class="btn-add-borrower" onclick="addBorrower('${calcKey}')" ${canAdd ? '' : 'disabled'}>
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Add borrower ${calc.borrowers.length}/${RULES.maxBorrowers}
+  </button>`;
+
+  // IWAA + summary
+  const iwaa = computeIwaa(calc.borrowers);
+  const totalEff = totalEffectiveIncome(calc.borrowers);
+  const totalBoost = totalFundsBoost(calc.borrowers);
+  html += `<div class="iwaa-summary">
+    <div><span class="label">IWAA</span><span class="value"> ${iwaa.toFixed(1)} yrs</span></div>
+    <div><span class="label">Effective income</span><span class="value"> ${fmt.money(totalEff)}</span></div>
+    ${totalBoost > 0 ? `<div><span class="label">+ Funds boost</span><span class="value"> ${fmt.money(totalBoost)}</span></div>` : ''}
+  </div>`;
+
+  container.innerHTML = html;
+  bindBorrowerInputs(container);
+}
+
+function bindBorrowerInputs(container) {
+  container.querySelectorAll('[data-borrower]').forEach(el => {
+    const handler = () => {
+      const path = el.dataset.borrower; // calcKey.idx.field
+      const [calcKey, idx, field] = path.split('.');
+      state[calcKey].borrowers[+idx][field] = num(el.value);
+      saveState();
+      renderBorrowers(calcKey);
+      renderAll();
+    };
+    el.addEventListener('input', handler);
+    el.addEventListener('change', handler);
+  });
+}
+
+window.addBorrower = function (calcKey) {
+  const calc = state[calcKey];
+  if (calc.borrowers.length >= RULES.maxBorrowers) return;
+  calc.borrowers.push(defaultBorrower({ age: 35, fixedIncome: 0 }));
+  saveState();
+  renderBorrowers(calcKey);
+  renderAll();
+};
+
+window.removeBorrower = function (calcKey, idx) {
+  const calc = state[calcKey];
+  if (idx === 0 || calc.borrowers.length <= 1) return;
+  calc.borrowers.splice(idx, 1);
+  saveState();
+  renderBorrowers(calcKey);
+  renderAll();
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   CALCULATORS
+   ═══════════════════════════════════════════════════════════════ */
+function calcAffordability(s) {
+  const isHdb = s.propertyType === 'hdb';
+  const iwaa = computeIwaa(s.borrowers);
+  const totalEff = totalEffectiveIncome(s.borrowers);
+  const fundsBoost = totalFundsBoost(s.borrowers);
+  const pBoost = pledgedBoost(s.borrowers);
+  const sBoost = showBoost(s.borrowers);
+  const eff = totalEff + fundsBoost;
+  const tdsrCap = eff * RULES.tdsr;
+  const msrCap = eff * RULES.msr;
+  const tdsrAvailable = Math.max(0, tdsrCap - num(s.commitments));
+  const msrAvailable = isHdb ? msrCap : Infinity;
+  const eligibleMonthly = Math.max(0, Math.min(tdsrAvailable, msrAvailable));
+  const scenario = s.ltvScenario || 'full';
+  const ltv = scenario === 'reduced' ? RULES.ltv.reducedFirst : RULES.ltv.fullFirst;
+  const tenure = tenureForScenario(s.propertyType, iwaa, scenario);
+  const maxLoan = loanFromMonthly(eligibleMonthly, RULES.stressRate, tenure);
+  const maxProperty = maxLoan / ltv;
+  const cashPct = scenario === 'reduced' ? RULES.cashMin.reducedFirst : RULES.cashMin.fullFirst;
+  const cashMin = maxProperty * cashPct;
+  const cpfBalance = maxProperty * (1 - ltv);
+  const fixedTotal = s.borrowers.reduce((a, b) => a + num(b.fixedIncome), 0);
+  const variableTotal = s.borrowers.reduce((a, b) => a + num(b.variableIncome) * (1 - RULES.variableHaircut), 0);
+  return {
+    isHdb, scenario,
+    iwaa, fixedTotal, variableTotal,
+    pBoost, sBoost, fundsBoost,
+    commit: num(s.commitments),
+    available: eligibleMonthly,
+    tenure, ltv, cashPct,
+    maxLoan, maxProperty,
+    cashMin,
+    cpfBalance,
+    tdsrPass: num(s.commitments) <= tdsrCap,
+    msrPass: !isHdb || true,
+  };
+}
+
+function calcPurchase(s, propType) {
+  const price = num(s.price);
+  const tenure = num(s.tenure);
+  const iwaa = computeIwaa(s.borrowers);
+  const rate = num(s.rate) / 100;
+  const isHdb = propType === 'hdb';
+  const propCount = parseInt(s.propertyCount, 10) || 1;
+  const ltv = ltvForFirstLoan(tenure, iwaa, propType);
+  const ltvFull = ltv === RULES.ltv.fullFirst;
+  const cashPct = cashMinForFirst(ltv);
+  const cpfPct = (1 - ltv) - cashPct;
+  const loan = price * ltv;
+  const monthly = pmt(loan, rate, tenure);
+  const monthlyStress = pmt(loan, RULES.stressRate, tenure);
+  const bsdAmt = bsd(price);
+  const absdR = absdRate(s.citizenship, propCount);
+  const absdAmt = price * absdR;
+  const cashDown = price * cashPct;
+  const cpfDown = price * cpfPct;
+  const legalFees = RULES.defaultLegalFees + RULES.defaultValuationFee;
+  const totalUpfront = cashDown + cpfDown + bsdAmt + absdAmt + legalFees;
+  const totalEff = totalEffectiveIncome(s.borrowers);
+  const fundsBoost = totalFundsBoost(s.borrowers);
+  const eff = totalEff + fundsBoost;
+  const tdsrRatio = (monthlyStress + num(s.commitments)) / Math.max(1, eff);
+  const msrRatio = isHdb ? monthlyStress / Math.max(1, eff) : 0;
+  const tdsrPass = tdsrRatio <= RULES.tdsr;
+  const msrPass = !isHdb || msrRatio <= RULES.msr;
+  const series = amortSeries(loan, rate, tenure);
+  const totalInterest = series.reduce((a, x) => a + x.interest, 0);
+  return {
+    propType, price, tenure, rate, iwaa,
+    citizenship: s.citizenship, propCount,
+    ltv, ltvFull, cashPct, cpfPct,
+    loan, monthly, monthlyStress,
+    bsd: bsdAmt, absdR, absd: absdAmt,
+    totalDuty: bsdAmt + absdAmt,
+    cashDown, cpfDown, legalFees, totalUpfront,
+    tdsrRatio, msrRatio, tdsrPass, msrPass,
+    series, totalInterest,
+    eff, fundsBoost,
+  };
+}
+
+function calcSellPurchase(s) {
+  const sale = num(s.salePrice);
+  const out = num(s.outstandingLoan);
+  const cpfUsed = num(s.cpfUsed);
+  const cpfYears = num(s.cpfYears);
+  const cpfAccruedTotal = cpfRefund(cpfUsed, cpfYears);
+  const cpfAccrued = cpfAccruedTotal - cpfUsed;
+  const agentFee = sale * (num(s.agentRate)/100) * (1 + RULES.gst);
+  const legalSell = 3000;
+  const netCash = Math.max(0, sale - out - cpfAccruedTotal - agentFee - legalSell);
+  const cpfRestored = cpfAccruedTotal;
+
+  const newPrice = num(s.newPrice);
+  const newType = s.newType;
+  const isHdb = newType === 'hdb';
+  const tenure = num(s.newTenure);
+  const rate = num(s.newRate) / 100;
+  const iwaa = computeIwaa(s.borrowers);
+  const ltv = ltvForFirstLoan(tenure, iwaa, newType);
+  const ltvFull = ltv === RULES.ltv.fullFirst;
+  const cashPct = cashMinForFirst(ltv);
+  const cpfPct = (1 - ltv) - cashPct;
+  const newLoan = newPrice * ltv;
+  const newDownpay = newPrice * (1 - ltv);
+  const newBsd = bsd(newPrice);
+  const propCount = 1;  // post-sale buyer
+  const absdR = absdRate(s.newCitizenship, propCount);
+  const absdUpfrontR = s.bridgingNeeded === 'yes' && s.newCitizenship === 'citizen'
+    ? absdRate(s.newCitizenship, 2)
+    : absdR;
+  const absdUpfront = newPrice * absdUpfrontR;
+  const absdRefund = (s.bridgingNeeded === 'yes' && s.newCitizenship === 'citizen')
+    ? newPrice * (absdUpfrontR - absdR)
+    : 0;
+  const newLegal = RULES.defaultLegalFees + RULES.defaultValuationFee;
+  const newTotalUpfront = newDownpay + newBsd + absdUpfront + newLegal;
+  const fundingFromSale = netCash + cpfRestored;
+  const cashGap = Math.max(0, newTotalUpfront - fundingFromSale);
+  const newMonthly = pmt(newLoan, rate, tenure);
+  const newMonthlyStress = pmt(newLoan, RULES.stressRate, tenure);
+  const newSeries = amortSeries(newLoan, rate, tenure);
+  const newTotalInterest = newSeries.reduce((a, x) => a + x.interest, 0);
+
+  // Servicing
+  const totalEff = totalEffectiveIncome(s.borrowers);
+  const fundsBoost = totalFundsBoost(s.borrowers);
+  const eff = totalEff + fundsBoost;
+  const tdsrRatio = (newMonthlyStress + num(s.commitments)) / Math.max(1, eff);
+  const msrRatio = isHdb ? newMonthlyStress / Math.max(1, eff) : 0;
+  const tdsrPass = tdsrRatio <= RULES.tdsr;
+  const msrPass = !isHdb || msrRatio <= RULES.msr;
+
+  return {
+    sale, out, cpfUsed, cpfYears, cpfAccrued, cpfRefundTotal: cpfAccruedTotal,
+    agentFee, legalSell, netCash, cpfRestored,
+    newPrice, newType, newLoan, newDownpay, newBsd,
+    ltv, ltvFull, cashPct, cpfPct,
+    absdR, absdUpfront, absdRefund, absdUpfrontR,
+    newLegal, newTotalUpfront, fundingFromSale, cashGap,
+    newMonthly, newTotalInterest, newMonthlyStress,
+    citizenship: s.newCitizenship, bridging: s.bridgingNeeded,
+    iwaa, tenure, isHdb,
+    tdsrRatio, msrRatio, tdsrPass, msrPass,
+    eff, fundsBoost,
+  };
+}
+
+function calcRefinance(s) {
+  const out = num(s.outstanding);
+  const curR = num(s.currentRate)/100;
+  const newR = num(s.newRate)/100;
+  const remT = num(s.remainingTenure);
+  const newT = num(s.newTenure);
+  const horizon = num(s.horizon);
+  const cur = pmt(out, curR, remT);
+  const nm = pmt(out, newR, newT);
+  const monthlySaving = cur - nm;
+  const penalty = num(s.lockinMonths) > 0 ? out * num(s.redemptionPct)/100 : 0;
+  const clawbackOut = num(s.clawback);
+  const legalOut = num(s.newLegal);
+  const totalCost = penalty + clawbackOut + legalOut;
+  const breakeven = monthlySaving > 0 ? totalCost / monthlySaving : Infinity;
+  const series = [];
+  let cum = -totalCost;
+  series.push({ month: 0, net: cum });
+  for (let m = 1; m <= horizon * 12; m++) {
+    cum += monthlySaving;
+    series.push({ month: m, net: cum });
+  }
+  const save1 = -totalCost + monthlySaving * 12;
+  const save3 = -totalCost + monthlySaving * 36;
+  const saveHorizon = -totalCost + monthlySaving * horizon * 12;
+  return {
+    cur, nm, monthlySaving,
+    penalty, clawback: clawbackOut, legal: legalOut, totalCost,
+    breakeven, series,
+    save1, save3, saveHorizon, horizon,
+  };
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER
+   ═══════════════════════════════════════════════════════════════ */
+function setOut(key, val) {
+  $$('[data-out="' + key + '"]').forEach(el => { el.textContent = val; });
+}
+function setBar(key, pct, max) {
+  $$('[data-bar="' + key + '"]').forEach(el => {
+    const fill = el.querySelector('.fill');
+    const overP = pct / max;
+    fill.style.width = Math.min(100, Math.max(0, overP * 100)) + '%';
+    el.classList.toggle('over', pct > max);
+  });
+}
+function setPill(key, pass) {
+  $$('[data-pill="' + key + '"]').forEach(el => {
+    el.classList.toggle('pass', pass);
+    el.classList.toggle('fail', !pass);
+    const k = el.dataset.pill || '';
+    const text = k.endsWith('msr') ? 'MSR' : k.endsWith('ltv') ? 'LTV' : 'TDSR';
+    const lbl = k.endsWith('ltv')
+      ? (pass ? 'Full LTV 75 %' : 'Reduced LTV 55 %')
+      : (pass ? text + ' pass' : text + ' fail');
+    el.lastChild.textContent = lbl;
+  });
+}
+function setShow(key, show) {
+  $$('[data-show="' + key + '"]').forEach(el => {
+    el.style.display = show ? '' : 'none';
+  });
+}
+
+let charts = {};
+
+function renderAffordability() {
+  const r = calcAffordability(state.affordability);
+  setOut('aff.maxPropertyPrice', fmt.money(r.maxProperty));
+  setOut('aff.maxPropertyNote',
+    `${(r.ltv*100).toFixed(0)} % LTV · ${r.tenure} y tenure · IWAA ${r.iwaa.toFixed(1)} y · ${r.isHdb ? 'HDB / EC' : 'Private'}`);
+  setOut('aff.maxLoan', fmt.money(r.maxLoan));
+  setOut('aff.maxLoanNote', `4 % stress · ${r.tenure} yrs`);
+  setOut('aff.eligibleMonthly', fmt.money(r.available));
+  setOut('aff.cashMin', fmt.money(r.cashMin));
+  setOut('aff.cashMinNote', `${(r.cashPct*100).toFixed(0)} % of price`);
+  setOut('aff.cpfBalance', fmt.money(r.cpfBalance - r.cashMin));
+  setOut('aff.cpfBalanceNote', `${((1 - r.ltv - r.cashPct)*100).toFixed(0)} % CPF / cash`);
+  setOut('aff.fixed', fmt.money(r.fixedTotal));
+  setOut('aff.variable', fmt.money(r.variableTotal));
+  setOut('aff.pledgedBoost', '+ ' + fmt.money(r.pBoost));
+  setOut('aff.showBoost', '+ ' + fmt.money(r.sBoost));
+  setOut('aff.commit', '- ' + fmt.money(r.commit));
+  setOut('aff.available', fmt.money(r.available));
+  setShow('aff.boostShow', r.fundsBoost > 0);
+  // Compliance — show commitments-only ratio (no mortgage yet)
+  const eff = r.fixedTotal + r.variableTotal + r.fundsBoost;
+  const tdsrUsedPct = r.commit / Math.max(1, eff);
+  setBar('aff.tdsr', tdsrUsedPct, RULES.tdsr);
+  setOut('aff.tdsrLabel', (tdsrUsedPct*100).toFixed(1) + ' / 55 %  (commits only)');
+  setShow('aff.msrShow', r.isHdb);
+  if (r.isHdb) {
+    setBar('aff.msr', 0, RULES.msr);
+    setOut('aff.msrLabel', '0.0 / 30 %  (no mortgage yet)');
+  }
+  setPill('aff.tdsr', r.tdsrPass);
+  setPill('aff.msr', r.msrPass);
+  // LTV scenario toggle UI sync
+  $$('[data-ltv-toggle="affordability"] .opt').forEach(el => {
+    el.classList.toggle('active', el.dataset.ltv === r.scenario);
+  });
+}
+
+function renderPurchase(stateKey, prefix, propType, chartId) {
+  const r = calcPurchase(state[stateKey], propType);
+  const isHdb = propType === 'hdb';
+  setOut(prefix + '.monthly', fmt.money(r.monthly));
+  setOut(prefix + '.monthlyNote', `at ${(r.rate*100).toFixed(2)} %, ${r.tenure} yrs · IWAA ${r.iwaa.toFixed(1)}`);
+  setOut(prefix + '.loan', fmt.money(r.loan));
+  setOut(prefix + '.ltvNote', `${(r.ltv*100).toFixed(0)} % LTV ${r.ltvFull ? '· full' : '· reduced'}`);
+  setOut(prefix + '.bsd', fmt.money(r.bsd));
+  setOut(prefix + '.absd', fmt.money(r.absd));
+  setOut(prefix + '.absdNote', describeAbsd(state[stateKey].citizenship, parseInt(state[stateKey].propertyCount)) + ' · ' + (r.absdR*100).toFixed(0) + ' %');
+  setOut(prefix + '.totalDuty', fmt.money(r.totalDuty));
+  setOut(prefix + '.cashDown', fmt.money(r.cashDown));
+  setOut(prefix + '.cashDownNote', (r.cashPct*100).toFixed(0) + ' % cash');
+  setOut(prefix + '.cpfDown', fmt.money(r.cpfDown));
+  setOut(prefix + '.cpfDownNote', (r.cpfPct*100).toFixed(0) + ' % CPF or cash');
+  setOut(prefix + '.dutyLine', fmt.money(r.totalDuty));
+  setOut(prefix + '.legalFees', fmt.money(r.legalFees));
+  setOut(prefix + '.totalUpfront', fmt.money(r.totalUpfront));
+  setOut(prefix + '.tdsrLabel', (r.tdsrRatio*100).toFixed(1) + ' / 55 %');
+  if (isHdb) setOut(prefix + '.msrLabel', (r.msrRatio*100).toFixed(1) + ' / 30 %');
+  setBar(prefix + '.tdsr', r.tdsrRatio, RULES.tdsr);
+  if (isHdb) setBar(prefix + '.msr', r.msrRatio, RULES.msr);
+  setPill(prefix + '.tdsr', r.tdsrPass);
+  if (isHdb) setPill(prefix + '.msr', r.msrPass);
+  setPill(prefix + '.ltv', r.ltvFull);
+  drawAmort(chartId, r.series);
+}
+
+function renderSellPurchase() {
+  const r = calcSellPurchase(state.sellPurchase);
+  setOut('sp.netCash', fmt.money(r.netCash));
+  setOut('sp.cashNeeded', fmt.money(r.cashGap));
+  setOut('sp.gapNote', r.cashGap > 0 ? 'After applying sale proceeds' : 'Fully covered by sale');
+  setOut('sp.salePriceOut', fmt.money(r.sale));
+  setOut('sp.lessOutstanding', '- ' + fmt.money(r.out));
+  setOut('sp.lessCpfRefund', '- ' + fmt.money(r.cpfRefundTotal));
+  setOut('sp.cpfRefundNote', fmt.money(r.cpfUsed) + ' principal + ' + fmt.money(r.cpfAccrued) + ' accrued');
+  setOut('sp.lessAgent', '- ' + fmt.money(r.agentFee));
+  setOut('sp.lessLegal', '- ' + fmt.money(r.legalSell));
+  setOut('sp.netCashOut', fmt.money(r.netCash));
+  setOut('sp.cpfRestored', fmt.money(r.cpfRestored));
+  setOut('sp.newPriceOut', fmt.money(r.newPrice));
+  setOut('sp.newLoan', fmt.money(r.newLoan));
+  setOut('sp.newLtvLabel', (r.ltv*100).toFixed(0) + ' %');
+  setOut('sp.newDownpay', fmt.money(r.newDownpay));
+  setOut('sp.newDownNote', `${(r.cashPct*100).toFixed(0)} % cash + ${(r.cpfPct*100).toFixed(0)} % CPF`);
+  setOut('sp.newBsd', fmt.money(r.newBsd));
+  setOut('sp.absdUpfront', fmt.money(r.absdUpfront));
+  setOut('sp.absdUpfrontNote', describeAbsd(r.citizenship, r.bridging === 'yes' ? 2 : 1) + ' · ' + (r.absdUpfrontR*100).toFixed(0) + ' %');
+  setOut('sp.absdRefund', '- ' + fmt.money(r.absdRefund));
+  setShow('sp.absdRefundShow', r.absdRefund > 0);
+  setOut('sp.newLegal', fmt.money(r.newLegal));
+  setOut('sp.newTotalUpfront', fmt.money(r.newTotalUpfront));
+  setOut('sp.fundingFromSale', '- ' + fmt.money(r.fundingFromSale));
+  setOut('sp.cashGap', fmt.money(r.cashGap));
+  setOut('sp.newMonthly', fmt.money(r.newMonthly));
+  setOut('sp.newTotalInterest', fmt.money(r.newTotalInterest));
+  setOut('sp.tdsrLabel', (r.tdsrRatio*100).toFixed(1) + ' / 55 %');
+  setBar('sp.tdsr', r.tdsrRatio, RULES.tdsr);
+  setShow('sp.msrShow', r.isHdb);
+  if (r.isHdb) {
+    setOut('sp.msrLabel', (r.msrRatio*100).toFixed(1) + ' / 30 %');
+    setBar('sp.msr', r.msrRatio, RULES.msr);
+  }
+  setPill('sp.tdsr', r.tdsrPass);
+  setPill('sp.msr', r.msrPass);
+  setPill('sp.ltv', r.ltvFull);
+}
+
+function renderRefinance() {
+  const r = calcRefinance(state.refinance);
+  setOut('rf.currentMonthly', fmt.money(r.cur));
+  setOut('rf.newMonthly', fmt.money(r.nm));
+  setOut('rf.monthlySaving', fmt.money(r.monthlySaving));
+  setOut('rf.monthlySavingNote', r.monthlySaving > 0 ? 'cash-flow positive' : (r.monthlySaving < 0 ? 'higher monthly' : 'flat'));
+  setOut('rf.penalty', fmt.money(r.penalty));
+  setOut('rf.clawbackOut', fmt.money(r.clawback));
+  setOut('rf.legalOut', fmt.money(r.legal));
+  setOut('rf.totalCost', fmt.money(r.totalCost));
+  setOut('rf.breakeven', isFinite(r.breakeven) && r.breakeven > 0 ? r.breakeven.toFixed(1) + ' mths' : '— mths');
+  setOut('rf.save1', fmt.money(r.save1));
+  setOut('rf.save3', fmt.money(r.save3));
+  setOut('rf.saveHorizon', fmt.money(r.saveHorizon));
+  setOut('rf.saveHorizonLabel', 'Year ' + r.horizon);
+  drawRefiChart(r);
+}
+
+function describeAbsd(citizenship, count) {
+  const c = citizenship === 'citizen' ? 'SG citizen' : citizenship === 'pr' ? 'SG PR' : 'Foreigner';
+  const n = count === 1 ? '1st' : count === 2 ? '2nd' : '3rd+';
+  return c + ' · ' + n + ' property';
+}
+
+function renderAll() {
+  renderAffordability();
+  renderPurchase('purchaseHdb', 'hdb', 'hdb', 'chart-hdb-amort');
+  renderPurchase('purchasePrivate', 'pvt', 'private', 'chart-pvt-amort');
+  renderSellPurchase();
+  renderRefinance();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CHARTS
+   ═══════════════════════════════════════════════════════════════ */
+const chartColors = {
+  ink: '#0B1220', muted: '#56657A', faint: '#94A3B8',
+  border: '#E5E7EB', accent: '#059669', accentSoft: 'rgba(5,150,105,.15)',
+};
+function drawAmort(canvasId, series) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (charts[canvasId]) charts[canvasId].destroy();
+  const labels = series.map(s => 'Y' + s.year);
+  charts[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Principal', data: series.map(s => Math.round(s.principal)), backgroundColor: chartColors.accent, borderRadius: 2, stack: 's', maxBarThickness: 14 },
+        { label: 'Interest', data: series.map(s => Math.round(s.interest)), backgroundColor: 'rgba(11,18,32,.18)', borderRadius: 2, stack: 's', maxBarThickness: 14 },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 8, boxHeight: 8, font: { family: 'Plus Jakarta Sans', size: 11 }, color: chartColors.muted, padding: 16 } },
+        tooltip: { callbacks: { label: c => c.dataset.label + ': ' + fmt.money(c.parsed.y) } },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Plus Jakarta Sans', size: 10 }, color: chartColors.faint, maxRotation: 0 } },
+        y: { stacked: true, grid: { color: chartColors.border, drawBorder: false }, ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: chartColors.faint, callback: v => '$ ' + (v/1000).toFixed(0) + 'k' } },
+      }
+    }
+  });
+}
+function drawRefiChart(r) {
+  const ctx = document.getElementById('chart-refi');
+  if (!ctx) return;
+  if (charts['chart-refi']) charts['chart-refi'].destroy();
+  const sampled = r.series.filter((_, i) => i % 3 === 0 || i === r.series.length - 1);
+  charts['chart-refi'] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: sampled.map(s => (s.month/12).toFixed(2) + ' yr'),
+      datasets: [{
+        label: 'Cumulative net saving',
+        data: sampled.map(s => Math.round(s.net)),
+        borderColor: chartColors.accent,
+        backgroundColor: chartColors.accentSoft,
+        fill: true, tension: 0.25,
+        borderWidth: 2, pointRadius: 0, pointHoverRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => 'Net: ' + fmt.money(c.parsed.y) } },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Plus Jakarta Sans', size: 10 }, color: chartColors.faint, maxTicksLimit: 8 } },
+        y: { grid: { color: chartColors.border, drawBorder: false }, ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: chartColors.faint, callback: v => fmt.money(v).replace('$ ','$') } },
+      }
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BINDING
+   ═══════════════════════════════════════════════════════════════ */
+function hydrateInputs() {
+  $$('[data-bind]').forEach(el => {
+    const path = el.dataset.bind;
+    const val = getPath(state, path);
+    if (val == null) return;
+    el.value = val;
+  });
+}
+function bindInputs() {
+  $$('[data-bind]').forEach(el => {
+    const path = el.dataset.bind;
+    const handler = () => {
+      const v = el.type === 'number' ? num(el.value) : el.value;
+      setPath(state, path, v);
+      saveState();
+      renderAll();
+    };
+    el.addEventListener('input', handler);
+    el.addEventListener('change', handler);
+  });
+  $('#client-name').addEventListener('input', e => { state.client.name = e.target.value; saveState(); });
+  $('#client-date').addEventListener('input', e => { state.client.date = e.target.value; saveState(); });
+  // LTV scenario toggles
+  $$('[data-ltv-toggle]').forEach(g => {
+    const calcKey = g.dataset.ltvToggle;
+    g.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        state[calcKey].ltvScenario = opt.dataset.ltv;
+        saveState();
+        renderAll();
+      });
+    });
+  });
+}
+function bindNav() {
+  $$('.nav-item').forEach(el => {
+    el.addEventListener('click', () => switchTab(el.dataset.tab));
+  });
+}
+function switchTab(tab) {
+  state.active = tab;
+  saveState();
+  $$('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.tab === tab));
+  $$('.calc-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === tab));
+  setTimeout(() => Object.values(charts).forEach(c => c.resize()), 50);
+  if (tab === 'rates') renderRatesPanel();
+}
+
+function renderAllBorrowers() {
+  ['affordability', 'purchaseHdb', 'purchasePrivate', 'sellPurchase'].forEach(renderBorrowers);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PERSIST
+   ═══════════════════════════════════════════════════════════════ */
+function saveState() {
+  try { localStorage.setItem('mc.state', JSON.stringify(state)); } catch(e) {}
+}
+function loadState() {
+  try {
+    const raw = localStorage.getItem('mc.state');
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    Object.keys(saved).forEach(k => {
+      if (typeof state[k] === 'object' && state[k] !== null && !Array.isArray(state[k])) {
+        state[k] = Object.assign({}, state[k], saved[k]);
+      } else {
+        state[k] = saved[k];
+      }
+    });
+    ['affordability', 'purchaseHdb', 'purchasePrivate', 'sellPurchase'].forEach(k => {
+      if (!Array.isArray(state[k].borrowers) || state[k].borrowers.length === 0) {
+        state[k].borrowers = [defaultBorrower({ age: 35, fixedIncome: 0 })];
+      }
+      state[k].borrowers = state[k].borrowers.map(b => defaultBorrower(b));
+    });
+    // Picks: ensure structure exists, all arrays
+    state.picks = Object.assign({
+      affordability: [], purchaseHdb: [], purchasePrivate: [], sellPurchase: [], refinance: [],
+    }, state.picks || {});
+    Object.keys(state.picks).forEach(k => {
+      if (!Array.isArray(state.picks[k])) state.picks[k] = [];
+    });
+    // Picker UI state — never persist transient
+    state.pickerCtx = null;
+  } catch(e) { console.error('loadState', e); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AUTH
+   ═══════════════════════════════════════════════════════════════ */
+const PASSCODE = 'danler321';
+function tryAuth(e) {
+  e.preventDefault();
+  const v = $('#auth-pw').value;
+  if (v === PASSCODE) {
+    sessionStorage.setItem('mc.auth', '1');
+    showApp();
+  } else {
+    $('#auth-error').style.display = 'block';
+    $('#auth-pw').value = '';
+  }
+  return false;
+}
+function showApp() {
+  $('#auth-gate').style.display = 'none';
+  $('#app').style.display = 'block';
+  loadState();
+  hydrateInputs();
+  $('#client-name').value = state.client.name || '';
+  $('#client-date').value = state.client.date || new Date().toISOString().slice(0,10);
+  renderAllBorrowers();
+  switchTab(state.active || 'affordability');
+  renderAll();
+  renderAllPickTriggers();
+  // Async-load rates spreadsheet, then re-render anything that depends on it
+  loadRates().then(() => {
+    renderRatesPanel();
+    renderAllPickTriggers();
+    if (state.pickerCtx) renderRatePicker(state.pickerCtx);
+  });
+}
+function logOut() {
+  sessionStorage.removeItem('mc.auth');
+  location.reload();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PDF REPORT
+   ═══════════════════════════════════════════════════════════════ */
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+function pdfBorrowersTable(borrowers, opts = {}) {
+  let rows = '';
+  borrowers.forEach((b, i) => {
+    const eff = num(b.fixedIncome) + num(b.variableIncome) * (1 - RULES.variableHaircut);
+    const boost = (num(b.pledgedFunds) + num(b.showFunds) * RULES.showHaircut) / RULES.pledgedDivisor;
+    rows += `<tr class="pdf-borrower-row">
+      <td><strong>Borrower ${i+1}</strong></td>
+      <td class="pdf-num">Age ${num(b.age)}</td>
+      <td class="pdf-num">Fixed ${fmt.money(num(b.fixedIncome))}</td>
+      <td class="pdf-num">Var ${fmt.money(num(b.variableIncome))}</td>
+      <td class="pdf-num">Eff ${fmt.money(eff)}</td>
+      <td class="pdf-num">${boost > 0 ? 'Boost ' + fmt.money(boost) : '—'}</td>
+    </tr>`;
+  });
+  return `<table class="pdf-table" style="margin-top: 8px;">
+    <tr style="border-bottom: 1px solid #E5E7EB;"><td colspan="6" style="padding-bottom: 4px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #94A3B8; font-weight: 600;">Per-borrower breakdown</td></tr>
+    ${rows}
+  </table>`;
+}
+
+function buildReport() {
+  const tab = state.active;
+  const niceTab = ({
+    'affordability': 'Affordability Analysis',
+    'purchase-hdb': 'New Purchase — HDB',
+    'purchase-private': 'New Purchase — Private Property',
+    'sell-purchase': 'Sell &amp; Purchase Analysis',
+    'refinance': 'Refinance Comparison',
+  })[tab];
+  const dateStr = new Date(state.client.date || Date.now()).toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' });
+  const clientName = state.client.name || '—';
+
+  // Map tab → state key for picks
+  const calcKey = ({
+    'affordability': 'affordability',
+    'purchase-hdb': 'purchaseHdb',
+    'purchase-private': 'purchasePrivate',
+    'sell-purchase': 'sellPurchase',
+    'refinance': 'refinance',
+  })[tab];
+
+  let body;
+  if (tab === 'affordability') body = pdfAffordability();
+  else if (tab === 'purchase-hdb') body = pdfPurchase('hdb');
+  else if (tab === 'purchase-private') body = pdfPurchase('private');
+  else if (tab === 'sell-purchase') body = pdfSellPurchase();
+  else if (tab === 'refinance') body = pdfRefinance();
+
+  const ratesPage = pdfRatesPage(calcKey);
+
+  return `
+    <div class="pdf-page">
+      <div style="display:flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <div class="pdf-cover-mark">N</div>
+          <div class="pdf-h3" style="margin-top: 22px;">Mortgage Analysis</div>
+          <div class="pdf-h1" style="margin-top: 8px; max-width: 440px;">${niceTab}</div>
+          <div style="font-size: 13px; color: #56657A; margin-top: 14px;">Prepared for <strong style="color:#0B1220;">${escapeHtml(clientName)}</strong></div>
+          <div style="font-size: 13px; color: #56657A; margin-top: 2px;">${dateStr}</div>
+        </div>
+        <div style="text-align: right; font-size: 11px; color: #56657A; line-height: 1.6;">
+          <div style="font-weight: 600; color: #0B1220;">Dan Ler</div>
+          <div>Nexus Mortgage SG</div>
+          <div style="margin-top: 6px;">Internal advisory document</div>
+        </div>
+      </div>
+      <div style="margin-top: 64px; border-top: 1px solid #E5E7EB; padding-top: 32px;">${body}</div>
+      <div style="position: absolute; bottom: 18mm; left: 16mm; right: 16mm; font-size: 9.5px; color: #94A3B8; line-height: 1.6;">
+        Indicative figures only. Subject to bank credit assessment, valuation, and prevailing IRAS, MAS, and HDB regulations.
+        Stress-test rate of 4 % is the MAS minimum used for residential TDSR / MSR computations. ABSD reflects rates effective 27 Apr 2023.
+        IWAA = Σ(age × income) ÷ Σ(income). CPF accrued at 2.6 % p.a.
+      </div>
+    </div>
+    ${ratesPage}
+  `;
+}
+
+function pdfAffordability() {
+  const r = calcAffordability(state.affordability);
+  const s = state.affordability;
+  return `
+    <div class="pdf-h3">Headline</div>
+    <div class="pdf-h2 pdf-num" style="margin-top: 8px; font-size: 44px; color: #047857;">${fmt.money(r.maxProperty)}</div>
+    <div style="font-size: 13px; color: #56657A; margin-top: 4px;">Maximum property price · ${r.isHdb ? 'HDB / EC' : 'Private'} · ${(r.ltv*100).toFixed(0)} % LTV · ${r.tenure} y tenure · IWAA ${r.iwaa.toFixed(1)} y</div>
+
+    <div style="margin-top: 32px;">
+      <div class="pdf-h3">Borrowers (${s.borrowers.length})</div>
+      ${pdfBorrowersTable(s.borrowers)}
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px;">
+      <div>
+        <div class="pdf-h3">Servicing capacity</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Total fixed income</td><td class="pdf-num">${fmt.money(r.fixedTotal)}</td></tr>
+          <tr><td>Total variable (after 30 % haircut)</td><td class="pdf-num">${fmt.money(r.variableTotal)}</td></tr>
+          ${r.pBoost > 0 ? `<tr><td>Pledged funds boost</td><td class="pdf-num">${fmt.money(r.pBoost)}</td></tr>` : ''}
+          ${r.sBoost > 0 ? `<tr><td>Show funds boost</td><td class="pdf-num">${fmt.money(r.sBoost)}</td></tr>` : ''}
+          <tr><td>TDSR cap (55 %)</td><td class="pdf-num">${fmt.money((r.fixedTotal + r.variableTotal + r.fundsBoost) * 0.55)}</td></tr>
+          ${r.isHdb ? `<tr><td>MSR cap (30 %)</td><td class="pdf-num">${fmt.money((r.fixedTotal + r.variableTotal + r.fundsBoost) * 0.30)}</td></tr>` : ''}
+          <tr><td>Less: existing commitments</td><td class="pdf-num">${fmt.money(r.commit)}</td></tr>
+          <tr><td><strong>Eligible monthly</strong></td><td class="pdf-num"><strong>${fmt.money(r.available)}</strong></td></tr>
+          <tr><td>Stress rate</td><td>4.00 % p.a.</td></tr>
+          <tr><td>Tenure used</td><td class="pdf-num">${r.tenure} yrs</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="pdf-h3">Indicative envelope</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Maximum loan</td><td class="pdf-num"><strong>${fmt.money(r.maxLoan)}</strong></td></tr>
+          <tr><td>Maximum property price</td><td class="pdf-num"><strong>${fmt.money(r.maxProperty)}</strong></td></tr>
+          <tr><td>LTV</td><td class="pdf-num">${(r.ltv*100).toFixed(0)} % (${r.scenario})</td></tr>
+          <tr><td>Cash component (${(r.cashPct*100).toFixed(0)} %)</td><td class="pdf-num">${fmt.money(r.cashMin)}</td></tr>
+          <tr><td>CPF / cash component</td><td class="pdf-num">${fmt.money(r.cpfBalance - r.cashMin)}</td></tr>
+          <tr><td>Total downpayment</td><td class="pdf-num">${fmt.money(r.cpfBalance)}</td></tr>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function pdfPurchase(propType) {
+  const stateKey = propType === 'hdb' ? 'purchaseHdb' : 'purchasePrivate';
+  const s = state[stateKey];
+  const r = calcPurchase(s, propType);
+  const isHdb = propType === 'hdb';
+  return `
+    <div class="pdf-h3">Headline</div>
+    <div class="pdf-h2 pdf-num" style="margin-top: 8px; font-size: 44px; color: #047857;">${fmt.money(r.monthly)}<span style="font-size: 18px; color: #56657A;">  / month</span></div>
+    <div style="font-size: 13px; color: #56657A; margin-top: 4px;">${(r.rate*100).toFixed(2)} % p.a. · ${r.tenure} yrs · loan ${fmt.money(r.loan)} · IWAA ${r.iwaa.toFixed(1)} y</div>
+
+    <div style="margin-top: 32px;">
+      <div class="pdf-h3">Borrowers (${s.borrowers.length})</div>
+      ${pdfBorrowersTable(s.borrowers)}
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px;">
+      <div>
+        <div class="pdf-h3">Property &amp; loan</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Property price</td><td class="pdf-num">${fmt.money(r.price)}</td></tr>
+          <tr><td>LTV</td><td class="pdf-num">${(r.ltv*100).toFixed(0)} % ${r.ltvFull ? '(full)' : '(reduced)'}</td></tr>
+          <tr><td>Loan amount</td><td class="pdf-num">${fmt.money(r.loan)}</td></tr>
+          <tr><td>Tenure</td><td class="pdf-num">${r.tenure} yrs</td></tr>
+          <tr><td>Interest rate</td><td class="pdf-num">${(r.rate*100).toFixed(2)} %</td></tr>
+          <tr><td>Citizenship · count</td><td>${describeAbsd(r.citizenship, r.propCount)}</td></tr>
+        </table>
+        <div class="pdf-h3" style="margin-top: 28px;">Stamp duty</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>BSD (1–6 % progressive)</td><td class="pdf-num">${fmt.money(r.bsd)}</td></tr>
+          <tr><td>ABSD (${(r.absdR*100).toFixed(0)} %)</td><td class="pdf-num">${fmt.money(r.absd)}</td></tr>
+          <tr><td><strong>Total duty</strong></td><td class="pdf-num"><strong>${fmt.money(r.totalDuty)}</strong></td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="pdf-h3">Up-front cash &amp; CPF</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Cash down-payment (${(r.cashPct*100).toFixed(0)} %)</td><td class="pdf-num">${fmt.money(r.cashDown)}</td></tr>
+          <tr><td>CPF / cash down-payment (${(r.cpfPct*100).toFixed(0)} %)</td><td class="pdf-num">${fmt.money(r.cpfDown)}</td></tr>
+          <tr><td>Stamp duty</td><td class="pdf-num">${fmt.money(r.totalDuty)}</td></tr>
+          <tr><td>Legal &amp; valuation fees</td><td class="pdf-num">${fmt.money(r.legalFees)}</td></tr>
+          <tr><td><strong>Total cash + CPF needed</strong></td><td class="pdf-num"><strong>${fmt.money(r.totalUpfront)}</strong></td></tr>
+        </table>
+        <div class="pdf-h3" style="margin-top: 28px;">Compliance — at 4 % stress</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Effective income (incl. boosters)</td><td class="pdf-num">${fmt.money(r.eff)}</td></tr>
+          <tr><td>TDSR (55 % cap)</td><td class="pdf-num">${(r.tdsrRatio*100).toFixed(1)} %  ${r.tdsrPass ? '✓ Pass' : '✗ Fail'}</td></tr>
+          ${isHdb ? `<tr><td>MSR (30 % cap)</td><td class="pdf-num">${(r.msrRatio*100).toFixed(1)} %  ${r.msrPass ? '✓ Pass' : '✗ Fail'}</td></tr>` : ''}
+          <tr><td>Total interest over tenure</td><td class="pdf-num">${fmt.money(r.totalInterest)}</td></tr>
+          <tr><td>Total cost of loan</td><td class="pdf-num">${fmt.money(r.loan + r.totalInterest)}</td></tr>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function pdfSellPurchase() {
+  const r = calcSellPurchase(state.sellPurchase);
+  const s = state.sellPurchase;
+  return `
+    <div class="pdf-h3">Headline</div>
+    <div class="pdf-h2 pdf-num" style="margin-top: 8px; font-size: 44px; color: ${r.cashGap > 0 ? '#0B1220' : '#047857'};">${fmt.money(r.cashGap)}</div>
+    <div style="font-size: 13px; color: #56657A; margin-top: 4px;">Cash gap to top-up · IWAA ${r.iwaa.toFixed(1)} y · ${(r.ltv*100).toFixed(0)} % LTV</div>
+
+    <div style="margin-top: 32px;">
+      <div class="pdf-h3">Borrowers (${s.borrowers.length})</div>
+      ${pdfBorrowersTable(s.borrowers)}
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px;">
+      <div>
+        <div class="pdf-h3">Sale waterfall</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Sale price</td><td class="pdf-num">${fmt.money(r.sale)}</td></tr>
+          <tr><td>Less: outstanding loan</td><td class="pdf-num">- ${fmt.money(r.out)}</td></tr>
+          <tr><td>Less: CPF refund (incl. 2.6 % accrued)</td><td class="pdf-num">- ${fmt.money(r.cpfRefundTotal)}</td></tr>
+          <tr><td>Less: agent commission (incl. GST)</td><td class="pdf-num">- ${fmt.money(r.agentFee)}</td></tr>
+          <tr><td>Less: legal &amp; conveyancing</td><td class="pdf-num">- ${fmt.money(r.legalSell)}</td></tr>
+          <tr><td><strong>Net cash to seller</strong></td><td class="pdf-num"><strong>${fmt.money(r.netCash)}</strong></td></tr>
+          <tr><td>CPF restored to OA</td><td class="pdf-num">${fmt.money(r.cpfRestored)}</td></tr>
+        </table>
+        <div class="pdf-h3" style="margin-top: 22px;">Servicing — new mortgage</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Monthly @ entered rate</td><td class="pdf-num">${fmt.money(r.newMonthly)}</td></tr>
+          <tr><td>Monthly @ 4 % stress</td><td class="pdf-num">${fmt.money(r.newMonthlyStress)}</td></tr>
+          <tr><td>TDSR ratio</td><td class="pdf-num">${(r.tdsrRatio*100).toFixed(1)} %  ${r.tdsrPass ? '✓ Pass' : '✗ Fail'}</td></tr>
+          ${r.isHdb ? `<tr><td>MSR ratio</td><td class="pdf-num">${(r.msrRatio*100).toFixed(1)} %  ${r.msrPass ? '✓ Pass' : '✗ Fail'}</td></tr>` : ''}
+        </table>
+      </div>
+      <div>
+        <div class="pdf-h3">New property — financial requirement</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Property price</td><td class="pdf-num">${fmt.money(r.newPrice)}</td></tr>
+          <tr><td>Loan @ ${(r.ltv*100).toFixed(0)} % LTV</td><td class="pdf-num">${fmt.money(r.newLoan)}</td></tr>
+          <tr><td>Down-payment (${((1-r.ltv)*100).toFixed(0)} %)</td><td class="pdf-num">${fmt.money(r.newDownpay)}</td></tr>
+          <tr><td>BSD</td><td class="pdf-num">${fmt.money(r.newBsd)}</td></tr>
+          <tr><td>ABSD upfront (${(r.absdUpfrontR*100).toFixed(0)} %)</td><td class="pdf-num">${fmt.money(r.absdUpfront)}</td></tr>
+          ${r.absdRefund > 0 ? `<tr><td>ABSD remission</td><td class="pdf-num">- ${fmt.money(r.absdRefund)}</td></tr>` : ''}
+          <tr><td>Legal &amp; valuation fees</td><td class="pdf-num">${fmt.money(r.newLegal)}</td></tr>
+          <tr><td><strong>Total upfront</strong></td><td class="pdf-num"><strong>${fmt.money(r.newTotalUpfront)}</strong></td></tr>
+          <tr><td>Less: net cash + CPF from sale</td><td class="pdf-num">- ${fmt.money(r.fundingFromSale)}</td></tr>
+          <tr><td><strong>Cash gap</strong></td><td class="pdf-num"><strong>${fmt.money(r.cashGap)}</strong></td></tr>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function pdfRefinance() {
+  const r = calcRefinance(state.refinance);
+  const s = state.refinance;
+  return `
+    <div class="pdf-h3">Headline</div>
+    <div class="pdf-h2 pdf-num" style="margin-top: 8px; font-size: 44px; color: ${r.monthlySaving > 0 ? '#047857' : '#DC2626'};">${fmt.money(r.monthlySaving)}<span style="font-size: 18px; color: #56657A;">  / month</span></div>
+    <div style="font-size: 13px; color: #56657A; margin-top: 4px;">${r.monthlySaving > 0 ? 'Saving' : 'Increase'} from refinancing · break-even ${isFinite(r.breakeven) ? r.breakeven.toFixed(1) + ' months' : 'not reached'}</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 36px;">
+      <div>
+        <div class="pdf-h3">Comparison</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Outstanding loan</td><td class="pdf-num">${fmt.money(num(s.outstanding))}</td></tr>
+          <tr><td>Current rate · tenure</td><td class="pdf-num">${num(s.currentRate).toFixed(2)} %  ·  ${num(s.remainingTenure)} yrs</td></tr>
+          <tr><td>New rate · tenure</td><td class="pdf-num">${num(s.newRate).toFixed(2)} %  ·  ${num(s.newTenure)} yrs</td></tr>
+          <tr><td>Current monthly</td><td class="pdf-num">${fmt.money(r.cur)}</td></tr>
+          <tr><td>New monthly</td><td class="pdf-num">${fmt.money(r.nm)}</td></tr>
+          <tr><td><strong>Monthly saving</strong></td><td class="pdf-num"><strong>${fmt.money(r.monthlySaving)}</strong></td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="pdf-h3">Switching cost</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Redemption penalty</td><td class="pdf-num">${fmt.money(r.penalty)}</td></tr>
+          <tr><td>Subsidy clawback</td><td class="pdf-num">${fmt.money(r.clawback)}</td></tr>
+          <tr><td>New legal fees</td><td class="pdf-num">${fmt.money(r.legal)}</td></tr>
+          <tr><td><strong>Total switching cost</strong></td><td class="pdf-num"><strong>${fmt.money(r.totalCost)}</strong></td></tr>
+          <tr><td><strong>Break-even</strong></td><td class="pdf-num"><strong>${isFinite(r.breakeven) && r.breakeven > 0 ? r.breakeven.toFixed(1) + ' months' : '—'}</strong></td></tr>
+        </table>
+        <div class="pdf-h3" style="margin-top: 22px;">Net savings (after switching cost)</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Year 1</td><td class="pdf-num">${fmt.money(r.save1)}</td></tr>
+          <tr><td>Year 3</td><td class="pdf-num">${fmt.money(r.save3)}</td></tr>
+          <tr><td>Year ${r.horizon}</td><td class="pdf-num"><strong>${fmt.money(r.saveHorizon)}</strong></td></tr>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+async function generatePdf() {
+  $('#gen-overlay').classList.add('show');
+  const reportEl = $('#report');
+  reportEl.innerHTML = buildReport();
+  await new Promise(r => setTimeout(r, 80));
+
+  const tabName = state.active.replace(/-/g, '_');
+  const clientPart = (state.client.name || 'client').replace(/[^a-z0-9]+/gi, '_').toLowerCase();
+  const dateStr = (state.client.date || new Date().toISOString().slice(0,10)).replace(/-/g,'');
+  const filename = `mortgage_${tabName}_${clientPart}_${dateStr}.pdf`;
+
+  try {
+    await html2pdf().set({
+      margin: 0,
+      filename,
+      image: { type: 'jpeg', quality: 0.95 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#FFFFFF' },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    }).from(reportEl).save();
+    showToast('PDF saved');
+  } catch (err) {
+    console.error(err);
+    showToast('Failed to generate PDF — check console');
+  } finally {
+    $('#gen-overlay').classList.remove('show');
+    reportEl.innerHTML = '';
+  }
+}
+
+function showToast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RATES — parse xlsx, picker modal, standalone panel
+   ═══════════════════════════════════════════════════════════════ */
+function parseRateNumber(text) {
+  if (text == null || text === '') return null;
+  const s = String(text);
+  const eq = s.match(/=\s*([\d.]+)\s*%/);
+  if (eq) return parseFloat(eq[1]);
+  const all = [...s.matchAll(/([\d.]+)\s*%/g)];
+  if (all.length === 0) return null;
+  return parseFloat(all[all.length - 1][1]);
+}
+function parseQualLoan(text) {
+  if (!text) return 0;
+  const m = String(text).match(/([\d.]+)\s*([MmKk])/);
+  if (!m) return 0;
+  const n = parseFloat(m[1]);
+  return m[2].toLowerCase() === 'm' ? n * 1_000_000 : n * 1_000;
+}
+function sectionShort(sec) {
+  if (!sec) return '';
+  if (/VARIABLE/i.test(sec)) return 'var';
+  if (/FIXED/i.test(sec)) return 'fix';
+  if (/COMBO/i.test(sec)) return 'combo';
+  return '';
+}
+
+async function loadRates() {
+  try {
+    if (typeof XLSX === 'undefined') {
+      RATES.error = 'SheetJS failed to load.';
+      return;
+    }
+    const res = await fetch('rates.xlsx', { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const ab = await res.arrayBuffer();
+    const wb = XLSX.read(ab, { type: 'array' });
+    const ws = wb.Sheets['All Rates'];
+    if (!ws) throw new Error('Sheet "All Rates" not found.');
+    const aoa = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, defval: '' });
+
+    const sectionRow = aoa[0] || [];
+    const subRow     = aoa[1] || [];
+    const qualRow    = aoa[2] || [];
+    const lenderRow  = aoa[3] || [];
+
+    const packages = [];
+    let curSection = '', curSub = '';
+    for (let c = 1; c < lenderRow.length; c++) {
+      if (sectionRow[c]) curSection = String(sectionRow[c]).trim();
+      if (subRow[c]) curSub = String(subRow[c]).trim();
+      const lender = lenderRow[c];
+      if (!lender || !String(lender).trim()) continue;
+      const qual = qualRow[c] != null ? String(qualRow[c]).trim() : '';
+      const pkg = {
+        idx: packages.length,
+        section: curSection,
+        secShort: sectionShort(curSection),
+        subType: curSub,
+        lender: String(lender).trim(),
+        qualLoan: qual,
+        qualLoanNum: parseQualLoan(qual),
+        rates: {
+          y1: aoa[4]?.[c] || '',
+          y2: aoa[5]?.[c] || '',
+          y3: aoa[6]?.[c] || '',
+          y4: aoa[7]?.[c] || '',
+          y5: aoa[8]?.[c] || '',
+          thereafter: aoa[9]?.[c] || '',
+        },
+        ratesNum: {
+          y1: parseRateNumber(aoa[4]?.[c]),
+          y2: parseRateNumber(aoa[5]?.[c]),
+          y3: parseRateNumber(aoa[6]?.[c]),
+        },
+        lockIn: aoa[11]?.[c] || '',
+        prepayment: aoa[12]?.[c] || '',
+        tdsrRate: aoa[13]?.[c] || '',
+        legalRebate: aoa[14]?.[c] || '',
+        valuationSubsidy: aoa[15]?.[c] || '',
+        freeConversion: aoa[16]?.[c] || '',
+        remarks: [aoa[17]?.[c], aoa[18]?.[c], aoa[19]?.[c]].filter(v => v && String(v).trim()).map(String),
+        bankers: [aoa[20]?.[c], aoa[21]?.[c], aoa[22]?.[c], aoa[23]?.[c]].filter(v => v && String(v).trim()).map(String),
+      };
+      packages.push(pkg);
+    }
+
+    let dateStamp = '';
+    let oneM = '', threeM = '';
+    for (let r = 24; r < Math.min(40, aoa.length); r++) {
+      const cell = aoa[r]?.[0];
+      if (!cell) continue;
+      const t = String(cell).trim();
+      if (/^As of/i.test(t)) dateStamp = t;
+      else if (/1M COMPOUNDED SORA/i.test(t)) oneM = t;
+      else if (/3M COMPOUNDED SORA/i.test(t)) threeM = t;
+    }
+
+    RATES.packages = packages;
+    RATES.dateStamp = dateStamp;
+    RATES.sora = { oneM, threeM };
+    RATES.loaded = true;
+    RATES.error = '';
+  } catch (e) {
+    console.error('loadRates failed', e);
+    RATES.error = e.message || 'Failed to load rates.xlsx';
+    RATES.loaded = false;
+  }
+}
+
+function reloadRates() {
+  showToast('Reloading rates…');
+  loadRates().then(() => {
+    renderRatePicker(state.pickerCtx);
+    renderRatesPanel();
+    renderAllPickTriggers();
+    showToast(RATES.loaded ? 'Rates reloaded' : 'Reload failed — check console');
+  });
+}
+
+function uniqueLenders() {
+  return [...new Set(RATES.packages.map(p => p.lender))].sort();
+}
+
+function filteredPackages() {
+  const f = state.rateFilters;
+  let list = RATES.packages.slice();
+  if (f.section !== 'all') list = list.filter(p => p.section === f.section);
+  if (f.lender !== 'all') list = list.filter(p => p.lender === f.lender);
+  if (f.search) {
+    const q = f.search.toLowerCase();
+    list = list.filter(p =>
+      (p.lender + ' ' + p.subType + ' ' + p.qualLoan + ' ' + p.section)
+        .toLowerCase().includes(q));
+  }
+  list.sort((a, b) => {
+    const k = f.sortKey;
+    let av, bv;
+    if (k === 'lender') { av = a.lender; bv = b.lender; }
+    else if (k === 'lockIn') { av = String(a.lockIn); bv = String(b.lockIn); }
+    else if (k === 'qual') { av = a.qualLoanNum; bv = b.qualLoanNum; }
+    else { av = a.ratesNum[k] ?? 99; bv = b.ratesNum[k] ?? 99; }
+    if (av < bv) return f.sortDir === 'asc' ? -1 : 1;
+    if (av > bv) return f.sortDir === 'asc' ? 1 : -1;
+    return 0;
+  });
+  return list;
+}
+
+function getActivePicks() {
+  const ctx = state.pickerCtx;
+  if (!ctx || ctx === 'standalone') return [];
+  return state.picks[ctx] || [];
+}
+
+function togglePick(pkgIdx) {
+  const ctx = state.pickerCtx;
+  if (!ctx || ctx === 'standalone') return;
+  const picks = state.picks[ctx];
+  const at = picks.indexOf(pkgIdx);
+  if (at >= 0) picks.splice(at, 1);
+  else if (picks.length < 4) picks.push(pkgIdx);
+  else { showToast('Max 4 packages — unselect one first'); return; }
+  saveState();
+  renderRatePicker(ctx);
+  renderPickTrigger(ctx);
+}
+
+window.openRateModal = function (calcKey) {
+  state.pickerCtx = calcKey;
+  $('#rate-modal-sub').textContent = calcKey === 'standalone'
+    ? 'Browsing all rate packages.'
+    : 'Up to 4 will appear in the client report.';
+  renderRatePicker(calcKey);
+  $('#rate-modal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+};
+window.closeRateModal = function () {
+  $('#rate-modal').classList.remove('show');
+  document.body.style.overflow = '';
+  state.pickerCtx = null;
+};
+window.clearPicks = function () {
+  const ctx = state.pickerCtx;
+  if (!ctx || ctx === 'standalone') return;
+  state.picks[ctx] = [];
+  saveState();
+  renderRatePicker(ctx);
+  renderPickTrigger(ctx);
+};
+
+function ratePickerHtml(ctx) {
+  if (!RATES.loaded) {
+    return `<div class="rates-status">${RATES.error
+      ? '<span class="fail-text">Failed to load rates.xlsx — ' + escapeHtml(RATES.error) + '</span>'
+      : '<span class="spinner"></span>Loading rates…'}</div>`;
+  }
+  const f = state.rateFilters;
+  const lenders = uniqueLenders();
+  const list = filteredPackages();
+  const picks = ctx === 'standalone' || !ctx ? [] : state.picks[ctx] || [];
+  const isStandalone = ctx === 'standalone' || !ctx;
+
+  // Filters
+  const sectionCounts = {
+    'all': RATES.packages.length,
+    'VARIABLE RATES': RATES.packages.filter(p => p.section === 'VARIABLE RATES').length,
+    'FIXED RATES': RATES.packages.filter(p => p.section === 'FIXED RATES').length,
+    'COMBO': RATES.packages.filter(p => p.section === 'COMBO').length,
+  };
+  const sectionChip = (val, label) => `<div class="filter-chip ${f.section === val ? 'active' : ''}" onclick="setRateFilter('section','${val}')">${label}<span class="count">${sectionCounts[val] || 0}</span></div>`;
+
+  const lenderOpts = ['<option value="all">All lenders</option>']
+    .concat(lenders.map(l => `<option value="${escapeHtml(l)}" ${f.lender === l ? 'selected' : ''}>${escapeHtml(l)}</option>`))
+    .join('');
+
+  const sortClass = (k) => f.sortKey === k ? 'sortable sorted ' + (f.sortDir === 'asc' ? 'sort-asc' : 'sort-desc') : 'sortable';
+
+  let rows = '';
+  list.forEach(p => {
+    const selected = picks.includes(p.idx);
+    const limited = !selected && picks.length >= 4 && !isStandalone;
+    rows += `
+      <tr class="${selected ? 'selected ' : ''}${limited ? 'disabled' : ''}" onclick="${isStandalone ? '' : 'togglePick(' + p.idx + ')'}">
+        ${isStandalone ? '' : `<td class="check-cell"><div class="check-box"></div></td>`}
+        <td><span class="sec-badge ${p.secShort}">${escapeHtml((p.section || '').replace(' RATES',''))}</span></td>
+        <td><span class="lender-tag">${escapeHtml(p.lender)}</span></td>
+        <td><div>${escapeHtml(p.subType || '—')}</div><div class="sub-tag">${escapeHtml(p.qualLoan || '')}</div></td>
+        <td class="num">${escapeHtml(String(p.rates.y1).replace(/\s+/g,' '))}</td>
+        <td class="num">${escapeHtml(String(p.rates.y2).replace(/\s+/g,' '))}</td>
+        <td class="num">${escapeHtml(String(p.rates.y3).replace(/\s+/g,' '))}</td>
+        <td>${escapeHtml(String(p.lockIn || '—').replace(/\s+/g,' '))}</td>
+      </tr>`;
+  });
+
+  return `
+    <div class="filters-bar">
+      ${sectionChip('all','All')}
+      ${sectionChip('VARIABLE RATES','Variable')}
+      ${sectionChip('FIXED RATES','Fixed')}
+      ${sectionChip('COMBO','Combo')}
+      <select class="field-select" onchange="setRateFilter('lender', this.value)" style="padding: 6px 28px 6px 10px; font-size: 12.5px; width: auto; min-width: 140px;">
+        ${lenderOpts}
+      </select>
+      <div class="filter-search">
+        <input type="text" placeholder="Search lender, sub-type, loan band…" value="${escapeHtml(f.search)}" oninput="setRateFilter('search', this.value)">
+      </div>
+    </div>
+    <div class="rate-table-wrap">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; font-size: 12px; color: var(--muted);">
+        <span>${list.length} package${list.length === 1 ? '' : 's'} · ${RATES.dateStamp || 'date stamp not found'}${RATES.sora?.oneM ? ' · ' + escapeHtml(RATES.sora.oneM) : ''}</span>
+        ${isStandalone ? '' : `<span>${picks.length} / 4 selected</span>`}
+      </div>
+      <table class="rate-table">
+        <thead>
+          <tr>
+            ${isStandalone ? '' : '<th></th>'}
+            <th>Type</th>
+            <th class="${sortClass('lender')}" onclick="setRateSort('lender')">Lender</th>
+            <th class="${sortClass('qual')}" onclick="setRateSort('qual')">Sub-type / Qual loan</th>
+            <th class="${sortClass('y1')}" onclick="setRateSort('y1')">1st yr</th>
+            <th class="${sortClass('y2')}" onclick="setRateSort('y2')">2nd yr</th>
+            <th class="${sortClass('y3')}" onclick="setRateSort('y3')">3rd yr</th>
+            <th class="${sortClass('lockIn')}" onclick="setRateSort('lockIn')">Lock-in</th>
+          </tr>
+        </thead>
+        <tbody>${rows || '<tr><td colspan="' + (isStandalone ? 7 : 8) + '" style="text-align:center; padding: 40px; color: var(--muted);">No packages match the filters.</td></tr>'}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+window.setRateFilter = function (key, val) {
+  state.rateFilters[key] = val;
+  renderRatePicker(state.pickerCtx);
+  renderRatesPanel();
+};
+window.setRateSort = function (key) {
+  const f = state.rateFilters;
+  if (f.sortKey === key) f.sortDir = f.sortDir === 'asc' ? 'desc' : 'asc';
+  else { f.sortKey = key; f.sortDir = 'asc'; }
+  renderRatePicker(state.pickerCtx);
+  renderRatesPanel();
+};
+
+function renderRatePicker(ctx) {
+  const host = $('#rate-picker-host');
+  if (!host) return;
+  host.innerHTML = ratePickerHtml(ctx);
+  const cnt = ctx && ctx !== 'standalone' ? (state.picks[ctx]?.length || 0) : 0;
+  $('#rate-modal-count').textContent = ctx === 'standalone' ? 'Browsing only — no selection in standalone view' : `${cnt} / 4 selected`;
+}
+
+function renderRatesPanel() {
+  const host = $('#rates-panel-host');
+  if (!host) return;
+  host.innerHTML = ratePickerHtml('standalone');
+  const sub = RATES.loaded
+    ? `${RATES.packages.length} packages · ${RATES.dateStamp || 'date unknown'}${RATES.sora?.oneM ? ' · ' + RATES.sora.oneM : ''}`
+    : (RATES.error || 'Loading rates…');
+  setOut('ratesPanelSub', sub);
+  setOut('ratesPanelStamp', RATES.dateStamp || '—');
+}
+
+function renderPickTrigger(calcKey) {
+  const trigger = $('[data-pick-trigger="' + calcKey + '"]');
+  const cntEl = $('[data-pick-count="' + calcKey + '"]');
+  const chipsHost = $('[data-pick-chips="' + calcKey + '"]');
+  if (!trigger) return;
+  const picks = state.picks[calcKey] || [];
+  if (cntEl) cntEl.textContent = picks.length + ' / 4';
+  trigger.classList.toggle('has-picks', picks.length > 0);
+  if (chipsHost) {
+    chipsHost.innerHTML = picks.map(idx => {
+      const p = RATES.packages[idx];
+      if (!p) return '';
+      const y1 = String(p.rates.y1).replace(/\s+/g, ' ').slice(0, 28);
+      return `<span class="rate-chip">
+        <span class="lender-tag-mini">${escapeHtml(p.lender)}</span>
+        <span style="font-size: 11px; color: var(--muted);">${escapeHtml(p.subType.slice(0,18))}</span>
+        <span class="num" style="font-weight: 600;">${escapeHtml(y1)}</span>
+        <span class="x" onclick="unpickRate('${calcKey}', ${idx}); event.stopPropagation();" title="Remove">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </span>
+      </span>`;
+    }).join('');
+  }
+}
+
+function renderAllPickTriggers() {
+  ['affordability', 'purchaseHdb', 'purchasePrivate', 'sellPurchase', 'refinance']
+    .forEach(renderPickTrigger);
+}
+
+window.unpickRate = function (calcKey, idx) {
+  const picks = state.picks[calcKey];
+  const at = picks.indexOf(idx);
+  if (at >= 0) picks.splice(at, 1);
+  saveState();
+  renderPickTrigger(calcKey);
+  renderRatePicker(state.pickerCtx);
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   PDF — rates page (appended after main analysis)
+   ═══════════════════════════════════════════════════════════════ */
+function pdfRatesPage(calcKey) {
+  const picks = state.picks[calcKey] || [];
+  if (picks.length === 0) return '';
+  const dateStr = new Date(state.client.date || Date.now()).toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' });
+  let rows = '';
+  picks.forEach((idx, i) => {
+    const p = RATES.packages[idx];
+    if (!p) return;
+    const sub = (p.subType || '') + (p.qualLoan ? ' · ' + p.qualLoan : '');
+    rows += `
+      <div style="margin-top: ${i === 0 ? '0' : '20px'}; padding-top: ${i === 0 ? '0' : '18px'}; ${i > 0 ? 'border-top: 1px solid #E5E7EB;' : ''}">
+        <div style="display: flex; align-items: baseline; gap: 12px;">
+          <div style="font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500;">${escapeHtml(p.lender)}</div>
+          <div style="font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #94A3B8; font-weight: 600;">${escapeHtml((p.section || '').replace(' RATES',''))}</div>
+        </div>
+        <div style="font-size: 12px; color: #56657A; margin-top: 2px;">${escapeHtml(sub)}</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>1st year</td><td class="pdf-num">${escapeHtml(String(p.rates.y1))}</td></tr>
+          <tr><td>2nd year</td><td class="pdf-num">${escapeHtml(String(p.rates.y2))}</td></tr>
+          <tr><td>3rd year</td><td class="pdf-num">${escapeHtml(String(p.rates.y3))}</td></tr>
+          <tr><td>4th year</td><td class="pdf-num">${escapeHtml(String(p.rates.y4))}</td></tr>
+          <tr><td>5th year</td><td class="pdf-num">${escapeHtml(String(p.rates.y5))}</td></tr>
+          <tr><td>Thereafter</td><td class="pdf-num">${escapeHtml(String(p.rates.thereafter))}</td></tr>
+          <tr><td>Lock-in</td><td class="pdf-num">${escapeHtml(String(p.lockIn))}</td></tr>
+          <tr><td>Prepayment</td><td>${escapeHtml(String(p.prepayment).replace(/\s+/g,' ').slice(0,90))}</td></tr>
+          <tr><td>Legal / cash rebate</td><td>${escapeHtml(String(p.legalRebate).replace(/\s+/g,' ').slice(0,90))}</td></tr>
+          ${p.freeConversion ? `<tr><td>Free conversion</td><td>${escapeHtml(String(p.freeConversion).replace(/\s+/g,' ').slice(0,90))}</td></tr>` : ''}
+        </table>
+      </div>`;
+  });
+  return `
+    <div class="pdf-page">
+      <div style="display:flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
+        <div>
+          <div class="pdf-h3">Indicative Rate Packages</div>
+          <div class="pdf-h1" style="margin-top: 6px;">${picks.length} package${picks.length === 1 ? '' : 's'} for review</div>
+          <div style="font-size: 12px; color: #56657A; margin-top: 6px;">${RATES.dateStamp || 'Rates as currently filed'} · ${RATES.sora?.oneM || ''}</div>
+        </div>
+        <div style="text-align: right; font-size: 11px; color: #56657A;">
+          <div style="font-weight: 600; color: #0B1220;">Dan Ler</div>
+          <div>${dateStr}</div>
+        </div>
+      </div>
+      <div style="border-top: 1px solid #E5E7EB; padding-top: 18px;">
+        ${rows}
+      </div>
+      <div style="position: absolute; bottom: 18mm; left: 16mm; right: 16mm; font-size: 9.5px; color: #94A3B8; line-height: 1.6;">
+        Rates are indicative, subject to bank approval, valuation, and credit assessment. Lock-in, prepayment penalty, and rebate conditions apply per bank's letter of offer.
+      </div>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════════════ */
+function init() {
+  bindInputs();
+  bindNav();
+  $('#btn-pdf').addEventListener('click', generatePdf);
+  if (sessionStorage.getItem('mc.auth') === '1') showApp();
+}
+window.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>
