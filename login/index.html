@@ -13,7 +13,9 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 
 <script>
@@ -74,39 +76,6 @@ tailwind.config = {
   .display { font-family: 'Fraunces', serif; font-optical-sizing: auto; letter-spacing: -0.02em; }
   .display-num { font-family: 'Fraunces', serif; font-feature-settings: 'tnum' 1, 'lnum' 1; font-variant-numeric: tabular-nums lining-nums; }
 
-  /* ── Auth gate ─── */
-  #auth-gate {
-    position: fixed; inset: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--bg);
-  }
-  #auth-gate::before {
-    content: ''; position: absolute; inset: 0;
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(5,150,105,.06) 0%, transparent 40%),
-      radial-gradient(circle at 80% 70%, rgba(5,150,105,.04) 0%, transparent 40%);
-  }
-  .auth-card {
-    position: relative; z-index: 1;
-    width: 380px; max-width: 92vw;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 40px 36px 32px;
-    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 24px 48px -28px rgba(11,18,32,.18);
-  }
-  .auth-mark {
-    width: 36px; height: 36px;
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--accent);
-    font-family: 'Fraunces', serif;
-    font-size: 19px;
-    font-weight: 500;
-    margin-bottom: 18px;
-  }
-
   /* ── Inputs ─── */
   .field { display: flex; flex-direction: column; gap: 6px; }
   .field-label {
@@ -143,6 +112,13 @@ tailwind.config = {
     border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(5,150,105,.13);
   }
+  /* Hide native number-input spinners — manual entry only */
+  .field-input[type="number"]::-webkit-outer-spin-button,
+  .field-input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .field-input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
   .field-select {
     appearance: none; -webkit-appearance: none;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2356657A' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
@@ -457,12 +433,16 @@ tailwind.config = {
 
   /* ── PDF report ─── */
   #report {
-    position: absolute; left: -99999px; top: 0;
+    position: fixed; top: 0; left: 0;
     width: 210mm;
     background: white;
     color: #0B1220;
     font-family: 'Plus Jakarta Sans', sans-serif;
+    display: none;
+    z-index: 1;
   }
+  /* Visible only during capture; gen-overlay (z-index 60) covers it from the user. */
+  #report.is-rendering { display: block; }
   .pdf-page {
     width: 210mm;
     min-height: 297mm;
@@ -470,6 +450,16 @@ tailwind.config = {
     background: white;
     page-break-after: always;
     position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  .pdf-footer {
+    margin-top: auto;
+    padding-top: 10mm;
+    font-size: 9.5px;
+    color: #94A3B8;
+    line-height: 1.6;
   }
   .pdf-page:last-child { page-break-after: auto; }
   .pdf-h1 { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
@@ -670,6 +660,47 @@ tailwind.config = {
     content: '✓'; font-size: 11px; line-height: 1;
   }
 
+  /* Rate row expand */
+  .rate-table .expand-cell { width: 30px; text-align: center; padding-right: 14px; }
+  .rate-expand-btn {
+    width: 22px; height: 22px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: background .12s, border-color .12s, transform .15s, color .12s;
+  }
+  .rate-expand-btn:hover { background: var(--surface-2); border-color: var(--border-strong); color: var(--ink); }
+  .rate-expand-btn.open { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent-strong); transform: rotate(180deg); }
+
+  .rate-detail-row td { padding: 0; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+  .rate-detail-content {
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 28px;
+  }
+  @media (min-width: 1100px) { .rate-detail-content { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .rate-detail-block { font-size: 12px; line-height: 1.5; }
+  .rate-detail-block .head {
+    font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--faint);
+    margin-bottom: 4px;
+  }
+  .rate-detail-block .body { color: var(--ink); }
+  .rate-detail-block .body .row { display: flex; justify-content: space-between; gap: 10px; padding: 2px 0; }
+  .rate-detail-block .body .row .lbl { color: var(--muted); }
+  .rate-detail-block .body .row .val { font-feature-settings: 'tnum' 1; font-variant-numeric: tabular-nums; }
+  .rate-detail-block.note { color: var(--muted); }
+  .rate-detail-block ul { margin: 0; padding-left: 16px; }
+  .rate-detail-block ul li { padding: 1px 0; }
+  .rate-detail-block .small {
+    font-size: 11px; color: var(--faint);
+    font-style: italic; margin-top: 4px;
+  }
+
   /* Selected-rate chip on calc cards */
   .rate-pick-trigger {
     display: inline-flex; align-items: center; gap: 8px;
@@ -734,25 +765,7 @@ tailwind.config = {
 <body>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     AUTH GATE
-     ═══════════════════════════════════════════════════════════════ -->
-<div id="auth-gate">
-  <form class="auth-card" onsubmit="return tryAuth(event)">
-    <div class="auth-mark">N</div>
-    <div class="display" style="font-size: 22px; font-weight: 500;">Mortgage Console</div>
-    <div class="muted" style="font-size: 13px; margin-top: 4px;">Internal use — Dan Ler</div>
-    <div style="margin-top: 24px;">
-      <label class="field-label" for="auth-pw">Passcode</label>
-      <input id="auth-pw" type="password" class="field-input" autocomplete="off" autofocus style="margin-top: 6px;">
-      <div id="auth-error" class="fail-text" style="display:none; font-size: 12.5px; margin-top: 8px;">Incorrect passcode.</div>
-    </div>
-    <button type="submit" class="btn-primary" style="margin-top: 18px; width: 100%; justify-content: center;">Unlock</button>
-    <div class="faint" style="font-size: 11px; margin-top: 16px; text-align: center;">Console v1.1 · SG mortgage rules · Apr 2026</div>
-  </form>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     APP SHELL
+     APP SHELL — auth handled upstream by Cloudflare Access
      ═══════════════════════════════════════════════════════════════ -->
 <div id="app" style="display: none; min-height: 100vh; position: relative; z-index: 1;">
 
@@ -793,13 +806,9 @@ tailwind.config = {
           <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/><path d="M12 6v2m0 8v2"/></svg>
           Affordability
         </div>
-        <div class="nav-item" data-tab="purchase-hdb">
+        <div class="nav-item" data-tab="purchase">
           <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
-          Purchase · HDB
-        </div>
-        <div class="nav-item" data-tab="purchase-private">
-          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="1"/><path d="M5 11V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6"/><path d="M9 21v-4h6v4"/></svg>
-          Purchase · Private
+          New Purchase
         </div>
         <div class="nav-item" data-tab="sell-purchase">
           <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
@@ -940,6 +949,18 @@ tailwind.config = {
             </div>
 
             <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Cash &amp; CPF position</div>
+              <div class="res-row"><div><div class="res-label">Cash on hand</div></div><div class="res-value num" data-out="aff.cashAvail">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">CPF OA available</div></div><div class="res-value num" data-out="aff.cpfAvail">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Combined funds</div></div><div class="res-value num" data-out="aff.fundsTotal">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Total downpayment @ max property</div></div><div class="res-value num" data-out="aff.downReqd">- $ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;" data-out="aff.positionLabel">Surplus / shortfall</div></div><div class="res-value num accent-text" data-out="aff.position" style="font-weight: 600; font-size: 18px;">$ 0</div></div>
+              <div class="divider-dashed" style="margin: 12px 0;"></div>
+              <div class="res-row"><div><div class="res-label muted">Cash-only floor (cash min)</div><div class="res-sublabel">Cannot be paid via CPF</div></div><div class="res-value num muted" data-out="aff.cashFloor">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label muted" data-out="aff.cashGapLabel">Cash margin vs floor</div></div><div class="res-value num" data-out="aff.cashGap">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
               <div class="sec-tag" style="margin-bottom: 14px;">Compliance — at 4 % stress, fully utilised</div>
               <div style="margin-bottom: 16px;">
                 <div class="flex justify-between items-baseline" style="margin-bottom: 6px;">
@@ -963,6 +984,20 @@ tailwind.config = {
             </div>
 
             <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Visual summary</div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Downpayment split</div>
+                  <div style="height: 180px; position: relative;"><canvas id="chart-aff-donut"></canvas></div>
+                </div>
+                <div>
+                  <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">HDB vs Private — max property</div>
+                  <div style="height: 180px; position: relative;"><canvas id="chart-aff-bar"></canvas></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card-pad-sm">
               <div class="sec-tag" style="margin-bottom: 8px;">Effective income build-up</div>
               <div class="res-row"><div><div class="res-label">Fixed income (all borrowers)</div></div><div class="res-value num" data-out="aff.fixed">$ 0</div></div>
               <div class="res-row"><div><div class="res-label">Variable income — after 30 % haircut</div></div><div class="res-value num" data-out="aff.variable">$ 0</div></div>
@@ -975,104 +1010,127 @@ tailwind.config = {
         </div>
       </div>
 
-      <!-- ════════ NEW PURCHASE — HDB ════════ -->
-      <div class="calc-panel" data-panel="purchase-hdb">
+      <!-- ════════ NEW PURCHASE (HDB / Private) ════════ -->
+      <div class="calc-panel" data-panel="purchase">
         <div class="flex items-end justify-between" style="margin-bottom: 28px;">
           <div>
             <div class="sec-tag" style="margin-bottom: 6px;">Calculator · 02</div>
-            <div class="panel-title">New Purchase — HDB</div>
-            <div class="panel-sub">Stamp duty, monthly installment, TDSR / MSR, full cash-on-hand requirement. Full LTV 75 % requires tenure ≤ 25 y and IWAA + tenure ≤ 65.</div>
+            <div class="panel-title">New Purchase</div>
+            <div class="panel-sub" data-out="pur.panelSub">Stamp duty, monthly installment, TDSR / MSR, full cash-on-hand requirement.</div>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: 480px 1fr; gap: 28px;">
           <div class="card card-pad">
-            <div class="sec-tag" style="margin-bottom: 14px;">Property &amp; loan</div>
+            <div class="flex justify-between items-center" style="margin-bottom: 14px;">
+              <div class="sec-tag">Property &amp; loan</div>
+              <div class="ltv-toggle" data-prop-toggle="purchase">
+                <div class="opt" data-prop="hdb">HDB / EC</div>
+                <div class="opt active" data-prop="private">Private</div>
+              </div>
+            </div>
             <div class="grid-form-1" style="margin-bottom: 12px;">
               <div class="field">
                 <label class="field-label">Property price</label>
-                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchaseHdb.price" min="0" step="1000"></div>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchase.price" min="0" step="1000"></div>
               </div>
             </div>
             <div class="grid-form">
               <div class="field">
                 <label class="field-label">Loan tenure</label>
-                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="purchaseHdb.tenure" min="1" max="30" step="1"><span class="input-suffix">yrs</span></div>
-                <div class="field-hint">Cap 30 y. Full LTV ≤ 25 y.</div>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="purchase.tenure" min="1" max="35" step="1"><span class="input-suffix">yrs</span></div>
+                <div class="field-hint" data-out="pur.tenureHint">Cap 35 y. Full LTV ≤ 30 y.</div>
               </div>
               <div class="field">
                 <label class="field-label">Interest rate</label>
-                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="purchaseHdb.rate" min="0" max="10" step="0.05"><span class="input-suffix">% p.a.</span></div>
+                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="purchase.rate" min="0" max="10" step="0.05"><span class="input-suffix">% p.a.</span></div>
               </div>
               <div class="field">
                 <label class="field-label">Citizenship</label>
-                <select class="field-select" data-bind="purchaseHdb.citizenship">
+                <select class="field-select" data-bind="purchase.citizenship">
                   <option value="citizen">SG Citizen</option>
                   <option value="pr">SG Permanent Resident</option>
+                  <option value="foreigner" data-citizen-private-only>Foreigner</option>
                 </select>
               </div>
               <div class="field">
                 <label class="field-label">Property count (incl. this)</label>
-                <select class="field-select" data-bind="purchaseHdb.propertyCount">
+                <select class="field-select" data-bind="purchase.propertyCount">
                   <option value="1">1st property</option>
                   <option value="2">2nd property</option>
                   <option value="3">3rd or more</option>
                 </select>
               </div>
-              <div class="field" style="grid-column: 1 / -1;">
-                <label class="field-label">Existing CPF for down-payment</label>
-                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchaseHdb.cpfAvailable" min="0" step="1000"></div>
+              <div class="field">
+                <label class="field-label">Cash on hand</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchase.cashOnHand" min="0" step="1000"></div>
+              </div>
+              <div class="field">
+                <label class="field-label">CPF OA available</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchase.cpfAvailable" min="0" step="1000"></div>
               </div>
             </div>
 
             <div class="divider" style="margin: 18px 0;"></div>
-            <div data-borrowers="purchaseHdb"></div>
+            <div data-borrowers="purchase"></div>
 
             <div class="grid-form" style="margin-top: 14px;">
               <div class="field" style="grid-column: 1 / -1;">
                 <label class="field-label">Other monthly commitments</label>
-                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchaseHdb.commitments" min="0" step="50"></div>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchase.commitments" min="0" step="50"></div>
               </div>
             </div>
 
             <div class="divider" style="margin: 18px 0;"></div>
             <div class="sec-tag" style="margin-bottom: 10px;">Rate packages for report</div>
-            <button type="button" class="rate-pick-trigger" onclick="openRateModal('purchaseHdb')" data-pick-trigger="purchaseHdb">
+            <button type="button" class="rate-pick-trigger" onclick="openRateModal('purchase')" data-pick-trigger="purchase">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 11 10 15 14 21 8"/></svg>
               <span>Pick rates</span>
-              <span class="pick-count" data-pick-count="purchaseHdb">0 / 4</span>
+              <span class="pick-count" data-pick-count="purchase">0 / 4</span>
             </button>
-            <div class="rate-chip-list" data-pick-chips="purchaseHdb"></div>
+            <div class="rate-chip-list" data-pick-chips="purchase"></div>
           </div>
 
           <div class="flex flex-col gap-4">
             <div class="grid grid-cols-2 gap-3">
               <div class="stat-tile accent">
                 <div class="stat-label">Monthly installment</div>
-                <div class="stat-value display-num" data-out="hdb.monthly">$ 0</div>
-                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="hdb.monthlyNote">at entered rate</div>
+                <div class="stat-value display-num" data-out="pur.monthly">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="pur.monthlyNote">at entered rate</div>
               </div>
               <div class="stat-tile">
                 <div class="stat-label">Loan amount</div>
-                <div class="stat-value display-num" data-out="hdb.loan">$ 0</div>
-                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="hdb.ltvNote">75 % LTV</div>
+                <div class="stat-value display-num" data-out="pur.loan">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="pur.ltvNote">75 % LTV</div>
               </div>
             </div>
 
             <div class="card card-pad-sm">
               <div class="sec-tag" style="margin-bottom: 14px;">Stamp duty</div>
-              <div class="res-row"><div><div class="res-label">BSD — Buyer's Stamp Duty</div><div class="res-sublabel">1–6 % progressive</div></div><div class="res-value num" data-out="hdb.bsd">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label">ABSD</div><div class="res-sublabel" data-out="hdb.absdNote">SG citizen · 1st</div></div><div class="res-value num" data-out="hdb.absd">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total duty payable</div></div><div class="res-value num" data-out="hdb.totalDuty" style="font-weight: 600;">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">BSD — Buyer's Stamp Duty</div><div class="res-sublabel">1–6 % progressive</div></div><div class="res-value num" data-out="pur.bsd">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">ABSD</div><div class="res-sublabel" data-out="pur.absdNote">SG citizen · 1st</div></div><div class="res-value num" data-out="pur.absd">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total duty payable</div></div><div class="res-value num" data-out="pur.totalDuty" style="font-weight: 600;">$ 0</div></div>
             </div>
 
             <div class="card card-pad-sm">
               <div class="sec-tag" style="margin-bottom: 14px;">Up-front cash &amp; CPF</div>
-              <div class="res-row"><div><div class="res-label">Cash down-payment</div><div class="res-sublabel" data-out="hdb.cashDownNote">5 % cash</div></div><div class="res-value num" data-out="hdb.cashDown">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label">CPF / cash down-payment</div><div class="res-sublabel" data-out="hdb.cpfDownNote">20 % CPF or cash</div></div><div class="res-value num" data-out="hdb.cpfDown">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label">Stamp duty (BSD + ABSD)</div></div><div class="res-value num" data-out="hdb.dutyLine">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label">Legal &amp; valuation fees</div></div><div class="res-value num" data-out="hdb.legalFees">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total cash + CPF needed</div></div><div class="res-value num accent-text" data-out="hdb.totalUpfront" style="font-weight: 600;">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Cash down-payment</div><div class="res-sublabel" data-out="pur.cashDownNote">5 % cash</div></div><div class="res-value num" data-out="pur.cashDown">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">CPF / cash down-payment</div><div class="res-sublabel" data-out="pur.cpfDownNote">20 % CPF or cash</div></div><div class="res-value num" data-out="pur.cpfDown">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Stamp duty (BSD + ABSD)</div><div class="res-sublabel">CPF or cash</div></div><div class="res-value num" data-out="pur.dutyLine">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Legal &amp; valuation fees</div><div class="res-sublabel">Cash only</div></div><div class="res-value num" data-out="pur.legalFees">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total cash + CPF needed</div></div><div class="res-value num accent-text" data-out="pur.totalUpfront" style="font-weight: 600;">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Cash &amp; CPF position</div>
+              <div class="res-row"><div><div class="res-label">Cash on hand</div></div><div class="res-value num" data-out="pur.cashAvail">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">CPF OA available</div></div><div class="res-value num" data-out="pur.cpfAvail">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Combined funds</div></div><div class="res-value num" data-out="pur.fundsTotal">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Less: total upfront required</div></div><div class="res-value num" data-out="pur.upfrontMinus">- $ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;" data-out="pur.positionLabel">Surplus / shortfall</div></div><div class="res-value num accent-text" data-out="pur.position" style="font-weight: 600; font-size: 18px;">$ 0</div></div>
+              <div class="divider-dashed" style="margin: 12px 0;"></div>
+              <div class="res-row"><div><div class="res-label muted">Cash-only floor (cash min + legal)</div><div class="res-sublabel" data-out="pur.cashFloorNote">Cannot be paid via CPF</div></div><div class="res-value num muted" data-out="pur.cashFloor">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label muted" data-out="pur.cashGapLabel">Cash margin vs floor</div></div><div class="res-value num" data-out="pur.cashGap">$ 0</div></div>
             </div>
 
             <div class="card card-pad-sm">
@@ -1080,153 +1138,33 @@ tailwind.config = {
               <div style="margin-bottom: 14px;">
                 <div class="flex justify-between items-baseline" style="margin-bottom: 6px;">
                   <span style="font-size: 13px; font-weight: 500;">TDSR (55 % cap)</span>
-                  <span class="num" data-out="hdb.tdsrLabel" style="font-size: 12.5px;">0 / 55 %</span>
+                  <span class="num" data-out="pur.tdsrLabel" style="font-size: 12.5px;">0 / 55 %</span>
                 </div>
-                <div class="ratio-bar" data-bar="hdb.tdsr"><div class="fill" style="width: 0;"></div></div>
+                <div class="ratio-bar" data-bar="pur.tdsr"><div class="fill" style="width: 0;"></div></div>
               </div>
-              <div>
+              <div data-show="pur.msrShow">
                 <div class="flex justify-between items-baseline" style="margin-bottom: 6px;">
                   <span style="font-size: 13px; font-weight: 500;">MSR (30 % cap)</span>
-                  <span class="num" data-out="hdb.msrLabel" style="font-size: 12.5px;">0 / 30 %</span>
+                  <span class="num" data-out="pur.msrLabel" style="font-size: 12.5px;">0 / 30 %</span>
                 </div>
-                <div class="ratio-bar" data-bar="hdb.msr"><div class="fill" style="width: 0;"></div></div>
+                <div class="ratio-bar" data-bar="pur.msr"><div class="fill" style="width: 0;"></div></div>
               </div>
               <div class="divider-dashed" style="margin: 16px 0;"></div>
               <div class="flex gap-2 flex-wrap">
-                <span class="pill pass" data-pill="hdb.tdsr"><span class="dot"></span>TDSR pass</span>
-                <span class="pill pass" data-pill="hdb.msr"><span class="dot"></span>MSR pass</span>
-                <span class="pill pass" data-pill="hdb.ltv"><span class="dot"></span>Full LTV 75 %</span>
+                <span class="pill pass" data-pill="pur.tdsr"><span class="dot"></span>TDSR pass</span>
+                <span class="pill pass" data-pill="pur.msr" data-show="pur.msrShow"><span class="dot"></span>MSR pass</span>
+                <span class="pill pass" data-pill="pur.ltv"><span class="dot"></span>Full LTV 75 %</span>
               </div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Up-front cost breakdown</div>
+              <div style="height: 220px; position: relative;"><canvas id="chart-pur-donut"></canvas></div>
             </div>
 
             <div class="card card-pad-sm">
               <div class="sec-tag" style="margin-bottom: 14px;">Amortization</div>
-              <div style="height: 200px;"><canvas id="chart-hdb-amort"></canvas></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ════════ NEW PURCHASE — PRIVATE ════════ -->
-      <div class="calc-panel" data-panel="purchase-private">
-        <div class="flex items-end justify-between" style="margin-bottom: 28px;">
-          <div>
-            <div class="sec-tag" style="margin-bottom: 6px;">Calculator · 03</div>
-            <div class="panel-title">New Purchase — Private</div>
-            <div class="panel-sub">Condo, landed, EC (post MOP). Full LTV 75 % requires tenure ≤ 30 y and IWAA + tenure ≤ 65; otherwise reduced LTV 55 %.</div>
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 480px 1fr; gap: 28px;">
-          <div class="card card-pad">
-            <div class="sec-tag" style="margin-bottom: 14px;">Property &amp; loan</div>
-            <div class="grid-form-1" style="margin-bottom: 12px;">
-              <div class="field">
-                <label class="field-label">Property price</label>
-                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchasePrivate.price" min="0" step="10000"></div>
-              </div>
-            </div>
-            <div class="grid-form">
-              <div class="field">
-                <label class="field-label">Loan tenure</label>
-                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="purchasePrivate.tenure" min="1" max="35" step="1"><span class="input-suffix">yrs</span></div>
-                <div class="field-hint">Cap 35 y. Full LTV ≤ 30 y.</div>
-              </div>
-              <div class="field">
-                <label class="field-label">Interest rate</label>
-                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="purchasePrivate.rate" min="0" max="10" step="0.05"><span class="input-suffix">% p.a.</span></div>
-              </div>
-              <div class="field">
-                <label class="field-label">Citizenship</label>
-                <select class="field-select" data-bind="purchasePrivate.citizenship">
-                  <option value="citizen">SG Citizen</option>
-                  <option value="pr">SG Permanent Resident</option>
-                  <option value="foreigner">Foreigner</option>
-                </select>
-              </div>
-              <div class="field">
-                <label class="field-label">Property count (incl. this)</label>
-                <select class="field-select" data-bind="purchasePrivate.propertyCount">
-                  <option value="1">1st property</option>
-                  <option value="2">2nd property</option>
-                  <option value="3">3rd or more</option>
-                </select>
-              </div>
-              <div class="field" style="grid-column: 1 / -1;">
-                <label class="field-label">Existing CPF for down-payment</label>
-                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchasePrivate.cpfAvailable" min="0" step="1000"></div>
-              </div>
-            </div>
-
-            <div class="divider" style="margin: 18px 0;"></div>
-            <div data-borrowers="purchasePrivate"></div>
-
-            <div class="grid-form" style="margin-top: 14px;">
-              <div class="field" style="grid-column: 1 / -1;">
-                <label class="field-label">Other monthly commitments</label>
-                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="purchasePrivate.commitments" min="0" step="50"></div>
-              </div>
-            </div>
-
-            <div class="divider" style="margin: 18px 0;"></div>
-            <div class="sec-tag" style="margin-bottom: 10px;">Rate packages for report</div>
-            <button type="button" class="rate-pick-trigger" onclick="openRateModal('purchasePrivate')" data-pick-trigger="purchasePrivate">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 11 10 15 14 21 8"/></svg>
-              <span>Pick rates</span>
-              <span class="pick-count" data-pick-count="purchasePrivate">0 / 4</span>
-            </button>
-            <div class="rate-chip-list" data-pick-chips="purchasePrivate"></div>
-          </div>
-
-          <div class="flex flex-col gap-4">
-            <div class="grid grid-cols-2 gap-3">
-              <div class="stat-tile accent">
-                <div class="stat-label">Monthly installment</div>
-                <div class="stat-value display-num" data-out="pvt.monthly">$ 0</div>
-                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="pvt.monthlyNote">at entered rate</div>
-              </div>
-              <div class="stat-tile">
-                <div class="stat-label">Loan amount</div>
-                <div class="stat-value display-num" data-out="pvt.loan">$ 0</div>
-                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="pvt.ltvNote">75 % LTV</div>
-              </div>
-            </div>
-
-            <div class="card card-pad-sm">
-              <div class="sec-tag" style="margin-bottom: 14px;">Stamp duty</div>
-              <div class="res-row"><div><div class="res-label">BSD — Buyer's Stamp Duty</div><div class="res-sublabel">1–6 % progressive</div></div><div class="res-value num" data-out="pvt.bsd">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label">ABSD</div><div class="res-sublabel" data-out="pvt.absdNote">SG citizen · 1st</div></div><div class="res-value num" data-out="pvt.absd">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total duty payable</div></div><div class="res-value num" data-out="pvt.totalDuty" style="font-weight: 600;">$ 0</div></div>
-            </div>
-
-            <div class="card card-pad-sm">
-              <div class="sec-tag" style="margin-bottom: 14px;">Up-front cash &amp; CPF</div>
-              <div class="res-row"><div><div class="res-label">Cash down-payment</div><div class="res-sublabel" data-out="pvt.cashDownNote">5 % cash</div></div><div class="res-value num" data-out="pvt.cashDown">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label">CPF / cash down-payment</div><div class="res-sublabel" data-out="pvt.cpfDownNote">20 % CPF or cash</div></div><div class="res-value num" data-out="pvt.cpfDown">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label">Stamp duty (BSD + ABSD)</div></div><div class="res-value num" data-out="pvt.dutyLine">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label">Legal &amp; valuation fees</div></div><div class="res-value num" data-out="pvt.legalFees">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total cash + CPF needed</div></div><div class="res-value num accent-text" data-out="pvt.totalUpfront" style="font-weight: 600;">$ 0</div></div>
-            </div>
-
-            <div class="card card-pad-sm">
-              <div class="sec-tag" style="margin-bottom: 14px;">Compliance — at 4 % stress</div>
-              <div>
-                <div class="flex justify-between items-baseline" style="margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 500;">TDSR (55 % cap)</span>
-                  <span class="num" data-out="pvt.tdsrLabel" style="font-size: 12.5px;">0 / 55 %</span>
-                </div>
-                <div class="ratio-bar" data-bar="pvt.tdsr"><div class="fill" style="width: 0;"></div></div>
-              </div>
-              <div class="divider-dashed" style="margin: 16px 0;"></div>
-              <div class="flex gap-2 flex-wrap">
-                <span class="pill pass" data-pill="pvt.tdsr"><span class="dot"></span>TDSR pass</span>
-                <span class="pill pass" data-pill="pvt.ltv"><span class="dot"></span>Full LTV 75 %</span>
-              </div>
-            </div>
-
-            <div class="card card-pad-sm">
-              <div class="sec-tag" style="margin-bottom: 14px;">Amortization</div>
-              <div style="height: 200px;"><canvas id="chart-pvt-amort"></canvas></div>
+              <div style="height: 200px;"><canvas id="chart-pur-amort"></canvas></div>
             </div>
           </div>
         </div>
@@ -1254,16 +1192,12 @@ tailwind.config = {
                 <label class="field-label">Outstanding loan</label>
                 <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="sellPurchase.outstandingLoan" min="0" step="1000"></div>
               </div>
-              <div class="field">
-                <label class="field-label">CPF principal used</label>
-                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="sellPurchase.cpfUsed" min="0" step="1000"></div>
+              <div class="field" style="grid-column: 1 / -1;">
+                <label class="field-label">CPF principal + accrued (from CPF statement)</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="sellPurchase.cpfPrincipalAccrued" min="0" step="1000"></div>
+                <div class="field-hint">Pull this directly from CPF (Property → Accrued interest).</div>
               </div>
-              <div class="field">
-                <label class="field-label">CPF used for years</label>
-                <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="sellPurchase.cpfYears" min="0" max="40" step="1"><span class="input-suffix">yrs</span></div>
-                <div class="field-hint">2.6 % p.a. accrual.</div>
-              </div>
-              <div class="field">
+              <div class="field" style="grid-column: 1 / -1;">
                 <label class="field-label">Agent commission</label>
                 <div class="input-wrap"><input type="number" class="field-input has-suffix" data-bind="sellPurchase.agentRate" min="0" max="5" step="0.1"><span class="input-suffix">%</span></div>
                 <div class="field-hint">+ 9 % GST.</div>
@@ -1314,6 +1248,16 @@ tailwind.config = {
             <div data-borrowers="sellPurchase"></div>
 
             <div class="grid-form" style="margin-top: 14px;">
+              <div class="field">
+                <label class="field-label">Cash on hand</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="sellPurchase.cashOnHand" min="0" step="1000"></div>
+                <div class="field-hint">Excludes sale proceeds.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">Additional CPF OA</label>
+                <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="sellPurchase.cpfAvailable" min="0" step="1000"></div>
+                <div class="field-hint">On top of CPF restored from sale.</div>
+              </div>
               <div class="field" style="grid-column: 1 / -1;">
                 <label class="field-label">Other monthly commitments</label>
                 <div class="input-wrap"><span class="input-prefix">$</span><input type="number" class="field-input has-prefix" data-bind="sellPurchase.commitments" min="0" step="50"></div>
@@ -1338,9 +1282,9 @@ tailwind.config = {
                 <div class="faint" style="font-size: 11.5px; margin-top: 4px;">After loan, CPF refund, fees</div>
               </div>
               <div class="stat-tile accent">
-                <div class="stat-label">Cash needed for new</div>
-                <div class="stat-value display-num" data-out="sp.cashNeeded">$ 0</div>
-                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="sp.gapNote">Top-up after sale proceeds</div>
+                <div class="stat-label" data-out="sp.positionLabel">Surplus / shortfall</div>
+                <div class="stat-value display-num" data-out="sp.position">$ 0</div>
+                <div class="faint" style="font-size: 11.5px; margin-top: 4px;" data-out="sp.positionNote">Funds vs new-property upfront</div>
               </div>
             </div>
 
@@ -1348,7 +1292,7 @@ tailwind.config = {
               <div class="sec-tag" style="margin-bottom: 14px;">Sale waterfall</div>
               <div class="res-row"><div><div class="res-label">Sale price</div></div><div class="res-value num" data-out="sp.salePriceOut">$ 0</div></div>
               <div class="res-row"><div><div class="res-label">Less: outstanding loan</div></div><div class="res-value num" data-out="sp.lessOutstanding">- $ 0</div></div>
-              <div class="res-row"><div><div class="res-label">Less: CPF refund (principal + 2.6 % accrued)</div><div class="res-sublabel" data-out="sp.cpfRefundNote">CPF used + accrued</div></div><div class="res-value num" data-out="sp.lessCpfRefund">- $ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Less: CPF refund (principal + accrued)</div><div class="res-sublabel">From CPF statement</div></div><div class="res-value num" data-out="sp.lessCpfRefund">- $ 0</div></div>
               <div class="res-row"><div><div class="res-label">Less: agent commission (incl. GST)</div></div><div class="res-value num" data-out="sp.lessAgent">- $ 0</div></div>
               <div class="res-row"><div><div class="res-label">Less: legal &amp; conveyancing</div></div><div class="res-value num" data-out="sp.lessLegal">- $ 0</div></div>
               <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Net cash to seller</div></div><div class="res-value num accent-text" data-out="sp.netCashOut" style="font-weight: 600;">$ 0</div></div>
@@ -1360,13 +1304,39 @@ tailwind.config = {
               <div class="res-row"><div><div class="res-label">Property price</div></div><div class="res-value num" data-out="sp.newPriceOut">$ 0</div></div>
               <div class="res-row"><div><div class="res-label">Loan @ <span data-out="sp.newLtvLabel">75 %</span> LTV</div></div><div class="res-value num" data-out="sp.newLoan">$ 0</div></div>
               <div class="res-row"><div><div class="res-label">Down-payment</div><div class="res-sublabel" data-out="sp.newDownNote">25 % cash + CPF</div></div><div class="res-value num" data-out="sp.newDownpay">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label">BSD</div></div><div class="res-value num" data-out="sp.newBsd">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">BSD</div><div class="res-sublabel">CPF or cash</div></div><div class="res-value num" data-out="sp.newBsd">$ 0</div></div>
               <div class="res-row"><div><div class="res-label">ABSD payable upfront</div><div class="res-sublabel" data-out="sp.absdUpfrontNote"></div></div><div class="res-value num" data-out="sp.absdUpfront">$ 0</div></div>
               <div class="res-row" data-show="sp.absdRefundShow"><div><div class="res-label">ABSD remission (refundable)</div><div class="res-sublabel">Sell within 6 months to claim</div></div><div class="res-value num accent-text" data-out="sp.absdRefund">- $ 0</div></div>
-              <div class="res-row"><div><div class="res-label">Legal &amp; valuation fees</div></div><div class="res-value num" data-out="sp.newLegal">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Legal &amp; valuation fees</div><div class="res-sublabel">Cash only</div></div><div class="res-value num" data-out="sp.newLegal">$ 0</div></div>
               <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Total upfront for new property</div></div><div class="res-value num" data-out="sp.newTotalUpfront" style="font-weight: 600;">$ 0</div></div>
-              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Less: net cash + CPF from sale</div></div><div class="res-value num accent-text" data-out="sp.fundingFromSale">- $ 0</div></div>
-              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;">Cash gap to top-up</div></div><div class="res-value num" data-out="sp.cashGap" style="font-weight: 600; font-size: 18px;">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Cash &amp; CPF position</div>
+              <div class="res-row"><div><div class="res-label">Cash on hand</div></div><div class="res-value num" data-out="sp.cashAvail">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Net cash from sale</div></div><div class="res-value num" data-out="sp.netCashLine">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">CPF restored from sale</div></div><div class="res-value num" data-out="sp.cpfRestoredLine">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Additional CPF available</div></div><div class="res-value num" data-out="sp.cpfAddLine">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Combined funds</div></div><div class="res-value num" data-out="sp.fundsTotal">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label">Less: total upfront for new</div></div><div class="res-value num" data-out="sp.upfrontMinus">- $ 0</div></div>
+              <div class="res-row"><div><div class="res-label" style="color: var(--ink); font-weight: 600;" data-out="sp.positionLabel2">Surplus / shortfall</div></div><div class="res-value num accent-text" data-out="sp.positionLine" style="font-weight: 600; font-size: 18px;">$ 0</div></div>
+              <div class="divider-dashed" style="margin: 12px 0;"></div>
+              <div class="res-row"><div><div class="res-label muted">Cash-only floor (cash min + agent + legal)</div><div class="res-sublabel">Cannot be paid via CPF</div></div><div class="res-value num muted" data-out="sp.cashFloor">$ 0</div></div>
+              <div class="res-row"><div><div class="res-label muted" data-out="sp.cashGapLabel">Cash margin vs floor</div></div><div class="res-value num" data-out="sp.cashGap">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Visual summary</div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Sale proceeds waterfall</div>
+                  <div style="height: 200px; position: relative;"><canvas id="chart-sp-waterfall"></canvas></div>
+                </div>
+                <div>
+                  <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">New property funding</div>
+                  <div style="height: 200px; position: relative;"><canvas id="chart-sp-funding"></canvas></div>
+                </div>
+              </div>
             </div>
 
             <div class="card card-pad-sm">
@@ -1505,6 +1475,20 @@ tailwind.config = {
               <div class="res-row"><div><div class="res-label">Year 1</div></div><div class="res-value num" data-out="rf.save1">$ 0</div></div>
               <div class="res-row"><div><div class="res-label">Year 3</div></div><div class="res-value num" data-out="rf.save3">$ 0</div></div>
               <div class="res-row"><div><div class="res-label" data-out="rf.saveHorizonLabel">Year 5</div></div><div class="res-value num accent-text" data-out="rf.saveHorizon" style="font-weight: 600;">$ 0</div></div>
+            </div>
+
+            <div class="card card-pad-sm">
+              <div class="sec-tag" style="margin-bottom: 14px;">Visual summary</div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Monthly comparison</div>
+                  <div style="height: 200px; position: relative;"><canvas id="chart-rf-monthly"></canvas></div>
+                </div>
+                <div>
+                  <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Switching cost split</div>
+                  <div style="height: 200px; position: relative;"><canvas id="chart-rf-cost-donut"></canvas></div>
+                </div>
+              </div>
             </div>
 
             <div class="card card-pad-sm">
@@ -1654,27 +1638,23 @@ const state = {
     borrowers: [defaultBorrower({ age: 35, fixedIncome: 12000 })],
     commitments: 500, cash: 200000, cpf: 150000,
   },
-  purchaseHdb: {
-    price: 700000, tenure: 25, rate: 3.0,
+  purchase: {
+    propertyType: 'private',       // 'hdb' | 'private'
+    price: 1800000, tenure: 27, rate: 3.5,
+    tenureAuto: true,              // auto-sync tenure to (65 - IWAA) until user edits
     citizenship: 'citizen', propertyCount: '1',
-    cpfAvailable: 100000,
-    borrowers: [defaultBorrower({ age: 35, fixedIncome: 8000 })],
-    commitments: 300,
-  },
-  purchasePrivate: {
-    price: 1800000, tenure: 30, rate: 3.5,
-    citizenship: 'citizen', propertyCount: '1',
-    cpfAvailable: 200000,
+    cpfAvailable: 200000, cashOnHand: 100000,
     borrowers: [defaultBorrower({ age: 38, fixedIncome: 18000 })],
     commitments: 800,
   },
   sellPurchase: {
     salePrice: 1100000, outstandingLoan: 380000,
-    cpfUsed: 220000, cpfYears: 12,
+    cpfPrincipalAccrued: 299358,    // CPF principal + accrued interest (from CPF statement)
     agentRate: 2.0,
     newPrice: 1900000, newType: 'private', newCitizenship: 'citizen',
     bridgingNeeded: 'no',
     newTenure: 28, newRate: 3.5,
+    cashOnHand: 50000, cpfAvailable: 0,
     borrowers: [defaultBorrower({ age: 42, fixedIncome: 18000 })],
     commitments: 800,
   },
@@ -1686,8 +1666,7 @@ const state = {
   // Selected rate package indices (into RATES.packages) per calculator
   picks: {
     affordability: [],
-    purchaseHdb: [],
-    purchasePrivate: [],
+    purchase: [],
     sellPurchase: [],
     refinance: [],
   },
@@ -1700,6 +1679,7 @@ const state = {
     sortKey: 'y1',    // y1, y2, y3, lender, lockIn
     sortDir: 'asc',
   },
+  rateExpanded: {},   // { [pkgIdx]: true } — transient, not persisted
 };
 
 // Rates data, populated by loadRates()
@@ -1917,18 +1897,34 @@ function renderBorrowers(calcKey) {
     Add borrower ${calc.borrowers.length}/${RULES.maxBorrowers}
   </button>`;
 
-  // IWAA + summary
+  // IWAA + summary — keyed so updateBorrowerSummary() can refresh in place
   const iwaa = computeIwaa(calc.borrowers);
   const totalEff = totalEffectiveIncome(calc.borrowers);
   const totalBoost = totalFundsBoost(calc.borrowers);
-  html += `<div class="iwaa-summary">
-    <div><span class="label">IWAA</span><span class="value"> ${iwaa.toFixed(1)} yrs</span></div>
-    <div><span class="label">Effective income</span><span class="value"> ${fmt.money(totalEff)}</span></div>
-    ${totalBoost > 0 ? `<div><span class="label">+ Funds boost</span><span class="value"> ${fmt.money(totalBoost)}</span></div>` : ''}
+  html += `<div class="iwaa-summary" data-borrower-summary="${calcKey}">
+    <div><span class="label">IWAA</span><span class="value" data-iwaa-out="iwaa"> ${iwaa.toFixed(1)} yrs</span></div>
+    <div><span class="label">Effective income</span><span class="value" data-iwaa-out="eff"> ${fmt.money(totalEff)}</span></div>
+    <div data-iwaa-row="boost" style="${totalBoost > 0 ? '' : 'display:none;'}"><span class="label">+ Funds boost</span><span class="value" data-iwaa-out="boost"> ${fmt.money(totalBoost)}</span></div>
   </div>`;
 
   container.innerHTML = html;
   bindBorrowerInputs(container);
+}
+
+function updateBorrowerSummary(calcKey) {
+  const calc = state[calcKey];
+  if (!calc) return;
+  const iwaa = computeIwaa(calc.borrowers);
+  const totalEff = totalEffectiveIncome(calc.borrowers);
+  const totalBoost = totalFundsBoost(calc.borrowers);
+  const root = document.querySelector('[data-borrower-summary="' + calcKey + '"]');
+  if (!root) return;
+  const set = (k, v) => { const el = root.querySelector('[data-iwaa-out="' + k + '"]'); if (el) el.textContent = v; };
+  set('iwaa', ' ' + iwaa.toFixed(1) + ' yrs');
+  set('eff', ' ' + fmt.money(totalEff));
+  const boostRow = root.querySelector('[data-iwaa-row="boost"]');
+  if (boostRow) boostRow.style.display = totalBoost > 0 ? '' : 'none';
+  set('boost', ' ' + fmt.money(totalBoost));
 }
 
 function bindBorrowerInputs(container) {
@@ -1938,7 +1934,8 @@ function bindBorrowerInputs(container) {
       const [calcKey, idx, field] = path.split('.');
       state[calcKey].borrowers[+idx][field] = num(el.value);
       saveState();
-      renderBorrowers(calcKey);
+      // Update IWAA summary in-place (no DOM rebuild → focus preserved)
+      updateBorrowerSummary(calcKey);
       renderAll();
     };
     el.addEventListener('input', handler);
@@ -1980,6 +1977,7 @@ function calcAffordability(s) {
   const tdsrAvailable = Math.max(0, tdsrCap - num(s.commitments));
   const msrAvailable = isHdb ? msrCap : Infinity;
   const eligibleMonthly = Math.max(0, Math.min(tdsrAvailable, msrAvailable));
+  const msrBinding = isHdb && msrAvailable < tdsrAvailable;
   const scenario = s.ltvScenario || 'full';
   const ltv = scenario === 'reduced' ? RULES.ltv.reducedFirst : RULES.ltv.fullFirst;
   const tenure = tenureForScenario(s.propertyType, iwaa, scenario);
@@ -1987,9 +1985,16 @@ function calcAffordability(s) {
   const maxProperty = maxLoan / ltv;
   const cashPct = scenario === 'reduced' ? RULES.cashMin.reducedFirst : RULES.cashMin.fullFirst;
   const cashMin = maxProperty * cashPct;
-  const cpfBalance = maxProperty * (1 - ltv);
+  const totalDownpayment = maxProperty * (1 - ltv);
+  const cpfPortion = totalDownpayment - cashMin;
   const fixedTotal = s.borrowers.reduce((a, b) => a + num(b.fixedIncome), 0);
   const variableTotal = s.borrowers.reduce((a, b) => a + num(b.variableIncome) * (1 - RULES.variableHaircut), 0);
+  // Position vs user's cash + CPF on hand
+  const cashAvail = num(s.cash);
+  const cpfAvail = num(s.cpf);
+  const fundsTotal = cashAvail + cpfAvail;
+  const position = fundsTotal - totalDownpayment;       // signed
+  const cashGap = cashAvail - cashMin;                  // signed; negative = cash short
   return {
     isHdb, scenario,
     iwaa, fixedTotal, variableTotal,
@@ -1998,19 +2003,21 @@ function calcAffordability(s) {
     available: eligibleMonthly,
     tenure, ltv, cashPct,
     maxLoan, maxProperty,
-    cashMin,
-    cpfBalance,
-    tdsrPass: num(s.commitments) <= tdsrCap,
-    msrPass: !isHdb || true,
+    cashMin, totalDownpayment, cpfPortion,
+    cashAvail, cpfAvail, fundsTotal, position, cashGap,
+    tdsrPass: num(s.commitments) < tdsrCap,
+    msrPass: !isHdb || msrAvailable >= 0,
+    msrBinding,
   };
 }
 
-function calcPurchase(s, propType) {
+function calcPurchase(s) {
+  const propType = s.propertyType === 'hdb' ? 'hdb' : 'private';
+  const isHdb = propType === 'hdb';
   const price = num(s.price);
   const tenure = num(s.tenure);
   const iwaa = computeIwaa(s.borrowers);
   const rate = num(s.rate) / 100;
-  const isHdb = propType === 'hdb';
   const propCount = parseInt(s.propertyCount, 10) || 1;
   const ltv = ltvForFirstLoan(tenure, iwaa, propType);
   const ltvFull = ltv === RULES.ltv.fullFirst;
@@ -2020,7 +2027,9 @@ function calcPurchase(s, propType) {
   const monthly = pmt(loan, rate, tenure);
   const monthlyStress = pmt(loan, RULES.stressRate, tenure);
   const bsdAmt = bsd(price);
-  const absdR = absdRate(s.citizenship, propCount);
+  // Foreigners can't buy HDB — clamp citizenship for HDB
+  const citizenship = isHdb && s.citizenship === 'foreigner' ? 'pr' : s.citizenship;
+  const absdR = absdRate(citizenship, propCount);
   const absdAmt = price * absdR;
   const cashDown = price * cashPct;
   const cpfDown = price * cpfPct;
@@ -2035,14 +2044,22 @@ function calcPurchase(s, propType) {
   const msrPass = !isHdb || msrRatio <= RULES.msr;
   const series = amortSeries(loan, rate, tenure);
   const totalInterest = series.reduce((a, x) => a + x.interest, 0);
+  // Cash & CPF position — BSD/ABSD are fungible (CPF or cash)
+  const cashAvail = num(s.cashOnHand);
+  const cpfAvail = num(s.cpfAvailable);
+  const fundsTotal = cashAvail + cpfAvail;
+  const position = fundsTotal - totalUpfront;           // signed
+  const cashFloor = cashDown + legalFees;               // strictly cash
+  const cashGap = cashAvail - cashFloor;                // signed
   return {
-    propType, price, tenure, rate, iwaa,
-    citizenship: s.citizenship, propCount,
+    propType, isHdb, price, tenure, rate, iwaa,
+    citizenship, propCount,
     ltv, ltvFull, cashPct, cpfPct,
     loan, monthly, monthlyStress,
     bsd: bsdAmt, absdR, absd: absdAmt,
     totalDuty: bsdAmt + absdAmt,
     cashDown, cpfDown, legalFees, totalUpfront,
+    cashAvail, cpfAvail, fundsTotal, position, cashFloor, cashGap,
     tdsrRatio, msrRatio, tdsrPass, msrPass,
     series, totalInterest,
     eff, fundsBoost,
@@ -2052,14 +2069,12 @@ function calcPurchase(s, propType) {
 function calcSellPurchase(s) {
   const sale = num(s.salePrice);
   const out = num(s.outstandingLoan);
-  const cpfUsed = num(s.cpfUsed);
-  const cpfYears = num(s.cpfYears);
-  const cpfAccruedTotal = cpfRefund(cpfUsed, cpfYears);
-  const cpfAccrued = cpfAccruedTotal - cpfUsed;
+  // CPF principal + accrued is now a single direct input from CPF statement
+  const cpfRefundTotal = num(s.cpfPrincipalAccrued);
   const agentFee = sale * (num(s.agentRate)/100) * (1 + RULES.gst);
-  const legalSell = 3000;
-  const netCash = Math.max(0, sale - out - cpfAccruedTotal - agentFee - legalSell);
-  const cpfRestored = cpfAccruedTotal;
+  const legalSell = RULES.defaultLegalFees + RULES.defaultValuationFee;
+  const netCash = Math.max(0, sale - out - cpfRefundTotal - agentFee - legalSell);
+  const cpfRestored = cpfRefundTotal;
 
   const newPrice = num(s.newPrice);
   const newType = s.newType;
@@ -2073,20 +2088,20 @@ function calcSellPurchase(s) {
   const cpfPct = (1 - ltv) - cashPct;
   const newLoan = newPrice * ltv;
   const newDownpay = newPrice * (1 - ltv);
+  const newCashDown = newPrice * cashPct;
   const newBsd = bsd(newPrice);
   const propCount = 1;  // post-sale buyer
-  const absdR = absdRate(s.newCitizenship, propCount);
-  const absdUpfrontR = s.bridgingNeeded === 'yes' && s.newCitizenship === 'citizen'
-    ? absdRate(s.newCitizenship, 2)
+  const newCitizenship = isHdb && s.newCitizenship === 'foreigner' ? 'pr' : s.newCitizenship;
+  const absdR = absdRate(newCitizenship, propCount);
+  const absdUpfrontR = s.bridgingNeeded === 'yes' && newCitizenship === 'citizen'
+    ? absdRate(newCitizenship, 2)
     : absdR;
   const absdUpfront = newPrice * absdUpfrontR;
-  const absdRefund = (s.bridgingNeeded === 'yes' && s.newCitizenship === 'citizen')
+  const absdRefund = (s.bridgingNeeded === 'yes' && newCitizenship === 'citizen')
     ? newPrice * (absdUpfrontR - absdR)
     : 0;
   const newLegal = RULES.defaultLegalFees + RULES.defaultValuationFee;
   const newTotalUpfront = newDownpay + newBsd + absdUpfront + newLegal;
-  const fundingFromSale = netCash + cpfRestored;
-  const cashGap = Math.max(0, newTotalUpfront - fundingFromSale);
   const newMonthly = pmt(newLoan, rate, tenure);
   const newMonthlyStress = pmt(newLoan, RULES.stressRate, tenure);
   const newSeries = amortSeries(newLoan, rate, tenure);
@@ -2101,15 +2116,28 @@ function calcSellPurchase(s) {
   const tdsrPass = tdsrRatio <= RULES.tdsr;
   const msrPass = !isHdb || msrRatio <= RULES.msr;
 
+  // Cash & CPF position — sale proceeds + on-hand cash + restored CPF + additional CPF
+  const cashAvail = num(s.cashOnHand);
+  const cpfAvail = num(s.cpfAvailable);
+  const fundsTotal = netCash + cashAvail + cpfRestored + cpfAvail;
+  const position = fundsTotal - newTotalUpfront;        // signed
+  const cashFloor = newCashDown + agentFee + newLegal;  // strictly cash for the move
+  const cashGap = (netCash + cashAvail) - cashFloor;    // signed cash margin
+  // Legacy: keep cashGap-floored for back-compat
+  const cashGapAbs = Math.max(0, newTotalUpfront - (netCash + cpfRestored));
+
   return {
-    sale, out, cpfUsed, cpfYears, cpfAccrued, cpfRefundTotal: cpfAccruedTotal,
+    sale, out, cpfRefundTotal,
     agentFee, legalSell, netCash, cpfRestored,
-    newPrice, newType, newLoan, newDownpay, newBsd,
+    newPrice, newType, newLoan, newDownpay, newBsd, newCashDown,
     ltv, ltvFull, cashPct, cpfPct,
     absdR, absdUpfront, absdRefund, absdUpfrontR,
-    newLegal, newTotalUpfront, fundingFromSale, cashGap,
+    newLegal, newTotalUpfront,
+    fundingFromSale: netCash + cpfRestored,
+    cashGapAbs,
+    cashAvail, cpfAvail, fundsTotal, position, cashFloor, cashGap,
     newMonthly, newTotalInterest, newMonthlyStress,
-    citizenship: s.newCitizenship, bridging: s.bridgingNeeded,
+    citizenship: newCitizenship, bridging: s.bridgingNeeded,
     iwaa, tenure, isHdb,
     tdsrRatio, msrRatio, tdsrPass, msrPass,
     eff, fundsBoost,
@@ -2189,11 +2217,11 @@ function renderAffordability() {
   setOut('aff.maxPropertyNote',
     `${(r.ltv*100).toFixed(0)} % LTV · ${r.tenure} y tenure · IWAA ${r.iwaa.toFixed(1)} y · ${r.isHdb ? 'HDB / EC' : 'Private'}`);
   setOut('aff.maxLoan', fmt.money(r.maxLoan));
-  setOut('aff.maxLoanNote', `4 % stress · ${r.tenure} yrs`);
+  setOut('aff.maxLoanNote', `4 % stress · ${r.tenure} yrs${r.msrBinding ? ' · MSR-bound' : ''}`);
   setOut('aff.eligibleMonthly', fmt.money(r.available));
   setOut('aff.cashMin', fmt.money(r.cashMin));
   setOut('aff.cashMinNote', `${(r.cashPct*100).toFixed(0)} % of price`);
-  setOut('aff.cpfBalance', fmt.money(r.cpfBalance - r.cashMin));
+  setOut('aff.cpfBalance', fmt.money(r.cpfPortion));
   setOut('aff.cpfBalanceNote', `${((1 - r.ltv - r.cashPct)*100).toFixed(0)} % CPF / cash`);
   setOut('aff.fixed', fmt.money(r.fixedTotal));
   setOut('aff.variable', fmt.money(r.variableTotal));
@@ -2202,61 +2230,114 @@ function renderAffordability() {
   setOut('aff.commit', '- ' + fmt.money(r.commit));
   setOut('aff.available', fmt.money(r.available));
   setShow('aff.boostShow', r.fundsBoost > 0);
-  // Compliance — show commitments-only ratio (no mortgage yet)
+  // Cash & CPF position
+  setOut('aff.cashAvail', fmt.money(r.cashAvail));
+  setOut('aff.cpfAvail', fmt.money(r.cpfAvail));
+  setOut('aff.fundsTotal', fmt.money(r.fundsTotal));
+  setOut('aff.downReqd', '- ' + fmt.money(r.totalDownpayment));
+  setOut('aff.positionLabel', r.position >= 0 ? 'Surplus over downpayment' : 'Shortfall to downpayment');
+  setOut('aff.position', (r.position >= 0 ? '+ ' : '- ') + fmt.money(Math.abs(r.position)));
+  setOut('aff.cashFloor', fmt.money(r.cashMin));
+  setOut('aff.cashGapLabel', r.cashGap >= 0 ? 'Cash margin (positive)' : 'Cash short (negative)');
+  setOut('aff.cashGap', (r.cashGap >= 0 ? '+ ' : '- ') + fmt.money(Math.abs(r.cashGap)));
+  // Compliance — at full utilisation (max eligible loan + existing commits)
   const eff = r.fixedTotal + r.variableTotal + r.fundsBoost;
-  const tdsrUsedPct = r.commit / Math.max(1, eff);
-  setBar('aff.tdsr', tdsrUsedPct, RULES.tdsr);
-  setOut('aff.tdsrLabel', (tdsrUsedPct*100).toFixed(1) + ' / 55 %  (commits only)');
+  const tdsrAtUtil = eff > 0 ? (r.available + r.commit) / eff : 0;
+  const msrAtUtil  = r.isHdb && eff > 0 ? r.available / eff : 0;
+  setBar('aff.tdsr', tdsrAtUtil, RULES.tdsr);
+  setOut('aff.tdsrLabel', (tdsrAtUtil*100).toFixed(1) + ' / 55 %');
   setShow('aff.msrShow', r.isHdb);
   if (r.isHdb) {
-    setBar('aff.msr', 0, RULES.msr);
-    setOut('aff.msrLabel', '0.0 / 30 %  (no mortgage yet)');
+    setBar('aff.msr', msrAtUtil, RULES.msr);
+    setOut('aff.msrLabel', (msrAtUtil*100).toFixed(1) + ' / 30 %');
   }
-  setPill('aff.tdsr', r.tdsrPass);
-  setPill('aff.msr', r.msrPass);
+  setPill('aff.tdsr', tdsrAtUtil <= RULES.tdsr + 1e-6);
+  setPill('aff.msr', !r.isHdb || msrAtUtil <= RULES.msr + 1e-6);
   // LTV scenario toggle UI sync
   $$('[data-ltv-toggle="affordability"] .opt').forEach(el => {
     el.classList.toggle('active', el.dataset.ltv === r.scenario);
   });
+  // Charts
+  drawAffDonut(r);
+  drawAffBar(state.affordability);
 }
 
-function renderPurchase(stateKey, prefix, propType, chartId) {
-  const r = calcPurchase(state[stateKey], propType);
-  const isHdb = propType === 'hdb';
-  setOut(prefix + '.monthly', fmt.money(r.monthly));
-  setOut(prefix + '.monthlyNote', `at ${(r.rate*100).toFixed(2)} %, ${r.tenure} yrs · IWAA ${r.iwaa.toFixed(1)}`);
-  setOut(prefix + '.loan', fmt.money(r.loan));
-  setOut(prefix + '.ltvNote', `${(r.ltv*100).toFixed(0)} % LTV ${r.ltvFull ? '· full' : '· reduced'}`);
-  setOut(prefix + '.bsd', fmt.money(r.bsd));
-  setOut(prefix + '.absd', fmt.money(r.absd));
-  setOut(prefix + '.absdNote', describeAbsd(state[stateKey].citizenship, parseInt(state[stateKey].propertyCount)) + ' · ' + (r.absdR*100).toFixed(0) + ' %');
-  setOut(prefix + '.totalDuty', fmt.money(r.totalDuty));
-  setOut(prefix + '.cashDown', fmt.money(r.cashDown));
-  setOut(prefix + '.cashDownNote', (r.cashPct*100).toFixed(0) + ' % cash');
-  setOut(prefix + '.cpfDown', fmt.money(r.cpfDown));
-  setOut(prefix + '.cpfDownNote', (r.cpfPct*100).toFixed(0) + ' % CPF or cash');
-  setOut(prefix + '.dutyLine', fmt.money(r.totalDuty));
-  setOut(prefix + '.legalFees', fmt.money(r.legalFees));
-  setOut(prefix + '.totalUpfront', fmt.money(r.totalUpfront));
-  setOut(prefix + '.tdsrLabel', (r.tdsrRatio*100).toFixed(1) + ' / 55 %');
-  if (isHdb) setOut(prefix + '.msrLabel', (r.msrRatio*100).toFixed(1) + ' / 30 %');
-  setBar(prefix + '.tdsr', r.tdsrRatio, RULES.tdsr);
-  if (isHdb) setBar(prefix + '.msr', r.msrRatio, RULES.msr);
-  setPill(prefix + '.tdsr', r.tdsrPass);
-  if (isHdb) setPill(prefix + '.msr', r.msrPass);
-  setPill(prefix + '.ltv', r.ltvFull);
-  drawAmort(chartId, r.series);
+function renderPurchase() {
+  const s = state.purchase;
+  // Auto-sync tenure to (65 - IWAA), capped to property-type max — until user manually edits
+  if (s.tenureAuto !== false) {
+    const iwaa = computeIwaa(s.borrowers);
+    const propMax = s.propertyType === 'hdb' ? RULES.maxTenure.hdb : RULES.maxTenure.private;
+    const autoTenure = Math.max(5, Math.min(propMax, Math.floor(RULES.retireAge - iwaa)));
+    if (s.tenure !== autoTenure) {
+      s.tenure = autoTenure;
+      const inp = document.querySelector('[data-bind="purchase.tenure"]');
+      if (inp && document.activeElement !== inp) inp.value = autoTenure;
+    }
+  }
+  const r = calcPurchase(s);
+  const isHdb = r.isHdb;
+  setOut('pur.panelSub', isHdb
+    ? 'HDB / EC. Stamp duty, monthly installment, TDSR / MSR, full cash-on-hand requirement. Full LTV 75 % requires tenure ≤ 25 y and IWAA + tenure ≤ 65.'
+    : 'Private. Condo, landed, EC (post-MOP). Full LTV 75 % requires tenure ≤ 30 y and IWAA + tenure ≤ 65; otherwise reduced LTV 55 %.');
+  setOut('pur.tenureHint', isHdb ? 'Cap 30 y. Full LTV ≤ 25 y.' : 'Cap 35 y. Full LTV ≤ 30 y.');
+  setOut('pur.monthly', fmt.money(r.monthly));
+  setOut('pur.monthlyNote', `at ${(r.rate*100).toFixed(2)} %, ${r.tenure} yrs · IWAA ${r.iwaa.toFixed(1)}`);
+  setOut('pur.loan', fmt.money(r.loan));
+  setOut('pur.ltvNote', `${(r.ltv*100).toFixed(0)} % LTV ${r.ltvFull ? '· full' : '· reduced'}`);
+  setOut('pur.bsd', fmt.money(r.bsd));
+  setOut('pur.absd', fmt.money(r.absd));
+  setOut('pur.absdNote', describeAbsd(r.citizenship, r.propCount) + ' · ' + (r.absdR*100).toFixed(0) + ' %');
+  setOut('pur.totalDuty', fmt.money(r.totalDuty));
+  setOut('pur.cashDown', fmt.money(r.cashDown));
+  setOut('pur.cashDownNote', (r.cashPct*100).toFixed(0) + ' % cash');
+  setOut('pur.cpfDown', fmt.money(r.cpfDown));
+  setOut('pur.cpfDownNote', (r.cpfPct*100).toFixed(0) + ' % CPF or cash');
+  setOut('pur.dutyLine', fmt.money(r.totalDuty));
+  setOut('pur.legalFees', fmt.money(r.legalFees));
+  setOut('pur.totalUpfront', fmt.money(r.totalUpfront));
+  // Cash & CPF position
+  setOut('pur.cashAvail', fmt.money(r.cashAvail));
+  setOut('pur.cpfAvail', fmt.money(r.cpfAvail));
+  setOut('pur.fundsTotal', fmt.money(r.fundsTotal));
+  setOut('pur.upfrontMinus', '- ' + fmt.money(r.totalUpfront));
+  setOut('pur.positionLabel', r.position >= 0 ? 'Surplus' : 'Shortfall (top-up needed)');
+  setOut('pur.position', (r.position >= 0 ? '+ ' : '- ') + fmt.money(Math.abs(r.position)));
+  setOut('pur.cashFloor', fmt.money(r.cashFloor));
+  setOut('pur.cashGapLabel', r.cashGap >= 0 ? 'Cash margin (positive)' : 'Cash short (negative)');
+  setOut('pur.cashGap', (r.cashGap >= 0 ? '+ ' : '- ') + fmt.money(Math.abs(r.cashGap)));
+  setOut('pur.cashFloorNote', `Cash min ${(r.cashPct*100).toFixed(0)}% + legal & valuation`);
+  setOut('pur.tdsrLabel', (r.tdsrRatio*100).toFixed(1) + ' / 55 %');
+  setBar('pur.tdsr', r.tdsrRatio, RULES.tdsr);
+  setShow('pur.msrShow', isHdb);
+  if (isHdb) {
+    setOut('pur.msrLabel', (r.msrRatio*100).toFixed(1) + ' / 30 %');
+    setBar('pur.msr', r.msrRatio, RULES.msr);
+  }
+  setPill('pur.tdsr', r.tdsrPass);
+  setPill('pur.msr', r.msrPass);
+  setPill('pur.ltv', r.ltvFull);
+  // Property-type toggle UI sync
+  $$('[data-prop-toggle="purchase"] .opt').forEach(el => {
+    el.classList.toggle('active', el.dataset.prop === r.propType);
+  });
+  // Hide foreigner option when HDB selected (foreigners can't buy HDB)
+  $$('[data-bind="purchase.citizenship"] option[data-citizen-private-only]').forEach(el => {
+    el.style.display = isHdb ? 'none' : '';
+  });
+  drawAmort('chart-pur-amort', r.series);
+  drawCostDonut('chart-pur-donut', r);
 }
 
 function renderSellPurchase() {
   const r = calcSellPurchase(state.sellPurchase);
   setOut('sp.netCash', fmt.money(r.netCash));
-  setOut('sp.cashNeeded', fmt.money(r.cashGap));
-  setOut('sp.gapNote', r.cashGap > 0 ? 'After applying sale proceeds' : 'Fully covered by sale');
+  setOut('sp.positionLabel', r.position >= 0 ? 'Surplus' : 'Shortfall (top-up needed)');
+  setOut('sp.position', (r.position >= 0 ? '+ ' : '- ') + fmt.money(Math.abs(r.position)));
+  setOut('sp.positionNote', r.position >= 0 ? 'Funds vs new-property upfront' : 'Funds short of new-property upfront');
   setOut('sp.salePriceOut', fmt.money(r.sale));
   setOut('sp.lessOutstanding', '- ' + fmt.money(r.out));
   setOut('sp.lessCpfRefund', '- ' + fmt.money(r.cpfRefundTotal));
-  setOut('sp.cpfRefundNote', fmt.money(r.cpfUsed) + ' principal + ' + fmt.money(r.cpfAccrued) + ' accrued');
   setOut('sp.lessAgent', '- ' + fmt.money(r.agentFee));
   setOut('sp.lessLegal', '- ' + fmt.money(r.legalSell));
   setOut('sp.netCashOut', fmt.money(r.netCash));
@@ -2273,8 +2354,18 @@ function renderSellPurchase() {
   setShow('sp.absdRefundShow', r.absdRefund > 0);
   setOut('sp.newLegal', fmt.money(r.newLegal));
   setOut('sp.newTotalUpfront', fmt.money(r.newTotalUpfront));
-  setOut('sp.fundingFromSale', '- ' + fmt.money(r.fundingFromSale));
-  setOut('sp.cashGap', fmt.money(r.cashGap));
+  // Cash & CPF position card
+  setOut('sp.cashAvail', fmt.money(r.cashAvail));
+  setOut('sp.netCashLine', fmt.money(r.netCash));
+  setOut('sp.cpfRestoredLine', fmt.money(r.cpfRestored));
+  setOut('sp.cpfAddLine', fmt.money(r.cpfAvail));
+  setOut('sp.fundsTotal', fmt.money(r.fundsTotal));
+  setOut('sp.upfrontMinus', '- ' + fmt.money(r.newTotalUpfront));
+  setOut('sp.positionLabel2', r.position >= 0 ? 'Surplus' : 'Shortfall (top-up needed)');
+  setOut('sp.positionLine', (r.position >= 0 ? '+ ' : '- ') + fmt.money(Math.abs(r.position)));
+  setOut('sp.cashFloor', fmt.money(r.cashFloor));
+  setOut('sp.cashGapLabel', r.cashGap >= 0 ? 'Cash margin (positive)' : 'Cash short (negative)');
+  setOut('sp.cashGap', (r.cashGap >= 0 ? '+ ' : '- ') + fmt.money(Math.abs(r.cashGap)));
   setOut('sp.newMonthly', fmt.money(r.newMonthly));
   setOut('sp.newTotalInterest', fmt.money(r.newTotalInterest));
   setOut('sp.tdsrLabel', (r.tdsrRatio*100).toFixed(1) + ' / 55 %');
@@ -2287,6 +2378,8 @@ function renderSellPurchase() {
   setPill('sp.tdsr', r.tdsrPass);
   setPill('sp.msr', r.msrPass);
   setPill('sp.ltv', r.ltvFull);
+  drawSpWaterfall(r);
+  drawSpFunding(r);
 }
 
 function renderRefinance() {
@@ -2305,6 +2398,8 @@ function renderRefinance() {
   setOut('rf.saveHorizon', fmt.money(r.saveHorizon));
   setOut('rf.saveHorizonLabel', 'Year ' + r.horizon);
   drawRefiChart(r);
+  drawRfMonthly(r);
+  drawRfCostDonut(r);
 }
 
 function describeAbsd(citizenship, count) {
@@ -2315,8 +2410,7 @@ function describeAbsd(citizenship, count) {
 
 function renderAll() {
   renderAffordability();
-  renderPurchase('purchaseHdb', 'hdb', 'hdb', 'chart-hdb-amort');
-  renderPurchase('purchasePrivate', 'pvt', 'private', 'chart-pvt-amort');
+  renderPurchase();
   renderSellPurchase();
   renderRefinance();
 }
@@ -2327,7 +2421,298 @@ function renderAll() {
 const chartColors = {
   ink: '#0B1220', muted: '#56657A', faint: '#94A3B8',
   border: '#E5E7EB', accent: '#059669', accentSoft: 'rgba(5,150,105,.15)',
+  accentStrong: '#047857',
+  // Muted multi-tone palette for donuts (emerald → teal → slate range)
+  donut: ['#059669', '#0F766E', '#475569', '#94A3B8', '#CBD5E1'],
+  donutBorder: '#FFFFFF',
 };
+
+// Common Chart.js options for clean labels
+const chartFontSans = { family: 'Plus Jakarta Sans', size: 11 };
+
+function donutOpts(centerText) {
+  return {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '62%',
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          boxWidth: 8, boxHeight: 8, padding: 10,
+          font: chartFontSans, color: chartColors.muted,
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: c => c.label + ': ' + fmt.money(c.parsed),
+        },
+      },
+      datalabels: {
+        display: (ctx) => {
+          const arr = ctx.dataset.data || [];
+          const total = arr.reduce((a, b) => a + (Number(b) || 0), 0);
+          if (!total) return false;
+          return (Number(arr[ctx.dataIndex]) || 0) / total >= 0.06;
+        },
+        color: '#fff',
+        font: dlFontSans,
+        anchor: 'center',
+        align: 'center',
+        formatter: (v) => fmt.money(v),
+      },
+    },
+  };
+}
+
+// Tiny plugin: write big text inside donut hole
+const donutCenter = {
+  id: 'donutCenter',
+  afterDraw(chart, args, opts) {
+    if (!opts || !opts.text) return;
+    const { ctx, chartArea } = chart;
+    const cx = (chartArea.left + chartArea.right) / 2;
+    const cy = (chartArea.top + chartArea.bottom) / 2;
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = chartColors.ink;
+    ctx.font = '500 16px "Fraunces", serif';
+    ctx.fillText(opts.text, cx, cy - 7);
+    if (opts.sub) {
+      ctx.fillStyle = chartColors.muted;
+      ctx.font = '500 10px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(opts.sub, cx, cy + 11);
+    }
+    ctx.restore();
+  },
+};
+Chart.register(donutCenter);
+
+// Data labels: register globally but default-OFF; charts opt in.
+if (typeof ChartDataLabels !== 'undefined') {
+  Chart.register(ChartDataLabels);
+  Chart.defaults.set('plugins.datalabels', { display: false });
+}
+const dlFontSans = { family: 'Plus Jakarta Sans', size: 10, weight: '600' };
+
+function drawDonut(canvasId, labels, values, centerText, centerSub) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (charts[canvasId]) charts[canvasId].destroy();
+  // Filter out zero values
+  const filtered = values.map((v, i) => ({ v, l: labels[i] })).filter(x => x.v > 0);
+  if (filtered.length === 0) return;
+  const total = filtered.reduce((a, x) => a + x.v, 0);
+  charts[canvasId] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: filtered.map(x => x.l),
+      datasets: [{
+        data: filtered.map(x => x.v),
+        backgroundColor: chartColors.donut.slice(0, filtered.length),
+        borderColor: chartColors.donutBorder,
+        borderWidth: 2,
+      }],
+    },
+    options: {
+      ...donutOpts(),
+      plugins: {
+        ...donutOpts().plugins,
+        donutCenter: { text: centerText || fmt.money(total), sub: centerSub || '' },
+      },
+    },
+  });
+}
+
+function drawAffDonut(r) {
+  const cashAmt = r.maxProperty * r.cashPct;
+  const cpfAmt = r.maxProperty * (1 - r.ltv) - cashAmt;
+  const totalDown = r.maxProperty * (1 - r.ltv);
+  drawDonut(
+    'chart-aff-donut',
+    [`Cash min (${(r.cashPct*100).toFixed(0)}%)`, `CPF / cash (${((1-r.ltv-r.cashPct)*100).toFixed(0)}%)`],
+    [cashAmt, cpfAmt],
+    fmt.money(totalDown),
+    `${((1-r.ltv)*100).toFixed(0)} % downpayment`
+  );
+}
+
+function drawAffBar(s) {
+  const ctx = document.getElementById('chart-aff-bar');
+  if (!ctx) return;
+  if (charts['chart-aff-bar']) charts['chart-aff-bar'].destroy();
+  // Compute both scenarios using same input
+  const sHdb = { ...s, propertyType: 'hdb' };
+  const sPvt = { ...s, propertyType: 'private' };
+  const rH = calcAffordability(sHdb);
+  const rP = calcAffordability(sPvt);
+  charts['chart-aff-bar'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['HDB / EC', 'Private'],
+      datasets: [{
+        data: [Math.round(rH.maxProperty), Math.round(rP.maxProperty)],
+        backgroundColor: [chartColors.donut[1], chartColors.donut[0]],
+        borderRadius: 4,
+        maxBarThickness: 50,
+      }],
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { right: 56 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => fmt.money(c.parsed.x) } },
+        datalabels: {
+          display: true,
+          anchor: 'end', align: 'end', offset: 4, clip: false,
+          color: chartColors.ink, font: dlFontSans,
+          formatter: (v) => fmt.money(v),
+        },
+      },
+      scales: {
+        x: { grid: { color: chartColors.border, drawBorder: false }, ticks: { font: chartFontSans, color: chartColors.faint, callback: v => '$ ' + (v/1000).toFixed(0) + 'k' } },
+        y: { grid: { display: false }, ticks: { font: { ...chartFontSans, weight: '600' }, color: chartColors.ink } },
+      },
+    },
+  });
+}
+
+function drawCostDonut(canvasId, r) {
+  drawDonut(
+    canvasId,
+    ['Cash down', 'CPF down', 'BSD', 'ABSD', 'Legal & valuation'],
+    [r.cashDown, r.cpfDown, r.bsd, r.absd, r.legalFees],
+    fmt.money(r.totalUpfront),
+    'total up-front'
+  );
+}
+
+function drawSpWaterfall(r) {
+  const ctx = document.getElementById('chart-sp-waterfall');
+  if (!ctx) return;
+  if (charts['chart-sp-waterfall']) charts['chart-sp-waterfall'].destroy();
+  // Stacked horizontal: each deduction shown as a slice
+  const labels = ['Sale price', '− Loan', '− CPF refund', '− Agent', '− Legal', 'Net cash'];
+  const values = [r.sale, -r.out, -r.cpfRefundTotal, -r.agentFee, -r.legalSell, r.netCash];
+  const colors = [
+    chartColors.donut[0], // Sale (positive)
+    'rgba(220,38,38,.6)', // loan
+    'rgba(217,119,6,.65)', // CPF
+    'rgba(94,114,140,.65)', // agent
+    'rgba(148,163,184,.65)', // legal
+    chartColors.accent, // Net
+  ];
+  charts['chart-sp-waterfall'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data: values.map(Math.abs),
+        backgroundColor: colors,
+        borderRadius: 3,
+        maxBarThickness: 22,
+      }],
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { right: 64 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: (c) => {
+          const sign = (c.dataIndex > 0 && c.dataIndex < 5) ? '−' : '';
+          return sign + fmt.money(c.parsed.x);
+        } } },
+        datalabels: {
+          display: true,
+          anchor: 'end', align: 'end', offset: 4, clip: false,
+          color: chartColors.ink, font: dlFontSans,
+          formatter: (v, ctx) => {
+            const sign = (ctx.dataIndex > 0 && ctx.dataIndex < 5) ? '−' : '';
+            return sign + fmt.money(v);
+          },
+        },
+      },
+      scales: {
+        x: { grid: { color: chartColors.border, drawBorder: false }, ticks: { font: chartFontSans, color: chartColors.faint, callback: v => '$ ' + (v/1000).toFixed(0) + 'k' } },
+        y: { grid: { display: false }, ticks: { font: chartFontSans, color: chartColors.ink } },
+      },
+    },
+  });
+}
+
+function drawSpFunding(r) {
+  drawDonut(
+    'chart-sp-funding',
+    ['New loan', 'Net cash from sale', 'CPF restored', 'Cash gap (top-up)'],
+    [r.newLoan, r.netCash, r.cpfRestored, r.cashGap],
+    fmt.money(r.newPrice),
+    'new property'
+  );
+}
+
+function drawRfMonthly(r) {
+  const ctx = document.getElementById('chart-rf-monthly');
+  if (!ctx) return;
+  if (charts['chart-rf-monthly']) charts['chart-rf-monthly'].destroy();
+  charts['chart-rf-monthly'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Current', 'New'],
+      datasets: [{
+        data: [Math.round(r.cur), Math.round(r.nm)],
+        backgroundColor: [chartColors.donut[2], chartColors.accent],
+        borderRadius: 4,
+        maxBarThickness: 60,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 22 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => fmt.money(c.parsed.y) + ' / month' } },
+        datalabels: {
+          display: true,
+          anchor: 'end', align: 'top', offset: 2, clip: false,
+          color: chartColors.ink, font: dlFontSans,
+          formatter: (v) => fmt.money(v),
+        },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { ...chartFontSans, weight: '600' }, color: chartColors.ink } },
+        y: { grid: { color: chartColors.border, drawBorder: false }, ticks: { font: chartFontSans, color: chartColors.faint, callback: v => '$ ' + (v/1000).toFixed(1) + 'k' } },
+      },
+    },
+  });
+}
+
+function drawRfCostDonut(r) {
+  if (r.totalCost <= 0) {
+    // No switching cost — render placeholder
+    const ctx = document.getElementById('chart-rf-cost-donut');
+    if (charts['chart-rf-cost-donut']) charts['chart-rf-cost-donut'].destroy();
+    if (ctx) {
+      const c = ctx.getContext('2d');
+      c.clearRect(0, 0, ctx.width, ctx.height);
+      c.fillStyle = chartColors.faint;
+      c.font = '500 12px "Plus Jakarta Sans", sans-serif';
+      c.textAlign = 'center';
+      c.textBaseline = 'middle';
+      c.fillText('No switching cost', ctx.width / 2, ctx.height / 2);
+    }
+    return;
+  }
+  drawDonut(
+    'chart-rf-cost-donut',
+    ['Redemption penalty', 'Subsidy clawback', 'Legal fees'],
+    [r.penalty, r.clawback, r.legal],
+    fmt.money(r.totalCost),
+    'switching cost'
+  );
+}
 function drawAmort(canvasId, series) {
   const ctx = document.getElementById(canvasId);
   if (!ctx) return;
@@ -2404,6 +2789,8 @@ function bindInputs() {
     const handler = () => {
       const v = el.type === 'number' ? num(el.value) : el.value;
       setPath(state, path, v);
+      // Manual edit of purchase.tenure pins the value (stops IWAA auto-sync)
+      if (path === 'purchase.tenure') state.purchase.tenureAuto = false;
       saveState();
       renderAll();
     };
@@ -2418,6 +2805,31 @@ function bindInputs() {
     g.querySelectorAll('.opt').forEach(opt => {
       opt.addEventListener('click', () => {
         state[calcKey].ltvScenario = opt.dataset.ltv;
+        saveState();
+        renderAll();
+      });
+    });
+  });
+  // Property-type toggles (HDB / Private on the merged Purchase tab)
+  $$('[data-prop-toggle]').forEach(g => {
+    const calcKey = g.dataset.propToggle;
+    g.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        const isHdb = opt.dataset.prop === 'hdb';
+        state[calcKey].propertyType = opt.dataset.prop;
+        // Foreigners can't buy HDB — coerce
+        if (isHdb && state[calcKey].citizenship === 'foreigner') {
+          state[calcKey].citizenship = 'pr';
+          const sel = document.querySelector('[data-bind="' + calcKey + '.citizenship"]');
+          if (sel) sel.value = 'pr';
+        }
+        // HDB tenure cap = 30; clamp visual + state if needed
+        const tenureInp = document.querySelector('[data-bind="' + calcKey + '.tenure"]');
+        if (tenureInp) tenureInp.max = isHdb ? 30 : 35;
+        if (isHdb && num(state[calcKey].tenure) > 30) {
+          state[calcKey].tenure = 30;
+          if (tenureInp) tenureInp.value = 30;
+        }
         saveState();
         renderAll();
       });
@@ -2439,7 +2851,7 @@ function switchTab(tab) {
 }
 
 function renderAllBorrowers() {
-  ['affordability', 'purchaseHdb', 'purchasePrivate', 'sellPurchase'].forEach(renderBorrowers);
+  ['affordability', 'purchase', 'sellPurchase'].forEach(renderBorrowers);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -2460,16 +2872,50 @@ function loadState() {
         state[k] = saved[k];
       }
     });
-    ['affordability', 'purchaseHdb', 'purchasePrivate', 'sellPurchase'].forEach(k => {
+    // ── Migrations ──────────────────────────────────────────────
+    // 1. Old purchaseHdb / purchasePrivate → merged purchase. Prefer Private if both exist.
+    if (saved.purchaseHdb || saved.purchasePrivate) {
+      const src = saved.purchasePrivate || saved.purchaseHdb;
+      const propertyType = saved.purchasePrivate ? 'private' : 'hdb';
+      state.purchase = Object.assign({}, state.purchase, src, { propertyType });
+    }
+    delete state.purchaseHdb;
+    delete state.purchasePrivate;
+    // Default tenureAuto to true if missing (keeps tenure synced to 65 - IWAA)
+    if (state.purchase && state.purchase.tenureAuto == null) state.purchase.tenureAuto = true;
+    // 2. Old sell-purchase cpfUsed + cpfYears → cpfPrincipalAccrued
+    if (state.sellPurchase && state.sellPurchase.cpfUsed != null && state.sellPurchase.cpfPrincipalAccrued == null) {
+      const used = num(state.sellPurchase.cpfUsed);
+      const yrs = num(state.sellPurchase.cpfYears);
+      state.sellPurchase.cpfPrincipalAccrued = Math.round(used * Math.pow(1 + RULES.cpfAccrual, yrs));
+    }
+    delete state.sellPurchase.cpfUsed;
+    delete state.sellPurchase.cpfYears;
+    if (state.sellPurchase.cashOnHand == null) state.sellPurchase.cashOnHand = 0;
+    if (state.sellPurchase.cpfAvailable == null) state.sellPurchase.cpfAvailable = 0;
+    // 3. Active tab migration
+    if (state.active === 'purchase-hdb' || state.active === 'purchase-private') {
+      state.active = 'purchase';
+    }
+    // ── /Migrations ─────────────────────────────────────────────
+    ['affordability', 'purchase', 'sellPurchase'].forEach(k => {
       if (!Array.isArray(state[k].borrowers) || state[k].borrowers.length === 0) {
         state[k].borrowers = [defaultBorrower({ age: 35, fixedIncome: 0 })];
       }
       state[k].borrowers = state[k].borrowers.map(b => defaultBorrower(b));
     });
-    // Picks: ensure structure exists, all arrays
+    // Picks: ensure structure exists, all arrays. Migrate legacy keys.
     state.picks = Object.assign({
-      affordability: [], purchaseHdb: [], purchasePrivate: [], sellPurchase: [], refinance: [],
+      affordability: [], purchase: [], sellPurchase: [], refinance: [],
     }, state.picks || {});
+    if (saved.picks) {
+      const legacy = saved.picks.purchasePrivate || saved.picks.purchaseHdb;
+      if (legacy && legacy.length && (!state.picks.purchase || !state.picks.purchase.length)) {
+        state.picks.purchase = legacy;
+      }
+    }
+    delete state.picks.purchaseHdb;
+    delete state.picks.purchasePrivate;
     Object.keys(state.picks).forEach(k => {
       if (!Array.isArray(state.picks[k])) state.picks[k] = [];
     });
@@ -2479,23 +2925,9 @@ function loadState() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   AUTH
+   APP BOOT — auth handled upstream by Cloudflare Access
    ═══════════════════════════════════════════════════════════════ */
-const PASSCODE = 'danler321';
-function tryAuth(e) {
-  e.preventDefault();
-  const v = $('#auth-pw').value;
-  if (v === PASSCODE) {
-    sessionStorage.setItem('mc.auth', '1');
-    showApp();
-  } else {
-    $('#auth-error').style.display = 'block';
-    $('#auth-pw').value = '';
-  }
-  return false;
-}
 function showApp() {
-  $('#auth-gate').style.display = 'none';
   $('#app').style.display = 'block';
   loadState();
   hydrateInputs();
@@ -2505,7 +2937,6 @@ function showApp() {
   switchTab(state.active || 'affordability');
   renderAll();
   renderAllPickTriggers();
-  // Async-load rates spreadsheet, then re-render anything that depends on it
   loadRates().then(() => {
     renderRatesPanel();
     renderAllPickTriggers();
@@ -2513,8 +2944,8 @@ function showApp() {
   });
 }
 function logOut() {
-  sessionStorage.removeItem('mc.auth');
-  location.reload();
+  // Sign out of Cloudflare Access; the next load will redirect to the login flow.
+  location.href = '/cdn-cgi/access/logout';
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -2522,6 +2953,23 @@ function logOut() {
    ═══════════════════════════════════════════════════════════════ */
 function escapeHtml(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+// Capture an on-screen Chart.js canvas as a PNG data URL for inline embed in PDF
+function chartImg(canvasId) {
+  const el = document.getElementById(canvasId);
+  if (!el) return '';
+  try { return el.toDataURL('image/png'); } catch (e) { return ''; }
+}
+function chartFigure(canvasId, caption, opts = {}) {
+  const src = chartImg(canvasId);
+  if (!src) return '';
+  const w = opts.width || '100%';
+  const h = opts.height || '60mm';
+  return `<figure style="margin: 0; text-align: center; min-width: 0; overflow: hidden;">
+    <img src="${src}" style="display: block; width: ${w}; max-width: 100%; height: ${h}; object-fit: contain; margin: 0 auto;" />
+    ${caption ? `<figcaption style="font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #94A3B8; font-weight: 600; margin-top: 6px;">${escapeHtml(caption)}</figcaption>` : ''}
+  </figure>`;
 }
 
 function pdfBorrowersTable(borrowers, opts = {}) {
@@ -2546,10 +2994,10 @@ function pdfBorrowersTable(borrowers, opts = {}) {
 
 function buildReport() {
   const tab = state.active;
+  const purchaseIsHdb = (state.purchase || {}).propertyType === 'hdb';
   const niceTab = ({
     'affordability': 'Affordability Analysis',
-    'purchase-hdb': 'New Purchase — HDB',
-    'purchase-private': 'New Purchase — Private Property',
+    'purchase': purchaseIsHdb ? 'New Purchase — HDB' : 'New Purchase — Private Property',
     'sell-purchase': 'Sell &amp; Purchase Analysis',
     'refinance': 'Refinance Comparison',
   })[tab];
@@ -2559,44 +3007,63 @@ function buildReport() {
   // Map tab → state key for picks
   const calcKey = ({
     'affordability': 'affordability',
-    'purchase-hdb': 'purchaseHdb',
-    'purchase-private': 'purchasePrivate',
+    'purchase': 'purchase',
     'sell-purchase': 'sellPurchase',
     'refinance': 'refinance',
   })[tab];
 
-  let body;
-  if (tab === 'affordability') body = pdfAffordability();
-  else if (tab === 'purchase-hdb') body = pdfPurchase('hdb');
-  else if (tab === 'purchase-private') body = pdfPurchase('private');
-  else if (tab === 'sell-purchase') body = pdfSellPurchase();
-  else if (tab === 'refinance') body = pdfRefinance();
+  let pdfData;
+  if (tab === 'affordability') pdfData = pdfAffordability();
+  else if (tab === 'purchase') pdfData = pdfPurchase();
+  else if (tab === 'sell-purchase') pdfData = pdfSellPurchase();
+  else if (tab === 'refinance') pdfData = pdfRefinance();
 
   const ratesPage = pdfRatesPage(calcKey);
 
+  const coverHeader = `<div style="display:flex; justify-content: space-between; align-items: flex-start;">
+    <div>
+      <div class="pdf-cover-mark">N</div>
+      <div class="pdf-h3" style="margin-top: 22px;">Mortgage Analysis</div>
+      <div class="pdf-h1" style="margin-top: 8px; max-width: 440px;">${niceTab}</div>
+      <div style="font-size: 13px; color: #56657A; margin-top: 14px;">Prepared for <strong style="color:#0B1220;">${escapeHtml(clientName)}</strong></div>
+      <div style="font-size: 13px; color: #56657A; margin-top: 2px;">${dateStr}</div>
+    </div>
+    <div style="text-align: right; font-size: 11px; color: #56657A; line-height: 1.6;">
+      <div style="font-weight: 600; color: #0B1220;">Dan Ler</div>
+      <div>Nexus Mortgage SG</div>
+      <div style="margin-top: 6px;">Internal advisory document</div>
+    </div>
+  </div>`;
+
+  const continuationHeader = `<div style="display:flex; justify-content: space-between; align-items: flex-start;">
+    <div>
+      <div class="pdf-h3">Visual Breakdown</div>
+      <div class="pdf-h1" style="margin-top: 6px; max-width: 440px;">${niceTab} <span style="color:#94A3B8; font-style: italic; font-size: 22px;">· cont.</span></div>
+      <div style="font-size: 12px; color: #56657A; margin-top: 6px;">Charts &amp; visualisations · for ${escapeHtml(clientName)}</div>
+    </div>
+    <div style="text-align: right; font-size: 11px; color: #56657A; line-height: 1.6;">
+      <div style="font-weight: 600; color: #0B1220;">Dan Ler</div>
+      <div>${dateStr}</div>
+    </div>
+  </div>`;
+
+  const footer = `<div class="pdf-footer">
+    Indicative figures only. Subject to bank credit assessment, valuation, and prevailing IRAS, MAS, and HDB regulations.
+    Stress-test rate of 4 % is the MAS minimum used for residential TDSR / MSR computations. ABSD reflects rates effective 27 Apr 2023.
+    IWAA = Σ(age × income) ÷ Σ(income). CPF accrued at 2.6 % p.a.
+  </div>`;
+
   return `
     <div class="pdf-page">
-      <div style="display:flex; justify-content: space-between; align-items: flex-start;">
-        <div>
-          <div class="pdf-cover-mark">N</div>
-          <div class="pdf-h3" style="margin-top: 22px;">Mortgage Analysis</div>
-          <div class="pdf-h1" style="margin-top: 8px; max-width: 440px;">${niceTab}</div>
-          <div style="font-size: 13px; color: #56657A; margin-top: 14px;">Prepared for <strong style="color:#0B1220;">${escapeHtml(clientName)}</strong></div>
-          <div style="font-size: 13px; color: #56657A; margin-top: 2px;">${dateStr}</div>
-        </div>
-        <div style="text-align: right; font-size: 11px; color: #56657A; line-height: 1.6;">
-          <div style="font-weight: 600; color: #0B1220;">Dan Ler</div>
-          <div>Nexus Mortgage SG</div>
-          <div style="margin-top: 6px;">Internal advisory document</div>
-        </div>
-      </div>
-      <div style="margin-top: 64px; border-top: 1px solid #E5E7EB; padding-top: 32px;">${body}</div>
-      <div style="position: absolute; bottom: 18mm; left: 16mm; right: 16mm; font-size: 9.5px; color: #94A3B8; line-height: 1.6;">
-        Indicative figures only. Subject to bank credit assessment, valuation, and prevailing IRAS, MAS, and HDB regulations.
-        Stress-test rate of 4 % is the MAS minimum used for residential TDSR / MSR computations. ABSD reflects rates effective 27 Apr 2023.
-        IWAA = Σ(age × income) ÷ Σ(income). CPF accrued at 2.6 % p.a.
-      </div>
+      ${coverHeader}
+      <div style="margin-top: 56px; border-top: 1px solid #E5E7EB; padding-top: 28px;">${pdfData.analysis}</div>
+      ${footer}
     </div>
+    ${pdfData.charts ? `<div class="pdf-page">
+      ${continuationHeader}
+      <div style="margin-top: 36px; border-top: 1px solid #E5E7EB; padding-top: 28px;">${pdfData.charts}</div>
+      ${footer}
+    </div>` : ''}
     ${ratesPage}
   `;
 }
@@ -2604,7 +3071,8 @@ function buildReport() {
 function pdfAffordability() {
   const r = calcAffordability(state.affordability);
   const s = state.affordability;
-  return `
+  const signed = (v) => (v >= 0 ? '+ ' : '- ') + fmt.money(Math.abs(v));
+  const analysis = `
     <div class="pdf-h3">Headline</div>
     <div class="pdf-h2 pdf-num" style="margin-top: 8px; font-size: 44px; color: #047857;">${fmt.money(r.maxProperty)}</div>
     <div style="font-size: 13px; color: #56657A; margin-top: 4px;">Maximum property price · ${r.isHdb ? 'HDB / EC' : 'Private'} · ${(r.ltv*100).toFixed(0)} % LTV · ${r.tenure} y tenure · IWAA ${r.iwaa.toFixed(1)} y</div>
@@ -2626,8 +3094,7 @@ function pdfAffordability() {
           ${r.isHdb ? `<tr><td>MSR cap (30 %)</td><td class="pdf-num">${fmt.money((r.fixedTotal + r.variableTotal + r.fundsBoost) * 0.30)}</td></tr>` : ''}
           <tr><td>Less: existing commitments</td><td class="pdf-num">${fmt.money(r.commit)}</td></tr>
           <tr><td><strong>Eligible monthly</strong></td><td class="pdf-num"><strong>${fmt.money(r.available)}</strong></td></tr>
-          <tr><td>Stress rate</td><td>4.00 % p.a.</td></tr>
-          <tr><td>Tenure used</td><td class="pdf-num">${r.tenure} yrs</td></tr>
+          <tr><td>Stress rate · tenure</td><td class="pdf-num">4.00 %  ·  ${r.tenure} yrs</td></tr>
         </table>
       </div>
       <div>
@@ -2637,23 +3104,39 @@ function pdfAffordability() {
           <tr><td>Maximum property price</td><td class="pdf-num"><strong>${fmt.money(r.maxProperty)}</strong></td></tr>
           <tr><td>LTV</td><td class="pdf-num">${(r.ltv*100).toFixed(0)} % (${r.scenario})</td></tr>
           <tr><td>Cash component (${(r.cashPct*100).toFixed(0)} %)</td><td class="pdf-num">${fmt.money(r.cashMin)}</td></tr>
-          <tr><td>CPF / cash component</td><td class="pdf-num">${fmt.money(r.cpfBalance - r.cashMin)}</td></tr>
-          <tr><td>Total downpayment</td><td class="pdf-num">${fmt.money(r.cpfBalance)}</td></tr>
+          <tr><td>CPF / cash component</td><td class="pdf-num">${fmt.money(r.cpfPortion)}</td></tr>
+          <tr><td><strong>Total downpayment</strong></td><td class="pdf-num"><strong>${fmt.money(r.totalDownpayment)}</strong></td></tr>
+        </table>
+        <div class="pdf-h3" style="margin-top: 22px;">Cash &amp; CPF position</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Cash on hand</td><td class="pdf-num">${fmt.money(r.cashAvail)}</td></tr>
+          <tr><td>CPF OA available</td><td class="pdf-num">${fmt.money(r.cpfAvail)}</td></tr>
+          <tr><td>Less: total downpayment</td><td class="pdf-num">- ${fmt.money(r.totalDownpayment)}</td></tr>
+          <tr><td><strong>${r.position >= 0 ? 'Surplus' : 'Shortfall'}</strong></td><td class="pdf-num"><strong>${signed(r.position)}</strong></td></tr>
+          <tr><td>Cash-only floor (cash min)</td><td class="pdf-num">${fmt.money(r.cashMin)}</td></tr>
+          <tr><td>${r.cashGap >= 0 ? 'Cash margin' : 'Cash short'}</td><td class="pdf-num">${signed(r.cashGap)}</td></tr>
         </table>
       </div>
     </div>
   `;
+  const charts = `
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end;">
+      <div style="min-width: 0;">${chartFigure('chart-aff-donut', 'Downpayment split')}</div>
+      <div style="min-width: 0;">${chartFigure('chart-aff-bar', 'HDB vs Private — max property')}</div>
+    </div>
+  `;
+  return { analysis, charts };
 }
 
-function pdfPurchase(propType) {
-  const stateKey = propType === 'hdb' ? 'purchaseHdb' : 'purchasePrivate';
-  const s = state[stateKey];
-  const r = calcPurchase(s, propType);
-  const isHdb = propType === 'hdb';
-  return `
+function pdfPurchase() {
+  const s = state.purchase;
+  const r = calcPurchase(s);
+  const isHdb = r.isHdb;
+  const signed = (v) => (v >= 0 ? '+ ' : '- ') + fmt.money(Math.abs(v));
+  const analysis = `
     <div class="pdf-h3">Headline</div>
     <div class="pdf-h2 pdf-num" style="margin-top: 8px; font-size: 44px; color: #047857;">${fmt.money(r.monthly)}<span style="font-size: 18px; color: #56657A;">  / month</span></div>
-    <div style="font-size: 13px; color: #56657A; margin-top: 4px;">${(r.rate*100).toFixed(2)} % p.a. · ${r.tenure} yrs · loan ${fmt.money(r.loan)} · IWAA ${r.iwaa.toFixed(1)} y</div>
+    <div style="font-size: 13px; color: #56657A; margin-top: 4px;">${isHdb ? 'HDB / EC' : 'Private'} · ${(r.rate*100).toFixed(2)} % p.a. · ${r.tenure} yrs · loan ${fmt.money(r.loan)} · IWAA ${r.iwaa.toFixed(1)} y</div>
 
     <div style="margin-top: 32px;">
       <div class="pdf-h3">Borrowers (${s.borrowers.length})</div>
@@ -2671,23 +3154,28 @@ function pdfPurchase(propType) {
           <tr><td>Interest rate</td><td class="pdf-num">${(r.rate*100).toFixed(2)} %</td></tr>
           <tr><td>Citizenship · count</td><td>${describeAbsd(r.citizenship, r.propCount)}</td></tr>
         </table>
-        <div class="pdf-h3" style="margin-top: 28px;">Stamp duty</div>
-        <table class="pdf-table" style="margin-top: 10px;">
-          <tr><td>BSD (1–6 % progressive)</td><td class="pdf-num">${fmt.money(r.bsd)}</td></tr>
-          <tr><td>ABSD (${(r.absdR*100).toFixed(0)} %)</td><td class="pdf-num">${fmt.money(r.absd)}</td></tr>
-          <tr><td><strong>Total duty</strong></td><td class="pdf-num"><strong>${fmt.money(r.totalDuty)}</strong></td></tr>
-        </table>
-      </div>
-      <div>
-        <div class="pdf-h3">Up-front cash &amp; CPF</div>
+        <div class="pdf-h3" style="margin-top: 22px;">Up-front cash &amp; CPF</div>
         <table class="pdf-table" style="margin-top: 10px;">
           <tr><td>Cash down-payment (${(r.cashPct*100).toFixed(0)} %)</td><td class="pdf-num">${fmt.money(r.cashDown)}</td></tr>
           <tr><td>CPF / cash down-payment (${(r.cpfPct*100).toFixed(0)} %)</td><td class="pdf-num">${fmt.money(r.cpfDown)}</td></tr>
-          <tr><td>Stamp duty</td><td class="pdf-num">${fmt.money(r.totalDuty)}</td></tr>
+          <tr><td>BSD</td><td class="pdf-num">${fmt.money(r.bsd)}</td></tr>
+          <tr><td>ABSD (${(r.absdR*100).toFixed(0)} %)</td><td class="pdf-num">${fmt.money(r.absd)}</td></tr>
           <tr><td>Legal &amp; valuation fees</td><td class="pdf-num">${fmt.money(r.legalFees)}</td></tr>
           <tr><td><strong>Total cash + CPF needed</strong></td><td class="pdf-num"><strong>${fmt.money(r.totalUpfront)}</strong></td></tr>
         </table>
-        <div class="pdf-h3" style="margin-top: 28px;">Compliance — at 4 % stress</div>
+      </div>
+      <div>
+        <div class="pdf-h3">Cash &amp; CPF position</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Cash on hand</td><td class="pdf-num">${fmt.money(r.cashAvail)}</td></tr>
+          <tr><td>CPF OA available</td><td class="pdf-num">${fmt.money(r.cpfAvail)}</td></tr>
+          <tr><td>Combined funds</td><td class="pdf-num">${fmt.money(r.fundsTotal)}</td></tr>
+          <tr><td>Less: total upfront required</td><td class="pdf-num">- ${fmt.money(r.totalUpfront)}</td></tr>
+          <tr><td><strong>${r.position >= 0 ? 'Surplus' : 'Shortfall (top-up)'}</strong></td><td class="pdf-num"><strong>${signed(r.position)}</strong></td></tr>
+          <tr><td>Cash-only floor (cash min + legal)</td><td class="pdf-num">${fmt.money(r.cashFloor)}</td></tr>
+          <tr><td>${r.cashGap >= 0 ? 'Cash margin' : 'Cash short'}</td><td class="pdf-num">${signed(r.cashGap)}</td></tr>
+        </table>
+        <div class="pdf-h3" style="margin-top: 22px;">Compliance — at 4 % stress</div>
         <table class="pdf-table" style="margin-top: 10px;">
           <tr><td>Effective income (incl. boosters)</td><td class="pdf-num">${fmt.money(r.eff)}</td></tr>
           <tr><td>TDSR (55 % cap)</td><td class="pdf-num">${(r.tdsrRatio*100).toFixed(1)} %  ${r.tdsrPass ? '✓ Pass' : '✗ Fail'}</td></tr>
@@ -2698,15 +3186,24 @@ function pdfPurchase(propType) {
       </div>
     </div>
   `;
+  const charts = `
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end;">
+      <div style="min-width: 0;">${chartFigure('chart-pur-donut', 'Up-front cost breakdown')}</div>
+      <div style="min-width: 0;">${chartFigure('chart-pur-amort', 'Amortization (yearly)')}</div>
+    </div>
+  `;
+  return { analysis, charts };
 }
 
 function pdfSellPurchase() {
   const r = calcSellPurchase(state.sellPurchase);
   const s = state.sellPurchase;
-  return `
+  const signed = (v) => (v >= 0 ? '+ ' : '- ') + fmt.money(Math.abs(v));
+  const surplus = r.position >= 0;
+  const analysis = `
     <div class="pdf-h3">Headline</div>
-    <div class="pdf-h2 pdf-num" style="margin-top: 8px; font-size: 44px; color: ${r.cashGap > 0 ? '#0B1220' : '#047857'};">${fmt.money(r.cashGap)}</div>
-    <div style="font-size: 13px; color: #56657A; margin-top: 4px;">Cash gap to top-up · IWAA ${r.iwaa.toFixed(1)} y · ${(r.ltv*100).toFixed(0)} % LTV</div>
+    <div class="pdf-h2 pdf-num" style="margin-top: 8px; font-size: 44px; color: ${surplus ? '#047857' : '#B91C1C'};">${signed(r.position)}</div>
+    <div style="font-size: 13px; color: #56657A; margin-top: 4px;">${surplus ? 'Surplus over new-property upfront' : 'Shortfall — top-up required'} · IWAA ${r.iwaa.toFixed(1)} y · ${(r.ltv*100).toFixed(0)} % LTV</div>
 
     <div style="margin-top: 32px;">
       <div class="pdf-h3">Borrowers (${s.borrowers.length})</div>
@@ -2719,7 +3216,7 @@ function pdfSellPurchase() {
         <table class="pdf-table" style="margin-top: 10px;">
           <tr><td>Sale price</td><td class="pdf-num">${fmt.money(r.sale)}</td></tr>
           <tr><td>Less: outstanding loan</td><td class="pdf-num">- ${fmt.money(r.out)}</td></tr>
-          <tr><td>Less: CPF refund (incl. 2.6 % accrued)</td><td class="pdf-num">- ${fmt.money(r.cpfRefundTotal)}</td></tr>
+          <tr><td>Less: CPF refund (principal + accrued)</td><td class="pdf-num">- ${fmt.money(r.cpfRefundTotal)}</td></tr>
           <tr><td>Less: agent commission (incl. GST)</td><td class="pdf-num">- ${fmt.money(r.agentFee)}</td></tr>
           <tr><td>Less: legal &amp; conveyancing</td><td class="pdf-num">- ${fmt.money(r.legalSell)}</td></tr>
           <tr><td><strong>Net cash to seller</strong></td><td class="pdf-num"><strong>${fmt.money(r.netCash)}</strong></td></tr>
@@ -2744,18 +3241,34 @@ function pdfSellPurchase() {
           ${r.absdRefund > 0 ? `<tr><td>ABSD remission</td><td class="pdf-num">- ${fmt.money(r.absdRefund)}</td></tr>` : ''}
           <tr><td>Legal &amp; valuation fees</td><td class="pdf-num">${fmt.money(r.newLegal)}</td></tr>
           <tr><td><strong>Total upfront</strong></td><td class="pdf-num"><strong>${fmt.money(r.newTotalUpfront)}</strong></td></tr>
-          <tr><td>Less: net cash + CPF from sale</td><td class="pdf-num">- ${fmt.money(r.fundingFromSale)}</td></tr>
-          <tr><td><strong>Cash gap</strong></td><td class="pdf-num"><strong>${fmt.money(r.cashGap)}</strong></td></tr>
+        </table>
+        <div class="pdf-h3" style="margin-top: 22px;">Cash &amp; CPF position</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Cash on hand</td><td class="pdf-num">${fmt.money(r.cashAvail)}</td></tr>
+          <tr><td>Net cash from sale</td><td class="pdf-num">${fmt.money(r.netCash)}</td></tr>
+          <tr><td>CPF restored from sale</td><td class="pdf-num">${fmt.money(r.cpfRestored)}</td></tr>
+          <tr><td>Additional CPF available</td><td class="pdf-num">${fmt.money(r.cpfAvail)}</td></tr>
+          <tr><td>Less: total upfront for new</td><td class="pdf-num">- ${fmt.money(r.newTotalUpfront)}</td></tr>
+          <tr><td><strong>${surplus ? 'Surplus' : 'Shortfall (top-up)'}</strong></td><td class="pdf-num"><strong>${signed(r.position)}</strong></td></tr>
+          <tr><td>Cash-only floor (cash min + agent + legal)</td><td class="pdf-num">${fmt.money(r.cashFloor)}</td></tr>
+          <tr><td>${r.cashGap >= 0 ? 'Cash margin' : 'Cash short'}</td><td class="pdf-num">${signed(r.cashGap)}</td></tr>
         </table>
       </div>
     </div>
   `;
+  const charts = `
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end;">
+      <div style="min-width: 0;">${chartFigure('chart-sp-waterfall', 'Sale proceeds waterfall')}</div>
+      <div style="min-width: 0;">${chartFigure('chart-sp-funding', 'New property funding mix')}</div>
+    </div>
+  `;
+  return { analysis, charts };
 }
 
 function pdfRefinance() {
   const r = calcRefinance(state.refinance);
   const s = state.refinance;
-  return `
+  const analysis = `
     <div class="pdf-h3">Headline</div>
     <div class="pdf-h2 pdf-num" style="margin-top: 8px; font-size: 44px; color: ${r.monthlySaving > 0 ? '#047857' : '#DC2626'};">${fmt.money(r.monthlySaving)}<span style="font-size: 18px; color: #56657A;">  / month</span></div>
     <div style="font-size: 13px; color: #56657A; margin-top: 4px;">${r.monthlySaving > 0 ? 'Saving' : 'Increase'} from refinancing · break-even ${isFinite(r.breakeven) ? r.breakeven.toFixed(1) + ' months' : 'not reached'}</div>
@@ -2790,13 +3303,44 @@ function pdfRefinance() {
       </div>
     </div>
   `;
+  const charts = `
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end;">
+      <div style="min-width: 0;">${chartFigure('chart-rf-monthly', 'Monthly comparison')}</div>
+      <div style="min-width: 0;">${chartFigure('chart-rf-cost-donut', 'Switching cost split')}</div>
+    </div>
+    <div style="margin-top: 28px; min-width: 0;">
+      ${chartFigure('chart-refi', 'Cumulative net savings over horizon', { height: '70mm' })}
+    </div>
+  `;
+  return { analysis, charts };
 }
 
 async function generatePdf() {
   $('#gen-overlay').classList.add('show');
-  const reportEl = $('#report');
+
+  // Fresh element each time, attached to document.body with inline styles.
+  // position:absolute (not fixed) so html2canvas's clone iframe captures it correctly.
+  const reportEl = document.createElement('div');
+  reportEl.style.cssText = [
+    'position:absolute', 'top:0', 'left:0',
+    'width:210mm',
+    'background:#ffffff',
+    'color:#0B1220',
+    'font-family:"Plus Jakarta Sans",system-ui,sans-serif',
+    'z-index:1',
+  ].join(';');
   reportEl.innerHTML = buildReport();
-  await new Promise(r => setTimeout(r, 80));
+  document.body.appendChild(reportEl);
+
+  // Force a fresh layout and wait for fonts
+  void reportEl.offsetHeight;
+  if (document.fonts && document.fonts.ready) {
+    try { await document.fonts.ready; } catch (_) {}
+  }
+  await new Promise(r => setTimeout(r, 250));
+
+  const pdfPages = Array.from(reportEl.querySelectorAll('.pdf-page'));
+  console.log('[pdf] reportEl', reportEl.scrollWidth, 'x', reportEl.scrollHeight, '· pages:', pdfPages.length);
 
   const tabName = state.active.replace(/-/g, '_');
   const clientPart = (state.client.name || 'client').replace(/[^a-z0-9]+/gi, '_').toLowerCase();
@@ -2804,20 +3348,48 @@ async function generatePdf() {
   const filename = `mortgage_${tabName}_${clientPart}_${dateStr}.pdf`;
 
   try {
-    await html2pdf().set({
-      margin: 0,
-      filename,
-      image: { type: 'jpeg', quality: 0.95 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#FFFFFF' },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    }).from(reportEl).save();
+    const { jsPDF } = window.jspdf;
+    const pdfDoc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+    const pageW = 210, pageH = 297;
+
+    // Render each .pdf-page div as its own A4 page (clean breaks, no mid-section cuts).
+    for (let i = 0; i < pdfPages.length; i++) {
+      const pageEl = pdfPages[i];
+      const canvas = await html2canvas(pageEl, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#FFFFFF',
+        logging: false,
+        windowWidth: pageEl.scrollWidth,
+      });
+      console.log(`[pdf] page ${i+1}/${pdfPages.length} canvas`, canvas.width, 'x', canvas.height);
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+      if (i > 0) pdfDoc.addPage();
+      const imgRatio = canvas.height / canvas.width;
+      const imgWmm = pageW;
+      const imgHmm = pageW * imgRatio;
+      if (imgHmm <= pageH + 0.5) {
+        pdfDoc.addImage(imgData, 'JPEG', 0, 0, imgWmm, imgHmm);
+      } else {
+        // Single .pdf-page section is still too tall — slice it across multiple A4 pages
+        let consumed = 0;
+        let firstSlice = true;
+        while (consumed < imgHmm - 0.1) {
+          if (!firstSlice) pdfDoc.addPage();
+          pdfDoc.addImage(imgData, 'JPEG', 0, -consumed, imgWmm, imgHmm);
+          consumed += pageH;
+          firstSlice = false;
+        }
+      }
+    }
+    pdfDoc.save(filename);
     showToast('PDF saved');
   } catch (err) {
-    console.error(err);
+    console.error('[pdf] generation failed:', err);
     showToast('Failed to generate PDF — check console');
   } finally {
+    reportEl.remove();
     $('#gen-overlay').classList.remove('show');
-    reportEl.innerHTML = '';
   }
 }
 
@@ -3046,12 +3618,14 @@ function ratePickerHtml(ctx) {
 
   const sortClass = (k) => f.sortKey === k ? 'sortable sorted ' + (f.sortDir === 'asc' ? 'sort-asc' : 'sort-desc') : 'sortable';
 
+  const colCount = (isStandalone ? 0 : 1) + 8; // +1 for expand col
   let rows = '';
   list.forEach(p => {
     const selected = picks.includes(p.idx);
     const limited = !selected && picks.length >= 4 && !isStandalone;
+    const expanded = !!state.rateExpanded[p.idx];
     rows += `
-      <tr class="${selected ? 'selected ' : ''}${limited ? 'disabled' : ''}" onclick="${isStandalone ? '' : 'togglePick(' + p.idx + ')'}">
+      <tr class="${selected ? 'selected ' : ''}${limited ? 'disabled' : ''}" onclick="${isStandalone ? 'toggleRateExpand(' + p.idx + ')' : 'togglePick(' + p.idx + ')'}">
         ${isStandalone ? '' : `<td class="check-cell"><div class="check-box"></div></td>`}
         <td><span class="sec-badge ${p.secShort}">${escapeHtml((p.section || '').replace(' RATES',''))}</span></td>
         <td><span class="lender-tag">${escapeHtml(p.lender)}</span></td>
@@ -3060,7 +3634,12 @@ function ratePickerHtml(ctx) {
         <td class="num">${escapeHtml(String(p.rates.y2).replace(/\s+/g,' '))}</td>
         <td class="num">${escapeHtml(String(p.rates.y3).replace(/\s+/g,' '))}</td>
         <td>${escapeHtml(String(p.lockIn || '—').replace(/\s+/g,' '))}</td>
-      </tr>`;
+        <td class="expand-cell">
+          <button type="button" class="rate-expand-btn ${expanded ? 'open' : ''}" onclick="event.stopPropagation(); toggleRateExpand(${p.idx});" title="${expanded ? 'Hide details' : 'Show details'}">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </td>
+      </tr>${expanded ? `<tr class="rate-detail-row"><td colspan="${colCount}">${rateDetailHtml(p)}</td></tr>` : ''}`;
   });
 
   return `
@@ -3092,12 +3671,75 @@ function ratePickerHtml(ctx) {
             <th class="${sortClass('y2')}" onclick="setRateSort('y2')">2nd yr</th>
             <th class="${sortClass('y3')}" onclick="setRateSort('y3')">3rd yr</th>
             <th class="${sortClass('lockIn')}" onclick="setRateSort('lockIn')">Lock-in</th>
+            <th class="expand-cell" title="Expand for full package details"></th>
           </tr>
         </thead>
-        <tbody>${rows || '<tr><td colspan="' + (isStandalone ? 7 : 8) + '" style="text-align:center; padding: 40px; color: var(--muted);">No packages match the filters.</td></tr>'}</tbody>
+        <tbody>${rows || '<tr><td colspan="' + colCount + '" style="text-align:center; padding: 40px; color: var(--muted);">No packages match the filters.</td></tr>'}</tbody>
       </table>
     </div>
   `;
+}
+
+window.toggleRateExpand = function (pkgIdx) {
+  const cur = !!state.rateExpanded[pkgIdx];
+  if (cur) delete state.rateExpanded[pkgIdx];
+  else state.rateExpanded[pkgIdx] = true;
+  renderRatePicker(state.pickerCtx);
+  renderRatesPanel();
+};
+
+function rateDetailHtml(p) {
+  const cleanText = (t) => String(t || '').replace(/\s+/g, ' ').trim();
+  const remarks = (p.remarks || []).filter(Boolean).map(cleanText);
+  const bankers = (p.bankers || []).filter(Boolean).map(cleanText);
+  const isVarOrFix = /VARIABLE|FIXED|COMBO/.test(p.section);
+  const legalNote = isVarOrFix && p.legalRebate
+    ? `<div class="small">*Only for refinancing unless otherwise stated.</div>`
+    : '';
+  return `<div class="rate-detail-content">
+    <div class="rate-detail-block">
+      <div class="head">Full rate schedule</div>
+      <div class="body">
+        <div class="row"><span class="lbl">1st year</span><span class="val">${escapeHtml(cleanText(p.rates.y1))}</span></div>
+        <div class="row"><span class="lbl">2nd year</span><span class="val">${escapeHtml(cleanText(p.rates.y2))}</span></div>
+        <div class="row"><span class="lbl">3rd year</span><span class="val">${escapeHtml(cleanText(p.rates.y3))}</span></div>
+        <div class="row"><span class="lbl">4th year</span><span class="val">${escapeHtml(cleanText(p.rates.y4))}</span></div>
+        <div class="row"><span class="lbl">5th year</span><span class="val">${escapeHtml(cleanText(p.rates.y5))}</span></div>
+        <div class="row"><span class="lbl">Thereafter</span><span class="val">${escapeHtml(cleanText(p.rates.thereafter))}</span></div>
+      </div>
+    </div>
+
+    <div class="rate-detail-block">
+      <div class="head">Lock-in &amp; prepayment</div>
+      <div class="body">
+        <div class="row"><span class="lbl">Lock-in</span><span class="val">${escapeHtml(cleanText(p.lockIn) || '—')}</span></div>
+        ${p.prepayment ? `<div style="margin-top: 6px;">${escapeHtml(cleanText(p.prepayment))}</div>` : ''}
+        ${p.tdsrRate ? `<div style="margin-top: 8px;"><span class="lbl">TDSR rate basis: </span>${escapeHtml(cleanText(p.tdsrRate))}</div>` : ''}
+      </div>
+    </div>
+
+    <div class="rate-detail-block">
+      <div class="head">Legal / cash rebate</div>
+      <div class="body">${escapeHtml(cleanText(p.legalRebate) || '—')}</div>
+      ${legalNote}
+      ${p.valuationSubsidy ? `<div style="margin-top: 8px;"><span class="lbl">Valuation subsidy: </span>${escapeHtml(cleanText(p.valuationSubsidy))}</div>` : ''}
+    </div>
+
+    <div class="rate-detail-block">
+      <div class="head">Free conversion benefit</div>
+      <div class="body">${escapeHtml(cleanText(p.freeConversion) || '—')}</div>
+    </div>
+
+    ${remarks.length ? `<div class="rate-detail-block" style="grid-column: 1 / -1;">
+      <div class="head">Remarks</div>
+      <div class="body"><ul>${remarks.map((t, i) => `<li><strong>${i+1}.</strong> ${escapeHtml(t)}</li>`).join('')}</ul></div>
+    </div>` : ''}
+
+    ${bankers.length ? `<div class="rate-detail-block" style="grid-column: 1 / -1;">
+      <div class="head">Banker contacts</div>
+      <div class="body">${bankers.map(t => `<div style="padding: 1px 0;">${escapeHtml(t)}</div>`).join('')}</div>
+    </div>` : ''}
+  </div>`;
 }
 
 window.setRateFilter = function (key, val) {
@@ -3158,7 +3800,7 @@ function renderPickTrigger(calcKey) {
 }
 
 function renderAllPickTriggers() {
-  ['affordability', 'purchaseHdb', 'purchasePrivate', 'sellPurchase', 'refinance']
+  ['affordability', 'purchase', 'sellPurchase', 'refinance']
     .forEach(renderPickTrigger);
 }
 
@@ -3178,52 +3820,82 @@ function pdfRatesPage(calcKey) {
   const picks = state.picks[calcKey] || [];
   if (picks.length === 0) return '';
   const dateStr = new Date(state.client.date || Date.now()).toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' });
-  let rows = '';
-  picks.forEach((idx, i) => {
+  const cleanText = (t) => String(t || '').replace(/\s+/g, ' ').trim();
+  const total = picks.length;
+
+  const ratesFooter = `<div class="pdf-footer">
+    Rates are indicative, subject to bank approval, valuation, and credit assessment. Lock-in, prepayment penalty, and rebate conditions apply per bank's letter of offer.
+  </div>`;
+
+  // One A4 page per selected package — full-text remarks, no banker contacts.
+  return picks.map((idx, i) => {
     const p = RATES.packages[idx];
-    if (!p) return;
+    if (!p) return '';
     const sub = (p.subType || '') + (p.qualLoan ? ' · ' + p.qualLoan : '');
-    rows += `
-      <div style="margin-top: ${i === 0 ? '0' : '20px'}; padding-top: ${i === 0 ? '0' : '18px'}; ${i > 0 ? 'border-top: 1px solid #E5E7EB;' : ''}">
-        <div style="display: flex; align-items: baseline; gap: 12px;">
-          <div style="font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500;">${escapeHtml(p.lender)}</div>
-          <div style="font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #94A3B8; font-weight: 600;">${escapeHtml((p.section || '').replace(' RATES',''))}</div>
-        </div>
-        <div style="font-size: 12px; color: #56657A; margin-top: 2px;">${escapeHtml(sub)}</div>
-        <table class="pdf-table" style="margin-top: 10px;">
-          <tr><td>1st year</td><td class="pdf-num">${escapeHtml(String(p.rates.y1))}</td></tr>
-          <tr><td>2nd year</td><td class="pdf-num">${escapeHtml(String(p.rates.y2))}</td></tr>
-          <tr><td>3rd year</td><td class="pdf-num">${escapeHtml(String(p.rates.y3))}</td></tr>
-          <tr><td>4th year</td><td class="pdf-num">${escapeHtml(String(p.rates.y4))}</td></tr>
-          <tr><td>5th year</td><td class="pdf-num">${escapeHtml(String(p.rates.y5))}</td></tr>
-          <tr><td>Thereafter</td><td class="pdf-num">${escapeHtml(String(p.rates.thereafter))}</td></tr>
-          <tr><td>Lock-in</td><td class="pdf-num">${escapeHtml(String(p.lockIn))}</td></tr>
-          <tr><td>Prepayment</td><td>${escapeHtml(String(p.prepayment).replace(/\s+/g,' ').slice(0,90))}</td></tr>
-          <tr><td>Legal / cash rebate</td><td>${escapeHtml(String(p.legalRebate).replace(/\s+/g,' ').slice(0,90))}</td></tr>
-          ${p.freeConversion ? `<tr><td>Free conversion</td><td>${escapeHtml(String(p.freeConversion).replace(/\s+/g,' ').slice(0,90))}</td></tr>` : ''}
-        </table>
-      </div>`;
-  });
-  return `
+    const remarks = (p.remarks || []).filter(Boolean).map(cleanText);
+    const isVarOrFix = /VARIABLE|FIXED|COMBO/.test(p.section);
+    const sectionLabel = (p.section || '').replace(' RATES', '');
+
+    return `
     <div class="pdf-page">
-      <div style="display:flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
+      <div style="display:flex; justify-content: space-between; align-items: flex-start;">
         <div>
-          <div class="pdf-h3">Indicative Rate Packages</div>
-          <div class="pdf-h1" style="margin-top: 6px;">${picks.length} package${picks.length === 1 ? '' : 's'} for review</div>
-          <div style="font-size: 12px; color: #56657A; margin-top: 6px;">${RATES.dateStamp || 'Rates as currently filed'} · ${RATES.sora?.oneM || ''}</div>
+          <div class="pdf-h3">Rate Package · ${i + 1} of ${total}</div>
+          <div class="pdf-h1" style="margin-top: 6px;">${escapeHtml(p.lender)}</div>
+          <div style="font-size: 13px; color: #56657A; margin-top: 6px;">
+            <span style="font-weight: 600; color: #0B1220;">${escapeHtml(sectionLabel)}</span>
+            ${sub ? ' · ' + escapeHtml(sub) : ''}
+          </div>
+          <div style="font-size: 12px; color: #94A3B8; margin-top: 4px;">${escapeHtml(RATES.dateStamp || 'Rates as currently filed')}${RATES.sora?.oneM ? ' · ' + escapeHtml(RATES.sora.oneM) : ''}</div>
         </div>
-        <div style="text-align: right; font-size: 11px; color: #56657A;">
+        <div style="text-align: right; font-size: 11px; color: #56657A; line-height: 1.6;">
           <div style="font-weight: 600; color: #0B1220;">Dan Ler</div>
           <div>${dateStr}</div>
         </div>
       </div>
-      <div style="border-top: 1px solid #E5E7EB; padding-top: 18px;">
-        ${rows}
+
+      <div style="margin-top: 24px; border-top: 1px solid #E5E7EB; padding-top: 22px;">
+
+        <div class="pdf-h3">Full rate schedule</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>1st year</td><td class="pdf-num">${escapeHtml(cleanText(p.rates.y1) || '—')}</td></tr>
+          <tr><td>2nd year</td><td class="pdf-num">${escapeHtml(cleanText(p.rates.y2) || '—')}</td></tr>
+          <tr><td>3rd year</td><td class="pdf-num">${escapeHtml(cleanText(p.rates.y3) || '—')}</td></tr>
+          <tr><td>4th year</td><td class="pdf-num">${escapeHtml(cleanText(p.rates.y4) || '—')}</td></tr>
+          <tr><td>5th year</td><td class="pdf-num">${escapeHtml(cleanText(p.rates.y5) || '—')}</td></tr>
+          <tr><td>Thereafter</td><td class="pdf-num">${escapeHtml(cleanText(p.rates.thereafter) || '—')}</td></tr>
+        </table>
+
+        <div class="pdf-h3" style="margin-top: 22px;">Lock-in &amp; prepayment</div>
+        <table class="pdf-table" style="margin-top: 10px;">
+          <tr><td>Lock-in</td><td class="pdf-num">${escapeHtml(cleanText(p.lockIn) || '—')}</td></tr>
+          ${p.tdsrRate ? `<tr><td>TDSR rate basis</td><td>${escapeHtml(cleanText(p.tdsrRate))}</td></tr>` : ''}
+        </table>
+        ${p.prepayment ? `<div style="margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.6;">${escapeHtml(cleanText(p.prepayment))}</div>` : ''}
+
+        <div class="pdf-h3" style="margin-top: 22px;">Legal / cash rebate</div>
+        <div style="margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.6;">
+          ${escapeHtml(cleanText(p.legalRebate) || '—')}
+        </div>
+        ${isVarOrFix && p.legalRebate ? `<div style="margin-top: 4px; font-size: 11px; color: #94A3B8;">*Only for refinancing unless otherwise stated.</div>` : ''}
+        ${p.valuationSubsidy ? `<div style="margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.6;"><strong style="color:#0B1220;">Valuation subsidy:</strong> ${escapeHtml(cleanText(p.valuationSubsidy))}</div>` : ''}
+
+        <div class="pdf-h3" style="margin-top: 22px;">Free conversion benefit</div>
+        <div style="margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.6;">
+          ${escapeHtml(cleanText(p.freeConversion) || '—')}
+        </div>
+
+        ${remarks.length ? `
+          <div class="pdf-h3" style="margin-top: 22px;">Remarks</div>
+          <ol style="margin-top: 8px; padding-left: 20px; font-size: 12px; color: #334155; line-height: 1.65;">
+            ${remarks.map(t => `<li style="margin-bottom: 4px;">${escapeHtml(t)}</li>`).join('')}
+          </ol>
+        ` : ''}
+
       </div>
-      <div style="position: absolute; bottom: 18mm; left: 16mm; right: 16mm; font-size: 9.5px; color: #94A3B8; line-height: 1.6;">
-        Rates are indicative, subject to bank approval, valuation, and credit assessment. Lock-in, prepayment penalty, and rebate conditions apply per bank's letter of offer.
-      </div>
+      ${ratesFooter}
     </div>`;
+  }).join('');
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -3233,7 +3905,24 @@ function init() {
   bindInputs();
   bindNav();
   $('#btn-pdf').addEventListener('click', generatePdf);
-  if (sessionStorage.getItem('mc.auth') === '1') showApp();
+
+  // Click-to-edit: select all when a number field is focused so typing
+  // replaces the existing value instead of appending to it.
+  // Use focusin (bubbles) + rAF so the browser's own click-cursor logic
+  // has run before we override it.
+  document.addEventListener('focusin', (e) => {
+    const t = e.target;
+    if (t && t.matches && t.matches('input[type="number"], input.field-input')) {
+      requestAnimationFrame(() => { try { t.select(); } catch (_) {} });
+    }
+  });
+  // Prevent scroll-wheel from silently changing a focused number value.
+  document.addEventListener('wheel', (e) => {
+    const a = document.activeElement;
+    if (a && a.matches && a.matches('input[type="number"]:focus')) a.blur();
+  }, { passive: true });
+
+  showApp();
 }
 window.addEventListener('DOMContentLoaded', init);
 </script>

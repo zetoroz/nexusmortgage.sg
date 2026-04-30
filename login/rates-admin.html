@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Rates Admin — Nexus Mortgage</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #F6F7F9;
+    --surface: #FFFFFF;
+    --surface-2: #F1F3F5;
+    --border: #E5E7EB;
+    --ink: #0B1220;
+    --ink-2: #1F2937;
+    --muted: #56657A;
+    --faint: #94A3B8;
+    --accent: #C4973B;
+    --accent-soft: rgba(196, 151, 59, .08);
+    --green: #059669;
+    --green-soft: #ECFDF5;
+    --red: #DC2626;
+    --red-soft: #FEF2F2;
+    --amber: #D97706;
+    --amber-soft: #FEF3C7;
+    --navy: #0B1C3A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: var(--bg); color: var(--ink);
+    font-size: 14px; line-height: 1.55;
+    min-height: 100vh;
+  }
+  .display { font-family: 'Fraunces', serif; letter-spacing: -.02em; }
+  .num { font-family: 'JetBrains Mono', monospace; font-feature-settings: 'tnum' 1; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 28px 24px 80px; }
+
+  /* Header */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px; background: var(--navy); color: white;
+    border-radius: 10px; margin-bottom: 20px;
+  }
+  .topbar .logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; }
+  .topbar .logo .dot { color: var(--accent); }
+  .topbar a {
+    color: rgba(255,255,255,.7); text-decoration: none; font-size: 12.5px;
+    letter-spacing: .04em; padding: 6px 12px; border-radius: 6px;
+    transition: background .2s;
+  }
+  .topbar a:hover { background: rgba(255,255,255,.08); color: white; }
+
+  h1 { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 500; letter-spacing: -.02em; margin-bottom: 4px; }
+  h2 { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; margin: 28px 0 10px; color: var(--ink); }
+  .lead { color: var(--muted); font-size: 13.5px; margin-bottom: 4px; }
+
+  /* Status strip */
+  .status {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin: 20px 0 24px;
+  }
+  .stat-card {
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px;
+  }
+  .stat-card .lbl {
+    font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; margin-bottom: 8px;
+  }
+  .stat-card .val { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; color: var(--ink); }
+  .stat-card .sub { font-size: 11.5px; color: var(--faint); margin-top: 4px; }
+  .stat-card.ok    { background: var(--green-soft); border-color: rgba(5,150,105,.18); }
+  .stat-card.warn  { background: var(--amber-soft); border-color: rgba(217,119,6,.22); }
+  .stat-card.error { background: var(--red-soft);   border-color: rgba(220,38,38,.22); }
+  .stat-card.ok .lbl    { color: var(--green); }
+  .stat-card.warn .lbl  { color: var(--amber); }
+  .stat-card.error .lbl { color: var(--red); }
+
+  /* Card */
+  .card {
+    background: white; border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; margin-bottom: 20px;
+  }
+  .card-h { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .card-h h2 { margin: 0; font-size: 17px; }
+
+  /* Pills */
+  .pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 9px; border-radius: 100px;
+    font-size: 11px; font-weight: 600; letter-spacing: .04em;
+  }
+  .pill.up { background: var(--red-soft); color: var(--red); }
+  .pill.down { background: var(--green-soft); color: var(--green); }
+  .pill.add { background: var(--accent-soft); color: var(--accent); }
+  .pill.rm { background: var(--surface-2); color: var(--muted); }
+  .pill.same { background: var(--surface-2); color: var(--faint); }
+
+  /* Tables */
+  table { width: 100%; border-collapse: separate; border-spacing: 0; }
+  th {
+    text-align: left; font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+    padding: 10px 12px; border-bottom: 1px solid var(--border);
+  }
+  th.right { text-align: right; }
+  td {
+    padding: 11px 12px; border-bottom: 1px solid var(--border);
+    font-size: 13.5px; color: var(--ink-2);
+  }
+  td.right { text-align: right; }
+  tr:hover td { background: var(--surface-2); }
+  .lender-cell { font-weight: 600; color: var(--ink); }
+  .pkg-cell { color: var(--muted); font-size: 12.5px; }
+
+  /* Filters */
+  .filters {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;
+    align-items: center;
+  }
+  .filter-input {
+    padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px;
+    font: inherit; font-size: 12.5px; min-width: 180px;
+    background: white; color: var(--ink);
+  }
+  .filter-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .filter-chip {
+    padding: 6px 12px; border: 1px solid var(--border); border-radius: 100px;
+    font-size: 11.5px; cursor: pointer; background: white; color: var(--muted);
+    font-weight: 500; letter-spacing: .04em;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .filter-chip:hover { background: var(--surface-2); }
+  .filter-chip.active { background: var(--navy); color: white; border-color: var(--navy); }
+
+  /* History entry */
+  .history-entry {
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; margin-bottom: 10px;
+  }
+  .history-entry .h-head {
+    display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 8px;
+  }
+  .history-entry .h-when { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--muted); }
+  .history-entry .h-summary { font-size: 13px; color: var(--ink); }
+  .history-entry .h-changes {
+    margin-top: 8px; display: flex; flex-direction: column; gap: 6px;
+    font-size: 12.5px; color: var(--ink-2);
+  }
+  .h-change-row { display: flex; gap: 10px; align-items: center; padding: 4px 0; }
+  .h-change-row .who { min-width: 110px; font-weight: 600; color: var(--ink); }
+
+  .empty {
+    color: var(--faint); font-size: 13px; padding: 18px; text-align: center;
+    border: 1px dashed var(--border); border-radius: 8px;
+  }
+
+  .help-card {
+    background: var(--accent-soft); border: 1px solid rgba(196,151,59,.22);
+    border-radius: 10px; padding: 16px 18px; font-size: 13px; color: var(--ink-2);
+    line-height: 1.7;
+  }
+  .help-card code {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    background: white; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border);
+  }
+
+  @media (max-width: 720px) {
+    .status { grid-template-columns: 1fr 1fr; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="logo">Nexus<span class="dot">.</span></div>
+    <div style="display:flex; gap:4px;">
+      <a href="/login/">← Console</a>
+      <a href="/mortgage-rates/">Public Rates Page</a>
+      <a href="/free-report/">Free Report</a>
+    </div>
+  </div>
+
+  <h1 class="display">Rates Admin</h1>
+  <p class="lead">Status of <code style="font-family: 'JetBrains Mono', monospace; font-size:12px;">/rates.json</code> — sync'd from <code style="font-family: 'JetBrains Mono', monospace; font-size:12px;">/login/rates.xlsx</code></p>
+
+  <div id="status" class="status"></div>
+
+  <div class="card">
+    <div class="card-h">
+      <h2>Current Rates</h2>
+      <span id="pkg-count" style="font-size:11.5px; color: var(--muted);"></span>
+    </div>
+    <div class="filters">
+      <input type="text" id="search" class="filter-input" placeholder="Search lender or package…">
+      <button class="filter-chip active" data-family="all">All</button>
+      <button class="filter-chip" data-family="fixed">Fixed</button>
+      <button class="filter-chip" data-family="floating">Floating</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table id="rates-table">
+        <thead>
+          <tr>
+            <th>Lender</th>
+            <th>Package</th>
+            <th>Qualifying</th>
+            <th class="right">Yr 1</th>
+            <th class="right">Yr 2</th>
+            <th class="right">Yr 3</th>
+            <th class="right">Lock</th>
+          </tr>
+        </thead>
+        <tbody id="rates-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-h">
+      <h2>Change History</h2>
+      <span style="font-size:11.5px; color: var(--muted);">Most recent first · last 200 syncs</span>
+    </div>
+    <div id="history-list"></div>
+  </div>
+
+  <div class="help-card">
+    <strong>How to update rates:</strong>
+    <ol style="margin:8px 0 0 22px; padding:0;">
+      <li>Replace <code>/login/rates.xlsx</code> with your new sheet.</li>
+      <li>From the project root, run <code>python3 scripts/convert-rates.py</code>.</li>
+      <li>Refresh this page — new rates show under "Current Rates", and a new entry appears in "Change History" with what changed and by how much.</li>
+      <li>Commit and push <code>login/rates.xlsx</code>, <code>rates.json</code>, and <code>rates-history.json</code>.</li>
+    </ol>
+  </div>
+
+</div>
+
+<script>
+const fmt = n => (n == null || isNaN(n)) ? '—' : (+n).toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+const $ = id => document.getElementById(id);
+
+let RATES = null, HISTORY = [];
+
+async function load() {
+  // rates.json
+  try {
+    const r = await fetch('/rates.json?v=' + Date.now());
+    if (r.ok) RATES = await r.json();
+  } catch (e) { console.warn('rates.json failed', e); }
+  // rates-history.json
+  try {
+    const r = await fetch('/rates-history.json?v=' + Date.now());
+    if (r.ok) HISTORY = await r.json();
+  } catch (e) { console.warn('rates-history.json failed', e); }
+
+  renderStatus();
+  renderRates();
+  renderHistory();
+}
+
+function renderStatus() {
+  const el = $('status');
+  if (!RATES) {
+    el.innerHTML = `<div class="stat-card error" style="grid-column:1/-1;">
+      <div class="lbl">rates.json not found</div>
+      <div class="val">—</div>
+      <div class="sub">Run <code>python3 scripts/convert-rates.py</code> from project root to generate.</div>
+    </div>`;
+    return;
+  }
+  const last = HISTORY.length ? HISTORY[HISTORY.length - 1] : null;
+  const lastWhen = last ? new Date(last.generatedAt) : (RATES.generatedAt ? new Date(RATES.generatedAt) : null);
+  const ageDays = lastWhen ? Math.floor((Date.now() - lastWhen.getTime()) / 86400000) : null;
+  const ageClass = ageDays == null ? 'warn' : ageDays > 30 ? 'warn' : 'ok';
+  el.innerHTML = `
+    <div class="stat-card ok">
+      <div class="lbl">As of</div>
+      <div class="val">${RATES.asOf || '—'}</div>
+      <div class="sub">From the xlsx header</div>
+    </div>
+    <div class="stat-card ok">
+      <div class="lbl">Packages</div>
+      <div class="val">${RATES.packages ? RATES.packages.length : 0}</div>
+      <div class="sub">${countLenders()} lenders · ${countFamilies()} families</div>
+    </div>
+    <div class="stat-card ${ageClass}">
+      <div class="lbl">Last sync</div>
+      <div class="val">${lastWhen ? relTime(lastWhen) : '—'}</div>
+      <div class="sub">${lastWhen ? lastWhen.toLocaleString('en-SG') : 'No history yet'}${ageDays != null && ageDays > 30 ? ' · &gt;30 days old' : ''}</div>
+    </div>
+    <div class="stat-card ok">
+      <div class="lbl">xlsx fingerprint</div>
+      <div class="val num" style="font-size:14px;">${(RATES.xlsxFingerprint || '—').slice(0, 12)}</div>
+      <div class="sub">Changes when rates.xlsx is replaced</div>
+    </div>
+  `;
+}
+
+function countLenders() {
+  if (!RATES || !RATES.packages) return 0;
+  const s = new Set(RATES.packages.map(p => p.lender));
+  return s.size;
+}
+function countFamilies() {
+  if (!RATES || !RATES.packages) return 0;
+  const s = new Set(RATES.packages.map(p => p.family));
+  return s.size;
+}
+
+function relTime(d) {
+  const ms = Date.now() - d.getTime();
+  if (ms < 60000) return 'just now';
+  if (ms < 3600000) return Math.floor(ms / 60000) + ' min ago';
+  if (ms < 86400000) return Math.floor(ms / 3600000) + ' h ago';
+  const days = Math.floor(ms / 86400000);
+  if (days === 1) return 'yesterday';
+  if (days < 30) return days + ' days ago';
+  return Math.floor(days / 30) + ' mo ago';
+}
+
+let activeFamily = 'all';
+const FIXED_FAMS = new Set(['fixed1y', 'fixed2y', 'fixed3y']);
+const FLOAT_FAMS = new Set(['fhr', 'sora1m', 'sora3m', 'combo']);
+
+function renderRates() {
+  const body = $('rates-body');
+  const search = $('search').value.trim().toLowerCase();
+  if (!RATES || !RATES.packages) {
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center; color: var(--faint); padding:24px;">No data</td></tr>';
+    $('pkg-count').textContent = '';
+    return;
+  }
+  let pkgs = RATES.packages.slice();
+  if (activeFamily === 'fixed')   pkgs = pkgs.filter(p => FIXED_FAMS.has(p.family));
+  if (activeFamily === 'floating') pkgs = pkgs.filter(p => FLOAT_FAMS.has(p.family));
+  if (search) {
+    pkgs = pkgs.filter(p =>
+      (p.lender || '').toLowerCase().includes(search) ||
+      (p.subCategory || '').toLowerCase().includes(search) ||
+      (p.qualifying || '').toLowerCase().includes(search)
+    );
+  }
+  pkgs.sort((a, b) => (a.lender || '').localeCompare(b.lender || '') || (a.year1Rate || 0) - (b.year1Rate || 0));
+
+  body.innerHTML = pkgs.map(p => `
+    <tr>
+      <td><span class="lender-cell">${esc(p.lender || '—')}</span></td>
+      <td><span class="pkg-cell">${esc(p.subCategory || p.family || '—')}</span></td>
+      <td style="font-size:12.5px; color: var(--muted);">${esc(p.qualifying || '—')}</td>
+      <td class="right num"><strong>${p.year1Rate != null ? p.year1Rate.toFixed(2) + '%' : '—'}</strong></td>
+      <td class="right num">${p.year2Rate != null ? p.year2Rate.toFixed(2) + '%' : '—'}</td>
+      <td class="right num">${p.year3Rate != null ? p.year3Rate.toFixed(2) + '%' : '—'}</td>
+      <td class="right num">${p.lockInYears != null ? p.lockInYears + 'y' : '—'}</td>
+    </tr>
+  `).join('') || '<tr><td colspan="7" class="empty">No packages match.</td></tr>';
+  $('pkg-count').textContent = pkgs.length + ' showing of ' + RATES.packages.length;
+}
+
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
+
+function renderHistory() {
+  const list = $('history-list');
+  if (!HISTORY || HISTORY.length === 0) {
+    list.innerHTML = '<div class="empty">No history yet — re-run <code>python3 scripts/convert-rates.py</code> to seed.</div>';
+    return;
+  }
+  const reversed = HISTORY.slice().reverse();
+  list.innerHTML = reversed.map((entry, i) => {
+    const d = new Date(entry.generatedAt);
+    const refRows = entry.refRateChanges ? Object.entries(entry.refRateChanges).map(([k, v]) => `
+      <div class="h-change-row">
+        <span class="who">${k.toUpperCase()}</span>
+        <span>${v.before == null ? '—' : v.before.toFixed(3) + '%'} → <strong>${v.after == null ? '—' : v.after.toFixed(3) + '%'}</strong></span>
+        ${renderDelta(v.deltaPct)}
+      </div>
+    `).join('') : '';
+    const pkgRows = (entry.packageChanges || []).slice(0, 30).map(c => {
+      const what = c.what === 'year1Rate'
+        ? `<span>${c.before != null ? c.before.toFixed(2) + '%' : '—'} → <strong>${c.after != null ? c.after.toFixed(2) + '%' : '—'}</strong></span> ${renderDelta(c.deltaPct)}`
+        : c.what === 'added' ? `<span class="pill add">added at ${c.after != null ? c.after.toFixed(2) + '%' : '—'}</span>`
+        : c.what === 'removed' ? `<span class="pill rm">removed (was ${c.before != null ? c.before.toFixed(2) + '%' : '—'})</span>`
+        : `<span>${c.what}: ${c.before} → ${c.after}</span>`;
+      return `
+        <div class="h-change-row">
+          <span class="who">${esc(c.lender || '—')}</span>
+          <span style="color: var(--muted); font-size: 11.5px;">${esc(c.package || c.qualifying || c.key.split('|').slice(1).join(' / '))}</span>
+          ${what}
+        </div>
+      `;
+    }).join('');
+    const showMore = (entry.packageChanges || []).length > 30
+      ? `<div style="color: var(--faint); font-size: 12px; margin-top: 6px;">…and ${entry.packageChanges.length - 30} more package changes.</div>`
+      : '';
+    return `
+      <div class="history-entry">
+        <div class="h-head">
+          <div class="h-when">${d.toLocaleString('en-SG')} · ${relTime(d)}</div>
+          <div class="h-summary">${esc(entry.summary || '')}</div>
+        </div>
+        <div style="font-size: 11.5px; color: var(--muted);">
+          asOf <strong>${esc(entry.asOf || '—')}</strong> · ${entry.packageCount} packages · xlsx <code>${(entry.xlsxFingerprint || '—').slice(0,8)}</code>
+        </div>
+        ${(refRows || pkgRows) ? '<div class="h-changes">' + refRows + pkgRows + showMore + '</div>' : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function renderDelta(d) {
+  if (d == null) return '';
+  if (d === 0) return '<span class="pill same">no change</span>';
+  if (d > 0)   return '<span class="pill up">▲ +' + d.toFixed(2) + '%</span>';
+  return '<span class="pill down">▼ ' + d.toFixed(2) + '%</span>';
+}
+
+// Wire filters
+$('search').addEventListener('input', renderRates);
+document.querySelectorAll('.filter-chip').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    activeFamily = b.dataset.family;
+    renderRates();
+  });
+});
+
+load();
+</script>
+
+</body>
+</html>
