@@ -441,6 +441,8 @@ body::after {
 .rate-table td.right { text-align: right; }
 .rate-table tr.best td { background: var(--accent-soft); }
 .rate-table tr.best td:first-child { border-left: 3px solid var(--accent); padding-left: 9px; }
+.rate-table tr.picked td { background: rgba(196,151,59,.13); box-shadow: inset 0 0 0 1px rgba(196,151,59,.45); }
+.rate-table tr:hover td { background: rgba(196,151,59,.06); }
 .rate-table .bank-name { font-weight: 600; color: var(--ink); }
 .rate-table .pkg { color: var(--muted); font-size: 12px; }
 
@@ -722,10 +724,27 @@ body::after {
     <a href="/" style="text-decoration:none; display:flex; align-items:center; gap:.6rem;">
       <span style="font-family:'Cormorant Garamond',serif; font-size:1.55rem; font-weight:500; color:#FAF7F2; letter-spacing:.02em;">Nexus<span style="color:var(--gold-400);">.</span></span>
     </a>
-    <div class="hidden lg:flex items-center gap-8">
+    <div class="hidden lg:flex items-center gap-6">
       <a href="/services/" class="nav-link">Services</a>
       <a href="/mortgage-rates/" class="nav-link">Rates</a>
       <a href="/free-report/" class="nav-link is-current">Free Report</a>
+      <div class="nav-tools-wrap" style="position:relative;">
+        <button class="nav-link nav-tools-btn"
+          style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:.3rem;font:inherit;padding:0;"
+          aria-haspopup="true" aria-expanded="false" id="tools-btn">
+          Tools
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="tools-dropdown"
+          style="display:none;position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);background:rgba(11,28,58,0.97);backdrop-filter:blur(16px);border:1px solid rgba(196,151,59,.22);border-radius:10px;padding:.5rem;min-width:220px;z-index:200;box-shadow:0 16px 40px rgba(0,0,0,.4);">
+          <a href="/free-report/" class="tools-dd-item" style="color:var(--gold-400); display:flex; align-items:center; justify-content:space-between;">Free Report <span style="font-size:.6rem; letter-spacing:.1em; padding:1px 6px; border-radius:100px; background:rgba(196,151,59,.18); color:var(--gold-400); font-weight:600; border:1px solid rgba(196,151,59,.3);">NEW</span></a>
+          <a href="/#calculator" class="tools-dd-item">Mortgage Calculator</a>
+          <a href="/affordability/" class="tools-dd-item">Affordability Check</a>
+          <a href="/refinance-calculator/" class="tools-dd-item">Refinance Savings</a>
+          <a href="/equity-loan/" class="tools-dd-item">Equity / Cash-Out</a>
+          <a href="/mortgage-rates/" class="tools-dd-item">Current Rates</a>
+        </div>
+      </div>
       <a href="/about/" class="nav-link">About</a>
       <a href="/contact/" class="nav-link">Contact</a>
       <a href="/blog/" class="nav-link" style="color:var(--gold-400);">Insights</a>
@@ -1033,7 +1052,8 @@ body::after {
               <table class="rate-table" id="rateTable">
                 <thead>
                   <tr>
-                    <th style="width: 30%;">Bank · Package</th>
+                    <th style="width: 56px;">Choose</th>
+                    <th style="width: 28%;">Bank · Package</th>
                     <th class="right">Rate p.a.</th>
                     <th class="right">Monthly</th>
                     <th class="right">Total cost (lock-in)</th>
@@ -1043,7 +1063,73 @@ body::after {
               </table>
             </div>
             <div style="margin-top:12px; font-size: 11.5px; color: var(--faint); line-height: 1.55;">
-              Rates are indicative as of Apr 2026 and subject to bank credit assessment. Lock-in cost = total of monthly payments for the lock-in period (typically 2 years).
+              Rates are indicative as of <span id="rates-asof">Apr 2026</span> and subject to bank credit assessment. Lock-in cost = total of monthly payments for the lock-in period (typically 2 years).
+            </div>
+
+            <!-- Send-report CTA -->
+            <div id="send-report-wrap" style="margin-top:18px; padding:16px 18px; background:rgba(11,28,58,.04); border:1px solid rgba(196,151,59,.22); border-radius:8px; display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;">
+              <div style="font-size:13px; color:var(--ink);">
+                <strong>Selected:</strong> <span id="selected-rate-label">—</span><br>
+                <span style="font-size:11.5px; color:var(--faint);">Pick a different rate above, then email yourself the report.</span>
+              </div>
+              <button id="sendReportBtn" type="button" class="btn-gold" style="padding:.7rem 1.5rem; font-size:.85rem; background:linear-gradient(135deg,#C4973B,#E8C97A); color:#0B1C3A; border:none; border-radius:6px; font-weight:600; letter-spacing:.04em; cursor:pointer; display:inline-flex; align-items:center; gap:.5rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
+                <span id="sendReportLabel">Send me my report</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ============ Fixed vs Floating comparison ============ -->
+          <div class="console-card card-pad" id="fixed-vs-floating-card" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
+              <div>
+                <span class="sec-tag">Strategy</span>
+                <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">Fixed vs Floating — head-to-head</h3>
+              </div>
+              <div style="font-size:11.5px; color:var(--faint); max-width:340px; text-align:right;">
+                Same loan, same tenure. Floating tracks SORA / FHR (movements possible). Fixed locks the rate for 1–3 years.
+              </div>
+            </div>
+            <div id="ff-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;"></div>
+            <div id="ff-verdict" style="margin-top:14px; padding:12px 14px; background:rgba(196,151,59,.08); border-left:3px solid var(--accent); border-radius:4px; font-size:13px; color:var(--ink-2); line-height:1.6;"></div>
+          </div>
+
+          <!-- ============ Year-by-year rate progression ============ -->
+          <div class="console-card card-pad" id="year-by-year-card" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
+              <div>
+                <span class="sec-tag">Year-by-year</span>
+                <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">How your rate changes after the lock-in</h3>
+                <div class="chart-sub" id="ybr-sub">For your selected package — rate, monthly payment, and what changes when.</div>
+              </div>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="rate-table" id="ybr-table">
+                <thead>
+                  <tr>
+                    <th style="width:90px;">Year</th>
+                    <th>Rate basis</th>
+                    <th class="right">Rate p.a.</th>
+                    <th class="right">Monthly</th>
+                    <th class="right">Annual interest</th>
+                  </tr>
+                </thead>
+                <tbody id="ybr-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ============ Lock-in expiry strategy ============ -->
+          <div class="console-card card-pad" id="lockin-card" style="display:none; background:linear-gradient(135deg, rgba(11,28,58,.04) 0%, rgba(196,151,59,.06) 100%); border-color:rgba(196,151,59,.28);">
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <div style="flex:0 0 40px; height:40px; border-radius:8px; background:rgba(196,151,59,.18); color:var(--accent-strong); display:flex; align-items:center; justify-content:center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div style="flex:1;">
+                <span class="sec-tag" style="color:var(--accent-strong);">Plan ahead</span>
+                <h3 class="console-display" style="font-size:18px; margin-top:4px; font-weight:500;" id="lockin-title">Your lock-in playbook</h3>
+                <div id="lockin-body" style="font-size:13.5px; color:var(--ink-2); line-height:1.65; margin-top:6px;"></div>
+              </div>
             </div>
           </div>
 
@@ -1367,6 +1453,187 @@ const LOCK_IN_YEARS = 2;
 let mode = 'purchase';
 let lastResult = null;
 let charts = {};
+let selectedRateIdx = 0;       // index into lastResult.banks of the user's chosen package
+let leadInfo = null;           // {name, phone, email} captured at first form submit
+
+function updateSelectedRateLabel() {
+  if (!lastResult || !lastResult.banks || !lastResult.banks[selectedRateIdx]) return;
+  const b = lastResult.banks[selectedRateIdx];
+  const lbl = document.getElementById('selected-rate-label');
+  if (lbl) {
+    lbl.innerHTML = `<strong>${b.bank}</strong> · ${b.pkg} · <strong>${b.rate.toFixed(2)}%</strong> p.a. · $${fmt(Math.round(b.monthly))}/mo`;
+  }
+}
+
+// Family classification helpers
+const FIXED_FAMILIES = new Set(['fixed1y', 'fixed2y', 'fixed3y']);
+const FLOAT_FAMILIES = new Set(['fhr', 'sora1m', 'sora3m', 'combo']);
+function isFixed(b) { return FIXED_FAMILIES.has(b.family); }
+function isFloating(b) { return FLOAT_FAMILIES.has(b.family); }
+
+/**
+ * Render Fixed vs Floating head-to-head comparison.
+ */
+function renderFixedVsFloating(r) {
+  const card = document.getElementById('fixed-vs-floating-card');
+  const grid = document.getElementById('ff-grid');
+  const verdict = document.getElementById('ff-verdict');
+  if (!card || !grid || !r.banks || !r.banks.length) return;
+  const bestFixed = r.banks.find(isFixed);
+  const bestFloat = r.banks.find(isFloating);
+  if (!bestFixed && !bestFloat) { card.style.display = 'none'; return; }
+  card.style.display = '';
+
+  const card3yCost = (b) => {
+    if (!b) return null;
+    // Lock-in years drives "first phase" cost; assume same monthly through 3y for floating estimate
+    return b.monthly * 36;
+  };
+
+  const renderBox = (b, label, accent) => {
+    if (!b) return `<div style="padding:16px; background:white; border:1px dashed var(--border); border-radius:8px; color:var(--faint); font-size:12px;">No ${label.toLowerCase()} package matches your loan tier.</div>`;
+    const lock = b.lockInYears || (FIXED_FAMILIES.has(b.family) ? (b.family === 'fixed1y' ? 1 : b.family === 'fixed3y' ? 3 : 2) : 2);
+    return `
+      <div style="padding:16px; background:white; border:1px solid ${accent.border}; border-radius:8px; position:relative;">
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:${accent.bar}; border-radius:8px 8px 0 0;"></div>
+        <div style="font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:${accent.tag}; font-weight:600; margin-bottom:8px;">${label}</div>
+        <div style="font-weight:600; color:var(--ink); font-size:14px;">${b.bank} · ${b.pkg}</div>
+        <div class="console-display-num" style="font-size:30px; color:${accent.tag}; margin-top:8px; line-height:1;">${b.rate.toFixed(2)}%</div>
+        <div style="font-size:11px; color:var(--muted); margin-top:2px;">Year 1 rate · ${lock}-yr lock-in</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; padding-top:12px; border-top:1px solid var(--border); font-size:12px;">
+          <div>
+            <div style="color:var(--faint); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;">Monthly</div>
+            <div class="num" style="color:var(--ink); font-weight:500; margin-top:2px;">$${fmt(Math.round(b.monthly))}</div>
+          </div>
+          <div>
+            <div style="color:var(--faint); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;">3-yr cost*</div>
+            <div class="num" style="color:var(--ink); font-weight:500; margin-top:2px;">$${fmt(Math.round(card3yCost(b)))}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  };
+
+  grid.innerHTML = renderBox(bestFloat, 'Best Floating', { tag:'#3B8FA4', border:'rgba(59,143,164,.3)', bar:'#3B8FA4' })
+                 + renderBox(bestFixed, 'Best Fixed', { tag:'var(--accent-strong)', border:'rgba(196,151,59,.3)', bar:'linear-gradient(90deg,#C4973B,#E8C97A)' });
+
+  // Verdict text
+  let v = '';
+  if (bestFixed && bestFloat) {
+    const diff = bestFixed.rate - bestFloat.rate;
+    if (diff > 0.20) {
+      v = `Floating is ~${Math.abs(diff).toFixed(2)}% cheaper today — but SORA could move. <strong>Take floating</strong> if you have buffer to absorb a 0.5–1.0% rise; <strong>take fixed</strong> if you want certainty for ${bestFixed.lockInYears || 2} years.`;
+    } else if (diff < -0.10) {
+      v = `Fixed is actually <strong>cheaper</strong> than floating right now — uncommon. Lock in fixed and review near lock-in expiry.`;
+    } else {
+      v = `Fixed and floating are within ${Math.abs(diff).toFixed(2)}% of each other. <strong>Fixed wins on certainty</strong>; floating wins if SORA falls. Pick based on your risk appetite, not the headline rate.`;
+    }
+  } else if (bestFixed) {
+    v = `No floating package matches your tier — your loan size lands in fixed-rate territory. Lock in the ${bestFixed.lockInYears || 2}-year fixed and revisit at expiry.`;
+  } else if (bestFloat) {
+    v = `Only floating packages match your loan tier. Build a 3–6 month buffer to ride out rate movements.`;
+  }
+  verdict.innerHTML = '<strong>Our take:</strong> ' + v + ' <span style="color:var(--faint);">*3-yr cost assumes today\'s rate held flat — actual costs vary as floating rates move and after-fixed periods kick in.</span>';
+}
+
+/**
+ * Render year-by-year rate progression for the selected package.
+ */
+function renderYearByYear(r) {
+  const card = document.getElementById('year-by-year-card');
+  const tbody = document.getElementById('ybr-body');
+  const sub = document.getElementById('ybr-sub');
+  if (!card || !tbody) return;
+  const sel = r.banks[selectedRateIdx];
+  if (!sel || !sel.raw) { card.style.display = 'none'; return; }
+  card.style.display = '';
+  const raw = sel.raw;
+  const tenure = r.inp.tenure || 25;
+  const loan = r.inp.loan || 0;
+
+  if (sub) sub.textContent = `For ${sel.bank} · ${sel.pkg} — rate, monthly payment, and what changes when.`;
+
+  const rows = [];
+  const yearRates = [
+    { y: 1, rate: raw.year1Rate, raw: raw.year1Raw },
+    { y: 2, rate: raw.year2Rate, raw: raw.year2Raw },
+    { y: 3, rate: raw.year3Rate, raw: raw.year3Raw },
+    { y: 4, rate: raw.year4Rate, raw: raw.year4Raw },
+    { y: 5, rate: raw.year5Rate, raw: raw.year5Raw },
+  ];
+  // Compute remaining balance year by year + annual interest
+  let bal = loan;
+  let prevRate = null;
+  for (const yr of yearRates) {
+    if (yr.rate == null) continue;
+    const r2 = yr.rate / 100;
+    const monthly = pmt(loan, r2, tenure);
+    // Estimate annual interest at this year (rough — uses full tenure schedule with this rate)
+    const yrInterest = bal * r2 - (12 * monthly - bal * r2 > 0 ? Math.max(0, 12 * monthly - bal * r2) : 0);
+    const annualInt = bal * r2; // simpler: interest = balance × rate (approx)
+    // Reduce balance for next year (use first-year amort approx)
+    const principalPaid = (monthly * 12) - annualInt;
+    bal = Math.max(0, bal - principalPaid);
+    const isLockExit = sel.lockInYears && yr.y === sel.lockInYears + 1 && prevRate != null && Math.abs(yr.rate - prevRate) > 0.05;
+    rows.push(`
+      <tr ${isLockExit ? 'style="background:rgba(220,38,38,.05);"' : ''}>
+        <td><strong>Year ${yr.y}</strong>${isLockExit ? ' <span style="color:#DC2626; font-size:10px; font-weight:600;">LOCK ENDS</span>' : ''}</td>
+        <td style="font-size:12px; color:var(--muted);">${yr.raw || (FIXED_FAMILIES.has(sel.family) ? 'Fixed' : 'Pegged')}</td>
+        <td class="right num">${yr.rate.toFixed(2)}%</td>
+        <td class="right num">$${fmt(Math.round(monthly))}</td>
+        <td class="right num">$${fmt(Math.round(annualInt))}</td>
+      </tr>
+    `);
+    prevRate = yr.rate;
+  }
+  if (raw.thereafterRate != null) {
+    const r2 = raw.thereafterRate / 100;
+    const monthly = pmt(loan, r2, tenure);
+    const annualInt = bal * r2;
+    rows.push(`
+      <tr style="background:rgba(220,38,38,.04);">
+        <td><strong>Yr 6+</strong></td>
+        <td style="font-size:12px; color:var(--muted);">${raw.thereafterRaw || 'After-fixed (board / FHR)'}</td>
+        <td class="right num" style="color:#DC2626; font-weight:600;">${raw.thereafterRate.toFixed(2)}%</td>
+        <td class="right num">$${fmt(Math.round(monthly))}</td>
+        <td class="right num">$${fmt(Math.round(annualInt))}</td>
+      </tr>
+    `);
+  }
+  tbody.innerHTML = rows.join('') || '<tr><td colspan="5" style="color:var(--faint); text-align:center; padding:18px;">Year-by-year breakdown not available for this package.</td></tr>';
+}
+
+/**
+ * Render the lock-in expiry playbook.
+ */
+function renderLockinStrategy(r) {
+  const card = document.getElementById('lockin-card');
+  const title = document.getElementById('lockin-title');
+  const body = document.getElementById('lockin-body');
+  if (!card || !body) return;
+  const sel = r.banks[selectedRateIdx];
+  if (!sel) { card.style.display = 'none'; return; }
+  card.style.display = '';
+
+  const lock = sel.lockInYears || 2;
+  const raw = sel.raw || {};
+  const thereafter = raw.thereafterRate;
+  const year1 = sel.rate;
+  const jump = thereafter != null ? (thereafter - year1) : null;
+
+  const today = new Date();
+  const expiryDate = new Date(today.getFullYear() + lock, today.getMonth(), today.getDate());
+  const refiWindow = new Date(expiryDate);
+  refiWindow.setMonth(refiWindow.getMonth() - 4);
+  const fmtDate = (d) => d.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' });
+
+  if (title) title.textContent = `Your ${lock}-year lock-in playbook`;
+  body.innerHTML = `
+    <p style="margin:0 0 10px;">Your <strong>${lock}-year lock-in</strong> on <strong>${sel.bank}</strong> ends around <strong>${fmtDate(expiryDate)}</strong> ${jump != null && jump > 0.3 ? `— and the rate jumps from <strong>${year1.toFixed(2)}%</strong> to <strong>${thereafter.toFixed(2)}%</strong> (+${jump.toFixed(2)}%)` : ''}.</p>
+    <p style="margin:0 0 10px;">Start refinance shopping <strong>~${fmtDate(refiWindow)}</strong> (4 months before expiry). Most banks let you commit to a new package without a penalty if your current lock-in hasn't ended.</p>
+    <p style="margin:0; color:var(--muted); font-size:12.5px;"><em>Set a calendar reminder — most homeowners forget and pay 1.5–2.0% above market for 3–6 months before they get around to refinancing.</em></p>
+  `;
+}
 
 /* ============ HELPERS ============ */
 const $ = id => document.getElementById(id);
@@ -1748,16 +2015,43 @@ function render(r) {
   }
   $('m-pills').innerHTML = pills.join('');
 
-  // Bank rate table
+  // Bank rate table — with radio picker
   const body = $('rateTableBody');
   body.innerHTML = r.banks.slice(0, 8).map((b, i) => `
-    <tr class="${i === 0 ? 'best' : ''}">
+    <tr class="${i === 0 ? 'best' : ''}" data-rate-idx="${i}" style="cursor:pointer;">
+      <td style="text-align:center;">
+        <input type="radio" name="ratePick" value="${i}" ${i === 0 ? 'checked' : ''} aria-label="${b.bank} ${b.pkg}" style="cursor:pointer; accent-color:#C4973B; width:16px; height:16px;">
+      </td>
       <td><div class="bank-name">${b.bank}</div><div class="pkg">${b.pkg}</div></td>
       <td class="right num">${b.rate.toFixed(2)}%</td>
       <td class="right num">$${fmt(Math.round(b.monthly))}</td>
       <td class="right num">$${fmt(Math.round(b.lockInCost))}</td>
     </tr>
   `).join('');
+
+  // Default selected = best (index 0)
+  selectedRateIdx = 0;
+  updateSelectedRateLabel();
+
+  // Wire row clicks + radio change to set selection
+  body.querySelectorAll('tr').forEach(tr => {
+    tr.addEventListener('click', (ev) => {
+      const radio = tr.querySelector('input[type="radio"]');
+      if (!radio) return;
+      if (ev.target !== radio) radio.checked = true;
+      selectedRateIdx = parseInt(tr.dataset.rateIdx, 10) || 0;
+      updateSelectedRateLabel();
+      body.querySelectorAll('tr').forEach(x => x.classList.remove('picked'));
+      tr.classList.add('picked');
+      // Refresh year-by-year for the new pick
+      renderYearByYear(r);
+    });
+  });
+
+  // Render the new sections
+  renderFixedVsFloating(r);
+  renderYearByYear(r);
+  renderLockinStrategy(r);
 
   // Best savings pill
   if (r.inp.mode === 'refinance' && r.refi) {
@@ -2334,6 +2628,38 @@ function buildReportPdf(r, lead) {
     y += 17;
   }
 
+  // ===== AFFORDABILITY (purchase mode + has income) =====
+  if (r.inp.mode === 'purchase' && r.inp.income > 0 && r.maxLoanAffordable) {
+    const tdsrFail = !r.tdsrPass || (r.msrApplies && !r.msrPass);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+    doc.text('AFFORDABILITY HEADROOM', M, y);
+    y += 4;
+
+    if (tdsrFail) {
+      // FAIL — shortfall
+      setFill(RED_SOFT); doc.rect(M, y, CW, 18, 'F');
+      setDraw(RED); doc.setLineWidth(0.4); doc.rect(M, y, CW, 18);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(RED);
+      doc.text((r.cappedBy || 'TDSR') + ' SHORTFALL — REDUCE LOAN OR ADD CASH', M + 5, y + 6);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(INK);
+      doc.text('Max loan you qualify for: $' + fmt(Math.round(r.maxLoanAffordable)) + '   ·   Extra cash needed: $' + fmt(Math.round(r.downPaymentShortfall || 0)), M + 5, y + 12);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
+      doc.text('To keep this property at $' + fmt(r.inp.price || 0) + ', either reduce the loan to the cap or top up cash.', M + 5, y + 16);
+      y += 22;
+    } else {
+      // PASS — headroom
+      setFill(GREEN_SOFT); doc.rect(M, y, CW, 18, 'F');
+      setDraw([5, 150, 105]); doc.setLineWidth(0.4); doc.rect(M, y, CW, 18);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GREEN_DARK);
+      doc.text('YOU QUALIFY — AND HAVE ROOM TO STRETCH', M + 5, y + 6);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(INK);
+      doc.text('Max property price: $' + fmt(Math.round(r.maxPurchasePrice || 0)) + '   ·   Max loan: $' + fmt(Math.round(r.maxLoanAffordable)), M + 5, y + 12);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
+      doc.text('Based on your income & debts at MAS 4% stress rate, 55% TDSR cap, ' + r.inp.tenure + 'y tenure.', M + 5, y + 16);
+      y += 22;
+    }
+  }
+
   // ===== BANK RATES TABLE =====
   doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
   doc.text('BANK RATES — RANKED BY 2-YEAR LOCK-IN COST', M, y);
@@ -2393,13 +2719,185 @@ function buildReportPdf(r, lead) {
     y += 9;
   }
 
-  // ===== DISCLAIMER =====
+  // ===== PAGE 2 — CHOSEN PACKAGE DEEP DIVE =====
+  doc.addPage();
+
+  // Slim header on page 2
+  setFill(NAVY); doc.rect(0, 0, W, 18, 'F');
+  setFill(GOLD); doc.rect(0, 18, W, 0.4, 'F');
+  doc.setFont('times', 'normal'); doc.setFontSize(13); setColor(CREAM);
+  doc.text('Nexus', M, 12);
+  setColor(GOLD); doc.text('.', M + 14, 12);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor([180, 180, 180]);
+  doc.text('Personalised Mortgage Report — page 2', M + 22, 12);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor([180, 180, 180]);
+  doc.text(lead.name, W - M, 12, { align: 'right' });
+
+  let y2 = 30;
+
+  // ===== YOUR CHOSEN PACKAGE =====
+  const sel = r.banks[0]; // best — by the time PDF is built, banks[0] is the user's pick (rebuilt in send-report)
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+  doc.text('YOUR SELECTED PACKAGE', M, y2);
+  y2 += 4;
+  setFill(SOFT_BG); doc.rect(M, y2, CW, 22, 'F');
+  setDraw(BORDER); doc.rect(M, y2, CW, 22);
+  doc.setFont('times', 'normal'); doc.setFontSize(16); setColor(INK);
+  doc.text(sel.bank + ' — ' + sel.pkg, M + 5, y2 + 9);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(MUTED);
+  const lockText = (sel.lockInYears || 2) + '-year lock-in  ·  ' + (sel.qualifying || 'Standard tier');
+  doc.text(lockText, M + 5, y2 + 16);
+  // Right side: rate
+  doc.setFont('times', 'normal'); doc.setFontSize(20); setColor(GOLD);
+  doc.text(sel.rate.toFixed(2) + '%', W - M - 5, y2 + 14, { align: 'right' });
+  y2 += 28;
+
+  // ===== FIXED VS FLOATING =====
+  const FIXED_FAMS = new Set(['fixed1y', 'fixed2y', 'fixed3y']);
+  const FLOAT_FAMS = new Set(['fhr', 'sora1m', 'sora3m', 'combo']);
+  const bestFixed = r.banks.find(b => FIXED_FAMS.has(b.family));
+  const bestFloat = r.banks.find(b => FLOAT_FAMS.has(b.family));
+  if (bestFixed || bestFloat) {
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+    doc.text('FIXED VS FLOATING — BEST IN EACH CATEGORY', M, y2);
+    y2 += 4;
+    const colW = CW * 0.5 - 3;
+    const drawCol = (b, x, label, accent) => {
+      setFill([255, 255, 255]); doc.rect(x, y2, colW, 28, 'F');
+      setDraw(accent); doc.setLineWidth(0.4); doc.rect(x, y2, colW, 28);
+      setFill(accent); doc.rect(x, y2, colW, 1.5, 'F');
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(accent);
+      doc.text(label, x + 4, y2 + 7);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(10); setColor(INK);
+      if (b) {
+        doc.text(b.bank + ' · ' + b.pkg, x + 4, y2 + 13);
+        doc.setFont('times', 'normal'); doc.setFontSize(18); setColor(accent);
+        doc.text(b.rate.toFixed(2) + '%', x + 4, y2 + 22);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
+        doc.text('$' + fmt(Math.round(b.monthly)) + '/mo · ' + (b.lockInYears || 2) + 'y lock', x + colW - 4, y2 + 22, { align: 'right' });
+      } else {
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
+        doc.text('No package matches your loan tier.', x + 4, y2 + 16);
+      }
+    };
+    drawCol(bestFloat, M, 'BEST FLOATING', [59, 143, 164]);
+    drawCol(bestFixed, M + colW + 6, 'BEST FIXED', GOLD);
+    y2 += 32;
+
+    // Verdict line
+    if (bestFixed && bestFloat) {
+      const diff = bestFixed.rate - bestFloat.rate;
+      let verdict = '';
+      if (diff > 0.20) verdict = 'Floating is ~' + Math.abs(diff).toFixed(2) + '% cheaper today, but rates can move. Fixed wins on certainty.';
+      else if (diff < -0.10) verdict = 'Fixed is currently cheaper than floating — uncommon. Lock in fixed and review at expiry.';
+      else verdict = 'Fixed and floating within ' + Math.abs(diff).toFixed(2) + '% of each other. Pick on risk appetite, not headline rate.';
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); setColor(INK);
+      doc.text('Our take: ' + verdict, M, y2);
+      y2 += 8;
+    }
+  }
+
+  // ===== YEAR-BY-YEAR =====
+  if (sel.raw && sel.raw.year1Rate != null) {
+    const raw = sel.raw;
+    const tenure = r.inp.tenure || 25;
+    const loan = r.inp.loan || 0;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+    doc.text('YEAR-BY-YEAR — HOW YOUR RATE CHANGES', M, y2);
+    y2 += 4;
+
+    // Table header
+    setFill(SOFT_BG); doc.rect(M, y2, CW, 6, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
+    doc.text('YEAR', M + 4, y2 + 4);
+    doc.text('RATE BASIS', M + 24, y2 + 4);
+    doc.text('RATE', M + CW * 0.62, y2 + 4);
+    doc.text('MONTHLY', M + CW * 0.78, y2 + 4);
+    doc.text('ANNUAL INT', M + CW - 4, y2 + 4, { align: 'right' });
+    y2 += 6;
+
+    let bal = loan;
+    let prevRate = null;
+    const yearRates = [
+      { y: 1, rate: raw.year1Rate, txt: raw.year1Raw },
+      { y: 2, rate: raw.year2Rate, txt: raw.year2Raw },
+      { y: 3, rate: raw.year3Rate, txt: raw.year3Raw },
+      { y: 4, rate: raw.year4Rate, txt: raw.year4Raw },
+      { y: 5, rate: raw.year5Rate, txt: raw.year5Raw },
+    ];
+    for (const yr of yearRates) {
+      if (yr.rate == null) continue;
+      const r2 = yr.rate / 100;
+      const monthly = pmt(loan, r2, tenure);
+      const annualInt = bal * r2;
+      const principalPaid = (monthly * 12) - annualInt;
+      bal = Math.max(0, bal - principalPaid);
+      const isLockExit = sel.lockInYears && yr.y === sel.lockInYears + 1 && prevRate != null && Math.abs(yr.rate - prevRate) > 0.05;
+      if (isLockExit) {
+        setFill([254, 242, 242]); doc.rect(M, y2, CW, 6, 'F');
+      }
+      doc.setFont('helvetica', isLockExit ? 'bold' : 'normal'); doc.setFontSize(8); setColor(INK);
+      doc.text('Year ' + yr.y + (isLockExit ? '  ⚠' : ''), M + 4, y2 + 4);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setColor(MUTED);
+      const basis = (yr.txt || (FIXED_FAMS.has(sel.family) ? 'Fixed' : 'Pegged')).slice(0, 38);
+      doc.text(basis, M + 24, y2 + 4);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(INK);
+      doc.text(yr.rate.toFixed(2) + '%', M + CW * 0.62, y2 + 4);
+      doc.text('$' + fmt(Math.round(monthly)), M + CW * 0.78, y2 + 4);
+      doc.text('$' + fmt(Math.round(annualInt)), M + CW - 4, y2 + 4, { align: 'right' });
+      setDraw(BORDER); doc.line(M, y2 + 6, M + CW, y2 + 6);
+      y2 += 6;
+      prevRate = yr.rate;
+    }
+    if (raw.thereafterRate != null) {
+      setFill([254, 242, 242]); doc.rect(M, y2, CW, 6, 'F');
+      const r2 = raw.thereafterRate / 100;
+      const monthly = pmt(loan, r2, tenure);
+      const annualInt = bal * r2;
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(INK);
+      doc.text('Yr 6+', M + 4, y2 + 4);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setColor(MUTED);
+      doc.text((raw.thereafterRaw || 'After-fixed').slice(0, 38), M + 24, y2 + 4);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(RED);
+      doc.text(raw.thereafterRate.toFixed(2) + '%', M + CW * 0.62, y2 + 4);
+      doc.setFont('helvetica', 'normal'); setColor(INK);
+      doc.text('$' + fmt(Math.round(monthly)), M + CW * 0.78, y2 + 4);
+      doc.text('$' + fmt(Math.round(annualInt)), M + CW - 4, y2 + 4, { align: 'right' });
+      y2 += 6;
+    }
+    y2 += 4;
+  }
+
+  // ===== LOCK-IN PLAYBOOK =====
+  const lockYrs = sel.lockInYears || 2;
+  const today = new Date();
+  const expiry = new Date(today.getFullYear() + lockYrs, today.getMonth(), today.getDate());
+  const refiStart = new Date(expiry); refiStart.setMonth(refiStart.getMonth() - 4);
+  const fmtMon = d => d.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' });
+
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+  doc.text('LOCK-IN PLAYBOOK — PLAN YOUR REFINANCE', M, y2);
+  y2 += 4;
+  setFill([253, 250, 243]); doc.rect(M, y2, CW, 22, 'F');
+  setDraw(GOLD); doc.setLineWidth(0.4); doc.rect(M, y2, CW, 22);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); setColor(INK);
+  const playbook = [
+    'Your ' + lockYrs + '-year lock-in on ' + sel.bank + ' ends ~' + fmtMon(expiry) + '.',
+    'Start refinance shopping ~' + fmtMon(refiStart) + ' (4 months early). Most banks let you commit without penalty before lock-in expiry.',
+    'Set a calendar reminder — most homeowners pay 1.5–2.0% above market for months before they refi.',
+  ];
+  playbook.forEach((line, i) => {
+    doc.text('•  ' + line, M + 5, y2 + 6 + i * 5.5);
+  });
+  y2 += 26;
+
+  // ===== DISCLAIMER (page 2) =====
   doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setColor(MUTED);
   const disc = 'Indicative figures only as of ' + dateStr + '. Subject to bank credit assessment, valuation, and prevailing IRAS / MAS / HDB rules. Stress-test rate of 4% is the MAS minimum for residential TDSR / MSR computations. This report does not constitute financial advice; for personalised guidance speak to a Nexus mortgage broker. Banks pay our referral fee — service is free to you.';
-  const lines = doc.splitTextToSize(disc, CW);
-  doc.text(lines, M, y);
+  const dlines = doc.splitTextToSize(disc, CW);
+  doc.text(dlines, M, y2);
 
-  // ===== FOOTER BAND =====
+  // ===== FOOTER BAND (page 2) =====
   setFill(NAVY); doc.rect(0, H - 24, W, 24, 'F');
   setFill(GOLD); doc.rect(0, H - 24, W, 0.5, 'F');
 
@@ -2471,17 +2969,11 @@ leadForm.addEventListener('submit', async e => {
 
   setSubmitting(true);
 
-  const payload = buildPayload({ name, phone: '+65 ' + phoneRaw.slice(0,4) + ' ' + phoneRaw.slice(4), email });
+  // Cache lead info for the later send-report step
+  leadInfo = { name, phone: '+65 ' + phoneRaw.slice(0,4) + ' ' + phoneRaw.slice(4), email };
 
-  // Generate PDF and attach to payload (so Make → Gmail can attach it)
-  try {
-    const pdf = buildReportPdf(lastResult, payload.lead);
-    payload.reportPdfBase64 = pdf.base64;
-    payload.reportPdfFilename = pdf.filename;
-    payload.reportPdfMime = 'application/pdf';
-  } catch (pdfErr) {
-    console.warn('PDF generation failed; submitting without attachment:', pdfErr);
-  }
+  const payload = buildPayload(leadInfo);
+  payload.stage = 'lead-capture';   // Make scenario routes by stage — this path notifies but does NOT email PDF
 
   try {
     if (MAKE_WEBHOOK_URL) {
@@ -2492,16 +2984,18 @@ leadForm.addEventListener('submit', async e => {
       });
       if (!res.ok) throw new Error('Webhook returned ' + res.status);
     } else {
-      // Dev mode: just log
-      console.log('[FREE-REPORT] Would POST to webhook:', payload);
-      await new Promise(r => setTimeout(r, 800));
+      console.log('[FREE-REPORT] Would POST lead-capture to webhook:', payload);
+      await new Promise(r => setTimeout(r, 600));
     }
-    // Success
+    // Success — unlock the report so user can pick a rate
     sessionStorage.setItem('reportUnlocked', '1');
     reportGate.classList.remove('is-locked');
     closeModal();
-    showToast('Report unlocked & sent to ' + email, 'success');
-    setTimeout(() => reportWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 350);
+    showToast('Report unlocked — pick a rate, then click "Send me my report".', 'success');
+    setTimeout(() => {
+      const target = document.getElementById('send-report-wrap') || reportWrap;
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 350);
   } catch (err) {
     console.error(err);
     showToast('Something went wrong — please try again or WhatsApp us.', 'error');
@@ -2509,6 +3003,79 @@ leadForm.addEventListener('submit', async e => {
     setSubmitting(false);
   }
 });
+
+/* ============ SEND REPORT button (stage 2: chosen rate + PDF email) ============ */
+const sendReportBtn = document.getElementById('sendReportBtn');
+if (sendReportBtn) {
+  sendReportBtn.addEventListener('click', async () => {
+    if (!lastResult) { showToast('Calculate your report first.', 'error'); return; }
+    if (!leadInfo) { showToast('Please submit your details first.', 'error'); return; }
+
+    const lblEl = document.getElementById('sendReportLabel');
+    const origLabel = lblEl ? lblEl.textContent : 'Send me my report';
+    sendReportBtn.disabled = true;
+    if (lblEl) lblEl.textContent = 'Sending…';
+
+    // Build payload, then mark the user's chosen package and re-rank for PDF
+    const payload = buildPayload(leadInfo);
+    payload.stage = 'send-report';
+    payload.selectedRateIdx = selectedRateIdx;
+    const chosen = lastResult.banks[selectedRateIdx];
+    if (chosen) {
+      payload.selected = {
+        bank: chosen.bank, package: chosen.pkg,
+        ratePct: chosen.rate, monthly: Math.round(chosen.monthly),
+        lockInCost: Math.round(chosen.lockInCost),
+      };
+      // Override summary fields so the email/Notion reflect the user's choice
+      payload.summary.bestRate = +chosen.rate.toFixed(2);
+      payload.summary.bestBank = chosen.bank;
+      payload.summary.bestPackage = chosen.pkg;
+      payload.summary.monthlyPayment = Math.round(chosen.monthly);
+    }
+
+    // Re-build PDF with chosen rate first
+    try {
+      const banksReordered = [chosen, ...lastResult.banks.filter((_, i) => i !== selectedRateIdx)];
+      const resultForPdf = Object.assign({}, lastResult, {
+        banks: banksReordered,
+        bestRate: chosen.rate / 100,
+        monthlyBest: chosen.monthly,
+      });
+      const pdf = buildReportPdf(resultForPdf, payload.lead);
+      payload.reportPdfBase64 = pdf.base64;
+      payload.reportPdfFilename = pdf.filename;
+      payload.reportPdfMime = 'application/pdf';
+    } catch (pdfErr) {
+      console.warn('PDF rebuild failed:', pdfErr);
+    }
+
+    try {
+      if (MAKE_WEBHOOK_URL) {
+        const res = await fetch(MAKE_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error('Webhook returned ' + res.status);
+      } else {
+        console.log('[FREE-REPORT] Would POST send-report:', payload);
+        await new Promise(r => setTimeout(r, 600));
+      }
+      showToast('Report emailed to ' + leadInfo.email + ' ✓', 'success');
+      if (lblEl) lblEl.textContent = 'Sent ✓';
+      setTimeout(() => {
+        sendReportBtn.disabled = false;
+        if (lblEl) lblEl.textContent = origLabel;
+      }, 3500);
+    } catch (err) {
+      console.error(err);
+      showToast('Could not send the email — please try again.', 'error');
+      sendReportBtn.disabled = false;
+      if (lblEl) lblEl.textContent = origLabel;
+    }
+  });
+}
 
 function setSubmitting(yes) {
   leadSubmit.disabled = yes;
@@ -2565,6 +3132,9 @@ function showToast(msg, type) {
   toast._t = setTimeout(() => toast.classList.remove('show'), 4000);
 }
 
+/* ============ LOAD LIVE RATES on page init ============ */
+loadRates();
+
 /* ============ Reveal on scroll ============ */
 const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
@@ -2576,5 +3146,30 @@ window.addEventListener('scroll', () => {
 });
 </script>
 
+
+  <script>
+    // ===== TOOLS DROPDOWN =====
+    (function () {
+      const toolsBtn = document.getElementById('tools-btn');
+      const toolsDd = document.getElementById('tools-dropdown');
+      if (!toolsBtn || !toolsDd) return;
+      toolsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = toolsDd.style.display === 'block';
+        toolsDd.style.display = open ? 'none' : 'block';
+        toolsBtn.setAttribute('aria-expanded', String(!open));
+      });
+      document.addEventListener('click', () => {
+        toolsDd.style.display = 'none';
+        toolsBtn.setAttribute('aria-expanded', 'false');
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          toolsDd.style.display = 'none';
+          toolsBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
