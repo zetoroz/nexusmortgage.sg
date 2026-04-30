@@ -523,6 +523,103 @@ body::after {
 .rate-table .bank-name { font-weight: 600; color: var(--ink); }
 .rate-table .pkg { color: var(--muted); font-size: 12px; }
 
+/* ════ Rate selector tabs (mortgage-rates style) ════ */
+.rs-mtabs {
+  display:flex; gap:4px; padding:4px;
+  background: #faf6ec;
+  border:1px solid rgba(196,151,59,.22);
+  border-radius:10px;
+  margin-bottom:18px;
+}
+.rs-mtab {
+  flex:1; padding:11px 18px;
+  background:none; border:none; border-radius:7px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem; font-weight:600;
+  color:var(--muted); cursor:pointer;
+  letter-spacing:.02em;
+  transition: background .2s, color .2s, box-shadow .2s;
+}
+.rs-mtab:hover { color: var(--ink); background: rgba(196,151,59,.06); }
+.rs-mtab:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.rs-mtab.active {
+  background: white;
+  color: #8a6a26;
+  box-shadow: 0 1px 0 rgba(196,151,59,.45), 0 4px 14px -4px rgba(196,151,59,.28);
+  border: 1px solid rgba(196,151,59,.42);
+  margin: -1px;
+}
+.rs-tpanel { display:none; }
+.rs-tpanel.active { display:block; animation: rsFade .22s ease; }
+@keyframes rsFade { from { opacity:0; transform: translateY(2px);} to { opacity:1; transform: none;} }
+
+.rs-stabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+.rs-stab {
+  padding:6px 13px;
+  background:white; border:1px solid var(--border);
+  border-radius:6px;
+  font-size:11.5px; font-weight:500;
+  color:var(--muted); cursor:pointer;
+  letter-spacing:.02em;
+  transition: all .15s ease;
+}
+.rs-stab:hover { border-color: var(--accent); color: var(--ink); }
+.rs-stab.active {
+  background: rgba(196,151,59,.12);
+  border-color: var(--accent);
+  color: var(--accent-strong, #8a6a26);
+  font-weight:600;
+}
+.rs-stab .count {
+  margin-left:6px; padding:1px 6px;
+  background: rgba(11,28,58,.07);
+  border-radius:8px;
+  font-size:10px; font-weight:600;
+  color: var(--muted);
+}
+.rs-stab.active .count { background: rgba(196,151,59,.22); color: var(--accent-strong, #8a6a26); }
+
+.rs-prop-toggle { display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap; }
+.rs-ptab {
+  padding:8px 16px;
+  background:white; border:1px solid var(--border);
+  border-radius:8px;
+  font-size:12.5px; font-weight:500;
+  color:var(--muted); cursor:pointer;
+  display:inline-flex; align-items:center; gap:8px;
+  transition: all .2s;
+}
+.rs-ptab:hover { border-color: var(--accent); color: var(--ink); }
+.rs-ptab .dot { width:7px; height:7px; border-radius:50%; background:currentColor; opacity:.7; }
+.rs-ptab.active {
+  background: rgba(196,151,59,.10);
+  border-color: var(--accent);
+  color: var(--accent-strong, #8a6a26);
+  font-weight:600;
+}
+.rs-ptab[data-pt="buc"]:hover { border-color: #0d9488; color: #0f766e; }
+.rs-ptab[data-pt="buc"].active {
+  background: rgba(13,148,136,.08);
+  border-color: #0d9488;
+  color: #0f766e;
+}
+.rs-pgroup { display:none; }
+.rs-pgroup.active { display:block; animation: rsFade .2s ease; }
+.rs-buc-note {
+  display:flex; gap:9px; align-items:flex-start;
+  padding:10px 14px;
+  background: rgba(13,148,136,.06);
+  border:1px solid rgba(13,148,136,.22);
+  border-radius:8px;
+  font-size:12px; color: #0f766e;
+  line-height:1.5; margin-bottom:14px;
+}
+.rs-table-wrap { overflow-x:auto; }
+.rs-empty {
+  padding:28px 16px; text-align:center;
+  color: var(--faint); font-size:13px; font-style:italic;
+}
+
 
 /* Property type toggle (inline, full-width within field cell) */
 .prop-toggle {
@@ -1369,28 +1466,45 @@ body::after {
               </div>
               <span class="pill pass" id="bestSavingsPill"><span class="dot"></span>Save $—</span>
             </div>
-            <!-- Rate type filter chips -->
-            <div id="rate-type-filter" style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; align-items:center;">
-              <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin-right:6px;">Filter</span>
-              <button type="button" class="rt-chip active" data-rt="all">All</button>
-              <button type="button" class="rt-chip" data-rt="floating">Floating</button>
-              <button type="button" class="rt-chip" data-rt="fixed">Fixed</button>
-              <button type="button" class="rt-chip" data-rt="fhr">FHR</button>
-              <button type="button" class="rt-chip" data-rt="sora">SORA</button>
+            <!-- Main tabs (Fixed / Floating) -->
+            <div class="rs-mtabs" id="rs-mtabs">
+              <button type="button" class="rs-mtab active" data-mt="fixed">Fixed Rate</button>
+              <button type="button" class="rs-mtab" data-mt="float">Floating Rate</button>
             </div>
-            <div style="overflow-x:auto;">
-              <table class="rate-table" id="rateTable">
-                <thead>
-                  <tr>
-                    <th style="width: 56px;">Choose</th>
-                    <th style="width: 28%;">Bank · Package</th>
-                    <th class="right">Rate p.a.</th>
-                    <th class="right">Monthly</th>
-                    <th class="right">Total cost (lock-in)</th>
-                  </tr>
-                </thead>
-                <tbody id="rateTableBody"></tbody>
-              </table>
+
+            <!-- Fixed panel -->
+            <div class="rs-tpanel active" id="rs-panel-fixed">
+              <div class="rs-stabs" id="rs-stabs-fixed"></div>
+              <div class="rs-table-wrap"><table class="rate-table"><thead>
+                <tr><th style="width:48px;">Pick</th><th>Bank</th><th>Package</th>
+                <th class="right">Rate p.a.</th><th class="right">Monthly</th><th class="right">Lock-in cost</th></tr>
+              </thead><tbody id="rs-body-fixed"></tbody></table></div>
+            </div>
+
+            <!-- Floating panel -->
+            <div class="rs-tpanel" id="rs-panel-float">
+              <div class="rs-prop-toggle">
+                <button type="button" class="rs-ptab active" data-pt="cpl"><span class="dot"></span>Completed Properties</button>
+                <button type="button" class="rs-ptab" data-pt="buc"><span class="dot"></span>Building Under Construction (BUC)</button>
+              </div>
+              <div class="rs-pgroup active" id="rs-pg-cpl">
+                <div class="rs-stabs" id="rs-stabs-cpl"></div>
+                <div class="rs-table-wrap"><table class="rate-table"><thead>
+                  <tr><th style="width:48px;">Pick</th><th>Bank</th><th>Package</th>
+                  <th class="right">Rate p.a.</th><th class="right">Monthly</th><th class="right">Lock-in cost</th></tr>
+                </thead><tbody id="rs-body-cpl"></tbody></table></div>
+              </div>
+              <div class="rs-pgroup" id="rs-pg-buc">
+                <div class="rs-buc-note">
+                  <span style="flex-shrink:0;">🏗</span>
+                  <span>BUC packages are for uncompleted properties (under construction). No lock-in penalty — loan tracks construction progress with 2× free conversions (before TOP and again after TOP).</span>
+                </div>
+                <div class="rs-stabs" id="rs-stabs-buc"></div>
+                <div class="rs-table-wrap"><table class="rate-table"><thead>
+                  <tr><th style="width:48px;">Pick</th><th>Bank</th><th>Package</th>
+                  <th class="right">Rate p.a.</th><th class="right">Monthly</th><th class="right">Lock-in cost</th></tr>
+                </thead><tbody id="rs-body-buc"></tbody></table></div>
+              </div>
             </div>
             <div style="margin-top:12px; font-size: 11.5px; color: var(--faint); line-height: 1.55;">
               Rates are indicative as of <span id="rates-asof">Apr 2026</span> and subject to bank credit assessment. Lock-in cost = total of monthly payments for the lock-in period (typically 2 years).
@@ -1835,15 +1949,19 @@ const SUBCAT_DISPLAY = {
 };
 
 async function loadRates() {
-  try {
-    const res = await fetch('/rates.json?v=' + Date.now());
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    RATES_DATA = await res.json();
-    console.log('[free-report] Loaded rates.json:', RATES_DATA.packages.length, 'packages, asOf', RATES_DATA.asOf);
-  } catch (e) {
-    console.warn('[free-report] Failed to load rates.json — using fallback', e);
-    RATES_DATA = null;
+  // Try absolute /rates.json (production) first, then relative ../rates.json (dev /Nexus Mortgage/...)
+  const candidates = ['/rates.json', '../rates.json', './rates.json'];
+  for (const url of candidates) {
+    try {
+      const res = await fetch(url + '?v=' + Date.now());
+      if (!res.ok) continue;
+      RATES_DATA = await res.json();
+      console.log('[free-report] Loaded rates.json from ' + url + ':', RATES_DATA.packages.length, 'packages, asOf', RATES_DATA.asOf);
+      return;
+    } catch (e) { /* try next */ }
   }
+  console.warn('[free-report] Failed to load rates.json from any path — using fallback');
+  RATES_DATA = null;
 }
 
 /**
@@ -2082,6 +2200,178 @@ function renderLockinStrategy(r) {
     <p style="margin:0 0 10px;">Start refinance shopping <strong>~${fmtDate(refiWindow)}</strong> (4 months before expiry). Most banks let you commit to a new package without a penalty if your current lock-in hasn't ended.</p>
     <p style="margin:0; color:var(--muted); font-size:12.5px;"><em>Set a calendar reminder — most homeowners forget and pay 1.5–2.0% above market for 3–6 months before they get around to refinancing.</em></p>
   `;
+}
+
+/* ============ RATE SELECTOR (tabbed) ============ */
+// State: which main tab, prop tab, and sub-tab are active
+let rsState = {
+  main: 'fixed',         // 'fixed' | 'float'
+  propType: 'cpl',       // 'cpl' | 'buc'
+  subFixed: 'all',       // 'all' | '1' | '2' | '3' (lock-in years)
+  subCpl: 'all',         // 'all' | 'sora3m' | 'sora1m' | 'fhr' | 'combo'
+  subBuc: 'all',
+};
+
+const RS_FIXED = ['fixed1y','fixed2y','fixed3y'];
+const RS_FLOAT = ['fhr','sora1m','sora3m','combo'];
+
+const FAMILY_LABEL = {
+  'fixed1y': '1Y Fixed',
+  'fixed2y': '2Y Fixed',
+  'fixed3y': '3Y Fixed',
+  'fhr': 'FHR',
+  'sora1m': '1M SORA',
+  'sora3m': '3M SORA',
+  'combo': 'Combo',
+};
+
+function renderRateSelector(r) {
+  if (!r || !r.banks || !r.banks.length) return;
+  // Tag every package with its origin index so we can map back to lastResult.banks
+  const all = r.banks.map((b, i) => ({ ...b, _origIdx: i }));
+
+  const fixed = all.filter(b => RS_FIXED.includes(b.family) || (b.family == null && /fixed/i.test(b.pkg||'')));
+  const floatCpl = all.filter(b => RS_FLOAT.includes(b.family) && (b.lockInYears == null || b.lockInYears >= 1));
+  const floatBuc = all.filter(b => RS_FLOAT.includes(b.family) && (b.lockInYears === 0 || (b.qualifying && /BUC/i.test(b.qualifying))));
+  // Fallback: if BUC bucket is empty but we have floating packages, expose the no-lock-in slice
+  const floatBucFinal = floatBuc.length ? floatBuc : all.filter(b => RS_FLOAT.includes(b.family) && !b.lockInYears);
+
+  // Build sub-tabs for each main bucket
+  function subTabsFor(items, families, kind) {
+    const counts = { all: items.length };
+    families.forEach(f => { counts[f] = items.filter(b => b.family === f).length; });
+    const tabs = [{ key: 'all', label: 'All', n: counts.all }];
+    families.forEach(f => {
+      if (counts[f] > 0) {
+        const lbl = kind === 'fixed'
+          ? f.replace('fixed','').replace('y',' Year')
+          : FAMILY_LABEL[f] || f;
+        tabs.push({ key: f, label: lbl, n: counts[f] });
+      }
+    });
+    return tabs;
+  }
+
+  // Render fixed sub-tabs
+  const fixedTabs = subTabsFor(fixed, RS_FIXED, 'fixed');
+  $('rs-stabs-fixed').innerHTML = fixedTabs.map(t =>
+    `<button type="button" class="rs-stab ${rsState.subFixed===t.key?'active':''}" data-st="${t.key}">${t.label}<span class="count">${t.n}</span></button>`
+  ).join('');
+  // Render floating Completed sub-tabs
+  const cplTabs = subTabsFor(floatCpl, RS_FLOAT, 'float');
+  $('rs-stabs-cpl').innerHTML = cplTabs.map(t =>
+    `<button type="button" class="rs-stab ${rsState.subCpl===t.key?'active':''}" data-st="${t.key}">${t.label}<span class="count">${t.n}</span></button>`
+  ).join('');
+  // Render floating BUC sub-tabs
+  const bucTabs = subTabsFor(floatBucFinal, RS_FLOAT, 'float');
+  $('rs-stabs-buc').innerHTML = bucTabs.map(t =>
+    `<button type="button" class="rs-stab ${rsState.subBuc===t.key?'active':''}" data-st="${t.key}">${t.label}<span class="count">${t.n}</span></button>`
+  ).join('');
+
+  // Render bodies
+  function fillBody(elId, items, subKey) {
+    const filtered = subKey === 'all' ? items : items.filter(b => b.family === subKey);
+    const sorted = filtered.slice().sort((a,b) => a.rate - b.rate);
+    const el = $(elId);
+    if (!el) return;
+    if (!sorted.length) {
+      el.innerHTML = `<tr><td colspan="6" class="rs-empty">No packages match this filter at your loan amount. Try another tab — or WhatsApp us for a hand-curated quote.</td></tr>`;
+      return;
+    }
+    el.innerHTML = sorted.map((b, i) => {
+      const isSelected = b._origIdx === selectedRateIdx;
+      const isBest = i === 0;
+      return `<tr class="${isBest ? 'best' : ''} ${isSelected ? 'picked' : ''}" data-rate-idx="${b._origIdx}" style="cursor:pointer;">
+        <td style="text-align:center;">
+          <input type="radio" name="ratePick" value="${b._origIdx}" ${isSelected?'checked':''} aria-label="${b.bank} ${b.pkg}" style="cursor:pointer; accent-color:#C4973B; width:16px; height:16px;">
+        </td>
+        <td><div class="bank-name">${b.bank}</div></td>
+        <td><div style="font-weight:500; color:var(--ink);">${b.pkg}</div><div class="pkg">${b.lockInYears ? b.lockInYears + 'y lock-in' : 'No lock-in'}${b.qualifying ? ' · ' + b.qualifying : ''}</div></td>
+        <td class="right num" style="font-weight:600; color:var(--ink);">${b.rate.toFixed(2)}%</td>
+        <td class="right num">$${fmt(Math.round(b.monthly))}</td>
+        <td class="right num">$${fmt(Math.round(b.lockInCost))}</td>
+      </tr>`;
+    }).join('');
+    // Wire row clicks
+    el.querySelectorAll('tr').forEach(tr => {
+      tr.addEventListener('click', (ev) => {
+        const radio = tr.querySelector('input[type="radio"]');
+        if (!radio) return;
+        if (ev.target !== radio) radio.checked = true;
+        selectedRateIdx = parseInt(tr.dataset.rateIdx, 10) || 0;
+        updateSelectedRateLabel();
+        // Highlight across ALL bodies
+        document.querySelectorAll('#rs-body-fixed tr, #rs-body-cpl tr, #rs-body-buc tr').forEach(x => x.classList.remove('picked'));
+        tr.classList.add('picked');
+        // Refresh dependent panels
+        if (lastResult) { renderYearByYear(lastResult); renderPackageDetails(lastResult); }
+      });
+    });
+  }
+  fillBody('rs-body-fixed', fixed, rsState.subFixed);
+  fillBody('rs-body-cpl', floatCpl, rsState.subCpl);
+  fillBody('rs-body-buc', floatBucFinal, rsState.subBuc);
+
+  // Default selection: pick best in currently active panel if current selection isn't visible
+  const visibleIds = new Set();
+  document.querySelectorAll('.rs-tpanel.active .rs-pgroup.active tr[data-rate-idx], .rs-tpanel.active > .rs-table-wrap tr[data-rate-idx]').forEach(tr => {
+    visibleIds.add(parseInt(tr.dataset.rateIdx, 10));
+  });
+  if (visibleIds.size && !visibleIds.has(selectedRateIdx)) {
+    // Pick the cheapest visible
+    const firstVisibleTr = document.querySelector('.rs-tpanel.active .rs-pgroup.active tr[data-rate-idx], .rs-tpanel.active > .rs-table-wrap tr[data-rate-idx]');
+    if (firstVisibleTr) {
+      selectedRateIdx = parseInt(firstVisibleTr.dataset.rateIdx, 10);
+      const radio = firstVisibleTr.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+      firstVisibleTr.classList.add('picked');
+      updateSelectedRateLabel();
+    }
+  }
+}
+
+// Wire up tab clicks (delegated, set up once on calculate)
+function wireRateSelectorTabs() {
+  // Main tabs
+  document.querySelectorAll('.rs-mtab').forEach(btn => {
+    if (btn._wired) return; btn._wired = true;
+    btn.addEventListener('click', () => {
+      const mt = btn.dataset.mt;
+      rsState.main = mt;
+      document.querySelectorAll('.rs-mtab').forEach(x => x.classList.toggle('active', x.dataset.mt === mt));
+      document.querySelectorAll('.rs-tpanel').forEach(p => p.classList.toggle('active',
+        (mt === 'fixed' && p.id === 'rs-panel-fixed') || (mt === 'float' && p.id === 'rs-panel-float')));
+      if (lastResult) renderRateSelector(lastResult);
+    });
+  });
+  // Prop tabs (Completed / BUC)
+  document.querySelectorAll('.rs-ptab').forEach(btn => {
+    if (btn._wired) return; btn._wired = true;
+    btn.addEventListener('click', () => {
+      const pt = btn.dataset.pt;
+      rsState.propType = pt;
+      document.querySelectorAll('.rs-ptab').forEach(x => x.classList.toggle('active', x.dataset.pt === pt));
+      document.querySelectorAll('.rs-pgroup').forEach(p => p.classList.toggle('active',
+        (pt === 'cpl' && p.id === 'rs-pg-cpl') || (pt === 'buc' && p.id === 'rs-pg-buc')));
+      if (lastResult) renderRateSelector(lastResult);
+    });
+  });
+  // Sub-tabs (delegated to each container)
+  ['rs-stabs-fixed','rs-stabs-cpl','rs-stabs-buc'].forEach(id => {
+    const c = $(id);
+    if (!c || c._wired) return;
+    if (c) c._wired = true;
+    if (!c) return;
+    c.addEventListener('click', e => {
+      const btn = e.target.closest('.rs-stab');
+      if (!btn) return;
+      const key = btn.dataset.st;
+      if (id === 'rs-stabs-fixed') rsState.subFixed = key;
+      else if (id === 'rs-stabs-cpl') rsState.subCpl = key;
+      else if (id === 'rs-stabs-buc') rsState.subBuc = key;
+      if (lastResult) renderRateSelector(lastResult);
+    });
+  });
 }
 
 /**
@@ -2876,49 +3166,8 @@ function render(r) {
   }
   $('m-pills').innerHTML = pills.join('');
 
-  // Bank rate table — with radio picker (filtered by rate type)
-  const body = $('rateTableBody');
-  // Build a *filtered, re-indexed* view but keep mapping back to the original index
-  const filteredBanks = r.banks
-    .map((b, i) => ({ ...b, _origIdx: i }))
-    .filter(b => familyMatchesFilter(b.family, rateTypeFilter))
-    .slice(0, 8);
-
-  if (!filteredBanks.length) {
-    body.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:24px; color:var(--faint);">No ${rateTypeFilter} packages match your loan amount tier.</td></tr>`;
-    selectedRateIdx = 0;
-  } else {
-    body.innerHTML = filteredBanks.map((b, i) => `
-      <tr class="${i === 0 ? 'best' : ''}" data-rate-idx="${b._origIdx}" style="cursor:pointer;">
-        <td style="text-align:center;">
-          <input type="radio" name="ratePick" value="${b._origIdx}" ${i === 0 ? 'checked' : ''} aria-label="${b.bank} ${b.pkg}" style="cursor:pointer; accent-color:#C4973B; width:16px; height:16px;">
-        </td>
-        <td><div class="bank-name">${b.bank}</div><div class="pkg">${b.pkg}</div></td>
-        <td class="right num">${b.rate.toFixed(2)}%</td>
-        <td class="right num">$${fmt(Math.round(b.monthly))}</td>
-        <td class="right num">$${fmt(Math.round(b.lockInCost))}</td>
-      </tr>
-    `).join('');
-    // Default-select first row in current filter (set state to its original index)
-    selectedRateIdx = filteredBanks[0]._origIdx;
-  }
-  updateSelectedRateLabel();
-
-  // Wire row clicks + radio change to set selection
-  body.querySelectorAll('tr').forEach(tr => {
-    tr.addEventListener('click', (ev) => {
-      const radio = tr.querySelector('input[type="radio"]');
-      if (!radio) return;
-      if (ev.target !== radio) radio.checked = true;
-      selectedRateIdx = parseInt(tr.dataset.rateIdx, 10) || 0;
-      updateSelectedRateLabel();
-      body.querySelectorAll('tr').forEach(x => x.classList.remove('picked'));
-      tr.classList.add('picked');
-      // Refresh year-by-year + package details for the new pick
-      renderYearByYear(r);
-      renderPackageDetails(r);
-    });
-  });
+  // Bank rate selector — tabbed by rate type (Fixed / Floating-Completed / Floating-BUC)
+  renderRateSelector(r);
 
   // Render the new sections
   renderFixedVsFloating(r);
@@ -3410,701 +3659,753 @@ document.querySelectorAll('.num-input').forEach(el => {
 function buildReportPdf(r, lead) {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
-  const W = 210, H = 297, M = 15;
+  const W = 210, H = 297, M = 14;
   const CW = W - 2 * M;
 
-  const NAVY = [11, 28, 58], GOLD = [196, 151, 59], CREAM = [250, 247, 242];
-  const INK = [11, 18, 32], MUTED = [86, 101, 122], FAINT = [148, 163, 184];
-  const BORDER = [229, 231, 235], SOFT_BG = [246, 247, 249];
-  const GREEN = [5, 150, 105], GREEN_SOFT = [236, 253, 245], GREEN_DARK = [4, 120, 87];
+  // ── Palette ──
+  const NAVY = [11, 28, 58], NAVY_DARK = [6, 18, 42];
+  const GOLD = [196, 151, 59], GOLD_TINT = [253, 247, 233];
+  const CREAM = [250, 247, 242];
+  const INK = [11, 18, 32], INK_2 = [44, 56, 78];
+  const MUTED = [86, 101, 122], FAINT = [148, 163, 184];
+  const BORDER = [221, 225, 232], BORDER_LT = [236, 239, 244];
+  const SURFACE = [251, 252, 253], SOFT_BG = [246, 247, 249];
+  const GREEN = [5, 150, 105], GREEN_SOFT = [236, 253, 245], GREEN_DK = [4, 120, 87];
   const RED = [220, 38, 38], RED_SOFT = [254, 242, 242];
+  const AMBER = [217, 119, 6];
 
   const setColor = c => doc.setTextColor(c[0], c[1], c[2]);
-  const setFill = c => doc.setFillColor(c[0], c[1], c[2]);
-  const setDraw = c => doc.setDrawColor(c[0], c[1], c[2]);
+  const setFill  = c => doc.setFillColor(c[0], c[1], c[2]);
+  const setDraw  = c => doc.setDrawColor(c[0], c[1], c[2]);
+  const fmtN = n => (n == null || isNaN(n)) ? '—' : Math.round(n).toLocaleString('en-SG');
+  const fmt$ = n => '$' + fmtN(n);
   const dateStr = new Date().toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' });
 
+  let pageNum = 0;
+  const TOTAL_PAGES = 9;
+
+  function pageChrome(eyebrow) {
+    pageNum++;
+    if (pageNum > 1) doc.addPage();
+    setFill(NAVY); doc.rect(0, 0, W, 14, 'F');
+    setFill(GOLD); doc.rect(0, 14, W, 0.4, 'F');
+    doc.setFont('times','normal'); doc.setFontSize(11); setColor(CREAM);
+    doc.text('Nexus', M, 9);
+    setColor(GOLD); doc.text('.', M + 12, 9);
+    if (eyebrow) {
+      doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor([200,200,200]);
+      doc.text(eyebrow.toUpperCase(), M + 22, 9);
+    }
+    doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor([180,180,180]);
+    doc.text(pageNum + ' / ' + TOTAL_PAGES, W - M, 9, { align: 'right' });
+    setDraw(BORDER_LT); doc.line(M, H - 9, W - M, H - 9);
+    doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(MUTED);
+    doc.text('nexusmortgage.sg  ·  free service  ·  banks pay our referral fee', M, H - 5);
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor([108,84,33]);
+    doc.text('WhatsApp +65 8752 0859  ·  danler@nexusmortgage.sg', W - M, H - 5, { align: 'right' });
+    return 22;
+  }
+
+  function sectionHeader(y, eyebrow, title, sub) {
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(GOLD);
+    doc.text(eyebrow.toUpperCase(), M, y);
+    setFill(GOLD); doc.rect(M, y + 1.5, doc.getTextWidth(eyebrow.toUpperCase()), 0.4, 'F');
+    y += 7;
+    doc.setFont('times','normal'); doc.setFontSize(17); setColor(INK);
+    const tlines = doc.splitTextToSize(title, CW);
+    doc.text(tlines, M, y);
+    y += tlines.length * 6.5;
+    if (sub) {
+      doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(MUTED);
+      const slines = doc.splitTextToSize(sub, CW);
+      doc.text(slines, M, y + 1);
+      y += slines.length * 4.2;
+    }
+    return y + 5;
+  }
+
+  function kpiTile(x, y, w, h, label, value, sub, accent) {
+    setFill(SURFACE); doc.rect(x, y, w, h, 'F');
+    setDraw(BORDER); doc.rect(x, y, w, h);
+    if (accent) { setFill(accent); doc.rect(x, y, 1.5, h, 'F'); }
+    doc.setFont('helvetica','bold'); doc.setFontSize(6.5); setColor(MUTED);
+    doc.text(label.toUpperCase(), x + 5, y + 6);
+    doc.setFont('times','normal'); doc.setFontSize(15); setColor(INK);
+    doc.text(value, x + 5, y + 16);
+    if (sub) {
+      doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(MUTED);
+      const lines = doc.splitTextToSize(sub, w - 10);
+      doc.text(lines, x + 5, y + h - 4);
+    }
+  }
+
+  function table(headers, rows, opts) {
+    const o = opts || {};
+    const x0 = M;
+    const widths = o.widths;
+    const totalW = widths.reduce(function(s,w){return s+w;},0);
+    const aligns = o.aligns || widths.map(function(_,i){return i===0?'left':'right';});
+    let y = o.y;
+    setFill(NAVY); doc.rect(x0, y, totalW, 6.5, 'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(CREAM);
+    let cx = x0;
+    headers.forEach(function(h,i){
+      const align = aligns[i];
+      const tx = align==='right' ? cx + widths[i] - 3 : cx + 3;
+      doc.text(String(h).toUpperCase(), tx, y + 4.5, { align: align });
+      cx += widths[i];
+    });
+    y += 6.5;
+    rows.forEach(function(row, ri){
+      const rh = row._h || 6.8;
+      if (row._highlight) {
+        setFill(row._highlightColor || GREEN_SOFT);
+        doc.rect(x0, y, totalW, rh, 'F');
+      } else if (ri % 2 === 1) {
+        setFill(SOFT_BG); doc.rect(x0, y, totalW, rh, 'F');
+      }
+      doc.setFont('helvetica','normal'); doc.setFontSize(8.3);
+      setColor(row._color || INK);
+      cx = x0;
+      row.cells.forEach(function(cell, i){
+        const align = aligns[i];
+        const tx = align==='right' ? cx + widths[i] - 3 : cx + 3;
+        const obj = (cell && typeof cell === 'object') ? cell : { text: cell };
+        if (obj.font === 'bold') doc.setFont('helvetica','bold'); else doc.setFont('helvetica','normal');
+        if (obj.color) setColor(obj.color); else setColor(row._color || INK);
+        doc.text(String(obj.text == null ? '' : obj.text), tx, y + rh - 2.3, { align: align });
+        cx += widths[i];
+      });
+      setDraw(BORDER_LT); doc.line(x0, y + rh, x0 + totalW, y + rh);
+      y += rh;
+    });
+    return y;
+  }
+
+  function bar(x, y, w, h, used, cap, max) {
+    const m = max || Math.max(cap, used) * 1.05;
+    setFill(BORDER_LT); doc.rect(x, y, w, h, 'F');
+    if (used > 0) {
+      const fillW = Math.min(1, used / m) * w;
+      const tone = used <= cap ? GREEN : (used <= cap*1.05 ? AMBER : RED);
+      setFill(tone); doc.rect(x, y, fillW, h, 'F');
+    }
+    const capX = x + Math.min(1, cap / m) * w;
+    setDraw(NAVY); doc.setLineWidth(0.5);
+    doc.line(capX, y - 0.5, capX, y + h + 0.5);
+    doc.setLineWidth(0.2);
+  }
+
+  // ── Pre-compute everything ──
   const isRefi = r.inp.mode === 'refinance';
   const propLabel = r.inp.propertyType === 'hdb' ? 'HDB / EC' : 'Private';
-  const sel = r.banks[0];
-  const monthly = r.monthlyBest;
+  const sel = r.banks[selectedRateIdx] || r.banks[0];
+  const monthly = sel.monthly;
   const totalIncome = r.inp.income || 0;
   const price = r.inp.price || (isRefi ? r.inp.loan : 0);
+  const tdsrFail = !r.tdsrPass || (r.msrApplies && !r.msrPass);
 
-  // ── BSD / ABSD using current IRAS rules + buyer details ──
+  const buyers = (r.inp.borrowerResidencies || ['SC']).map(function(res, i){
+    return { residency: res, propertiesOwned: (r.inp.borrowerPropertiesOwned || [0])[i] || 0 };
+  });
+  const buyerDesc = buyersDescription(buyers);
   const bsd = calcBSD(price);
-  const buyers = (r.inp.borrowerResidencies || ['SC']).map((res, i) => ({
-    residency: res,
-    propertiesOwned: (r.inp.borrowerPropertiesOwned || [0])[i] || 0,
-  }));
   const absdRate = calcABSDRate(buyers);
   const absd = Math.round(price * absdRate);
   const absdRateLabel = absdLabel(absdRate);
-  const buyerDesc = buyersDescription(buyers);
-  // Down payment + LTV (private 25%, HDB bank 25%, HDB concessionary handled by HDB)
-  // Use EFFECTIVE LTV — this drops below 75% when MSR/TDSR limits the loan
+
   const regulatoryLtvPct = (r.ltvPct || 75) / 100;
   const effectiveLtvPct = (r.effectiveLtvPct || (r.ltvPct || 75)) / 100;
   const ltvPct = effectiveLtvPct;
   const downPayment = r.actualDownPayment != null ? r.actualDownPayment : Math.round(price * (1 - ltvPct));
-  const downPaymentPct = price > 0 ? (downPayment / price) : (1 - regulatoryLtvPct);
-  const ltvDroppedDueToMSR = effectiveLtvPct < regulatoryLtvPct - 0.01;
-  // Min cash: 5% of price for ANY bank loan (HDB or private). For HDB concessionary up to 0%.
   const minCashRequired = Math.round(price * 0.05);
   const cpfPortion = Math.max(0, downPayment - minCashRequired);
-  const legalFee = price > 1_000_000 ? 3000 : 2500;
-  const valuationFee = price > 1_000_000 ? 600 : 300;
+  const legalFee = price > 1000000 ? 3000 : 2500;
+  const valuationFee = price > 1000000 ? 600 : 300;
   const upfrontTotal = downPayment + bsd + absd + legalFee + valuationFee;
   const upfrontMinCash = minCashRequired + bsd + absd + valuationFee;
   const upfrontMinCPF = cpfPortion + legalFee;
-
-  // CPF/Cash shortfall analysis (only meaningful when user provided values)
   const cpfOA = r.inp.cpfOA || 0;
   const cashOnHand = r.inp.cashOnHand || 0;
-  const hasCpfOrCash = cpfOA > 0 || cashOnHand > 0;
-  const cashShortfall = Math.max(0, upfrontMinCash - cashOnHand);
-  const cpfShortfall = Math.max(0, upfrontMinCPF - cpfOA);
-  // If CPF is short, the excess has to come from cash. If cash short, the excess has to come from CPF.
   const totalShortfall = Math.max(0, upfrontTotal - (cpfOA + cashOnHand));
 
-  // ═══════ PAGE 1: COVER ═══════
-  setFill(NAVY); doc.rect(0, 0, W, 32, 'F'); setFill(GOLD); doc.rect(0, 32, W, 0.6, 'F');
-  doc.setFont('times', 'normal'); doc.setFontSize(22); setColor(CREAM);
-  doc.text('Nexus', M, 16);
-  setColor(GOLD); doc.text('.', M + 23, 16);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(11); setColor(CREAM);
-  doc.text(isRefi ? 'Refinance Analysis Report' : 'Property Buyer Report', M, 25);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor([180, 180, 180]);
-  doc.text(dateStr, W - M, 16, { align: 'right' });
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-  doc.text('FREE  |  NO OBLIGATION', W - M, 25, { align: 'right' });
+  // ═══════════════════ PAGE 1 — COVER ═══════════════════
+  pageNum = 1;
+  setFill(NAVY); doc.rect(0, 0, W, H, 'F');
+  setFill(GOLD); doc.rect(0, 70, W, 0.6, 'F');
+  setFill(GOLD); doc.rect(0, 71.5, W, 0.2, 'F');
+  doc.setFont('times','normal'); doc.setFontSize(34); setColor(CREAM);
+  doc.text('Nexus', M, 35);
+  setColor(GOLD); doc.text('.', M + 38, 35);
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); setColor([200,200,200]);
+  doc.text('SINGAPORE MORTGAGE SPECIALISTS', M, 41);
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(GOLD);
+  doc.text('REPORT DATE  ·  ' + dateStr.toUpperCase(), W - M, 25, { align: 'right' });
 
-  let y = 45;
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-  doc.text('PREPARED FOR', M, y); y += 6;
-  doc.setFont('times', 'normal'); doc.setFontSize(18); setColor(INK);
-  doc.text(lead.name, M, y); y += 6;
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(MUTED);
-  doc.text(lead.email + '  |  ' + lead.phone, M, y); y += 12;
+  doc.setFont('helvetica','bold'); doc.setFontSize(8); setColor(GOLD);
+  doc.text(isRefi ? 'REFINANCE OPPORTUNITY ANALYSIS' : 'PROPERTY PURCHASE REPORT', M, 90);
+  doc.setFont('times','normal'); doc.setFontSize(36); setColor(CREAM);
+  doc.text(['Your personalised', 'mortgage report.'], M, 105);
+  doc.setFont('helvetica','normal'); doc.setFontSize(11); setColor([200,200,200]);
+  const subTxt = isRefi
+    ? 'A side-by-side analysis of your current loan against the cheapest packages on the market right now — with year-by-year cost projections and a refinance playbook.'
+    : 'A complete affordability and rate analysis built around your income, property type, and tenure — with stamp duties, funds position, and the cheapest 8 packages from 16 banks.';
+  doc.text(doc.splitTextToSize(subTxt, CW - 50), M, 145);
 
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-  doc.text(isRefi ? 'CURRENT LOAN' : 'PROPERTY DETAILS', M, y); y += 4;
-  setFill(SOFT_BG); doc.rect(M, y, CW, 28, 'F');
-  setDraw(BORDER); doc.rect(M, y, CW, 28);
-  const cells = isRefi ? [
-    ['PROPERTY TYPE', propLabel],
-    ['OUTSTANDING', '$' + fmt(r.inp.loan)],
-    ['REMAINING TENURE', r.inp.tenure + ' years'],
-    ['CURRENT RATE', ((r.inp.currentRate || 0) * 100).toFixed(2) + '%'],
-  ] : [
-    ['PROPERTY', propLabel],
-    ['PURCHASE PRICE', '$' + fmt(price)],
-    ['LOAN', '$' + fmt(r.inp.loan) + ' (' + (price ? Math.round(r.inp.loan / price * 100) : 0) + '%)'],
-    ['TENURE', r.inp.tenure + 'y'],
+  let yPF = 175;
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(GOLD);
+  doc.text('PREPARED FOR', M, yPF); yPF += 5;
+  doc.setFont('times','normal'); doc.setFontSize(20); setColor(CREAM);
+  doc.text(lead.name, M, yPF + 5); yPF += 10;
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); setColor([180,180,180]);
+  doc.text(lead.email + '   ·   ' + lead.phone, M, yPF + 4);
+
+  const cardY = 220;
+  setFill([15, 35, 65]); doc.rect(M, cardY, CW, 32, 'F');
+  setDraw(GOLD); doc.setLineWidth(0.4); doc.rect(M, cardY, CW, 32);
+  doc.setLineWidth(0.2);
+  const kpiW = CW / 4;
+  const kpis = [
+    ['BEST RATE', (r.bestRate*100).toFixed(2) + '%'],
+    [isRefi ? 'NEW MONTHLY' : 'EST. MONTHLY', fmt$(monthly) + '/mo'],
+    [isRefi ? 'CURRENT LOAN' : 'LOAN AMOUNT', fmt$(r.inp.loan)],
+    ['TENURE', r.inp.tenure + ' years'],
   ];
-  const cw = CW / 4;
-  cells.forEach((c, i) => {
-    const cx = M + cw * i + 5;
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
-    doc.text(c[0], cx, y + 9);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(11); setColor(INK);
-    doc.text(c[1], cx, y + 17);
-    if (i < 3) { setDraw(BORDER); doc.line(M + cw * (i + 1), y + 4, M + cw * (i + 1), y + 24); }
+  kpis.forEach(function(k, i){
+    const cx = M + kpiW * i + 6;
+    doc.setFont('helvetica','bold'); doc.setFontSize(6.5); setColor(GOLD);
+    doc.text(k[0], cx, cardY + 9);
+    doc.setFont('times','normal'); doc.setFontSize(15); setColor(CREAM);
+    doc.text(k[1], cx, cardY + 22);
+    if (i < 3) {
+      setDraw([60,80,110]); doc.line(M + kpiW * (i+1), cardY + 5, M + kpiW * (i+1), cardY + 27);
+    }
   });
-  y += 36;
 
-  const tdsrFail = !r.tdsrPass || (r.msrApplies && !r.msrPass);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-  doc.text(isRefi ? 'REFINANCE OPPORTUNITY' : 'TDSR / MSR ANALYSIS', M, y); y += 4;
-  setFill(tdsrFail ? RED_SOFT : GREEN_SOFT); doc.rect(M, y, CW, 24, 'F');
-  setDraw(tdsrFail ? RED : GREEN); doc.setLineWidth(0.4); doc.rect(M, y, CW, 24);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(8.5); setColor(tdsrFail ? RED : GREEN_DARK);
-  doc.text(tdsrFail ? 'YOU EXCEED THE ' + (r.cappedBy || 'TDSR') + ' CAP' : 'YOU MEET TDSR' + (r.msrApplies ? ' AND MSR' : '') + ' REQUIREMENTS', M + 5, y + 7);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(INK);
-  if (isRefi && r.refi) {
-    doc.text('Switch from ' + (r.refi.currentRate * 100).toFixed(2) + '% to ' + (r.bestRate * 100).toFixed(2) + '% --- save $' + fmt(Math.round(r.refi.annualSavings)) + '/year', M + 5, y + 13);
-    doc.text('2-yr lock-in savings: $' + fmt(Math.round(r.refi.lockInSavings)) + '   |   Best: ' + sel.bank + ' / ' + sel.pkg, M + 5, y + 19);
-  } else if (tdsrFail) {
-    doc.text('Max loan you qualify for: $' + fmt(Math.round(r.maxLoanAffordable || 0)), M + 5, y + 13);
-    doc.text('Cash shortfall: $' + fmt(Math.round(r.downPaymentShortfall || 0)) + ' (or reduce property)', M + 5, y + 19);
-  } else {
-    doc.text('Max loan: $' + fmt(Math.round(r.maxLoanAffordable || 0)) + '   |   Max property: $' + fmt(Math.round(r.maxPurchasePrice || 0)), M + 5, y + 13);
-    doc.text('Best rate: ' + (r.bestRate * 100).toFixed(2) + '% with ' + sel.bank + '   |   Monthly: $' + fmt(Math.round(monthly)), M + 5, y + 19);
-  }
+  setFill(NAVY_DARK); doc.rect(0, H - 24, W, 24, 'F');
+  setFill(GOLD); doc.rect(0, H - 24, W, 0.4, 'F');
+  doc.setFont('times','normal'); doc.setFontSize(12); setColor(CREAM);
+  doc.text('Want us to lock in this rate?', M, H - 12);
+  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor([180,180,180]);
+  doc.text('Free service  ·  zero fees  ·  banks pay our referral fee', M, H - 6);
+  doc.setFont('helvetica','bold'); doc.setFontSize(11); setColor(GOLD);
+  doc.text('WhatsApp +65 8752 0859', W - M, H - 14, { align: 'right' });
+  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor([180,180,180]);
+  doc.text('danler@nexusmortgage.sg  ·  nexusmortgage.sg', W - M, H - 6, { align: 'right' });
+
+  // ═══════════════════ PAGE 2 — EXECUTIVE SUMMARY ═══════════════════
+  let y = pageChrome('Executive Summary');
+  y = sectionHeader(y, 'Executive summary', 'At a glance — what your numbers say.',
+    'A snapshot of the key metrics; the rest of this report explains how each was derived.');
+
+  const kpiH = 26;
+  const kpiTW = (CW - 9) / 4;
+  const tdsrPct = r.tdsrUsage * 100;
+  kpiTile(M, y, kpiTW, kpiH, 'Best rate found', (r.bestRate*100).toFixed(2) + '% p.a.',
+    r.banks[0].bank + ' · ' + r.banks[0].pkg, GOLD);
+  kpiTile(M + kpiTW + 3, y, kpiTW, kpiH, 'Estimated monthly', fmt$(monthly) + '/mo',
+    'at best rate over ' + r.inp.tenure + 'y', GREEN);
+  kpiTile(M + (kpiTW + 3) * 2, y, kpiTW, kpiH, 'TDSR usage', tdsrPct.toFixed(1) + '%',
+    r.tdsrPass ? 'Within 55% cap' : 'Exceeds 55% cap', r.tdsrPass ? GREEN : RED);
+  kpiTile(M + (kpiTW + 3) * 3, y, kpiTW, kpiH, 'Effective LTV', (r.effectiveLtvPct || r.ltvPct).toFixed(1) + '%',
+    'Down payment ' + fmt$(downPayment), NAVY);
+  y += kpiH + 8;
+
+  const verdict = tdsrFail
+    ? { tone: RED, soft: RED_SOFT,
+        title: 'You exceed the ' + (r.cappedBy === 'MSR' ? '30% MSR' : '55% TDSR') + ' cap',
+        body: 'At your requested loan, this won\'t pass MAS stress-testing. The good news: there are clear levers to fit inside the cap — see the Optimisation Playbook.' }
+    : { tone: GREEN, soft: GREEN_SOFT,
+        title: 'You qualify — and there\'s headroom to go higher',
+        body: 'Your monthly fits comfortably inside both regulatory caps. The cheapest package gives a Year-1 monthly of ' + fmt$(monthly) + '.' };
+  setFill(verdict.soft); doc.rect(M, y, CW, 22, 'F');
+  setFill(verdict.tone); doc.rect(M, y, 1.8, 22, 'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(11); setColor(verdict.tone);
+  doc.text(verdict.title, M + 6, y + 9);
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); setColor(INK_2);
+  doc.text(doc.splitTextToSize(verdict.body, CW - 12), M + 6, y + 15);
   y += 30;
 
-  const card3W = (CW - 12) / 3;
-  setFill(GREEN_SOFT); doc.rect(M, y, card3W, 28, 'F');
-  setDraw([5, 150, 105]); doc.setLineWidth(0.3); doc.rect(M, y, card3W, 28);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GREEN_DARK);
-  doc.text('BEST RATE', M + 5, y + 7);
-  doc.setFont('times', 'normal'); doc.setFontSize(24); setColor(INK);
-  doc.text((r.bestRate * 100).toFixed(2) + '%', M + 5, y + 19);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
-  doc.text(sel.bank + ' / ' + sel.pkg, M + 5, y + 25);
-
-  const c2x = M + card3W + 6;
-  setFill(SOFT_BG); doc.rect(c2x, y, card3W, 28, 'F');
-  setDraw(BORDER); doc.rect(c2x, y, card3W, 28);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
-  doc.text('MONTHLY', c2x + 5, y + 7);
-  doc.setFont('times', 'normal'); doc.setFontSize(24); setColor(INK);
-  doc.text('$' + fmt(Math.round(monthly)), c2x + 5, y + 19);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
-  doc.text('Principal + interest', c2x + 5, y + 25);
-
-  const c3x = M + (card3W + 6) * 2;
-  setFill(tdsrFail ? RED_SOFT : GREEN_SOFT); doc.rect(c3x, y, card3W, 28, 'F');
-  setDraw(tdsrFail ? RED : GREEN); doc.rect(c3x, y, card3W, 28);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(tdsrFail ? RED : GREEN_DARK);
-  doc.text('TDSR USAGE', c3x + 5, y + 7);
-  doc.setFont('times', 'normal'); doc.setFontSize(24); setColor(INK);
-  doc.text((r.tdsrUsage * 100).toFixed(1) + '%', c3x + 5, y + 19);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
-  doc.text('of 55% MAS cap', c3x + 5, y + 25);
-
-  setFill(NAVY); doc.rect(0, H - 22, W, 22, 'F');
-  doc.setFont('times', 'normal'); doc.setFontSize(11); setColor(CREAM);
-  doc.text('Want us to lock in this rate?', M, H - 12);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setColor([180, 180, 180]);
-  doc.text('Free  |  zero fees  |  banks pay our referral fee', M, H - 6);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(10); setColor(GOLD);
-  doc.text('WhatsApp +65 8752 0859', W - M, H - 13, { align: 'right' });
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setColor([180, 180, 180]);
-  doc.text('danler@nexusmortgage.sg', W - M, H - 7, { align: 'right' });
-  doc.setFontSize(6); setColor(FAINT);
-  doc.text('Page 1', W / 2, H - 2, { align: 'center' });
-
-  // ═══════ PAGE 2: INCOME & DEBT SERVICING ═══════
-  doc.addPage();
-  setFill(NAVY); doc.rect(0, 0, W, 18, 'F'); setFill(GOLD); doc.rect(0, 18, W, 0.4, 'F');
-  doc.setFont('times', 'normal'); doc.setFontSize(13); setColor(CREAM);
-  doc.text('Nexus', M, 12); setColor(GOLD); doc.text('.', M + 14, 12);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor([180, 180, 180]);
-  doc.text((isRefi ? 'Refinance Analysis' : 'Property Buyer Report') + ' --- page 2', M + 22, 12);
-  doc.text(lead.name, W - M, 12, { align: 'right' });
-  let y2 = 30;
-
-  // Buyer profile (only purchase mode)
-  if (!isRefi) {
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-    doc.text('BUYER PROFILE', M, y2); y2 += 5;
-    setFill(SOFT_BG); doc.rect(M, y2, CW, 6, 'F');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
-    doc.text('BUYER', M + 4, y2 + 4);
-    doc.text('AGE', M + 50, y2 + 4);
-    doc.text('INCOME (MO)', M + 75, y2 + 4);
-    doc.text('RESIDENCY', M + 115, y2 + 4);
-    doc.text('PROPERTIES OWNED', W - M - 4, y2 + 4, { align: 'right' });
-    y2 += 6;
-    (r.inp.borrowerIncomes || []).forEach((inc, i) => {
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(INK);
-      doc.text('Borrower ' + (i + 1), M + 4, y2 + 5);
-      doc.text(((r.inp.borrowerAges || [])[i] || '—') + 'y', M + 50, y2 + 5);
-      doc.text('$' + fmt(inc), M + 75, y2 + 5);
-      doc.text(((r.inp.borrowerResidencies || [])[i] || 'SC'), M + 115, y2 + 5);
-      doc.text(String(((r.inp.borrowerPropertiesOwned || [])[i] || 0)), W - M - 4, y2 + 5, { align: 'right' });
-      setDraw(BORDER); doc.line(M, y2 + 7, M + CW, y2 + 7);
-      y2 += 7;
-    });
-    y2 += 4;
-  }
-
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-  doc.text('INCOME & DEBT SERVICING', M, y2); y2 += 5;
-
-  // Compute income breakdown
-  const eff = r.inp.effectiveIncome || { fixed: totalIncome, variable: 0, pledged: 0, show: 0, total: totalIncome };
-  const hasBoosters = eff.variable > 0 || eff.pledged > 0 || eff.show > 0;
-
-  const incomeBoxH = hasBoosters ? 46 : 30;
-  setFill(SOFT_BG); doc.rect(M, y2, CW, incomeBoxH, 'F');
-  setDraw(BORDER); doc.rect(M, y2, CW, incomeBoxH);
-  const colW2 = CW / 2;
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
-  doc.text('TDSR-RECOGNISED INCOME', M + 5, y2 + 7);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(13); setColor(INK);
-  doc.text('$' + fmt(Math.round(eff.total)) + '/mo', M + 5, y2 + 16);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
-  doc.text((r.inp.borrowers || 1) + ' borrower' + ((r.inp.borrowers || 1) > 1 ? 's' : '') + (r.iwaa ? '  |  IWAA ' + r.iwaa.toFixed(1) + 'y' : ''), M + 5, y2 + 23);
-  if (hasBoosters) {
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setColor(MUTED);
-    let line = 'Fixed $' + fmt(Math.round(eff.fixed));
-    if (eff.variable > 0) line += '  +  Variable $' + fmt(Math.round(eff.variable)) + ' (30% factor)';
-    if (eff.pledged > 0) line += '  +  Pledged $' + fmt(Math.round(eff.pledged)) + '/mo';
-    if (eff.show > 0) line += '  +  Show $' + fmt(Math.round(eff.show)) + '/mo';
-    doc.text(line, M + 5, y2 + 30);
-    doc.text('Pledged: 100% / 48 mths   Show: 30% / 48 mths', M + 5, y2 + 37);
-  }
-
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
-  doc.text('STRESS-TEST DEBT SERVICING (4%)', M + colW2 + 5, y2 + 7);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(13); setColor(INK);
-  const stressM = pmt(r.inp.loan, 0.04, r.inp.tenure);
-  doc.text('$' + fmt(Math.round(stressM)) + '/mo', M + colW2 + 5, y2 + 16);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
-  doc.text('At MAS 4% floor over ' + r.inp.tenure + 'y', M + colW2 + 5, y2 + 23);
-  setDraw(BORDER); doc.line(M + colW2, y2 + 4, M + colW2, y2 + incomeBoxH - 4);
-  y2 += incomeBoxH + 6;
-
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-  doc.text('REGULATORY CHECKS', M, y2); y2 += 4;
-
-  const checks = [];
-  // Always show ACTUAL TDSR / MSR at the requested loan amount (the user's real position).
-  checks.push({ label: 'TDSR (cap 55%)', pct: r.tdsrUsage * 100, max: 55 });
-  if (r.msrApplies) checks.push({ label: 'MSR (cap 30%)', pct: r.msrUsage * 100, max: 30 });
-  // LTV: show effective (drops below 75% when debt-servicing caps the affordable loan).
-  if (!isRefi) {
-    const regLtv = r.ltvPct || 75;
-    const effLtv = r.effectiveLtvPct != null ? r.effectiveLtvPct : regLtv;
-    checks.push({ label: 'LTV (cap ' + regLtv + '%)', pct: effLtv, max: regLtv });
-  }
-  checks.forEach((chk, i) => {
-    const ry = y2 + i * 14;
-    setFill(SOFT_BG); doc.rect(M, ry, CW, 11, 'F');
-    setDraw(BORDER); doc.rect(M, ry, CW, 11);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(INK);
-    doc.text(chk.label, M + 5, ry + 7);
-    const barX = M + 60, barW = CW - 90, barH = 4, barY = ry + 4;
-    setFill(BORDER); doc.rect(barX, barY, barW, barH, 'F');
-    const fillPct = Math.min(100, (chk.pct / chk.max) * 100);
-    // Colour: green at/under cap, amber close to cap, red over
-    const overCap = chk.pct > chk.max + 0.5;
-    const nearCap = chk.pct > chk.max * 0.85;
-    const barColor = overCap ? RED : (nearCap ? [217, 119, 6] : GREEN);
-    setFill(barColor);
-    doc.rect(barX, barY, barW * fillPct / 100, barH, 'F');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(INK);
-    doc.text(chk.pct.toFixed(1) + '%', barX + barW + 5, ry + 7);
+  y = sectionHeader(y, 'What\'s in this report', 'A walkthrough across nine pages.', '');
+  const toc = [
+    ['1', 'Cover'],
+    ['2', 'Executive summary (this page)'],
+    ['3', 'Income, debt servicing & affordability'],
+    ['4', 'Bank rate comparison — top 8 packages'],
+    ['5', 'Your selected package — full terms'],
+    ['6', 'Stress test & lifetime cost'],
+    ['7', isRefi ? 'Refinance comparison' : 'Upfront costs & funds position'],
+    ['8', 'Amortisation schedule, year by year'],
+    ['9', 'Optimisation playbook & next steps'],
+  ];
+  doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
+  toc.forEach(function(t){
+    setColor(GOLD); doc.setFont('helvetica','bold'); doc.text(t[0], M, y);
+    setColor(INK_2); doc.setFont('helvetica','normal'); doc.text(t[1], M + 8, y);
+    setDraw(BORDER_LT); doc.line(M + 8 + doc.getTextWidth(t[1]) + 2, y - 1, W - M, y - 1);
+    y += 6;
   });
-  y2 += checks.length * 14 + 6;
 
-  if (!isRefi && r.inp.income > 0) {
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-    doc.text(tdsrFail ? 'WHAT YOU NEED TO QUALIFY' : 'AFFORDABILITY HEADROOM', M, y2); y2 += 4;
-    const boxH = tdsrFail ? 36 : 22;
-    setFill(tdsrFail ? RED_SOFT : GREEN_SOFT); doc.rect(M, y2, CW, boxH, 'F');
-    setDraw(tdsrFail ? RED : GREEN); doc.setLineWidth(0.3); doc.rect(M, y2, CW, boxH);
-    if (tdsrFail) {
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(RED);
-      doc.text('THREE WAYS TO QUALIFY:', M + 5, y2 + 6);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(INK);
-      doc.text('o  Reduce loan to $' + fmt(Math.round(r.maxLoanAffordable || 0)) + ' (extra cash $' + fmt(Math.round(r.downPaymentShortfall || 0)) + ')', M + 5, y2 + 12);
-      const pNeed = r.pledgeNeeded || 0;
-      const sNeed = r.showNeeded || 0;
-      if (pNeed > 0) {
-        doc.text('o  Pledge $' + fmt(pNeed) + ' for 4+ years (counts as $' + fmt(Math.round(pNeed / 48)) + '/mo income)', M + 5, y2 + 18);
-      }
-      if (sNeed > 0) {
-        doc.text('o  Show $' + fmt(sNeed) + ' in eligible assets (counts as $' + fmt(Math.round(sNeed * 0.30 / 48)) + '/mo income at 30% factor)', M + 5, y2 + 24);
-      }
-      doc.setFont('helvetica', 'italic'); doc.setFontSize(7); setColor(MUTED);
-      doc.text('Pledged: cash/equiv. assets locked for 4 years (100% factor / 48 mths). Show: liquid assets shown but not locked (30% factor / 48 mths).', M + 5, y2 + 32);
-    } else {
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(GREEN_DARK);
-      doc.text('YOU HAVE ROOM TO STRETCH', M + 5, y2 + 6);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(INK);
-      doc.text('Max loan: $' + fmt(Math.round(r.maxLoanAffordable || 0)) + '  |  Max property: $' + fmt(Math.round(r.maxPurchasePrice || 0)), M + 5, y2 + 12);
-      doc.text('Headroom above current loan: $' + fmt(Math.round(Math.max(0, (r.maxLoanAffordable || 0) - r.inp.loan))), M + 5, y2 + 18);
-    }
-    y2 += boxH + 6;
+  // ═══════════════════ PAGE 3 — INCOME & DEBT SERVICING ═══════════════════
+  y = pageChrome('Income · Debt Servicing · Affordability');
+  y = sectionHeader(y, 'Income & debt servicing', 'How TDSR and MSR see your case.',
+    'MAS rules cap your debt servicing at 55% of effective monthly income (TDSR), and HDB/EC mortgages at 30% (MSR). All numbers below stress-tested at MAS 4%.');
 
-    // ─── OPTIMIZATION SUMMARY (sensitivity envelope) ───
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-    doc.text('OPTIMIZATION SUMMARY — YOUR ENVELOPE', M, y2); y2 += 4;
-    setFill(SOFT_BG); doc.rect(M, y2, CW, 32, 'F');
-    setDraw(BORDER); doc.rect(M, y2, CW, 32);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(MUTED);
-    doc.text(tdsrFail ? 'TO PASS TDSR' + (r.msrApplies ? ' / MSR' : '') + ', YOU CAN:' : 'YOU HAVE FLEXIBILITY TO:', M + 5, y2 + 6);
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); setColor(INK);
-    const lines = [];
-    if (tdsrFail) {
-      lines.push('o  Reduce the loan to $' + fmt(Math.round(r.maxLoanAffordable || 0)));
-    } else {
-      lines.push('o  Stretch the loan up to $' + fmt(Math.round(r.maxLoanAffordable || 0)) + ' (purchase price up to $' + fmt(Math.round(r.maxPurchasePrice || 0)) + ')');
-    }
-    if (r.minTenurePass != null) {
-      lines.push('o  ' + (tdsrFail ? 'Stretch tenure to at least' : 'Use as short as') + ' ' + r.minTenurePass + ' year' + (r.minTenurePass === 1 ? '' : 's') + ' (currently ' + r.inp.tenure + 'y)');
-    }
-    if (r.minIncomePass > 0) {
-      lines.push('o  ' + (tdsrFail ? 'Increase your TDSR-recognised income to at least' : 'Get away with as low as') + ' $' + fmt(r.minIncomePass) + '/mo (currently $' + fmt(Math.round(r.inp.income)) + ')');
-    }
-    if (r.maxAdditionalDebts > 0 && !r.msrApplies) {
-      lines.push('o  Carry up to $' + fmt(r.maxAdditionalDebts) + '/mo more in other debts (currently $' + fmt(Math.round(r.inp.debts)) + ')');
-    }
-    lines.slice(0, 4).forEach((line, i) => {
-      doc.text(line, M + 5, y2 + 12 + i * 5.5);
-    });
-    y2 += 38;
+  const incomeFixed = (r.inp.borrowerIncomes || [r.inp.income]).reduce(function(s,v){return s+(v||0);},0);
+  const incomeVar30 = ((r.inp.borrowerVariableIncomes||[]).reduce(function(s,v){return s+(v||0);},0)) * 0.30;
+  const pledgedTotal = (r.inp.borrowerPledged||[]).reduce(function(s,v){return s+(v||0);},0);
+  const showTotal = (r.inp.borrowerShow||[]).reduce(function(s,v){return s+(v||0);},0);
+  const incomePledged = pledgedTotal / 48;
+  const incomeShow = (showTotal * 0.30) / 48;
+  const debtsTotal = r.inp.debts || 0;
+  const availForMortgage = (r.inp.income||0) - debtsTotal;
+
+  const rowsIncome = [
+    { cells: ['Fixed monthly income (all borrowers)', fmt$(incomeFixed) + '/mo'] },
+    { cells: ['+ Variable income × 30% (MAS haircut)', fmt$(incomeVar30) + '/mo'] },
+  ];
+  if (pledgedTotal > 0) rowsIncome.push({ cells: ['+ Pledged funds boost (100% ÷ 48 mths)', fmt$(incomePledged) + '/mo'] });
+  if (showTotal > 0) rowsIncome.push({ cells: ['+ Show funds boost (30% ÷ 48 mths)', fmt$(incomeShow) + '/mo'] });
+  rowsIncome.push({ cells: [{ text: 'Less existing monthly debts' }, { text: '– ' + fmt$(debtsTotal) + '/mo', color: RED }] });
+  rowsIncome.push({ cells: [{ text: 'Available for mortgage', font: 'bold' }, { text: fmt$(availForMortgage) + '/mo', font: 'bold' }],
+    _highlight: true, _highlightColor: GOLD_TINT });
+  y = table(['Component', 'Monthly'], rowsIncome, { y: y, widths: [CW - 50, 50] });
+  y += 8;
+
+  doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
+  doc.text('Regulatory checks', M, y); y += 6;
+  const barRows = [
+    ['TDSR · Total Debt Servicing Ratio', r.tdsrUsage, 0.55, '55% cap'],
+  ];
+  if (r.msrApplies) barRows.push(['MSR · Mortgage Servicing Ratio (HDB/EC)', r.msrUsage, 0.30, '30% cap']);
+  barRows.push(['Effective LTV · Loan-to-Value', (r.effectiveLtvPct||r.ltvPct)/100, regulatoryLtvPct, (r.ltvPct||75) + '% cap']);
+  barRows.forEach(function(row){
+    const lbl = row[0], used = row[1], cap = row[2], capLbl = row[3];
+    doc.setFont('helvetica','bold'); doc.setFontSize(8.5); setColor(INK);
+    doc.text(lbl, M, y);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8); setColor(INK_2);
+    doc.text((used*100).toFixed(1) + '%  /  ' + capLbl, W - M, y, { align: 'right' });
+    y += 2;
+    bar(M, y, CW, 4, used, cap);
+    y += 8;
+  });
+
+  y += 4;
+  doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
+  doc.text(tdsrFail ? 'Affordability shortfall' : 'Affordability headroom', M, y); y += 5;
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(MUTED);
+  const afLine = tdsrFail
+    ? 'You\'re asking for $' + fmtN(r.inp.loan) + '. The most you qualify for at this tenure & income is shown below.'
+    : 'You\'re asking for $' + fmtN(r.inp.loan) + '. Your headroom shows the most you could borrow before hitting the cap.';
+  doc.text(doc.splitTextToSize(afLine, CW), M, y); y += 8;
+
+  const tw = (CW - 4) / 2;
+  setFill(SOFT_BG); doc.rect(M, y, tw, 22, 'F'); setDraw(BORDER); doc.rect(M, y, tw, 22);
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(MUTED);
+  doc.text(tdsrFail ? 'MAX LOAN AT YOUR INCOME' : 'MAX LOAN HEADROOM', M + 4, y + 6);
+  doc.setFont('times','normal'); doc.setFontSize(15); setColor(tdsrFail ? RED : GREEN);
+  doc.text(fmt$(r.maxLoanAffordable || 0), M + 4, y + 16);
+  setFill(SOFT_BG); doc.rect(M + tw + 4, y, tw, 22, 'F'); setDraw(BORDER); doc.rect(M + tw + 4, y, tw, 22);
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(MUTED);
+  doc.text('MAX PROPERTY PRICE  ·  ' + (r.ltvPct||75) + '% LTV', M + tw + 8, y + 6);
+  doc.setFont('times','normal'); doc.setFontSize(15); setColor(GREEN);
+  doc.text(fmt$(r.maxPurchasePrice || 0), M + tw + 8, y + 16);
+  y += 30;
+
+  // ═══════════════════ PAGE 4 — BANK RATE COMPARISON ═══════════════════
+  y = pageChrome('Bank Rate Comparison');
+  y = sectionHeader(y, 'Bank rates ranked', 'The cheapest 8 packages for your loan tier.',
+    'Ranked by total cost over the lock-in period (typically 2 years). Highlight = your selected package. Rates as of ' + dateStr + '.');
+  const top8 = r.banks.slice(0, 8);
+  const rateRows = top8.map(function(b, i){
+    const isSelected = (b._origIdx === selectedRateIdx) || (i === selectedRateIdx);
+    return {
+      cells: [
+        { text: (i===0?'★ ':'') + b.bank, font: 'bold' },
+        b.pkg,
+        (b.lockInYears ? b.lockInYears + 'y' : 'No lock'),
+        b.rate.toFixed(2) + '%',
+        fmt$(b.monthly),
+        fmt$(b.lockInCost),
+      ],
+      _highlight: isSelected,
+      _highlightColor: GOLD_TINT,
+    };
+  });
+  y = table(['Bank','Package','Lock-in','Rate p.a.','Monthly','Lock-in cost'],
+    rateRows, { y: y, widths: [22, 60, 16, 22, 24, 36] });
+  y += 8;
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(MUTED);
+  doc.text(doc.splitTextToSize('Lock-in cost = total monthly payments × lock-in months. After lock-in, the rate typically reverts to the package\'s "thereafter" rate (see your selected package on the next page).', CW), M, y);
+  y += 12;
+
+  if (r.banks.length >= 2) {
+    setFill(GREEN_SOFT); doc.rect(M, y, CW, 18, 'F');
+    setFill(GREEN); doc.rect(M, y, 1.8, 18, 'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(GREEN_DK);
+    doc.text('You save ' + fmt$(r.savingsVsSecond) + ' over lock-in', M + 6, y + 8);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(INK_2);
+    doc.text('vs. the next-cheapest package on the market — at no cost to you.', M + 6, y + 14);
+    y += 24;
   }
 
-  setFill(NAVY); doc.rect(0, H - 22, W, 22, 'F');
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setColor([180, 180, 180]);
-  doc.text('Indicative figures only as of ' + dateStr + '. Subject to bank credit assessment.', M, H - 13);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(10); setColor(GOLD);
-  doc.text('WhatsApp +65 8752 0859', W - M, H - 13, { align: 'right' });
-  doc.setFontSize(6); setColor(FAINT);
-  doc.text('Page 2', W / 2, H - 2, { align: 'center' });
+  // ═══════════════════ PAGE 5 — SELECTED PACKAGE ═══════════════════
+  y = pageChrome('Selected Package');
+  y = sectionHeader(y, 'Selected package', sel.bank + ' · ' + sel.pkg,
+    (sel.subCategory || sel.category || '') + '  ·  Year-1 rate ' + sel.rate.toFixed(2) + '% p.a.');
 
-  // ═══════ PAGE 3: UPFRONT (purchase) or REFI (refi) ═══════
-  doc.addPage();
-  setFill(NAVY); doc.rect(0, 0, W, 18, 'F'); setFill(GOLD); doc.rect(0, 18, W, 0.4, 'F');
-  doc.setFont('times', 'normal'); doc.setFontSize(13); setColor(CREAM);
-  doc.text('Nexus', M, 12); setColor(GOLD); doc.text('.', M + 14, 12);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor([180, 180, 180]);
-  doc.text((isRefi ? 'Refinance Analysis' : 'Property Buyer Report') + ' --- page 3', M + 22, 12);
-  doc.text(lead.name, W - M, 12, { align: 'right' });
-  let y3 = 30;
+  const yrs = [
+    ['Year 1', sel.year1Raw || (sel.year1Rate!=null ? sel.year1Rate.toFixed(2)+'%' : '—'), sel.year1Rate],
+    ['Year 2', sel.year2Raw || (sel.year2Rate!=null ? sel.year2Rate.toFixed(2)+'%' : '—'), sel.year2Rate],
+    ['Year 3', sel.year3Raw || (sel.year3Rate!=null ? sel.year3Rate.toFixed(2)+'%' : '—'), sel.year3Rate],
+    ['Year 4', sel.year4Raw || (sel.year4Rate!=null ? sel.year4Rate.toFixed(2)+'%' : '—'), sel.year4Rate],
+    ['Year 5', sel.year5Raw || (sel.year5Rate!=null ? sel.year5Rate.toFixed(2)+'%' : '—'), sel.year5Rate],
+    ['Thereafter', sel.thereafterRaw || (sel.thereafterRate!=null ? sel.thereafterRate.toFixed(2)+'%' : '—'), sel.thereafterRate],
+  ];
+  const yrRows = yrs.map(function(yr){
+    const m = yr[2] != null ? pmt(r.inp.loan, yr[2]/100, r.inp.tenure) : null;
+    return { cells: [yr[0], yr[1], m != null ? fmt$(m) : '—', m != null ? fmt$(m * 12) : '—'] };
+  });
+  y = table(['Year','Rate basis','Monthly','Annual cost'], yrRows, { y: y, widths: [22, 90, 32, 36] });
+  y += 8;
 
-  if (isRefi) {
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-    doc.text('REFINANCE SAVINGS BREAKDOWN', M, y3); y3 += 5;
-    setFill(GREEN_SOFT); doc.rect(M, y3, CW, 38, 'F');
-    setDraw(GREEN); doc.setLineWidth(0.4); doc.rect(M, y3, CW, 38);
-    if (r.refi) {
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(GREEN_DARK);
-      doc.text('SWITCH TO ' + sel.bank.toUpperCase() + ' AT ' + (r.bestRate * 100).toFixed(2) + '% --- SAVE BIG', M + 5, y3 + 7);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(11); setColor(INK);
-      doc.text('Annual savings: $' + fmt(Math.round(r.refi.annualSavings)), M + 5, y3 + 16);
-      doc.text('Lock-in (2y) savings: $' + fmt(Math.round(r.refi.lockInSavings)), M + 5, y3 + 24);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(MUTED);
-      doc.text('Current: $' + fmt(Math.round(pmt(r.inp.loan, r.inp.currentRate, r.inp.tenure))) + '/mo at ' + (r.refi.currentRate * 100).toFixed(2) + '%', M + 5, y3 + 32);
-      doc.text('New:       $' + fmt(Math.round(monthly)) + '/mo at ' + (r.bestRate * 100).toFixed(2) + '%', M + 100, y3 + 32);
-    }
-    y3 += 44;
-  } else {
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-    doc.text('UPFRONT PAYMENT BREAKDOWN', M, y3); y3 += 5;
-    setFill(SOFT_BG); doc.rect(M, y3, CW, 6, 'F');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
-    doc.text('ITEM', M + 4, y3 + 4);
-    doc.text('FORMULA / BASIS', M + 60, y3 + 4);
-    doc.text('AMOUNT', W - M - 4, y3 + 4, { align: 'right' });
-    y3 += 6;
+  doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
+  doc.text('Terms & conditions', M, y); y += 5;
+  const terms = [
+    ['Lock-in period', sel.lockInYears ? sel.lockInYears + ' year' + (sel.lockInYears>1?'s':'') : 'No lock-in'],
+    ['Qualifying loan', sel.qualifying || ('Min $' + fmtN(sel.qualifyingMin || 0))],
+    ['Rate basis', sel.category || sel.family || '—'],
+    ['Lock-in cost (your loan)', fmt$(sel.lockInCost)],
+    ['Monthly payment (Year 1)', fmt$(sel.monthly)],
+    ['Total interest over ' + r.inp.tenure + 'y', fmt$(r.totalInterest)],
+  ];
+  const tw2 = (CW - 4) / 2;
+  terms.forEach(function(t, i){
+    const col = i % 2;
+    const row = Math.floor(i / 2);
+    const x = M + col * (tw2 + 4);
+    const yy = y + row * 14;
+    setFill(SURFACE); doc.rect(x, yy, tw2, 12, 'F'); setDraw(BORDER_LT); doc.rect(x, yy, tw2, 12);
+    doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(MUTED);
+    doc.text(t[0].toUpperCase(), x + 3, yy + 4);
+    doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
+    doc.text(t[1], x + 3, yy + 9);
+  });
+  y += Math.ceil(terms.length / 2) * 14 + 8;
+
+  if (sel.lockInYears) {
+    const expiry = new Date();
+    expiry.setFullYear(expiry.getFullYear() + sel.lockInYears);
+    const refiWindow = new Date(expiry);
+    refiWindow.setMonth(refiWindow.getMonth() - 4);
+    setFill(GOLD_TINT); doc.rect(M, y, CW, 22, 'F'); setFill(GOLD); doc.rect(M, y, 1.8, 22, 'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(NAVY);
+    doc.text('Lock-in expires around ' + expiry.toLocaleDateString('en-SG', { month:'short', year:'numeric' }), M + 6, y + 8);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(INK_2);
+    const reText = 'Start refinance shopping by ' + refiWindow.toLocaleDateString('en-SG', { month:'short', year:'numeric' }) + '. We\'ll reach out 6 weeks before — free service, banks pay our referral.';
+    doc.text(doc.splitTextToSize(reText, CW - 12), M + 6, y + 14);
+    y += 28;
+  }
+
+  // ═══════════════════ PAGE 6 — STRESS TEST + LIFETIME COST ═══════════════════
+  y = pageChrome('Stress Test · Lifetime Cost');
+  y = sectionHeader(y, 'Stress test', 'If rates rise — what your monthly looks like.',
+    'Same loan, same tenure — just a higher rate. MAS already stress-tests you at 4% for affordability; we model up to 6% so you can see the headroom on your own budget.');
+
+  const baseM = r.monthlyBest;
+  const stressData = [
+    ['Your best rate (today)', r.bestRate*100, baseM],
+    ['Mild uptick', 3.0, pmt(r.inp.loan, 0.03, r.inp.tenure)],
+    ['MAS stress floor', 4.0, pmt(r.inp.loan, 0.04, r.inp.tenure)],
+    ['Severe', 5.0, pmt(r.inp.loan, 0.05, r.inp.tenure)],
+    ['Extreme', 6.0, pmt(r.inp.loan, 0.06, r.inp.tenure)],
+  ];
+  const stressTbl = stressData.map(function(sr, i){
+    const delta = i === 0 ? 0 : sr[2] - baseM;
+    const dTxt = i === 0 ? '—' : (delta > 0 ? '+' + fmt$(delta) + '/mo' : fmt$(delta) + '/mo');
+    const annualInt = r.inp.loan * (sr[1]/100);
+    return {
+      cells: [
+        sr[0],
+        sr[1].toFixed(2) + '%',
+        fmt$(sr[2]),
+        { text: dTxt, color: i === 0 ? MUTED : (delta > 0 ? RED : GREEN) },
+        fmt$(annualInt),
+      ],
+      _highlight: i === 0,
+      _highlightColor: GREEN_SOFT,
+    };
+  });
+  y = table(['Scenario','Rate','Monthly','Δ vs best','Y1 interest'], stressTbl,
+    { y: y, widths: [50, 22, 32, 36, 40] });
+  y += 10;
+
+  y = sectionHeader(y, 'Lifetime cost', 'What you\'ll pay over the full ' + r.inp.tenure + '-year tenure.', '');
+  const interest = r.totalInterest;
+  const totalPaid = r.inp.loan + interest;
+  const intPct = (interest / totalPaid) * 100;
+  const lcW = (CW - 8) / 3;
+  kpiTile(M, y, lcW, kpiH, 'Principal repaid', fmt$(r.inp.loan), 'The original loan amount.', NAVY);
+  kpiTile(M + lcW + 4, y, lcW, kpiH, 'Total interest', fmt$(interest), intPct.toFixed(1) + '% of total outlay', GOLD);
+  kpiTile(M + (lcW + 4) * 2, y, lcW, kpiH, 'Total paid back', fmt$(totalPaid), 'Principal + interest, undiscounted', GREEN);
+  y += kpiH + 6;
+
+  doc.setFont('helvetica','bold'); doc.setFontSize(8.5); setColor(INK);
+  doc.text('Where every $1 you pay back goes:', M, y); y += 4;
+  const segPrincipal = (r.inp.loan / totalPaid) * CW;
+  setFill(NAVY); doc.rect(M, y, segPrincipal, 10, 'F');
+  setFill(GOLD); doc.rect(M + segPrincipal, y, CW - segPrincipal, 10, 'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(8); setColor(CREAM);
+  doc.text('Principal · ' + (100-intPct).toFixed(1) + '%', M + 3, y + 6.5);
+  doc.text('Interest · ' + intPct.toFixed(1) + '%', M + segPrincipal + 3, y + 6.5);
+  y += 16;
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(MUTED);
+  const lcNote = intPct > 30
+    ? 'On a ' + r.inp.tenure + '-year tenure, interest makes up ' + intPct.toFixed(1) + '% of your total outlay. Refinancing every 2–3 years (when your lock-in expires) is the single biggest lever to bring this down.'
+    : 'Interest is ' + intPct.toFixed(1) + '% of your total outlay — relatively healthy. Keep an eye on lock-in expiry to ride future rate cuts.';
+  doc.text(doc.splitTextToSize(lcNote, CW), M, y);
+
+  // ═══════════════════ PAGE 7 — UPFRONT or REFI ═══════════════════
+  if (!isRefi) {
+    y = pageChrome('Upfront Costs · Funds');
+    y = sectionHeader(y, 'Upfront costs', 'What you need at completion.',
+      'Calculated using IRAS BSD/ABSD rates effective 27 Apr 2023 and MAS LTV rules.');
     const upfrontRows = [
-      ['Down Payment', ltvDroppedDueToMSR
-        ? (Math.round(downPaymentPct * 100) + '% — LTV reduced by MSR cap (was ' + Math.round(regulatoryLtvPct * 100) + '%)'
-        ) : (Math.round(downPaymentPct * 100) + '% of $' + fmt(price)),
-        '$' + fmt(downPayment)],
-      ['Buyer Stamp Duty (BSD)', '1% / 2% / 3% / 4% / 5% / 6% tiered', '$' + fmt(bsd)],
-      ['ABSD ' + absdRateLabel, buyerDesc + ' (IRAS 27 Apr 2023 rates)', '$' + fmt(absd)],
-      ['Legal Fee', 'Conveyancing + disbursements', '$' + fmt(legalFee)],
-      ['Valuation Fee', price > 1_000_000 ? 'Private property' : 'HDB / EC', '$' + fmt(valuationFee)],
+      { cells: [
+          { text: 'Down payment · ' + ((1-ltvPct)*100).toFixed(1) + '% of price', font: 'bold' },
+          { text: fmt$(downPayment), font: 'bold' },
+        ]},
+      { cells: ['  Min cash (5% of price)', fmt$(minCashRequired)] },
+      { cells: ['  Balance via CPF OA or cash', fmt$(cpfPortion)] },
+      { cells: ['Buyer\'s Stamp Duty (BSD) · 1–6% tiered', fmt$(bsd)] },
+      { cells: ['Additional Buyer\'s Stamp Duty · ' + absdRateLabel + ' (' + buyerDesc + ')', fmt$(absd)] },
+      { cells: ['Legal fees', fmt$(legalFee)] },
+      { cells: ['Valuation fee', fmt$(valuationFee)] },
+      { cells: [
+          { text: 'Total upfront required', font: 'bold' },
+          { text: fmt$(upfrontTotal), font: 'bold' },
+        ], _highlight: true, _highlightColor: GOLD_TINT },
     ];
-    upfrontRows.forEach(row => {
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(INK);
-      doc.text(row[0], M + 4, y3 + 5);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
-      doc.text(row[1], M + 60, y3 + 5);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(INK);
-      doc.text(row[2], W - M - 4, y3 + 5, { align: 'right' });
-      setDraw(BORDER); doc.line(M, y3 + 7, M + CW, y3 + 7);
-      y3 += 7;
-    });
-    setFill([253, 250, 243]); doc.rect(M, y3, CW, 8, 'F');
-    setDraw(GOLD); doc.setLineWidth(0.4); doc.rect(M, y3, CW, 8);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(9); setColor(INK);
-    doc.text('TOTAL UPFRONT', M + 4, y3 + 5.5);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(10); setColor(NAVY);
-    doc.text('$' + fmt(upfrontTotal), W - M - 4, y3 + 5.5, { align: 'right' });
-    y3 += 12;
+    y = table(['Cost item', 'Amount'], upfrontRows, { y: y, widths: [CW - 50, 50] });
+    y += 8;
 
-    // Cash vs CPF split panel (shows shortfall when user provided their balances)
-    const splitTitle = hasCpfOrCash ? 'CASH & CPF — NEEDED vs AVAILABLE' : 'SUGGESTED CASH vs CPF SPLIT (MIN-CASH SCENARIO)';
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-    doc.text(splitTitle, M, y3); y3 += 4;
+    doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
+    doc.text('Cash vs CPF allocation', M, y); y += 5;
+    setFill(SOFT_BG); doc.rect(M, y, CW, 24, 'F'); setDraw(BORDER); doc.rect(M, y, CW, 24);
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(MUTED);
+    doc.text('CASH NEEDED (MIN)', M + 4, y + 6);
+    doc.text('CPF OA NEEDED', M + CW/2 + 4, y + 6);
+    doc.setFont('times','normal'); doc.setFontSize(15); setColor(INK);
+    doc.text(fmt$(upfrontMinCash), M + 4, y + 18);
+    doc.text(fmt$(upfrontMinCPF), M + CW/2 + 4, y + 18);
+    setDraw(BORDER); doc.line(M + CW/2, y + 4, M + CW/2, y + 20);
+    y += 30;
 
-    if (hasCpfOrCash) {
-      // 4-row table: Need / Have / Shortfall / for each of cash and CPF
-      setFill(SOFT_BG); doc.rect(M, y3, CW, 6, 'F');
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
-      doc.text('SOURCE', M + 4, y3 + 4);
-      doc.text('NEEDED (MIN)', M + CW * 0.30, y3 + 4);
-      doc.text('AVAILABLE', M + CW * 0.55, y3 + 4);
-      doc.text('SHORTFALL', W - M - 4, y3 + 4, { align: 'right' });
-      y3 += 6;
-
-      const splitRows = [
-        { label: 'Cash on hand', need: upfrontMinCash, have: cashOnHand, shortfall: cashShortfall },
-        { label: 'CPF Ordinary Account', need: upfrontMinCPF, have: cpfOA, shortfall: cpfShortfall },
+    if (cpfOA > 0 || cashOnHand > 0) {
+      y = sectionHeader(y, 'Your funds position', totalShortfall === 0 ? 'You\'re fully covered.' : 'Shortfall of ' + fmt$(totalShortfall) + '.',
+        'Based on the CPF OA & cash on hand you provided.');
+      const fundRows = [
+        { cells: ['Cash on hand', fmt$(cashOnHand)] },
+        { cells: ['Cash needed (min)', '– ' + fmt$(upfrontMinCash)] },
+        { cells: [
+            { text: cashOnHand >= upfrontMinCash ? 'Cash surplus' : 'Cash shortfall', font: 'bold' },
+            { text: (cashOnHand >= upfrontMinCash ? '+ ' : '– ') + fmt$(Math.abs(cashOnHand - upfrontMinCash)), font: 'bold', color: cashOnHand >= upfrontMinCash ? GREEN : RED }
+          ]},
+        { cells: ['CPF OA available', fmt$(cpfOA)] },
+        { cells: ['CPF OA needed', '– ' + fmt$(upfrontMinCPF)] },
+        { cells: [
+            { text: cpfOA >= upfrontMinCPF ? 'CPF surplus' : 'CPF shortfall', font: 'bold' },
+            { text: (cpfOA >= upfrontMinCPF ? '+ ' : '– ') + fmt$(Math.abs(cpfOA - upfrontMinCPF)), font: 'bold', color: cpfOA >= upfrontMinCPF ? GREEN : RED }
+          ]},
+        { cells: [
+            { text: 'TOTAL POSITION', font: 'bold' },
+            { text: (totalShortfall === 0 ? 'Fully covered' : 'Need additional ' + fmt$(totalShortfall)), font: 'bold', color: totalShortfall === 0 ? GREEN : RED }
+          ], _highlight: true, _highlightColor: totalShortfall === 0 ? GREEN_SOFT : RED_SOFT },
       ];
-      splitRows.forEach((row, i) => {
-        const isShort = row.shortfall > 0;
-        if (isShort) { setFill([254, 242, 242]); doc.rect(M, y3, CW, 7, 'F'); }
-        doc.setFont('helvetica', 'bold'); doc.setFontSize(9); setColor(INK);
-        doc.text(row.label, M + 4, y3 + 5);
-        doc.setFont('helvetica', 'normal');
-        doc.text('$' + fmt(row.need), M + CW * 0.30, y3 + 5);
-        doc.text('$' + fmt(row.have), M + CW * 0.55, y3 + 5);
-        if (isShort) {
-          doc.setFont('helvetica', 'bold'); setColor(RED);
-          doc.text('-$' + fmt(row.shortfall), W - M - 4, y3 + 5, { align: 'right' });
-        } else {
-          setColor(GREEN_DARK);
-          doc.text('OK', W - M - 4, y3 + 5, { align: 'right' });
-        }
-        setDraw(BORDER); doc.line(M, y3 + 7, M + CW, y3 + 7);
-        y3 += 7;
-      });
-
-      // Verdict banner
-      if (totalShortfall > 0) {
-        setFill(RED_SOFT); doc.rect(M, y3, CW, 12, 'F');
-        setDraw(RED); doc.setLineWidth(0.4); doc.rect(M, y3, CW, 12);
-        doc.setFont('helvetica', 'bold'); doc.setFontSize(8.5); setColor(RED);
-        doc.text('TOTAL SHORTFALL: $' + fmt(totalShortfall), M + 4, y3 + 5);
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(INK);
-        doc.text('You will need to top up an additional $' + fmt(totalShortfall) + ' from cash, family loans, or by reducing the property price.', M + 4, y3 + 10);
-        y3 += 16;
-      } else {
-        setFill(GREEN_SOFT); doc.rect(M, y3, CW, 10, 'F');
-        setDraw(GREEN); doc.setLineWidth(0.4); doc.rect(M, y3, CW, 10);
-        doc.setFont('helvetica', 'bold'); doc.setFontSize(8.5); setColor(GREEN_DARK);
-        doc.text('YOU HAVE ENOUGH CASH AND CPF TO COMPLETE THIS PURCHASE.', M + 4, y3 + 6);
-        y3 += 14;
-      }
-    } else {
-      // No user input — show generic min-cash / min-cpf split
-      setFill(SOFT_BG); doc.rect(M, y3, CW, 28, 'F');
-      setDraw(BORDER); doc.rect(M, y3, CW, 28);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(MUTED);
-      doc.text('CASH NEEDED', M + 5, y3 + 6);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(13); setColor(INK);
-      doc.text('$' + fmt(upfrontMinCash), M + 5, y3 + 14);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
-      doc.text('5% min cash + BSD + ABSD + valuation', M + 5, y3 + 21);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(MUTED);
-      doc.text('CPF OA NEEDED', M + colW2 + 5, y3 + 6);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(13); setColor(INK);
-      doc.text('$' + fmt(upfrontMinCPF), M + colW2 + 5, y3 + 14);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
-      doc.text('Remainder of down payment + legal fee', M + colW2 + 5, y3 + 21);
-      setDraw(BORDER); doc.line(M + colW2, y3 + 4, M + colW2, y3 + 24);
-      // Hint to fill in next time
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setColor(FAINT);
-      doc.text('Tip: enter your CPF OA & cash on hand on the calculator to get a personalised shortfall analysis.', M + 5, y3 + 27);
-      y3 += 32;
+      y = table(['Item', 'Amount'], fundRows, { y: y, widths: [CW - 60, 60] });
     }
-  }
-
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-  doc.text('TOP BANK PACKAGES --- RANKED BY 2-YEAR LOCK-IN COST', M, y3); y3 += 5;
-  setFill(SOFT_BG); doc.rect(M, y3, CW, 6, 'F');
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
-  doc.text('BANK / PACKAGE', M + 4, y3 + 4);
-  doc.text('YR 1', M + CW * 0.45, y3 + 4);
-  doc.text('YR 3+', M + CW * 0.55, y3 + 4);
-  doc.text('MONTHLY', M + CW * 0.68, y3 + 4);
-  doc.text('2Y LOCK COST', W - M - 4, y3 + 4, { align: 'right' });
-  y3 += 6;
-  r.banks.slice(0, 6).forEach((b, i) => {
-    if (i === 0) { setFill(GREEN_SOFT); doc.rect(M, y3, CW, 8, 'F'); setFill(GREEN); doc.rect(M, y3, 1.5, 8, 'F'); }
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(9); setColor(INK);
-    doc.text(b.bank, M + 4, y3 + 5.5);
-    const bw = doc.getTextWidth(b.bank);
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
-    doc.text('/ ' + (b.pkg || '').slice(0, 30), M + 4 + bw + 2, y3 + 5.5);
-    doc.setFont('helvetica', i === 0 ? 'bold' : 'normal'); doc.setFontSize(9); setColor(INK);
-    doc.text(b.rate.toFixed(2) + '%', M + CW * 0.45, y3 + 5.5);
-    const yr3 = b.raw && b.raw.year3Rate != null ? b.raw.year3Rate.toFixed(2) + '%' : '---';
-    doc.setFont('helvetica', 'normal');
-    doc.text(yr3, M + CW * 0.55, y3 + 5.5);
-    doc.text('$' + fmt(Math.round(b.monthly)), M + CW * 0.68, y3 + 5.5);
-    doc.text('$' + fmt(Math.round(b.lockInCost)), W - M - 4, y3 + 5.5, { align: 'right' });
-    setDraw(BORDER); doc.line(M, y3 + 8, M + CW, y3 + 8);
-    y3 += 8;
-  });
-
-  setFill(NAVY); doc.rect(0, H - 22, W, 22, 'F');
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setColor([180, 180, 180]);
-  doc.text('BSD/ABSD calculated using IRAS rules effective 27 Apr 2023.', M, H - 13);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(10); setColor(GOLD);
-  doc.text('WhatsApp +65 8752 0859', W - M, H - 13, { align: 'right' });
-  doc.setFontSize(6); setColor(FAINT);
-  doc.text('Page 3', W / 2, H - 2, { align: 'center' });
-
-  // ═══════ PAGE 4: SELECTED PACKAGE + AMORTIZATION ═══════
-  doc.addPage();
-  setFill(NAVY); doc.rect(0, 0, W, 18, 'F'); setFill(GOLD); doc.rect(0, 18, W, 0.4, 'F');
-  doc.setFont('times', 'normal'); doc.setFontSize(13); setColor(CREAM);
-  doc.text('Nexus', M, 12); setColor(GOLD); doc.text('.', M + 14, 12);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor([180, 180, 180]);
-  doc.text((isRefi ? 'Refinance Analysis' : 'Property Buyer Report') + ' --- page 4', M + 22, 12);
-  doc.text(lead.name, W - M, 12, { align: 'right' });
-  let y4 = 30;
-
-  // ─── PACKAGE DETAILS PANEL ───
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-  doc.text('YOUR SELECTED PACKAGE', M, y4); y4 += 4;
-  // Hero block: bank · package · rate
-  setFill(SOFT_BG); doc.rect(M, y4, CW, 22, 'F');
-  setDraw(BORDER); doc.rect(M, y4, CW, 22);
-  doc.setFont('times', 'normal'); doc.setFontSize(16); setColor(INK);
-  doc.text(sel.bank + ' --- ' + sel.pkg, M + 5, y4 + 9);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(MUTED);
-  doc.text((sel.lockInYears || 2) + '-year lock-in  |  ' + (sel.qualifying || 'Standard tier') + '  |  Year 1: ' + sel.rate.toFixed(2) + '% p.a.', M + 5, y4 + 16);
-  doc.setFont('times', 'normal'); doc.setFontSize(20); setColor(GOLD);
-  doc.text(sel.rate.toFixed(2) + '%', W - M - 5, y4 + 14, { align: 'right' });
-  y4 += 26;
-
-  // Package details — year-by-year rate string (raw)
-  if (sel.raw) {
-    const raw = sel.raw;
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-    doc.text('PACKAGE DETAILS', M, y4); y4 += 4;
-    setFill(SOFT_BG); doc.rect(M, y4, CW, 6, 'F');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
-    doc.text('TERM', M + 4, y4 + 4);
-    doc.text('RATE BASIS', M + 32, y4 + 4);
-    doc.text('RATE', W - M - 4, y4 + 4, { align: 'right' });
-    y4 += 6;
-    const detailRows = [
-      ['Year 1', raw.year1Raw, raw.year1Rate],
-      ['Year 2', raw.year2Raw, raw.year2Rate],
-      ['Year 3', raw.year3Raw, raw.year3Rate],
-      ['Year 4', raw.year4Raw, raw.year4Rate],
-      ['Year 5', raw.year5Raw, raw.year5Rate],
-      ['Thereafter', raw.thereafterRaw, raw.thereafterRate],
-    ].filter(row => row[2] != null);
-    detailRows.forEach((row, i) => {
-      const isLockExit = sel.lockInYears && (i === sel.lockInYears) && row[2] != null;
-      const isThereafter = row[0] === 'Thereafter';
-      if (isThereafter) { setFill([254, 242, 242]); doc.rect(M, y4, CW, 6, 'F'); }
-      doc.setFont('helvetica', isThereafter ? 'bold' : 'normal'); doc.setFontSize(8); setColor(INK);
-      doc.text(row[0], M + 4, y4 + 4);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); setColor(MUTED);
-      doc.text((row[1] || '—').slice(0, 70), M + 32, y4 + 4);
-      doc.setFont('helvetica', isThereafter ? 'bold' : 'normal'); doc.setFontSize(8); setColor(isThereafter ? RED : INK);
-      doc.text(row[2].toFixed(2) + '%', W - M - 4, y4 + 4, { align: 'right' });
-      setDraw(BORDER); doc.line(M, y4 + 6, M + CW, y4 + 6);
-      y4 += 6;
-    });
-    y4 += 4;
-  }
-
-  // ─── FULL AMORTIZATION (selected package) ───
-  if (sel.raw && sel.raw.year1Rate != null) {
-    const raw = sel.raw;
-    const tenure = r.inp.tenure || 25;
-    const loan = r.inp.loan || 0;
-
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-    doc.text('AMORTIZATION SCHEDULE — SELECTED PACKAGE', M, y4); y4 += 5;
-    setFill(SOFT_BG); doc.rect(M, y4, CW, 6, 'F');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
-    doc.text('YEAR', M + 4, y4 + 4);
-    doc.text('RATE', M + CW * 0.16, y4 + 4);
-    doc.text('MONTHLY', M + CW * 0.30, y4 + 4);
-    doc.text('PRINCIPAL/YR', M + CW * 0.48, y4 + 4);
-    doc.text('INTEREST/YR', M + CW * 0.66, y4 + 4);
-    doc.text('END BALANCE', W - M - 4, y4 + 4, { align: 'right' });
-    y4 += 6;
-
-    let bal = loan, prevRate = null;
-    let totalPaidYears = 0, totalIntYears = 0;
-    const yearRows = [
-      { y: 1, rate: raw.year1Rate, txt: raw.year1Raw },
-      { y: 2, rate: raw.year2Rate, txt: raw.year2Raw },
-      { y: 3, rate: raw.year3Rate, txt: raw.year3Raw },
-      { y: 4, rate: raw.year4Rate, txt: raw.year4Raw },
-      { y: 5, rate: raw.year5Rate, txt: raw.year5Raw },
+  } else {
+    y = pageChrome('Refinance Comparison');
+    y = sectionHeader(y, 'Refinance comparison', 'Your current loan vs the cheapest new package.',
+      'Savings projected over the new lock-in period.');
+    const curMonthly = pmt(r.inp.loan, r.inp.currentRate || 0.04, r.inp.tenure);
+    const newMonthly = sel.monthly;
+    const monthSave = curMonthly - newMonthly;
+    const lockMonths = (sel.lockInYears || 2) * 12;
+    const lockSavings = monthSave * lockMonths;
+    const refiRows = [
+      { cells: ['Outstanding loan', fmt$(r.inp.loan)] },
+      { cells: ['Remaining tenure', r.inp.tenure + ' years'] },
+      { cells: ['Current rate (your input)', ((r.inp.currentRate||0)*100).toFixed(2) + '%'] },
+      { cells: ['Current monthly', fmt$(curMonthly)] },
+      { cells: ['New best rate', sel.rate.toFixed(2) + '%'] },
+      { cells: ['New monthly', fmt$(newMonthly)] },
+      { cells: [
+          { text: 'Monthly saving', font: 'bold' },
+          { text: fmt$(monthSave) + '/mo', font: 'bold', color: monthSave > 0 ? GREEN : RED }
+        ]},
+      { cells: [
+          { text: 'Total saving over ' + (sel.lockInYears||2) + 'y lock-in', font: 'bold' },
+          { text: fmt$(lockSavings), font: 'bold', color: lockSavings > 0 ? GREEN : RED }
+        ], _highlight: true, _highlightColor: GREEN_SOFT },
     ];
-    for (const yr of yearRows) {
-      if (yr.rate == null) continue;
-      const r2 = yr.rate / 100;
-      const m = pmt(loan, r2, tenure);
-      // Approximate yearly principal/interest: balance × rate is yearly interest cost,
-      // monthly × 12 - interest = principal repaid
-      const yrInt = Math.round(bal * r2);
-      const yrPrincipal = Math.round(m * 12 - yrInt);
-      bal = Math.max(0, bal - yrPrincipal);
-      totalPaidYears += m * 12;
-      totalIntYears += yrInt;
-      const isLockExit = sel.lockInYears && yr.y === sel.lockInYears + 1 && prevRate != null && Math.abs(yr.rate - prevRate) > 0.05;
-      if (isLockExit) { setFill([254, 242, 242]); doc.rect(M, y4, CW, 6, 'F'); }
-      doc.setFont('helvetica', isLockExit ? 'bold' : 'normal'); doc.setFontSize(8); setColor(INK);
-      doc.text('Y' + yr.y + (isLockExit ? ' !' : ''), M + 4, y4 + 4);
-      doc.text(yr.rate.toFixed(2) + '%', M + CW * 0.16, y4 + 4);
-      doc.text('$' + fmt(Math.round(m)), M + CW * 0.30, y4 + 4);
-      doc.text('$' + fmt(yrPrincipal), M + CW * 0.48, y4 + 4);
-      doc.text('$' + fmt(yrInt), M + CW * 0.66, y4 + 4);
-      doc.text('$' + fmt(Math.round(bal)), W - M - 4, y4 + 4, { align: 'right' });
-      setDraw(BORDER); doc.line(M, y4 + 6, M + CW, y4 + 6);
-      y4 += 6;
-      prevRate = yr.rate;
-    }
-
-    // Then "thereafter" up to the final tenure year — show 1 illustrative line at thereafter rate
-    if (raw.thereafterRate != null && tenure > 5) {
-      const r2 = raw.thereafterRate / 100;
-      const m = pmt(loan, r2, tenure);
-      // Compute remaining-tenure totals from end of year 5 to end of tenure
-      const remainingYears = tenure - 5;
-      // Approx: simulate remaining balance to zero
-      let bal2 = bal;
-      let totalInt2 = 0, totalPrin2 = 0;
-      for (let yi = 0; yi < remainingYears; yi++) {
-        const yrI = bal2 * r2;
-        const yrP = m * 12 - yrI;
-        bal2 = Math.max(0, bal2 - yrP);
-        totalInt2 += yrI;
-        totalPrin2 += yrP;
-      }
-      setFill([254, 242, 242]); doc.rect(M, y4, CW, 6, 'F');
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(INK);
-      doc.text('Y6 → Y' + tenure, M + 4, y4 + 4);
-      doc.setFont('helvetica', 'bold'); setColor(RED);
-      doc.text(raw.thereafterRate.toFixed(2) + '%', M + CW * 0.16, y4 + 4);
-      doc.setFont('helvetica', 'normal'); setColor(INK);
-      doc.text('$' + fmt(Math.round(m)), M + CW * 0.30, y4 + 4);
-      doc.text('$' + fmt(Math.round(totalPrin2)), M + CW * 0.48, y4 + 4);
-      doc.text('$' + fmt(Math.round(totalInt2)), M + CW * 0.66, y4 + 4);
-      doc.text('$' + fmt(Math.round(bal2)), W - M - 4, y4 + 4, { align: 'right' });
-      y4 += 6;
-      totalPaidYears += m * 12 * remainingYears;
-      totalIntYears += totalInt2;
-    }
-
-    // Totals row
-    setFill([253, 250, 243]); doc.rect(M, y4, CW, 7, 'F');
-    setDraw(GOLD); doc.setLineWidth(0.4); doc.rect(M, y4, CW, 7);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setColor(INK);
-    doc.text('TOTAL OVER ' + tenure + 'y', M + 4, y4 + 4.5);
-    doc.text('Interest paid: $' + fmt(Math.round(totalIntYears)) + '   |   Total paid: $' + fmt(Math.round(totalPaidYears)) + '   |   Loan: $' + fmt(loan), M + CW * 0.30, y4 + 4.5);
-    y4 += 11;
+    y = table(['Item','Amount'], refiRows, { y: y, widths: [CW - 60, 60] });
   }
 
-  const lockYrs = sel.lockInYears || 2;
-  const today = new Date();
-  const expiry = new Date(today.getFullYear() + lockYrs, today.getMonth(), today.getDate());
-  const refiStart = new Date(expiry); refiStart.setMonth(refiStart.getMonth() - 4);
-  const fmtMon = d => d.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' });
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
-  doc.text('LOCK-IN PLAYBOOK', M, y4); y4 += 4;
-  setFill([253, 250, 243]); doc.rect(M, y4, CW, 22, 'F');
-  setDraw(GOLD); doc.setLineWidth(0.4); doc.rect(M, y4, CW, 22);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(INK);
-  doc.text('o  ' + lockYrs + '-year lock-in ends approximately ' + fmtMon(expiry) + '.', M + 5, y4 + 6);
-  doc.text('o  Begin refinance shopping ' + fmtMon(refiStart) + ' (4 months before expiry).', M + 5, y4 + 12);
-  doc.text("o  We'll reach out 6 weeks before expiry with options --- free service.", M + 5, y4 + 18);
-  y4 += 28;
+  // ═══════════════════ PAGE 8 — AMORTISATION ═══════════════════
+  y = pageChrome('Amortisation Schedule');
+  y = sectionHeader(y, 'Amortisation schedule', 'Year-by-year — at your best rate.',
+    'How your loan unwinds. Principal payments grow each year while interest shrinks.');
 
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setColor(MUTED);
-  const disc = 'Indicative figures only as of ' + dateStr + '. Subject to bank credit assessment, valuation, and prevailing IRAS / MAS / HDB rules. Stress-test rate of 4% is the MAS minimum for residential TDSR / MSR. ABSD calculated using IRAS rates effective 27 April 2023: SC 1st prop 0%, SC 2nd 20%, SC 3rd+ 30%, PR 1st 5%, PR 2nd+ 30%, Foreigner 60%. Buyer Stamp Duty calculated using IRAS tiered rates. Married SC + SC couples buying matrimonial home jointly may qualify for ABSD remission - confirm with us. This report does not constitute financial advice; for personalised guidance speak to a Nexus mortgage broker. Banks pay our referral fee --- service is free to you.';
-  const dlines = doc.splitTextToSize(disc, CW);
-  doc.text(dlines, M, y4);
+  const rateY = r.bestRate;
+  let bal = r.inp.loan;
+  const annMon = pmt(r.inp.loan, rateY, r.inp.tenure);
+  const schedule = [];
+  for (let yr = 1; yr <= r.inp.tenure; yr++) {
+    let yearInt = 0, yearPrin = 0;
+    for (let m = 0; m < 12; m++) {
+      if (bal <= 0) break;
+      const i = bal * (rateY / 12);
+      const p = annMon - i;
+      yearInt += i; yearPrin += p; bal -= p;
+    }
+    schedule.push({ yr: yr, payment: annMon * 12, interest: yearInt, principal: yearPrin, balance: Math.max(0, bal) });
+  }
+  const half = Math.ceil(schedule.length / 2);
+  const left = schedule.slice(0, half);
+  const right = schedule.slice(half);
 
-  setFill(NAVY); doc.rect(0, H - 24, W, 24, 'F'); setFill(GOLD); doc.rect(0, H - 24, W, 0.5, 'F');
-  doc.setFont('times', 'normal'); doc.setFontSize(13); setColor(CREAM);
-  doc.text('Want us to lock in this rate?', M, H - 13);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor([180, 180, 180]);
-  doc.text('Free  |  zero fees  |  banks pay our referral fee', M, H - 7);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(11); setColor(GOLD);
-  doc.text('WhatsApp +65 8752 0859', W - M, H - 17, { align: 'right' });
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor([180, 180, 180]);
-  doc.text('danler@nexusmortgage.sg', W - M, H - 11, { align: 'right' });
-  doc.text('nexusmortgage.sg/free-report', W - M, H - 5, { align: 'right' });
+  function amortTable(rowsX, x0, w) {
+    const widths = [10, w * 0.22, w * 0.22, w * 0.22, w * 0.34 - 10];
+    const headers = ['Yr', 'Payment', 'Interest', 'Principal', 'Closing bal'];
+    setFill(NAVY); doc.rect(x0, y, w, 6, 'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(CREAM);
+    let cx = x0;
+    headers.forEach(function(h, i){
+      const align = i === 0 ? 'left' : 'right';
+      const tx = align==='right' ? cx + widths[i] - 2 : cx + 2;
+      doc.text(h, tx, y + 4, { align: align });
+      cx += widths[i];
+    });
+    let yy = y + 6;
+    rowsX.forEach(function(s, ri){
+      if (ri % 2 === 1) { setFill(SOFT_BG); doc.rect(x0, yy, w, 5, 'F'); }
+      doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(INK);
+      cx = x0;
+      const cs = [String(s.yr), fmt$(s.payment), fmt$(s.interest), fmt$(s.principal), fmt$(s.balance)];
+      cs.forEach(function(c, i){
+        const align = i === 0 ? 'left' : 'right';
+        const tx = align==='right' ? cx + widths[i] - 2 : cx + 2;
+        doc.text(c, tx, yy + 3.6, { align: align });
+        cx += widths[i];
+      });
+      yy += 5;
+    });
+    return yy;
+  }
+  const colW = (CW - 4) / 2;
+  const yLeft = amortTable(left, M, colW);
+  const yRight = right.length ? amortTable(right, M + colW + 4, colW) : y + 6;
+  y = Math.max(yLeft, yRight) + 6;
+  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(MUTED);
+  doc.text('Schedule assumes the best-rate package and constant monthly payments.', M, y);
+
+  // ═══════════════════ PAGE 9 — OPTIMISATION + NEXT STEPS ═══════════════════
+  y = pageChrome('Optimisation · Next Steps');
+  y = sectionHeader(y, 'Optimisation playbook', 'Concrete levers to lower your monthly or qualify for more.',
+    'Each lever is run through the same MAS 4% stress floor.');
+
+  const tips = [];
+  const tenureCap = r.propertyTenureCap || (r.inp.propertyType === 'hdb' ? 30 : 35);
+  if (r.inp.tenure < tenureCap) {
+    const newT = Math.min(tenureCap, r.inp.tenure + 5);
+    const newM = pmt(r.inp.loan, r.bestRate, newT);
+    tips.push({
+      title: 'Stretch tenure to ' + newT + ' years',
+      body: 'Drops your monthly to ' + fmt$(newM) + ' (–' + fmt$(r.monthlyBest - newM) + '/mo at ' + (r.bestRate*100).toFixed(2) + '%). Trade-off: more total interest paid.',
+    });
+  }
+  if (r.inp.tenure > 15) {
+    const newT = r.inp.tenure - 5;
+    const newM = pmt(r.inp.loan, r.bestRate, newT);
+    tips.push({
+      title: 'Shorten tenure to ' + newT + ' years',
+      body: 'Monthly rises to ' + fmt$(newM) + ', but you save substantial total interest. Use this if monthly headroom is comfortable.',
+    });
+  }
+  if (tdsrFail && r.minIncomePass > r.inp.income) {
+    const gap = r.minIncomePass - r.inp.income;
+    tips.push({
+      title: 'Increase qualifying income by ' + fmt$(gap) + '/mo',
+      body: 'A pledge of ' + fmt$(Math.ceil(gap*48)) + ' (counted at 100%/48 mths) or show-funds of ' + fmt$(Math.ceil(gap*48/0.30)) + ' (30%/48 mths) gets you there under MAS rules.',
+    });
+  }
+  if (tdsrFail && r.maxLoanAffordable < r.inp.loan) {
+    const reduce = r.inp.loan - r.maxLoanAffordable;
+    tips.push({
+      title: 'Reduce loan by ' + fmt$(reduce),
+      body: 'Borrow ' + fmt$(r.maxLoanAffordable) + ' instead — fits inside the ' + (r.msrApplies?'MSR':'TDSR') + ' cap. Top up the difference with cash/CPF.',
+    });
+  }
+  if (tdsrFail && !r.msrApplies && r.inp.debts > 0) {
+    tips.push({
+      title: 'Pay down existing debts',
+      body: 'You\'re carrying ' + fmt$(r.inp.debts) + '/mo. Every $1 of debt cleared = $1 of mortgage capacity gained.',
+    });
+  }
+  if (sel.lockInYears) {
+    tips.push({
+      title: 'Plan for refinance at year ' + sel.lockInYears,
+      body: 'Set a reminder ~4 months before lock-in expiry. Refinancing every 2–3 years is the biggest single lever to lower lifetime interest.',
+    });
+  }
+
+  if (!tips.length) {
+    setFill(GREEN_SOFT); doc.rect(M, y, CW, 22, 'F'); setFill(GREEN); doc.rect(M, y, 1.8, 22, 'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(11); setColor(GREEN_DK);
+    doc.text('You\'re already in a strong position', M + 6, y + 9);
+    doc.setFont('helvetica','normal'); doc.setFontSize(9); setColor(INK_2);
+    doc.text('No obvious levers — focus on locking in your selected rate and setting a refinance reminder.', M + 6, y + 16);
+    y += 28;
+  } else {
+    tips.slice(0, 6).forEach(function(t, i){
+      setFill(SURFACE); doc.rect(M, y, CW, 18, 'F');
+      setDraw(BORDER); doc.rect(M, y, CW, 18);
+      setFill(GOLD); doc.rect(M, y, 1.5, 18, 'F');
+      setFill(GOLD); doc.circle(M + 9, y + 9, 4, 'F');
+      doc.setFont('helvetica','bold'); doc.setFontSize(9); setColor(CREAM);
+      doc.text(String(i+1), M + 9, y + 10.5, { align: 'center' });
+      doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
+      doc.text(t.title, M + 16, y + 7);
+      doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(INK_2);
+      doc.text(doc.splitTextToSize(t.body, CW - 22), M + 16, y + 12);
+      y += 21;
+    });
+  }
+  y += 4;
+
+  if (y < H - 80) {
+    y = sectionHeader(y, 'Next steps', 'Three things to do this week.', '');
+    const steps = [
+      ['Lock in your rate.', 'WhatsApp us with your preferred package and we handle the bank application end-to-end.'],
+      ['Confirm your IPA / OTP timeline.', 'We coordinate with the bank, conveyancing lawyer, and CPF for a smooth completion.'],
+      ['Set a refinance reminder.', 'For ' + (sel.lockInYears||2) + ' year' + ((sel.lockInYears||2)>1?'s':'') + ' from completion. We\'ll reach out 6 weeks before — free service.'],
+    ];
+    steps.forEach(function(s, i){
+      doc.setFont('times','normal'); doc.setFontSize(20); setColor(GOLD);
+      doc.text(String(i+1), M, y + 5);
+      doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
+      doc.text(s[0], M + 10, y + 1);
+      doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(INK_2);
+      doc.text(doc.splitTextToSize(s[1], CW - 12), M + 10, y + 6);
+      y += 14;
+    });
+  }
+
+  const discY = H - 32;
+  doc.setFont('helvetica','normal'); doc.setFontSize(6.5); setColor(FAINT);
+  const disc = 'Indicative figures only as of ' + dateStr + '. Subject to bank credit assessment, valuation, and prevailing IRAS / MAS / HDB rules. Stress-test rate of 4% is the MAS minimum for residential TDSR / MSR. ABSD calculated using IRAS rates effective 27 April 2023: SC 1st prop 0%, SC 2nd 20%, SC 3rd+ 30%, PR 1st 5%, PR 2nd+ 30%, Foreigner 60%. BSD calculated using IRAS tiered rates. Married SC + SC couples buying matrimonial home jointly may qualify for ABSD remission — confirm with us. This report does not constitute financial advice; for personalised guidance speak to a Nexus mortgage broker. Banks pay our referral fee — service is free to you.';
+  doc.text(doc.splitTextToSize(disc, CW), M, discY);
 
   return {
     base64: doc.output('datauristring').split(',')[1],
@@ -4380,15 +4681,8 @@ function showToast(msg, type) {
 /* ============ LOAD LIVE RATES on page init ============ */
 loadRates();
 
-/* ============ Rate type filter chips ============ */
-document.querySelectorAll('#rate-type-filter .rt-chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    document.querySelectorAll('#rate-type-filter .rt-chip').forEach(c => c.classList.remove('active'));
-    chip.classList.add('active');
-    rateTypeFilter = chip.dataset.rt;
-    if (lastResult) render(lastResult);
-  });
-});
+/* ============ Wire rate selector tabs ============ */
+wireRateSelectorTabs();
 
 /* ============ Reveal on scroll ============ */
 const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.12 });
