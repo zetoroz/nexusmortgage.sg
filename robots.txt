@@ -1,4 +1,15 @@
+# https://nexusmortgage.sg
 User-agent: *
 Allow: /
+Disallow: /login/
+Disallow: /scripts/
+Disallow: /*?*
+
+# Crawl rate hints
+User-agent: AhrefsBot
+Crawl-delay: 5
+
+User-agent: SemrushBot
+Crawl-delay: 5
 
 Sitemap: https://nexusmortgage.sg/sitemap.xml
