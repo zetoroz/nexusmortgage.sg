@@ -1,0 +1,2389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<title>Free Mortgage Report Singapore | Personalised Bank Rates | Nexus Mortgage</title>
+<meta name="description" content="Get your free personalised mortgage report in 60 seconds. Compare rates from 16 banks, see your TDSR/MSR, monthly payment, and total interest — instantly.">
+<meta name="keywords" content="free mortgage report singapore, personalised home loan rates, mortgage calculator singapore, refinance report, TDSR MSR check">
+<meta property="og:title" content="Free Mortgage Report — See Rates From 16 Banks | Nexus Mortgage">
+<meta property="og:description" content="Compare home loan rates from 16 Singapore banks. Free personalised report with full savings breakdown — delivered to your inbox.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nexusmortgage.sg/free-report/">
+<meta property="og:image" content="https://nexusmortgage.sg/og-image.png">
+<link rel="canonical" href="https://nexusmortgage.sg/free-report/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        display: ['"Cormorant Garamond"', 'serif'],
+        sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+        console: ['"Fraunces"', 'serif'],
+        ui: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
+    },
+  },
+};
+</script>
+
+<style>
+:root {
+  /* Public-site brand */
+  --navy-950: #060E1F;
+  --navy-900: #0B1C3A;
+  --navy-800: #122244;
+  --gold-500: #C4973B;
+  --gold-400: #E8C97A;
+  --gold-300: #F0D98A;
+  --cream-100: #FAF7F2;
+  --cream-200: #F5F0E6;
+
+  /* Console / report tokens (from /login) */
+  --bg: #F6F7F9;
+  --surface: #FFFFFF;
+  --surface-2: #F1F3F5;
+  --surface-3: #E9ECEF;
+  --border: #E5E7EB;
+  --border-strong: #CBD5E1;
+  --ink: #0B1220;
+  --ink-2: #1F2937;
+  --muted: #56657A;
+  --faint: #94A3B8;
+
+  /* Multi-color chart palette (green primary + accent variations) */
+  --accent: #059669;        /* green primary */
+  --accent-strong: #047857;
+  --accent-soft: #ECFDF5;
+  --accent-line: rgba(5,150,105,.18);
+  --c-navy: #1E3A8A;        /* navy variant for charts */
+  --c-teal: #0D9488;
+  --c-gold: #B45309;        /* deep gold */
+  --c-amber: #D97706;
+  --c-red: #DC2626;
+  --c-red-soft: #FEF2F2;
+  --c-rose: #BE123C;
+  --c-purple: #6D28D9;
+  --c-cyan: #0891B2;
+  --warn-soft: #FFFBEB;
+  --fail-soft: #FEF2F2;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream-100);
+  color: #1A1A2E;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grain overlay (matches main site) */
+body::after {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+.gold-line { height: 1px; background: linear-gradient(90deg, transparent, var(--gold-500), transparent); }
+.num { font-feature-settings: 'tnum' 1, 'lnum' 1; font-variant-numeric: tabular-nums lining-nums; }
+
+/* ===== NAVBAR (matches main site) ===== */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.35rem 0;
+  background: rgba(6, 14, 31, 0.96);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(196,151,59,.12);
+}
+.nav-link {
+  font-size: .8rem; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(250, 247, 242, .7);
+  transition: color .25s; text-decoration: none;
+}
+.nav-link:hover, .nav-link:focus-visible { color: var(--gold-400); outline: none; }
+.nav-link.is-current { color: var(--gold-400); }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white; font-weight: 600; font-size: .82rem;
+  padding: .65rem 1.25rem; border-radius: 5px;
+  text-decoration: none; box-shadow: 0 4px 18px rgba(37,211,102,.28);
+  transition: transform .2s, box-shadow .2s;
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(37,211,102,.4); }
+
+/* ===== HERO ===== */
+#hero {
+  background: var(--navy-950);
+  position: relative; padding: 9rem 0 5rem;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 70% at 65% 45%, rgba(196,151,59,.08) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 90% at 15% 85%, rgba(18,34,68,.9) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 50% at 50% 10%, rgba(6,14,31,.8) 0%, transparent 80%);
+  pointer-events: none;
+}
+.hero-deco-frame {
+  position: absolute; top: 8%; right: -8%; width: 58%; height: 82%;
+  border: 1px solid rgba(196,151,59,.1); border-radius: 4px;
+  transform: rotate(14deg); pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: rgba(196,151,59,.1);
+  border: 1px solid rgba(196,151,59,.28);
+  color: var(--gold-400);
+  font-size: .72rem; font-weight: 500; letter-spacing: .13em;
+  text-transform: uppercase; padding: .35rem 1rem;
+  border-radius: 100px; margin-bottom: 1.5rem;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 300; line-height: 1.04;
+  letter-spacing: -.025em; color: #FAF7F2;
+}
+.hero-title em { font-style: italic; color: var(--gold-400); }
+.hero-sub {
+  color: rgba(250,247,242,.7); font-size: 1.05rem; line-height: 1.7;
+  max-width: 560px; margin-top: 1.25rem;
+}
+.hero-stat-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(196,151,59,.18); margin-top: 2.5rem;
+  border-top: 1px solid rgba(196,151,59,.18);
+  border-bottom: 1px solid rgba(196,151,59,.18);
+}
+.hero-stat {
+  background: var(--navy-950); padding: 1.25rem 1rem;
+}
+.hero-stat-label {
+  font-size: .68rem; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(250,247,242,.45);
+  margin-bottom: .35rem;
+}
+.hero-stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 500; color: var(--gold-400);
+  letter-spacing: .01em;
+}
+
+/* ===== CALCULATOR SECTION (light /login style) ===== */
+#calculator-section {
+  background:
+    linear-gradient(to bottom, var(--cream-100) 0%, var(--bg) 8%, var(--bg) 92%, var(--cream-100) 100%);
+  padding: 5rem 0; position: relative;
+}
+#calculator-section::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(11,18,32,.045) 1px, transparent 1px);
+  background-size: 24px 24px; background-position: 12px 12px;
+  mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
+}
+
+.console-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  position: relative; z-index: 1;
+  box-shadow:
+    0 1px 0 rgba(11,18,32,.02),
+    0 4px 12px rgba(11,18,32,.04),
+    0 24px 48px -12px rgba(11,18,32,.08);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 14px; line-height: 1.5; color: var(--ink);
+}
+
+.console-display { font-family: 'Fraunces', serif; font-optical-sizing: auto; letter-spacing: -0.02em; }
+.console-display-num { font-family: 'Fraunces', serif; font-feature-settings: 'tnum' 1, 'lnum' 1; font-variant-numeric: tabular-nums lining-nums; }
+
+.sec-tag {
+  font-size: 10.5px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--faint);
+  font-weight: 600;
+}
+.divider { height: 1px; background: var(--border); width: 100%; }
+.divider-dashed { border-top: 1px dashed var(--border); width: 100%; }
+
+.card-pad { padding: 24px; }
+.card-pad-lg { padding: 32px; }
+@media (max-width: 640px) {
+  .card-pad-lg { padding: 20px; }
+}
+
+/* Mode toggle */
+.mode-toggle {
+  display: inline-flex; padding: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  position: relative;
+}
+.mode-btn {
+  position: relative; z-index: 1;
+  padding: 9px 20px; border-radius: 7px;
+  font-weight: 600; font-size: 13px;
+  color: var(--muted); background: transparent;
+  border: none; cursor: pointer;
+  transition: color .18s ease;
+  font-family: inherit;
+}
+.mode-btn.active { color: var(--ink); }
+.mode-btn .ico { width: 14px; height: 14px; margin-right: 6px; vertical-align: -2px; }
+.mode-indicator {
+  position: absolute; top: 4px; left: 4px; height: calc(100% - 8px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  box-shadow: 0 1px 2px rgba(11,18,32,.06);
+  transition: transform .25s cubic-bezier(.5,1.5,.4,1), width .25s cubic-bezier(.5,1.5,.4,1);
+  z-index: 0;
+}
+
+/* Inputs */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+.field-label .normal { font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--faint); margin-left: 4px; }
+.field-hint { font-size: 11.5px; color: var(--faint); margin-top: 2px; }
+.input-wrap { position: relative; }
+.input-prefix, .input-suffix {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  color: var(--faint); font-size: 13px; pointer-events: none;
+  font-feature-settings: 'tnum' 1;
+}
+.input-prefix { left: 12px; }
+.input-suffix { right: 12px; }
+.field-input, .field-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  font-size: 14px; color: var(--ink);
+  font-family: inherit;
+  font-feature-settings: 'tnum' 1;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+.field-input.has-prefix { padding-left: 28px; }
+.field-input.has-suffix { padding-right: 32px; }
+.field-input:hover, .field-select:hover { border-color: var(--border-strong); }
+.field-input:focus, .field-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(5,150,105,.13);
+}
+.field-input[type="number"]::-webkit-outer-spin-button,
+.field-input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.field-input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+.field-select {
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2356657A' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px;
+}
+
+/* Buttons */
+.btn-primary-console {
+  background: var(--accent); color: white;
+  padding: 13px 22px; border-radius: 10px;
+  font-weight: 600; font-size: 14px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  cursor: pointer; border: 1px solid var(--accent);
+  transition: background .15s, border-color .15s, transform .1s, box-shadow .15s;
+  font-family: inherit;
+  box-shadow: 0 4px 14px rgba(5,150,105,.22), 0 1px 2px rgba(5,150,105,.12);
+}
+.btn-primary-console:hover { background: var(--accent-strong); border-color: var(--accent-strong); box-shadow: 0 6px 18px rgba(5,150,105,.32); }
+.btn-primary-console:active { transform: translateY(1px); }
+.btn-primary-console:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn-secondary-console {
+  background: var(--surface); color: var(--ink);
+  padding: 10px 16px; border-radius: 8px;
+  font-weight: 500; font-size: 13px;
+  border: 1px solid var(--border); cursor: pointer;
+  transition: background .15s, border-color .15s;
+  font-family: inherit;
+}
+.btn-secondary-console:hover { background: var(--surface-2); border-color: var(--border-strong); }
+
+/* Metric cards (preview) */
+.metric-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  position: relative; overflow: hidden;
+}
+.metric-card.tinted-green { background: linear-gradient(135deg, var(--accent-soft) 0%, #fff 60%); border-color: var(--accent-line); }
+.metric-card.tinted-fail { background: linear-gradient(135deg, var(--c-red-soft) 0%, #fff 60%); border-color: rgba(220,38,38,.18); }
+.metric-card.tinted-warn { background: linear-gradient(135deg, var(--warn-soft) 0%, #fff 60%); border-color: rgba(217,119,6,.22); }
+.metric-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+}
+.metric-val {
+  font-family: 'Fraunces', serif; font-feature-settings: 'tnum' 1;
+  font-size: 30px; font-weight: 500; color: var(--ink);
+  line-height: 1.05; letter-spacing: -.02em;
+}
+.metric-val .small { font-size: 16px; color: var(--muted); font-weight: 400; }
+.metric-sub { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+
+/* Pills */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11.5px; font-weight: 600;
+  padding: 4px 10px; border-radius: 100px;
+  letter-spacing: .02em;
+}
+.pill .dot { width: 6px; height: 6px; border-radius: 100px; }
+.pill.pass { background: var(--accent-soft); color: var(--accent-strong); }
+.pill.pass .dot { background: var(--accent); }
+.pill.fail { background: var(--c-red-soft); color: var(--c-red); }
+.pill.fail .dot { background: var(--c-red); }
+.pill.warn { background: var(--warn-soft); color: var(--c-amber); }
+.pill.warn .dot { background: var(--c-amber); }
+
+/* Gated wrapper */
+.gated {
+  position: relative;
+}
+.gated.is-locked .gated-content {
+  filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+  opacity: .8;
+}
+.gate-overlay {
+  position: absolute; inset: 0; z-index: 5;
+  display: none; flex-direction: column;
+  align-items: center; justify-content: flex-start;
+  text-align: center; padding: 70px 24px 32px;
+  background: linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.85) 18%, rgba(255,255,255,.78) 60%, rgba(255,255,255,.55) 100%);
+  border-radius: 16px;
+}
+@media (max-width: 640px) {
+  .gate-overlay { padding-top: 40px; }
+}
+.gated.is-locked .gate-overlay { display: flex; }
+.gate-card {
+  max-width: 460px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 28px 24px;
+  box-shadow: 0 24px 60px -12px rgba(11,18,32,.18), 0 8px 20px rgba(5,150,105,.08);
+}
+.gate-card .lock-ico {
+  width: 44px; height: 44px; margin: 0 auto 14px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-strong);
+}
+.gate-card h3 {
+  font-family: 'Fraunces', serif; font-size: 22px;
+  letter-spacing: -.01em; color: var(--ink);
+  margin-bottom: 6px;
+}
+.gate-card p { color: var(--muted); font-size: 13.5px; line-height: 1.55; margin-bottom: 18px; }
+.gate-bullets { text-align: left; font-size: 13px; color: var(--ink-2); margin: 14px 0 18px; }
+.gate-bullet { display: flex; align-items: flex-start; gap: 10px; padding: 4px 0; }
+.gate-bullet svg { flex-shrink: 0; color: var(--accent); margin-top: 2px; }
+
+/* Charts container */
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+}
+.chart-card h4 {
+  font-size: 12px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+}
+.chart-card .chart-sub { font-size: 12.5px; color: var(--faint); margin-bottom: 14px; }
+
+/* Bank rate table */
+.rate-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+.rate-table th {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--faint);
+  text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border);
+}
+.rate-table th.right { text-align: right; }
+.rate-table td {
+  padding: 11px 12px; font-size: 13.5px; color: var(--ink-2);
+  border-bottom: 1px solid var(--border);
+  font-feature-settings: 'tnum' 1;
+}
+.rate-table td.right { text-align: right; }
+.rate-table tr.best td { background: var(--accent-soft); }
+.rate-table tr.best td:first-child { border-left: 3px solid var(--accent); padding-left: 9px; }
+.rate-table .bank-name { font-weight: 600; color: var(--ink); }
+.rate-table .pkg { color: var(--muted); font-size: 12px; }
+
+
+/* Property type toggle (inline, full-width within field cell) */
+.prop-toggle {
+  display: flex; padding: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  position: relative;
+  width: 100%; height: 40px;
+}
+.prop-toggle .prop-btn {
+  position: relative; z-index: 1;
+  flex: 1; padding: 8px 10px;
+  border-radius: 6px;
+  font-weight: 600; font-size: 13px;
+  color: var(--muted); background: transparent;
+  border: none; cursor: pointer;
+  transition: color .18s ease;
+  font-family: inherit;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.prop-toggle .prop-btn .ico { width: 13px; height: 13px; }
+.prop-toggle .prop-btn.active { color: var(--ink); }
+.prop-toggle .prop-indicator {
+  position: absolute; top: 4px; left: 4px; height: calc(100% - 8px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(11,18,32,.06);
+  transition: transform .25s cubic-bezier(.5,1.5,.4,1), width .25s cubic-bezier(.5,1.5,.4,1);
+  z-index: 0;
+}
+
+/* Add borrower button (full-width, dashed) */
+.borrower-pair {
+  display: grid;
+  grid-template-columns: 1fr 76px;
+  gap: 6px;
+}
+.borrower-pair .field-input { padding-right: 8px; }
+.borrower-pair .borrower-age {
+  text-align: center;
+  padding-left: 6px; padding-right: 6px;
+}
+.borrower-age::placeholder { color: var(--faint); }
+
+/* Pill for LTV status (added alongside TDSR/MSR) */
+.pill.info { background: #EFF6FF; color: #1E3A8A; }
+.pill.info .dot { background: #1E3A8A; }
+
+.add-borrower-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%;
+  padding: 11px 16px;
+  border: 1.5px dashed var(--border-strong);
+  background: transparent;
+  border-radius: 10px;
+  color: var(--muted);
+  font-family: inherit; font-weight: 600; font-size: 13px;
+  cursor: pointer;
+  transition: border-color .18s, color .18s, background .18s;
+  margin-top: 18px;
+}
+.add-borrower-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+  background: var(--accent-soft);
+}
+.add-borrower-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.add-borrower-btn .plus-ico {
+  width: 16px; height: 16px;
+  border: 1.5px solid currentColor;
+  border-radius: 100px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 12px; line-height: 1;
+}
+
+/* Borrower row remove button — sits inside the field-label */
+.field-label .borrower-remove {
+  float: right;
+  background: transparent; border: none;
+  color: var(--faint); font-size: 14px; line-height: 1;
+  width: 18px; height: 18px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 4px; cursor: pointer;
+  margin-top: -2px;
+  transition: color .15s, background .15s;
+  font-family: inherit; padding: 0;
+}
+.field-label .borrower-remove:hover { color: var(--c-red); background: var(--c-red-soft); }
+
+/* Borrower row entrance animation */
+.borrower-row {
+  animation: slideIn .35s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(11,18,32,.55);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-backdrop.open { display: flex; animation: fadeIn .25s ease; }
+.modal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  width: 100%; max-width: 480px;
+  padding: 32px 32px 28px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  position: relative;
+  animation: popIn .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 30px 60px -12px rgba(11,18,32,.45);
+}
+@media (max-width: 480px) { .modal-card { padding: 24px 20px 20px; } }
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 32px; height: 32px; border-radius: 8px;
+  border: 1px solid var(--border); background: transparent;
+  cursor: pointer; color: var(--muted);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s, color .15s;
+}
+.modal-close:hover { background: var(--surface-2); color: var(--ink); }
+.modal-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--accent-strong);
+  background: var(--accent-soft); padding: 5px 10px; border-radius: 100px;
+  margin-bottom: 14px;
+}
+.modal-title {
+  font-family: 'Fraunces', serif; font-size: 26px; line-height: 1.15;
+  letter-spacing: -.015em; color: var(--ink); margin-bottom: 6px;
+}
+.modal-sub { color: var(--muted); font-size: 14px; line-height: 1.55; margin-bottom: 20px; }
+.modal-foot { font-size: 11.5px; color: var(--faint); text-align: center; margin-top: 14px; line-height: 1.55; }
+
+/* Toast */
+.toast {
+  position: fixed; left: 50%; bottom: 24px;
+  transform: translate(-50%, 80px);
+  background: var(--ink); color: white;
+  padding: 12px 18px; border-radius: 10px;
+  font-size: 13.5px; font-weight: 500; font-family: 'Plus Jakarta Sans', sans-serif;
+  z-index: 250; opacity: 0; pointer-events: none;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 12px 30px rgba(11,18,32,.4);
+  transition: transform .35s cubic-bezier(.5,1.5,.4,1), opacity .25s;
+}
+.toast.show { transform: translate(-50%, 0); opacity: 1; }
+.toast.success { background: var(--accent-strong); }
+.toast.error { background: var(--c-red); }
+
+/* Honeypot */
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { from { transform: scale(.92) translateY(8px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+@keyframes pulseGreen {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,.4); }
+  50% { box-shadow: 0 0 0 8px rgba(5,150,105,0); }
+}
+.pulse-green { animation: pulseGreen 2s ease-in-out infinite; }
+
+/* FAQ */
+.faq-item {
+  border-top: 1px solid rgba(11,28,58,.08);
+  padding: 1.5rem 0;
+}
+.faq-q {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+  font-weight: 500; color: var(--navy-900);
+  cursor: pointer; display: flex; justify-content: space-between; gap: 1rem;
+  align-items: flex-start; list-style: none;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after {
+  content: '+'; font-family: 'DM Sans', sans-serif;
+  font-size: 1.5rem; color: var(--gold-500); font-weight: 300;
+  line-height: 1; flex-shrink: 0;
+  transition: transform .3s;
+}
+.faq-item[open] .faq-q::after { transform: rotate(45deg); }
+.faq-a { color: rgba(11,28,58,.7); font-size: .95rem; line-height: 1.75; padding-top: .75rem; max-width: 65ch; }
+
+/* Footer (matches main site) */
+#site-footer {
+  background: var(--navy-950); color: rgba(250,247,242,.7);
+  padding: 4rem 0 2rem; position: relative;
+}
+.footer-h {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; color: var(--gold-400);
+  letter-spacing: .03em; margin-bottom: 1rem;
+}
+.footer-link {
+  color: rgba(250,247,242,.55); font-size: .85rem;
+  text-decoration: none; transition: color .2s;
+  display: block; padding: .25rem 0;
+}
+.footer-link:hover { color: var(--gold-400); }
+.footer-bottom {
+  border-top: 1px solid rgba(196,151,59,.12);
+  margin-top: 3rem; padding-top: 1.5rem;
+  font-size: .78rem; color: rgba(250,247,242,.4);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+
+/* Loading shimmer */
+.shimmer {
+  background: linear-gradient(90deg, var(--surface-2) 0%, var(--surface) 50%, var(--surface-2) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 8px;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* Scroll reveals */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s cubic-bezier(.25,.8,.25,1), transform .7s cubic-bezier(.25,.8,.25,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* Spinner */
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Smaller chart heights on mobile */
+.chart-h-md { height: 220px; position: relative; }
+.chart-h-lg { height: 260px; position: relative; }
+@media (max-width: 640px) {
+  .chart-h-md, .chart-h-lg { height: 200px; }
+  .metric-val { font-size: 24px; }
+  .console-card { border-radius: 12px; }
+}
+</style>
+
+<!-- JSON-LD: WebPage + Service + FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Free Mortgage Report Singapore",
+  "url": "https://nexusmortgage.sg/free-report/",
+  "description": "Get a free personalised mortgage report comparing rates from 16 Singapore banks. See your monthly payment, TDSR/MSR, and total interest in 60 seconds.",
+  "isPartOf": { "@type": "WebSite", "url": "https://nexusmortgage.sg/", "name": "Nexus Mortgage SG" },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "Free Personalised Mortgage Report",
+    "provider": { "@type": "MortgageBroker", "name": "Nexus Mortgage SG", "url": "https://nexusmortgage.sg/" },
+    "areaServed": "Singapore",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "SGD" }
+  }
+}
+</script>
+</head>
+
+<body>
+
+<!-- ============ NAV ============ -->
+<nav id="navbar">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <a href="/" style="text-decoration:none; display:flex; align-items:center; gap:.6rem;">
+      <span style="font-family:'Cormorant Garamond',serif; font-size:1.55rem; font-weight:500; color:#FAF7F2; letter-spacing:.02em;">Nexus<span style="color:var(--gold-400);">.</span></span>
+    </a>
+    <div class="hidden lg:flex items-center gap-8">
+      <a href="/services/" class="nav-link">Services</a>
+      <a href="/mortgage-rates/" class="nav-link">Rates</a>
+      <a href="/free-report/" class="nav-link is-current">Free Report</a>
+      <a href="/about/" class="nav-link">About</a>
+      <a href="/contact/" class="nav-link">Contact</a>
+      <a href="/blog/" class="nav-link" style="color:var(--gold-400);">Insights</a>
+    </div>
+    <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" rel="noopener" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8 8 0 0 0 4.32 15.6L4 20l4.5-1.18A8 8 0 0 0 17.6 6.32Zm-5.7 12a6.66 6.66 0 0 1-3.4-.93l-.24-.14-2.5.66.67-2.44-.16-.25a6.66 6.66 0 1 1 5.63 3.1Zm3.7-5c-.2-.1-1.18-.58-1.36-.65s-.32-.1-.45.1-.5.65-.62.78-.23.15-.43.05a5.4 5.4 0 0 1-2.7-2.36c-.2-.35.2-.32.59-1.07a.36.36 0 0 0 0-.34c-.05-.1-.45-1.08-.62-1.48s-.32-.34-.45-.34a3.4 3.4 0 0 0-.4 0 .77.77 0 0 0-.55.26 2.32 2.32 0 0 0-.72 1.73 4.04 4.04 0 0 0 .85 2.16 9.27 9.27 0 0 0 3.55 3.13c1.32.57 1.84.62 2.5.52a2.13 2.13 0 0 0 1.4-.99 1.74 1.74 0 0 0 .12-.99c-.05-.08-.18-.13-.38-.23Z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-deco-frame"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="grid lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-7">
+        <span class="hero-eyebrow">
+          <span style="width:6px; height:6px; background:var(--gold-400); border-radius:100px; display:inline-block;"></span>
+          Free · 60 seconds · 16 banks
+        </span>
+        <h1 class="hero-title">
+          Your <em>personalised</em><br>mortgage report —<br>delivered free.
+        </h1>
+        <p class="hero-sub">
+          Enter your numbers below and see your real monthly payment, TDSR/MSR position, and the lowest rates available across 16 Singapore banks. Full breakdown emailed instantly.
+        </p>
+        <div class="hero-stat-grid">
+          <div class="hero-stat">
+            <div class="hero-stat-label">Banks compared</div>
+            <div class="hero-stat-val num">16</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-label">Avg. savings</div>
+            <div class="hero-stat-val num">$8,400/yr</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-label">Service fee</div>
+            <div class="hero-stat-val">Zero</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 hidden lg:block">
+        <!-- Decorative report mock-up card -->
+        <div style="position:relative; transform: rotate(2deg);">
+          <div style="background:linear-gradient(180deg, rgba(196,151,59,.1), transparent); border:1px solid rgba(196,151,59,.18); border-radius:14px; padding:20px; backdrop-filter: blur(6px);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+              <div style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:#FAF7F2;">Your Report</div>
+              <span style="font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-400); border:1px solid rgba(196,151,59,.4); padding:3px 8px; border-radius:100px;">Live preview</span>
+            </div>
+            <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin-bottom:14px;">
+              <div style="background:rgba(250,247,242,.04); border:1px solid rgba(196,151,59,.12); border-radius:8px; padding:12px;">
+                <div style="font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(250,247,242,.5);">Monthly</div>
+                <div style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--gold-400); margin-top:2px;">$3,247</div>
+              </div>
+              <div style="background:rgba(250,247,242,.04); border:1px solid rgba(196,151,59,.12); border-radius:8px; padding:12px;">
+                <div style="font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(250,247,242,.5);">Best rate</div>
+                <div style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--gold-400); margin-top:2px;">1.45%</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; justify-content:space-between; font-size:.78rem; color:rgba(250,247,242,.6);"><span>DBS · Fixed 2Y</span><span style="color:var(--gold-400);">1.45%</span></div>
+              <div style="display:flex; justify-content:space-between; font-size:.78rem; color:rgba(250,247,242,.6);"><span>HSBC · Fixed 2Y</span><span style="color:var(--gold-400);">1.50%</span></div>
+              <div style="display:flex; justify-content:space-between; font-size:.78rem; color:rgba(250,247,242,.6);"><span>OCBC · Fixed 2Y</span><span style="color:var(--gold-400);">1.50%</span></div>
+              <div style="display:flex; justify-content:space-between; font-size:.78rem; color:rgba(250,247,242,.45);"><span>+ 13 more banks</span><span>···</span></div>
+            </div>
+          </div>
+          <!-- Floating stamp -->
+          <div style="position:absolute; top:-14px; right:-12px; background:linear-gradient(135deg,#C4973B,#E8C97A); color:#0B1C3A; font-weight:700; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; padding:6px 12px; border-radius:100px; box-shadow:0 6px 20px rgba(196,151,59,.4); transform: rotate(8deg);">100% Free</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CALCULATOR + REPORT ============ -->
+<section id="calculator-section">
+  <div class="max-w-7xl mx-auto px-6 relative">
+    <div style="text-align:center; margin-bottom: 2.5rem;">
+      <span class="sec-tag" style="color: var(--gold-500); display:inline-block; margin-bottom:10px;">Step 1 of 2</span>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 400; color: var(--navy-900); letter-spacing: -.015em;">
+        Tell us about your loan
+      </h2>
+      <p style="color: rgba(11,28,58,.65); margin-top: .5rem; max-width: 520px; margin-left:auto; margin-right:auto;">
+        Pick new purchase or refinance, fill in the basics, and your full report appears below.
+      </p>
+    </div>
+
+    <div class="console-card card-pad-lg">
+      <!-- Mode toggle -->
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom: 24px;">
+        <div class="mode-toggle" id="modeToggle">
+          <div class="mode-indicator" id="modeIndicator"></div>
+          <button type="button" class="mode-btn active" data-mode="purchase">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8v10a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2V11z"/></svg>
+            New Purchase
+          </button>
+          <button type="button" class="mode-btn" data-mode="refinance">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            Refinance
+          </button>
+        </div>
+        <span class="sec-tag" style="display:inline-flex; align-items:center; gap:6px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          ~60 seconds
+        </span>
+      </div>
+
+      <!-- ===== PURCHASE INPUTS ===== -->
+      <div id="form-purchase" class="form-block">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="field">
+            <label class="field-label">Property type</label>
+            <div class="prop-toggle" data-form="purchase">
+              <div class="prop-indicator"></div>
+              <button type="button" class="prop-btn active" data-prop="hdb">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+                HDB / EC
+              </button>
+              <button type="button" class="prop-btn" data-prop="private">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22V8l10-6 10 6v14"/><path d="M9 22v-7h6v7"/><path d="M2 12h20"/></svg>
+                Private
+              </button>
+            </div>
+            <div class="field-hint" id="p-prop-hint">MSR cap of 30% applies to HDB &amp; EC. Tenure default: 25y.</div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="p-price">Property price <span class="normal">SGD</span></label>
+            <div class="input-wrap">
+              <span class="input-prefix">$</span>
+              <input id="p-price" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="800,000" data-comma="1" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="p-loan">Loan amount <span class="normal">SGD</span></label>
+            <div class="input-wrap">
+              <span class="input-prefix">$</span>
+              <input id="p-loan" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="600,000" data-comma="1" autocomplete="off">
+            </div>
+            <div class="field-hint">75% LTV is the typical maximum.</div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="p-tenure">Tenure <span class="normal">years</span></label>
+            <input id="p-tenure" type="number" inputmode="numeric" class="field-input num" value="25" min="5" max="35">
+            <div class="field-hint" id="p-tenure-hint">Max 30y HDB, 35y private. IWAA cap: <span id="iwaa-cap-text">—</span>.</div>
+          </div>
+
+          <div class="field borrower-group" data-borrower-n="1">
+            <label class="field-label" for="p-income">Borrower 1 <span class="normal">income & age</span></label>
+            <div class="borrower-pair">
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input id="p-income" type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-income" data-comma="1" autocomplete="off" value="12,000" placeholder="Income">
+              </div>
+              <input id="p-age-1" type="number" inputmode="numeric" class="field-input num borrower-age" min="18" max="80" value="35" placeholder="Age" aria-label="Borrower 1 age">
+            </div>
+            <div class="field-hint">$ income / month · age in years (used for IWAA + tenure cap)</div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="p-debts">Existing monthly debts <span class="normal">SGD</span></label>
+            <div class="input-wrap">
+              <span class="input-prefix">$</span>
+              <input id="p-debts" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="0" data-comma="1" autocomplete="off">
+            </div>
+            <div class="field-hint">Car loans, credit-card minimums, etc.</div>
+          </div>
+          <!-- Additional borrowers slot in here (grid cells) -->
+          <div id="borrower-extra-slot" style="display: contents;"></div>
+        </div>
+        <!-- Add borrower button (sits below the grid) -->
+        <button type="button" class="add-borrower-btn" id="addBorrowerBtn">
+          <span class="plus-ico">+</span>
+          <span>Add another borrower</span>
+          <span style="color: var(--faint); font-weight: 500;">(<span id="borrower-count-text">1</span> of 4)</span>
+        </button>
+      </div>
+
+      <!-- ===== REFINANCE INPUTS ===== -->
+      <div id="form-refinance" class="form-block" style="display:none;">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="field">
+            <label class="field-label">Property type</label>
+            <div class="prop-toggle" data-form="refinance">
+              <div class="prop-indicator"></div>
+              <button type="button" class="prop-btn active" data-prop="hdb">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+                HDB / EC
+              </button>
+              <button type="button" class="prop-btn" data-prop="private">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22V8l10-6 10 6v14"/><path d="M9 22v-7h6v7"/><path d="M2 12h20"/></svg>
+                Private
+              </button>
+            </div>
+            <div class="field-hint">MSR cap of 30% applies to HDB &amp; EC.</div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="r-outstanding">Outstanding loan <span class="normal">SGD</span></label>
+            <div class="input-wrap">
+              <span class="input-prefix">$</span>
+              <input id="r-outstanding" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="500,000" data-comma="1" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="r-current-rate">Current rate <span class="normal">% p.a.</span></label>
+            <div class="input-wrap">
+              <input id="r-current-rate" type="number" step="0.01" class="field-input has-suffix num" value="3.20" min="0">
+              <span class="input-suffix">%</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="r-tenure-left">Remaining tenure <span class="normal">years</span></label>
+            <input id="r-tenure-left" type="number" inputmode="numeric" class="field-input num" value="20" min="1" max="35">
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="r-income">Combined monthly income <span class="normal">SGD</span></label>
+            <div class="input-wrap">
+              <span class="input-prefix">$</span>
+              <input id="r-income" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="12,000" data-comma="1" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="r-debts">Existing monthly debts <span class="normal">SGD</span></label>
+            <div class="input-wrap">
+              <span class="input-prefix">$</span>
+              <input id="r-debts" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="0" data-comma="1" autocomplete="off">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+        <div style="font-size:12.5px; color: var(--faint);">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px;"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+          Indicative only · stress-tested at MAS 4% floor
+        </div>
+        <button id="calculateBtn" class="btn-primary-console pulse-green" type="button">
+          Calculate my report
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ============ REPORT (initially hidden) ============ -->
+    <div id="reportWrap" style="display:none; margin-top: 36px;">
+
+      <!-- Top metrics: ALWAYS visible (even when locked) -->
+      <div style="text-align:center; margin-bottom: 1.5rem;">
+        <span class="sec-tag" style="color: var(--gold-500); display:inline-block; margin-bottom:8px;">Step 2 of 2 · Your report</span>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 400; color: var(--navy-900); letter-spacing: -.015em;">
+          Here's what we found
+        </h2>
+      </div>
+
+      <!-- Visible top metrics -->
+      <div class="grid md:grid-cols-3 gap-4" style="margin-bottom: 24px;">
+        <div class="metric-card tinted-green">
+          <div class="metric-label">Best rate found</div>
+          <div class="metric-val console-display-num"><span id="m-best-rate">—</span><span class="small">% p.a.</span></div>
+          <div class="metric-sub" id="m-best-bank">—</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Estimated monthly payment</div>
+          <div class="metric-val console-display-num"><span class="small">$</span><span id="m-monthly">—</span></div>
+          <div class="metric-sub" id="m-monthly-sub">at best rate, principal + interest</div>
+        </div>
+        <div class="metric-card" id="m-tdsr-card">
+          <div class="metric-label">TDSR / MSR check</div>
+          <div class="metric-val console-display-num"><span id="m-tdsr-pct">—</span><span class="small">%</span></div>
+          <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;" id="m-pills"></div>
+        </div>
+      </div>
+
+      <!-- Gated: full report -->
+      <div class="gated is-locked" id="reportGate">
+        <div class="gated-content" style="display:flex; flex-direction:column; gap: 20px;">
+
+          <!-- Bank rate comparison -->
+          <div class="console-card card-pad">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
+              <div>
+                <span class="sec-tag">Bank rates</span>
+                <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">Top packages, ranked by total cost</h3>
+              </div>
+              <span class="pill pass" id="bestSavingsPill"><span class="dot"></span>Save $—</span>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="rate-table" id="rateTable">
+                <thead>
+                  <tr>
+                    <th style="width: 30%;">Bank · Package</th>
+                    <th class="right">Rate p.a.</th>
+                    <th class="right">Monthly</th>
+                    <th class="right">Total cost (lock-in)</th>
+                  </tr>
+                </thead>
+                <tbody id="rateTableBody"></tbody>
+              </table>
+            </div>
+            <div style="margin-top:12px; font-size: 11.5px; color: var(--faint); line-height: 1.55;">
+              Rates are indicative as of Apr 2026 and subject to bank credit assessment. Lock-in cost = total of monthly payments for the lock-in period (typically 2 years).
+            </div>
+          </div>
+
+          <!-- Charts row 1 -->
+          <div class="grid lg:grid-cols-2 gap-5">
+            <div class="chart-card">
+              <h4>Bank rate comparison</h4>
+              <div class="chart-sub">Total cost over 2-year lock-in — lower is better.</div>
+              <div class="chart-h-lg"><canvas id="chart-bank"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <h4>Loan composition</h4>
+              <div class="chart-sub">How your total payments split over the full tenure.</div>
+              <div class="chart-h-lg"><canvas id="chart-composition"></canvas></div>
+            </div>
+          </div>
+
+          <!-- Charts row 2 -->
+          <div class="grid lg:grid-cols-2 gap-5">
+            <div class="chart-card">
+              <h4>TDSR / MSR usage</h4>
+              <div class="chart-sub" id="chart-gauge-sub">Where this loan sits against MAS caps.</div>
+              <div class="chart-h-md"><canvas id="chart-gauge"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <h4 id="chart-amort-title">Outstanding balance over time</h4>
+              <div class="chart-sub">Remaining principal year by year at the best rate.</div>
+              <div class="chart-h-md"><canvas id="chart-amort"></canvas></div>
+            </div>
+          </div>
+
+          <!-- Refinance comparison (purchase mode shows scenario instead) -->
+          <div class="chart-card" id="comparisonCard">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px;">
+              <div>
+                <h4 id="comparisonTitle">Year-1 cash flow</h4>
+                <div class="chart-sub" id="comparisonSub">Each month's payment split: principal vs interest.</div>
+              </div>
+              <div id="comparisonLegend" style="display:flex; gap:14px; flex-wrap:wrap; font-size: 11.5px; color: var(--muted);"></div>
+            </div>
+            <div class="chart-h-lg" style="margin-top: 8px;"><canvas id="chart-compare"></canvas></div>
+          </div>
+
+          <!-- Action strip -->
+          <div class="console-card" style="background: linear-gradient(135deg, var(--accent-soft) 0%, var(--surface) 70%); padding: 22px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap: 16px;">
+              <div>
+                <div class="sec-tag" style="color: var(--accent-strong);">Next step</div>
+                <div class="console-display" style="font-size: 20px; margin-top: 4px; color: var(--ink);">Want us to lock in the best rate?</div>
+                <div style="color: var(--muted); font-size: 13.5px; margin-top: 2px;">Your dedicated broker will call within 24 hours — zero fees, banks pay us.</div>
+              </div>
+              <a href="https://wa.me/6587520859?text=Hi%2C%20I%20want%20to%20lock%20in%20the%20best%20rate%20from%20my%20mortgage%20report." target="_blank" rel="noopener" class="btn-primary-console" style="background: #25D366; border-color: #25D366;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8 8 0 0 0 4.32 15.6L4 20l4.5-1.18A8 8 0 0 0 17.6 6.32Z"/></svg>
+                WhatsApp my broker
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gate overlay -->
+        <div class="gate-overlay">
+          <div class="gate-card">
+            <div class="lock-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3>Unlock your full report</h3>
+            <p>Get the complete bank-by-bank breakdown — instantly viewable here and emailed as a PDF.</p>
+            <div class="gate-bullets">
+              <div class="gate-bullet">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>All 16 banks ranked by your total cost</span>
+              </div>
+              <div class="gate-bullet">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Loan composition + amortisation curves</span>
+              </div>
+              <div class="gate-bullet">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>TDSR / MSR detailed analysis</span>
+              </div>
+              <div class="gate-bullet">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>PDF copy in your inbox in 30 seconds</span>
+              </div>
+            </div>
+            <button type="button" class="btn-primary-console" id="openModalBtn" style="width:100%; justify-content:center;">
+              Get my full report — free
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <div style="font-size: 11px; color: var(--faint); margin-top: 12px;">No spam · we never share your data · unsubscribe any time</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust badges (always visible) -->
+    <div style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap: 24px; margin-top: 3rem; opacity: .85;">
+      <div style="display:flex; align-items:center; gap:8px; font-size:.78rem; color: var(--muted);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        MAS-compliant calculations
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:.78rem; color: var(--muted);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        SSL-encrypted submission
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:.78rem; color: var(--muted);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Trusted by 500+ Singapore homeowners
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section style="background: var(--cream-100); padding: 5rem 0;">
+  <div class="max-w-4xl mx-auto px-6">
+    <div style="text-align:center; margin-bottom: 2rem;">
+      <span class="sec-tag" style="color: var(--gold-500);">FAQ</span>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 400; color: var(--navy-900); margin-top: .5rem;">
+        Common questions
+      </h2>
+    </div>
+
+    <details class="faq-item">
+      <summary class="faq-q">Is the report really free?</summary>
+      <div class="faq-a">Yes. Banks pay us a referral fee when a mortgage closes, so the report and our advisory service cost you nothing. There is no obligation — many users just want to benchmark their current loan.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">How accurate are the rates?</summary>
+      <div class="faq-a">Rates shown are indicative and refreshed regularly with packages from 16 Singapore banks. The exact rate you receive depends on bank credit assessment, valuation, and the loan amount. We confirm every rate before you sign anything.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Why do you need my contact details?</summary>
+      <div class="faq-a">Two reasons. First, we email you a PDF copy of the report you can refer back to. Second, a Nexus broker reaches out within 24 hours to answer questions and lock in your rate if you're ready. We never share your data with third parties.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">What is TDSR and MSR?</summary>
+      <div class="faq-a">TDSR (Total Debt Servicing Ratio) caps your total monthly debt payments at 55% of gross income, stress-tested at MAS's 4% floor. MSR (Mortgage Servicing Ratio) applies only to HDB and EC purchases, capping the mortgage portion at 30%. The report tells you exactly where you stand against both.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Does it work for HDB and private property?</summary>
+      <div class="faq-a">Yes — both. Toggle the property type in the calculator. For HDB and EC, we apply the MSR cap on top of TDSR. For private property, only TDSR applies. The report adjusts automatically.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="site-footer">
+  <div class="gold-line" style="position:absolute; top:0; left:0; right:0;"></div>
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-4 gap-8">
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:#FAF7F2; margin-bottom: .5rem;">Nexus<span style="color:var(--gold-400);">.</span></div>
+        <p style="font-size:.85rem; line-height: 1.7; color: rgba(250,247,242,.55);">
+          Singapore's free mortgage advisory. We compare 16 banks, MAS-compliant, zero fees.
+        </p>
+      </div>
+      <div>
+        <div class="footer-h">Tools</div>
+        <a href="/free-report/" class="footer-link">Free Report</a>
+        <a href="/affordability/" class="footer-link">Affordability</a>
+        <a href="/refinance-calculator/" class="footer-link">Refinance Savings</a>
+        <a href="/equity-loan/" class="footer-link">Equity / Cash-out</a>
+        <a href="/mortgage-rates/" class="footer-link">Current Rates</a>
+      </div>
+      <div>
+        <div class="footer-h">Company</div>
+        <a href="/about/" class="footer-link">About</a>
+        <a href="/services/" class="footer-link">Services</a>
+        <a href="/blog/" class="footer-link">Insights</a>
+        <a href="/contact/" class="footer-link">Contact</a>
+      </div>
+      <div>
+        <div class="footer-h">Talk to us</div>
+        <a href="https://wa.me/6587520859" target="_blank" rel="noopener" class="footer-link">WhatsApp · +65 8752 0859</a>
+        <a href="tel:+6587520859" class="footer-link">Call · +65 8752 0859</a>
+        <a href="mailto:danler@nexusmortgage.sg" class="footer-link">Email · danler@nexusmortgage.sg</a>
+        <span class="footer-link" style="color:rgba(250,247,242,.4);">Mon-Sat · 9am-7pm</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nexus Mortgage SG. All rights reserved.</span>
+      <span>MAS-compliant · No referral fees from clients</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ LEAD MODAL ============ -->
+<div class="modal-backdrop" id="leadModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <span class="modal-eyebrow">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Free · No obligation
+    </span>
+    <h2 id="modalTitle" class="modal-title">One step from your full report</h2>
+    <p class="modal-sub">We'll unlock the full breakdown here and email you a PDF copy. A Nexus broker may follow up within 24 hours.</p>
+
+    <form id="leadForm" novalidate>
+      <div class="hp-field">
+        <label>Don't fill this — <input type="text" id="hp-input" name="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <div class="field" style="margin-bottom: 12px;">
+        <label class="field-label" for="lead-name">Full name</label>
+        <input id="lead-name" type="text" class="field-input" placeholder="e.g. Jeremy Tan" autocomplete="name" required>
+      </div>
+      <div class="field" style="margin-bottom: 12px;">
+        <label class="field-label" for="lead-phone">Mobile <span class="normal">SG number</span></label>
+        <div class="input-wrap">
+          <span class="input-prefix" style="color: var(--ink-2); font-weight: 500;">+65</span>
+          <input id="lead-phone" type="tel" class="field-input has-prefix num" placeholder="9123 4567" autocomplete="tel" inputmode="numeric" maxlength="9" required style="padding-left:44px;">
+        </div>
+      </div>
+      <div class="field" style="margin-bottom: 14px;">
+        <label class="field-label" for="lead-email">Email</label>
+        <input id="lead-email" type="email" class="field-input" placeholder="you@example.com" autocomplete="email" required>
+      </div>
+      <label style="display:flex; gap:10px; align-items:flex-start; font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; cursor:pointer;">
+        <input type="checkbox" id="lead-consent" required style="margin-top:2px; accent-color: var(--accent);">
+        <span>I'd like Nexus to contact me about my report. I can unsubscribe any time.</span>
+      </label>
+      <button type="submit" class="btn-primary-console" id="leadSubmit" style="width:100%; justify-content:center;">
+        <span class="btn-label">Send me the report</span>
+      </button>
+      <div class="modal-foot">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Encrypted submission. Banks pay us — no fees to you, ever.
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ TOAST ============ -->
+<div class="toast" id="toast"></div>
+
+<!-- ============ JAVASCRIPT ============ -->
+<script>
+/* ============ CONFIG ============ */
+// TODO: paste your Make webhook URL here once your scenario is set up.
+// Until set, submissions show success but nothing is sent.
+const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/k85r6qpuqd3p3npd9w7xe86jyc8dl7y9';
+
+// Indicative rates (Q2 2026). Update from /mortgage-rates/ rate sheet.
+const BANK_RATES = [
+  { bank: 'DBS',              pkg: 'Fixed 2Y',      rate: 1.45 },
+  { bank: 'OCBC',             pkg: 'Fixed 2Y',      rate: 1.50 },
+  { bank: 'UOB',              pkg: 'Fixed 2Y',      rate: 1.55 },
+  { bank: 'HSBC',             pkg: 'Fixed 2Y',      rate: 1.50 },
+  { bank: 'Standard Chart.',  pkg: 'Fixed 2Y',      rate: 1.65 },
+  { bank: 'Maybank',          pkg: 'Fixed 2Y',      rate: 1.60 },
+  { bank: 'Citibank',         pkg: 'Fixed 2Y',      rate: 1.55 },
+  { bank: 'Bank of China',    pkg: 'Fixed 2Y',      rate: 1.70 },
+  { bank: 'CIMB',             pkg: '3M SORA + 0.85',rate: 1.87 },
+  { bank: 'RHB',              pkg: '3M SORA + 0.80',rate: 1.82 },
+];
+
+// HDB concessionary appended only when HDB type chosen (informational)
+const HDB_CONCESSIONARY = { bank: 'HDB',  pkg: 'Concessionary', rate: 2.60 };
+
+const STRESS_RATE = 0.04;          // MAS 4% stress floor for residential
+const TDSR_CAP = 0.55;
+const MSR_CAP = 0.30;
+const LOCK_IN_YEARS = 2;
+
+/* ============ STATE ============ */
+let mode = 'purchase';
+let lastResult = null;
+let charts = {};
+
+/* ============ HELPERS ============ */
+const $ = id => document.getElementById(id);
+const fmt = (n, d = 0) => n == null || isNaN(n) ? '—' : n.toLocaleString('en-SG', { minimumFractionDigits: d, maximumFractionDigits: d });
+const fmtMoney = n => '$' + fmt(Math.round(n));
+const fmtPct = (n, d = 2) => fmt(n * 100, d) + '%';
+
+/* PMT — monthly mortgage payment, principal+interest, fully amortizing */
+function pmt(principal, annualRate, years) {
+  if (principal <= 0 || years <= 0) return 0;
+  const r = annualRate / 12;
+  const n = years * 12;
+  if (r === 0) return principal / n;
+  return principal * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+}
+
+/* Build amortization series (yearly remaining balance) */
+function amortBalance(principal, annualRate, years) {
+  const monthly = pmt(principal, annualRate, years);
+  const r = annualRate / 12;
+  let bal = principal;
+  const out = [{ year: 0, balance: bal, principal: 0, interest: 0 }];
+  for (let y = 1; y <= years; y++) {
+    let yPrin = 0, yInt = 0;
+    for (let m = 0; m < 12; m++) {
+      const i = bal * r;
+      const p = monthly - i;
+      bal -= p; yInt += i; yPrin += p;
+    }
+    if (bal < 0) bal = 0;
+    out.push({ year: y, balance: bal, principal: yPrin, interest: yInt });
+  }
+  return { monthly, series: out };
+}
+
+/* ============ MODE TOGGLE ============ */
+const modeToggle = $('modeToggle');
+const modeIndicator = $('modeIndicator');
+function positionModeIndicator() {
+  const active = modeToggle.querySelector('.mode-btn.active');
+  if (!active) return;
+  modeIndicator.style.width = active.offsetWidth + 'px';
+  modeIndicator.style.transform = `translateX(${active.offsetLeft - 4}px)`;
+}
+modeToggle.addEventListener('click', e => {
+  const btn = e.target.closest('.mode-btn'); if (!btn) return;
+  modeToggle.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b === btn));
+  mode = btn.dataset.mode;
+  $('form-purchase').style.display = mode === 'purchase' ? '' : 'none';
+  $('form-refinance').style.display = mode === 'refinance' ? '' : 'none';
+  positionModeIndicator();
+});
+window.addEventListener('load', positionModeIndicator);
+window.addEventListener('resize', positionModeIndicator);
+
+/* ============ PROPERTY TYPE TOGGLES ============ */
+function positionPropIndicator(toggle) {
+  const ind = toggle.querySelector('.prop-indicator');
+  const active = toggle.querySelector('.prop-btn.active');
+  if (!ind || !active) return;
+  ind.style.width = active.offsetWidth + 'px';
+  ind.style.transform = `translateX(${active.offsetLeft - 4}px)`;
+}
+document.querySelectorAll('.prop-toggle').forEach(toggle => {
+  // Click handlers
+  toggle.addEventListener('click', e => {
+    const btn = e.target.closest('.prop-btn'); if (!btn) return;
+    if (btn.classList.contains('active')) return;
+    toggle.querySelectorAll('.prop-btn').forEach(b => b.classList.toggle('active', b === btn));
+    positionPropIndicator(toggle);
+
+    // Auto-update tenure default when in purchase mode (only if current tenure is a known default)
+    if (toggle.dataset.form === 'purchase') {
+      const tenureEl = $('p-tenure');
+      const newDefault = btn.dataset.prop === 'hdb' ? 25 : 30;
+      const cur = +tenureEl.value;
+      if (cur === 25 || cur === 30 || cur === 0 || isNaN(cur)) {
+        tenureEl.value = newDefault;
+      }
+      const hint = $('p-prop-hint');
+      if (hint) {
+        hint.textContent = btn.dataset.prop === 'hdb'
+          ? 'MSR cap of 30% applies to HDB & EC. Tenure default: 25y.'
+          : 'No MSR cap. Private property tenure default: 30y.';
+      }
+    }
+  });
+});
+// Initial positioning (after fonts load to get correct widths)
+function initPropToggles() {
+  document.querySelectorAll('.prop-toggle').forEach(positionPropIndicator);
+}
+window.addEventListener('load', initPropToggles);
+window.addEventListener('resize', () => document.querySelectorAll('.prop-toggle').forEach(positionPropIndicator));
+
+/* ============ MULTI-BORROWER (purchase only) ============ */
+const MAX_BORROWERS = 4;
+let borrowerCount = 1;
+
+function updateBorrowerCountText() {
+  const t = $('borrower-count-text');
+  if (t) t.textContent = String(borrowerCount);
+  const btn = $('addBorrowerBtn');
+  if (btn) btn.style.display = borrowerCount >= MAX_BORROWERS ? 'none' : '';
+}
+function addBorrower() {
+  if (borrowerCount >= MAX_BORROWERS) return;
+  borrowerCount++;
+  const slot = $('borrower-extra-slot');
+  const row = document.createElement('div');
+  row.className = 'field borrower-group borrower-row';
+  row.dataset.borrowerN = borrowerCount;
+  row.innerHTML = `
+    <label class="field-label">Borrower ${borrowerCount} <span class="normal">income & age</span><button type="button" class="borrower-remove" aria-label="Remove this borrower">×</button></label>
+    <div class="borrower-pair">
+      <div class="input-wrap">
+        <span class="input-prefix">$</span>
+        <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-income" data-comma="1" autocomplete="off" value="0" placeholder="Income">
+      </div>
+      <input type="number" inputmode="numeric" class="field-input num borrower-age" min="18" max="80" value="35" placeholder="Age" aria-label="Borrower ${borrowerCount} age">
+    </div>
+  `;
+  slot.appendChild(row);
+  // Wire up income formatter
+  const incomeInp = row.querySelector('.borrower-income');
+  incomeInp.addEventListener('input', () => formatCommaInput(incomeInp));
+  incomeInp.addEventListener('blur', () => formatCommaInput(incomeInp));
+  formatCommaInput(incomeInp);
+  // Recompute IWAA hint when income or age changes
+  const ageInp = row.querySelector('.borrower-age');
+  [incomeInp, ageInp].forEach(el => el.addEventListener('input', updateIwaaHint));
+  // Remove handler
+  row.querySelector('.borrower-remove').addEventListener('click', () => removeBorrower(row));
+  updateBorrowerCountText();
+  updateIwaaHint();
+  // Focus the new income field
+  setTimeout(() => incomeInp.focus(), 50);
+}
+function removeBorrower(row) {
+  row.style.transition = 'opacity .2s, transform .2s';
+  row.style.opacity = '0';
+  row.style.transform = 'translateY(-6px)';
+  setTimeout(() => {
+    row.remove();
+    borrowerCount--;
+    // Renumber remaining
+    document.querySelectorAll('.borrower-row').forEach((r, i) => {
+      const n = i + 2;
+      r.dataset.borrowerN = n;
+      const lbl = r.querySelector('.field-label');
+      lbl.firstChild.textContent = `Borrower ${n} `;
+      const ageInp = r.querySelector('.borrower-age');
+      if (ageInp) ageInp.setAttribute('aria-label', `Borrower ${n} age`);
+    });
+    updateBorrowerCountText();
+    updateIwaaHint();
+  }, 180);
+}
+const addBtn = $('addBorrowerBtn');
+if (addBtn) addBtn.addEventListener('click', addBorrower);
+
+/* Live IWAA hint under tenure field (purchase mode) */
+function updateIwaaHint() {
+  if (mode !== 'purchase') return;
+  const { incomes, ages } = getBorrowerData();
+  const iwaa = calcIWAA(incomes, ages);
+  const el = $('iwaa-cap-text');
+  if (!el) return;
+  if (!iwaa) { el.textContent = '—'; return; }
+  const cap = Math.max(0, Math.floor(65 - iwaa));
+  const propType = getPropType('purchase');
+  const propCap = propType === 'hdb' ? 25 : 30;
+  const fullCap = Math.min(propCap, cap);
+  const tenure = nVal('p-tenure') || 25;
+  const exceeds = tenure > fullCap;
+  el.innerHTML = `IWAA <strong>${iwaa.toFixed(1)}y</strong> · max for 75% LTV: <strong>${fullCap}y</strong>${exceeds ? ' · <span style="color:var(--c-amber); font-weight:600;">tenure exceeds cap → 55% LTV</span>' : ''}`;
+}
+// Hook IWAA hint to primary borrower fields + tenure + property toggle
+['p-income', 'p-age-1', 'p-tenure'].forEach(id => {
+  const el = $(id);
+  if (el) el.addEventListener('input', updateIwaaHint);
+});
+document.querySelectorAll('.prop-toggle[data-form="purchase"] .prop-btn').forEach(b => b.addEventListener('click', () => setTimeout(updateIwaaHint, 30)));
+window.addEventListener('load', updateIwaaHint);
+
+/* ============ CALCULATION ============ */
+function nVal(id) {
+  // Strip commas, return Number or 0
+  const v = $(id).value;
+  if (v == null) return 0;
+  return +String(v).replace(/,/g, '') || 0;
+}
+function getPropType(formName) {
+  const t = document.querySelector('.prop-toggle[data-form="' + formName + '"]');
+  if (!t) return 'hdb';
+  const active = t.querySelector('.prop-btn.active');
+  return active ? active.dataset.prop : 'hdb';
+}
+function getBorrowerData() {
+  // Returns { incomes:[], ages:[] } including primary + dynamically-added rows
+  const incomes = [nVal('p-income')];
+  const ages = [+($('p-age-1') || {}).value || 35];
+  document.querySelectorAll('.borrower-row').forEach(r => {
+    const inc = r.querySelector('.borrower-income');
+    const age = r.querySelector('.borrower-age');
+    if (inc) incomes.push(+String(inc.value).replace(/,/g, '') || 0);
+    if (age) ages.push(+age.value || 35);
+  });
+  return { incomes, ages };
+}
+function calcIWAA(incomes, ages) {
+  const totalIncome = incomes.reduce((s, v) => s + v, 0);
+  if (totalIncome === 0) return null;
+  const weighted = incomes.reduce((s, inc, i) => s + inc * (ages[i] || 35), 0);
+  return weighted / totalIncome;
+}
+function getInputs() {
+  if (mode === 'purchase') {
+    const { incomes, ages } = getBorrowerData();
+    const iwaa = calcIWAA(incomes, ages);
+    return {
+      mode: 'purchase',
+      propertyType: getPropType('purchase'),
+      price: nVal('p-price'),
+      loan: nVal('p-loan'),
+      tenure: nVal('p-tenure') || 25,
+      income: incomes.reduce((s, v) => s + v, 0),
+      debts: nVal('p-debts'),
+      borrowers: incomes.length,
+      borrowerIncomes: incomes,
+      borrowerAges: ages,
+      iwaa,
+    };
+  } else {
+    return {
+      mode: 'refinance',
+      propertyType: getPropType('refinance'),
+      loan: nVal('r-outstanding'),
+      currentRate: (+$('r-current-rate').value || 0) / 100,
+      tenure: nVal('r-tenure-left') || 20,
+      income: nVal('r-income'),
+      debts: nVal('r-debts'),
+      borrowers: 1,
+      borrowerIncomes: [nVal('r-income')],
+      borrowerAges: [],
+      iwaa: null,
+    };
+  }
+}
+
+function computeReport(inp) {
+  // Best rate from bank list (always exclude HDB concessionary from "best" comparison)
+  const bestPkg = BANK_RATES.reduce((a, b) => a.rate < b.rate ? a : b);
+  const bestRate = bestPkg.rate / 100;
+
+  // Build per-bank metrics
+  const banks = BANK_RATES.map(b => {
+    const r = b.rate / 100;
+    const monthly = pmt(inp.loan, r, inp.tenure);
+    const lockInCost = monthly * 12 * LOCK_IN_YEARS;
+    return { ...b, monthly, lockInCost };
+  }).sort((a, b) => a.lockInCost - b.lockInCost);
+
+  // Stress monthly (TDSR/MSR)
+  const stressMonthly = pmt(inp.loan, STRESS_RATE, inp.tenure);
+  const tdsrUsage = inp.income > 0 ? (stressMonthly + inp.debts) / inp.income : 0;
+  const msrUsage = inp.income > 0 ? stressMonthly / inp.income : 0;
+  const tdsrPass = tdsrUsage <= TDSR_CAP;
+  const msrApplies = inp.propertyType === 'hdb';
+  const msrPass = !msrApplies || msrUsage <= MSR_CAP;
+
+  // Best-rate amort
+  const { monthly: monthlyBest, series } = amortBalance(inp.loan, bestRate, inp.tenure);
+  const totalInterest = series.reduce((s, y) => s + y.interest, 0);
+  const totalPaid = monthlyBest * 12 * inp.tenure;
+
+  // Refi savings (only if refi)
+  let refi = null;
+  if (inp.mode === 'refinance') {
+    const monthlyCurrent = pmt(inp.loan, inp.currentRate, inp.tenure);
+    const lockInCurrent = monthlyCurrent * 12 * LOCK_IN_YEARS;
+    const lockInBest = monthlyBest * 12 * LOCK_IN_YEARS;
+    refi = {
+      currentRate: inp.currentRate,
+      monthlyCurrent,
+      monthlySavings: monthlyCurrent - monthlyBest,
+      lockInSavings: lockInCurrent - lockInBest,
+      annualSavings: (monthlyCurrent - monthlyBest) * 12,
+    };
+  }
+
+  // Best vs second-best savings (purchase mode "save" pill)
+  const second = banks[1];
+  const savingsVsSecond = (second ? second.lockInCost - banks[0].lockInCost : 0);
+
+  // IWAA-based tenure cap (full 75% LTV requires age + tenure ≤ 65)
+  // HDB bank loan: full LTV needs tenure ≤ 25; private: tenure ≤ 30
+  const iwaa = inp.iwaa;
+  const isHdb = inp.propertyType === 'hdb';
+  const propertyTenureCap = isHdb ? 25 : 30;
+  const iwaaTenureCap = iwaa ? Math.max(0, Math.floor(65 - iwaa)) : null;
+  const fullLtvCap = iwaaTenureCap !== null ? Math.min(propertyTenureCap, iwaaTenureCap) : propertyTenureCap;
+  const ltvFull = inp.tenure <= fullLtvCap;
+  const ltvPct = ltvFull ? 75 : 55;
+  const tenureExceedsIwaa = iwaaTenureCap !== null && inp.tenure > iwaaTenureCap;
+
+  return {
+    inp, banks, bestPkg, bestRate, monthlyBest,
+    series, totalInterest, totalPaid,
+    stressMonthly, tdsrUsage, msrUsage, tdsrPass, msrPass, msrApplies,
+    refi, savingsVsSecond,
+    iwaa, iwaaTenureCap, fullLtvCap, ltvFull, ltvPct, tenureExceedsIwaa,
+    propertyTenureCap,
+  };
+}
+
+/* ============ RENDER ============ */
+function render(r) {
+  // Top metrics (visible)
+  $('m-best-rate').textContent = (r.bestRate * 100).toFixed(2);
+  $('m-best-bank').textContent = `${r.banks[0].bank} · ${r.banks[0].pkg}`;
+  $('m-monthly').textContent = fmt(Math.round(r.monthlyBest));
+  $('m-monthly-sub').textContent = `at ${(r.bestRate*100).toFixed(2)}% over ${r.inp.tenure}y`;
+
+  const tdsrPct = (r.tdsrUsage * 100);
+  $('m-tdsr-pct').textContent = tdsrPct.toFixed(1);
+  const tdsrCard = $('m-tdsr-card');
+  tdsrCard.classList.remove('tinted-green', 'tinted-fail', 'tinted-warn');
+  if (!r.tdsrPass || (r.msrApplies && !r.msrPass)) tdsrCard.classList.add('tinted-fail');
+  else if (r.tdsrUsage > 0.45) tdsrCard.classList.add('tinted-warn');
+  else tdsrCard.classList.add('tinted-green');
+
+  // Pills (TDSR · MSR · LTV status)
+  const pills = [];
+  pills.push(`<span class="pill ${r.tdsrPass ? 'pass' : 'fail'}"><span class="dot"></span>TDSR ${r.tdsrPass ? 'pass' : 'fail'}</span>`);
+  if (r.msrApplies) pills.push(`<span class="pill ${r.msrPass ? 'pass' : 'fail'}"><span class="dot"></span>MSR ${r.msrPass ? 'pass' : 'fail'}</span>`);
+  if (r.iwaa) {
+    const ltvCls = r.ltvFull ? 'pass' : 'warn';
+    pills.push(`<span class="pill ${ltvCls}"><span class="dot"></span>${r.ltvPct}% LTV</span>`);
+  }
+  $('m-pills').innerHTML = pills.join('');
+
+  // Bank rate table
+  const body = $('rateTableBody');
+  body.innerHTML = r.banks.slice(0, 8).map((b, i) => `
+    <tr class="${i === 0 ? 'best' : ''}">
+      <td><div class="bank-name">${b.bank}</div><div class="pkg">${b.pkg}</div></td>
+      <td class="right num">${b.rate.toFixed(2)}%</td>
+      <td class="right num">$${fmt(Math.round(b.monthly))}</td>
+      <td class="right num">$${fmt(Math.round(b.lockInCost))}</td>
+    </tr>
+  `).join('');
+
+  // Best savings pill
+  if (r.inp.mode === 'refinance' && r.refi) {
+    $('bestSavingsPill').innerHTML = `<span class="dot"></span>Save $${fmt(Math.round(r.refi.lockInSavings))} over lock-in`;
+  } else {
+    $('bestSavingsPill').innerHTML = `<span class="dot"></span>$${fmt(Math.round(r.savingsVsSecond))} below 2nd-best`;
+  }
+
+  // Charts
+  drawCharts(r);
+}
+
+/* ============ CHART PALETTE & THEME ============ */
+const CHART_COLORS = {
+  ink: '#0B1220', muted: '#56657A', faint: '#94A3B8', border: '#E5E7EB',
+  bars: ['#059669', '#1E3A8A', '#0D9488', '#B45309', '#6D28D9', '#0891B2', '#BE123C', '#D97706', '#047857', '#1D4ED8'],
+  composition: ['#059669', '#DC2626'],   // principal vs interest
+  gaugeOk: '#059669', gaugeWarn: '#D97706', gaugeFail: '#DC2626', gaugeRest: '#E5E7EB',
+  amort: '#1E3A8A',
+  cashflow: { principal: '#059669', interest: '#DC2626' },
+  refi: { current: '#DC2626', proposed: '#059669' },
+};
+const CHART_FONT = { family: 'Plus Jakarta Sans', size: 11 };
+
+if (typeof ChartDataLabels !== 'undefined') {
+  Chart.register(ChartDataLabels);
+  Chart.defaults.set('plugins.datalabels', { display: false });
+}
+
+/* ============ DRAW CHARTS ============ */
+function destroyChart(id) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } }
+
+function drawCharts(r) {
+  drawBankBar(r);
+  drawComposition(r);
+  drawGauge(r);
+  drawAmort(r);
+  drawCompare(r);
+}
+
+function drawBankBar(r) {
+  destroyChart('chart-bank');
+  const top = r.banks.slice(0, 6);
+  const ctx = $('chart-bank');
+  charts['chart-bank'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: top.map(b => b.bank),
+      datasets: [{
+        label: 'Total cost (lock-in)',
+        data: top.map(b => Math.round(b.lockInCost)),
+        backgroundColor: top.map((_, i) => i === 0 ? CHART_COLORS.bars[0] : CHART_COLORS.bars[i+1] || '#94A3B8'),
+        borderRadius: 6,
+        maxBarThickness: 38,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => '$' + fmt(c.parsed.x) + ' over ' + LOCK_IN_YEARS + 'y lock-in' } },
+        datalabels: {
+          display: true, anchor: 'end', align: 'end',
+          font: { ...CHART_FONT, weight: '600' }, color: CHART_COLORS.ink,
+          formatter: v => '$' + fmt(Math.round(v / 1000)) + 'k',
+        },
+      },
+      scales: {
+        x: { grid: { color: CHART_COLORS.border }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint, callback: v => '$' + (v/1000).toFixed(0) + 'k' } },
+        y: { grid: { display: false }, ticks: { font: { ...CHART_FONT, weight: '600' }, color: CHART_COLORS.ink } },
+      },
+      layout: { padding: { right: 50 } },
+    }
+  });
+}
+
+function drawComposition(r) {
+  destroyChart('chart-composition');
+  const ctx = $('chart-composition');
+  const principal = r.inp.loan;
+  const interest = r.totalInterest;
+  charts['chart-composition'] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Principal', 'Interest'],
+      datasets: [{
+        data: [Math.round(principal), Math.round(interest)],
+        backgroundColor: CHART_COLORS.composition,
+        borderColor: '#fff', borderWidth: 3,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '64%',
+      plugins: {
+        legend: { position: 'bottom', labels: { font: CHART_FONT, color: CHART_COLORS.muted, padding: 14, boxWidth: 10, boxHeight: 10, usePointStyle: true } },
+        tooltip: { callbacks: { label: c => c.label + ': $' + fmt(c.parsed) } },
+        datalabels: {
+          display: true, color: '#fff', font: { ...CHART_FONT, weight: '700', size: 12 },
+          formatter: (v, c) => {
+            const t = c.dataset.data.reduce((a,b) => a+b, 0);
+            return Math.round(v / t * 100) + '%';
+          }
+        },
+      },
+    }
+  });
+}
+
+function drawGauge(r) {
+  destroyChart('chart-gauge');
+  const ctx = $('chart-gauge');
+  const pct = Math.min(r.tdsrUsage, 1);
+  const cap = TDSR_CAP;
+  let color = CHART_COLORS.gaugeOk;
+  if (pct > cap) color = CHART_COLORS.gaugeFail;
+  else if (pct > cap * 0.85) color = CHART_COLORS.gaugeWarn;
+
+  // segments: used, free up to cap, overflow
+  const used = Math.min(pct, cap);
+  const free = Math.max(0, cap - pct);
+  const over = Math.max(0, pct - cap);
+  const rest = Math.max(0, 1 - cap - over);
+
+  $('chart-gauge-sub').textContent = `${(pct*100).toFixed(1)}% of income used vs ${(cap*100).toFixed(0)}% cap.`;
+
+  charts['chart-gauge'] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Used', 'Free', 'Over cap', 'Beyond cap'],
+      datasets: [{
+        data: [used, free, over, rest],
+        backgroundColor: [color, '#E2E8F0', CHART_COLORS.gaugeFail, '#F1F3F5'],
+        borderColor: '#fff', borderWidth: 2,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '74%',
+      circumference: 360, rotation: -90,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => c.label + ': ' + (c.parsed*100).toFixed(1) + '%' } },
+        datalabels: { display: false },
+      },
+    },
+    plugins: [{
+      id: 'centerLabel',
+      afterDraw(chart) {
+        const { ctx, chartArea } = chart;
+        const cx = (chartArea.left + chartArea.right) / 2;
+        const cy = (chartArea.top + chartArea.bottom) / 2;
+        ctx.save();
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillStyle = CHART_COLORS.ink;
+        ctx.font = '600 22px Fraunces, serif';
+        ctx.fillText((pct*100).toFixed(1) + '%', cx, cy - 6);
+        ctx.fillStyle = CHART_COLORS.muted;
+        ctx.font = '500 11px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText(pct > cap ? 'OVER MAS CAP' : 'TDSR usage', cx, cy + 14);
+        ctx.restore();
+      }
+    }],
+  });
+}
+
+function drawAmort(r) {
+  destroyChart('chart-amort');
+  const ctx = $('chart-amort');
+  $('chart-amort-title').textContent = r.inp.mode === 'refinance' ? 'Outstanding balance — proposed loan' : 'Outstanding balance over time';
+  charts['chart-amort'] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: r.series.map(y => 'Y' + y.year),
+      datasets: [{
+        label: 'Balance',
+        data: r.series.map(y => Math.round(y.balance)),
+        borderColor: CHART_COLORS.amort,
+        backgroundColor: 'rgba(30, 58, 138, 0.08)',
+        fill: true, borderWidth: 2,
+        tension: 0.25, pointRadius: 0, pointHoverRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => 'Balance: $' + fmt(c.parsed.y) } },
+        datalabels: { display: false },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint, maxTicksLimit: 8 } },
+        y: { grid: { color: CHART_COLORS.border }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint, callback: v => '$' + (v/1000).toFixed(0) + 'k' } },
+      }
+    }
+  });
+}
+
+function drawCompare(r) {
+  destroyChart('chart-compare');
+  const ctx = $('chart-compare');
+  const titleEl = $('comparisonTitle');
+  const subEl = $('comparisonSub');
+  const legendEl = $('comparisonLegend');
+
+  if (r.inp.mode === 'refinance' && r.refi) {
+    // Refi comparison: monthly current vs proposed over remaining tenure (lump-sum each year)
+    titleEl.textContent = 'Current loan vs. proposed best rate';
+    subEl.textContent = `Stay at ${(r.refi.currentRate*100).toFixed(2)}% vs switch to ${(r.bestRate*100).toFixed(2)}% — annual cost.`;
+    legendEl.innerHTML = `
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:${CHART_COLORS.refi.current};border-radius:2px;display:inline-block;"></span>Current</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:${CHART_COLORS.refi.proposed};border-radius:2px;display:inline-block;"></span>Proposed</span>`;
+    const yrs = Math.min(r.inp.tenure, 5);
+    const labels = []; const cur = []; const prop = [];
+    for (let y = 1; y <= yrs; y++) {
+      labels.push('Y' + y);
+      cur.push(Math.round(r.refi.monthlyCurrent * 12));
+      prop.push(Math.round(r.monthlyBest * 12));
+    }
+    charts['chart-compare'] = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          { label: 'Current', data: cur, backgroundColor: CHART_COLORS.refi.current, borderRadius: 4, maxBarThickness: 30 },
+          { label: 'Proposed', data: prop, backgroundColor: CHART_COLORS.refi.proposed, borderRadius: 4, maxBarThickness: 30 },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: c => c.dataset.label + ': $' + fmt(c.parsed.y) } },
+          datalabels: { display: false },
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint } },
+          y: { grid: { color: CHART_COLORS.border }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint, callback: v => '$' + (v/1000).toFixed(0) + 'k' } }
+        }
+      }
+    });
+  } else {
+    // Year-1 cash flow: principal vs interest per month
+    titleEl.textContent = 'Year-1 monthly cash flow';
+    subEl.textContent = 'How each $' + fmt(Math.round(r.monthlyBest)) + ' splits between interest and principal in the first 12 months.';
+    legendEl.innerHTML = `
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:${CHART_COLORS.cashflow.interest};border-radius:2px;display:inline-block;"></span>Interest</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:${CHART_COLORS.cashflow.principal};border-radius:2px;display:inline-block;"></span>Principal</span>`;
+    // Compute month-by-month
+    const labels = []; const prin = []; const intr = [];
+    let bal = r.inp.loan; const rate = r.bestRate / 12;
+    for (let m = 1; m <= 12; m++) {
+      const i = bal * rate;
+      const p = r.monthlyBest - i;
+      labels.push('M' + m);
+      prin.push(Math.round(p));
+      intr.push(Math.round(i));
+      bal -= p;
+    }
+    charts['chart-compare'] = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          { label: 'Interest', data: intr, backgroundColor: CHART_COLORS.cashflow.interest, borderRadius: 3, maxBarThickness: 24, stack: 'a' },
+          { label: 'Principal', data: prin, backgroundColor: CHART_COLORS.cashflow.principal, borderRadius: 3, maxBarThickness: 24, stack: 'a' },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { mode: 'index', callbacks: { label: c => c.dataset.label + ': $' + fmt(c.parsed.y) } },
+          datalabels: { display: false },
+        },
+        scales: {
+          x: { stacked: true, grid: { display: false }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint, maxTicksLimit: 12 } },
+          y: { stacked: true, grid: { color: CHART_COLORS.border }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint, callback: v => '$' + fmt(v) } }
+        }
+      }
+    });
+  }
+}
+
+
+/* ============ COMMA FORMATTER FOR CURRENCY INPUTS ============ */
+function formatCommaInput(el) {
+  const cursorPos = el.selectionStart;
+  const oldLen = el.value.length;
+  const raw = el.value.replace(/[^0-9]/g, '');
+  const formatted = raw ? Number(raw).toLocaleString('en-SG') : '';
+  if (el.value === formatted) return;
+  el.value = formatted;
+  const newLen = formatted.length;
+  const newPos = Math.max(0, Math.min(newLen, cursorPos + (newLen - oldLen)));
+  if (document.activeElement === el) {
+    try { el.setSelectionRange(newPos, newPos); } catch(e) {}
+  }
+}
+document.querySelectorAll('.num-input').forEach(el => {
+  el.addEventListener('input', () => formatCommaInput(el));
+  el.addEventListener('blur', () => formatCommaInput(el));
+  // Allow paste
+  el.addEventListener('paste', () => setTimeout(() => formatCommaInput(el), 0));
+  formatCommaInput(el); // format any initial value
+});
+
+/* ============ PDF GENERATION ============ */
+function buildReportPdf(r, lead) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  const W = 210, H = 297, M = 15;
+  const CW = W - 2 * M;
+
+  // RGB colors
+  const NAVY = [11, 28, 58], GOLD = [196, 151, 59], CREAM = [250, 247, 242];
+  const INK = [11, 18, 32], MUTED = [86, 101, 122], BORDER = [229, 231, 235];
+  const SOFT_BG = [246, 247, 249];
+  const GREEN = [5, 150, 105], GREEN_SOFT = [236, 253, 245], GREEN_DARK = [4, 120, 87];
+  const RED = [220, 38, 38], RED_SOFT = [254, 242, 242];
+
+  const setColor = c => doc.setTextColor(c[0], c[1], c[2]);
+  const setFill = c => doc.setFillColor(c[0], c[1], c[2]);
+  const setDraw = c => doc.setDrawColor(c[0], c[1], c[2]);
+
+  // ===== HEADER BAND =====
+  setFill(NAVY); doc.rect(0, 0, W, 32, 'F');
+  setFill(GOLD); doc.rect(0, 32, W, 0.6, 'F');
+
+  // Logo
+  doc.setFont('times', 'normal'); doc.setFontSize(22); setColor(CREAM);
+  doc.text('Nexus', M, 16);
+  setColor(GOLD); doc.text('.', M + 23, 16);
+
+  // Title
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(12); setColor(CREAM);
+  doc.text('Personalised Mortgage Report', M, 25);
+
+  // Right column
+  const dateStr = new Date().toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' });
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor([180, 180, 180]);
+  doc.text('Generated ' + dateStr, W - M, 16, { align: 'right' });
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+  doc.text('FREE  ·  NO OBLIGATION', W - M, 25, { align: 'right' });
+
+  // ===== PREPARED FOR =====
+  let y = 45;
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+  doc.text('PREPARED FOR', M, y);
+  y += 6;
+  doc.setFont('times', 'normal'); doc.setFontSize(16); setColor(INK);
+  doc.text(lead.name, M, y);
+  y += 6;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(MUTED);
+  doc.text(lead.email + '   ·   ' + lead.phone, M, y);
+  y += 11;
+
+  // ===== YOUR LOAN BOX =====
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+  doc.text('YOUR LOAN', M, y);
+  y += 4;
+
+  setFill(SOFT_BG); doc.rect(M, y, CW, 22, 'F');
+  setDraw(BORDER); doc.rect(M, y, CW, 22);
+
+  const propLabel = r.inp.propertyType === 'hdb' ? 'HDB / EC' : 'Private';
+  const borrowerLabel = (r.inp.borrowers && r.inp.borrowers > 1) ? r.inp.borrowers + ' borrowers' : '1 borrower';
+  const tenureCell = r.iwaa
+    ? r.inp.tenure + 'y · IWAA ' + r.iwaa.toFixed(1) + 'y'
+    : r.inp.tenure + ' years';
+  const cells = [
+    ['PROPERTY TYPE', propLabel],
+    [r.inp.mode === 'purchase' ? 'LOAN AMOUNT' : 'OUTSTANDING', '$' + fmt(r.inp.loan)],
+    ['TENURE', tenureCell],
+    ['INCOME (' + borrowerLabel.toUpperCase() + ')', '$' + fmt(r.inp.income)],
+  ];
+  const cw = CW / 4;
+  cells.forEach((c, i) => {
+    const cx = M + cw * i + 5;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
+    doc.text(c[0], cx, y + 8);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(11); setColor(INK);
+    doc.text(c[1], cx, y + 16);
+    if (i < 3) {
+      setDraw(BORDER);
+      doc.line(M + cw * (i + 1), y + 4, M + cw * (i + 1), y + 18);
+    }
+  });
+  y += 30;
+
+  // ===== KEY FINDINGS =====
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+  doc.text('KEY FINDINGS', M, y);
+  y += 4;
+
+  // Two big metric cards
+  const card1W = CW * 0.5 - 3;
+  const card2W = CW * 0.5 - 3;
+
+  // Card 1: best rate (green tint)
+  setFill(GREEN_SOFT); doc.rect(M, y, card1W, 30, 'F');
+  setDraw([5, 150, 105]); doc.setLineWidth(0.3); doc.rect(M, y, card1W, 30);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GREEN_DARK);
+  doc.text('BEST RATE FOUND', M + 5, y + 7);
+  doc.setFont('times', 'normal'); doc.setFontSize(28); setColor(INK);
+  doc.text((r.bestRate * 100).toFixed(2) + '%', M + 5, y + 21);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(MUTED);
+  doc.text(r.banks[0].bank + '  ·  ' + r.banks[0].pkg, M + 5, y + 27);
+
+  // Card 2: monthly payment
+  const c2x = M + card1W + 6;
+  setFill(SOFT_BG); doc.rect(c2x, y, card2W, 30, 'F');
+  setDraw(BORDER); doc.setLineWidth(0.3); doc.rect(c2x, y, card2W, 30);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
+  doc.text('ESTIMATED MONTHLY PAYMENT', c2x + 5, y + 7);
+  doc.setFont('times', 'normal'); doc.setFontSize(28); setColor(INK);
+  doc.text('$' + fmt(Math.round(r.monthlyBest)), c2x + 5, y + 21);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(MUTED);
+  doc.text('Principal + interest, ' + r.inp.tenure + 'y tenure', c2x + 5, y + 27);
+  y += 34;
+
+  // ===== TDSR / MSR ROW =====
+  const tdsrPass = r.tdsrPass;
+  const msrPass = !r.msrApplies || r.msrPass;
+
+  setFill(SOFT_BG); doc.rect(M, y, CW, 18, 'F');
+  setDraw(BORDER); doc.rect(M, y, CW, 18);
+
+  // TDSR
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
+  doc.text('TDSR USAGE', M + 5, y + 6);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(15); setColor(INK);
+  doc.text((r.tdsrUsage * 100).toFixed(1) + '%', M + 5, y + 14);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(MUTED);
+  doc.text('of 55% MAS cap', M + 32, y + 14);
+
+  // TDSR pill
+  const tdsrFill = tdsrPass ? GREEN : RED;
+  setFill(tdsrFill);
+  doc.roundedRect(M + 70, y + 9, 22, 6, 2, 2, 'F');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor([255, 255, 255]);
+  doc.text(tdsrPass ? 'PASS' : 'FAIL', M + 81, y + 13, { align: 'center' });
+
+  // MSR (if HDB/EC)
+  if (r.msrApplies) {
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
+    doc.text('MSR USAGE', M + 105, y + 6);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(15); setColor(INK);
+    doc.text((r.msrUsage * 100).toFixed(1) + '%', M + 105, y + 14);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(MUTED);
+    doc.text('of 30% cap', M + 132, y + 14);
+
+    const msrFill = msrPass ? GREEN : RED;
+    setFill(msrFill);
+    doc.roundedRect(M + CW - 27, y + 9, 22, 6, 2, 2, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor([255, 255, 255]);
+    doc.text(msrPass ? 'PASS' : 'FAIL', M + CW - 16, y + 13, { align: 'center' });
+  } else {
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor([180, 180, 180]);
+    doc.text('MSR not applicable for private property', M + 105, y + 11);
+  }
+  // LTV pill (rightmost) — only when IWAA available
+  if (r.iwaa && r.msrApplies) {
+    // For HDB row already crowded; we'll put LTV info as a tiny note instead
+  }
+  y += 24;
+
+  // ===== IWAA / LTV INFO LINE (purchase + IWAA available) =====
+  if (r.iwaa) {
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+    doc.text('IWAA & LTV ELIGIBILITY', M, y);
+    y += 4;
+    setFill(SOFT_BG); doc.rect(M, y, CW, 13, 'F');
+    setDraw(BORDER); doc.rect(M, y, CW, 13);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(INK);
+    const iwaaTxt = 'IWAA ' + r.iwaa.toFixed(1) + 'y  ·  Full-LTV cap (65−IWAA): ' + r.fullLtvCap + 'y  ·  Chosen tenure: ' + r.inp.tenure + 'y';
+    doc.text(iwaaTxt, M + 5, y + 5.5);
+    // LTV badge on right
+    const ltvColor = r.ltvFull ? GREEN : [217, 119, 6];
+    setFill(ltvColor); doc.roundedRect(M + CW - 35, y + 3.5, 30, 6, 2, 2, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor([255, 255, 255]);
+    doc.text(r.ltvPct + '% LTV', M + CW - 20, y + 7.5, { align: 'center' });
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
+    const note = r.tenureExceedsIwaa
+      ? 'Note: tenure exceeds IWAA cap — bank LTV will be reduced from 75% to 55%.'
+      : 'Eligible for full 75% LTV under MAS rules.';
+    doc.text(note, M + 5, y + 10.5);
+    y += 17;
+  }
+
+  // ===== BANK RATES TABLE =====
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+  doc.text('BANK RATES — RANKED BY 2-YEAR LOCK-IN COST', M, y);
+  y += 4;
+
+  // Table header
+  setFill(SOFT_BG); doc.rect(M, y, CW, 7, 'F');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(MUTED);
+  doc.text('BANK  ·  PACKAGE', M + 4, y + 5);
+  doc.text('RATE', M + CW * 0.50, y + 5);
+  doc.text('MONTHLY', M + CW * 0.66, y + 5);
+  doc.text('2Y TOTAL', M + CW * 0.86, y + 5);
+  y += 7;
+
+  // Rows (top 8)
+  r.banks.slice(0, 7).forEach((b, i) => {
+    if (i === 0) {
+      setFill(GREEN_SOFT); doc.rect(M, y, CW, 8, 'F');
+      setFill(GREEN); doc.rect(M, y, 1.4, 8, 'F');
+    }
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9); setColor(INK);
+    doc.text(b.bank, M + 4, y + 5.5);
+    const bankW = doc.getTextWidth(b.bank);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor(MUTED);
+    doc.text('·  ' + b.pkg, M + 4 + bankW + 2, y + 5.5);
+
+    doc.setFont('helvetica', i === 0 ? 'bold' : 'normal'); doc.setFontSize(9); setColor(INK);
+    doc.text(b.rate.toFixed(2) + '%', M + CW * 0.50, y + 5.5);
+    doc.text('$' + fmt(Math.round(b.monthly)), M + CW * 0.66, y + 5.5);
+    doc.text('$' + fmt(Math.round(b.lockInCost)), M + CW * 0.86, y + 5.5);
+
+    setDraw(BORDER); doc.line(M, y + 8, M + CW, y + 8);
+    y += 8;
+  });
+  y += 4;
+
+  // ===== REFI SAVINGS (if applicable) =====
+  if (r.inp.mode === 'refinance' && r.refi) {
+    setFill(GREEN_SOFT); doc.rect(M, y, CW, 18, 'F');
+    setDraw(GREEN); doc.setLineWidth(0.4); doc.rect(M, y, CW, 18);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GREEN_DARK);
+    doc.text('REFINANCING SAVINGS', M + 5, y + 6);
+    doc.setFont('times', 'normal'); doc.setFontSize(12); setColor(INK);
+    doc.text('Save $' + fmt(Math.round(r.refi.annualSavings)) + '/year by switching from ' + (r.refi.currentRate * 100).toFixed(2) + '% to ' + (r.bestRate * 100).toFixed(2) + '%', M + 5, y + 12);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(MUTED);
+    doc.text('Total over 2-year lock-in: $' + fmt(Math.round(r.refi.lockInSavings)) + '   ·   Total interest saved over remaining tenure: $' + fmt(Math.round(r.totalInterest)) + ' less than current loan', M + 5, y + 16);
+    y += 22;
+  }
+
+  // ===== FULL TENURE COST (purchase only — refi card already shows savings) =====
+  if (r.inp.mode !== 'refinance') {
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setColor(GOLD);
+    doc.text('TOTAL COST OVER ' + r.inp.tenure + '-YEAR TENURE', M, y);
+    y += 5;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setColor(INK);
+    doc.text('Principal: $' + fmt(r.inp.loan) + '     ·     Interest: $' + fmt(Math.round(r.totalInterest)) + '     ·     Total paid: $' + fmt(Math.round(r.totalPaid)), M, y);
+    y += 9;
+  }
+
+  // ===== DISCLAIMER =====
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setColor(MUTED);
+  const disc = 'Indicative figures only as of ' + dateStr + '. Subject to bank credit assessment, valuation, and prevailing IRAS / MAS / HDB rules. Stress-test rate of 4% is the MAS minimum for residential TDSR / MSR computations. This report does not constitute financial advice; for personalised guidance speak to a Nexus mortgage broker. Banks pay our referral fee — service is free to you.';
+  const lines = doc.splitTextToSize(disc, CW);
+  doc.text(lines, M, y);
+
+  // ===== FOOTER BAND =====
+  setFill(NAVY); doc.rect(0, H - 24, W, 24, 'F');
+  setFill(GOLD); doc.rect(0, H - 24, W, 0.5, 'F');
+
+  doc.setFont('times', 'normal'); doc.setFontSize(13); setColor(CREAM);
+  doc.text('Want us to lock in this rate?', M, H - 13);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor([180, 180, 180]);
+  doc.text('Free  ·  zero fees  ·  banks pay our referral fee', M, H - 7);
+
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(11); setColor(GOLD);
+  doc.text('WhatsApp +65 8752 0859', W - M, H - 17, { align: 'right' });
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setColor([180, 180, 180]);
+  doc.text('danler@nexusmortgage.sg', W - M, H - 11, { align: 'right' });
+  doc.text('nexusmortgage.sg/free-report', W - M, H - 5, { align: 'right' });
+
+  return {
+    base64: doc.output('datauristring').split(',')[1],
+    filename: 'nexus-mortgage-report-' + new Date().toISOString().slice(0, 10) + '.pdf',
+  };
+}
+
+/* ============ FORM SUBMISSION ============ */
+const calcBtn = $('calculateBtn');
+const reportWrap = $('reportWrap');
+const reportGate = $('reportGate');
+const openModalBtn = $('openModalBtn');
+const leadModal = $('leadModal');
+const modalClose = $('modalClose');
+const leadForm = $('leadForm');
+const leadSubmit = $('leadSubmit');
+const toast = $('toast');
+
+calcBtn.addEventListener('click', () => {
+  const inp = getInputs();
+  if (!inp.loan || !inp.income || !inp.tenure) {
+    showToast('Please fill in loan, income and tenure.', 'error'); return;
+  }
+  lastResult = computeReport(inp);
+  reportWrap.style.display = '';
+  // Always re-lock if user re-calculates (keep gating until they submit)
+  if (!sessionStorage.getItem('reportUnlocked')) reportGate.classList.add('is-locked');
+  render(lastResult);
+  // Smooth scroll
+  reportWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+openModalBtn.addEventListener('click', () => {
+  leadModal.classList.add('open');
+  setTimeout(() => $('lead-name').focus(), 100);
+});
+modalClose.addEventListener('click', closeModal);
+leadModal.addEventListener('click', e => { if (e.target === leadModal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+function closeModal() { leadModal.classList.remove('open'); }
+
+leadForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  // Honeypot
+  if ($('hp-input').value) { closeModal(); return; }
+
+  const name = $('lead-name').value.trim();
+  const phoneRaw = $('lead-phone').value.replace(/\D/g, '');
+  const email = $('lead-email').value.trim();
+  const consent = $('lead-consent').checked;
+
+  if (!name || name.length < 2) { showToast('Please enter your name.', 'error'); return; }
+  if (!/^[89]\d{7}$/.test(phoneRaw)) { showToast('Please enter a valid SG mobile (8 digits, starts with 8 or 9).', 'error'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Please enter a valid email.', 'error'); return; }
+  if (!consent) { showToast('Please tick the consent box to proceed.', 'error'); return; }
+
+  setSubmitting(true);
+
+  const payload = buildPayload({ name, phone: '+65 ' + phoneRaw.slice(0,4) + ' ' + phoneRaw.slice(4), email });
+
+  // Generate PDF and attach to payload (so Make → Gmail can attach it)
+  try {
+    const pdf = buildReportPdf(lastResult, payload.lead);
+    payload.reportPdfBase64 = pdf.base64;
+    payload.reportPdfFilename = pdf.filename;
+    payload.reportPdfMime = 'application/pdf';
+  } catch (pdfErr) {
+    console.warn('PDF generation failed; submitting without attachment:', pdfErr);
+  }
+
+  try {
+    if (MAKE_WEBHOOK_URL) {
+      const res = await fetch(MAKE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Webhook returned ' + res.status);
+    } else {
+      // Dev mode: just log
+      console.log('[FREE-REPORT] Would POST to webhook:', payload);
+      await new Promise(r => setTimeout(r, 800));
+    }
+    // Success
+    sessionStorage.setItem('reportUnlocked', '1');
+    reportGate.classList.remove('is-locked');
+    closeModal();
+    showToast('Report unlocked & sent to ' + email, 'success');
+    setTimeout(() => reportWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 350);
+  } catch (err) {
+    console.error(err);
+    showToast('Something went wrong — please try again or WhatsApp us.', 'error');
+  } finally {
+    setSubmitting(false);
+  }
+});
+
+function setSubmitting(yes) {
+  leadSubmit.disabled = yes;
+  leadSubmit.innerHTML = yes
+    ? '<span class="spinner"></span><span class="btn-label">Sending…</span>'
+    : '<span class="btn-label">Send me the report</span>';
+}
+
+function buildPayload({ name, phone, email }) {
+  const r = lastResult;
+  return {
+    source: 'nexusmortgage.sg/free-report',
+    submittedAt: new Date().toISOString(),
+    lead: { name, phone, email },
+    inputs: r.inp,
+    summary: {
+      bestRate: +(r.bestRate * 100).toFixed(2),
+      bestBank: r.banks[0].bank,
+      bestPackage: r.banks[0].pkg,
+      monthlyPayment: Math.round(r.monthlyBest),
+      tdsrUsagePct: +(r.tdsrUsage * 100).toFixed(1),
+      msrUsagePct: +(r.msrUsage * 100).toFixed(1),
+      tdsrPass: r.tdsrPass,
+      msrPass: r.msrPass,
+      msrApplies: r.msrApplies,
+      iwaa: r.iwaa ? +r.iwaa.toFixed(1) : null,
+      fullLtvTenureCap: r.fullLtvCap,
+      ltvPct: r.ltvPct,
+      tenureExceedsIwaa: r.tenureExceedsIwaa,
+      totalInterest: Math.round(r.totalInterest),
+      totalPaid: Math.round(r.totalPaid),
+      annualSavings: r.refi ? Math.round(r.refi.annualSavings) : null,
+      lockInSavings: r.refi ? Math.round(r.refi.lockInSavings) : null,
+    },
+    bankRates: r.banks.slice(0, 8).map(b => ({
+      bank: b.bank, package: b.pkg,
+      ratePct: b.rate, monthly: Math.round(b.monthly), lockInCost: Math.round(b.lockInCost)
+    })),
+  };
+}
+
+function showToast(msg, type) {
+  toast.className = 'toast ' + (type || '') + ' show';
+  toast.innerHTML = (type === 'success'
+    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
+    : type === 'error'
+    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
+    : '') + '<span>' + msg + '</span>';
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+/* ============ Reveal on scroll ============ */
+const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ============ Auto-scroll nav indicator ============ */
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 24) document.getElementById('navbar').classList.add('scrolled');
+  else document.getElementById('navbar').classList.remove('scrolled');
+});
+</script>
+
+</body>
+</html>
