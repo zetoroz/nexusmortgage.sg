@@ -122,9 +122,78 @@
     .faq-body p{margin-bottom:.6rem;color:inherit;font-size:inherit}
     .faq-body p:last-child{margin-bottom:0}
     .faq-body a{color:rgba(196,151,59,.8)}
+  
+    /* ==== Site nav (added to standardise blog detail posts) ==== */
+    :root { --gold-400: #C4973B; --gold-500: #E8C97A; --navy-900: #0B1C3A; --cream: #FAF7F2; }
+    #site-navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(11, 28, 58, .92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(196, 151, 59, .15); padding: .9rem 0; transition: background .25s; }
+    #site-navbar .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    #site-navbar .nav-logo { text-decoration: none; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 600; color: var(--cream); letter-spacing: .02em; }
+    #site-navbar .nav-logo .dot { color: var(--gold-400); }
+    #site-navbar .nav-links { display: none; align-items: center; gap: 1.4rem; }
+    @media (min-width: 1024px) { #site-navbar .nav-links { display: flex; } #site-navbar .mob-toggle { display: none; } }
+    #site-navbar .nav-link-item { font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250, 247, 242, .7); font-weight: 500; text-decoration: none; transition: color .25s; }
+    #site-navbar .nav-link-item:hover, #site-navbar .nav-link-item.is-current { color: var(--gold-400); }
+    #site-navbar .nav-cta { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1.1rem; background: linear-gradient(135deg, #C4973B, #E8C97A); color: #0B1C3A; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; border-radius: 100px; text-decoration: none; transition: transform .2s; }
+    #site-navbar .nav-cta:hover { transform: translateY(-1px); }
+    #site-navbar .mob-toggle { background: none; border: none; cursor: pointer; color: var(--cream); padding: .3rem; }
+    #site-navbar .tools-dd-wrap { position: relative; }
+    #site-navbar .tools-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: .3rem; font: inherit; padding: 0; font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250, 247, 242, .7); font-weight: 500; }
+    #site-navbar .tools-btn:hover { color: var(--gold-400); }
+    #site-navbar .tools-dd { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: rgba(11, 28, 58, .97); backdrop-filter: blur(16px); border: 1px solid rgba(196, 151, 59, .22); border-radius: 10px; padding: .5rem; min-width: 220px; z-index: 200; box-shadow: 0 16px 40px rgba(0, 0, 0, .4); }
+    #site-navbar .tools-dd a { display: block; padding: .55rem 1rem; color: rgba(250, 247, 242, .75); font-size: .76rem; font-weight: 500; letter-spacing: .04em; text-decoration: none; border-radius: 6px; transition: background .2s, color .2s; }
+    #site-navbar .tools-dd a:hover { background: rgba(196, 151, 59, .12); color: var(--gold-400); }
+    #site-navbar .free-report-link { color: var(--gold-400); display: inline-flex; align-items: center; gap: .35rem; }
+    #site-navbar .new-badge { font-size: .55rem; letter-spacing: .1em; padding: 1px 6px; border-radius: 100px; background: rgba(196, 151, 59, .18); color: var(--gold-400); font-weight: 600; border: 1px solid rgba(196, 151, 59, .3); }
+    #site-mob-menu { display: none; padding: .5rem 1.5rem 1rem; border-top: 1px solid rgba(196, 151, 59, .12); }
+    #site-mob-menu.open { display: block; }
+    #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
+    body.has-site-nav { padding-top: 64px; }
+
   </style>
 </head>
 <body>
+<nav id="site-navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Nexus<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="/services/" class="nav-link-item">Services</a>
+      <a href="/mortgage-rates/" class="nav-link-item">Rates</a>
+      <a href="/free-report/" class="nav-link-item free-report-link">Free Report <span class="new-badge">NEW</span></a>
+      <a href="/#calculator" class="nav-link-item">Calculator</a>
+      <div class="tools-dd-wrap">
+        <button class="tools-btn" id="tools-btn" aria-haspopup="true" aria-expanded="false">Tools <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="tools-dd" id="tools-dropdown">
+          <a href="/free-report/" class="free-report-link">Free Report <span class="new-badge">NEW</span></a>
+          <a href="/#calculator">Mortgage Calculator</a>
+          <a href="/affordability/">Affordability Check</a>
+          <a href="/refinance-calculator/">Refinance Savings</a>
+          <a href="/equity-loan/">Equity / Cash-Out</a>
+          <a href="/mortgage-rates/">Current Rates</a>
+        </div>
+      </div>
+      <a href="/about/" class="nav-link-item">About</a>
+      <a href="/contact/" class="nav-link-item">Contact</a>
+      <a href="/blog/" class="nav-link-item is-current">Insights</a>
+    </div>
+    <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" rel="noopener" class="nav-cta" style="display:none;" id="nav-cta-desktop">Free Consult</a>
+    <button class="mob-toggle" onclick="document.getElementById('site-mob-menu').classList.toggle('open')" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="site-mob-menu">
+    <a href="/services/">Services</a>
+    <a href="/mortgage-rates/">Rates</a>
+    <a href="/free-report/" class="free-report-link">Free Report <span class="new-badge">NEW</span></a>
+    <a href="/#calculator">Calculator</a>
+    <a href="/affordability/">Affordability</a>
+    <a href="/equity-loan/">Equity Loan</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+    <a href="/blog/">Insights</a>
+  </div>
+</nav>
+<style>@media (min-width: 1024px) { #nav-cta-desktop { display: inline-flex !important; } }</style>
+
 <div id="reading-progress"></div>
 <article class="blog-wrap">
 
@@ -481,5 +550,19 @@
   btt.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
 })();
 </script>
+
+<script>
+(function() {
+  const tBtn = document.getElementById('tools-btn');
+  const tDd = document.getElementById('tools-dropdown');
+  if (tBtn && tDd) {
+    tBtn.addEventListener('click', e => { e.stopPropagation(); const open = tDd.style.display === 'block'; tDd.style.display = open ? 'none' : 'block'; tBtn.setAttribute('aria-expanded', String(!open)); });
+    document.addEventListener('click', () => { tDd.style.display = 'none'; tBtn.setAttribute('aria-expanded', 'false'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { tDd.style.display = 'none'; tBtn.setAttribute('aria-expanded', 'false'); } });
+  }
+  document.body.classList.add('has-site-nav');
+})();
+</script>
+
 </body>
 </html>
