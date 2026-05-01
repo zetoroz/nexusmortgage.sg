@@ -5,13 +5,61 @@
   <link rel="icon" type="image/x-icon" href="../favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Property & Finance Insights | Nexus Mortgage SG</title>
-  <meta name="description" content="Singapore mortgage guides for homebuyers in 2026 — TDSR, MSR, MAS stress test, HDB vs bank loans, and CPF rules, explained by an independent Singapore mortgage broker. Free advice, zero fees.">
+  <meta name="description" content="Singapore mortgage guides — TDSR, MSR, MAS stress tests, HDB vs bank loans, CPF rules. Independent broker insights. Free advice, zero fees.">
   <meta name="keywords" content="Singapore mortgage insights, MAS stress test, TDSR guide, HDB loan vs bank loan, SME caveat loan, property finance Singapore">
   <meta property="og:title" content="Property & Finance Insights | Nexus Mortgage SG">
   <meta property="og:description" content="Expert analysis on Singapore mortgages, SME lending, and real estate strategy.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nexusmortgage.sg/blog/">
   <link rel="canonical" href="https://nexusmortgage.sg/blog/">
+
+  <!-- Blog + BreadcrumbList + ItemList schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Nexus Mortgage SG · Property & Finance Insights",
+    "description": "Singapore mortgage guides — TDSR, MSR, MAS stress tests, HDB vs bank loans, CPF rules.",
+    "url": "https://nexusmortgage.sg/blog/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Nexus Mortgage SG",
+      "url": "https://nexusmortgage.sg/",
+      "logo": { "@type": "ImageObject", "url": "https://nexusmortgage.sg/og-image.png" }
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nexusmortgage.sg/" },
+      { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://nexusmortgage.sg/blog/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Nexus Mortgage SG · All Insights",
+    "itemListOrder": "https://schema.org/ItemListOrderDescending",
+    "numberOfItems": 10,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1,  "url": "https://nexusmortgage.sg/blog/blog-mas-stress-test-2026.html",            "name": "MAS Stress Test 2026 — what it means for borrowers" },
+      { "@type": "ListItem", "position": 2,  "url": "https://nexusmortgage.sg/blog/blog-home-loan-rates-singapore.html",       "name": "Home Loan Rates Singapore — fixed vs SORA explained" },
+      { "@type": "ListItem", "position": 3,  "url": "https://nexusmortgage.sg/blog/blog-best-home-loan-first-time-buyer.html", "name": "Best Home Loan for Condo & Private Property in Singapore 2026" },
+      { "@type": "ListItem", "position": 4,  "url": "https://nexusmortgage.sg/blog/blog-cpf-oa-hdb-guide.html",                "name": "CPF OA for HDB — usage limits, accrued interest, and refunds" },
+      { "@type": "ListItem", "position": 5,  "url": "https://nexusmortgage.sg/blog/blog-decoupling-private-property-singapore.html", "name": "Decoupling Private Property in Singapore — when it pays off" },
+      { "@type": "ListItem", "position": 6,  "url": "https://nexusmortgage.sg/blog/blog-first-time-hdb-buyer-guide.html",      "name": "First-time HDB Buyer Guide — eligibility, grants, financing" },
+      { "@type": "ListItem", "position": 7,  "url": "https://nexusmortgage.sg/blog/blog-hdb-vs-bank-loan.html",                "name": "HDB Loan vs Bank Loan — which is right for you?" },
+      { "@type": "ListItem", "position": 8,  "url": "https://nexusmortgage.sg/blog/blog-tdsr-msr-explained.html",              "name": "TDSR & MSR Explained — Singapore mortgage caps in 2026" },
+      { "@type": "ListItem", "position": 9,  "url": "https://nexusmortgage.sg/blog/blog-when-to-refinance-singapore.html",     "name": "When to Refinance Your Singapore Home Loan" },
+      { "@type": "ListItem", "position": 10, "url": "https://nexusmortgage.sg/blog/blog-hdb-resale-q1-2026-mortgage.html",     "name": "HDB Resale Q1 2026 — mortgage market update" }
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -410,7 +458,7 @@
     .tools-dd-item:focus-visible { outline:2px solid var(--gold-400); outline-offset:2px; }
   </style>
 <!-- NAV-STYLES-CANONICAL v1 -->
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/styles.min.css">
 <style>
 /* ===== Canonical navbar styles (shared) ===== */
 #navbar {
