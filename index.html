@@ -1462,6 +1462,529 @@
 @media (min-width: 1024px) { #mob-menu { display: none !important; } }
 </style>
 <!-- /NAV-STYLES-CANONICAL -->
+
+<!-- ============================================================
+     UX/ANIMATION ENHANCEMENTS — only transform/opacity,
+     reduced-motion safe. Layered on top of existing styles.
+     ============================================================ -->
+<style>
+  /* ---- Hero entrance cascade ---- */
+  @keyframes nmsgFadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes nmsgFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes nmsgHexFloat {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    25%      { transform: translate3d(8px, -14px, 0); }
+    50%      { transform: translate3d(-6px, -26px, 0); }
+    75%      { transform: translate3d(-10px, -12px, 0); }
+  }
+  @keyframes nmsgHexSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes nmsgHexPulse {
+    0%, 100% { opacity: .55; }
+    50%      { opacity: 1; }
+  }
+  @keyframes nmsgScaleIn {
+    from { opacity: 0; transform: scale(.94); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  #hero .hero-tag,
+  #hero .hero-title,
+  #hero .hero-sub,
+  #hero .hero-cta-row,
+  #hero .hero-statbar,
+  #hero #intent-picker {
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: nmsgFadeUp .9s cubic-bezier(.16, 1, .3, 1) forwards;
+  }
+  #hero .hero-tag      { animation-delay: .05s; }
+  #hero .hero-title    { animation-delay: .18s; }
+  #hero .hero-sub      { animation-delay: .34s; }
+  #hero .hero-cta-row  { animation-delay: .48s; }
+  #hero .hero-statbar  { animation-delay: .68s; }
+  #hero #intent-picker { animation-delay: .82s; }
+
+  /* Stat cells stagger inside the bar */
+  #hero .hero-statbar > div > div {
+    opacity: 0;
+    animation: nmsgFadeUp .8s cubic-bezier(.16, 1, .3, 1) forwards;
+  }
+  #hero .hero-statbar > div > div:nth-child(1) { animation-delay: .82s; }
+  #hero .hero-statbar > div > div:nth-child(2) { animation-delay: .92s; }
+  #hero .hero-statbar > div > div:nth-child(3) { animation-delay: 1.02s; }
+  #hero .hero-statbar > div > div:nth-child(4) { animation-delay: 1.12s; }
+
+  /* Hex motif — float drift + opacity breathe + inner spin */
+  #hero .hero-hex-bg {
+    animation: nmsgHexFloat 11s ease-in-out infinite,
+               nmsgHexPulse 7s ease-in-out infinite;
+    transform-origin: center;
+    will-change: transform, opacity;
+  }
+  #hero .hero-hex-bg svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    transform-origin: 50% 50%;
+    animation: nmsgHexSpin 70s linear infinite;
+    will-change: transform;
+  }
+
+  /* ---- Btn-gold liquid sheen ---- */
+  .btn-gold {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-gold > * {
+    position: relative;
+    z-index: 1;
+  }
+  .btn-gold::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg,
+                  transparent 28%,
+                  rgba(255, 255, 255, .55) 50%,
+                  transparent 72%);
+    transform: translateX(-130%) skewX(-14deg);
+    transition: transform .85s cubic-bezier(.4, 0, .2, 1);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .btn-gold:hover::after,
+  .btn-gold:focus-visible::after {
+    transform: translateX(130%) skewX(-14deg);
+  }
+
+  /* ---- Cursor spotlight on cards ---- */
+  .qa-card,
+  .svc-card,
+  .why-card,
+  .article-card,
+  .testimonial-card {
+    position: relative;
+    isolation: isolate;
+    --mx: 50%;
+    --my: 50%;
+    --spotlight: 0;
+  }
+  .qa-card > *,
+  .svc-card > *,
+  .why-card > *,
+  .article-card > *,
+  .testimonial-card > * {
+    position: relative;
+    z-index: 1;
+  }
+  .qa-card::after,
+  .svc-card::after,
+  .why-card::after,
+  .article-card::after,
+  .testimonial-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(420px circle at var(--mx) var(--my),
+                  rgba(196, 151, 59, .14),
+                  transparent 45%);
+    opacity: var(--spotlight);
+    transition: opacity .35s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---- Nav-link underline ---- */
+  #navbar .nav-link {
+    position: relative;
+  }
+  #navbar .nav-link:not(.nav-tools-btn)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+    pointer-events: none;
+  }
+  #navbar .nav-link:hover::after,
+  #navbar .nav-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* ---- WhatsApp float — idle pulse + tooltip ---- */
+  @keyframes nmsgWaPulse {
+    0%, 100% { box-shadow: 0 6px 28px rgba(37, 211, 102, .42), 0 0 0 0 rgba(37, 211, 102, .35); }
+    70%      { box-shadow: 0 6px 28px rgba(37, 211, 102, .42), 0 0 0 18px rgba(37, 211, 102, 0); }
+  }
+  #wa-float {
+    animation: nmsgWaPulse 2.6s ease-out infinite;
+  }
+  #wa-float:hover,
+  #wa-float:focus-visible {
+    animation-play-state: paused;
+  }
+  #wa-float::before {
+    content: 'Chat with us';
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%) translateX(8px);
+    background: var(--navy-900);
+    color: var(--gold-400);
+    font-family: 'DM Sans', sans-serif;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    padding: .5rem .9rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .2s, transform .25s cubic-bezier(.4, 0, .2, 1);
+    pointer-events: none;
+    border: 1px solid rgba(196, 151, 59, .3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .35);
+  }
+  #wa-float:hover::before,
+  #wa-float:focus-visible::before {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+  @media (max-width: 640px) {
+    #wa-float::before { display: none; }
+  }
+
+  /* ---- FAQ — open state visual lift ---- */
+  .faq-item {
+    transition: border-color .3s, box-shadow .3s;
+  }
+  .faq-item.open {
+    border-color: rgba(196, 151, 59, .42);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, .25),
+                inset 0 1px 0 rgba(196, 151, 59, .12);
+  }
+  .faq-item.open .faq-q {
+    background: rgba(196, 151, 59, .07);
+    color: var(--gold-300);
+  }
+
+  /* ---- Bank chip stagger on enter (using existing reveal trigger) ---- */
+  #banks .bank-chip {
+    transition: transform .28s cubic-bezier(.4, 0, .2, 1),
+                border-color .25s,
+                box-shadow .25s;
+  }
+  #banks .bank-chip:hover {
+    transform: translateY(-3px);
+  }
+
+  /* ---- Stat number count helper ---- */
+  .num-anim {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- Hero ambient particles ---- */
+  @keyframes nmsgParticleRise {
+    0%   { transform: translate3d(0, 0, 0) scale(.5); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translate3d(var(--drift, 20px), -110vh, 0) scale(1); opacity: 0; }
+  }
+  .hero-particle {
+    position: absolute;
+    bottom: -12px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold-400);
+    box-shadow: 0 0 10px rgba(232, 201, 122, .8),
+                0 0 18px rgba(196, 151, 59, .35);
+    pointer-events: none;
+    z-index: 2;
+    will-change: transform, opacity;
+    animation: nmsgParticleRise var(--dur, 16s) linear infinite;
+  }
+
+  /* ---- Btn-gold idle glow pulse ---- */
+  @keyframes nmsgBtnGlow {
+    0%, 100% {
+      box-shadow: 0 4px 24px rgba(196, 151, 59, .35),
+                  0 0 0 0 rgba(196, 151, 59, 0);
+    }
+    50% {
+      box-shadow: 0 6px 32px rgba(196, 151, 59, .55),
+                  0 0 0 6px rgba(196, 151, 59, .08);
+    }
+  }
+  .btn-gold {
+    animation: nmsgBtnGlow 3.4s ease-in-out infinite;
+  }
+  .btn-gold:hover,
+  .btn-gold:focus-visible {
+    animation-play-state: paused;
+  }
+
+  /* ---- Trust bar icon nudge ---- */
+  @keyframes nmsgIconNudge {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    25%      { transform: translateY(-3px) rotate(-6deg); }
+    50%      { transform: translateY(0) rotate(0); }
+    75%      { transform: translateY(-2px) rotate(6deg); }
+  }
+  #trust-bar svg {
+    transform-origin: center;
+    animation: nmsgIconNudge 4.2s ease-in-out infinite;
+    will-change: transform;
+  }
+  #trust-bar > div > div > div:nth-child(1) svg { animation-delay: 0s; }
+  #trust-bar > div > div > div:nth-child(3) svg { animation-delay: .35s; }
+  #trust-bar > div > div > div:nth-child(5) svg { animation-delay: .7s; }
+  #trust-bar > div > div > div:nth-child(7) svg { animation-delay: 1.05s; }
+  #trust-bar > div > div > div:nth-child(9) svg { animation-delay: 1.4s; }
+
+  /* ---- Why-card icon hover spin ---- */
+  .why-card svg {
+    transition: transform .45s cubic-bezier(.34, 1.56, .64, 1);
+  }
+  .why-card:hover svg {
+    transform: rotate(-12deg) scale(1.12);
+  }
+
+  /* ---- Service-card icon hover lift ---- */
+  .svc-icon {
+    transition: transform .35s cubic-bezier(.34, 1.56, .64, 1);
+  }
+  .svc-card:hover .svc-icon {
+    transform: translateY(-4px) rotate(-6deg);
+  }
+
+  /* ---- QA-card icon idle bob ---- */
+  @keyframes nmsgIconBob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+  }
+  .qa-icon {
+    transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+    animation: nmsgIconBob 3.8s ease-in-out infinite;
+  }
+  .qa-card:hover .qa-icon {
+    transform: scale(1.1) rotate(-5deg);
+    animation-play-state: paused;
+  }
+
+  /* ---- Testimonial stars stagger pop (triggered when card .in-view) ---- */
+  @keyframes nmsgStarPop {
+    0%   { transform: scale(0) rotate(-40deg); opacity: 0; }
+    60%  { transform: scale(1.2) rotate(8deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+  }
+  .testimonial-stars > * {
+    display: inline-block;
+    transform-origin: center;
+    opacity: 0;
+  }
+  .testimonial-card.in-view .testimonial-stars > *,
+  .tcard.in-view .testimonial-stars > * {
+    animation: nmsgStarPop .55s cubic-bezier(.34, 1.56, .64, 1) forwards;
+  }
+  .testimonial-card.in-view .testimonial-stars > *:nth-child(1),
+  .tcard.in-view .testimonial-stars > *:nth-child(1) { animation-delay: .05s; }
+  .testimonial-card.in-view .testimonial-stars > *:nth-child(2),
+  .tcard.in-view .testimonial-stars > *:nth-child(2) { animation-delay: .14s; }
+  .testimonial-card.in-view .testimonial-stars > *:nth-child(3),
+  .tcard.in-view .testimonial-stars > *:nth-child(3) { animation-delay: .23s; }
+  .testimonial-card.in-view .testimonial-stars > *:nth-child(4),
+  .tcard.in-view .testimonial-stars > *:nth-child(4) { animation-delay: .32s; }
+  .testimonial-card.in-view .testimonial-stars > *:nth-child(5),
+  .tcard.in-view .testimonial-stars > *:nth-child(5) { animation-delay: .41s; }
+
+  /* ---- NEW badge pulse ---- */
+  @keyframes nmsgBadgePulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%      { transform: scale(1.08); opacity: .85; }
+  }
+  .qa-card span[style*="NEW"],
+  .nav-link span[style*="NEW"],
+  .tools-dd-item span[style*="NEW"] {
+    /* hard to target by content — use generic class below */
+  }
+  .nmsg-new-badge,
+  a[href="/free-report/"] > span:first-of-type,
+  a.qa-card[aria-label*="Free Mortgage"] span:first-of-type {
+    animation: nmsgBadgePulse 2.2s ease-in-out infinite;
+    transform-origin: center;
+    will-change: transform, opacity;
+  }
+
+  /* ---- Bank chip stagger entrance ---- */
+  #banks .bank-chip {
+    opacity: 0;
+    transform: translateY(14px) scale(.96);
+  }
+  #banks.in-view .bank-chip {
+    animation: nmsgChipIn .55s cubic-bezier(.16, 1, .3, 1) forwards;
+  }
+  @keyframes nmsgChipIn {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  #banks.in-view .bank-chip:nth-child(1)  { animation-delay: .04s; }
+  #banks.in-view .bank-chip:nth-child(2)  { animation-delay: .08s; }
+  #banks.in-view .bank-chip:nth-child(3)  { animation-delay: .12s; }
+  #banks.in-view .bank-chip:nth-child(4)  { animation-delay: .16s; }
+  #banks.in-view .bank-chip:nth-child(5)  { animation-delay: .20s; }
+  #banks.in-view .bank-chip:nth-child(6)  { animation-delay: .24s; }
+  #banks.in-view .bank-chip:nth-child(7)  { animation-delay: .28s; }
+  #banks.in-view .bank-chip:nth-child(8)  { animation-delay: .32s; }
+  #banks.in-view .bank-chip:nth-child(9)  { animation-delay: .36s; }
+  #banks.in-view .bank-chip:nth-child(10) { animation-delay: .40s; }
+  #banks.in-view .bank-chip:nth-child(11) { animation-delay: .44s; }
+  #banks.in-view .bank-chip:nth-child(12) { animation-delay: .48s; }
+  #banks.in-view .bank-chip:nth-child(13) { animation-delay: .52s; }
+  #banks.in-view .bank-chip:nth-child(14) { animation-delay: .56s; }
+  #banks.in-view .bank-chip:nth-child(15) { animation-delay: .60s; }
+  #banks.in-view .bank-chip:nth-child(16) { animation-delay: .64s; }
+
+  /* ---- Footer icon rotate hover ---- */
+  .footer-icon-btn svg {
+    transition: transform .35s cubic-bezier(.34, 1.56, .64, 1);
+  }
+  .footer-icon-btn:hover svg {
+    transform: rotate(-15deg) scale(1.15);
+  }
+
+  /* ---- Section title — italic em subtle pulse ---- */
+  @keyframes nmsgEmGlow {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: .82; }
+  }
+  .hero-title em,
+  h2 em[style*="gold"] {
+    animation: nmsgEmGlow 3.6s ease-in-out infinite;
+  }
+
+  /* ---- Step number drift ---- */
+  @keyframes nmsgStepDrift {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+  .step-num {
+    animation: nmsgStepDrift 5s ease-in-out infinite;
+  }
+
+  /* ---- Scroll progress shimmer ---- */
+  @keyframes nmsgProgShimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  #prog {
+    background: linear-gradient(90deg,
+                  #C4973B 0%,
+                  #F0D98A 25%,
+                  #FFE9A8 50%,
+                  #F0D98A 75%,
+                  #C4973B 100%) !important;
+    background-size: 200% 100% !important;
+    animation: nmsgProgShimmer 3s linear infinite;
+  }
+
+  /* ---- Advisor initial drift ---- */
+  @keyframes nmsgAdvisorDrift {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-10px) scale(1.02); }
+  }
+  .advisor-initial {
+    animation: nmsgAdvisorDrift 8s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  /* ---- Credential chip slide-in (triggered on advisor.in-view) ---- */
+  .advisor-section .credential-chip {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  .advisor-section.in-view .credential-chip {
+    animation: nmsgChipSlide .6s cubic-bezier(.16, 1, .3, 1) forwards;
+  }
+  @keyframes nmsgChipSlide {
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .advisor-section.in-view .credential-chip:nth-child(1) { animation-delay: .1s; }
+  .advisor-section.in-view .credential-chip:nth-child(2) { animation-delay: .22s; }
+  .advisor-section.in-view .credential-chip:nth-child(3) { animation-delay: .34s; }
+  .advisor-section.in-view .credential-chip:nth-child(4) { animation-delay: .46s; }
+  .advisor-section.in-view .credential-chip:nth-child(5) { animation-delay: .58s; }
+
+  /* ---- Calculator result-val flash on update ---- */
+  @keyframes nmsgValFlash {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.06); }
+    100% { transform: scale(1); }
+  }
+  .result-val.flashing {
+    animation: nmsgValFlash .4s ease-out;
+    transform-origin: center;
+  }
+
+  /* ---- Reduced motion safety (covers all enhancements) ---- */
+  @media (prefers-reduced-motion: reduce) {
+    #hero .hero-tag,
+    #hero .hero-title,
+    #hero .hero-sub,
+    #hero .hero-cta-row,
+    #hero .hero-statbar,
+    #hero #intent-picker,
+    #hero .hero-statbar > div > div {
+      opacity: 1;
+      animation: none;
+    }
+    #hero .hero-hex-bg,
+    #hero .hero-hex-bg svg { animation: none; }
+    .hero-particle { display: none; }
+    .btn-gold { animation: none; }
+    .btn-gold::after { display: none; }
+    .qa-card::after,
+    .svc-card::after,
+    .why-card::after,
+    .article-card::after,
+    .testimonial-card::after { display: none; }
+    #wa-float { animation: none; }
+    #navbar .nav-link::after { transition: none; }
+    #trust-bar svg { animation: none; }
+    .qa-icon { animation: none; }
+    .step-num { animation: none; }
+    .advisor-initial { animation: none; }
+    .hero-title em,
+    h2 em[style*="gold"] { animation: none; }
+    #prog { animation: none; }
+    .testimonial-card.in-view .testimonial-stars > *,
+    .tcard.in-view .testimonial-stars > * { animation: none; opacity: 1; }
+    .testimonial-stars > * { opacity: 1; }
+    .nmsg-new-badge,
+    a[href="/free-report/"] > span:first-of-type,
+    a.qa-card[aria-label*="Free Mortgage"] span:first-of-type { animation: none; }
+    #banks .bank-chip { opacity: 1; transform: none; animation: none; }
+    .advisor-section .credential-chip { opacity: 1; transform: none; animation: none; }
+    .why-card svg,
+    .svc-icon,
+    .footer-icon-btn svg { transition: none; }
+  }
+</style>
 </head>
 
 <body>
@@ -1614,12 +2137,12 @@
         Best <em>Home Loan</em><br>Rates in Singapore —<br>Compare 16 Banks Free
       </h1>
 
-      <p style="font-size:1.0625rem;font-weight:300;line-height:1.8;color:rgba(250,247,242,.62);max-width:520px;margin-bottom:2.75rem;text-align:center;">
+      <p class="hero-sub" style="font-size:1.0625rem;font-weight:300;line-height:1.8;color:rgba(250,247,242,.62);max-width:520px;margin-bottom:2.75rem;text-align:center;">
         Fixed rates &amp; SORA packages from DBS, OCBC, UOB, Maybank, StanChart &amp; more — for HDB, private property, and refinancing.
         Our service is <strong style="color:rgba(250,247,242,.9);font-weight:500;">100% free to you</strong> — banks pay our referral fee upon disbursement.
       </p>
 
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">
+      <div class="hero-cta-row" style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">
         <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" class="btn-gold">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -1638,7 +2161,7 @@
     </div>
 
     <!-- ── STAT BAR ── -->
-    <div style="position:relative;z-index:5;width:100%;border-top:1px solid rgba(196,151,59,.14);border-bottom:1px solid rgba(196,151,59,.14);background:rgba(255,255,255,.025);backdrop-filter:blur(10px);">
+    <div class="hero-statbar" style="position:relative;z-index:5;width:100%;border-top:1px solid rgba(196,151,59,.14);border-bottom:1px solid rgba(196,151,59,.14);background:rgba(255,255,255,.025);backdrop-filter:blur(10px);">
       <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);">
         <div style="padding:1.75rem 1.5rem;text-align:center;border-right:1px solid rgba(196,151,59,.12);">
           <div style="font-family:'Cormorant Garamond',serif;font-size:2.75rem;font-weight:300;color:var(--gold-400);line-height:1;margin-bottom:.3rem;">20+</div>
@@ -3249,7 +3772,6 @@
     // ===== SCROLL REVEAL =====
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
-      // Instantly show all reveal elements; skip observer
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
     } else {
       const ro = new IntersectionObserver(entries => {
@@ -3918,6 +4440,107 @@
 })();
 </script>
 <!-- /NAV-JS-CANONICAL -->
+
+<!-- ============================================================
+     UX/ANIMATION ENHANCEMENTS — cursor spotlight + count-up.
+     Reduced-motion safe.
+     ============================================================ -->
+<script>
+(function () {
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- Card cursor spotlight ----
+  if (!rm && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var cards = document.querySelectorAll(
+      '.qa-card, .svc-card, .why-card, .article-card, .testimonial-card'
+    );
+    cards.forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var x = ((e.clientX - r.left) / r.width) * 100;
+        var y = ((e.clientY - r.top) / r.height) * 100;
+        card.style.setProperty('--mx', x + '%');
+        card.style.setProperty('--my', y + '%');
+        card.style.setProperty('--spotlight', '1');
+      });
+      card.addEventListener('pointerleave', function () {
+        card.style.setProperty('--spotlight', '0');
+      });
+    });
+  }
+
+  // ---- Stat count-up ----
+  var statCells = document.querySelectorAll('.hero-statbar > div > div');
+  statCells.forEach(function (cell) {
+    var bigNum = cell.querySelector('div:first-child');
+    if (!bigNum) return;
+    var raw = (bigNum.textContent || '').trim();
+    var m = raw.match(/^([^\d]*)(\d+)([^\d]*)$/);
+    if (!m) return;
+    var prefix = m[1] || '';
+    var target = parseInt(m[2], 10);
+    var suffix = m[3] || '';
+    if (!isFinite(target)) return;
+
+    bigNum.dataset.target = String(target);
+    bigNum.dataset.prefix = prefix;
+    bigNum.dataset.suffix = suffix;
+
+    if (rm || target === 0) {
+      bigNum.textContent = prefix + target + suffix;
+      return;
+    }
+
+    // Start at 0
+    bigNum.textContent = prefix + '0' + suffix;
+  });
+
+  function runCountUp(el) {
+    var target = parseInt(el.dataset.target, 10);
+    var prefix = el.dataset.prefix || '';
+    var suffix = el.dataset.suffix || '';
+    if (!isFinite(target) || target === 0) return;
+    var dur = 1400;
+    var start = performance.now();
+    function tick(now) {
+      var t = Math.min(1, (now - start) / dur);
+      // ease-out cubic
+      var e = 1 - Math.pow(1 - t, 3);
+      var v = Math.round(target * e);
+      el.textContent = prefix + v + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  if (!rm && 'IntersectionObserver' in window) {
+    var statObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          if (el.dataset.counted) return;
+          el.dataset.counted = '1';
+          // Slight delay to align with hero stagger
+          setTimeout(function () { runCountUp(el); }, 200);
+          statObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.hero-statbar > div > div > div:first-child[data-target]')
+      .forEach(function (el) { statObs.observe(el); });
+  }
+
+  // ---- FAQ open animate aria-expanded sync (defensive) ----
+  document.querySelectorAll('.faq-q').forEach(function (q) {
+    q.addEventListener('click', function () {
+      requestAnimationFrame(function () {
+        var item = q.closest('.faq-item');
+        q.setAttribute('aria-expanded', item && item.classList.contains('open') ? 'true' : 'false');
+      });
+    });
+  });
+})();
+</script>
 </body>
 
 </html>
