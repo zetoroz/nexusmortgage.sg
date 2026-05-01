@@ -91,6 +91,13 @@
 
   <!-- Blog posts (live, sorted by recency) -->
   <url>
+    <loc>https://nexusmortgage.sg/blog/blog-self-employed-tdsr-singapore.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://nexusmortgage.sg/blog/blog-hdb-resale-q1-2026-mortgage.html</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
