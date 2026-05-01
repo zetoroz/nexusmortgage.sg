@@ -1108,7 +1108,8 @@
       let iwaa;
       if (totalInc <= 0) iwaa = ages[0] || 35;
       else iwaa = ages.reduce((s, a, i) => s + a * incomes[i], 0) / totalInc;
-      const ageCapMax = propType === 'hdb' ? 65 : 75;
+      // MAS rule: full 75% LTV requires (iwaa + tenure ≤ 65). Both HDB and private.
+      const ageCapMax = 65;
       const tenureMax = propType === 'hdb' ? 25 : 30;
       return Math.max(5, Math.min(tenureMax, Math.floor(ageCapMax - iwaa)));
     }

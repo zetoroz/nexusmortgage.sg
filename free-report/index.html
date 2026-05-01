@@ -1673,7 +1673,7 @@ body::after {
               </div>
 
               <div class="field">
-                <label class="field-label">Variable income <span class="normal">30% factor</span></label>
+                <label class="field-label">Variable income <span class="normal">70% counted</span></label>
                 <div class="input-wrap">
                   <span class="input-prefix">$</span>
                   <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-variable" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower 1 variable income">
@@ -3492,7 +3492,7 @@ function addBorrower() {
       </div>
 
       <div class="field">
-        <label class="field-label">Variable income <span class="normal">30% factor</span></label>
+        <label class="field-label">Variable income <span class="normal">70% counted</span></label>
         <div class="input-wrap">
           <span class="input-prefix">$</span>
           <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-variable" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower ${borrowerCount} variable income">
@@ -3637,13 +3637,13 @@ function getBorrowerData() {
 }
 
 /* Compute MAS-style effective income.
- * Fixed income: 100%. Variable: 30% factor (70% haircut).
+ * Fixed income: 100%. Variable: 70% counted (30% haircut per MAS Notice 645).
  * Pledged eligible assets (4 y+): 100% / 48 months.
  * Show eligible assets: 30% factor / 48 months.
  */
 function calcEffectiveIncome(incomes, variables, pledged, showFunds) {
   const fixed = (incomes || []).reduce((s, v) => s + v, 0);
-  const varCont = (variables || []).reduce((s, v) => s + v * 0.30, 0);
+  const varCont = (variables || []).reduce((s, v) => s + v * 0.70, 0);
   const pledgedCont = (pledged || []).reduce((s, v) => s + v / 48, 0);
   const showCont = (showFunds || []).reduce((s, v) => s + (v * 0.30) / 48, 0);
   return {
@@ -4062,7 +4062,7 @@ function renderPurchaserMatrix(r) {
     const sh = showFunds[i] || 0;
     const age = ages[i] || 0;
     const fixedC = fixed * 1.0;
-    const varC = v * 0.30;
+    const varC = v * 0.70;
     const plC = pl / 48;
     const shC = (sh * 0.30) / 48;
     const total = fixedC + varC + plC + shC;
@@ -4071,7 +4071,7 @@ function renderPurchaserMatrix(r) {
     totalWeightedAge += age * fixed;
     const components = [
       ['Fixed income', fixed, '100% × 1mth', fixedC],
-      ['Variable income', v, '30% × 1mth', varC],
+      ['Variable income', v, '70% × 1mth', varC],
       ['Pledged funds', pl, '100% ÷ 48mth', plC],
       ['Show funds', sh, '30% ÷ 48mth', shC],
     ];
@@ -5080,7 +5080,7 @@ function buildReportPdf(r, lead) {
     const sh = bShow[i] || 0;
     const age = bAges[i] || 0;
     const fixedC = fixed * 1.0;
-    const varC = v * 0.30;
+    const varC = v * 0.70;
     const plC = pl / 48;
     const shC = (sh * 0.30) / 48;
     const subtotal = fixedC + varC + plC + shC;
@@ -5089,7 +5089,7 @@ function buildReportPdf(r, lead) {
     totalWeightedAge += age * fixed;
     const pNo = String(i+1).padStart(2,'0');
     matrixRows.push({ cells: [{text:'P' + pNo, font:'bold'}, 'Fixed income · age ' + age, fmt$(fixed) + '/mo', '100% × 1mth', fmt$(fixedC) + '/mo'] });
-    matrixRows.push({ cells: ['', 'Variable income', fmt$(v) + '/mo', '30% × 1mth', fmt$(varC) + '/mo'] });
+    matrixRows.push({ cells: ['', 'Variable income', fmt$(v) + '/mo', '70% × 1mth', fmt$(varC) + '/mo'] });
     if (pl > 0) matrixRows.push({ cells: ['', 'Pledged funds', fmt$(pl), '100% ÷ 48mth', fmt$(plC) + '/mo'] });
     if (sh > 0) matrixRows.push({ cells: ['', 'Show funds', fmt$(sh), '30% ÷ 48mth', fmt$(shC) + '/mo'] });
     matrixRows.push({ cells: ['', { text: 'P' + pNo + ' subtotal', font: 'bold' }, '', '', { text: fmt$(subtotal) + '/mo', font: 'bold' }],
