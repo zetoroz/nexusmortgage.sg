@@ -994,6 +994,14 @@ tailwind.config = {
                   <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">HDB vs Private — max property</div>
                   <div style="height: 180px; position: relative;"><canvas id="chart-aff-bar"></canvas></div>
                 </div>
+                <div>
+                  <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Stress test · monthly @ 3 / 4 / 5 / 6 %</div>
+                  <div style="height: 180px; position: relative;"><canvas id="chart-aff-stress"></canvas></div>
+                </div>
+                <div>
+                  <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Income composition · per borrower</div>
+                  <div style="height: 180px; position: relative;"><canvas id="chart-aff-income"></canvas></div>
+                </div>
               </div>
             </div>
 
@@ -1488,6 +1496,14 @@ tailwind.config = {
                   <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Switching cost split</div>
                   <div style="height: 200px; position: relative;"><canvas id="chart-rf-cost-donut"></canvas></div>
                 </div>
+                <div>
+                  <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Net savings · 2 / 3 / 5 yr horizons</div>
+                  <div style="height: 200px; position: relative;"><canvas id="chart-rf-horizons"></canvas></div>
+                </div>
+                <div>
+                  <div class="faint" style="font-size: 11px; text-align: center; margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">Interest paid · current vs new</div>
+                  <div style="height: 200px; position: relative;"><canvas id="chart-rf-interest"></canvas></div>
+                </div>
               </div>
             </div>
 
@@ -1589,7 +1605,7 @@ const RULES = {
   msr: 0.30,
   stressRate: 0.04,
   variableHaircut: 0.30,
-  cpfAccrual: 0.026,                 // 2.5 % OA + 0.1 % effective accrued rate
+  cpfAccrual: 0.026,                 // CPF refund rate when OA is used for housing: OA earning rate 2.5% + 0.1% accrual = 2.6% p.a. Used in sell-purchase refund calc only.
   ltv: {
     fullFirst: 0.75,
     reducedFirst: 0.55,
@@ -2260,6 +2276,8 @@ function renderAffordability() {
   // Charts
   drawAffDonut(r);
   drawAffBar(state.affordability);
+  drawAffStress(r);
+  drawAffIncome(state.affordability);
 }
 
 function renderPurchase() {
@@ -2400,6 +2418,8 @@ function renderRefinance() {
   drawRefiChart(r);
   drawRfMonthly(r);
   drawRfCostDonut(r);
+  drawRfHorizons(r);
+  drawRfInterest(r);
 }
 
 function describeAbsd(citizenship, count) {
@@ -2573,6 +2593,160 @@ function drawAffBar(s) {
       },
       scales: {
         x: { grid: { color: chartColors.border, drawBorder: false }, ticks: { font: chartFontSans, color: chartColors.faint, callback: v => '$ ' + (v/1000).toFixed(0) + 'k' } },
+        y: { grid: { display: false }, ticks: { font: { ...chartFontSans, weight: '600' }, color: chartColors.ink } },
+      },
+    },
+  });
+}
+
+function drawAffStress(r) {
+  const ctx = document.getElementById('chart-aff-stress');
+  if (!ctx) return;
+  if (charts['chart-aff-stress']) charts['chart-aff-stress'].destroy();
+  // Stress test: monthly at 3/4/5/6% over chosen tenure on the max loan
+  const loan = r.maxProperty * r.ltv;
+  const tenure = r.tenure;
+  const rates = [0.03, 0.04, 0.05, 0.06];
+  const labels = rates.map(rt => (rt*100).toFixed(0) + ' %');
+  const monthly = rates.map(rt => {
+    const mr = rt / 12, n = tenure * 12;
+    return loan && mr > 0 ? Math.round(loan * mr / (1 - Math.pow(1+mr, -n))) : 0;
+  });
+  // Highlight MAS 4% bar
+  const colors = rates.map(rt => rt === 0.04 ? chartColors.accent : 'rgba(5,150,105,.45)');
+  charts['chart-aff-stress'] = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{ data: monthly, backgroundColor: colors, borderRadius: 4, maxBarThickness: 38 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 18 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => fmt.money(c.parsed.y) + ' / mo' } },
+        datalabels: {
+          display: true, anchor: 'end', align: 'top', offset: 2, clip: false,
+          color: chartColors.ink, font: { ...chartFontSans, weight: '600', size: 10 },
+          formatter: v => '$' + (v/1000).toFixed(1) + 'k',
+        },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { ...chartFontSans, weight: '600' }, color: chartColors.ink } },
+        y: { grid: { color: chartColors.border }, ticks: { font: chartFontSans, color: chartColors.faint, callback: v => '$' + (v/1000).toFixed(0) + 'k' } },
+      },
+    },
+  });
+}
+
+function drawAffIncome(s) {
+  const ctx = document.getElementById('chart-aff-income');
+  if (!ctx) return;
+  if (charts['chart-aff-income']) charts['chart-aff-income'].destroy();
+  const borrowers = s.borrowers || [];
+  const labels = borrowers.map((_, i) => 'B' + (i+1));
+  const fixed = borrowers.map(b => num(b.fixedIncome) || 0);
+  const variable = borrowers.map(b => Math.round((num(b.variableIncome) || 0) * (1 - RULES.variableHaircut)));
+  const boost = borrowers.map(b => Math.round(((num(b.pledgedFunds) || 0) + (num(b.showFunds) || 0) * RULES.showHaircut) / RULES.pledgedDivisor));
+  charts['chart-aff-income'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Fixed', data: fixed, backgroundColor: chartColors.donut[0], borderRadius: 3, maxBarThickness: 36, stack: 'a' },
+        { label: 'Var (× 70 %)', data: variable, backgroundColor: chartColors.donut[1], borderRadius: 3, maxBarThickness: 36, stack: 'a' },
+        { label: 'Boost', data: boost, backgroundColor: chartColors.donut[3], borderRadius: 3, maxBarThickness: 36, stack: 'a' },
+      ],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: chartFontSans, color: chartColors.muted, padding: 10, boxWidth: 10, boxHeight: 10, usePointStyle: true } },
+        tooltip: { mode: 'index', callbacks: { label: c => c.dataset.label + ': ' + fmt.money(c.parsed.y) } },
+        datalabels: { display: false },
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { font: { ...chartFontSans, weight: '600' }, color: chartColors.ink } },
+        y: { stacked: true, grid: { color: chartColors.border }, ticks: { font: chartFontSans, color: chartColors.faint, callback: v => '$' + (v/1000).toFixed(0) + 'k' } },
+      },
+    },
+  });
+}
+
+function drawRfHorizons(r) {
+  const ctx = document.getElementById('chart-rf-horizons');
+  if (!ctx) return;
+  if (charts['chart-rf-horizons']) charts['chart-rf-horizons'].destroy();
+  // Net savings = monthly delta × 12 × N − total switching cost
+  const monthlyDelta = (r.cur || 0) - (r.nm || 0);
+  const cost = r.totalCost || 0;
+  const netY = (yrs) => Math.round(monthlyDelta * 12 * yrs - cost);
+  const labels = ['Y2', 'Y3', 'Y5'];
+  const values = [netY(2), netY(3), netY(5)];
+  const colors = values.map(v => v >= 0 ? chartColors.accent : '#DC2626');
+  charts['chart-rf-horizons'] = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderRadius: 4, maxBarThickness: 42 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 18 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => fmt.money(c.parsed.y) + ' net' } },
+        datalabels: {
+          display: true, anchor: ctx => ctx.parsed.y >= 0 ? 'end' : 'start',
+          align: ctx => ctx.parsed.y >= 0 ? 'top' : 'bottom',
+          offset: 2, clip: false,
+          color: chartColors.ink, font: { ...chartFontSans, weight: '600', size: 10 },
+          formatter: v => (v >= 0 ? '+' : '−') + '$' + (Math.abs(v)/1000).toFixed(1) + 'k',
+        },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { ...chartFontSans, weight: '600' }, color: chartColors.ink } },
+        y: { grid: { color: chartColors.border }, ticks: { font: chartFontSans, color: chartColors.faint, callback: v => '$' + (v/1000).toFixed(0) + 'k' } },
+      },
+    },
+  });
+}
+
+function drawRfInterest(r) {
+  const ctx = document.getElementById('chart-rf-interest');
+  if (!ctx) return;
+  if (charts['chart-rf-interest']) charts['chart-rf-interest'].destroy();
+  // Interest paid over tenure: current vs new (uses state tenures + outstanding)
+  const s = state.refinance || {};
+  const out = num(s.outstanding) || 0;
+  const remT = num(s.remainingTenure) || 0;
+  const newT = num(s.newTenure) || remT;
+  const intCur = Math.round(((r.cur || 0) * 12 * remT) - out);
+  const intNew = Math.round(((r.nm || 0) * 12 * newT) - out);
+  const intCurClean = Math.max(0, intCur);
+  const intNewClean = Math.max(0, intNew);
+  const saved = Math.max(0, intCurClean - intNewClean);
+  charts['chart-rf-interest'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Stay current', 'Refinance'],
+      datasets: [{
+        data: [intCurClean, intNewClean],
+        backgroundColor: ['rgba(220,38,38,.55)', chartColors.accent],
+        borderRadius: 4, maxBarThickness: 50,
+      }],
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { right: 56 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => fmt.money(c.parsed.x) + ' total interest' } },
+        datalabels: {
+          display: true, anchor: 'end', align: 'end', offset: 4, clip: false,
+          color: chartColors.ink, font: { ...chartFontSans, weight: '600', size: 10 },
+          formatter: v => '$' + (v/1000).toFixed(0) + 'k',
+        },
+        title: saved > 0 ? { display: true, text: 'Interest saved: ' + fmt.money(saved), color: chartColors.accent, font: { ...chartFontSans, weight: '600', size: 11 }, padding: { top: 0, bottom: 6 } } : { display: false },
+      },
+      scales: {
+        x: { grid: { color: chartColors.border, drawBorder: false }, ticks: { font: chartFontSans, color: chartColors.faint, callback: v => '$' + (v/1000).toFixed(0) + 'k' } },
         y: { grid: { display: false }, ticks: { font: { ...chartFontSans, weight: '600' }, color: chartColors.ink } },
       },
     },
@@ -3120,9 +3294,11 @@ function pdfAffordability() {
     </div>
   `;
   const charts = `
-    <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end;">
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: end;">
       <div style="min-width: 0;">${chartFigure('chart-aff-donut', 'Downpayment split')}</div>
       <div style="min-width: 0;">${chartFigure('chart-aff-bar', 'HDB vs Private — max property')}</div>
+      <div style="min-width: 0;">${chartFigure('chart-aff-stress', 'Stress test · monthly @ 3 / 4 / 5 / 6 %')}</div>
+      <div style="min-width: 0;">${chartFigure('chart-aff-income', 'Income composition · per borrower')}</div>
     </div>
   `;
   return { analysis, charts };
@@ -3304,9 +3480,11 @@ function pdfRefinance() {
     </div>
   `;
   const charts = `
-    <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end;">
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: end;">
       <div style="min-width: 0;">${chartFigure('chart-rf-monthly', 'Monthly comparison')}</div>
       <div style="min-width: 0;">${chartFigure('chart-rf-cost-donut', 'Switching cost split')}</div>
+      <div style="min-width: 0;">${chartFigure('chart-rf-horizons', 'Net savings · 2 / 3 / 5 yr horizons')}</div>
+      <div style="min-width: 0;">${chartFigure('chart-rf-interest', 'Interest paid · current vs new')}</div>
     </div>
     <div style="margin-top: 28px; min-width: 0;">
       ${chartFigure('chart-refi', 'Cumulative net savings over horizon', { height: '70mm' })}
