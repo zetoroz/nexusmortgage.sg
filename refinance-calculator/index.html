@@ -234,6 +234,63 @@
 
     .container-narrow { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
   </style>
+<!-- NAV-STYLES-CANONICAL v1 -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ===== Canonical navbar styles (shared) ===== */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.35rem 0;
+  transition: background .4s, box-shadow .4s, padding .4s;
+}
+#navbar.scrolled {
+  background: rgba(6,14,31,0.96);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 40px rgba(0,0,0,.45);
+  padding: .9rem 0;
+}
+#navbar .nav-link {
+  font-size: .8rem; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,.7);
+  transition: color .25s; text-decoration: none;
+}
+#navbar .nav-link:hover { color: var(--gold-400, #E8C97A); }
+#navbar .nav-link:focus-visible { outline: 2px solid var(--gold-400, #E8C97A); outline-offset: 2px; }
+#navbar .nav-tools-btn { display: flex; align-items: center; gap: .3rem; }
+#navbar #tools-dropdown a { color: rgba(250,247,242,.85); }
+.tools-dd-item {
+  display: block; padding: .6rem 1rem;
+  color: rgba(250,247,242,.7);
+  font-size: .8rem; font-weight: 500; letter-spacing: .05em;
+  text-decoration: none; border-radius: 6px;
+  transition: background .2s, color .2s;
+}
+.tools-dd-item:hover { background: rgba(196,151,59,.12); color: var(--gold-400, #E8C97A); }
+.tools-dd-item:focus-visible { outline: 2px solid var(--gold-400, #E8C97A); outline-offset: 2px; }
+/* Canonical nav button (overrides per-page .btn-gold variants for navbar only) */
+#navbar .btn-gold {
+  display: inline-flex; align-items: center; gap: .6rem;
+  background: linear-gradient(135deg, #C4973B, #E8C97A);
+  color: #0B1C3A; font-weight: 600; font-size: .8rem;
+  letter-spacing: .04em; padding: .6rem 1.4rem;
+  border-radius: 5px; border: none; cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(196,151,59,.35);
+  white-space: nowrap;
+}
+#navbar .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 36px rgba(196,151,59,.5); }
+#mob-menu {
+  display: none; flex-direction: column; gap: 0;
+  background: rgba(6,14,31,.98);
+  backdrop-filter: blur(20px);
+}
+#mob-menu.open { display: flex; }
+#mob-menu .nav-link { color: rgba(250,247,242,.85); font-size: .85rem; }
+@media (min-width: 1024px) { #mob-menu { display: none !important; } }
+</style>
+<!-- /NAV-STYLES-CANONICAL -->
 </head>
 
 <body>
@@ -728,6 +785,41 @@
       calcRefi();
     });
   </script>
+<!-- NAV-JS-CANONICAL v2 -->
+<script>
+(function(){
+  var nb = document.getElementById('navbar');
+  if (nb && !nb.dataset.canonicalScrollWired) {
+    nb.dataset.canonicalScrollWired = '1';
+    window.addEventListener('scroll', function(){ nb.classList.toggle('scrolled', window.scrollY > 55); }, { passive: true });
+  }
+  // toggleMenu — always re-define so DOM-ready order doesn't matter
+  window.toggleMenu = function(){ var m = document.getElementById('mob-menu'); if (m) m.classList.toggle('open'); };
+  // Tools dropdown: clone button to nuke ALL prior listeners, then attach canonical only
+  var toolsBtn = document.getElementById('tools-btn');
+  var toolsDd = document.getElementById('tools-dropdown');
+  if (toolsBtn && toolsDd && !toolsBtn.dataset.canonicalWired) {
+    var clone = toolsBtn.cloneNode(true);
+    toolsBtn.parentNode.replaceChild(clone, toolsBtn);
+    toolsBtn = clone;
+    toolsBtn.dataset.canonicalWired = '1';
+    toolsBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = toolsDd.style.display === 'block';
+      toolsDd.style.display = open ? 'none' : 'block';
+      toolsBtn.setAttribute('aria-expanded', String(!open));
+    });
+    document.addEventListener('click', function(){
+      toolsDd.style.display = 'none';
+      toolsBtn.setAttribute('aria-expanded', 'false');
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') { toolsDd.style.display = 'none'; toolsBtn.setAttribute('aria-expanded','false'); }
+    });
+  }
+})();
+</script>
+<!-- /NAV-JS-CANONICAL -->
 </body>
 
 </html>
