@@ -202,12 +202,11 @@ body::after {
 .console-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 6px;
   position: relative; z-index: 1;
   box-shadow:
     0 1px 0 rgba(11,18,32,.02),
-    0 4px 12px rgba(11,18,32,.04),
-    0 24px 48px -12px rgba(11,18,32,.08);
+    0 2px 8px rgba(11,18,32,.03);
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 14px; line-height: 1.5; color: var(--ink);
 }
@@ -216,9 +215,11 @@ body::after {
 .console-display-num { font-family: 'Fraunces', serif; font-feature-settings: 'tnum' 1, 'lnum' 1; font-variant-numeric: tabular-nums lining-nums; }
 
 .sec-tag {
-  font-size: 10.5px; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--faint);
-  font-weight: 600;
+  font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--navy-900);
+  font-weight: 700;
+  border-bottom: 1.5px solid var(--gold-500);
+  padding-bottom: 2px; display: inline-block;
 }
 .divider { height: 1px; background: var(--border); width: 100%; }
 .divider-dashed { border-top: 1px dashed var(--border); width: 100%; }
@@ -230,68 +231,171 @@ body::after {
 }
 
 /* Mode toggle */
+/* Banker mode toggle: hairline border, navy active state */
 .mode-toggle {
-  display: inline-flex; padding: 4px;
+  display: inline-flex; padding: 3px;
   background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
   position: relative;
 }
 .mode-btn {
   position: relative; z-index: 1;
-  padding: 9px 20px; border-radius: 7px;
-  font-weight: 600; font-size: 13px;
+  padding: 8px 18px; border-radius: 2px;
+  font-weight: 600; font-size: 12px; letter-spacing: .04em;
   color: var(--muted); background: transparent;
   border: none; cursor: pointer;
-  transition: color .18s ease;
+  transition: color .15s ease;
   font-family: inherit;
 }
-.mode-btn.active { color: var(--ink); }
-.mode-btn .ico { width: 14px; height: 14px; margin-right: 6px; vertical-align: -2px; }
+.mode-btn.active { color: var(--cream-100); }
+.mode-btn .ico { width: 13px; height: 13px; margin-right: 6px; vertical-align: -2px; }
 .mode-indicator {
-  position: absolute; top: 4px; left: 4px; height: calc(100% - 8px);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  box-shadow: 0 1px 2px rgba(11,18,32,.06);
-  transition: transform .25s cubic-bezier(.5,1.5,.4,1), width .25s cubic-bezier(.5,1.5,.4,1);
+  position: absolute; top: 3px; left: 3px; height: calc(100% - 6px);
+  background: var(--navy-900);
+  border-radius: 2px;
+  transition: transform .22s cubic-bezier(.4,1,.5,1), width .22s cubic-bezier(.4,1,.5,1);
   z-index: 0;
 }
+
+/* Banker form section: eyebrow + hairline + grid */
+.form-section { margin-bottom: 28px; }
+.form-section:last-child { margin-bottom: 0; }
+.form-section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+  border-top: 2px solid var(--navy-900);
+  padding: 10px 0 14px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.form-section-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--navy-900);
+  border-bottom: 1.5px solid var(--gold-500);
+  padding-bottom: 2px;
+}
+.form-section-num {
+  font-family: 'Fraunces', serif; font-size: 11px;
+  color: var(--muted); letter-spacing: .04em;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+}
+.form-section-hint {
+  font-size: 11.5px; color: var(--muted);
+  letter-spacing: .01em;
+}
+.form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 20px; }
+.form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px 20px; }
+@media (max-width: 768px) {
+  .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Borrower card — full-width container with internal grid */
+.borrower-card {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--navy-900);
+  border-radius: 4px;
+  padding: 16px 18px 14px;
+  margin-bottom: 12px;
+  background: var(--surface);
+}
+.borrower-card .borrower-card-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.borrower-card .borrower-card-title {
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--navy-900);
+}
+.borrower-card .borrower-card-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px 18px;
+}
+@media (max-width: 768px) {
+  .borrower-card .borrower-card-grid { grid-template-columns: 1fr; }
+}
+.borrower-card .borrower-cfb-wrap { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+
+/* Banker calc title block — left-aligned, term-sheet feel */
+.calc-title-block {
+  margin-bottom: 28px;
+  padding: 0 0 18px;
+  border-bottom: 2px solid var(--navy-900);
+}
+.calc-title-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px; margin-bottom: 12px;
+}
+.calc-title-meta .sec-tag { color: var(--navy-900); }
+.calc-title-time {
+  font-size: 10px; font-weight: 700; letter-spacing: .16em;
+  color: var(--muted);
+  border-bottom: 1.5px solid var(--gold-500);
+  padding-bottom: 2px;
+}
+.calc-title-h {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+  font-weight: 500; color: var(--navy-900);
+  letter-spacing: -.015em; line-height: 1.1;
+  margin: 4px 0 6px;
+}
+.calc-title-sub {
+  color: var(--muted); font-size: 13.5px;
+  max-width: 620px; line-height: 1.55;
+}
+
+/* Calculate-row footer */
+.calc-footer {
+  margin-top: 24px; padding-top: 18px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.calc-footer-note {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 11.5px; letter-spacing: .04em;
+  color: var(--muted);
+}
+.calc-footer-note svg { color: var(--accent); }
 
 /* Inputs */
 .field { display: flex; flex-direction: column; gap: 6px; }
 .field-label {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--muted);
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--navy-900);
 }
-.field-label .normal { font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--faint); margin-left: 4px; }
-.field-hint { font-size: 11.5px; color: var(--faint); margin-top: 2px; }
+.field-label .normal { font-weight: 500; letter-spacing: .02em; text-transform: uppercase; color: var(--faint); margin-left: 6px; font-size: 9.5px; }
+.field-hint { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
 .input-wrap { position: relative; }
 .input-prefix, .input-suffix {
   position: absolute; top: 50%; transform: translateY(-50%);
-  color: var(--faint); font-size: 13px; pointer-events: none;
-  font-feature-settings: 'tnum' 1;
+  color: var(--muted); font-size: 13px; pointer-events: none;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-weight: 500;
 }
 .input-prefix { left: 12px; }
 .input-suffix { right: 12px; }
 .field-input, .field-select {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
   background: var(--surface);
   font-size: 14px; color: var(--ink);
   font-family: inherit;
-  font-feature-settings: 'tnum' 1;
-  transition: border-color .15s, box-shadow .15s, background .15s;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  transition: border-color .12s, box-shadow .12s, background .12s;
 }
 .field-input.has-prefix { padding-left: 28px; }
 .field-input.has-suffix { padding-right: 32px; }
-.field-input:hover, .field-select:hover { border-color: var(--border-strong); }
+.field-input:hover, .field-select:hover { border-color: var(--navy-900); }
 .field-input:focus, .field-select:focus {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(5,150,105,.13);
+  border-color: var(--navy-900);
+  box-shadow: 0 0 0 3px rgba(11,28,58,.08);
 }
 .field-input[type="number"]::-webkit-outer-spin-button,
 .field-input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
@@ -327,27 +431,41 @@ body::after {
 .btn-secondary-console:hover { background: var(--surface-2); border-color: var(--border-strong); }
 
 /* Metric cards (preview) */
+/* Banker stat tile: hairline border, tight radius, accent rule on top */
 .metric-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px 20px;
+  border-radius: 4px;
+  padding: 16px 18px 14px;
   position: relative; overflow: hidden;
 }
-.metric-card.tinted-green { background: linear-gradient(135deg, var(--accent-soft) 0%, #fff 60%); border-color: var(--accent-line); }
-.metric-card.tinted-fail { background: linear-gradient(135deg, var(--c-red-soft) 0%, #fff 60%); border-color: rgba(220,38,38,.18); }
-.metric-card.tinted-warn { background: linear-gradient(135deg, var(--warn-soft) 0%, #fff 60%); border-color: rgba(217,119,6,.22); }
+.metric-card::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0;
+  height: 2px; background: var(--navy-900);
+}
+.metric-card.tinted-green::before { background: var(--accent-strong); }
+.metric-card.tinted-green { background: var(--surface); border-color: var(--border); }
+.metric-card.tinted-fail::before { background: var(--c-red); }
+.metric-card.tinted-fail { background: var(--surface); border-color: var(--border); }
+.metric-card.tinted-warn::before { background: var(--c-amber); }
+.metric-card.tinted-warn { background: var(--surface); border-color: var(--border); }
+.metric-card.tinted-gold::before { background: var(--gold-500); }
 .metric-label {
-  font-size: 11px; font-weight: 600; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
 }
 .metric-val {
-  font-family: 'Fraunces', serif; font-feature-settings: 'tnum' 1;
-  font-size: 30px; font-weight: 500; color: var(--ink);
+  font-family: 'Fraunces', serif; font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-size: 28px; font-weight: 500; color: var(--ink);
   line-height: 1.05; letter-spacing: -.02em;
 }
-.metric-val .small { font-size: 16px; color: var(--muted); font-weight: 400; }
-.metric-sub { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+.metric-val .small { font-size: 14px; color: var(--muted); font-weight: 400; }
+.metric-sub {
+  font-size: 11.5px; color: var(--muted); margin-top: 8px;
+  font-weight: 500; letter-spacing: .01em;
+  border-top: 1px solid var(--border-lt, var(--border));
+  padding-top: 8px;
+}
 
 /* Pills */
 .pill {
@@ -409,38 +527,79 @@ body::after {
   pointer-events: none;
   border-radius: inherit;
 }
+/* Banker unlock strip: navy bg, gold accent, no gradient mush */
 .unlock-banner {
   margin: 18px 0 8px;
   padding: 14px 18px;
-  background: linear-gradient(135deg, rgba(196,151,59,.10), rgba(196,151,59,.04));
-  border: 1px solid rgba(196,151,59,.28);
-  border-radius: 10px;
+  background: var(--navy-900);
+  border: 1px solid var(--navy-800);
+  border-left: 3px solid var(--gold-500);
+  border-radius: 4px;
   display: flex; align-items: center; gap: 14px;
   flex-wrap: wrap;
 }
 .unlock-banner .ub-ico {
-  width: 36px; height: 36px; flex-shrink: 0;
-  background: var(--accent-soft);
-  border: 1px solid var(--accent-line);
-  border-radius: 8px;
+  width: 32px; height: 32px; flex-shrink: 0;
+  background: rgba(196,151,59,.14);
+  border: 1px solid rgba(196,151,59,.45);
+  border-radius: 4px;
   display: flex; align-items: center; justify-content: center;
-  color: var(--accent-strong);
+  color: var(--gold-400);
 }
 .unlock-banner .ub-text {
   flex: 1; min-width: 200px;
-  font-size: 13px; color: var(--ink-2); line-height: 1.5;
+  font-size: 13px; color: rgba(250,247,242,.85); line-height: 1.5;
 }
-.unlock-banner .ub-text strong { color: var(--ink); font-weight: 600; }
+.unlock-banner .ub-text strong {
+  color: var(--gold-400); font-weight: 700;
+  letter-spacing: .02em;
+}
 .unlock-banner button {
   padding: .55rem 1.1rem;
-  background: linear-gradient(135deg,#C4973B,#E8C97A);
-  color: #0B1C3A; border: none; border-radius: 6px;
-  font-weight: 600; letter-spacing: .03em; font-size: 12.5px;
+  background: var(--gold-500);
+  color: var(--navy-900); border: none; border-radius: 3px;
+  font-weight: 700; letter-spacing: .04em; font-size: 12px;
+  text-transform: uppercase;
   cursor: pointer;
   display: inline-flex; align-items: center; gap: .4rem;
+  transition: background .15s ease, transform .12s ease;
 }
-.unlock-banner button:hover { transform: translateY(-1px); }
+.unlock-banner button:hover { background: var(--gold-400); transform: translateY(-1px); }
 .unlock-banner button:active { transform: translateY(0); }
+.unlock-banner button:focus-visible { outline: 2px solid var(--gold-300); outline-offset: 2px; }
+
+/* Banker inline CTA (used after bank table, etc.) */
+.banker-cta {
+  margin-top: 18px; padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-500);
+  border-radius: 4px;
+  display: flex; flex-wrap: wrap; gap: 14px;
+  align-items: center; justify-content: space-between;
+}
+.banker-cta .bc-text {
+  font-size: 13px; color: var(--ink-2); line-height: 1.5;
+}
+.banker-cta .bc-text strong { color: var(--navy-900); font-weight: 700; }
+.banker-cta .bc-text .bc-sub {
+  display: block; margin-top: 4px;
+  font-size: 11.5px; color: var(--muted); line-height: 1.5;
+}
+.btn-gold {
+  padding: .65rem 1.3rem;
+  background: var(--gold-500);
+  color: var(--navy-900);
+  border: none; border-radius: 3px;
+  font-weight: 700; letter-spacing: .04em; font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: .5rem;
+  transition: background .15s ease, transform .12s ease;
+}
+.btn-gold:hover { background: var(--gold-400); transform: translateY(-1px); }
+.btn-gold:active { transform: translateY(0); }
+.btn-gold:focus-visible { outline: 2px solid var(--gold-300); outline-offset: 2px; }
 .gate-card {
   max-width: 460px;
   background: var(--surface);
@@ -467,36 +626,55 @@ body::after {
 .gate-bullet { display: flex; align-items: flex-start; gap: 10px; padding: 4px 0; }
 .gate-bullet svg { flex-shrink: 0; color: var(--accent); margin-top: 2px; }
 
-/* Charts container */
+/* Banker chart card: tight radius, hairline border, navy eyebrow */
 .chart-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px;
+  border-radius: 4px;
+  padding: 18px 18px 14px;
+  position: relative;
+}
+.chart-card::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0;
+  height: 1px; background: var(--navy-900);
 }
 .chart-card h4 {
-  font-size: 12px; font-weight: 600; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--navy-900); margin-bottom: 4px;
+  display: inline-block; padding-bottom: 2px;
+  border-bottom: 1.5px solid var(--gold-500);
 }
-.chart-card .chart-sub { font-size: 12.5px; color: var(--faint); margin-bottom: 14px; }
+.chart-card .chart-sub {
+  font-size: 12px; color: var(--muted); margin-bottom: 14px;
+  letter-spacing: .01em;
+}
 
 /* Bank rate table */
+/* Banker rate table: navy top rule, hairline rows, no zebra. Selected = gold tint. */
 .rate-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+.rate-table thead tr { border-top: 2px solid var(--navy-900); }
 .rate-table th {
-  font-size: 10.5px; font-weight: 600; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--faint);
-  text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border);
+  font-size: 10px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--navy-900);
+  text-align: left; padding: 10px 12px;
+  border-top: 2px solid var(--navy-900);
+  border-bottom: 1px solid var(--border-strong);
+  background: transparent;
 }
 .rate-table th.right { text-align: right; }
 .rate-table td {
-  padding: 11px 12px; font-size: 13.5px; color: var(--ink-2);
+  padding: 11px 12px; font-size: 13px; color: var(--ink-2);
   border-bottom: 1px solid var(--border);
-  font-feature-settings: 'tnum' 1;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-variant-numeric: tabular-nums lining-nums;
 }
 .rate-table td.right { text-align: right; }
-.rate-table tr.best td { background: var(--accent-soft); }
-.rate-table tr.best td:first-child { border-left: 3px solid var(--accent); padding-left: 9px; }
-.rate-table tr.picked td { background: rgba(196,151,59,.13); box-shadow: inset 0 0 0 1px rgba(196,151,59,.45); }
+.rate-table tbody tr:last-child td { border-bottom: 2px solid var(--navy-900); }
+.rate-table tr.best td { background: rgba(5,150,105,.05); }
+.rate-table tr.best td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+.rate-table tr.picked td { background: rgba(196,151,59,.10); }
+.rate-table tr.picked td:first-child { box-shadow: inset 3px 0 0 var(--gold-500); }
+.rate-table tr:hover:not(.picked):not(.best) td { background: rgba(11,28,58,.025); }
 
 /* Rate type filter chips */
 .rt-chip {
@@ -621,76 +799,82 @@ body::after {
 }
 
 
-/* Property type toggle (inline, full-width within field cell) */
+/* Banker property toggle: hairline + navy active */
 .prop-toggle {
-  display: flex; padding: 4px;
+  display: flex; padding: 3px;
   background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
   position: relative;
   width: 100%; height: 40px;
 }
 .prop-toggle .prop-btn {
   position: relative; z-index: 1;
-  flex: 1; padding: 8px 10px;
-  border-radius: 6px;
-  font-weight: 600; font-size: 13px;
+  flex: 1; padding: 7px 10px;
+  border-radius: 2px;
+  font-weight: 600; font-size: 12px;
+  letter-spacing: .04em;
   color: var(--muted); background: transparent;
   border: none; cursor: pointer;
-  transition: color .18s ease;
+  transition: color .15s ease;
   font-family: inherit;
   display: flex; align-items: center; justify-content: center; gap: 6px;
 }
 .prop-toggle .prop-btn .ico { width: 13px; height: 13px; }
-.prop-toggle .prop-btn.active { color: var(--ink); }
+.prop-toggle .prop-btn.active { color: var(--cream-100); }
 .prop-toggle .prop-indicator {
-  position: absolute; top: 4px; left: 4px; height: calc(100% - 8px);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(11,18,32,.06);
-  transition: transform .25s cubic-bezier(.5,1.5,.4,1), width .25s cubic-bezier(.5,1.5,.4,1);
+  position: absolute; top: 3px; left: 3px; height: calc(100% - 6px);
+  background: var(--navy-900);
+  border-radius: 2px;
+  transition: transform .22s cubic-bezier(.4,1,.5,1), width .22s cubic-bezier(.4,1,.5,1);
   z-index: 0;
 }
 
-/* Result panel rows (login-style) — clean key/value table */
+/* Banker ledger rows: solid hairline, dense leading, tabular numerals */
 .res-row {
   display: flex; justify-content: space-between; align-items: baseline;
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--border);
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
 }
 .res-row:last-child { border-bottom: 0; }
 .res-row.total {
-  border-top: 1px solid var(--border);
-  border-bottom: 0;
+  border-top: 1.5px solid var(--navy-900);
+  border-bottom: 2px solid var(--navy-900);
   margin-top: 4px;
-  padding-top: 12px;
+  padding: 10px 0;
 }
-.res-row.total .res-label { color: var(--ink); font-weight: 600; }
+.res-row.total .res-label {
+  color: var(--navy-900); font-weight: 700;
+  font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
+}
 .res-row.total .res-value {
-  color: var(--accent-strong);
-  font-weight: 700;
+  color: var(--ink);
+  font-weight: 600;
   font-size: 18px;
+  font-family: 'Fraunces', serif;
 }
-.res-label { font-size: 13px; color: var(--muted); }
+.res-label { font-size: 13px; color: var(--ink-2); }
 .res-sublabel { font-size: 11px; color: var(--faint); margin-top: 1px; }
 .res-value {
-  font-size: 15px; font-weight: 500; color: var(--ink);
-  font-family: inherit;
-  font-feature-settings: 'tnum' 1;
+  font-size: 14px; font-weight: 500; color: var(--ink);
+  font-family: 'Fraunces', serif;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-variant-numeric: tabular-nums lining-nums;
 }
-.res-value.add { color: var(--accent-strong); }
-.res-value.subtract { color: var(--muted); }
+.res-value.add { color: var(--accent-strong); font-weight: 600; }
+.res-value.subtract { color: var(--c-red); font-weight: 600; }
 .res-card-title {
-  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--accent-strong); font-weight: 600;
-  margin-bottom: 4px;
+  font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--navy-900); font-weight: 700;
+  border-bottom: 1.5px solid var(--gold-500);
+  padding-bottom: 2px; display: inline-block;
+  margin-bottom: 8px;
 }
 .res-card-h3 {
   font-family: 'Fraunces', serif;
-  font-size: 18px; font-weight: 500;
+  font-size: 17px; font-weight: 500;
   color: var(--ink);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   letter-spacing: -0.01em;
 }
 
@@ -807,43 +991,184 @@ body::after {
 .add-borrower-btn {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   width: 100%;
-  padding: 11px 16px;
-  border: 1.5px dashed var(--border-strong);
+  padding: 10px 16px;
+  border: 1px dashed var(--border-strong);
   background: transparent;
-  border-radius: 10px;
+  border-radius: 4px;
   color: var(--muted);
-  font-family: inherit; font-weight: 600; font-size: 13px;
+  font-family: inherit; font-weight: 700; font-size: 11.5px;
+  letter-spacing: .08em; text-transform: uppercase;
   cursor: pointer;
-  transition: border-color .18s, color .18s, background .18s;
-  margin-top: 18px;
+  transition: border-color .15s, color .15s, background .15s;
+  margin-top: 8px;
 }
 .add-borrower-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent-strong);
-  background: var(--accent-soft);
+  border-color: var(--navy-900);
+  border-style: solid;
+  color: var(--navy-900);
+  background: rgba(11,28,58,.025);
 }
-.add-borrower-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.add-borrower-btn:focus-visible { outline: 2px solid var(--navy-900); outline-offset: 2px; }
 .add-borrower-btn .plus-ico {
-  width: 16px; height: 16px;
+  width: 14px; height: 14px;
   border: 1.5px solid currentColor;
-  border-radius: 100px;
+  border-radius: 2px;
   display: inline-flex; align-items: center; justify-content: center;
-  font-size: 12px; line-height: 1;
+  font-size: 11px; line-height: 1;
 }
 
-/* Borrower row remove button — sits inside the field-label */
-.field-label .borrower-remove {
-  float: right;
-  background: transparent; border: none;
-  color: var(--faint); font-size: 14px; line-height: 1;
-  width: 18px; height: 18px;
-  display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 4px; cursor: pointer;
-  margin-top: -2px;
-  transition: color .15s, background .15s;
-  font-family: inherit; padding: 0;
+/* Borrower remove btn — banker chip in card head */
+.borrower-card .borrower-remove {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--muted); font-size: 10.5px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 3px;
+  cursor: pointer; font-family: inherit;
+  transition: color .15s, background .15s, border-color .15s;
 }
-.field-label .borrower-remove:hover { color: var(--c-red); background: var(--c-red-soft); }
+.borrower-card .borrower-remove:hover {
+  color: var(--c-red);
+  border-color: var(--c-red);
+  background: var(--c-red-soft);
+}
+
+/* Mode row */
+.mode-row {
+  display: flex; align-items: center; justify-content: flex-start;
+  gap: 16px; flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+/* ═══ Refi savings dashboard (live, before Calculate) ═══ */
+.refi-shell {
+  display: grid; grid-template-columns: 3fr 2fr; gap: 28px;
+  margin-bottom: 28px;
+}
+@media (max-width: 980px) {
+  .refi-shell { grid-template-columns: 1fr; }
+}
+.refi-inputs { min-width: 0; }
+.refi-side { min-width: 0; }
+
+.refi-net-cost {
+  display: flex; justify-content: space-between; align-items: baseline;
+  background: rgba(196,151,59,.08);
+  border: 1px solid rgba(196,151,59,.30);
+  border-left: 3px solid var(--gold-500);
+  border-radius: 4px;
+  padding: 11px 14px;
+  font-size: 12.5px;
+  margin-top: 6px;
+}
+.refi-net-cost .label {
+  color: var(--ink-2); font-weight: 600;
+  letter-spacing: .04em;
+}
+.refi-net-cost .value {
+  color: var(--navy-900); font-size: 16px; font-weight: 700;
+  font-family: 'Fraunces', serif;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.refi-tip {
+  margin-top: 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--navy-900);
+  border-radius: 4px;
+  padding: 11px 14px;
+  font-size: 12px; line-height: 1.6;
+  color: var(--ink-2);
+}
+.refi-tip strong {
+  color: var(--navy-900); font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase; font-size: 10.5px;
+  display: inline-block; margin-right: 4px;
+}
+
+/* Summary band: navy with gold serif headline */
+.refi-summary-band {
+  background: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-950) 100%);
+  color: var(--cream-100);
+  border-radius: 6px;
+  border-top: 3px solid var(--gold-500);
+  padding: 22px 22px 20px;
+  position: relative; overflow: hidden;
+  margin-bottom: 12px;
+}
+.refi-summary-band::before {
+  content: ''; position: absolute; top: -50%; right: -25%;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(196,151,59,.18), transparent 65%);
+  pointer-events: none;
+}
+.refi-summary-band > * { position: relative; }
+.refi-summary-headline {
+  font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(250,247,242,.55); font-weight: 700;
+}
+.refi-summary-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 2.9rem);
+  font-weight: 500;
+  color: var(--gold-300);
+  letter-spacing: -.02em; line-height: 1.05;
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.refi-summary-sub {
+  font-size: 11.5px; color: rgba(250,247,242,.55);
+  margin-top: 6px;
+}
+.refi-rec-pill {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  padding: 5px 10px; border-radius: 100px;
+  margin-top: 12px;
+}
+.refi-rec-pill.go { background: rgba(74,222,128,.10); color: #4ADE80; border: 1px solid rgba(74,222,128,.35); }
+.refi-rec-pill.maybe { background: rgba(196,151,59,.12); color: var(--gold-300); border: 1px solid rgba(196,151,59,.35); }
+.refi-rec-pill.no { background: rgba(248,113,113,.08); color: #FCA5A5; border: 1px solid rgba(248,113,113,.30); }
+
+/* Result grid: 2x2 navy cards with gold serif numerals */
+.refi-result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.refi-result-card {
+  background: linear-gradient(160deg, var(--navy-900), var(--navy-800));
+  color: var(--cream-100);
+  padding: 14px 14px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(196,151,59,.18);
+  position: relative;
+}
+.refi-result-card.gold-border { border-color: rgba(196,151,59,.45); }
+.refi-result-card .label {
+  font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(250,247,242,.50); font-weight: 700;
+}
+.refi-result-card .value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem; font-weight: 500;
+  color: var(--gold-300);
+  letter-spacing: -.01em; line-height: 1.05;
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.refi-result-card .sublabel {
+  font-size: 10px; color: rgba(250,247,242,.45);
+  margin-top: 3px;
+  letter-spacing: .04em;
+}
+
+.refi-cta-block {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: rgba(196,151,59,.08);
+  border: 1px solid rgba(196,151,59,.30);
+  border-left: 3px solid var(--gold-500);
+  border-radius: 4px;
+  font-size: 12px; color: var(--ink-2); line-height: 1.55;
+}
+.refi-cta-block .btn-gold { width: 100%; justify-content: center; margin-top: 8px; }
 
 /* Borrower row entrance animation */
 .borrower-row {
@@ -1133,19 +1458,20 @@ body::after {
 <!-- ============ CALCULATOR + REPORT ============ -->
 <section id="calculator-section">
   <div class="max-w-7xl mx-auto px-6 relative">
-    <div style="text-align:center; margin-bottom: 2.5rem;">
-      <span class="sec-tag" style="color: var(--gold-500); display:inline-block; margin-bottom:10px;">Step 1 of 2</span>
-      <h2 style="font-family:'Cormorant Garamond',serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 400; color: var(--navy-900); letter-spacing: -.015em;">
-        Tell us about your loan
-      </h2>
-      <p style="color: rgba(11,28,58,.65); margin-top: .5rem; max-width: 520px; margin-left:auto; margin-right:auto;">
-        Pick new purchase or refinance, fill in the basics, and your full report appears below.
+    <div class="calc-title-block">
+      <div class="calc-title-meta">
+        <span class="sec-tag">Step 01 of 02 · Inputs</span>
+        <span class="calc-title-time">~60 SECONDS</span>
+      </div>
+      <h2 class="calc-title-h">Tell us about your loan.</h2>
+      <p class="calc-title-sub">
+        Pick new purchase or refinance, fill in the basics. Your full report appears below — stress-tested at the MAS 4% floor.
       </p>
     </div>
 
     <div class="console-card card-pad-lg">
-      <!-- Mode toggle -->
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom: 24px;">
+      <!-- Mode toggle row -->
+      <div class="mode-row">
         <div class="mode-toggle" id="modeToggle">
           <div class="mode-indicator" id="modeIndicator"></div>
           <button type="button" class="mode-btn active" data-mode="purchase">
@@ -1157,207 +1483,362 @@ body::after {
             Refinance
           </button>
         </div>
-        <span class="sec-tag" style="display:inline-flex; align-items:center; gap:6px;">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          ~60 seconds
-        </span>
       </div>
 
       <!-- ===== PURCHASE INPUTS ===== -->
       <div id="form-purchase" class="form-block">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <div class="field">
-            <label class="field-label">Property type</label>
-            <div class="prop-toggle" data-form="purchase">
-              <div class="prop-indicator"></div>
-              <button type="button" class="prop-btn active" data-prop="hdb">
-                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
-                HDB / EC
-              </button>
-              <button type="button" class="prop-btn" data-prop="private">
-                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22V8l10-6 10 6v14"/><path d="M9 22v-7h6v7"/><path d="M2 12h20"/></svg>
-                Private
-              </button>
+
+        <!-- Section 1: PROPERTY & LOAN -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <span class="form-section-eyebrow">Property &amp; Loan</span>
+            <span class="form-section-num">Section 01 / 03</span>
+          </div>
+          <div class="form-grid-3">
+            <div class="field">
+              <label class="field-label">Property type</label>
+              <div class="prop-toggle" data-form="purchase">
+                <div class="prop-indicator"></div>
+                <button type="button" class="prop-btn active" data-prop="hdb">
+                  <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+                  HDB / EC
+                </button>
+                <button type="button" class="prop-btn" data-prop="private">
+                  <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22V8l10-6 10 6v14"/><path d="M9 22v-7h6v7"/><path d="M2 12h20"/></svg>
+                  Private
+                </button>
+              </div>
+              <div class="field-hint" id="p-prop-hint">MSR cap of 30% applies to HDB &amp; EC. Tenure default 25y.</div>
             </div>
-            <div class="field-hint" id="p-prop-hint">MSR cap of 30% applies to HDB &amp; EC. Tenure default: 25y.</div>
-          </div>
 
-          <div class="field">
-            <label class="field-label" for="p-price">Property price <span class="normal">SGD</span></label>
-            <div class="input-wrap">
-              <span class="input-prefix">$</span>
-              <input id="p-price" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="800,000" data-comma="1" autocomplete="off">
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="field-label" for="p-loan">Loan amount <span class="normal">SGD</span></label>
-            <div class="input-wrap">
-              <span class="input-prefix">$</span>
-              <input id="p-loan" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="600,000" data-comma="1" autocomplete="off">
-            </div>
-            <div class="field-hint">75% LTV is the typical maximum.</div>
-          </div>
-
-          <div class="field">
-            <label class="field-label" for="p-tenure">Tenure <span class="normal">years</span></label>
-            <input id="p-tenure" type="number" inputmode="numeric" class="field-input num" value="25" min="5" max="35">
-            <div class="field-hint" id="p-tenure-hint">Max 30y HDB, 35y private. IWAA cap: <span id="iwaa-cap-text">—</span>.</div>
-          </div>
-
-          <div class="field borrower-group" data-borrower-n="1">
-            <label class="field-label" for="p-income">Borrower 1</label>
-
-            <!-- Sub-row 1: fixed income + age -->
-            <div class="sub-row-label">Fixed monthly income · age</div>
-            <div class="borrower-pair">
+            <div class="field">
+              <label class="field-label" for="p-price">Property price <span class="normal">SGD</span></label>
               <div class="input-wrap">
                 <span class="input-prefix">$</span>
-                <input id="p-income" type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-income" data-comma="1" autocomplete="off" value="12,000" placeholder="Fixed income">
-              </div>
-              <input id="p-age-1" type="number" inputmode="numeric" class="field-input num borrower-age" min="18" max="80" value="35" placeholder="Age" aria-label="Borrower 1 age">
-            </div>
-
-            <!-- Sub-row 2: variable income -->
-            <div class="sub-row-label">Variable income <span class="sub-row-hint">bonus / commission / rental — 30% factor</span></div>
-            <div class="input-wrap">
-              <span class="input-prefix">$</span>
-              <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-variable" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower 1 variable income">
-            </div>
-
-            <!-- Sub-row 3: residency + properties -->
-            <div class="sub-row-label">Residency · residential properties already owned <span class="sub-row-hint">drives ABSD</span></div>
-            <div class="borrower-pair borrower-pair-2-1">
-              <select class="field-input borrower-residency" aria-label="Borrower 1 residency">
-                <option value="SC" selected>🇸🇬 Singapore Citizen</option>
-                <option value="PR">🪪 Permanent Resident</option>
-                <option value="FOREIGNER">🌐 Foreigner</option>
-              </select>
-              <div class="input-wrap input-wrap-properties">
-                <span class="input-prefix-text">Owned</span>
-                <input type="number" inputmode="numeric" class="field-input num borrower-properties" min="0" max="10" value="0" placeholder="0" aria-label="Borrower 1 properties owned">
+                <input id="p-price" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="800,000" data-comma="1" autocomplete="off">
               </div>
             </div>
 
-            <!-- Cash flow boosters (collapsible) -->
-            <details class="cash-flow-booster">
-              <summary>
-                <span class="cfb-chevron">▸</span> Cash flow boosters <span class="cfb-optional">(optional)</span>
-              </summary>
-              <div class="cfb-body">
-                <div class="sub-row-label">Pledged funds <span class="sub-row-hint">cash locked at bank for 4+ yrs · 100% ÷ 48 mths</span></div>
-                <div class="input-wrap">
-                  <span class="input-prefix">$</span>
-                  <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-pledged" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower 1 pledged funds">
-                </div>
-                <div class="sub-row-label">Show funds <span class="sub-row-hint">eligible assets shown but not locked · 30% ÷ 48 mths</span></div>
-                <div class="input-wrap">
-                  <span class="input-prefix">$</span>
-                  <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-show" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower 1 show funds">
-                </div>
+            <div class="field">
+              <label class="field-label" for="p-loan">Loan amount <span class="normal">SGD</span></label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input id="p-loan" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="600,000" data-comma="1" autocomplete="off">
               </div>
-            </details>
-          </div>
+              <div class="field-hint">75% LTV is the typical maximum.</div>
+            </div>
 
-          <div class="field">
-            <label class="field-label" for="p-debts">Existing monthly debts <span class="normal">SGD</span></label>
-            <div class="input-wrap">
-              <span class="input-prefix">$</span>
-              <input id="p-debts" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="0" data-comma="1" autocomplete="off">
+            <div class="field">
+              <label class="field-label" for="p-tenure">Tenure <span class="normal">years</span></label>
+              <input id="p-tenure" type="number" inputmode="numeric" class="field-input num" value="25" min="5" max="35">
+              <div class="field-hint" id="p-tenure-hint">Max 30y HDB, 35y private. IWAA cap: <span id="iwaa-cap-text">—</span>.</div>
             </div>
-            <div class="field-hint">Car loans, credit-card minimums, etc.</div>
-          </div>
-          <!-- Additional borrowers slot in here (grid cells) -->
-          <div id="borrower-extra-slot" style="display: contents;"></div>
-          <!-- Optional: total CPF OA + Cash on hand (drives shortfall analysis) -->
-          <div class="field">
-            <label class="field-label" for="p-cpf-oa">Total CPF OA <span class="normal">optional · all buyers</span></label>
-            <div class="input-wrap">
-              <span class="input-prefix">$</span>
-              <input id="p-cpf-oa" type="text" inputmode="numeric" class="field-input has-prefix num num-input" data-comma="1" autocomplete="off" placeholder="0">
+
+            <div class="field">
+              <label class="field-label" for="p-debts">Existing monthly debts <span class="normal">SGD</span></label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input id="p-debts" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="0" data-comma="1" autocomplete="off">
+              </div>
+              <div class="field-hint">Car loans, credit-card minimums, etc.</div>
             </div>
-            <div class="field-hint">Combined CPF Ordinary Account balance (used for down payment, legal, monthly).</div>
-          </div>
-          <div class="field">
-            <label class="field-label" for="p-cash-on-hand">Cash on hand <span class="normal">optional</span></label>
-            <div class="input-wrap">
-              <span class="input-prefix">$</span>
-              <input id="p-cash-on-hand" type="text" inputmode="numeric" class="field-input has-prefix num num-input" data-comma="1" autocomplete="off" placeholder="0">
-            </div>
-            <div class="field-hint">Cash + savings available for down payment & duties (excluding CPF).</div>
+
+            <div class="field" aria-hidden="true"><!-- spacer for grid alignment --></div>
           </div>
         </div>
-        <!-- Add borrower button (sits below the grid) -->
-        <button type="button" class="add-borrower-btn" id="addBorrowerBtn">
-          <span class="plus-ico">+</span>
-          <span>Add another borrower</span>
-          <span style="color: var(--faint); font-weight: 500;">(<span id="borrower-count-text">1</span> of 4)</span>
-        </button>
+
+        <!-- Section 2: BORROWERS -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <span class="form-section-eyebrow">Borrowers</span>
+            <span class="form-section-num">Section 02 / 03 · up to 4 borrowers</span>
+          </div>
+
+          <div class="borrower-card borrower-group" data-borrower-n="1">
+            <div class="borrower-card-head">
+              <span class="borrower-card-title">Borrower 01</span>
+              <span class="form-section-hint">Drives TDSR / MSR / ABSD calcs</span>
+            </div>
+            <div class="borrower-card-grid">
+              <div class="field">
+                <label class="field-label" for="p-income">Fixed income · Age</label>
+                <div class="borrower-pair">
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input id="p-income" type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-income" data-comma="1" autocomplete="off" value="12,000" placeholder="Fixed income">
+                  </div>
+                  <input id="p-age-1" type="number" inputmode="numeric" class="field-input num borrower-age" min="18" max="80" value="35" placeholder="Age" aria-label="Borrower 1 age">
+                </div>
+                <div class="field-hint">Monthly · used at 100%</div>
+              </div>
+
+              <div class="field">
+                <label class="field-label">Variable income <span class="normal">30% factor</span></label>
+                <div class="input-wrap">
+                  <span class="input-prefix">$</span>
+                  <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-variable" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower 1 variable income">
+                </div>
+                <div class="field-hint">Bonus, commission, rental — MAS haircut applied.</div>
+              </div>
+
+              <div class="field">
+                <label class="field-label">Residency · Properties owned <span class="normal">drives ABSD</span></label>
+                <div class="borrower-pair borrower-pair-2-1">
+                  <select class="field-input borrower-residency" aria-label="Borrower 1 residency">
+                    <option value="SC" selected>🇸🇬 Singapore Citizen</option>
+                    <option value="PR">🪪 Permanent Resident</option>
+                    <option value="FOREIGNER">🌐 Foreigner</option>
+                  </select>
+                  <div class="input-wrap input-wrap-properties">
+                    <span class="input-prefix-text">Owned</span>
+                    <input type="number" inputmode="numeric" class="field-input num borrower-properties" min="0" max="10" value="0" placeholder="0" aria-label="Borrower 1 properties owned">
+                  </div>
+                </div>
+                <div class="field-hint">Counts existing residential properties only.</div>
+              </div>
+            </div>
+
+            <div class="borrower-cfb-wrap">
+              <details class="cash-flow-booster">
+                <summary>
+                  <span class="cfb-chevron">▸</span> Cash flow boosters <span class="cfb-optional">(optional)</span>
+                </summary>
+                <div class="cfb-body">
+                  <div class="sub-row-label">Pledged funds <span class="sub-row-hint">cash locked at bank for 4+ yrs · 100% ÷ 48 mths</span></div>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-pledged" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower 1 pledged funds">
+                  </div>
+                  <div class="sub-row-label">Show funds <span class="sub-row-hint">eligible assets shown but not locked · 30% ÷ 48 mths</span></div>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-show" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower 1 show funds">
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <div id="borrower-extra-slot"></div>
+
+          <button type="button" class="add-borrower-btn" id="addBorrowerBtn">
+            <span class="plus-ico">+</span>
+            <span>Add another borrower</span>
+            <span style="color: var(--faint); font-weight: 500;">(<span id="borrower-count-text">1</span> of 4)</span>
+          </button>
+        </div>
+
+        <!-- Section 3: FUNDS POSITION -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <span class="form-section-eyebrow">Funds position</span>
+            <span class="form-section-num">Section 03 / 03 · optional</span>
+          </div>
+          <div class="form-grid-2">
+            <div class="field">
+              <label class="field-label" for="p-cpf-oa">Total CPF OA <span class="normal">all buyers</span></label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input id="p-cpf-oa" type="text" inputmode="numeric" class="field-input has-prefix num num-input" data-comma="1" autocomplete="off" placeholder="0">
+              </div>
+              <div class="field-hint">Combined CPF Ordinary Account balance — used for down payment, legal, monthly.</div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="p-cash-on-hand">Cash on hand</label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input id="p-cash-on-hand" type="text" inputmode="numeric" class="field-input has-prefix num num-input" data-comma="1" autocomplete="off" placeholder="0">
+              </div>
+              <div class="field-hint">Cash + savings available for down payment &amp; duties (excluding CPF).</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ===== REFINANCE INPUTS ===== -->
       <div id="form-refinance" class="form-block" style="display:none;">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <div class="field">
-            <label class="field-label">Property type</label>
-            <div class="prop-toggle" data-form="refinance">
-              <div class="prop-indicator"></div>
-              <button type="button" class="prop-btn active" data-prop="hdb">
-                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
-                HDB / EC
-              </button>
-              <button type="button" class="prop-btn" data-prop="private">
-                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22V8l10-6 10 6v14"/><path d="M9 22v-7h6v7"/><path d="M2 12h20"/></svg>
-                Private
-              </button>
+
+        <div class="refi-shell">
+
+          <!-- LEFT — INPUTS -->
+          <div class="refi-inputs">
+
+            <!-- Section 1: CURRENT LOAN -->
+            <div class="form-section">
+              <div class="form-section-head">
+                <span class="form-section-eyebrow">Current loan</span>
+                <span class="form-section-num">Section 01 / 03</span>
+              </div>
+              <div class="form-grid-2">
+                <div class="field">
+                  <label class="field-label">Property type</label>
+                  <div class="prop-toggle" data-form="refinance">
+                    <div class="prop-indicator"></div>
+                    <button type="button" class="prop-btn active" data-prop="hdb">
+                      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+                      HDB / EC
+                    </button>
+                    <button type="button" class="prop-btn" data-prop="private">
+                      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22V8l10-6 10 6v14"/><path d="M9 22v-7h6v7"/><path d="M2 12h20"/></svg>
+                      Private
+                    </button>
+                  </div>
+                  <div class="field-hint">MSR cap of 30% applies to HDB &amp; EC.</div>
+                </div>
+
+                <div class="field">
+                  <label class="field-label" for="r-outstanding">Outstanding loan <span class="normal">SGD</span></label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input id="r-outstanding" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="500,000" data-comma="1" autocomplete="off">
+                  </div>
+                  <div class="field-hint">Balance still owed to your current bank.</div>
+                </div>
+
+                <div class="field">
+                  <label class="field-label" for="r-current-rate">Current rate <span class="normal">% p.a.</span></label>
+                  <div class="input-wrap">
+                    <input id="r-current-rate" type="number" step="0.01" class="field-input has-suffix num" value="3.20" min="0">
+                    <span class="input-suffix">%</span>
+                  </div>
+                  <div class="field-hint">What you're paying right now.</div>
+                </div>
+
+                <div class="field">
+                  <label class="field-label" for="r-new-rate">Target NEW rate <span class="normal">% p.a.</span></label>
+                  <div class="input-wrap">
+                    <input id="r-new-rate" type="number" step="0.05" class="field-input has-suffix num" value="1.45" min="0">
+                    <span class="input-suffix">%</span>
+                  </div>
+                  <div class="field-hint">Indicative — pick from live bank rates after Calculate.</div>
+                </div>
+
+                <div class="field">
+                  <label class="field-label" for="r-tenure-left">Remaining tenure <span class="normal">years</span></label>
+                  <input id="r-tenure-left" type="number" inputmode="numeric" class="field-input num" value="20" min="1" max="35">
+                  <div class="field-hint">Years left on your current loan.</div>
+                </div>
+
+                <div class="field" aria-hidden="true"></div>
+              </div>
             </div>
-            <div class="field-hint">MSR cap of 30% applies to HDB &amp; EC.</div>
+
+            <!-- Section 2: SWITCHING COSTS -->
+            <div class="form-section">
+              <div class="form-section-head">
+                <span class="form-section-eyebrow">Switching costs</span>
+                <span class="form-section-num">Section 02 / 03</span>
+              </div>
+              <div class="form-grid-2">
+                <div class="field">
+                  <label class="field-label" for="r-switching-cost">Switching costs <span class="normal">SGD</span></label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input id="r-switching-cost" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="3,000" data-comma="1" autocomplete="off">
+                  </div>
+                  <div class="field-hint">Legal, valuation, bank admin fees.</div>
+                </div>
+                <div class="field">
+                  <label class="field-label" for="r-subsidy">Bank subsidy <span class="normal">SGD</span></label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input id="r-subsidy" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="2,500" data-comma="1" autocomplete="off">
+                  </div>
+                  <div class="field-hint">Most refi packages subsidise up to S$2,500 in legal &amp; valuation.</div>
+                </div>
+              </div>
+              <div class="refi-net-cost">
+                <span class="label">NET OUT-OF-POCKET COST</span>
+                <span class="value" id="r-net-cost">$500</span>
+              </div>
+              <div class="refi-tip">
+                <strong>Tip:</strong> If inside lock-in period, switching usually triggers a 1.5% prepayment penalty on outstanding balance — add to switching costs above.
+              </div>
+            </div>
+
+            <!-- Section 3: AFFORDABILITY -->
+            <div class="form-section">
+              <div class="form-section-head">
+                <span class="form-section-eyebrow">Affordability</span>
+                <span class="form-section-num">Section 03 / 03</span>
+              </div>
+              <div class="form-grid-2">
+                <div class="field">
+                  <label class="field-label" for="r-income">Combined monthly income <span class="normal">SGD</span></label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input id="r-income" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="12,000" data-comma="1" autocomplete="off">
+                  </div>
+                  <div class="field-hint">All borrowers combined · drives TDSR.</div>
+                </div>
+
+                <div class="field">
+                  <label class="field-label" for="r-debts">Existing monthly debts <span class="normal">SGD</span></label>
+                  <div class="input-wrap">
+                    <span class="input-prefix">$</span>
+                    <input id="r-debts" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="0" data-comma="1" autocomplete="off">
+                  </div>
+                  <div class="field-hint">Car loans, credit-card minimums, etc.</div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="field">
-            <label class="field-label" for="r-outstanding">Outstanding loan <span class="normal">SGD</span></label>
-            <div class="input-wrap">
-              <span class="input-prefix">$</span>
-              <input id="r-outstanding" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="500,000" data-comma="1" autocomplete="off">
+          <!-- RIGHT — LIVE SAVINGS DASHBOARD -->
+          <aside class="refi-side" aria-labelledby="refi-summary-headline">
+            <div class="refi-summary-band">
+              <span class="refi-summary-headline" id="refi-summary-headline">Total savings over remaining tenure</span>
+              <div class="refi-summary-amount" id="refi-total" aria-live="polite">—</div>
+              <p class="refi-summary-sub" id="refi-tenure-line">After deducting net switching cost.</p>
+              <span class="refi-rec-pill" id="refi-rec-pill" style="display:none;"></span>
             </div>
-          </div>
 
-          <div class="field">
-            <label class="field-label" for="r-current-rate">Current rate <span class="normal">% p.a.</span></label>
-            <div class="input-wrap">
-              <input id="r-current-rate" type="number" step="0.01" class="field-input has-suffix num" value="3.20" min="0">
-              <span class="input-suffix">%</span>
+            <div class="refi-result-grid">
+              <div class="refi-result-card">
+                <div class="label">Save in 2 years</div>
+                <div class="value" id="refi-2y">—</div>
+                <div class="sublabel">net of switch cost</div>
+              </div>
+              <div class="refi-result-card">
+                <div class="label">Save in 3 years</div>
+                <div class="value" id="refi-3y">—</div>
+                <div class="sublabel">net of switch cost</div>
+              </div>
+              <div class="refi-result-card">
+                <div class="label">Save in 5 years</div>
+                <div class="value" id="refi-5y">—</div>
+                <div class="sublabel">net of switch cost</div>
+              </div>
+              <div class="refi-result-card gold-border">
+                <div class="label">Break-even</div>
+                <div class="value" id="refi-breakeven">—</div>
+                <div class="sublabel">months to recoup</div>
+              </div>
+              <div class="refi-result-card">
+                <div class="label">Monthly saving</div>
+                <div class="value" id="refi-monthly">—</div>
+                <div class="sublabel">SGD per month</div>
+              </div>
+              <div class="refi-result-card gold-border">
+                <div class="label">New monthly</div>
+                <div class="value" id="refi-new-mo">—</div>
+                <div class="sublabel">vs <span id="refi-curr-mo">—</span> now</div>
+              </div>
             </div>
-          </div>
 
-          <div class="field">
-            <label class="field-label" for="r-tenure-left">Remaining tenure <span class="normal">years</span></label>
-            <input id="r-tenure-left" type="number" inputmode="numeric" class="field-input num" value="20" min="1" max="35">
-          </div>
-
-          <div class="field">
-            <label class="field-label" for="r-income">Combined monthly income <span class="normal">SGD</span></label>
-            <div class="input-wrap">
-              <span class="input-prefix">$</span>
-              <input id="r-income" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="12,000" data-comma="1" autocomplete="off">
+            <div class="refi-cta-block" id="refi-cta-block" style="display:none;">
+              <span id="refi-cta-text">Refinancing looks worthwhile. Pick a live bank rate after Calculate to lock it in.</span>
             </div>
-          </div>
+          </aside>
 
-          <div class="field">
-            <label class="field-label" for="r-debts">Existing monthly debts <span class="normal">SGD</span></label>
-            <div class="input-wrap">
-              <span class="input-prefix">$</span>
-              <input id="r-debts" type="text" inputmode="numeric" class="field-input has-prefix num num-input" value="0" data-comma="1" autocomplete="off">
-            </div>
-          </div>
         </div>
       </div>
 
-      <div style="margin-top: 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
-        <div style="font-size:12.5px; color: var(--faint);">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px;"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
-          Indicative only · stress-tested at MAS 4% floor
-        </div>
+      <div class="calc-footer">
+        <span class="calc-footer-note">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+          INDICATIVE ONLY · STRESS-TESTED AT MAS 4% FLOOR
+        </span>
         <button id="calculateBtn" class="btn-primary-console pulse-green" type="button">
           Calculate my report
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -1453,6 +1934,35 @@ body::after {
         </div>
       </div>
 
+      <!-- ════ Per-purchaser income matrix (Vasu-style) ════ -->
+      <div id="purchaser-matrix-card" class="console-card card-pad" style="display:none; margin-bottom:24px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
+          <div>
+            <span class="sec-tag">Income matrix</span>
+            <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">Income build-up — per purchaser</h3>
+            <div class="chart-sub">Each component × MAS factor = monthly contribution. Weighted age (IWAA) drives max-LTV tenure cap.</div>
+          </div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="rate-table" id="purchaser-matrix-table" style="min-width:680px;">
+            <thead>
+              <tr>
+                <th>Purchaser</th>
+                <th>Component</th>
+                <th class="right">Amount</th>
+                <th class="right">Factor</th>
+                <th class="right">Monthly contribution</th>
+              </tr>
+            </thead>
+            <tbody id="purchaser-matrix-body"></tbody>
+          </table>
+        </div>
+        <div style="margin-top:12px; padding:10px 14px; background:rgba(196,151,59,.08); border-left:3px solid var(--gold-500); border-radius:4px; font-size:12.5px; color:var(--ink-2); line-height:1.55;">
+          <strong style="color:var(--navy-900); font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:10.5px;">IWAA</strong>
+          &nbsp;Income-Weighted Average Age. Each purchaser's age is weighted by their fixed-income share. Used by MAS to cap max tenure for full LTV: tenure + IWAA ≤ 65 (HDB) or 65 (private full LTV; 75 reduced LTV).
+        </div>
+      </div>
+
       <!-- Gated: full report -->
       <div class="gated is-locked" id="reportGate">
         <div class="gated-content" style="display:flex; flex-direction:column; gap: 20px;">
@@ -1511,12 +2021,12 @@ body::after {
             </div>
 
             <!-- Send-report CTA -->
-            <div id="send-report-wrap" style="margin-top:18px; padding:16px 18px; background:rgba(11,28,58,.04); border:1px solid rgba(196,151,59,.22); border-radius:8px; display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;">
-              <div style="font-size:13px; color:var(--ink);">
-                <strong>Selected:</strong> <span id="selected-rate-label">—</span><br>
-                <span style="font-size:11.5px; color:var(--faint);">Pick a different rate above, then email yourself a <strong>detailed breakdown &amp; full details report</strong> — covering income build-up, stamp duty, funds position, year-by-year rate progression, amortisation schedule and your selected package's full terms.</span>
+            <div id="send-report-wrap" class="banker-cta">
+              <div class="bc-text">
+                <strong>Selected:</strong> <span id="selected-rate-label">—</span>
+                <span class="bc-sub">Pick a different rate above, then email yourself a <strong>detailed breakdown &amp; full details report</strong> — covering income build-up, stamp duty, funds position, year-by-year rate progression, amortisation schedule and your selected package's full terms.</span>
               </div>
-              <button id="sendReportBtn" type="button" class="btn-gold" style="padding:.7rem 1.5rem; font-size:.85rem; background:linear-gradient(135deg,#C4973B,#E8C97A); color:#0B1C3A; border:none; border-radius:6px; font-weight:600; letter-spacing:.04em; cursor:pointer; display:inline-flex; align-items:center; gap:.5rem;">
+              <button id="sendReportBtn" type="button" class="btn-gold">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
                 <span id="sendReportLabel">Email my detailed report</span>
               </button>
@@ -1591,33 +2101,50 @@ body::after {
             </div>
           </div>
 
-          <!-- ============ Total cost summary ============ -->
+          <!-- ============ Cost over realistic refi horizons ============ -->
           <div class="console-card card-pad" id="totalcost-card" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
               <div>
-                <span class="sec-tag">Lifetime cost</span>
-                <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">What you'll pay across the full tenure</h3>
-                <div class="chart-sub">At your best rate over <span id="tc-tenure">—</span> years.</div>
+                <span class="sec-tag">Cost horizons</span>
+                <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">What you'll pay before you refinance</h3>
+                <div class="chart-sub">Most SG borrowers refi at lock-in expiry — these are realistic 2/3/5y horizons. Tenure on file: <span id="tc-tenure">—</span>y.</div>
               </div>
             </div>
             <div class="grid md:grid-cols-3 gap-4">
-              <div class="metric-card">
-                <div class="metric-label">Principal repaid</div>
-                <div class="metric-val console-display-num"><span class="small">$</span><span id="tc-principal">—</span></div>
-                <div class="metric-sub">The original loan amount.</div>
+              <div class="metric-card tinted-green">
+                <div class="metric-label">2-year horizon</div>
+                <div class="metric-val console-display-num"><span class="small">$</span><span id="tc-int-2y">—</span></div>
+                <div class="metric-sub" id="tc-paid-2y">Interest paid · monthly × 24</div>
               </div>
               <div class="metric-card">
-                <div class="metric-label">Total interest paid</div>
-                <div class="metric-val console-display-num"><span class="small">$</span><span id="tc-interest">—</span></div>
-                <div class="metric-sub" id="tc-interest-pct">— of what you pay back.</div>
+                <div class="metric-label">3-year horizon</div>
+                <div class="metric-val console-display-num"><span class="small">$</span><span id="tc-int-3y">—</span></div>
+                <div class="metric-sub" id="tc-paid-3y">Interest paid · monthly × 36</div>
               </div>
-              <div class="metric-card">
-                <div class="metric-label">Total paid back</div>
-                <div class="metric-val console-display-num"><span class="small">$</span><span id="tc-total">—</span></div>
-                <div class="metric-sub">Principal + interest, undiscounted.</div>
+              <div class="metric-card tinted-gold">
+                <div class="metric-label">5-year horizon</div>
+                <div class="metric-val console-display-num"><span class="small">$</span><span id="tc-int-5y">—</span></div>
+                <div class="metric-sub" id="tc-paid-5y">Interest paid · monthly × 60</div>
               </div>
             </div>
-            <div style="margin-top:14px; padding:12px 14px; background:rgba(196,151,59,.08); border-left:3px solid var(--accent); border-radius:4px; font-size:13px; color:var(--ink-2); line-height:1.6;" id="tc-note">
+            <div class="grid md:grid-cols-3 gap-4" style="margin-top:10px;">
+              <div class="metric-card">
+                <div class="metric-label">Closing balance · Y2</div>
+                <div class="metric-val console-display-num"><span class="small">$</span><span id="tc-bal-2y">—</span></div>
+                <div class="metric-sub">Outstanding after 24 months</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Closing balance · Y3</div>
+                <div class="metric-val console-display-num"><span class="small">$</span><span id="tc-bal-3y">—</span></div>
+                <div class="metric-sub">Outstanding after 36 months</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Closing balance · Y5</div>
+                <div class="metric-val console-display-num"><span class="small">$</span><span id="tc-bal-5y">—</span></div>
+                <div class="metric-sub">Outstanding after 60 months</div>
+              </div>
+            </div>
+            <div style="margin-top:14px; padding:12px 14px; background:rgba(196,151,59,.08); border-left:3px solid var(--gold-500); border-radius:4px; font-size:13px; color:var(--ink-2); line-height:1.6;" id="tc-note">
               —
             </div>
           </div>
@@ -1689,8 +2216,8 @@ body::after {
               <div class="chart-h-lg"><canvas id="chart-bank"></canvas></div>
             </div>
             <div class="chart-card">
-              <h4>Loan composition</h4>
-              <div class="chart-sub">How your total payments split over the full tenure.</div>
+              <h4>Loan composition · first 5 years</h4>
+              <div class="chart-sub">Of your total payments through the realistic refi window — how much is principal vs interest.</div>
               <div class="chart-h-lg"><canvas id="chart-composition"></canvas></div>
             </div>
           </div>
@@ -1706,6 +2233,20 @@ body::after {
               <h4 id="chart-amort-title">Outstanding balance over time</h4>
               <div class="chart-sub">Remaining principal year by year at the best rate.</div>
               <div class="chart-h-md"><canvas id="chart-amort"></canvas></div>
+            </div>
+          </div>
+
+          <!-- Charts row 3 — upfront pie + horizon savings bar -->
+          <div class="grid lg:grid-cols-2 gap-5" id="chart-row-extra">
+            <div class="chart-card" id="chart-upfront-card" style="display:none;">
+              <h4>Upfront cost composition</h4>
+              <div class="chart-sub">Down payment / BSD / ABSD / legal / valuation. Hover for share.</div>
+              <div class="chart-h-md"><canvas id="chart-upfront"></canvas></div>
+            </div>
+            <div class="chart-card" id="chart-horizons-card">
+              <h4>Cumulative interest · 2y / 3y / 5y</h4>
+              <div class="chart-sub">Interest you pay before lock-in expiry — lower = sooner refi window.</div>
+              <div class="chart-h-md"><canvas id="chart-horizons"></canvas></div>
             </div>
           </div>
 
@@ -1923,19 +2464,15 @@ body::after {
 const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/k85r6qpuqd3p3npd9w7xe86jyc8dl7y9';
 
 /* ============ LIVE RATES (from /rates.json — generated by scripts/convert-rates.py) ============ */
-// Default fallback rates if rates.json fails to load
+// FALLBACK kept only as ultimate safety so the page can still render; loud banner shown if used.
 const FALLBACK_RATES = [
-  { bank: 'DBS',  pkg: 'Fixed 2Y', rate: 1.45 },
-  { bank: 'OCBC', pkg: 'Fixed 2Y', rate: 1.50 },
-  { bank: 'UOB',  pkg: 'Fixed 2Y', rate: 1.55 },
-  { bank: 'HSBC', pkg: 'Fixed 2Y', rate: 1.50 },
-  { bank: 'Standard Chart.', pkg: 'Fixed 2Y', rate: 1.65 },
-  { bank: 'Maybank', pkg: 'Fixed 2Y', rate: 1.60 },
+  { bank: 'DBS',  pkg: 'Fixed 2Y', rate: 1.45, family: 'fixed2y', lockInYears: 2, qualifying: 'Min $0', qualifyingMin: 0, year1Rate: 1.45, year2Rate: 1.45, year3Rate: null, year4Rate: null, year5Rate: null, thereafterRate: null, year1Raw: '1.45 Fixed', year2Raw: '1.45 Fixed', _fallback: true },
 ];
 
 // Will be populated from rates.json on page load
 let RATES_DATA = null;       // full json object: { asOf, refRates, packages: [...] }
-let BANK_RATES = FALLBACK_RATES;  // simple [{bank, pkg, rate}] derived for the user's loan tier
+let BANK_RATES = FALLBACK_RATES;
+let RATES_LOAD_OK = false;   // true once rates.json successfully loaded
 
 // Lender display-name mapping
 const LENDER_DISPLAY = {
@@ -1949,19 +2486,51 @@ const SUBCAT_DISPLAY = {
 };
 
 async function loadRates() {
-  // Try absolute /rates.json (production) first, then relative ../rates.json (dev /Nexus Mortgage/...)
   const candidates = ['/rates.json', '../rates.json', './rates.json'];
+  const errors = [];
   for (const url of candidates) {
     try {
       const res = await fetch(url + '?v=' + Date.now());
-      if (!res.ok) continue;
+      if (!res.ok) { errors.push(url + ' → HTTP ' + res.status); continue; }
       RATES_DATA = await res.json();
-      console.log('[free-report] Loaded rates.json from ' + url + ':', RATES_DATA.packages.length, 'packages, asOf', RATES_DATA.asOf);
-      return;
-    } catch (e) { /* try next */ }
+      RATES_LOAD_OK = !!(RATES_DATA && Array.isArray(RATES_DATA.packages) && RATES_DATA.packages.length);
+      if (RATES_LOAD_OK) {
+        console.log('[free-report] Loaded rates.json from ' + url + ': ' + RATES_DATA.packages.length + ' packages, asOf ' + RATES_DATA.asOf);
+        return;
+      }
+      errors.push(url + ' → invalid shape');
+    } catch (e) { errors.push(url + ' → ' + e.message); }
   }
-  console.warn('[free-report] Failed to load rates.json from any path — using fallback');
   RATES_DATA = null;
+  RATES_LOAD_OK = false;
+  console.error('[free-report] rates.json failed all paths:\n' + errors.join('\n'));
+}
+
+/* Loud failure banner — slot at top of report when rates.json didn't load. */
+function showRatesFailBanner() {
+  if (RATES_LOAD_OK) return;
+  const wrap = document.getElementById('reportWrap');
+  if (!wrap || document.getElementById('rates-fail-banner')) return;
+  const banner = document.createElement('div');
+  banner.id = 'rates-fail-banner';
+  banner.style.cssText = 'margin: 0 0 18px; padding: 14px 16px; background: #FEF2F2; border: 1px solid #DC2626; border-left: 3px solid #DC2626; border-radius: 4px; font-size: 13px; color: #7F1D1D; line-height: 1.5;';
+  banner.innerHTML = '<strong style="display:block; margin-bottom:4px; letter-spacing:.04em; text-transform:uppercase; font-size:11px; color:#DC2626;">Rates feed unavailable</strong>Could not load <code style="background:#FECACA; padding:1px 4px; border-radius:2px;">rates.json</code> — showing placeholder data only. Check network tab + that <code style="background:#FECACA; padding:1px 4px; border-radius:2px;">rates.json</code> is reachable from this page. Open browser console for details.';
+  wrap.insertBefore(banner, wrap.firstChild);
+}
+
+/* Eligibility info banner — "Showing X of Y packages eligible for $loan loan" */
+function showEligibilityBanner(loanAmount, eligibleCount, totalCount) {
+  const wrap = document.getElementById('reportWrap');
+  if (!wrap) return;
+  let banner = document.getElementById('rates-eligibility-banner');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'rates-eligibility-banner';
+    banner.style.cssText = 'margin: 0 0 14px; padding: 10px 14px; background: #F8F9FB; border: 1px solid var(--border); border-left: 3px solid var(--gold-500); border-radius: 4px; font-size: 12px; color: var(--ink-2); line-height: 1.5; display: flex; gap: 14px; flex-wrap: wrap; justify-content: space-between; align-items: center;';
+    wrap.insertBefore(banner, wrap.firstChild);
+  }
+  const pct = totalCount ? Math.round((eligibleCount / totalCount) * 100) : 0;
+  banner.innerHTML = '<span><strong style="color:var(--navy-900); font-weight:700;">' + eligibleCount + '</strong> of ' + totalCount + ' packages eligible for your <strong>$' + (loanAmount||0).toLocaleString('en-SG') + '</strong> loan ' + (pct ? '(' + pct + '%)' : '') + '</span><span style="color:var(--muted); font-size:11px; letter-spacing:.04em; text-transform:uppercase;">As of ' + (RATES_DATA && RATES_DATA.asOf ? RATES_DATA.asOf : '—') + '</span>';
 }
 
 /**
@@ -1981,16 +2550,32 @@ function pickPackagesForLoan(loanAmount) {
     // Prefer lower year1Rate when multiple tiers qualify
     if (!prev || p.year1Rate < prev.year1Rate) seen.set(key, p);
   }
-  // Convert to flat list with bank/pkg/rate
+  // Convert to flat list — spread ALL package fields so renderers can read sel.year1Rate, sel.qualifyingMin, etc.
   return Array.from(seen.values()).map(p => ({
     bank: LENDER_DISPLAY[p.lender] || p.lender,
     pkg: SUBCAT_DISPLAY[p.family] || p.subCategory || 'Package',
     rate: p.year1Rate,
     family: p.family,
+    category: p.category,
+    subCategory: p.subCategory,
     lockInYears: p.lockInYears,
     qualifying: p.qualifying,
+    qualifyingMin: p.qualifyingMin,
+    year1Rate: p.year1Rate, year2Rate: p.year2Rate, year3Rate: p.year3Rate,
+    year4Rate: p.year4Rate, year5Rate: p.year5Rate, thereafterRate: p.thereafterRate,
+    year1Raw: p.year1Raw, year2Raw: p.year2Raw, year3Raw: p.year3Raw,
+    year4Raw: p.year4Raw, year5Raw: p.year5Raw, thereafterRaw: p.thereafterRaw,
+    lender: p.lender,
     raw: p,
   })).sort((a, b) => a.rate - b.rate);
+}
+
+/* Total package count + eligibility count */
+function getRatesCounts(loanAmount) {
+  if (!RATES_DATA || !RATES_DATA.packages) return { total: 0, eligible: 0 };
+  const total = RATES_DATA.packages.filter(p => p.year1Rate).length;
+  const eligible = RATES_DATA.packages.filter(p => p.year1Rate && (!p.qualifyingMin || loanAmount >= p.qualifyingMin)).length;
+  return { total, eligible };
 }
 
 // HDB concessionary appended only when HDB type chosen (informational)
@@ -2411,26 +2996,43 @@ function renderStressTest(r) {
 }
 
 /**
- * Render the total cost summary card — principal vs interest over full tenure.
+ * Render the cost-horizons card — interest paid + closing balance at 2/3/5y.
+ * Tenure stays as user input (drives monthly math); analysis horizon is realistic refi window.
  */
 function renderTotalCost(r) {
   const card = document.getElementById('totalcost-card');
   if (!card) return;
-  if (!r.inp.loan || !r.totalInterest) { card.style.display = 'none'; return; }
+  if (!r.inp.loan || !r.horizon || !r.horizon[2]) { card.style.display = 'none'; return; }
   card.style.display = '';
-  const principal = r.inp.loan;
-  const interest = r.totalInterest;
-  const total = principal + interest;
-  const intPct = (interest / total) * 100;
-  document.getElementById('tc-tenure').textContent = r.inp.tenure;
-  document.getElementById('tc-principal').textContent = fmt(Math.round(principal));
-  document.getElementById('tc-interest').textContent = fmt(Math.round(interest));
-  document.getElementById('tc-total').textContent = fmt(Math.round(total));
-  document.getElementById('tc-interest-pct').textContent = `${intPct.toFixed(1)}% of what you pay back is interest.`;
-  const note = intPct > 30
-    ? `On a ${r.inp.tenure}-year tenure, interest makes up <strong>${intPct.toFixed(1)}%</strong> of your total outlay. Refinancing to a lower rate every 2–3 years (when your lock-in expires) is the single biggest lever to bring this down.`
-    : `On a ${r.inp.tenure}-year tenure at ${(r.bestRate*100).toFixed(2)}%, interest is <strong>${intPct.toFixed(1)}%</strong> of your total outlay — that's relatively healthy. Keep an eye on your lock-in expiry to ride future rate cuts.`;
-  document.getElementById('tc-note').innerHTML = note;
+  const tenure = r.inp.tenure;
+  document.getElementById('tc-tenure').textContent = tenure;
+  // 2/3/5y interest + closing-balance grid
+  [2, 3, 5].forEach(y => {
+    const h = r.horizon[y];
+    const intEl = document.getElementById('tc-int-' + y + 'y');
+    const paidEl = document.getElementById('tc-paid-' + y + 'y');
+    const balEl = document.getElementById('tc-bal-' + y + 'y');
+    if (h && y <= tenure) {
+      if (intEl) intEl.textContent = fmt(Math.round(h.interest));
+      if (paidEl) paidEl.textContent = 'Of $' + fmt(Math.round(h.paid)) + ' total paid · ' + (h.interest && h.paid ? ((h.interest / h.paid) * 100).toFixed(1) : '0') + '% interest';
+      if (balEl) balEl.textContent = fmt(Math.round(h.closingBalance));
+    } else {
+      if (intEl) intEl.textContent = '—';
+      if (paidEl) paidEl.textContent = 'Beyond your remaining tenure';
+      if (balEl) balEl.textContent = '—';
+    }
+  });
+  // Verdict note based on 5y interest share
+  const h5 = r.horizon[5];
+  if (h5 && h5.paid > 0) {
+    const sharePct = (h5.interest / h5.paid) * 100;
+    const note = sharePct > 35
+      ? `Over the first 5 years at ${(r.bestRate*100).toFixed(2)}%, <strong>${sharePct.toFixed(1)}%</strong> of every dollar paid back goes to interest. Refinancing at year 2-3 (lock-in expiry) is the single biggest lever to bring this down — book a reminder now.`
+      : `Over the first 5 years at ${(r.bestRate*100).toFixed(2)}%, <strong>${sharePct.toFixed(1)}%</strong> of every dollar paid goes to interest — relatively healthy. Re-shop rates at lock-in expiry to keep it that way.`;
+    document.getElementById('tc-note').innerHTML = note;
+  } else {
+    document.getElementById('tc-note').textContent = '—';
+  }
 }
 
 /**
@@ -2708,6 +3310,7 @@ modeToggle.addEventListener('click', e => {
   $('form-purchase').style.display = mode === 'purchase' ? '' : 'none';
   $('form-refinance').style.display = mode === 'refinance' ? '' : 'none';
   positionModeIndicator();
+  if (mode === 'refinance' && typeof renderRefiDashboard === 'function') renderRefiDashboard();
 });
 window.addEventListener('load', positionModeIndicator);
 window.addEventListener('resize', positionModeIndicator);
@@ -2767,56 +3370,72 @@ function addBorrower() {
   borrowerCount++;
   const slot = $('borrower-extra-slot');
   const row = document.createElement('div');
-  row.className = 'field borrower-group borrower-row';
+  row.className = 'borrower-card borrower-group borrower-row';
   row.dataset.borrowerN = borrowerCount;
+  const nLbl = String(borrowerCount).padStart(2, '0');
   row.innerHTML = `
-    <label class="field-label">Borrower ${borrowerCount}<button type="button" class="borrower-remove" aria-label="Remove this borrower">×</button></label>
-
-    <div class="sub-row-label">Fixed monthly income · age</div>
-    <div class="borrower-pair">
-      <div class="input-wrap">
-        <span class="input-prefix">$</span>
-        <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-income" data-comma="1" autocomplete="off" value="0" placeholder="Fixed income">
+    <div class="borrower-card-head">
+      <span class="borrower-card-title">Borrower ${nLbl}</span>
+      <button type="button" class="borrower-remove" aria-label="Remove this borrower">× Remove</button>
+    </div>
+    <div class="borrower-card-grid">
+      <div class="field">
+        <label class="field-label">Fixed income · Age</label>
+        <div class="borrower-pair">
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-income" data-comma="1" autocomplete="off" value="0" placeholder="Fixed income">
+          </div>
+          <input type="number" inputmode="numeric" class="field-input num borrower-age" min="18" max="80" value="35" placeholder="Age" aria-label="Borrower ${borrowerCount} age">
+        </div>
+        <div class="field-hint">Monthly · used at 100%</div>
       </div>
-      <input type="number" inputmode="numeric" class="field-input num borrower-age" min="18" max="80" value="35" placeholder="Age" aria-label="Borrower ${borrowerCount} age">
-    </div>
 
-    <div class="sub-row-label">Variable income <span class="sub-row-hint">bonus / commission / rental — 30% factor</span></div>
-    <div class="input-wrap">
-      <span class="input-prefix">$</span>
-      <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-variable" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower ${borrowerCount} variable income">
-    </div>
-
-    <div class="sub-row-label">Residency · residential properties already owned <span class="sub-row-hint">drives ABSD</span></div>
-    <div class="borrower-pair borrower-pair-2-1">
-      <select class="field-input borrower-residency" aria-label="Borrower ${borrowerCount} residency">
-        <option value="SC" selected>🇸🇬 Singapore Citizen</option>
-        <option value="PR">🪪 Permanent Resident</option>
-        <option value="FOREIGNER">🌐 Foreigner</option>
-      </select>
-      <div class="input-wrap input-wrap-properties">
-        <span class="input-prefix-text">Owned</span>
-        <input type="number" inputmode="numeric" class="field-input num borrower-properties" min="0" max="10" value="0" placeholder="0" aria-label="Borrower ${borrowerCount} properties owned">
-      </div>
-    </div>
-
-    <details class="cash-flow-booster">
-      <summary>
-        <span class="cfb-chevron">▸</span> Cash flow boosters <span class="cfb-optional">(optional)</span>
-      </summary>
-      <div class="cfb-body">
-        <div class="sub-row-label">Pledged funds <span class="sub-row-hint">cash locked at bank for 4+ yrs · 100% ÷ 48 mths</span></div>
+      <div class="field">
+        <label class="field-label">Variable income <span class="normal">30% factor</span></label>
         <div class="input-wrap">
           <span class="input-prefix">$</span>
-          <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-pledged" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower ${borrowerCount} pledged funds">
+          <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-variable" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower ${borrowerCount} variable income">
         </div>
-        <div class="sub-row-label">Show funds <span class="sub-row-hint">eligible assets shown but not locked · 30% ÷ 48 mths</span></div>
-        <div class="input-wrap">
-          <span class="input-prefix">$</span>
-          <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-show" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower ${borrowerCount} show funds">
-        </div>
+        <div class="field-hint">Bonus, commission, rental — MAS haircut applied.</div>
       </div>
-    </details>
+
+      <div class="field">
+        <label class="field-label">Residency · Properties owned <span class="normal">drives ABSD</span></label>
+        <div class="borrower-pair borrower-pair-2-1">
+          <select class="field-input borrower-residency" aria-label="Borrower ${borrowerCount} residency">
+            <option value="SC" selected>🇸🇬 Singapore Citizen</option>
+            <option value="PR">🪪 Permanent Resident</option>
+            <option value="FOREIGNER">🌐 Foreigner</option>
+          </select>
+          <div class="input-wrap input-wrap-properties">
+            <span class="input-prefix-text">Owned</span>
+            <input type="number" inputmode="numeric" class="field-input num borrower-properties" min="0" max="10" value="0" placeholder="0" aria-label="Borrower ${borrowerCount} properties owned">
+          </div>
+        </div>
+        <div class="field-hint">Counts existing residential properties only.</div>
+      </div>
+    </div>
+
+    <div class="borrower-cfb-wrap">
+      <details class="cash-flow-booster">
+        <summary>
+          <span class="cfb-chevron">▸</span> Cash flow boosters <span class="cfb-optional">(optional)</span>
+        </summary>
+        <div class="cfb-body">
+          <div class="sub-row-label">Pledged funds <span class="sub-row-hint">cash locked at bank for 4+ yrs · 100% ÷ 48 mths</span></div>
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-pledged" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower ${borrowerCount} pledged funds">
+          </div>
+          <div class="sub-row-label">Show funds <span class="sub-row-hint">eligible assets shown but not locked · 30% ÷ 48 mths</span></div>
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input type="text" inputmode="numeric" class="field-input has-prefix num num-input borrower-show" data-comma="1" autocomplete="off" value="0" placeholder="0" aria-label="Borrower ${borrowerCount} show funds">
+          </div>
+        </div>
+      </details>
+    </div>
   `;
   slot.appendChild(row);
   // Wire up income formatter
@@ -2845,8 +3464,8 @@ function removeBorrower(row) {
     document.querySelectorAll('.borrower-row').forEach((r, i) => {
       const n = i + 2;
       r.dataset.borrowerN = n;
-      const lbl = r.querySelector('.field-label');
-      lbl.firstChild.textContent = `Borrower ${n} `;
+      const titleEl = r.querySelector('.borrower-card-title');
+      if (titleEl) titleEl.textContent = `Borrower ${String(n).padStart(2,'0')}`;
       const ageInp = r.querySelector('.borrower-age');
       if (ageInp) ageInp.setAttribute('aria-label', `Borrower ${n} age`);
     });
@@ -2976,6 +3595,9 @@ function getInputs() {
       propertyType: getPropType('refinance'),
       loan: nVal('r-outstanding'),
       currentRate: (+$('r-current-rate').value || 0) / 100,
+      newRate: (+($('r-new-rate') ? $('r-new-rate').value : 0) || 0) / 100,
+      switchingCost: nVal('r-switching-cost'),
+      bankSubsidy: nVal('r-subsidy'),
       tenure: nVal('r-tenure-left') || 20,
       income: nVal('r-income'),
       debts: nVal('r-debts'),
@@ -3018,6 +3640,18 @@ function computeReport(inp) {
   const { monthly: monthlyBest, series } = amortBalance(inp.loan, bestRate, inp.tenure);
   const totalInterest = series.reduce((s, y) => s + y.interest, 0);
   const totalPaid = monthlyBest * 12 * inp.tenure;
+
+  // Horizon snapshots (2 / 3 / 5y) — assumes user refinances at lock-in expiry, NOT 25y stays.
+  const horizonYears = [2, 3, 5];
+  const horizon = {};
+  horizonYears.forEach(y => {
+    const slice = series.slice(0, y);
+    const interest = slice.reduce((s, row) => s + row.interest, 0);
+    const principal = slice.reduce((s, row) => s + row.principal, 0);
+    const paid = monthlyBest * 12 * Math.min(y, inp.tenure);
+    const closingBalance = slice.length ? slice[slice.length - 1].balance : inp.loan;
+    horizon[y] = { years: y, interest, principal, paid, closingBalance };
+  });
 
   // Refi savings (only if refi)
   let refi = null;
@@ -3127,7 +3761,7 @@ function computeReport(inp) {
 
   return {
     inp, banks, bestPkg, bestRate, monthlyBest,
-    series, totalInterest, totalPaid,
+    series, totalInterest, totalPaid, horizon,
     stressMonthly, tdsrUsage, msrUsage, tdsrPass, msrPass, msrApplies,
     refi, savingsVsSecond,
     iwaa, iwaaTenureCap, fullLtvCap, ltvFull, ltvPct, tenureExceedsIwaa,
@@ -3142,6 +3776,13 @@ function computeReport(inp) {
 
 /* ============ RENDER ============ */
 function render(r) {
+  // Banners — fail or eligibility — at top of report
+  showRatesFailBanner();
+  if (RATES_LOAD_OK) {
+    const counts = getRatesCounts(r.inp.loan || 0);
+    showEligibilityBanner(r.inp.loan || 0, counts.eligible, counts.total);
+  }
+
   // Top metrics (visible)
   $('m-best-rate').textContent = (r.bestRate * 100).toFixed(2);
   $('m-best-bank').textContent = `${r.banks[0].bank} · ${r.banks[0].pkg}`;
@@ -3255,9 +3896,76 @@ function render(r) {
 
   // ── Login-style breakdown cards (income / upfront / funds) ──
   renderBreakdownCards(r);
+  renderPurchaserMatrix(r);
 
   // Charts
   drawCharts(r);
+}
+
+/* Per-purchaser income matrix (Vasu-style) */
+function renderPurchaserMatrix(r) {
+  const card = $('purchaser-matrix-card');
+  if (!card) return;
+  if (r.inp.mode !== 'purchase') { card.style.display = 'none'; return; }
+  const incomes = r.inp.borrowerIncomes || [];
+  const variables = r.inp.borrowerVariableIncomes || [];
+  const pledged = r.inp.borrowerPledged || [];
+  const showFunds = r.inp.borrowerShow || [];
+  const ages = r.inp.borrowerAges || [];
+  if (!incomes.length) { card.style.display = 'none'; return; }
+  card.style.display = '';
+
+  const fmtMo = v => '$' + Math.round(v || 0).toLocaleString('en-SG');
+  const rows = [];
+  let totalIncome = 0;
+  let totalFixed = 0;
+  let totalWeightedAge = 0;
+  incomes.forEach((fixed, i) => {
+    const v = variables[i] || 0;
+    const pl = pledged[i] || 0;
+    const sh = showFunds[i] || 0;
+    const age = ages[i] || 0;
+    const fixedC = fixed * 1.0;
+    const varC = v * 0.30;
+    const plC = pl / 48;
+    const shC = (sh * 0.30) / 48;
+    const total = fixedC + varC + plC + shC;
+    totalIncome += total;
+    totalFixed += fixed;
+    totalWeightedAge += age * fixed;
+    const components = [
+      ['Fixed income', fixed, '100% × 1mth', fixedC],
+      ['Variable income', v, '30% × 1mth', varC],
+      ['Pledged funds', pl, '100% ÷ 48mth', plC],
+      ['Show funds', sh, '30% ÷ 48mth', shC],
+    ];
+    components.forEach(([label, amt, factor, contrib], j) => {
+      rows.push(`<tr ${j === 0 ? 'class="purchaser-head"' : ''}>
+        <td>${j === 0 ? '<strong>Purchaser ' + String(i+1).padStart(2,'0') + '</strong><br><span style="font-size:11px; color:var(--muted);">Age ' + age + '</span>' : ''}</td>
+        <td>${label}</td>
+        <td class="right">${fmtMo(amt)}</td>
+        <td class="right" style="color:var(--muted); font-size:12px;">${factor}</td>
+        <td class="right">${fmtMo(contrib)}</td>
+      </tr>`);
+    });
+    rows.push(`<tr style="background:rgba(11,28,58,.04);">
+      <td></td>
+      <td colspan="3" style="text-align:right; font-weight:600; color:var(--navy-900); letter-spacing:.04em; text-transform:uppercase; font-size:11px;">Purchaser ${String(i+1).padStart(2,'0')} subtotal</td>
+      <td class="right" style="font-weight:700; color:var(--navy-900);">${fmtMo(total)}</td>
+    </tr>`);
+  });
+  const iwaa = totalFixed > 0 ? totalWeightedAge / totalFixed : 0;
+  rows.push(`<tr style="background:rgba(196,151,59,.10); border-top:2px solid var(--navy-900);">
+    <td colspan="2" style="font-weight:700; color:var(--navy-900); letter-spacing:.04em; text-transform:uppercase; font-size:11px;">Total qualifying income</td>
+    <td class="right" colspan="2" style="color:var(--muted); font-size:11px;">IWAA = Σ(age × fixed) / Σ fixed</td>
+    <td class="right" style="font-weight:700; font-size:15px; color:var(--navy-900); font-family:'Fraunces',serif;">${fmtMo(totalIncome)}/mo</td>
+  </tr>`);
+  rows.push(`<tr>
+    <td colspan="2" style="font-weight:600; color:var(--ink-2); font-size:12px;">Income-Weighted Average Age (IWAA)</td>
+    <td class="right" colspan="2" style="color:var(--muted); font-size:11px;">Tenure cap: ${65 - Math.round(iwaa)}y for full LTV</td>
+    <td class="right" style="font-weight:700; color:var(--navy-900); font-family:'Fraunces',serif;">${iwaa.toFixed(1)} yrs</td>
+  </tr>`);
+  $('purchaser-matrix-body').innerHTML = rows.join('');
 }
 
 /* Render the 3 breakdown cards (income build-up, upfront cost build-up, funds position) */
@@ -3337,13 +4045,20 @@ function renderBreakdownCards(r) {
 }
 
 /* ============ CHART PALETTE & THEME ============ */
+// Banker-disciplined chart palette: green for "the cheapest/winner",
+// navy for everything else, amber/gold for the cost side of a split.
+// Red is reserved strictly for negative variance (kept on refi current vs proposed).
 const CHART_COLORS = {
   ink: '#0B1220', muted: '#56657A', faint: '#94A3B8', border: '#E5E7EB',
-  bars: ['#059669', '#1E3A8A', '#0D9488', '#B45309', '#6D28D9', '#0891B2', '#BE123C', '#D97706', '#047857', '#1D4ED8'],
-  composition: ['#059669', '#DC2626'],   // principal vs interest
+  // Bank rate bars: emphasis (cheapest) + the field. drawBankBar() picks index 0 vs the rest.
+  bars: ['#059669', '#0B1C3A', '#0B1C3A', '#0B1C3A', '#0B1C3A', '#0B1C3A', '#0B1C3A', '#0B1C3A', '#0B1C3A', '#0B1C3A'],
+  // Principal vs interest composition: navy principal, brand-gold interest (was green/red — read as P/L)
+  composition: ['#0B1C3A', '#C4973B'],
   gaugeOk: '#059669', gaugeWarn: '#D97706', gaugeFail: '#DC2626', gaugeRest: '#E5E7EB',
-  amort: '#1E3A8A',
-  cashflow: { principal: '#059669', interest: '#DC2626' },
+  amort: '#0B1C3A',
+  // Year-by-year stacked cash flow: same discipline — navy principal, gold interest
+  cashflow: { principal: '#0B1C3A', interest: '#C4973B' },
+  // Refi current vs proposed retains semantic red/green — losing money vs saving money
   refi: { current: '#DC2626', proposed: '#059669' },
 };
 const CHART_FONT = { family: 'Plus Jakarta Sans', size: 11 };
@@ -3362,6 +4077,89 @@ function drawCharts(r) {
   drawGauge(r);
   drawAmort(r);
   drawCompare(r);
+  drawUpfrontPie(r);
+  drawHorizonsBar(r);
+}
+
+function drawUpfrontPie(r) {
+  destroyChart('chart-upfront');
+  const card = document.getElementById('chart-upfront-card');
+  if (!card) return;
+  // Only purchase mode + when we can compute upfront
+  if (r.inp.mode !== 'purchase' || !r.inp.price) { card.style.display = 'none'; return; }
+  card.style.display = '';
+  const ctx = $('chart-upfront');
+  const ltvPct = (r.effectiveLtvPct || r.ltvPct || 75) / 100;
+  const dp = Math.round(r.inp.price * (1 - ltvPct));
+  // Reuse calc helpers
+  const buyers = (r.inp.borrowerResidencies || ['SC']).map(function(res, i){
+    return { residency: res, propertiesOwned: (r.inp.borrowerPropertiesOwned || [0])[i] || 0 };
+  });
+  const bsdAmt = (typeof calcBSD === 'function') ? calcBSD(r.inp.price) : 0;
+  const absdRate = (typeof calcABSDRate === 'function') ? calcABSDRate(buyers) : 0;
+  const absdAmt = Math.round(r.inp.price * absdRate);
+  const legal = r.inp.price > 1000000 ? 3000 : 2500;
+  const valuation = r.inp.price > 1000000 ? 600 : 300;
+  const labels = ['Down payment', 'BSD', 'ABSD', 'Legal', 'Valuation'];
+  const data = [dp, bsdAmt, absdAmt, legal, valuation];
+  charts['chart-upfront'] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: ['#0B1C3A', '#C4973B', '#1E3A5C', '#059669', '#94A3B8'],
+        borderColor: '#fff', borderWidth: 3,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '58%',
+      plugins: {
+        legend: { position: 'bottom', labels: { font: CHART_FONT, color: CHART_COLORS.muted, padding: 12, boxWidth: 10, boxHeight: 10, usePointStyle: true } },
+        tooltip: { callbacks: { label: c => c.label + ': $' + fmt(c.parsed) } },
+        datalabels: {
+          display: ctx => ctx.parsed > 0,
+          color: '#fff', font: { ...CHART_FONT, weight: '700', size: 11 },
+          formatter: (v, c) => {
+            const t = c.dataset.data.reduce((a,b) => a+b, 0);
+            const pct = t ? Math.round(v / t * 100) : 0;
+            return pct >= 6 ? pct + '%' : '';
+          }
+        },
+      },
+    }
+  });
+}
+
+function drawHorizonsBar(r) {
+  destroyChart('chart-horizons');
+  const ctx = $('chart-horizons');
+  if (!ctx || !r.horizon || !r.horizon[2]) return;
+  const labels = ['Year 2', 'Year 3', 'Year 5'];
+  const interestData = [r.horizon[2].interest, r.horizon[3].interest, r.horizon[5].interest].map(v => Math.round(v));
+  const principalData = [r.horizon[2].principal, r.horizon[3].principal, r.horizon[5].principal].map(v => Math.round(v));
+  charts['chart-horizons'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Principal repaid', data: principalData, backgroundColor: '#0B1C3A', borderRadius: 3, maxBarThickness: 50, stack: 'a' },
+        { label: 'Interest paid',    data: interestData, backgroundColor: '#C4973B', borderRadius: 3, maxBarThickness: 50, stack: 'a' },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: CHART_FONT, color: CHART_COLORS.muted, padding: 12, boxWidth: 10, boxHeight: 10, usePointStyle: true } },
+        tooltip: { mode: 'index', callbacks: { label: c => c.dataset.label + ': $' + fmt(c.parsed.y) } },
+        datalabels: { display: false },
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { font: { ...CHART_FONT, weight: '600' }, color: CHART_COLORS.ink } },
+        y: { stacked: true, grid: { color: CHART_COLORS.border }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint, callback: v => '$' + (v/1000).toFixed(0) + 'k' } }
+      }
+    }
+  });
 }
 
 function drawBankBar(r) {
@@ -3403,14 +4201,17 @@ function drawBankBar(r) {
 function drawComposition(r) {
   destroyChart('chart-composition');
   const ctx = $('chart-composition');
-  const principal = r.inp.loan;
-  const interest = r.totalInterest;
+  // 5y horizon split (or shorter if tenure < 5y) — realistic refi window
+  const horizonY = Math.min(5, r.inp.tenure);
+  const h = (r.horizon && r.horizon[horizonY]) || r.horizon[Math.min(3, r.inp.tenure)] || r.horizon[2];
+  const principalPaid = h ? h.principal : 0;
+  const interestPaid = h ? h.interest : 0;
   charts['chart-composition'] = new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: ['Principal', 'Interest'],
+      labels: ['Principal repaid', 'Interest paid'],
       datasets: [{
-        data: [Math.round(principal), Math.round(interest)],
+        data: [Math.round(principalPaid), Math.round(interestPaid)],
         backgroundColor: CHART_COLORS.composition,
         borderColor: '#fff', borderWidth: 3,
       }]
@@ -3491,18 +4292,26 @@ function drawGauge(r) {
 function drawAmort(r) {
   destroyChart('chart-amort');
   const ctx = $('chart-amort');
-  $('chart-amort-title').textContent = r.inp.mode === 'refinance' ? 'Outstanding balance — proposed loan' : 'Outstanding balance over time';
+  $('chart-amort-title').textContent = r.inp.mode === 'refinance'
+    ? 'Outstanding balance · first 5 years (proposed)'
+    : 'Outstanding balance · first 5 years';
+  // Cap at 5y or remaining tenure, whichever is smaller. Prepend Y0 = full loan.
+  const cap = Math.min(5, r.inp.tenure);
+  const sliced = r.series.slice(0, cap);
+  const labels = ['Y0'].concat(sliced.map(y => 'Y' + y.year));
+  const data = [Math.round(r.inp.loan)].concat(sliced.map(y => Math.round(y.balance)));
   charts['chart-amort'] = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: r.series.map(y => 'Y' + y.year),
+      labels,
       datasets: [{
         label: 'Balance',
-        data: r.series.map(y => Math.round(y.balance)),
+        data,
         borderColor: CHART_COLORS.amort,
-        backgroundColor: 'rgba(30, 58, 138, 0.08)',
+        backgroundColor: 'rgba(11, 28, 58, 0.06)',
         fill: true, borderWidth: 2,
-        tension: 0.25, pointRadius: 0, pointHoverRadius: 4,
+        tension: 0.25, pointRadius: 3, pointHoverRadius: 5,
+        pointBackgroundColor: CHART_COLORS.amort,
       }]
     },
     options: {
@@ -3513,7 +4322,7 @@ function drawAmort(r) {
         datalabels: { display: false },
       },
       scales: {
-        x: { grid: { display: false }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint, maxTicksLimit: 8 } },
+        x: { grid: { display: false }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint } },
         y: { grid: { color: CHART_COLORS.border }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint, callback: v => '$' + (v/1000).toFixed(0) + 'k' } },
       }
     }
@@ -3682,109 +4491,176 @@ function buildReportPdf(r, lead) {
   const dateStr = new Date().toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' });
 
   let pageNum = 0;
-  const TOTAL_PAGES = 9;
+  const TOTAL_PAGES = 10;
 
+  // ── Banker primitives ──
   function pageChrome(eyebrow) {
     pageNum++;
     if (pageNum > 1) doc.addPage();
-    setFill(NAVY); doc.rect(0, 0, W, 14, 'F');
-    setFill(GOLD); doc.rect(0, 14, W, 0.4, 'F');
-    doc.setFont('times','normal'); doc.setFontSize(11); setColor(CREAM);
-    doc.text('Nexus', M, 9);
-    setColor(GOLD); doc.text('.', M + 12, 9);
+    // Slim top strip
+    setFill(NAVY); doc.rect(0, 0, W, 7.5, 'F');
+    setFill(GOLD); doc.rect(0, 7.5, W, 0.15, 'F');
+    // Wordmark
+    doc.setFont('times','normal'); doc.setFontSize(8.5); setColor(CREAM);
+    doc.text('Nexus', M, 5.2);
+    setColor(GOLD); doc.text('.', M + 9.6, 5.2);
+    // Eyebrow (page section)
     if (eyebrow) {
-      doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor([200,200,200]);
-      doc.text(eyebrow.toUpperCase(), M + 22, 9);
+      doc.setFont('helvetica','bold'); doc.setFontSize(6); setColor([200,205,215]);
+      doc.text(eyebrow.toUpperCase(), M + 18, 5.2);
     }
-    doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor([180,180,180]);
-    doc.text(pageNum + ' / ' + TOTAL_PAGES, W - M, 9, { align: 'right' });
-    setDraw(BORDER_LT); doc.line(M, H - 9, W - M, H - 9);
-    doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(MUTED);
-    doc.text('nexusmortgage.sg  ·  free service  ·  banks pay our referral fee', M, H - 5);
-    doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor([108,84,33]);
-    doc.text('WhatsApp +65 8752 0859  ·  danler@nexusmortgage.sg', W - M, H - 5, { align: 'right' });
-    return 22;
+    // Page n / total
+    doc.setFont('helvetica','normal'); doc.setFontSize(6); setColor([200,205,215]);
+    doc.text('PAGE ' + pageNum + ' OF ' + TOTAL_PAGES, W - M, 5.2, { align: 'right' });
+    // Footer hairline
+    setDraw(BORDER); doc.setLineWidth(0.15);
+    doc.line(M, H - 8, W - M, H - 8);
+    // Footer text
+    doc.setFont('helvetica','normal'); doc.setFontSize(6.2); setColor(MUTED);
+    doc.text('NEXUS MORTGAGE  ·  NEXUSMORTGAGE.SG  ·  +65 8752 0859  ·  DANLER@NEXUSMORTGAGE.SG', M, H - 4.5);
+    doc.text(dateStr.toUpperCase(), W - M, H - 4.5, { align: 'right' });
+    return 14;
   }
 
   function sectionHeader(y, eyebrow, title, sub) {
-    doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(GOLD);
+    // Eyebrow
+    doc.setFont('helvetica','bold'); doc.setFontSize(6.2); setColor(GOLD);
     doc.text(eyebrow.toUpperCase(), M, y);
-    setFill(GOLD); doc.rect(M, y + 1.5, doc.getTextWidth(eyebrow.toUpperCase()), 0.4, 'F');
-    y += 7;
-    doc.setFont('times','normal'); doc.setFontSize(17); setColor(INK);
+    setDraw(GOLD); doc.setLineWidth(0.3);
+    doc.line(M, y + 1.2, M + doc.getTextWidth(eyebrow.toUpperCase()), y + 1.2);
+    y += 5.5;
+    // Title — helvetica bold (banker, not editorial serif)
+    doc.setFont('helvetica','bold'); doc.setFontSize(11.5); setColor(INK);
     const tlines = doc.splitTextToSize(title, CW);
     doc.text(tlines, M, y);
-    y += tlines.length * 6.5;
+    y += tlines.length * 4.6;
     if (sub) {
-      doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(MUTED);
-      const slines = doc.splitTextToSize(sub, CW);
-      doc.text(slines, M, y + 1);
-      y += slines.length * 4.2;
+      doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(MUTED);
+      const slines = doc.splitTextToSize(sub, CW * 0.85);
+      doc.text(slines, M, y + 0.8);
+      y += slines.length * 3.4;
     }
+    setDraw(BORDER); doc.setLineWidth(0.15);
+    doc.line(M, y + 2.5, W - M, y + 2.5);
+    return y + 7;
+  }
+
+  function eyebrow(y, label) {
+    doc.setFont('helvetica','bold'); doc.setFontSize(6.2); setColor(GOLD);
+    doc.text(label.toUpperCase(), M, y);
+    setDraw(GOLD); doc.setLineWidth(0.3);
+    doc.line(M, y + 1.2, M + doc.getTextWidth(label.toUpperCase()), y + 1.2);
     return y + 5;
   }
 
-  function kpiTile(x, y, w, h, label, value, sub, accent) {
-    setFill(SURFACE); doc.rect(x, y, w, h, 'F');
-    setDraw(BORDER); doc.rect(x, y, w, h);
-    if (accent) { setFill(accent); doc.rect(x, y, 1.5, h, 'F'); }
-    doc.setFont('helvetica','bold'); doc.setFontSize(6.5); setColor(MUTED);
-    doc.text(label.toUpperCase(), x + 5, y + 6);
-    doc.setFont('times','normal'); doc.setFontSize(15); setColor(INK);
-    doc.text(value, x + 5, y + 16);
-    if (sub) {
-      doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(MUTED);
-      const lines = doc.splitTextToSize(sub, w - 10);
-      doc.text(lines, x + 5, y + h - 4);
-    }
+  function statGrid(x, y, w, items) {
+    const n = items.length;
+    const colW = w / n;
+    const h = 18;
+    setDraw(NAVY); doc.setLineWidth(0.4);
+    doc.line(x, y, x + w, y);
+    setDraw(BORDER); doc.setLineWidth(0.15);
+    doc.line(x, y + h, x + w, y + h);
+    items.forEach(function(item, i) {
+      const cx = x + i * colW;
+      if (i > 0) {
+        setDraw(BORDER); doc.setLineWidth(0.15);
+        doc.line(cx, y + 1.5, cx, y + h - 1.5);
+      }
+      doc.setFont('helvetica','bold'); doc.setFontSize(5.8); setColor(MUTED);
+      doc.text(item.label.toUpperCase(), cx + 2.5, y + 4.5);
+      doc.setFont('helvetica','bold'); doc.setFontSize(11); setColor(item.color || INK);
+      doc.text(item.value, cx + 2.5, y + 11.5);
+      if (item.sub) {
+        doc.setFont('helvetica','normal'); doc.setFontSize(6); setColor(MUTED);
+        const ls = doc.splitTextToSize(item.sub, colW - 4);
+        doc.text(ls[0] || '', cx + 2.5, y + h - 2.2);
+      }
+    });
+    return y + h + 2;
+  }
+
+  function calloutBlock(y, tone, soft, title, body) {
+    const h = 16;
+    setFill(soft); doc.rect(M, y, CW, h, 'F');
+    setFill(tone); doc.rect(M, y, 1.4, h, 'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(9.5); setColor(tone);
+    doc.text(title, M + 4, y + 6);
+    doc.setFont('helvetica','normal'); doc.setFontSize(7.8); setColor(INK_2);
+    const lines = doc.splitTextToSize(body, CW - 8);
+    doc.text(lines, M + 4, y + 11);
+    return y + h + 4;
   }
 
   function table(headers, rows, opts) {
     const o = opts || {};
-    const x0 = M;
+    const x0 = o.x || M;
     const widths = o.widths;
     const totalW = widths.reduce(function(s,w){return s+w;},0);
     const aligns = o.aligns || widths.map(function(_,i){return i===0?'left':'right';});
+    const rowH = o.rowH || 5.5;
     let y = o.y;
-    setFill(NAVY); doc.rect(x0, y, totalW, 6.5, 'F');
-    doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(CREAM);
+
+    // Header — small caps, navy top rule, hairline bottom
+    setDraw(NAVY); doc.setLineWidth(0.5);
+    doc.line(x0, y, x0 + totalW, y);
+    doc.setFont('helvetica','bold'); doc.setFontSize(5.8); setColor(NAVY);
     let cx = x0;
     headers.forEach(function(h,i){
       const align = aligns[i];
-      const tx = align==='right' ? cx + widths[i] - 3 : cx + 3;
-      doc.text(String(h).toUpperCase(), tx, y + 4.5, { align: align });
+      const tx = align==='right' ? cx + widths[i] - 2 : (align === 'center' ? cx + widths[i]/2 : cx + 2);
+      doc.text(String(h).toUpperCase(), tx, y + 3.6, { align: align });
       cx += widths[i];
     });
-    y += 6.5;
+    y += 5;
+    setDraw(BORDER); doc.setLineWidth(0.15);
+    doc.line(x0, y, x0 + totalW, y);
+
+    // Rows
     rows.forEach(function(row, ri){
-      const rh = row._h || 6.8;
+      const rh = row._h || rowH;
       if (row._highlight) {
-        setFill(row._highlightColor || GREEN_SOFT);
+        setFill(row._highlightColor || GOLD_TINT);
         doc.rect(x0, y, totalW, rh, 'F');
-      } else if (ri % 2 === 1) {
-        setFill(SOFT_BG); doc.rect(x0, y, totalW, rh, 'F');
       }
-      doc.setFont('helvetica','normal'); doc.setFontSize(8.3);
+      doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
       setColor(row._color || INK);
       cx = x0;
       row.cells.forEach(function(cell, i){
         const align = aligns[i];
-        const tx = align==='right' ? cx + widths[i] - 3 : cx + 3;
+        const tx = align==='right' ? cx + widths[i] - 2 : (align === 'center' ? cx + widths[i]/2 : cx + 2);
         const obj = (cell && typeof cell === 'object') ? cell : { text: cell };
         if (obj.font === 'bold') doc.setFont('helvetica','bold'); else doc.setFont('helvetica','normal');
         if (obj.color) setColor(obj.color); else setColor(row._color || INK);
-        doc.text(String(obj.text == null ? '' : obj.text), tx, y + rh - 2.3, { align: align });
+        doc.text(String(obj.text == null ? '' : obj.text), tx, y + rh - 1.7, { align: align });
         cx += widths[i];
       });
-      setDraw(BORDER_LT); doc.line(x0, y + rh, x0 + totalW, y + rh);
+      // Inline mini-bar (e.g. spread or stress impact column)
+      if (row._bar) {
+        const b = row._bar;
+        inlineBar(x0 + b.colX, y + rh/2 - 0.7, b.colW, 1.6, b.frac, b.color || NAVY);
+      }
+      setDraw(BORDER_LT); doc.setLineWidth(0.1);
+      doc.line(x0, y + rh, x0 + totalW, y + rh);
       y += rh;
     });
+    setDraw(NAVY); doc.setLineWidth(0.4);
+    doc.line(x0, y, x0 + totalW, y);
     return y;
   }
 
-  function bar(x, y, w, h, used, cap, max) {
-    const m = max || Math.max(cap, used) * 1.05;
-    setFill(BORDER_LT); doc.rect(x, y, w, h, 'F');
+  function inlineBar(x, y, w, h, frac, color) {
+    setFill([232,236,240]); doc.rect(x, y, w, h, 'F');
+    if (frac > 0) {
+      setFill(color || NAVY);
+      doc.rect(x, y, Math.min(1, frac) * w, h, 'F');
+    }
+  }
+
+  function ratioBar(x, y, w, used, cap, max) {
+    const m = max || Math.max(cap, used) * 1.1;
+    const h = 2.5;
+    setFill([232,236,240]); doc.rect(x, y, w, h, 'F');
     if (used > 0) {
       const fillW = Math.min(1, used / m) * w;
       const tone = used <= cap ? GREEN : (used <= cap*1.05 ? AMBER : RED);
@@ -3792,9 +4668,42 @@ function buildReportPdf(r, lead) {
     }
     const capX = x + Math.min(1, cap / m) * w;
     setDraw(NAVY); doc.setLineWidth(0.5);
-    doc.line(capX, y - 0.5, capX, y + h + 0.5);
-    doc.setLineWidth(0.2);
+    doc.line(capX, y - 0.8, capX, y + h + 0.8);
+    doc.setLineWidth(0.15);
   }
+
+  function lineChart(x, y, w, h, series, opts) {
+    const o = opts || {};
+    const xMax = o.xMax;
+    const yMax = o.yMax;
+    if (o.gridY) {
+      setDraw(BORDER_LT); doc.setLineWidth(0.1);
+      for (let i = 1; i < o.gridY; i++) {
+        const gy = y + (h * i / o.gridY);
+        doc.line(x, gy, x + w, gy);
+      }
+    }
+    setDraw(MUTED); doc.setLineWidth(0.2);
+    doc.line(x, y + h, x + w, y + h);
+    doc.line(x, y, x, y + h);
+    series.forEach(function(s) {
+      setDraw(s.color || NAVY);
+      doc.setLineWidth(s.width || 0.6);
+      const pts = s.points;
+      for (let i = 1; i < pts.length; i++) {
+        const p0 = pts[i-1], p1 = pts[i];
+        doc.line(
+          x + (p0.x / xMax) * w,
+          y + h - (p0.y / yMax) * h,
+          x + (p1.x / xMax) * w,
+          y + h - (p1.y / yMax) * h
+        );
+      }
+    });
+    doc.setLineWidth(0.15);
+  }
+
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
 
   // ── Pre-compute everything ──
   const isRefi = r.inp.mode === 'refinance';
@@ -3829,151 +4738,244 @@ function buildReportPdf(r, lead) {
   const cashOnHand = r.inp.cashOnHand || 0;
   const totalShortfall = Math.max(0, upfrontTotal - (cpfOA + cashOnHand));
 
-  // ═══════════════════ PAGE 1 — COVER ═══════════════════
+  // ═══════════════════ PAGE 1 — COVER (term-sheet) ═══════════════════
   pageNum = 1;
   setFill(NAVY); doc.rect(0, 0, W, H, 'F');
-  setFill(GOLD); doc.rect(0, 70, W, 0.6, 'F');
-  setFill(GOLD); doc.rect(0, 71.5, W, 0.2, 'F');
-  doc.setFont('times','normal'); doc.setFontSize(34); setColor(CREAM);
-  doc.text('Nexus', M, 35);
-  setColor(GOLD); doc.text('.', M + 38, 35);
-  doc.setFont('helvetica','normal'); doc.setFontSize(8); setColor([200,200,200]);
-  doc.text('SINGAPORE MORTGAGE SPECIALISTS', M, 41);
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(GOLD);
-  doc.text('REPORT DATE  ·  ' + dateStr.toUpperCase(), W - M, 25, { align: 'right' });
 
-  doc.setFont('helvetica','bold'); doc.setFontSize(8); setColor(GOLD);
-  doc.text(isRefi ? 'REFINANCE OPPORTUNITY ANALYSIS' : 'PROPERTY PURCHASE REPORT', M, 90);
-  doc.setFont('times','normal'); doc.setFontSize(36); setColor(CREAM);
-  doc.text(['Your personalised', 'mortgage report.'], M, 105);
-  doc.setFont('helvetica','normal'); doc.setFontSize(11); setColor([200,200,200]);
+  // Top strip + wordmark
+  setFill(GOLD); doc.rect(0, 30, W, 0.4, 'F');
+  setFill(GOLD); doc.rect(0, 30.7, W, 0.1, 'F');
+  doc.setFont('times','normal'); doc.setFontSize(26); setColor(CREAM);
+  doc.text('Nexus', M, 22);
+  setColor(GOLD); doc.text('.', M + 29.5, 22);
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor([180,185,200]);
+  doc.text('SINGAPORE MORTGAGE SPECIALISTS', M, 27);
+  // Top right metadata
+  const refId = 'NM-' + new Date().getTime().toString(36).toUpperCase().slice(-6);
+  doc.setFont('helvetica','bold'); doc.setFontSize(6); setColor(GOLD);
+  doc.text('REPORT REF', W - M, 17, { align: 'right' });
+  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor([200,205,215]);
+  doc.text(refId, W - M, 21, { align: 'right' });
+  doc.setFont('helvetica','bold'); doc.setFontSize(6); setColor(GOLD);
+  doc.text('ISSUED', W - M, 25, { align: 'right' });
+  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor([200,205,215]);
+  doc.text(dateStr.toUpperCase(), W - M, 29, { align: 'right' });
+
+  // Title block
+  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); setColor(GOLD);
+  doc.text(isRefi ? 'REFINANCE OPPORTUNITY ANALYSIS' : 'PROPERTY PURCHASE — INDICATIVE MORTGAGE REPORT', M, 50);
+  doc.setFont('times','normal'); doc.setFontSize(32); setColor(CREAM);
+  doc.text(['Your personalised', 'mortgage report.'], M, 66);
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); setColor([200,205,215]);
   const subTxt = isRefi
     ? 'A side-by-side analysis of your current loan against the cheapest packages on the market right now — with year-by-year cost projections and a refinance playbook.'
     : 'A complete affordability and rate analysis built around your income, property type, and tenure — with stamp duties, funds position, and the cheapest 8 packages from 16 banks.';
-  doc.text(doc.splitTextToSize(subTxt, CW - 50), M, 145);
+  doc.text(doc.splitTextToSize(subTxt, CW * 0.7), M, 96);
 
-  let yPF = 175;
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(GOLD);
-  doc.text('PREPARED FOR', M, yPF); yPF += 5;
-  doc.setFont('times','normal'); doc.setFontSize(20); setColor(CREAM);
-  doc.text(lead.name, M, yPF + 5); yPF += 10;
-  doc.setFont('helvetica','normal'); doc.setFontSize(9); setColor([180,180,180]);
-  doc.text(lead.email + '   ·   ' + lead.phone, M, yPF + 4);
-
-  const cardY = 220;
-  setFill([15, 35, 65]); doc.rect(M, cardY, CW, 32, 'F');
-  setDraw(GOLD); doc.setLineWidth(0.4); doc.rect(M, cardY, CW, 32);
-  doc.setLineWidth(0.2);
-  const kpiW = CW / 4;
-  const kpis = [
-    ['BEST RATE', (r.bestRate*100).toFixed(2) + '%'],
-    [isRefi ? 'NEW MONTHLY' : 'EST. MONTHLY', fmt$(monthly) + '/mo'],
-    [isRefi ? 'CURRENT LOAN' : 'LOAN AMOUNT', fmt$(r.inp.loan)],
-    ['TENURE', r.inp.tenure + ' years'],
+  // Term-sheet metadata: 2-col definition list
+  const metaY = 124;
+  doc.setFont('helvetica','bold'); doc.setFontSize(6); setColor(GOLD);
+  doc.text('PREPARED FOR', M, metaY);
+  doc.text('SELECTED PACKAGE', M + CW/2 + 4, metaY);
+  setDraw(GOLD); doc.setLineWidth(0.3);
+  doc.line(M, metaY + 1.4, M + 22, metaY + 1.4);
+  doc.line(M + CW/2 + 4, metaY + 1.4, M + CW/2 + 30, metaY + 1.4);
+  const leftMeta = [
+    ['Name', lead.name || '—'],
+    ['Email', lead.email || '—'],
+    ['Phone', lead.phone || '—'],
+    ['Property type', propLabel],
+    ['Buyer profile', buyerDesc],
+    ['Tenure', r.inp.tenure + ' years'],
   ];
-  kpis.forEach(function(k, i){
-    const cx = M + kpiW * i + 6;
-    doc.setFont('helvetica','bold'); doc.setFontSize(6.5); setColor(GOLD);
-    doc.text(k[0], cx, cardY + 9);
-    doc.setFont('times','normal'); doc.setFontSize(15); setColor(CREAM);
-    doc.text(k[1], cx, cardY + 22);
-    if (i < 3) {
-      setDraw([60,80,110]); doc.line(M + kpiW * (i+1), cardY + 5, M + kpiW * (i+1), cardY + 27);
-    }
-  });
+  const rightMeta = [
+    ['Bank', sel.bank],
+    ['Package', sel.pkg],
+    ['Year-1 rate', sel.rate.toFixed(2) + '% p.a.'],
+    ['Loan amount', fmt$(r.inp.loan)],
+    ['Monthly (Year 1)', fmt$(monthly) + '/mo'],
+    ['Lock-in', sel.lockInYears ? sel.lockInYears + ' year' + (sel.lockInYears>1?'s':'') : 'No lock-in'],
+  ];
+  let myr = metaY + 7;
+  for (let i = 0; i < 6; i++) {
+    setDraw([60, 75, 100]); doc.setLineWidth(0.15);
+    doc.line(M, myr, M + CW/2 - 4, myr);
+    doc.line(M + CW/2 + 4, myr, W - M, myr);
+    doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor([170,180,200]);
+    doc.text(leftMeta[i][0], M, myr + 4.5);
+    doc.text(rightMeta[i][0], M + CW/2 + 4, myr + 4.5);
+    doc.setFont('helvetica','bold'); doc.setFontSize(8.5); setColor(CREAM);
+    doc.text(String(leftMeta[i][1]), M + CW/2 - 4, myr + 4.5, { align: 'right' });
+    doc.text(String(rightMeta[i][1]), W - M, myr + 4.5, { align: 'right' });
+    myr += 7.5;
+  }
+  setDraw([60, 75, 100]); doc.setLineWidth(0.15);
+  doc.line(M, myr, M + CW/2 - 4, myr);
+  doc.line(M + CW/2 + 4, myr, W - M, myr);
 
-  setFill(NAVY_DARK); doc.rect(0, H - 24, W, 24, 'F');
-  setFill(GOLD); doc.rect(0, H - 24, W, 0.4, 'F');
-  doc.setFont('times','normal'); doc.setFontSize(12); setColor(CREAM);
-  doc.text('Want us to lock in this rate?', M, H - 12);
-  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor([180,180,180]);
-  doc.text('Free service  ·  zero fees  ·  banks pay our referral fee', M, H - 6);
+  // Headline numbers strip
+  const heroY = 210;
+  doc.setFont('helvetica','bold'); doc.setFontSize(6); setColor(GOLD);
+  doc.text('HEADLINE NUMBERS', M, heroY);
+  setDraw(GOLD); doc.setLineWidth(0.3);
+  doc.line(M, heroY + 1.4, M + 32, heroY + 1.4);
+  setDraw([100,120,150]); doc.setLineWidth(0.3);
+  doc.line(M, heroY + 6, W - M, heroY + 6);
+  const heroItems = [
+    { label: 'BEST RATE', value: (r.bestRate*100).toFixed(2) + '%', sub: 'PER ANNUM' },
+    { label: isRefi ? 'NEW MONTHLY' : 'MONTHLY', value: fmt$(monthly), sub: r.inp.tenure + 'Y · YEAR 1' },
+    { label: 'TOTAL INTEREST', value: fmt$(r.totalInterest), sub: 'OVER ' + r.inp.tenure + ' YEARS' },
+    { label: 'TDSR USAGE', value: (r.tdsrUsage*100).toFixed(1) + '%', sub: 'OF 55% CAP' },
+  ];
+  const heroW = CW / 4;
+  heroItems.forEach(function(it, i){
+    const cx = M + heroW * i;
+    if (i > 0) {
+      setDraw([60,75,100]); doc.setLineWidth(0.15);
+      doc.line(cx, heroY + 9, cx, heroY + 33);
+    }
+    doc.setFont('helvetica','bold'); doc.setFontSize(5.8); setColor([170,180,200]);
+    doc.text(it.label, cx + 3, heroY + 12);
+    doc.setFont('times','normal'); doc.setFontSize(20); setColor(CREAM);
+    doc.text(it.value, cx + 3, heroY + 25);
+    doc.setFont('helvetica','normal'); doc.setFontSize(5.8); setColor(GOLD);
+    doc.text(it.sub, cx + 3, heroY + 31);
+  });
+  setDraw([100,120,150]); doc.setLineWidth(0.3);
+  doc.line(M, heroY + 35, W - M, heroY + 35);
+
+  // CTA strip
+  setFill(NAVY_DARK); doc.rect(0, H - 22, W, 22, 'F');
+  setFill(GOLD); doc.rect(0, H - 22, W, 0.4, 'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(6); setColor(GOLD);
+  doc.text('NEXT STEP', M, H - 16);
+  doc.setFont('times','normal'); doc.setFontSize(11); setColor(CREAM);
+  doc.text('Want us to lock in this rate?', M, H - 10);
+  doc.setFont('helvetica','normal'); doc.setFontSize(6.8); setColor([180,185,200]);
+  doc.text('FREE SERVICE  ·  ZERO FEES  ·  BANKS PAY OUR REFERRAL FEE', M, H - 5);
   doc.setFont('helvetica','bold'); doc.setFontSize(11); setColor(GOLD);
-  doc.text('WhatsApp +65 8752 0859', W - M, H - 14, { align: 'right' });
-  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor([180,180,180]);
-  doc.text('danler@nexusmortgage.sg  ·  nexusmortgage.sg', W - M, H - 6, { align: 'right' });
+  doc.text('WhatsApp +65 8752 0859', W - M, H - 11, { align: 'right' });
+  doc.setFont('helvetica','normal'); doc.setFontSize(6.8); setColor([180,185,200]);
+  doc.text('DANLER@NEXUSMORTGAGE.SG  ·  NEXUSMORTGAGE.SG', W - M, H - 5, { align: 'right' });
 
   // ═══════════════════ PAGE 2 — EXECUTIVE SUMMARY ═══════════════════
   let y = pageChrome('Executive Summary');
-  y = sectionHeader(y, 'Executive summary', 'At a glance — what your numbers say.',
-    'A snapshot of the key metrics; the rest of this report explains how each was derived.');
+  y = sectionHeader(y, 'Executive summary',
+    'At a glance — what your numbers say.',
+    'A snapshot of the key metrics; the rest of this report explains how each was derived. All figures stress-tested at MAS 4%.');
 
-  const kpiH = 26;
-  const kpiTW = (CW - 9) / 4;
+  // 6-cell stat grid (2 rows of 3)
   const tdsrPct = r.tdsrUsage * 100;
-  kpiTile(M, y, kpiTW, kpiH, 'Best rate found', (r.bestRate*100).toFixed(2) + '% p.a.',
-    r.banks[0].bank + ' · ' + r.banks[0].pkg, GOLD);
-  kpiTile(M + kpiTW + 3, y, kpiTW, kpiH, 'Estimated monthly', fmt$(monthly) + '/mo',
-    'at best rate over ' + r.inp.tenure + 'y', GREEN);
-  kpiTile(M + (kpiTW + 3) * 2, y, kpiTW, kpiH, 'TDSR usage', tdsrPct.toFixed(1) + '%',
-    r.tdsrPass ? 'Within 55% cap' : 'Exceeds 55% cap', r.tdsrPass ? GREEN : RED);
-  kpiTile(M + (kpiTW + 3) * 3, y, kpiTW, kpiH, 'Effective LTV', (r.effectiveLtvPct || r.ltvPct).toFixed(1) + '%',
-    'Down payment ' + fmt$(downPayment), NAVY);
-  y += kpiH + 8;
+  const ltvPctNum = (r.effectiveLtvPct || r.ltvPct);
+  const exec1 = [
+    { label: 'Best rate found', value: (r.bestRate*100).toFixed(2) + '%', sub: r.banks[0].bank + ' · ' + r.banks[0].pkg },
+    { label: 'Estimated monthly', value: fmt$(monthly), sub: 'Year 1 over ' + r.inp.tenure + 'y' },
+    { label: 'TDSR usage', value: tdsrPct.toFixed(1) + '%', sub: r.tdsrPass ? 'Within 55% cap' : 'Exceeds 55% cap', color: r.tdsrPass ? INK : RED },
+  ];
+  const exec2 = [
+    { label: 'Effective LTV', value: ltvPctNum.toFixed(1) + '%', sub: 'Down payment ' + fmt$(downPayment) },
+    { label: 'Max loan headroom', value: fmt$(r.maxLoanAffordable || 0), sub: 'At your income & tenure' },
+    { label: 'Total interest', value: fmt$(r.totalInterest), sub: 'Over ' + r.inp.tenure + ' years' },
+  ];
+  y = statGrid(M, y, CW, exec1) + 1;
+  y = statGrid(M, y, CW, exec2) + 4;
 
+  // Verdict callout
   const verdict = tdsrFail
     ? { tone: RED, soft: RED_SOFT,
-        title: 'You exceed the ' + (r.cappedBy === 'MSR' ? '30% MSR' : '55% TDSR') + ' cap',
-        body: 'At your requested loan, this won\'t pass MAS stress-testing. The good news: there are clear levers to fit inside the cap — see the Optimisation Playbook.' }
+        title: 'Above the ' + (r.cappedBy === 'MSR' ? '30% MSR' : '55% TDSR') + ' cap',
+        body: 'At your requested loan, this won\'t pass MAS stress-testing. There are clear levers to fit inside the cap — see page 9.' }
     : { tone: GREEN, soft: GREEN_SOFT,
-        title: 'You qualify — and there\'s headroom to go higher',
-        body: 'Your monthly fits comfortably inside both regulatory caps. The cheapest package gives a Year-1 monthly of ' + fmt$(monthly) + '.' };
-  setFill(verdict.soft); doc.rect(M, y, CW, 22, 'F');
-  setFill(verdict.tone); doc.rect(M, y, 1.8, 22, 'F');
-  doc.setFont('helvetica','bold'); doc.setFontSize(11); setColor(verdict.tone);
-  doc.text(verdict.title, M + 6, y + 9);
-  doc.setFont('helvetica','normal'); doc.setFontSize(9); setColor(INK_2);
-  doc.text(doc.splitTextToSize(verdict.body, CW - 12), M + 6, y + 15);
-  y += 30;
+        title: 'Within MAS caps — qualifies with headroom',
+        body: 'Your monthly fits inside both regulatory caps. Cheapest package gives a Year-1 monthly of ' + fmt$(monthly) + ' at ' + (r.bestRate*100).toFixed(2) + '%.' };
+  y = calloutBlock(y, verdict.tone, verdict.soft, verdict.title, verdict.body);
 
-  y = sectionHeader(y, 'What\'s in this report', 'A walkthrough across nine pages.', '');
+  // Two-column TOC (denser)
+  y = sectionHeader(y, 'Contents', 'A walkthrough across ten pages.', '');
   const toc = [
-    ['1', 'Cover'],
-    ['2', 'Executive summary (this page)'],
-    ['3', 'Income, debt servicing & affordability'],
-    ['4', 'Bank rate comparison — top 8 packages'],
-    ['5', 'Your selected package — full terms'],
-    ['6', 'Stress test & lifetime cost'],
-    ['7', isRefi ? 'Refinance comparison' : 'Upfront costs & funds position'],
-    ['8', 'Amortisation schedule, year by year'],
-    ['9', 'Optimisation playbook & next steps'],
+    ['01', 'Cover', 'Headline numbers'],
+    ['02', 'Executive summary', 'This page'],
+    ['03', 'Income matrix · per purchaser', 'TDSR, MSR, LTV, IWAA'],
+    ['04', 'Bank rate comparison', 'Top 8 packages ranked'],
+    ['05', 'Selected package', 'Full terms'],
+    ['06', 'Multi-package compare', 'Top 4 side-by-side'],
+    ['07', 'Stress test & cost horizons', 'Rate-rise + 2/3/5y window'],
+    ['08', isRefi ? 'Refinance comparison' : 'Upfront · CPF/Cash split', isRefi ? 'Current vs new' : 'Per-line CPF/cash alloc'],
+    ['09', 'Amortisation · with CPF', 'First 5y + CPF inflow'],
+    ['10', 'Optimisation playbook', 'Levers + next steps'],
   ];
-  doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
-  toc.forEach(function(t){
-    setColor(GOLD); doc.setFont('helvetica','bold'); doc.text(t[0], M, y);
-    setColor(INK_2); doc.setFont('helvetica','normal'); doc.text(t[1], M + 8, y);
-    setDraw(BORDER_LT); doc.line(M + 8 + doc.getTextWidth(t[1]) + 2, y - 1, W - M, y - 1);
-    y += 6;
+  const tocColW = CW / 2;
+  toc.forEach(function(t, i){
+    const col = i % 2;
+    const row = Math.floor(i / 2);
+    const tx = M + col * tocColW;
+    const ty = y + row * 6.2;
+    setDraw(BORDER_LT); doc.setLineWidth(0.1);
+    doc.line(tx, ty + 4, tx + tocColW - 2, ty + 4);
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(GOLD);
+    doc.text(t[0], tx, ty + 3);
+    doc.setFont('helvetica','bold'); doc.setFontSize(8); setColor(INK);
+    doc.text(t[1], tx + 8, ty + 3);
+    doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(MUTED);
+    doc.text(t[2], tx + tocColW - 4, ty + 3, { align: 'right' });
   });
 
   // ═══════════════════ PAGE 3 — INCOME & DEBT SERVICING ═══════════════════
   y = pageChrome('Income · Debt Servicing · Affordability');
-  y = sectionHeader(y, 'Income & debt servicing', 'How TDSR and MSR see your case.',
+  y = sectionHeader(y, 'Income & debt servicing',
+    'How TDSR and MSR see your case.',
     'MAS rules cap your debt servicing at 55% of effective monthly income (TDSR), and HDB/EC mortgages at 30% (MSR). All numbers below stress-tested at MAS 4%.');
 
-  const incomeFixed = (r.inp.borrowerIncomes || [r.inp.income]).reduce(function(s,v){return s+(v||0);},0);
-  const incomeVar30 = ((r.inp.borrowerVariableIncomes||[]).reduce(function(s,v){return s+(v||0);},0)) * 0.30;
-  const pledgedTotal = (r.inp.borrowerPledged||[]).reduce(function(s,v){return s+(v||0);},0);
-  const showTotal = (r.inp.borrowerShow||[]).reduce(function(s,v){return s+(v||0);},0);
-  const incomePledged = pledgedTotal / 48;
-  const incomeShow = (showTotal * 0.30) / 48;
+  const bIncomes = r.inp.borrowerIncomes || [r.inp.income || 0];
+  const bVar = r.inp.borrowerVariableIncomes || [];
+  const bPledged = r.inp.borrowerPledged || [];
+  const bShow = r.inp.borrowerShow || [];
+  const bAges = r.inp.borrowerAges || [];
   const debtsTotal = r.inp.debts || 0;
-  const availForMortgage = (r.inp.income||0) - debtsTotal;
 
-  const rowsIncome = [
-    { cells: ['Fixed monthly income (all borrowers)', fmt$(incomeFixed) + '/mo'] },
-    { cells: ['+ Variable income × 30% (MAS haircut)', fmt$(incomeVar30) + '/mo'] },
-  ];
-  if (pledgedTotal > 0) rowsIncome.push({ cells: ['+ Pledged funds boost (100% ÷ 48 mths)', fmt$(incomePledged) + '/mo'] });
-  if (showTotal > 0) rowsIncome.push({ cells: ['+ Show funds boost (30% ÷ 48 mths)', fmt$(incomeShow) + '/mo'] });
-  rowsIncome.push({ cells: [{ text: 'Less existing monthly debts' }, { text: '– ' + fmt$(debtsTotal) + '/mo', color: RED }] });
-  rowsIncome.push({ cells: [{ text: 'Available for mortgage', font: 'bold' }, { text: fmt$(availForMortgage) + '/mo', font: 'bold' }],
+  // Per-purchaser income matrix (vasu-style)
+  const matrixRows = [];
+  let totalEff = 0;
+  let totalFixed = 0;
+  let totalWeightedAge = 0;
+  bIncomes.forEach(function(fixed, i){
+    const v = bVar[i] || 0;
+    const pl = bPledged[i] || 0;
+    const sh = bShow[i] || 0;
+    const age = bAges[i] || 0;
+    const fixedC = fixed * 1.0;
+    const varC = v * 0.30;
+    const plC = pl / 48;
+    const shC = (sh * 0.30) / 48;
+    const subtotal = fixedC + varC + plC + shC;
+    totalEff += subtotal;
+    totalFixed += fixed;
+    totalWeightedAge += age * fixed;
+    const pNo = String(i+1).padStart(2,'0');
+    matrixRows.push({ cells: [{text:'P' + pNo, font:'bold'}, 'Fixed income · age ' + age, fmt$(fixed) + '/mo', '100% × 1mth', fmt$(fixedC) + '/mo'] });
+    matrixRows.push({ cells: ['', 'Variable income', fmt$(v) + '/mo', '30% × 1mth', fmt$(varC) + '/mo'] });
+    if (pl > 0) matrixRows.push({ cells: ['', 'Pledged funds', fmt$(pl), '100% ÷ 48mth', fmt$(plC) + '/mo'] });
+    if (sh > 0) matrixRows.push({ cells: ['', 'Show funds', fmt$(sh), '30% ÷ 48mth', fmt$(shC) + '/mo'] });
+    matrixRows.push({ cells: ['', { text: 'P' + pNo + ' subtotal', font: 'bold' }, '', '', { text: fmt$(subtotal) + '/mo', font: 'bold' }],
+      _highlight: true, _highlightColor: SOFT_BG });
+  });
+  const iwaa = totalFixed > 0 ? totalWeightedAge / totalFixed : 0;
+  const availForMortgage = totalEff - debtsTotal;
+  matrixRows.push({ cells: [{text:'TOTAL', font:'bold'}, { text: 'Effective qualifying income', font: 'bold' }, '', '', { text: fmt$(totalEff) + '/mo', font: 'bold' }],
     _highlight: true, _highlightColor: GOLD_TINT });
-  y = table(['Component', 'Monthly'], rowsIncome, { y: y, widths: [CW - 50, 50] });
+  if (debtsTotal > 0) {
+    matrixRows.push({ cells: ['', { text: 'Less existing monthly debts' }, '', '', { text: '– ' + fmt$(debtsTotal) + '/mo', color: RED }] });
+  }
+  matrixRows.push({ cells: ['', { text: 'Available for mortgage servicing', font: 'bold' }, '', '', { text: fmt$(availForMortgage) + '/mo', font: 'bold' }],
+    _highlight: true, _highlightColor: GOLD_TINT });
+  matrixRows.push({ cells: ['', { text: 'IWAA · Income-Weighted Avg Age' }, '', { text: 'Σ(age×fixed) ÷ Σ fixed', color: MUTED }, { text: iwaa.toFixed(1) + ' yrs', color: NAVY }] });
+  y = table(['#', 'Component', 'Amount', 'MAS factor', 'Monthly contribution'],
+    matrixRows, { y: y, widths: [12, 60, 30, 36, 44] });
   y += 8;
 
-  doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
-  doc.text('Regulatory checks', M, y); y += 6;
+  // Regulatory checks — slim bars
+  y = eyebrow(y, 'Regulatory checks');
+  y += 1;
   const barRows = [
     ['TDSR · Total Debt Servicing Ratio', r.tdsrUsage, 0.55, '55% cap'],
   ];
@@ -3981,135 +4983,239 @@ function buildReportPdf(r, lead) {
   barRows.push(['Effective LTV · Loan-to-Value', (r.effectiveLtvPct||r.ltvPct)/100, regulatoryLtvPct, (r.ltvPct||75) + '% cap']);
   barRows.forEach(function(row){
     const lbl = row[0], used = row[1], cap = row[2], capLbl = row[3];
-    doc.setFont('helvetica','bold'); doc.setFontSize(8.5); setColor(INK);
+    doc.setFont('helvetica','bold'); doc.setFontSize(7.5); setColor(INK);
     doc.text(lbl, M, y);
-    doc.setFont('helvetica','normal'); doc.setFontSize(8); setColor(INK_2);
-    doc.text((used*100).toFixed(1) + '%  /  ' + capLbl, W - M, y, { align: 'right' });
-    y += 2;
-    bar(M, y, CW, 4, used, cap);
-    y += 8;
+    doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(INK_2);
+    doc.text((used*100).toFixed(1) + '%   /   ' + capLbl, W - M, y, { align: 'right' });
+    y += 1.8;
+    ratioBar(M, y, CW, used, cap);
+    y += 7;
   });
 
-  y += 4;
-  doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
-  doc.text(tdsrFail ? 'Affordability shortfall' : 'Affordability headroom', M, y); y += 5;
-  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(MUTED);
+  y += 2;
+  // Affordability — 4-cell stat grid
+  y = eyebrow(y, tdsrFail ? 'Affordability shortfall' : 'Affordability headroom');
+  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(MUTED);
   const afLine = tdsrFail
-    ? 'You\'re asking for $' + fmtN(r.inp.loan) + '. The most you qualify for at this tenure & income is shown below.'
-    : 'You\'re asking for $' + fmtN(r.inp.loan) + '. Your headroom shows the most you could borrow before hitting the cap.';
-  doc.text(doc.splitTextToSize(afLine, CW), M, y); y += 8;
-
-  const tw = (CW - 4) / 2;
-  setFill(SOFT_BG); doc.rect(M, y, tw, 22, 'F'); setDraw(BORDER); doc.rect(M, y, tw, 22);
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(MUTED);
-  doc.text(tdsrFail ? 'MAX LOAN AT YOUR INCOME' : 'MAX LOAN HEADROOM', M + 4, y + 6);
-  doc.setFont('times','normal'); doc.setFontSize(15); setColor(tdsrFail ? RED : GREEN);
-  doc.text(fmt$(r.maxLoanAffordable || 0), M + 4, y + 16);
-  setFill(SOFT_BG); doc.rect(M + tw + 4, y, tw, 22, 'F'); setDraw(BORDER); doc.rect(M + tw + 4, y, tw, 22);
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(MUTED);
-  doc.text('MAX PROPERTY PRICE  ·  ' + (r.ltvPct||75) + '% LTV', M + tw + 8, y + 6);
-  doc.setFont('times','normal'); doc.setFontSize(15); setColor(GREEN);
-  doc.text(fmt$(r.maxPurchasePrice || 0), M + tw + 8, y + 16);
-  y += 30;
+    ? 'You\'re asking for ' + fmt$(r.inp.loan) + '. The most you qualify for at this tenure & income is shown below.'
+    : 'You\'re asking for ' + fmt$(r.inp.loan) + '. Your headroom shows the most you could borrow before hitting the cap.';
+  doc.text(doc.splitTextToSize(afLine, CW), M, y);
+  y += 6;
+  const buffer = (r.maxLoanAffordable || 0) - r.inp.loan;
+  const afItems = [
+    { label: tdsrFail ? 'Max loan at income' : 'Max loan headroom', value: fmt$(r.maxLoanAffordable || 0), sub: 'Subject to all caps', color: tdsrFail ? RED : GREEN },
+    { label: 'Max property price', value: fmt$(r.maxPurchasePrice || 0), sub: 'At ' + (r.ltvPct||75) + '% LTV', color: GREEN },
+    { label: 'Asking loan', value: fmt$(r.inp.loan), sub: 'Your input', color: INK },
+    { label: tdsrFail ? 'Loan to reduce' : 'Buffer remaining', value: tdsrFail ? '−' + fmt$(Math.abs(buffer)) : fmt$(Math.max(0, buffer)), sub: tdsrFail ? 'Below cap' : 'Before cap', color: tdsrFail ? RED : GREEN },
+  ];
+  y = statGrid(M, y, CW, afItems);
 
   // ═══════════════════ PAGE 4 — BANK RATE COMPARISON ═══════════════════
   y = pageChrome('Bank Rate Comparison');
-  y = sectionHeader(y, 'Bank rates ranked', 'The cheapest 8 packages for your loan tier.',
-    'Ranked by total cost over the lock-in period (typically 2 years). Highlight = your selected package. Rates as of ' + dateStr + '.');
+  y = sectionHeader(y, 'Bank rates ranked',
+    'The cheapest packages for your loan tier.',
+    'Ranked by total cost over the lock-in period (typically 2 years). Highlighted row = your selected package. Spread bar shows how much cheaper each package is vs the most expensive in this list. Rates as of ' + dateStr + '.');
   const top8 = r.banks.slice(0, 8);
+  // Spread bar normalisation
+  const minRate = Math.min.apply(null, top8.map(function(b){return b.rate;}));
+  const maxRate = Math.max.apply(null, top8.map(function(b){return b.rate;}));
+  const rateSpread = (maxRate - minRate) || 0.0001;
+  // Widths: # | Bank | Package | Lock | Rate | (bar) | Monthly | Lock-in cost
+  const tw = [10, 22, 30, 14, 18, 24, 22, 24];
+  const barColX = tw[0] + tw[1] + tw[2] + tw[3] + tw[4] + 1; // 95
+  const barColW = tw[5] - 2;
   const rateRows = top8.map(function(b, i){
     const isSelected = (b._origIdx === selectedRateIdx) || (i === selectedRateIdx);
+    const sprFrac = 1 - ((b.rate - minRate) / rateSpread); // 1 = cheapest
     return {
       cells: [
-        { text: (i===0?'★ ':'') + b.bank, font: 'bold' },
+        pad2(i + 1),
+        { text: b.bank, font: 'bold' },
         b.pkg,
         (b.lockInYears ? b.lockInYears + 'y' : 'No lock'),
         b.rate.toFixed(2) + '%',
+        '', // bar column
         fmt$(b.monthly),
         fmt$(b.lockInCost),
       ],
       _highlight: isSelected,
       _highlightColor: GOLD_TINT,
+      _bar: { colX: barColX, colW: barColW, frac: sprFrac, color: i === 0 ? GREEN : NAVY },
     };
   });
-  y = table(['Bank','Package','Lock-in','Rate p.a.','Monthly','Lock-in cost'],
-    rateRows, { y: y, widths: [22, 60, 16, 22, 24, 36] });
-  y += 8;
-  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(MUTED);
-  doc.text(doc.splitTextToSize('Lock-in cost = total monthly payments × lock-in months. After lock-in, the rate typically reverts to the package\'s "thereafter" rate (see your selected package on the next page).', CW), M, y);
-  y += 12;
+  y = table(['#','Bank','Package','Lock-in','Rate p.a.','Cheaper ←','Monthly','Lock-in cost'],
+    rateRows, { y: y, widths: tw, rowH: 6 });
+  y += 6;
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(MUTED);
+  doc.text(doc.splitTextToSize('Lock-in cost = total monthly payments × lock-in months. After lock-in, the rate typically reverts to the package\'s "thereafter" rate (see selected package on next page).', CW), M, y);
+  y += 9;
 
-  if (r.banks.length >= 2) {
-    setFill(GREEN_SOFT); doc.rect(M, y, CW, 18, 'F');
-    setFill(GREEN); doc.rect(M, y, 1.8, 18, 'F');
-    doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(GREEN_DK);
-    doc.text('You save ' + fmt$(r.savingsVsSecond) + ' over lock-in', M + 6, y + 8);
-    doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(INK_2);
-    doc.text('vs. the next-cheapest package on the market — at no cost to you.', M + 6, y + 14);
-    y += 24;
+  if (top8.length >= 2) {
+    y = eyebrow(y, 'Savings analysis');
+    y += 1;
+    const avgCost = top8.reduce(function(s,b){return s+b.lockInCost;},0) / top8.length;
+    const savingsItems = [
+      { label: 'Vs next cheapest', value: fmt$(r.savingsVsSecond || 0), sub: 'Lock-in saving', color: GREEN },
+      { label: 'Vs top-' + top8.length + ' avg.', value: fmt$(Math.max(0, avgCost - top8[0].lockInCost)), sub: 'Lock-in saving', color: GREEN },
+      { label: 'Vs most expensive', value: fmt$(Math.max(0, top8[top8.length-1].lockInCost - top8[0].lockInCost)), sub: 'Lock-in saving', color: GREEN },
+    ];
+    y = statGrid(M, y, CW, savingsItems);
   }
 
   // ═══════════════════ PAGE 5 — SELECTED PACKAGE ═══════════════════
   y = pageChrome('Selected Package');
-  y = sectionHeader(y, 'Selected package', sel.bank + ' · ' + sel.pkg,
-    (sel.subCategory || sel.category || '') + '  ·  Year-1 rate ' + sel.rate.toFixed(2) + '% p.a.');
+  y = sectionHeader(y, 'Selected package',
+    sel.bank + ' · ' + sel.pkg,
+    (sel.subCategory || sel.category || 'Fixed') + '  ·  Year-1 rate ' + sel.rate.toFixed(2) + '% p.a.  ·  Loan ' + fmt$(r.inp.loan) + '  ·  Tenure ' + r.inp.tenure + 'y');
 
+  // Year breakdown — graceful fallback when bank year-by-year data is missing
+  const fallbackRate = sel.rate; // already in percent (e.g. 1.45)
+  function yrInfo(rawKey, rateKey, defaultRate) {
+    if (sel[rawKey]) return { display: sel[rawKey], num: (sel[rateKey] != null ? sel[rateKey] : null) };
+    if (sel[rateKey] != null) return { display: sel[rateKey].toFixed(2) + '%', num: sel[rateKey] };
+    if (defaultRate != null) return { display: defaultRate.toFixed(2) + '%', num: defaultRate };
+    return { display: '—', num: null };
+  }
+  const lockY = sel.lockInYears || 0;
   const yrs = [
-    ['Year 1', sel.year1Raw || (sel.year1Rate!=null ? sel.year1Rate.toFixed(2)+'%' : '—'), sel.year1Rate],
-    ['Year 2', sel.year2Raw || (sel.year2Rate!=null ? sel.year2Rate.toFixed(2)+'%' : '—'), sel.year2Rate],
-    ['Year 3', sel.year3Raw || (sel.year3Rate!=null ? sel.year3Rate.toFixed(2)+'%' : '—'), sel.year3Rate],
-    ['Year 4', sel.year4Raw || (sel.year4Rate!=null ? sel.year4Rate.toFixed(2)+'%' : '—'), sel.year4Rate],
-    ['Year 5', sel.year5Raw || (sel.year5Rate!=null ? sel.year5Rate.toFixed(2)+'%' : '—'), sel.year5Rate],
-    ['Thereafter', sel.thereafterRaw || (sel.thereafterRate!=null ? sel.thereafterRate.toFixed(2)+'%' : '—'), sel.thereafterRate],
+    ['Year 1', yrInfo('year1Raw', 'year1Rate', fallbackRate), 0],
+    ['Year 2', yrInfo('year2Raw', 'year2Rate', lockY >= 2 ? fallbackRate : null), 1],
+    ['Year 3', yrInfo('year3Raw', 'year3Rate', lockY >= 3 ? fallbackRate : null), 2],
+    ['Year 4', yrInfo('year4Raw', 'year4Rate', lockY >= 4 ? fallbackRate : null), 3],
+    ['Year 5', yrInfo('year5Raw', 'year5Rate', lockY >= 5 ? fallbackRate : null), 4],
+    ['Thereafter', yrInfo('thereafterRaw', 'thereafterRate', null), -1],
   ];
   const yrRows = yrs.map(function(yr){
-    const m = yr[2] != null ? pmt(r.inp.loan, yr[2]/100, r.inp.tenure) : null;
-    return { cells: [yr[0], yr[1], m != null ? fmt$(m) : '—', m != null ? fmt$(m * 12) : '—'] };
+    const info = yr[1];
+    const idx = yr[2];
+    const m = info.num != null ? pmt(r.inp.loan, info.num/100, r.inp.tenure) : null;
+    const inLockIn = lockY > 0 && idx >= 0 && idx < lockY;
+    let status;
+    if (inLockIn) status = 'Locked in';
+    else if (info.num != null) status = idx === -1 ? 'Indicative' : 'Estimate';
+    else status = 'Bank quote';
+    return {
+      cells: [
+        { text: yr[0], font: inLockIn ? 'bold' : 'normal' },
+        info.display,
+        m != null ? fmt$(m) + '/mo' : 'See broker',
+        m != null ? fmt$(m * 12) : '—',
+        { text: status, color: inLockIn ? NAVY : MUTED },
+      ],
+      _highlight: inLockIn,
+      _highlightColor: GOLD_TINT,
+    };
   });
-  y = table(['Year','Rate basis','Monthly','Annual cost'], yrRows, { y: y, widths: [22, 90, 32, 36] });
+  y = table(['Year','Rate basis','Monthly','Annual cost','Status'],
+    yrRows, { y: y, widths: [22, 60, 32, 30, 36] });
   y += 8;
 
-  doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
-  doc.text('Terms & conditions', M, y); y += 5;
+  // Terms — 2-col definition list with hairline rules
+  y = eyebrow(y, 'Terms & conditions');
+  y += 0;
   const terms = [
     ['Lock-in period', sel.lockInYears ? sel.lockInYears + ' year' + (sel.lockInYears>1?'s':'') : 'No lock-in'],
     ['Qualifying loan', sel.qualifying || ('Min $' + fmtN(sel.qualifyingMin || 0))],
-    ['Rate basis', sel.category || sel.family || '—'],
+    ['Rate basis', sel.category || sel.family || 'Fixed'],
     ['Lock-in cost (your loan)', fmt$(sel.lockInCost)],
     ['Monthly payment (Year 1)', fmt$(sel.monthly)],
     ['Total interest over ' + r.inp.tenure + 'y', fmt$(r.totalInterest)],
   ];
-  const tw2 = (CW - 4) / 2;
-  terms.forEach(function(t, i){
-    const col = i % 2;
-    const row = Math.floor(i / 2);
-    const x = M + col * (tw2 + 4);
-    const yy = y + row * 14;
-    setFill(SURFACE); doc.rect(x, yy, tw2, 12, 'F'); setDraw(BORDER_LT); doc.rect(x, yy, tw2, 12);
-    doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(MUTED);
-    doc.text(t[0].toUpperCase(), x + 3, yy + 4);
-    doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
-    doc.text(t[1], x + 3, yy + 9);
-  });
-  y += Math.ceil(terms.length / 2) * 14 + 8;
+  const termColW = CW / 2;
+  setDraw(NAVY); doc.setLineWidth(0.4); doc.line(M, y, W - M, y);
+  for (let i = 0; i < terms.length; i += 2) {
+    const yi = y + (i / 2) * 7 + 1;
+    [0, 1].forEach(function(c){
+      const t = terms[i + c];
+      if (!t) return;
+      const tx = M + c * termColW;
+      doc.setFont('helvetica','normal'); doc.setFontSize(6.5); setColor(MUTED);
+      doc.text(t[0].toUpperCase(), tx, yi + 2.8);
+      doc.setFont('helvetica','bold'); doc.setFontSize(8.5); setColor(INK);
+      doc.text(String(t[1]), tx + termColW - 2, yi + 2.8, { align: 'right' });
+    });
+    setDraw(BORDER_LT); doc.setLineWidth(0.1);
+    doc.line(M, yi + 5, W - M, yi + 5);
+  }
+  y += Math.ceil(terms.length / 2) * 7 + 6;
+  setDraw(NAVY); doc.setLineWidth(0.4); doc.line(M, y - 6, W - M, y - 6);
 
+  // Lock-in callout
   if (sel.lockInYears) {
     const expiry = new Date();
     expiry.setFullYear(expiry.getFullYear() + sel.lockInYears);
     const refiWindow = new Date(expiry);
     refiWindow.setMonth(refiWindow.getMonth() - 4);
-    setFill(GOLD_TINT); doc.rect(M, y, CW, 22, 'F'); setFill(GOLD); doc.rect(M, y, 1.8, 22, 'F');
-    doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(NAVY);
-    doc.text('Lock-in expires around ' + expiry.toLocaleDateString('en-SG', { month:'short', year:'numeric' }), M + 6, y + 8);
-    doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(INK_2);
-    const reText = 'Start refinance shopping by ' + refiWindow.toLocaleDateString('en-SG', { month:'short', year:'numeric' }) + '. We\'ll reach out 6 weeks before — free service, banks pay our referral.';
-    doc.text(doc.splitTextToSize(reText, CW - 12), M + 6, y + 14);
-    y += 28;
+    y = calloutBlock(y, GOLD, GOLD_TINT,
+      'Lock-in expires around ' + expiry.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' }),
+      'Start refinance shopping by ' + refiWindow.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' }) + '. We\'ll reach out 6 weeks before — free service, banks pay our referral.');
   }
 
-  // ═══════════════════ PAGE 6 — STRESS TEST + LIFETIME COST ═══════════════════
+  // ═══════════════════ PAGE 6 — MULTI-PACKAGE COMPARE MATRIX ═══════════════════
+  y = pageChrome('Multi-Package Compare');
+  y = sectionHeader(y, 'Top packages · side-by-side',
+    'Year-by-year rate breakdown for your top ' + Math.min(4, r.banks.length) + ' picks.',
+    'Cheapest first. Each cell = effective rate (decimal) · raw structure underneath. Lock-in cost ranked at the bottom.');
+
+  const cmpBanks = r.banks.slice(0, 4);
+  const cmpYears = ['Year 1','Year 2','Year 3','Year 4','Year 5','Thereafter'];
+  const cmpFields = ['year1', 'year2', 'year3', 'year4', 'year5', 'thereafter'];
+  // Build header with bank names (truncated for column width)
+  const trunc = (s, n) => s && s.length > n ? s.slice(0, n - 1) + '…' : (s || '');
+  const cmpHeaders = ['Year'].concat(cmpBanks.map(function(b, i){
+    return trunc(b.bank, 14);
+  }));
+  // Sub-row showing pkg name in light type
+  const cmpSubHeaderRow = { cells: [''].concat(cmpBanks.map(function(b){ return { text: trunc(b.pkg, 18), color: MUTED }; })), _h: 5 };
+  // Compute equal column widths after first label col
+  const cmpFirstCol = 24;
+  const cmpRest = (CW - cmpFirstCol) / cmpBanks.length;
+  const cmpWidths = [cmpFirstCol].concat(cmpBanks.map(function(){ return cmpRest; }));
+  const cmpRows = [cmpSubHeaderRow];
+  cmpYears.forEach(function(yLabel, idx){
+    const f = cmpFields[idx];
+    const cells = [{ text: yLabel, font: 'bold' }];
+    cmpBanks.forEach(function(b){
+      const num = b[f + 'Rate'];
+      const display = num != null ? num.toFixed(2) + '%' : '—';
+      cells.push({ text: display });
+    });
+    cmpRows.push({ cells: cells, _h: 6 });
+  });
+  // Lock-in row
+  const lockCells = [{ text: 'Lock-in', font: 'bold' }];
+  cmpBanks.forEach(function(b){
+    lockCells.push(b.lockInYears ? b.lockInYears + ' yr' + (b.lockInYears>1?'s':'') : 'No lock');
+  });
+  cmpRows.push({ cells: lockCells, _highlight: true, _highlightColor: GOLD_TINT });
+  // Qualifying row (truncated)
+  const qualCells = [{ text: 'Qualifying', font: 'bold' }];
+  cmpBanks.forEach(function(b){
+    qualCells.push(trunc(b.qualifying || ('Min $' + fmtN(b.qualifyingMin || 0)), 18));
+  });
+  cmpRows.push({ cells: qualCells });
+  // Monthly row
+  const moCells = [{ text: 'Monthly (Y1)', font: 'bold' }];
+  cmpBanks.forEach(function(b){
+    moCells.push(fmt$(b.monthly) + '/mo');
+  });
+  cmpRows.push({ cells: moCells });
+  // Lock-in cost row
+  const lcCells = [{ text: 'Lock-in cost', font: 'bold' }];
+  cmpBanks.forEach(function(b){
+    lcCells.push(fmt$(b.lockInCost));
+  });
+  cmpRows.push({ cells: lcCells, _highlight: true, _highlightColor: SOFT_BG });
+  y = table(cmpHeaders, cmpRows, { y: y, widths: cmpWidths, rowH: 6,
+    aligns: ['left'].concat(cmpBanks.map(function(){ return 'left'; })) });
+  y += 6;
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(MUTED);
+  doc.text(doc.splitTextToSize('★ = your selected package. Variable rates show "raw" basis (e.g. SORA + spread, FHR + spread). After lock-in expiry, rate reverts to "Thereafter" — refinance window opens 4-6 months before that.', CW), M, y);
+
+  // ═══════════════════ PAGE 7 — STRESS TEST + LIFETIME COST ═══════════════════
   y = pageChrome('Stress Test · Lifetime Cost');
-  y = sectionHeader(y, 'Stress test', 'If rates rise — what your monthly looks like.',
+  y = sectionHeader(y, 'Stress test',
+    'If rates rise — what your monthly looks like.',
     'Same loan, same tenure — just a higher rate. MAS already stress-tests you at 4% for affordability; we model up to 6% so you can see the headroom on your own budget.');
 
   const baseM = r.monthlyBest;
@@ -4120,89 +5226,164 @@ function buildReportPdf(r, lead) {
     ['Severe', 5.0, pmt(r.inp.loan, 0.05, r.inp.tenure)],
     ['Extreme', 6.0, pmt(r.inp.loan, 0.06, r.inp.tenure)],
   ];
+  const stressMaxM = Math.max.apply(null, stressData.map(function(s){return s[2];}));
+  // Widths: Scenario | Rate | Monthly | Stress impact (bar) | Δ | Y1 interest
+  const stw = [50, 22, 28, 30, 28, 22];
+  const stBarColX = stw[0] + stw[1] + stw[2] + 1; // 101
+  const stBarColW = stw[3] - 2;
   const stressTbl = stressData.map(function(sr, i){
     const delta = i === 0 ? 0 : sr[2] - baseM;
     const dTxt = i === 0 ? '—' : (delta > 0 ? '+' + fmt$(delta) + '/mo' : fmt$(delta) + '/mo');
     const annualInt = r.inp.loan * (sr[1]/100);
+    const barColor = i === 0 ? GREEN : (sr[1] >= 5 ? RED : (sr[1] >= 4 ? AMBER : NAVY));
     return {
       cells: [
         sr[0],
         sr[1].toFixed(2) + '%',
         fmt$(sr[2]),
+        '',
         { text: dTxt, color: i === 0 ? MUTED : (delta > 0 ? RED : GREEN) },
         fmt$(annualInt),
       ],
       _highlight: i === 0,
       _highlightColor: GREEN_SOFT,
+      _bar: { colX: stBarColX, colW: stBarColW, frac: sr[2] / stressMaxM, color: barColor },
     };
   });
-  y = table(['Scenario','Rate','Monthly','Δ vs best','Y1 interest'], stressTbl,
-    { y: y, widths: [50, 22, 32, 36, 40] });
-  y += 10;
+  y = table(['Scenario','Rate','Monthly','Stress impact','Δ vs best','Y1 interest'],
+    stressTbl, { y: y, widths: stw, rowH: 6 });
+  y += 9;
 
-  y = sectionHeader(y, 'Lifetime cost', 'What you\'ll pay over the full ' + r.inp.tenure + '-year tenure.', '');
-  const interest = r.totalInterest;
-  const totalPaid = r.inp.loan + interest;
-  const intPct = (interest / totalPaid) * 100;
-  const lcW = (CW - 8) / 3;
-  kpiTile(M, y, lcW, kpiH, 'Principal repaid', fmt$(r.inp.loan), 'The original loan amount.', NAVY);
-  kpiTile(M + lcW + 4, y, lcW, kpiH, 'Total interest', fmt$(interest), intPct.toFixed(1) + '% of total outlay', GOLD);
-  kpiTile(M + (lcW + 4) * 2, y, lcW, kpiH, 'Total paid back', fmt$(totalPaid), 'Principal + interest, undiscounted', GREEN);
-  y += kpiH + 6;
+  y = sectionHeader(y, 'Cost horizons',
+    'What you\'ll pay before you refinance.',
+    'Most SG borrowers refinance at lock-in expiry. These are realistic 2/3/5y horizons — not full ' + r.inp.tenure + 'y. Tenure stays as input; this just caps the cost analysis.');
+  const h2 = (r.horizon && r.horizon[2]) || { interest: 0, principal: 0, paid: 0, closingBalance: r.inp.loan };
+  const h3 = (r.horizon && r.horizon[3]) || h2;
+  const h5 = (r.horizon && r.horizon[5]) || h3;
+  const horizonItems = [
+    { label: '2y · Interest paid', value: fmt$(h2.interest), sub: 'Of ' + fmt$(h2.paid) + ' paid', color: GREEN },
+    { label: '3y · Interest paid', value: fmt$(h3.interest), sub: 'Of ' + fmt$(h3.paid) + ' paid', color: NAVY },
+    { label: '5y · Interest paid', value: fmt$(h5.interest), sub: 'Of ' + fmt$(h5.paid) + ' paid', color: AMBER },
+  ];
+  y = statGrid(M, y, CW, horizonItems) + 1;
+  const balanceItems = [
+    { label: '2y · Closing balance', value: fmt$(h2.closingBalance), sub: 'After 24 months', color: NAVY },
+    { label: '3y · Closing balance', value: fmt$(h3.closingBalance), sub: 'After 36 months', color: NAVY },
+    { label: '5y · Closing balance', value: fmt$(h5.closingBalance), sub: 'After 60 months', color: NAVY },
+  ];
+  y = statGrid(M, y, CW, balanceItems);
+  y += 6;
 
-  doc.setFont('helvetica','bold'); doc.setFontSize(8.5); setColor(INK);
-  doc.text('Where every $1 you pay back goes:', M, y); y += 4;
-  const segPrincipal = (r.inp.loan / totalPaid) * CW;
-  setFill(NAVY); doc.rect(M, y, segPrincipal, 10, 'F');
-  setFill(GOLD); doc.rect(M + segPrincipal, y, CW - segPrincipal, 10, 'F');
-  doc.setFont('helvetica','bold'); doc.setFontSize(8); setColor(CREAM);
-  doc.text('Principal · ' + (100-intPct).toFixed(1) + '%', M + 3, y + 6.5);
-  doc.text('Interest · ' + intPct.toFixed(1) + '%', M + segPrincipal + 3, y + 6.5);
-  y += 16;
-  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(MUTED);
-  const lcNote = intPct > 30
-    ? 'On a ' + r.inp.tenure + '-year tenure, interest makes up ' + intPct.toFixed(1) + '% of your total outlay. Refinancing every 2–3 years (when your lock-in expires) is the single biggest lever to bring this down.'
-    : 'Interest is ' + intPct.toFixed(1) + '% of your total outlay — relatively healthy. Keep an eye on lock-in expiry to ride future rate cuts.';
+  // Allocation bar — over the 5y window
+  const total5 = h5.paid > 0 ? h5.paid : (r.inp.loan + r.totalInterest);
+  const intShare5 = total5 > 0 ? (h5.interest / total5) * 100 : 0;
+  y = eyebrow(y, 'Allocation of every $1 in first 5 years');
+  const segPrincipal = total5 > 0 ? (h5.principal / total5) * CW : 0;
+  setFill(NAVY); doc.rect(M, y, segPrincipal, 7, 'F');
+  setFill(GOLD); doc.rect(M + segPrincipal, y, CW - segPrincipal, 7, 'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); setColor(CREAM);
+  doc.text('Principal · ' + (100-intShare5).toFixed(1) + '%', M + 3, y + 4.7);
+  doc.text('Interest · ' + intShare5.toFixed(1) + '%', M + segPrincipal + 3, y + 4.7);
+  y += 11;
+  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(MUTED);
+  const lcNote = intShare5 > 35
+    ? 'Over the first 5 years at ' + (r.bestRate*100).toFixed(2) + '%, interest takes ' + intShare5.toFixed(1) + '% of every dollar paid. Refinancing at year 2-3 (lock-in expiry) is the single biggest lever to bring this down.'
+    : 'Interest is ' + intShare5.toFixed(1) + '% of total outlay over 5y — relatively healthy. Re-shop rates at lock-in expiry to keep it that way.';
   doc.text(doc.splitTextToSize(lcNote, CW), M, y);
 
-  // ═══════════════════ PAGE 7 — UPFRONT or REFI ═══════════════════
+  // ═══════════════════ PAGE 8 — UPFRONT or REFI ═══════════════════
   if (!isRefi) {
     y = pageChrome('Upfront Costs · Funds');
-    y = sectionHeader(y, 'Upfront costs', 'What you need at completion.',
+    y = sectionHeader(y, 'Upfront costs',
+      'What you need at completion.',
       'Calculated using IRAS BSD/ABSD rates effective 27 Apr 2023 and MAS LTV rules.');
-    const upfrontRows = [
-      { cells: [
-          { text: 'Down payment · ' + ((1-ltvPct)*100).toFixed(1) + '% of price', font: 'bold' },
-          { text: fmt$(downPayment), font: 'bold' },
-        ]},
-      { cells: ['  Min cash (5% of price)', fmt$(minCashRequired)] },
-      { cells: ['  Balance via CPF OA or cash', fmt$(cpfPortion)] },
-      { cells: ['Buyer\'s Stamp Duty (BSD) · 1–6% tiered', fmt$(bsd)] },
-      { cells: ['Additional Buyer\'s Stamp Duty · ' + absdRateLabel + ' (' + buyerDesc + ')', fmt$(absd)] },
-      { cells: ['Legal fees', fmt$(legalFee)] },
-      { cells: ['Valuation fee', fmt$(valuationFee)] },
-      { cells: [
-          { text: 'Total upfront required', font: 'bold' },
-          { text: fmt$(upfrontTotal), font: 'bold' },
-        ], _highlight: true, _highlightColor: GOLD_TINT },
-    ];
-    y = table(['Cost item', 'Amount'], upfrontRows, { y: y, widths: [CW - 50, 50] });
-    y += 8;
 
-    doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
-    doc.text('Cash vs CPF allocation', M, y); y += 5;
-    setFill(SOFT_BG); doc.rect(M, y, CW, 24, 'F'); setDraw(BORDER); doc.rect(M, y, CW, 24);
-    doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(MUTED);
-    doc.text('CASH NEEDED (MIN)', M + 4, y + 6);
-    doc.text('CPF OA NEEDED', M + CW/2 + 4, y + 6);
-    doc.setFont('times','normal'); doc.setFontSize(15); setColor(INK);
-    doc.text(fmt$(upfrontMinCash), M + 4, y + 18);
-    doc.text(fmt$(upfrontMinCPF), M + CW/2 + 4, y + 18);
-    setDraw(BORDER); doc.line(M + CW/2, y + 4, M + CW/2, y + 20);
-    y += 30;
+    // CPF/Cash allocation per cost line (vasu-style)
+    // Allocation rules:
+    //  - Down payment: 5% min cash, balance via CPF OA (capped at user's available CPF)
+    //  - BSD/ABSD: payable from CPF OA reimbursement, but timing means cash usually upfront
+    //  - Legal: payable from CPF OA
+    //  - Valuation: cash only
+    const cpfAvail = cpfOA || 0;
+    let cpfRemaining = cpfAvail;
+    const cpfDpAlloc = Math.min(cpfPortion, cpfRemaining); cpfRemaining -= cpfDpAlloc;
+    const cashDpAlloc = downPayment - cpfDpAlloc;
+    // BSD: assume reimbursed from CPF after completion (typical practice if CPF available); else cash
+    const cpfBsdAlloc = Math.min(bsd, cpfRemaining); cpfRemaining -= cpfBsdAlloc;
+    const cashBsdAlloc = bsd - cpfBsdAlloc;
+    // ABSD: same pattern
+    const cpfAbsdAlloc = Math.min(absd, cpfRemaining); cpfRemaining -= cpfAbsdAlloc;
+    const cashAbsdAlloc = absd - cpfAbsdAlloc;
+    // Legal: payable from CPF OA
+    const cpfLegalAlloc = Math.min(legalFee, cpfRemaining); cpfRemaining -= cpfLegalAlloc;
+    const cashLegalAlloc = legalFee - cpfLegalAlloc;
+    // Valuation: cash only
+    const cashValAlloc = valuationFee;
+    const totalCpfUsed = cpfDpAlloc + cpfBsdAlloc + cpfAbsdAlloc + cpfLegalAlloc;
+    const totalCashOut = cashDpAlloc + cashBsdAlloc + cashAbsdAlloc + cashLegalAlloc + cashValAlloc;
+
+    const upfrontRows = [];
+    upfrontRows.push({ cells: [
+      { text: 'Down payment · ' + ((1-ltvPct)*100).toFixed(1) + '% of price', font: 'bold' },
+      { text: fmt$(downPayment), font: 'bold' },
+      { text: '5% cash + balance', color: MUTED },
+      { text: fmt$(cpfDpAlloc), color: cpfDpAlloc > 0 ? GREEN_DK : MUTED },
+      { text: fmt$(cashDpAlloc), font: 'bold' },
+    ]});
+    upfrontRows.push({ cells: [
+      'Buyer\'s Stamp Duty (BSD) · 1–6%',
+      fmt$(bsd),
+      { text: 'Reimburse from CPF', color: MUTED },
+      { text: fmt$(cpfBsdAlloc), color: cpfBsdAlloc > 0 ? GREEN_DK : MUTED },
+      fmt$(cashBsdAlloc),
+    ]});
+    upfrontRows.push({ cells: [
+      'Additional BSD · ' + absdRateLabel + ' (' + buyerDesc + ')',
+      fmt$(absd),
+      { text: 'Reimburse from CPF', color: MUTED },
+      { text: fmt$(cpfAbsdAlloc), color: cpfAbsdAlloc > 0 ? GREEN_DK : MUTED },
+      fmt$(cashAbsdAlloc),
+    ]});
+    upfrontRows.push({ cells: [
+      'Legal fees',
+      fmt$(legalFee),
+      { text: 'CPF OA payable', color: MUTED },
+      { text: fmt$(cpfLegalAlloc), color: cpfLegalAlloc > 0 ? GREEN_DK : MUTED },
+      fmt$(cashLegalAlloc),
+    ]});
+    upfrontRows.push({ cells: [
+      'Valuation fee',
+      fmt$(valuationFee),
+      { text: 'Cash only', color: MUTED },
+      { text: '—', color: MUTED },
+      fmt$(cashValAlloc),
+    ]});
+    upfrontRows.push({ cells: [
+      { text: 'Total', font: 'bold' },
+      { text: fmt$(upfrontTotal), font: 'bold' },
+      { text: '', color: MUTED },
+      { text: fmt$(totalCpfUsed), font: 'bold', color: GREEN_DK },
+      { text: fmt$(totalCashOut), font: 'bold' },
+    ], _highlight: true, _highlightColor: GOLD_TINT });
+    y = table(['Cost item', 'Amount', 'Method', 'From CPF OA', 'Cash outlay'],
+      upfrontRows, { y: y, widths: [60, 26, 36, 26, 26] });
+    y += 7;
+
+    // Cash vs CPF — single split bar (driven by per-line allocation)
+    y = eyebrow(y, 'Cash vs CPF allocation · upfront');
+    const allocTotal = totalCpfUsed + totalCashOut;
+    const cashSeg = allocTotal > 0 ? (totalCashOut / allocTotal) * CW : CW;
+    const cpfSeg = CW - cashSeg;
+    setFill(NAVY); doc.rect(M, y, cashSeg, 8, 'F');
+    setFill([180, 140, 50]); doc.rect(M + cashSeg, y, cpfSeg, 8, 'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(7.5); setColor(CREAM);
+    doc.text('CASH ' + fmt$(totalCashOut) + (allocTotal > 0 ? '  ·  ' + ((totalCashOut/allocTotal)*100).toFixed(0) + '%' : ''), M + 3, y + 5.3);
+    if (totalCpfUsed > 0) doc.text('CPF OA ' + fmt$(totalCpfUsed) + '  ·  ' + ((totalCpfUsed/allocTotal)*100).toFixed(0) + '%', M + cashSeg + 3, y + 5.3);
+    y += 12;
 
     if (cpfOA > 0 || cashOnHand > 0) {
-      y = sectionHeader(y, 'Your funds position', totalShortfall === 0 ? 'You\'re fully covered.' : 'Shortfall of ' + fmt$(totalShortfall) + '.',
+      y = sectionHeader(y, 'Funds position',
+        totalShortfall === 0 ? 'You\'re fully covered.' : 'Shortfall of ' + fmt$(totalShortfall) + '.',
         'Based on the CPF OA & cash on hand you provided.');
       const fundRows = [
         { cells: ['Cash on hand', fmt$(cashOnHand)] },
@@ -4219,20 +5400,30 @@ function buildReportPdf(r, lead) {
           ]},
         { cells: [
             { text: 'TOTAL POSITION', font: 'bold' },
-            { text: (totalShortfall === 0 ? 'Fully covered' : 'Need additional ' + fmt$(totalShortfall)), font: 'bold', color: totalShortfall === 0 ? GREEN : RED }
+            { text: (totalShortfall === 0 ? 'Fully covered' : 'Need ' + fmt$(totalShortfall) + ' more'), font: 'bold', color: totalShortfall === 0 ? GREEN : RED }
           ], _highlight: true, _highlightColor: totalShortfall === 0 ? GREEN_SOFT : RED_SOFT },
       ];
       y = table(['Item', 'Amount'], fundRows, { y: y, widths: [CW - 60, 60] });
     }
   } else {
     y = pageChrome('Refinance Comparison');
-    y = sectionHeader(y, 'Refinance comparison', 'Your current loan vs the cheapest new package.',
-      'Savings projected over the new lock-in period.');
+    y = sectionHeader(y, 'Refinance comparison',
+      'Your current loan vs the cheapest new package.',
+      'Savings projected over the new lock-in period. Service is free — banks pay our referral fee.');
     const curMonthly = pmt(r.inp.loan, r.inp.currentRate || 0.04, r.inp.tenure);
     const newMonthly = sel.monthly;
     const monthSave = curMonthly - newMonthly;
     const lockMonths = (sel.lockInYears || 2) * 12;
     const lockSavings = monthSave * lockMonths;
+    // Side-by-side header strip
+    const refiItems = [
+      { label: 'Current rate', value: ((r.inp.currentRate||0)*100).toFixed(2) + '%', sub: 'Your input', color: INK },
+      { label: 'New rate', value: sel.rate.toFixed(2) + '%', sub: sel.bank + ' · ' + sel.pkg, color: GREEN },
+      { label: 'Monthly saving', value: fmt$(monthSave), sub: monthSave > 0 ? 'Per month' : 'No saving', color: monthSave > 0 ? GREEN : RED },
+      { label: 'Lock-in saving', value: fmt$(lockSavings), sub: 'Over ' + (sel.lockInYears||2) + 'y', color: lockSavings > 0 ? GREEN : RED },
+    ];
+    y = statGrid(M, y, CW, refiItems);
+    y += 4;
     const refiRows = [
       { cells: ['Outstanding loan', fmt$(r.inp.loan)] },
       { cells: ['Remaining tenure', r.inp.tenure + ' years'] },
@@ -4252,15 +5443,16 @@ function buildReportPdf(r, lead) {
     y = table(['Item','Amount'], refiRows, { y: y, widths: [CW - 60, 60] });
   }
 
-  // ═══════════════════ PAGE 8 — AMORTISATION ═══════════════════
-  y = pageChrome('Amortisation Schedule');
-  y = sectionHeader(y, 'Amortisation schedule', 'Year-by-year — at your best rate.',
-    'How your loan unwinds. Principal payments grow each year while interest shrinks.');
+  // ═══════════════════ PAGE 9 — AMORTISATION (realistic refi window + CPF) ═══════════════════
+  y = pageChrome('Amortisation · Refi Window');
+  y = sectionHeader(y, 'Amortisation · first 5 years',
+    'Realistic refinance window — not full ' + r.inp.tenure + 'y.',
+    'Tenure stays as input (drives monthly payment). This page focuses on the years that actually matter — most SG borrowers refinance at year 2 or 3 lock-in expiry.');
 
   const rateY = r.bestRate;
   let bal = r.inp.loan;
   const annMon = pmt(r.inp.loan, rateY, r.inp.tenure);
-  const schedule = [];
+  const fullSchedule = [];
   for (let yr = 1; yr <= r.inp.tenure; yr++) {
     let yearInt = 0, yearPrin = 0;
     for (let m = 0; m < 12; m++) {
@@ -4269,68 +5461,130 @@ function buildReportPdf(r, lead) {
       const p = annMon - i;
       yearInt += i; yearPrin += p; bal -= p;
     }
-    schedule.push({ yr: yr, payment: annMon * 12, interest: yearInt, principal: yearPrin, balance: Math.max(0, bal) });
+    fullSchedule.push({ yr: yr, payment: annMon * 12, interest: yearInt, principal: yearPrin, balance: Math.max(0, bal) });
   }
-  const half = Math.ceil(schedule.length / 2);
-  const left = schedule.slice(0, half);
-  const right = schedule.slice(half);
+  const schedule = fullSchedule.slice(0, Math.min(5, r.inp.tenure));
 
-  function amortTable(rowsX, x0, w) {
-    const widths = [10, w * 0.22, w * 0.22, w * 0.22, w * 0.34 - 10];
-    const headers = ['Yr', 'Payment', 'Interest', 'Principal', 'Closing bal'];
-    setFill(NAVY); doc.rect(x0, y, w, 6, 'F');
-    doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(CREAM);
-    let cx = x0;
-    headers.forEach(function(h, i){
-      const align = i === 0 ? 'left' : 'right';
-      const tx = align==='right' ? cx + widths[i] - 2 : cx + 2;
-      doc.text(h, tx, y + 4, { align: align });
-      cx += widths[i];
-    });
-    let yy = y + 6;
-    rowsX.forEach(function(s, ri){
-      if (ri % 2 === 1) { setFill(SOFT_BG); doc.rect(x0, yy, w, 5, 'F'); }
-      doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(INK);
-      cx = x0;
-      const cs = [String(s.yr), fmt$(s.payment), fmt$(s.interest), fmt$(s.principal), fmt$(s.balance)];
-      cs.forEach(function(c, i){
-        const align = i === 0 ? 'left' : 'right';
-        const tx = align==='right' ? cx + widths[i] - 2 : cx + 2;
-        doc.text(c, tx, yy + 3.6, { align: align });
-        cx += widths[i];
-      });
-      yy += 5;
-    });
-    return yy;
-  }
-  const colW = (CW - 4) / 2;
-  const yLeft = amortTable(left, M, colW);
-  const yRight = right.length ? amortTable(right, M + colW + 4, colW) : y + 6;
-  y = Math.max(yLeft, yRight) + 6;
-  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(MUTED);
-  doc.text('Schedule assumes the best-rate package and constant monthly payments.', M, y);
+  // Curve over full tenure with markers at Y2/Y3/Y5
+  y = eyebrow(y, 'Amortisation curve · full tenure with horizon markers');
+  const chartH = 30;
+  const chartTop = y;
+  const balSeries = [{x: 0, y: r.inp.loan}].concat(
+    fullSchedule.map(function(s, i){ return { x: i + 1, y: s.balance }; })
+  );
+  let cumIntF = 0;
+  const intSeries = [{x: 0, y: 0}].concat(
+    fullSchedule.map(function(s, i){ cumIntF += s.interest; return { x: i + 1, y: cumIntF }; })
+  );
+  let cumPrF = 0;
+  const prSeries = [{x: 0, y: 0}].concat(
+    fullSchedule.map(function(s, i){ cumPrF += s.principal; return { x: i + 1, y: cumPrF }; })
+  );
+  lineChart(M, chartTop, CW, chartH, [
+    { points: balSeries, color: NAVY, width: 0.7 },
+    { points: prSeries, color: GREEN, width: 0.5 },
+    { points: intSeries, color: AMBER, width: 0.5 },
+  ], { xMax: r.inp.tenure, yMax: r.inp.loan, gridY: 4 });
+  // Vertical markers at Y2 / Y3 / Y5
+  setDraw(GOLD); doc.setLineWidth(0.4);
+  [2, 3, 5].forEach(function(yr){
+    if (yr <= r.inp.tenure) {
+      const xMark = M + (yr / r.inp.tenure) * CW;
+      doc.line(xMark, chartTop, xMark, chartTop + chartH);
+      doc.setFont('helvetica','bold'); doc.setFontSize(5.5); setColor(GOLD);
+      doc.text('Y' + yr, xMark + 0.5, chartTop - 0.5);
+    }
+  });
+  doc.setLineWidth(0.15);
+  // Axis labels
+  doc.setFont('helvetica','normal'); doc.setFontSize(5.5); setColor(MUTED);
+  doc.text('Y0', M, chartTop + chartH + 3);
+  doc.text('Y' + r.inp.tenure, M + CW, chartTop + chartH + 3, { align: 'right' });
+  doc.text(fmt$(r.inp.loan), M - 1, chartTop + 2, { align: 'right' });
+  doc.text('$0', M - 1, chartTop + chartH + 1, { align: 'right' });
+  // Legend
+  const legY = chartTop + chartH + 7;
+  setFill(NAVY); doc.rect(M, legY - 1.4, 4, 1.2, 'F');
+  doc.setFont('helvetica','normal'); doc.setFontSize(6.5); setColor(INK);
+  doc.text('Outstanding balance', M + 6, legY);
+  setFill(GREEN); doc.rect(M + 50, legY - 1.4, 4, 1.2, 'F');
+  doc.text('Cumulative principal repaid', M + 56, legY);
+  setFill(AMBER); doc.rect(M + 110, legY - 1.4, 4, 1.2, 'F');
+  doc.text('Cumulative interest paid', M + 116, legY);
+  setFill(GOLD); doc.rect(M + 165, legY - 1.4, 4, 1.2, 'F');
+  doc.text('Refi horizons', M + 171, legY);
+  y = legY + 7;
 
-  // ═══════════════════ PAGE 9 — OPTIMISATION + NEXT STEPS ═══════════════════
+  // First-5-year detail with CPF inflow + cash outlay (Vasu-style)
+  // Model: assume each borrower contributes ~23% of capped-OW (Ordinary Wage cap S$7,400/mo) to CPF OA
+  //        Annual CPF inflow per borrower = min(fixedMonthly, 7400) × 0.23 × 12
+  const annualCpfInflow = (r.inp.borrowerIncomes || []).reduce(function(s, fx){
+    const cappedOW = Math.min(fx || 0, 7400);
+    return s + (cappedOW * 0.23 * 12);
+  }, 0);
+  let cpfBal = r.inp.cpfOA || 0;
+  const amortRows = schedule.map(function(s){
+    const annualPay = s.payment;
+    cpfBal += annualCpfInflow;
+    const fromCpfYr = Math.min(cpfBal, annualPay);
+    cpfBal -= fromCpfYr;
+    const cashYr = annualPay - fromCpfYr;
+    return {
+      cells: [
+        'Y' + s.yr,
+        fmt$(s.balance),
+        fmt$(s.interest),
+        fmt$(s.principal),
+        fmt$(annualPay),
+        fmt$(cpfBal + fromCpfYr),
+        { text: fmt$(fromCpfYr), color: fromCpfYr > 0 ? GREEN_DK : MUTED },
+        { text: fmt$(cashYr), font: 'bold' },
+      ],
+    };
+  });
+  // Cumulative summary rows (only mortgage-side; CPF logic above)
+  const sum2 = fullSchedule.slice(0, Math.min(2, r.inp.tenure)).reduce(function(a,s){return {p:a.p+s.payment, i:a.i+s.interest, pr:a.pr+s.principal, b:s.balance};}, {p:0,i:0,pr:0,b:r.inp.loan});
+  const sum3 = fullSchedule.slice(0, Math.min(3, r.inp.tenure)).reduce(function(a,s){return {p:a.p+s.payment, i:a.i+s.interest, pr:a.pr+s.principal, b:s.balance};}, {p:0,i:0,pr:0,b:r.inp.loan});
+  const sum5 = fullSchedule.slice(0, Math.min(5, r.inp.tenure)).reduce(function(a,s){return {p:a.p+s.payment, i:a.i+s.interest, pr:a.pr+s.principal, b:s.balance};}, {p:0,i:0,pr:0,b:r.inp.loan});
+  amortRows.push({ cells: [{text:'Σ Y2', font:'bold'}, {text:fmt$(sum2.b), font:'bold'}, {text:fmt$(sum2.i), font:'bold'}, {text:fmt$(sum2.pr), font:'bold'}, {text:fmt$(sum2.p), font:'bold'}, '', '', ''], _highlight: true, _highlightColor: GOLD_TINT });
+  amortRows.push({ cells: [{text:'Σ Y3', font:'bold'}, {text:fmt$(sum3.b), font:'bold'}, {text:fmt$(sum3.i), font:'bold'}, {text:fmt$(sum3.pr), font:'bold'}, {text:fmt$(sum3.p), font:'bold'}, '', '', ''], _highlight: true, _highlightColor: GOLD_TINT });
+  amortRows.push({ cells: [{text:'Σ Y5', font:'bold'}, {text:fmt$(sum5.b), font:'bold'}, {text:fmt$(sum5.i), font:'bold'}, {text:fmt$(sum5.pr), font:'bold'}, {text:fmt$(sum5.p), font:'bold'}, '', '', ''], _highlight: true, _highlightColor: GOLD_TINT });
+  y = eyebrow(y, 'Year-by-year · with CPF inflow & cash outlay (first 5y)');
+  y = table(['Y', 'Loan bal.', 'Interest yr', 'Principal yr', 'Annual pay', 'CPF avail.', 'From CPF', 'Cash outlay'],
+    amortRows, { y: y, widths: [10, 26, 22, 22, 22, 26, 22, CW - 150], rowH: 5.5 });
+  y += 4;
+  doc.setFont('helvetica','normal'); doc.setFontSize(6.5); setColor(MUTED);
+  const cpfNote = annualCpfInflow > 0
+    ? 'CPF inflow assumes ' + fmt$(annualCpfInflow) + '/yr OA contribution (23% of capped wages, all borrowers). Initial CPF OA: ' + fmt$(r.inp.cpfOA || 0) + '. From-CPF row uses available balance to pay annual installments; remainder = cash outlay.'
+    : 'CPF inflow not modelled — enter total CPF OA in form to see year-by-year CPF deduction. Cash outlay = full annual payment in this scenario.';
+  doc.text(doc.splitTextToSize(cpfNote, CW), M, y);
+
+  // ═══════════════════ PAGE 10 — OPTIMISATION + NEXT STEPS ═══════════════════
   y = pageChrome('Optimisation · Next Steps');
-  y = sectionHeader(y, 'Optimisation playbook', 'Concrete levers to lower your monthly or qualify for more.',
-    'Each lever is run through the same MAS 4% stress floor.');
+  y = sectionHeader(y, 'Optimisation playbook',
+    'Concrete levers to lower your monthly or qualify for more.',
+    'Each lever is run through the same MAS 4% stress floor. Pick the ones that match your goal — speak to us for tailored advice.');
 
   const tips = [];
   const tenureCap = r.propertyTenureCap || (r.inp.propertyType === 'hdb' ? 30 : 35);
   if (r.inp.tenure < tenureCap) {
     const newT = Math.min(tenureCap, r.inp.tenure + 5);
-    const newM = pmt(r.inp.loan, r.bestRate, newT);
-    tips.push({
-      title: 'Stretch tenure to ' + newT + ' years',
-      body: 'Drops your monthly to ' + fmt$(newM) + ' (–' + fmt$(r.monthlyBest - newM) + '/mo at ' + (r.bestRate*100).toFixed(2) + '%). Trade-off: more total interest paid.',
-    });
+    if (newT > r.inp.tenure) {
+      const newM = pmt(r.inp.loan, r.bestRate, newT);
+      tips.push({
+        title: 'Stretch tenure to ' + newT + ' years',
+        body: 'Drops your monthly to ' + fmt$(newM) + ' at ' + (r.bestRate*100).toFixed(2) + '%. Trade-off: more total interest paid over the life of the loan.',
+        impact: '−' + fmt$(r.monthlyBest - newM) + '/mo',
+      });
+    }
   }
   if (r.inp.tenure > 15) {
     const newT = r.inp.tenure - 5;
     const newM = pmt(r.inp.loan, r.bestRate, newT);
     tips.push({
       title: 'Shorten tenure to ' + newT + ' years',
-      body: 'Monthly rises to ' + fmt$(newM) + ', but you save substantial total interest. Use this if monthly headroom is comfortable.',
+      body: 'Monthly rises to ' + fmt$(newM) + ' but you save substantial total interest. Use this if monthly headroom is comfortable.',
+      impact: '+' + fmt$(newM - r.monthlyBest) + '/mo',
     });
   }
   if (tdsrFail && r.minIncomePass > r.inp.income) {
@@ -4338,6 +5592,7 @@ function buildReportPdf(r, lead) {
     tips.push({
       title: 'Increase qualifying income by ' + fmt$(gap) + '/mo',
       body: 'A pledge of ' + fmt$(Math.ceil(gap*48)) + ' (counted at 100%/48 mths) or show-funds of ' + fmt$(Math.ceil(gap*48/0.30)) + ' (30%/48 mths) gets you there under MAS rules.',
+      impact: 'Unlocks loan',
     });
   }
   if (tdsrFail && r.maxLoanAffordable < r.inp.loan) {
@@ -4345,65 +5600,90 @@ function buildReportPdf(r, lead) {
     tips.push({
       title: 'Reduce loan by ' + fmt$(reduce),
       body: 'Borrow ' + fmt$(r.maxLoanAffordable) + ' instead — fits inside the ' + (r.msrApplies?'MSR':'TDSR') + ' cap. Top up the difference with cash/CPF.',
+      impact: '−' + fmt$(reduce) + ' loan',
     });
   }
   if (tdsrFail && !r.msrApplies && r.inp.debts > 0) {
     tips.push({
       title: 'Pay down existing debts',
-      body: 'You\'re carrying ' + fmt$(r.inp.debts) + '/mo. Every $1 of debt cleared = $1 of mortgage capacity gained.',
+      body: 'You\'re carrying ' + fmt$(r.inp.debts) + '/mo in monthly debt. Every $1 of debt cleared = $1 of mortgage capacity gained.',
+      impact: '−' + fmt$(r.inp.debts) + '/mo debt',
     });
   }
+  // Always include a refinance lever (was conditionally skipped before)
   if (sel.lockInYears) {
     tips.push({
-      title: 'Plan for refinance at year ' + sel.lockInYears,
+      title: 'Plan refinance at year ' + sel.lockInYears,
       body: 'Set a reminder ~4 months before lock-in expiry. Refinancing every 2–3 years is the biggest single lever to lower lifetime interest.',
+      impact: 'Y' + sel.lockInYears + ' action',
+    });
+  } else {
+    tips.push({
+      title: 'Refinance opportunistically (no lock-in)',
+      body: 'Your selected package has no lock-in. You can switch packages or banks any time without penalty when better rates surface.',
+      impact: 'Anytime',
     });
   }
 
   if (!tips.length) {
-    setFill(GREEN_SOFT); doc.rect(M, y, CW, 22, 'F'); setFill(GREEN); doc.rect(M, y, 1.8, 22, 'F');
-    doc.setFont('helvetica','bold'); doc.setFontSize(11); setColor(GREEN_DK);
-    doc.text('You\'re already in a strong position', M + 6, y + 9);
-    doc.setFont('helvetica','normal'); doc.setFontSize(9); setColor(INK_2);
-    doc.text('No obvious levers — focus on locking in your selected rate and setting a refinance reminder.', M + 6, y + 16);
-    y += 28;
+    y = calloutBlock(y, GREEN, GREEN_SOFT,
+      'You\'re already in a strong position',
+      'No obvious levers — focus on locking in your selected rate and setting a refinance reminder.');
   } else {
+    // Levers as a banker table
+    const leverRows = tips.slice(0, 6).map(function(t, i){
+      return {
+        cells: [
+          pad2(i + 1),
+          { text: t.title, font: 'bold' },
+          { text: t.impact, color: NAVY },
+        ],
+      };
+    });
+    y = table(['#','Lever','Impact'], leverRows, { y: y, widths: [10, CW - 50, 40], rowH: 6 });
+    y += 4;
+    // Detail body for each lever
     tips.slice(0, 6).forEach(function(t, i){
-      setFill(SURFACE); doc.rect(M, y, CW, 18, 'F');
-      setDraw(BORDER); doc.rect(M, y, CW, 18);
-      setFill(GOLD); doc.rect(M, y, 1.5, 18, 'F');
-      setFill(GOLD); doc.circle(M + 9, y + 9, 4, 'F');
-      doc.setFont('helvetica','bold'); doc.setFontSize(9); setColor(CREAM);
-      doc.text(String(i+1), M + 9, y + 10.5, { align: 'center' });
-      doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
-      doc.text(t.title, M + 16, y + 7);
-      doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(INK_2);
-      doc.text(doc.splitTextToSize(t.body, CW - 22), M + 16, y + 12);
-      y += 21;
+      doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(GOLD);
+      doc.text(pad2(i + 1), M, y + 2.8);
+      doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(INK_2);
+      const lines = doc.splitTextToSize(t.body, CW - 8);
+      doc.text(lines, M + 7, y + 2.8);
+      y += lines.length * 3.4 + 2;
     });
   }
   y += 4;
 
-  if (y < H - 80) {
+  if (y < H - 70) {
     y = sectionHeader(y, 'Next steps', 'Three things to do this week.', '');
-    const steps = [
-      ['Lock in your rate.', 'WhatsApp us with your preferred package and we handle the bank application end-to-end.'],
-      ['Confirm your IPA / OTP timeline.', 'We coordinate with the bank, conveyancing lawyer, and CPF for a smooth completion.'],
-      ['Set a refinance reminder.', 'For ' + (sel.lockInYears||2) + ' year' + ((sel.lockInYears||2)>1?'s':'') + ' from completion. We\'ll reach out 6 weeks before — free service.'],
+    const stepsRows = [
+      { cells: [
+          '01',
+          { text: 'Lock in your rate', font: 'bold' },
+          'WhatsApp us with your preferred package — we handle the bank application end-to-end.',
+        ]},
+      { cells: [
+          '02',
+          { text: 'Confirm IPA / OTP timeline', font: 'bold' },
+          'We coordinate with the bank, conveyancing lawyer, and CPF for a smooth completion.',
+        ]},
+      { cells: [
+          '03',
+          { text: 'Set a refinance reminder', font: 'bold' },
+          'For ' + (sel.lockInYears||2) + ' year' + ((sel.lockInYears||2)>1?'s':'') + ' from completion. We\'ll reach out 6 weeks before — free service.',
+        ]},
     ];
-    steps.forEach(function(s, i){
-      doc.setFont('times','normal'); doc.setFontSize(20); setColor(GOLD);
-      doc.text(String(i+1), M, y + 5);
-      doc.setFont('helvetica','bold'); doc.setFontSize(10); setColor(INK);
-      doc.text(s[0], M + 10, y + 1);
-      doc.setFont('helvetica','normal'); doc.setFontSize(8.5); setColor(INK_2);
-      doc.text(doc.splitTextToSize(s[1], CW - 12), M + 10, y + 6);
-      y += 14;
+    y = table(['#','Step','Detail'], stepsRows, {
+      y: y, widths: [10, 50, CW - 60], rowH: 7,
+      aligns: ['left','left','left']
     });
   }
 
-  const discY = H - 32;
-  doc.setFont('helvetica','normal'); doc.setFontSize(6.5); setColor(FAINT);
+  // Disclaimer (compressed, hairline above)
+  const discY = H - 30;
+  setDraw(BORDER); doc.setLineWidth(0.15);
+  doc.line(M, discY - 4, W - M, discY - 4);
+  doc.setFont('helvetica','normal'); doc.setFontSize(5.5); setColor(FAINT);
   const disc = 'Indicative figures only as of ' + dateStr + '. Subject to bank credit assessment, valuation, and prevailing IRAS / MAS / HDB rules. Stress-test rate of 4% is the MAS minimum for residential TDSR / MSR. ABSD calculated using IRAS rates effective 27 April 2023: SC 1st prop 0%, SC 2nd 20%, SC 3rd+ 30%, PR 1st 5%, PR 2nd+ 30%, Foreigner 60%. BSD calculated using IRAS tiered rates. Married SC + SC couples buying matrimonial home jointly may qualify for ABSD remission — confirm with us. This report does not constitute financial advice; for personalised guidance speak to a Nexus mortgage broker. Banks pay our referral fee — service is free to you.';
   doc.text(doc.splitTextToSize(disc, CW), M, discY);
 
@@ -4441,10 +5721,19 @@ function applyLockState() {
   }
 }
 
-calcBtn.addEventListener('click', () => {
+calcBtn.addEventListener('click', async () => {
   const inp = getInputs();
   if (!inp.loan || !inp.income || !inp.tenure) {
     showToast('Please fill in loan, income and tenure.', 'error'); return;
+  }
+  // If rates.json hasn't loaded yet (or failed), retry now so first report uses real data.
+  if (!RATES_LOAD_OK) {
+    calcBtn.disabled = true;
+    const original = calcBtn.innerHTML;
+    calcBtn.innerHTML = 'Loading rates…';
+    try { await loadRates(); } catch (_) {}
+    calcBtn.disabled = false;
+    calcBtn.innerHTML = original;
   }
   lastResult = computeReport(inp);
   reportWrap.style.display = '';
@@ -4683,6 +5972,94 @@ loadRates();
 
 /* ============ Wire rate selector tabs ============ */
 wireRateSelectorTabs();
+
+/* ============ Live refi savings dashboard ============ */
+function renderRefiDashboard() {
+  if (mode !== 'refinance') return;
+  const balance = nVal('r-outstanding') || 0;
+  const curR = (+($('r-current-rate').value) || 0) / 100;
+  const newR = (+($('r-new-rate').value) || 0) / 100;
+  const tenure = nVal('r-tenure-left') || 0;
+  const switchCost = nVal('r-switching-cost') || 0;
+  const subsidy = nVal('r-subsidy') || 0;
+  const netCost = Math.max(0, switchCost - subsidy);
+
+  const moCur = (curR > 0 && tenure > 0 && balance > 0) ? pmt(balance, curR, tenure) : 0;
+  const moNew = (newR > 0 && tenure > 0 && balance > 0) ? pmt(balance, newR, tenure) : 0;
+  const moSave = moCur - moNew;
+  const totalSave = (moSave * 12 * tenure) - netCost;
+
+  // Net cost row
+  const netEl = $('r-net-cost');
+  if (netEl) netEl.textContent = '$' + Math.round(netCost).toLocaleString('en-SG');
+
+  // Helper formatters
+  const fmtCurrency = v => (v >= 0 ? 'S$' : '−S$') + Math.abs(Math.round(v)).toLocaleString('en-SG');
+  const fmtMo = v => 'S$' + Math.round(v).toLocaleString('en-SG');
+
+  // Summary band
+  const totalEl = $('refi-total');
+  if (totalEl) totalEl.textContent = (moSave > 0 || totalSave !== 0) ? fmtCurrency(totalSave) : '—';
+  const tlEl = $('refi-tenure-line');
+  if (tlEl) tlEl.textContent = tenure > 0 ? ('Over ' + tenure + ' yrs, after S$' + Math.round(netCost).toLocaleString('en-SG') + ' net switching cost.') : 'After deducting net switching cost.';
+
+  // 2/3/5y net savings
+  const netSavY = (yrs) => yrs <= tenure ? (moSave * 12 * yrs) - netCost : null;
+  const setVal = (id, v) => { const el = $(id); if (el) el.textContent = v == null ? '—' : fmtCurrency(v); };
+  setVal('refi-2y', netSavY(2));
+  setVal('refi-3y', netSavY(3));
+  setVal('refi-5y', netSavY(5));
+
+  // Break-even months
+  const beEl = $('refi-breakeven');
+  if (beEl) {
+    if (moSave <= 0 || netCost <= 0) beEl.textContent = moSave <= 0 ? '—' : 'Day 1';
+    else beEl.textContent = Math.ceil(netCost / moSave) + ' mo';
+  }
+
+  // Monthly + new monthly
+  const moSavEl = $('refi-monthly');
+  if (moSavEl) moSavEl.textContent = (moSave > 0 || moSave < 0) ? fmtCurrency(moSave) : '—';
+  const newMoEl = $('refi-new-mo');
+  if (newMoEl) newMoEl.textContent = moNew > 0 ? fmtMo(moNew) : '—';
+  const curMoEl = $('refi-curr-mo');
+  if (curMoEl) curMoEl.textContent = moCur > 0 ? fmtMo(moCur) : '—';
+
+  // Recommendation pill
+  const pill = $('refi-rec-pill');
+  if (pill) {
+    pill.style.display = 'inline-flex';
+    pill.classList.remove('go', 'maybe', 'no');
+    if (moSave > 0 && totalSave > 0 && (netCost === 0 || Math.ceil(netCost / moSave) <= 24)) {
+      pill.classList.add('go');
+      pill.textContent = '✓ Refinance recommended';
+    } else if (moSave > 0 && totalSave > 0) {
+      pill.classList.add('maybe');
+      pill.textContent = '◐ Marginal — consider timing';
+    } else if (moSave > 0 && totalSave <= 0) {
+      pill.classList.add('maybe');
+      pill.textContent = '◐ Switching cost eats savings';
+    } else if (moSave <= 0) {
+      pill.classList.add('no');
+      pill.textContent = '✗ New rate not lower';
+    } else {
+      pill.style.display = 'none';
+    }
+  }
+
+  // CTA panel
+  const cta = $('refi-cta-block');
+  if (cta) cta.style.display = (moSave > 0 && totalSave > 0) ? '' : 'none';
+}
+
+// Wire refi inputs to live-update dashboard
+['r-outstanding', 'r-current-rate', 'r-new-rate', 'r-tenure-left', 'r-switching-cost', 'r-subsidy'].forEach(id => {
+  const el = $(id);
+  if (!el) return;
+  el.addEventListener('input', renderRefiDashboard);
+});
+// Initial render (in case refi mode default)
+renderRefiDashboard();
 
 /* ============ Reveal on scroll ============ */
 const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.12 });
