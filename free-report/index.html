@@ -1959,7 +1959,7 @@ body::after {
         </div>
         <div style="margin-top:12px; padding:10px 14px; background:rgba(196,151,59,.08); border-left:3px solid var(--gold-500); border-radius:4px; font-size:12.5px; color:var(--ink-2); line-height:1.55;">
           <strong style="color:var(--navy-900); font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:10.5px;">IWAA</strong>
-          &nbsp;Income-Weighted Average Age. Each purchaser's age is weighted by their fixed-income share. Used by MAS to cap max tenure for full LTV: tenure + IWAA ≤ 65 (HDB) or 65 (private full LTV; 75 reduced LTV).
+          &nbsp;Income-Weighted Average Age. Each purchaser's age is weighted by their fixed-income share. MAS rule: tenure + IWAA ≤ 65 to keep 75% LTV. Above 65, MAS caps LTV at 55% — but the Affordability card below shows you the tradeoff so you can decide tenure vs LTV consciously.
         </div>
       </div>
 
@@ -3672,29 +3672,45 @@ function computeReport(inp) {
   const second = banks[1];
   const savingsVsSecond = (second ? second.lockInCost - banks[0].lockInCost : 0);
 
-  // IWAA-based tenure cap (full 75% LTV requires age + tenure ≤ 65)
-  // HDB bank loan: full LTV needs tenure ≤ 25; private: tenure ≤ 30
+  // IWAA-based tenure-cap WARNING (informational only — does NOT auto-drop LTV).
+  // If user wants full 75% LTV: tenure + IWAA must be ≤ 65. If exceeded, MAS will
+  // cap LTV at 55% only IF user chooses to keep that tenure. We surface as a
+  // tradeoff for the user to decide — don't silently drop to 55%.
   const iwaa = inp.iwaa;
   const isHdb = inp.propertyType === 'hdb';
   const propertyTenureCap = isHdb ? 25 : 30;
   const iwaaTenureCap = iwaa ? Math.max(0, Math.floor(65 - iwaa)) : null;
   const fullLtvCap = iwaaTenureCap !== null ? Math.min(propertyTenureCap, iwaaTenureCap) : propertyTenureCap;
   const ltvFull = inp.tenure <= fullLtvCap;
-  const ltvPct = ltvFull ? 75 : 55;
   const tenureExceedsIwaa = iwaaTenureCap !== null && inp.tenure > iwaaTenureCap;
+  // Regulatory LTV cap stays at 75% — DO NOT auto-drop. User picks tradeoff.
+  const ltvPct = 75;
+  // Max tenure user can take WITHOUT triggering LTV reduction
+  const maxTenureFor75Ltv = fullLtvCap;
 
-  // ===== AFFORDABILITY =====
-  // Max stress monthly the borrower can afford under 55% TDSR cap (after debts)
-  // Use stricter of TDSR (55%) and MSR (30% if HDB)
+  // ===== AFFORDABILITY — separate caps =====
+  // TDSR: total monthly debt servicing ≤ 55% of effective income
   const maxStressMonthlyTdsr = Math.max(0, inp.income * TDSR_CAP - inp.debts);
+  // MSR: mortgage-only servicing ≤ 30% (HDB/EC only)
   const maxStressMonthlyMsr  = msrApplies ? inp.income * MSR_CAP : Infinity;
+  // Whichever cap is stricter binds the loan
   const maxStressMonthly = Math.min(maxStressMonthlyTdsr, maxStressMonthlyMsr);
   const cappedBy = (msrApplies && maxStressMonthlyMsr < maxStressMonthlyTdsr) ? 'MSR' : 'TDSR';
-  // Max loan affordable at MAS 4% stress rate over chosen tenure
+  // Max loans at each cap (MAS 4% stress, current tenure)
+  const maxLoanTdsr = solveLoan(maxStressMonthlyTdsr, STRESS_RATE, inp.tenure);
+  const maxLoanMsr  = msrApplies ? solveLoan(maxStressMonthlyMsr, STRESS_RATE, inp.tenure) : null;
   const maxLoanAffordable = solveLoan(maxStressMonthly, STRESS_RATE, inp.tenure);
+  // LTV-binding loan caps (regulatory). Standard 75%; IF user keeps tenure > IWAA cap, MAS forces 55%.
+  const maxLoanAt75Ltv = (inp.price || 0) * 0.75;
+  const maxLoanAt55Ltv = (inp.price || 0) * 0.55;
+  const ltvAvailableForCurrentTenure = ltvFull ? 75 : 55;  // what MAS allows for THIS tenure (info only)
   // Purchase mode: use 75% LTV to translate loan back to a max price
-  const ltvForMax = (inp.propertyType === 'hdb') ? 0.75 : 0.75; // 75% standard LTV
-  const maxPurchasePrice = maxLoanAffordable / ltvForMax;
+  const maxPurchasePrice = maxLoanAffordable / 0.75;
+  // Min tenure to keep 75% LTV (drop tenure to this or lower)
+  const tenureForFullLtv = Math.min(propertyTenureCap, fullLtvCap);
+  // Failure-side surfacing: if TDSR/MSR fails, what LTV would the binding loan amount represent?
+  const effectiveLtvFromCaps = (inp.price > 0 && maxLoanAffordable > 0)
+    ? Math.round((maxLoanAffordable / inp.price) * 100 * 10) / 10 : null;
   // Down payment shortfall (purchase mode only)
   let downPaymentShortfall = null;
   let recommendedLoanReduction = null;
@@ -3721,10 +3737,9 @@ function computeReport(inp) {
   }
 
   // ===== EFFECTIVE LTV =====
-  // The regulatory LTV cap is 75% (or 55% if tenure exceeds IWAA). But when MSR/TDSR
-  // limits debt servicing, the AMOUNT they can borrow may be lower than the LTV cap allows.
-  // Effective LTV = min(regulatoryLTV, maxLoanAffordable / price) — this drives actual down payment.
-  let effectiveLtvPct = ltvPct;            // regulatory cap as default (already 75 or 55)
+  // Regulatory LTV cap stays at 75% (do NOT auto-drop). When MSR/TDSR caps the loan,
+  // the EFFECTIVE LTV may be lower — surface that to user as tradeoff, don't change the regulatory ceiling.
+  let effectiveLtvPct = ltvPct;            // user's regulatory cap (75% standard)
   let actualDownPayment = null;
   let actualLoan = inp.loan;
   if (inp.mode === 'purchase' && inp.price > 0) {
@@ -3732,6 +3747,13 @@ function computeReport(inp) {
     actualLoan = Math.min(regulatoryLoanCap, maxLoanAffordable);
     effectiveLtvPct = inp.price > 0 ? Math.round((actualLoan / inp.price) * 100 * 10) / 10 : ltvPct;
     actualDownPayment = Math.round(inp.price - actualLoan);
+  }
+  // What's the binding constraint? TDSR cap, MSR cap, or 75% LTV?
+  let bindingConstraint = 'LTV';
+  if (inp.mode === 'purchase' && inp.price > 0) {
+    if (maxLoanAffordable < (inp.price * 0.75)) {
+      bindingConstraint = (msrApplies && maxLoanMsr != null && maxLoanMsr < maxLoanTdsr) ? 'MSR' : 'TDSR';
+    }
   }
 
   // ===== OPTIMIZATION ENVELOPE =====
@@ -3765,7 +3787,9 @@ function computeReport(inp) {
     stressMonthly, tdsrUsage, msrUsage, tdsrPass, msrPass, msrApplies,
     refi, savingsVsSecond,
     iwaa, iwaaTenureCap, fullLtvCap, ltvFull, ltvPct, tenureExceedsIwaa,
-    propertyTenureCap,
+    propertyTenureCap, ltvAvailableForCurrentTenure, tenureForFullLtv, maxTenureFor75Ltv,
+    maxLoanTdsr, maxLoanMsr, maxLoanAt75Ltv, maxLoanAt55Ltv, maxStressMonthlyTdsr, maxStressMonthlyMsr,
+    bindingConstraint, effectiveLtvFromCaps,
     maxStressMonthly, maxLoanAffordable, maxPurchasePrice, cappedBy,
     downPaymentShortfall, recommendedLoanReduction,
     monthlyIncomeShortfall, pledgeNeeded, showNeeded,
@@ -3834,59 +3858,71 @@ function render(r) {
   if (r.inp.mode === 'purchase' && r.inp.income > 0 && r.inp.tenure > 0) {
     affordCard.style.display = '';
     const tdsrFail = !r.tdsrPass || (r.msrApplies && !r.msrPass);
+    const fmtN0 = v => fmt(Math.round(v || 0));
+    // Universal stat strip: show max loan at TDSR / MSR / 75% LTV / 55% LTV
+    const ltvAvail = r.ltvAvailableForCurrentTenure || 75;
+    const ltvNote = r.tenureExceedsIwaa
+      ? `Tenure ${r.inp.tenure}y + IWAA ${r.iwaa ? r.iwaa.toFixed(1) : '—'} > 65 → MAS allows max <strong>55% LTV</strong> at this tenure. Drop tenure to <strong>${r.tenureForFullLtv || r.fullLtvCap}y</strong> or shorter to keep <strong>75% LTV</strong>.`
+      : `Tenure ${r.inp.tenure}y + IWAA ${r.iwaa ? r.iwaa.toFixed(1) : '—'} ≤ 65 → full <strong>75% LTV</strong> available.`;
+    const cardsHtml = `
+      <div style="display:grid; grid-template-columns:1fr 1fr ${r.msrApplies ? '1fr ' : ''}1fr; gap:10px;">
+        <div style="padding:14px; background:white; border:1px solid var(--border); border-top:2px solid var(--navy-900); border-radius:4px;">
+          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:700;">Max loan · TDSR 55%</div>
+          <div class="console-display-num" style="font-size:22px;">$${fmtN0(r.maxLoanTdsr)}</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:6px; padding-top:6px; border-top:1px solid var(--border);">@ ${r.inp.tenure}y · MAS 4% stress</div>
+        </div>
+        ${r.msrApplies ? `
+        <div style="padding:14px; background:white; border:1px solid var(--border); border-top:2px solid var(--navy-900); border-radius:4px;">
+          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:700;">Max loan · MSR 30%</div>
+          <div class="console-display-num" style="font-size:22px;">$${fmtN0(r.maxLoanMsr)}</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:6px; padding-top:6px; border-top:1px solid var(--border);">HDB / EC mortgage cap</div>
+        </div>` : ''}
+        <div style="padding:14px; background:white; border:1px solid var(--border); border-top:2px solid var(--gold-500); border-radius:4px;">
+          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:700;">Max loan · 75% LTV</div>
+          <div class="console-display-num" style="font-size:22px; color:${ltvAvail >= 75 ? '#0B1C3A' : '#94A3B8'};">$${fmtN0(r.maxLoanAt75Ltv)}</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:6px; padding-top:6px; border-top:1px solid var(--border);">${ltvAvail >= 75 ? 'Standard MAS cap' : 'Need tenure ≤ ' + (r.tenureForFullLtv || r.fullLtvCap) + 'y'}</div>
+        </div>
+        <div style="padding:14px; background:white; border:1px solid var(--border); border-top:2px solid var(--gold-500); border-radius:4px;">
+          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:700;">Max loan · 55% LTV</div>
+          <div class="console-display-num" style="font-size:22px;">$${fmtN0(r.maxLoanAt55Ltv)}</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:6px; padding-top:6px; border-top:1px solid var(--border);">If tenure > IWAA ceiling</div>
+        </div>
+      </div>
+      <div style="font-size:12.5px; color:var(--ink-2); line-height:1.6; padding:10px 14px; background:rgba(196,151,59,.08); border-left:3px solid var(--gold-500); border-radius:4px;">
+        <strong style="color:var(--navy-900); font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:10.5px;">LTV Tradeoff</strong> &nbsp;${ltvNote}
+      </div>
+    `;
     if (tdsrFail) {
-      // FAIL: show shortfall + max loan
       affordCard.style.borderColor = 'rgba(220,38,38,.35)';
       affordCard.style.background = 'rgba(220,38,38,.04)';
       affordTag.style.color = '#DC2626';
       affordTag.textContent = `${r.cappedBy} shortfall`;
-      affordTitle.textContent = `Your loan exceeds the ${r.cappedBy === 'MSR' ? '30% MSR' : '55% TDSR'} cap`;
-      affordBody.innerHTML = `
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-          <div style="padding:14px; background:white; border:1px solid rgba(220,38,38,.18); border-radius:8px;">
-            <div style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Max loan you qualify for</div>
-            <div class="console-display-num" style="font-size:24px;">$${fmt(Math.round(r.maxLoanAffordable))}</div>
-            <div style="font-size:12px; color:var(--muted); margin-top:4px;">over ${r.inp.tenure}y at MAS 4% stress rate</div>
-          </div>
-          <div style="padding:14px; background:white; border:1px solid rgba(220,38,38,.18); border-radius:8px;">
-            <div style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Extra cash / down payment needed</div>
-            <div class="console-display-num" style="font-size:24px; color:#DC2626;">$${fmt(Math.round(r.downPaymentShortfall || 0))}</div>
-            <div style="font-size:12px; color:var(--muted); margin-top:4px;">to keep this property at $${fmt(r.inp.price || 0)}</div>
-          </div>
-        </div>
-        <div style="font-size:13px; color:var(--muted); line-height:1.6;">
-          To qualify, you can either: (1) reduce the loan to <strong>$${fmt(Math.round(r.maxLoanAffordable))}</strong> and add <strong>$${fmt(Math.round(r.downPaymentShortfall || 0))}</strong> more cash, (2) lower the property price, (3) extend the tenure (subject to age cap), or (4) increase income / clear other debts.
+      const failPct = ((r.cappedBy === 'MSR' ? r.msrUsage : r.tdsrUsage) * 100).toFixed(1);
+      const cap = r.cappedBy === 'MSR' ? '30%' : '55%';
+      affordTitle.textContent = `${r.cappedBy} ${failPct}% — exceeds ${cap} cap`;
+      const effLtvLine = r.effectiveLtvFromCaps != null
+        ? `Max LTV due to failed ${r.cappedBy}: <strong>${r.effectiveLtvFromCaps.toFixed(1)}%</strong> (loan capped by debt-servicing, not LTV).`
+        : '';
+      affordBody.innerHTML = cardsHtml + `
+        <div style="font-size:13px; color:var(--ink-2); line-height:1.65; padding:12px 14px; background:white; border:1px solid rgba(220,38,38,.20); border-left:3px solid #DC2626; border-radius:4px;">
+          <strong style="color:#DC2626; font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:10.5px;">${r.cappedBy} failure</strong>
+          &nbsp;${effLtvLine} To qualify: (1) reduce loan to <strong>$${fmtN0(r.maxLoanAffordable)}</strong> and add <strong>$${fmtN0(r.downPaymentShortfall || 0)}</strong> cash, (2) extend tenure (subject to age cap), or (3) raise income / clear debts.
         </div>
       `;
     } else {
-      // PASS: show max purchase headroom
       affordCard.style.borderColor = 'rgba(5,150,105,.25)';
       affordCard.style.background = 'rgba(5,150,105,.04)';
       affordTag.style.color = '#059669';
       affordTag.textContent = 'Affordability headroom';
-      affordTitle.textContent = `You qualify — and you have room to go higher`;
+      affordTitle.textContent = `You qualify — binding constraint: ${r.bindingConstraint}`;
       const headroomLoan = Math.max(0, r.maxLoanAffordable - r.inp.loan);
-      const capLine = r.msrApplies
-        ? 'at 30% MSR cap (HDB) + 55% TDSR cap, MAS 4% stress rate'
-        : 'at 55% TDSR cap, MAS 4% stress rate';
-      const stretchCap = r.msrApplies
-        ? 'while staying under the 30% MSR + 55% TDSR caps'
-        : 'while staying under the 55% TDSR cap';
-      affordBody.innerHTML = `
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-          <div style="padding:14px; background:white; border:1px solid rgba(5,150,105,.2); border-radius:8px;">
-            <div style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Max property price (${r.ltvPct}% LTV)</div>
-            <div class="console-display-num" style="font-size:24px; color:#059669;">$${fmt(Math.round(r.maxPurchasePrice))}</div>
-            <div style="font-size:12px; color:var(--muted); margin-top:4px;">${capLine}</div>
-          </div>
-          <div style="padding:14px; background:white; border:1px solid rgba(5,150,105,.2); border-radius:8px;">
-            <div style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Max loan amount</div>
-            <div class="console-display-num" style="font-size:24px;">$${fmt(Math.round(r.maxLoanAffordable))}</div>
-            <div style="font-size:12px; color:var(--muted); margin-top:4px;">${headroomLoan > 0 ? '$' + fmt(Math.round(headroomLoan)) + ' headroom above your current loan' : 'at your current loan amount'}</div>
-          </div>
-        </div>
-        <div style="font-size:13px; color:var(--muted); line-height:1.6;">
-          Based on your income, debts, and tenure, you could comfortably stretch to a property up to <strong>$${fmt(Math.round(r.maxPurchasePrice))}</strong> ${stretchCap}.
+      const headroomLine = headroomLoan > 0
+        ? `Headroom above current loan: <strong>$${fmtN0(headroomLoan)}</strong>. Max property price at 75% LTV: <strong>$${fmtN0(r.maxPurchasePrice)}</strong>.`
+        : `At your current loan amount.`;
+      affordBody.innerHTML = cardsHtml + `
+        <div style="font-size:13px; color:var(--ink-2); line-height:1.65; padding:12px 14px; background:white; border:1px solid rgba(5,150,105,.20); border-left:3px solid #059669; border-radius:4px;">
+          <strong style="color:#059669; font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:10.5px;">Within all caps</strong>
+          &nbsp;${headroomLine}
         </div>
       `;
     }
@@ -4993,22 +5029,34 @@ function buildReportPdf(r, lead) {
   });
 
   y += 2;
-  // Affordability — 4-cell stat grid
-  y = eyebrow(y, tdsrFail ? 'Affordability shortfall' : 'Affordability headroom');
+  // Max loan envelope — separate caps (TDSR / MSR / 75% LTV / 55% LTV)
+  y = eyebrow(y, tdsrFail ? 'Loan envelope · ' + r.cappedBy + ' fail' : 'Loan envelope · which cap binds?');
   doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(MUTED);
-  const afLine = tdsrFail
-    ? 'You\'re asking for ' + fmt$(r.inp.loan) + '. The most you qualify for at this tenure & income is shown below.'
-    : 'You\'re asking for ' + fmt$(r.inp.loan) + '. Your headroom shows the most you could borrow before hitting the cap.';
-  doc.text(doc.splitTextToSize(afLine, CW), M, y);
+  const failPctLine = tdsrFail
+    ? r.cappedBy + ' at ' + ((r.cappedBy === 'MSR' ? r.msrUsage : r.tdsrUsage) * 100).toFixed(1) + '% > ' + (r.cappedBy === 'MSR' ? '30%' : '55%') + ' cap. Loan capped by debt-servicing.'
+    : 'Binding constraint: ' + r.bindingConstraint + '. Loan amounts under each MAS cap shown below.';
+  doc.text(doc.splitTextToSize(failPctLine, CW), M, y);
   y += 6;
-  const buffer = (r.maxLoanAffordable || 0) - r.inp.loan;
-  const afItems = [
-    { label: tdsrFail ? 'Max loan at income' : 'Max loan headroom', value: fmt$(r.maxLoanAffordable || 0), sub: 'Subject to all caps', color: tdsrFail ? RED : GREEN },
-    { label: 'Max property price', value: fmt$(r.maxPurchasePrice || 0), sub: 'At ' + (r.ltvPct||75) + '% LTV', color: GREEN },
-    { label: 'Asking loan', value: fmt$(r.inp.loan), sub: 'Your input', color: INK },
-    { label: tdsrFail ? 'Loan to reduce' : 'Buffer remaining', value: tdsrFail ? '−' + fmt$(Math.abs(buffer)) : fmt$(Math.max(0, buffer)), sub: tdsrFail ? 'Below cap' : 'Before cap', color: tdsrFail ? RED : GREEN },
+  const envItems = [
+    { label: 'Max loan · TDSR 55%', value: fmt$(r.maxLoanTdsr || 0), sub: 'At ' + r.inp.tenure + 'y · MAS 4%', color: r.tdsrPass ? GREEN : RED },
+    r.msrApplies
+      ? { label: 'Max loan · MSR 30%', value: fmt$(r.maxLoanMsr || 0), sub: 'HDB / EC mortgage', color: r.msrPass ? GREEN : RED }
+      : { label: 'MSR not applicable', value: '—', sub: 'Private property', color: MUTED },
+    { label: 'Max loan · 75% LTV', value: fmt$(r.maxLoanAt75Ltv || 0), sub: r.ltvAvailableForCurrentTenure >= 75 ? 'Standard cap' : 'Tenure ≤ ' + (r.tenureForFullLtv || r.fullLtvCap) + 'y for this', color: r.ltvAvailableForCurrentTenure >= 75 ? GREEN : MUTED },
+    { label: 'Max loan · 55% LTV', value: fmt$(r.maxLoanAt55Ltv || 0), sub: r.ltvAvailableForCurrentTenure < 75 ? 'Active at this tenure' : 'If tenure > IWAA cap', color: GOLD },
   ];
-  y = statGrid(M, y, CW, afItems);
+  y = statGrid(M, y, CW, envItems);
+  y += 4;
+  // LTV tradeoff callout
+  const ltvFromCaps = r.effectiveLtvFromCaps != null ? r.effectiveLtvFromCaps.toFixed(1) + '%' : '—';
+  const ltvCallout = r.tenureExceedsIwaa
+    ? 'Tenure ' + r.inp.tenure + 'y + IWAA ' + (r.iwaa ? r.iwaa.toFixed(1) : '—') + ' > 65 → MAS allows max 55% LTV at this tenure. Drop to ' + (r.tenureForFullLtv || r.fullLtvCap) + 'y or shorter to keep 75% LTV.'
+    : 'Tenure ' + r.inp.tenure + 'y + IWAA ' + (r.iwaa ? r.iwaa.toFixed(1) : '—') + ' ≤ 65 → full 75% LTV available.';
+  const failCallout = tdsrFail
+    ? ' Effective LTV due to ' + r.cappedBy + ' cap: ' + ltvFromCaps + '. Reduce loan, extend tenure, or raise income to qualify.'
+    : '';
+  y = calloutBlock(y, tdsrFail ? RED : GOLD, tdsrFail ? RED_SOFT : GOLD_TINT,
+    tdsrFail ? 'LTV constrained by ' + r.cappedBy : 'LTV tradeoff', ltvCallout + failCallout);
 
   // ═══════════════════ PAGE 4 — BANK RATE COMPARISON ═══════════════════
   y = pageChrome('Bank Rate Comparison');
