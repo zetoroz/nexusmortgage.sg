@@ -95,6 +95,13 @@
     #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
     body.has-site-nav { padding-top: 64px; }
 
+    .toc { background: rgba(255,255,255,.03); border: 1px solid rgba(196,151,59,.15); border-radius: 10px; padding: 1.3rem 1.6rem; margin: 2rem 0 2.5rem; }
+    .toc-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: rgba(196,151,59,.7); margin-bottom: .8rem; }
+    .toc ol { padding-left: 1.2rem; counter-reset: toc; list-style: none; }
+    .toc ol li { counter-increment: toc; margin-bottom: .4rem; font-size: .88rem; }
+    .toc ol li::before { content: counter(toc) ". "; color: rgba(196,151,59,.5); font-weight: 600; font-size: .8rem; }
+    .toc a { color: rgba(232,227,218,.65); text-decoration: none; }
+    .toc a:hover { color: #c4973b; }
   </style>
 </head>
 <body>
@@ -153,7 +160,22 @@
 
   <img src="blog-images/cpf-oa-hdb-hero.png" alt="CPF Ordinary Account savings being used for private property purchase in Singapore" class="hero-img">
 
-  <h2>What CPF OA Can Pay For: HDB vs Bank Loan</h2>
+  <div class="toc">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#cpf-oa-uses">What CPF OA can pay for: HDB vs bank loan</a></li>
+      <li><a href="#cpf-limits">The four CPF limits every buyer should know</a></li>
+      <li><a href="#accrued-interest">Accrued interest: the number that surprises sellers</a></li>
+      <li><a href="#oa-vs-cash">OA for monthly instalments vs paying in cash</a></li>
+      <li><a href="#worked-examples">Worked examples: HDB and private condo</a></li>
+      <li><a href="#decoupling-brs">Decoupling, second properties and the BRS rule</a></li>
+      <li><a href="#hdb-grants">HDB housing grants and CPF</a></li>
+      <li><a href="#refinance-sell">Refinancing and selling: CPF continuity</a></li>
+      <li><a href="#plan-together">Plan CPF and mortgage together</a></li>
+    </ol>
+  </div>
+
+  <h2 id="cpf-oa-uses">What CPF OA Can Pay For: HDB vs Bank Loan</h2>
 
   <p>The rules differ between an HDB flat on an HDB concessionary loan and any property (HDB or private) on a bank loan. Get this split right before you sign anything.</p>
 
@@ -186,7 +208,7 @@
     </div>
   </div>
 
-  <h2>The Four CPF Limits Every Buyer Should Know</h2>
+  <h2 id="cpf-limits">The Four CPF Limits Every Buyer Should Know</h2>
 
   <p>Four constraints decide how much CPF OA you can actually pour into a property. Miss one and you end up topping up in cash mid-loan.</p>
 
@@ -207,7 +229,7 @@
   <h3>4. The Basic Retirement Sum (BRS) for a Second Property</h3>
   <p>If you already own one property and are buying a second, you must keep the Basic Retirement Sum across your OA and SA before further OA can be tapped. The 2026 BRS is <strong>S$106,500</strong>. Members aged 55 and above must keep the Full Retirement Sum (S$213,000 in 2026) in the Retirement Account instead. The BRS rule does not apply to your first property.</p>
 
-  <h2>Accrued Interest: The Number That Surprises Most Sellers</h2>
+  <h2 id="accrued-interest">Accrued Interest: The Number That Surprises Most Sellers</h2>
 
   <p>Every dollar of CPF OA used for property accrues interest at <strong>2.5% p.a., compounded</strong> &mdash; the same rate your OA would have earned. When you sell, you must return the principal plus accrued interest to your CPF account. The money goes back to you, not to the government, but it leaves the sale in cash form.</p>
 
@@ -220,7 +242,7 @@
     <p><strong>Cash refund shortfall:</strong> If net sale proceeds cannot cover the full CPF refund, you are not required to top up from other savings. The refund is capped at the net proceeds. CPF treats the shortfall as a write-off &mdash; but you have lost the ability to use that "missing" interest in retirement.</p>
   </div>
 
-  <h2>OA for Monthly Instalments vs Paying in Cash</h2>
+  <h2 id="oa-vs-cash">OA for Monthly Instalments vs Paying in Cash</h2>
 
   <p>Most buyers default to OA deduction because it preserves cash. That feels right. But the maths is not always one-sided.</p>
 
@@ -230,7 +252,7 @@
 
   <div class="pullquote">&#8220;Using OA every month is not free. The accrued interest compounds at 2.5% in the background, and it is paid back from the cash side of your eventual sale.&#8221;</div>
 
-  <h2>Worked Examples: HDB and Private Condo</h2>
+  <h2 id="worked-examples">Worked Examples: HDB and Private Condo</h2>
 
   <h3>Example A &mdash; S$700,000 HDB Resale, HDB Loan</h3>
   <p>Couple, both 35, combined OA balance S$220,000. They take the HDB concessionary loan at 2.6% p.a. The 20% downpayment is S$140,000, fully paid from OA. BSD (~S$15,600) also paid from OA. Monthly instalment of about S$2,250 deducts from OA each month. They keep S$20K in each OA earning the 3.5% extra-interest tier. No Withdrawal Limit applies. CPF accrued interest still compounds at 2.5% on every dollar used.</p>
@@ -238,28 +260,29 @@
   <h3>Example B &mdash; S$1,000,000 Condo, Bank Loan</h3>
   <p>Single buyer, age 38, OA balance S$280,000. Bank loan at 1.45% fixed for 3 years, 75% LTV. The 25% downpayment is S$250,000: S$50,000 must be cash (5%); S$200,000 can come from OA (20%). BSD (~S$24,600) payable from OA. Monthly instalment of about S$2,975 deducts from OA. Withdrawal Limit is S$1.2M (120% of S$1M). Over a 30-year tenure, the cap is unlikely to bind, but the buyer should run the numbers against the <a href="/affordability/">TDSR/MSR affordability calculator</a> and confirm qualifying loan size against the <a href="/blog/blog-mas-stress-test-2026.html">MAS 4% stress test</a> floor.</p>
 
-  <h2>Decoupling, Second Properties, and the BRS Rule</h2>
+  <h2 id="decoupling-brs">Decoupling, Second Properties, and the BRS Rule</h2>
 
   <p>Couples buying a second property by decoupling &mdash; one spouse buys out the other's share &mdash; trip on the BRS rule most often. The buying spouse must keep the BRS (S$106,500 in 2026) across OA and SA before any OA can be applied to the new property. Run this check before paying the buy-out, not after. The same applies to first-time second-property buyers using OA: keep the BRS, then withdraw.</p>
 
   <p>If you are eyeing the <a href="/equity-loan/">equity / cash-out loan</a> route on an existing property to fund a second purchase, layer the BRS rule on top of TDSR. Read our <a href="/blog/blog-tdsr-msr-explained.html">TDSR for private property</a> guide for the qualifying-income side and the <a href="/blog/blog-best-home-loan-first-time-buyer.html">best loan for condo</a> page for current bank packages.</p>
 
-  <h2>HDB Housing Grants and CPF</h2>
+  <h2 id="hdb-grants">HDB Housing Grants and CPF</h2>
 
   <p>First-timer HDB buyers may qualify for the <a href="https://www.hdb.gov.sg/buying-a-flat/flat-grant-and-loan-eligibility/couples-and-families/cpf-housing-grants" target="_blank" rel="noopener">CPF Housing Grant, Enhanced Housing Grant, or Proximity Housing Grant</a>. Grants land in your CPF OA, then flow into the property purchase &mdash; meaning grant amounts also accrue 2.5% interest and must be refunded to CPF on sale. See the <a href="https://www.hdb.gov.sg/buying-a-flat/flat-grant-and-loan-eligibility/couples-and-families/cpf-housing-grants" target="_blank" rel="noopener">HDB grant page</a> for current eligibility ceilings. Private properties do not qualify for any of these grants.</p>
 
-  <h2>Refinancing and Selling: CPF Continuity</h2>
+  <h2 id="refinance-sell">Refinancing and Selling: CPF Continuity</h2>
 
   <p>When you refinance from one bank to another, OA deductions continue without interruption. There is no need to "restart" the CPF housing arrangement &mdash; the new bank takes over the deduction mandate. Compare the savings using the <a href="/refinance-calculator/">refinance savings calculator</a> and time the move using <a href="/blog/blog-when-to-refinance-singapore.html">when to refinance</a>.</p>
 
   <p>On sale, CPF refund is calculated on completion day: principal used + accrued interest at 2.5% compounded. The conveyancing lawyer routes the refund directly from the sale proceeds. If you have used OA aggressively and prices have moved sideways, expect a small or zero cash cheque at the table.</p>
 
-  <h2>Plan CPF and Mortgage Together, Not in Isolation</h2>
+  <h2 id="plan-together">Plan CPF and Mortgage Together, Not in Isolation</h2>
 
-  <p>The CPF angle decides how much cash you keep at completion, how much liquidity you have for the next 25 years, and how much cash you walk away with at sale. The loan angle &mdash; rate, lock-in, repricing &mdash; decides your monthly cost. Most buyers optimise one and forget the other. Run both at the same time before you sign the Option to Purchase.</p>
+  <p>The CPF angle decides how much cash you keep at completion, how much liquidity you have for the next 25 years, and how much cash you walk away with at sale. The loan angle &mdash; rate, lock-in, repricing &mdash; decides your monthly cost. Most buyers optimise one and forget the other. Run both at the same time before you sign the Option to Purchase. For a printable version of this dual-track plan, download the <a href="/free-report/">Singapore Mortgage Free Report</a> &mdash; includes a CPF withdrawal worksheet and accrued-interest tracker.</p>
 
   <h2>Further Reading</h2>
   <ul class="verdict-list">
+    <li><a href="/free-report/">Singapore Mortgage Free Report</a> &mdash; Dan's full CPF + mortgage planning guide with worked HDB and condo examples in one downloadable PDF</li>
     <li><a href="/blog/blog-hdb-vs-bank-loan.html">HDB Loan vs Bank Loan</a> &mdash; rate, lock-in, and CPF treatment compared side by side</li>
     <li><a href="/blog/blog-first-time-hdb-buyer-guide.html">First-Time HDB Buyer Guide</a> &mdash; HFE letter, OTP, downpayment timing, and CPF use through each step</li>
     <li><a href="/blog/blog-tdsr-msr-explained.html">TDSR for Private Property</a> &mdash; how qualifying income and existing debts cap your loan</li>

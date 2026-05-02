@@ -94,6 +94,13 @@
     #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
     body.has-site-nav { padding-top: 64px; }
 
+    .toc { background: rgba(255,255,255,.03); border: 1px solid rgba(196,151,59,.15); border-radius: 10px; padding: 1.3rem 1.6rem; margin: 2rem 0 2.5rem; }
+    .toc-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: rgba(196,151,59,.7); margin-bottom: .8rem; }
+    .toc ol { padding-left: 1.2rem; counter-reset: toc; list-style: none; }
+    .toc ol li { counter-increment: toc; margin-bottom: .4rem; font-size: .88rem; }
+    .toc ol li::before { content: counter(toc) ". "; color: rgba(196,151,59,.5); font-weight: 600; font-size: .8rem; }
+    .toc a { color: rgba(232,227,218,.65); text-decoration: none; }
+    .toc a:hover { color: #c4973b; }
   </style>
 </head>
 <body>
@@ -152,7 +159,21 @@
 
   <img src="blog-images/tdsr-msr-hero.png" alt="Visual showing TDSR at 55% of gross monthly income for private property Singapore" class="hero-img">
 
-  <h2>The One Rule That Sets Private Property Apart: No MSR</h2>
+  <div class="toc">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#no-msr">The one rule that sets private property apart: no MSR</a></li>
+      <li><a href="#tdsr-calc">How TDSR is actually calculated</a></li>
+      <li><a href="#cc-trap">The credit-card trap (and other TDSR killers)</a></li>
+      <li><a href="#joint-iwaa">Joint borrowers and the IWAA tenure rule</a></li>
+      <li><a href="#ltv">LTV: the other ceiling</a></li>
+      <li><a href="#worked-example">Worked example: S$15,000 income, S$2M condo</a></li>
+      <li><a href="#absd">ABSD: the cash number TDSR cannot help with</a></li>
+      <li><a href="#before-otp">What to do before you sign the OTP</a></li>
+    </ol>
+  </div>
+
+  <h2 id="no-msr">The One Rule That Sets Private Property Apart: No MSR</h2>
 
   <p>If you have only ever bought an HDB flat before, the most useful thing to learn first is what does <em>not</em> apply. The 30% Mortgage Servicing Ratio (MSR) is an HDB and Executive Condominium rule. It does not apply to private condominiums, walk-ups, or landed homes financed with a bank loan.</p>
 
@@ -173,7 +194,7 @@
     </div>
   </div>
 
-  <h2>How TDSR Is Actually Calculated</h2>
+  <h2 id="tdsr-calc">How TDSR Is Actually Calculated</h2>
 
   <p>The arithmetic is simple. The trap is the assessment rate. Banks cannot use the headline rate on your loan package &mdash; they must size the qualifying instalment using the <strong>higher of the contractual rate or 4.00% p.a.</strong>, per <a href="https://www.mas.gov.sg/regulation/explainers/tdsr-for-property-loans" target="_blank" rel="noopener">MAS TDSR rules</a>.</p>
 
@@ -192,7 +213,7 @@
 
   <p>Two things to notice. First, the buyer qualifies for an instalment of S$5,100, but their actual monthly outflow at 1.65% is only S$3,770 &mdash; a S$1,330 monthly buffer that exists by design. Second, the credit-card line item shaved S$600 off the headroom. Most buyers forget this entirely.</p>
 
-  <h2>The Credit-Card Trap (And Other TDSR Killers)</h2>
+  <h2 id="cc-trap">The Credit-Card Trap (And Other TDSR Killers)</h2>
 
   <p>Private property buyers tend to be higher earners with multiple credit cards, a car, perhaps a renovation loan from a previous home. Each line item bites into TDSR before the new mortgage even enters the picture.</p>
 
@@ -211,13 +232,13 @@
     <p><strong>Variable income is haircut by 30%.</strong> Bonus, commission, director's fee, and rental income only count at 70% for TDSR. A S$10,000/month commission earner is assessed on S$7,000. Self-employed buyers are assessed on a two-year NOA average, also after the 30% haircut. Plan ahead with our <a href="/affordability/">TDSR/MSR affordability calculator</a> before you book a viewing.</p>
   </div>
 
-  <h2>Joint Borrowers and the IWAA Tenure Rule</h2>
+  <h2 id="joint-iwaa">Joint Borrowers and the IWAA Tenure Rule</h2>
 
   <p>When two or more people borrow together, banks set the maximum loan tenure using the Income-Weighted Average Age (IWAA) of all borrowers. A 35-year-old earning S$10,000 borrowing with a 60-year-old earning S$5,000 has an IWAA of (35 × 10/15) + (60 × 5/15) = 43.3 years.</p>
 
   <p>Maximum tenure for a private property bank loan is 35 years, but two LTV cliffs exist: any tenure beyond 30 years, or that runs past the youngest borrower's age 65, cuts the LTV by 5 percentage points (from 75% down to 55% on the first property). Adding a young, lower-earning co-borrower does not always help &mdash; the income weighting determines whether you cross the cliff. This is one reason couples often consider <a href="/blog/blog-decoupling-private-property-singapore.html">decoupling case study</a> arrangements before an upgrade.</p>
 
-  <h2>LTV: The Other Ceiling</h2>
+  <h2 id="ltv">LTV: The Other Ceiling</h2>
 
   <p>Even if your TDSR allows a larger loan, the Loan-to-Value (LTV) cap sets an absolute maximum on the loan as a percentage of the lower of purchase price or valuation.</p>
 
@@ -230,7 +251,7 @@
 
   <p>HDB upgraders need to think about timing. If you are still on the title of the HDB flat when the private property's Option to Purchase is exercised, the bank treats the new loan as a second-property loan &mdash; 45% LTV, not 75%. Selling the HDB first, executing simultaneous completion, or decoupling ownership are the three standard plays. None of them work as last-minute fixes; sequence matters.</p>
 
-  <h2>Worked Example: S$15,000 Income, S$2M Condo</h2>
+  <h2 id="worked-example">Worked Example: S$15,000 Income, S$2M Condo</h2>
 
   <img src="blog-images/tdsr-worked-example.png" alt="Step-by-step TDSR worked example for private property buyer in Singapore 2026" class="blog-img" loading="lazy">
   <p class="img-caption">At a 4% stress floor, the qualifying instalment is roughly 60% higher than the actual outflow at a 1.65% loan rate. On a S$2M property, that gap can swing the qualifying loan by S$300,000+.</p>
@@ -251,7 +272,7 @@
 
   <div class="pullquote">&#8220;The buyers who get caught are not the ones who ignored TDSR. They are the ones who ran the numbers without the credit-card factor, without the variable-income haircut, and without checking how their bank treats co-borrower age.&#8221;</div>
 
-  <h2>ABSD: The Cash Number TDSR Cannot Help With</h2>
+  <h2 id="absd">ABSD: The Cash Number TDSR Cannot Help With</h2>
 
   <p>TDSR sizes your loan. <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/additional-buyer's-stamp-duty-(absd)" target="_blank" rel="noopener">Additional Buyer's Stamp Duty (ABSD)</a> sizes your cash. ABSD cannot be financed; it must be settled in cash within 14 days of the Sale & Purchase Agreement.</p>
 
@@ -265,7 +286,7 @@
 
   <p>On a S$2M second property bought by a Singapore Citizen, ABSD alone is S$400,000 in cash &mdash; on top of the 25% minimum cash down payment for a second-property LTV of 45%. Buyer's Stamp Duty (BSD) on the same property adds roughly S$64,600 more. Treat these as fixed inputs to the upgrade plan, not afterthoughts.</p>
 
-  <h2>What To Do Before You Sign the OTP</h2>
+  <h2 id="before-otp">What To Do Before You Sign the OTP</h2>
 
   <p>An In-Principle Approval (IPA) is the only document that converts theory into a confirmed loan number. It is free, valid for 30 days, and based on your real income documents, real debts, and a real property quantum &mdash; all stress-tested at 4%. Run a sanity check first with the <a href="/affordability/">TDSR/MSR affordability calculator</a>, then collect IPAs from at least three lenders so you can compare quantum and rate side by side.</p>
 
@@ -273,6 +294,7 @@
 
   <h2>Further Reading</h2>
   <ul class="verdict-list">
+    <li><a href="/free-report/">Singapore Mortgage Free Report</a> &mdash; Dan's complete TDSR + MSR + ABSD + LTV stack with worked private and HDB examples in one downloadable PDF</li>
     <li><a href="/blog/blog-mas-stress-test-2026.html">MAS 4% stress test</a> &mdash; how the floor rate is derived and applied across every Singapore home loan</li>
     <li><a href="/blog/blog-best-home-loan-first-time-buyer.html">best loan for condo / private property</a> &mdash; package selection for first-time private buyers</li>
     <li><a href="/blog/blog-cpf-oa-hdb-guide.html">using CPF OA for property</a> &mdash; OA withdrawal limits, BRS, and accrued interest mechanics</li>

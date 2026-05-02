@@ -263,6 +263,13 @@
     #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
     body.has-site-nav { padding-top: 64px; }
 
+    .toc { background: rgba(255,255,255,.03); border: 1px solid rgba(196,151,59,.15); border-radius: 10px; padding: 1.3rem 1.6rem; margin: 2rem 0 2.5rem; }
+    .toc-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: rgba(196,151,59,.7); margin-bottom: .8rem; }
+    .toc ol { padding-left: 1.2rem; counter-reset: toc; list-style: none; }
+    .toc ol li { counter-increment: toc; margin-bottom: .4rem; font-size: .88rem; }
+    .toc ol li::before { content: counter(toc) ". "; color: rgba(196,151,59,.5); font-weight: 600; font-size: .8rem; }
+    .toc a { color: rgba(232,227,218,.65); text-decoration: none; }
+    .toc a:hover { color: #c4973b; }
   </style>
 </head>
 <body>
@@ -320,9 +327,23 @@
 
   <img src="blog-images/hero-stress-test.png" alt="Singapore skyline with mortgage calculator overlay" class="hero-img">
 
+  <div class="toc">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#real-budget">Why the MAS 4% stress test sets your real budget</a></li>
+      <li><a href="#what-it-does">What the MAS 4% stress test actually does</a></li>
+      <li><a href="#tdsr-vs-msr">TDSR vs MSR: which cap applies to you</a></li>
+      <li><a href="#worked-example">Worked example: S$8,000 monthly income</a></li>
+      <li><a href="#joint-iwaa">Joint borrowers and the IWAA tenure cap</a></li>
+      <li><a href="#existing-debts">How existing debts shrink your loan ceiling</a></li>
+      <li><a href="#ltv-cash">The stress test, LTV and cash on hand</a></li>
+      <li><a href="#next-steps">Where to go from here</a></li>
+    </ol>
+  </div>
+
   <!-- ===================== INTRODUCTION ===================== -->
 
-  <h2>Why the MAS 4% Stress Test Sets Your Real Budget</h2>
+  <h2 id="real-budget">Why the MAS 4% Stress Test Sets Your Real Budget</h2>
 
   <p>Most Singapore buyers start with the wrong question: "What is the cheapest home loan rate today?" In April 2026 the answer is attractive &mdash; fixed packages start from 1.40% p.a. for jumbo loans, with most buyers locking in between 1.45% and 1.65% p.a. SORA-linked loans price around 1.55%&ndash;1.77% p.a. effective, tracking the 1.0201% three-month Compounded SORA plus a 0.20%&ndash;0.75% spread. Compare every package on our <a href="/mortgage-rates/">current Singapore home loan rates</a> page.</p>
 
@@ -344,7 +365,7 @@
 
   <!-- ===================== 4% STRESS TEST ===================== -->
 
-  <h2>What the MAS 4% Stress Test Actually Does</h2>
+  <h2 id="what-it-does">What the MAS 4% Stress Test Actually Does</h2>
 
   <p>The stress test is a mandatory affordability calculation. Banks must compute your monthly mortgage repayment at whichever is higher: the contracted rate on your package, or 4.00% p.a. In April 2026, with packages between 1.40% and 2.00% p.a., the 4% floor wins every time.</p>
 
@@ -361,7 +382,7 @@
 
   <!-- ===================== TDSR vs MSR ===================== -->
 
-  <h2>TDSR vs MSR: Which Cap Applies to You</h2>
+  <h2 id="tdsr-vs-msr">TDSR vs MSR: Which Cap Applies to You</h2>
 
   <p>Once the stress-tested repayment is calculated, the bank measures it against one or two ratio caps depending on the property type.</p>
 
@@ -380,7 +401,7 @@
 
   <!-- ===================== WORKED EXAMPLE ===================== -->
 
-  <h2>Worked Example: S$8,000 Monthly Income</h2>
+  <h2 id="worked-example">Worked Example: S$8,000 Monthly Income</h2>
 
   <p>To make the maths concrete, take a buyer earning S$8,000 a month gross, with no other debt, applying for a 30-year tenure.</p>
 
@@ -400,7 +421,7 @@
 
   <!-- ===================== JOINT BORROWERS / IWAA ===================== -->
 
-  <h2>Joint Borrowers and the IWAA Tenure Cap</h2>
+  <h2 id="joint-iwaa">Joint Borrowers and the IWAA Tenure Cap</h2>
 
   <p>When two or more applicants take a loan together, the bank uses the income-weighted average age (IWAA) to set the maximum tenure. IWAA weights each applicant's age by their share of total income, so a younger high earner pulls the average down more than a younger low earner. Maximum tenure is then 65 minus IWAA for HDB bank loans and 75 minus IWAA for private property &mdash; capped at 25 years (HDB) or 30 years (private) regardless.</p>
 
@@ -411,7 +432,7 @@
 
   <!-- ===================== EXISTING DEBTS ===================== -->
 
-  <h2>How Existing Debts Shrink Your Loan Ceiling</h2>
+  <h2 id="existing-debts">How Existing Debts Shrink Your Loan Ceiling</h2>
 
   <p>The second-fastest way to discover the stress test is the painful way: through existing debt. Every dollar of monthly obligation eats directly into your TDSR headroom before the mortgage is even considered.</p>
 
@@ -430,7 +451,7 @@
 
   <!-- ===================== CPF / DOWNPAYMENT NOTE ===================== -->
 
-  <h2>The Stress Test, LTV and Cash on Hand</h2>
+  <h2 id="ltv-cash">The Stress Test, LTV and Cash on Hand</h2>
 
   <p>The 4% stress test sets your maximum loan, but two other rules set how much cash and CPF you must bring. Loan-to-value (LTV) on a first property is capped at 75%, dropping to 45% on a second outstanding loan and 35% on a third. Of the down payment, at least 5% must be cash on the first property; the balance can come from CPF Ordinary Account if eligible &mdash; see <a href="/blog/blog-cpf-oa-hdb-guide.html">using CPF OA for property</a> for the full breakdown.</p>
 
@@ -439,17 +460,18 @@
 
   <!-- ===================== CONCLUSION & CTA ===================== -->
 
-  <h2>Where to Go From Here</h2>
+  <h2 id="next-steps">Where to Go From Here</h2>
 
   <p>The 4% stress test, TDSR, MSR, IWAA tenure, LTV and ABSD all stack on top of each other. None of them is hard maths, but the combination decides whether the condo you viewed last weekend is realistic. Check your numbers before you fall for a unit, not after.</p>
 
-  <p>Three steps that take less than ten minutes: run the <a href="/affordability/">TDSR/MSR affordability calculator</a> with your gross income and existing debts; compare today's <a href="/mortgage-rates/">current Singapore home loan rates</a> across fixed and SORA-linked packages; and if you already own, sanity-check the <a href="/refinance-calculator/">refinance savings calculator</a> against your current rate to see whether you should be moving.</p>
+  <p>Three steps that take less than ten minutes: run the <a href="/affordability/">TDSR/MSR affordability calculator</a> with your gross income and existing debts; compare today's <a href="/mortgage-rates/">current Singapore home loan rates</a> across fixed and SORA-linked packages; and if you already own, sanity-check the <a href="/refinance-calculator/">refinance savings calculator</a> against your current rate to see whether you should be moving. For the full borrower&rsquo;s playbook in a single PDF &mdash; stress-test worked examples, IWAA tenure tables and ABSD/LTV pairings &mdash; download the <a href="/free-report/">Singapore Mortgage Free Report</a>.</p>
 
   <div class="cta-box">
     <p><strong style="color:#faf7f2;font-size:1.1rem;">See Your Stress-Tested Loan Ceiling in 60 Seconds</strong></p>
     <p>The Nexus affordability calculator applies the MAS 4% floor, your TDSR and MSR caps, IWAA tenure and existing debts in one go.</p>
     <a href="/affordability/" class="cta-btn">Open the Affordability Calculator &rarr;</a>
     <p style="margin-top:1.2rem;font-size:.82rem;">Prefer a personal review? <strong><a href="https://wa.me/6587520859">WhatsApp Dan Ler at +65 8752 0859</a></strong> for a free portfolio assessment across 16+ MAS-regulated banks. Banks pay our fee &mdash; you pay nothing.</p>
+    <p style="margin-top:.6rem;font-size:.82rem;">Or read first: <strong><a href="/free-report/">Singapore Mortgage Free Report</a></strong> &mdash; the full stress-test, TDSR and IWAA workbook in one PDF.</p>
   </div>
 
   <div class="author-bio" style="margin-top:2.5rem;padding:1.25rem 1.4rem;border:1px solid rgba(196,151,59,.2);border-radius:10px;background:rgba(196,151,59,.05);">

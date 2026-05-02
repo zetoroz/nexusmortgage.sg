@@ -105,6 +105,13 @@
     #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
     body.has-site-nav { padding-top: 64px; }
 
+    .toc { background: rgba(255,255,255,.03); border: 1px solid rgba(196,151,59,.15); border-radius: 10px; padding: 1.3rem 1.6rem; margin: 2rem 0 2.5rem; }
+    .toc-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: rgba(196,151,59,.7); margin-bottom: .8rem; }
+    .toc ol { padding-left: 1.2rem; counter-reset: toc; list-style: none; }
+    .toc ol li { counter-increment: toc; margin-bottom: .4rem; font-size: .88rem; }
+    .toc ol li::before { content: counter(toc) ". "; color: rgba(196,151,59,.5); font-weight: 600; font-size: .8rem; }
+    .toc a { color: rgba(232,227,218,.65); text-decoration: none; }
+    .toc a:hover { color: #c4973b; }
   </style>
 </head>
 <body>
@@ -163,7 +170,23 @@
 
   <img src="blog-images/refinance-hero.png" alt="Calendar and interest rate chart showing optimal refinancing window for private property in Singapore" class="hero-img">
 
-  <h2>The Cost of Doing Nothing</h2>
+  <div class="toc">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#cost-of-nothing">The cost of doing nothing</a></li>
+      <li><a href="#3-month-notice">The 3-month notice rule</a></li>
+      <li><a href="#two-triggers">When to refinance: two triggers</a></li>
+      <li><a href="#timeline">The refinancing timeline</a></li>
+      <li><a href="#reprice-vs-refi">Repricing vs refinancing</a></li>
+      <li><a href="#rate-picture">The 2026 rate picture</a></li>
+      <li><a href="#worked-example">Worked example: S$700K refinance</a></li>
+      <li><a href="#reduce-savings">What can reduce your savings</a></li>
+      <li><a href="#hdb-note">HDB owners: a quick note</a></li>
+      <li><a href="#broker-help">How a broker helps</a></li>
+    </ol>
+  </div>
+
+  <h2 id="cost-of-nothing">The Cost of Doing Nothing</h2>
 
   <p>Most Singapore mortgages have a 2- or 3-year lock-in. After that, the package quietly reverts to the bank's <strong>board rate</strong>, which sits between 3.50% and 4.50% p.a. in April 2026. The bank does not call you. They do not send a refinance offer. They simply collect the higher interest each month until you act.</p>
 
@@ -184,13 +207,13 @@
     </div>
   </div>
 
-  <h2>The 3-Month Notice Rule</h2>
+  <h2 id="3-month-notice">The 3-Month Notice Rule</h2>
 
   <p>Almost every Singapore bank requires <strong>3 months written notice</strong> before you redeem a loan at the end of its lock-in. Miss this window and the bank either delays your switch or charges a notice-period penalty equal to a full quarter of interest. Start the refinance conversation 4 months before lock-in expiry and you serve notice with room to spare.</p>
 
   <p>If your lock-in has already expired, the rule does not apply &mdash; you can refinance immediately. The same is true if you are inside lock-in but selling the property; the redemption penalty (typically 1.5% of the outstanding balance) only applies to refinances, not to genuine sales.</p>
 
-  <h2>When to Refinance: Two Triggers</h2>
+  <h2 id="two-triggers">When to Refinance: Two Triggers</h2>
 
   <p>You should refinance when either condition is true:</p>
 
@@ -201,7 +224,7 @@
 
   <p>Outside these triggers, repricing with your current bank is often the cleaner move. Inside lock-in with a small spread, the 1.5% redemption penalty wipes out the savings. <a href="/mortgage-rates/">Compare current refinance rates</a> against your existing rate before you decide.</p>
 
-  <h2>The Refinancing Timeline</h2>
+  <h2 id="timeline">The Refinancing Timeline</h2>
 
   <p>A standard private property refinance runs about 8 weeks from first conversation to disbursement. The new bank coordinates with your existing bank, your conveyancing lawyer, and CPF if applicable. Your <a href="/blog/blog-cpf-oa-hdb-guide.html">CPF OA deductions</a> pause briefly during changeover and resume once the new mortgage charge is registered.</p>
 
@@ -228,7 +251,7 @@
     </div>
   </div>
 
-  <h2>Repricing vs Refinancing</h2>
+  <h2 id="reprice-vs-refi">Repricing vs Refinancing</h2>
 
   <img src="blog-images/refinance-checklist.png" alt="Comparison checklist of refinancing versus repricing for Singapore private property owners" class="blog-img" loading="lazy">
   <p class="img-caption">Repricing keeps you with the same bank, takes 2&ndash;3 weeks, and costs S$200&ndash;S$500. Refinancing moves you to a new bank, takes 6&ndash;8 weeks, and is usually cost-neutral after the bank subsidy. The right choice depends on what your current bank can offer versus the rest of the market.</p>
@@ -272,7 +295,7 @@
 
   <p>Repricing is faster and lower friction. Refinancing usually wins on rate. Ask your bank for a reprice quote first; if it lands within 0.10% of the market's best, take it. If the gap is wider, refinance.</p>
 
-  <h2>The 2026 Rate Picture</h2>
+  <h2 id="rate-picture">The 2026 Rate Picture</h2>
 
   <img src="blog-images/refinance-savings-chart.png" alt="Bar chart comparing monthly savings from refinancing at different rate differentials for Singapore private property 2026" class="blog-img" loading="lazy">
   <p class="img-caption">Monthly saving from refinancing a S$700,000 balance: a 0.30% reduction saves about S$100/month, 0.60% saves about S$200/month, and switching off a 4% board rate saves around S$950/month.</p>
@@ -300,7 +323,7 @@
 
   <div class="pullquote">&#8220;The biggest savings I see right now are not from chasing the lowest fixed rate. They are from clients who have been sitting on a board rate for 6&ndash;12 months because nobody told them their lock-in had expired.&#8221;</div>
 
-  <h2>Worked Example: S$700K Refinance</h2>
+  <h2 id="worked-example">Worked Example: S$700K Refinance</h2>
 
   <p>A client has a S$700,000 outstanding loan, 25 years remaining, currently on a 2.05% p.a. expired-lock-in package that has just stepped up to a 3.85% board rate. We refinance to a 2-year fixed at 1.45% p.a.</p>
 
@@ -314,7 +337,7 @@
 
   <p>Even comparing against the previous 2.05% rate (not the board rate), the saving is roughly S$200/month. With the bank subsidy covering legal fees, break-even on the valuation alone is about 2 months. Past that, every month is pure saving.</p>
 
-  <h2>What Can Reduce Your Savings</h2>
+  <h2 id="reduce-savings">What Can Reduce Your Savings</h2>
 
   <ul class="verdict-list">
     <li><strong>Legal fee clawback:</strong> Bank subsidies typically come with a 3-year clawback. Refinance again before that and you repay the subsidy.</li>
@@ -324,15 +347,15 @@
     <li><strong>Multiple property loans:</strong> If this is a second mortgage, every other loan counts against your TDSR. An <a href="/equity-loan/">equity / cash-out loan</a> on top will tighten the calculation further.</li>
   </ul>
 
-  <h2>HDB Owners: A Quick Note</h2>
+  <h2 id="hdb-note">HDB Owners: A Quick Note</h2>
 
   <p>If you are on a 2.60% HDB concessionary loan, refinancing to a 1.45% bank package looks attractive on paper. But you cannot switch back to HDB once you leave. Read the <a href="/blog/blog-hdb-vs-bank-loan.html">HDB loan vs bank loan</a> trade-off before you commit &mdash; the lower rate is real, but so is the loss of optionality.</p>
 
-  <h2>How a Broker Helps</h2>
+  <h2 id="broker-help">How a Broker Helps</h2>
 
   <p>Nexus Mortgage SG works with 16+ MAS-regulated lenders (see <a href="https://www.abs.org.sg" target="_blank" rel="noopener">the Association of Banks in Singapore</a> for the full list of member banks). We pull every available package side by side, handle the 3-month notice, instruct the panel solicitor, and time the disbursement to your lock-in expiry. Banks pay us on disbursement, so the service is free to you.</p>
 
-  <p>The two things we get asked most: <em>"Has my lock-in expired?"</em> and <em>"What would I save?"</em> The first is a 30-second check on your loan letter. The second is what the <a href="/refinance-calculator/">refinance savings calculator</a> answers in under a minute.</p>
+  <p>The two things we get asked most: <em>"Has my lock-in expired?"</em> and <em>"What would I save?"</em> The first is a 30-second check on your loan letter. The second is what the <a href="/refinance-calculator/">refinance savings calculator</a> answers in under a minute. For the full owner&rsquo;s playbook &mdash; lock-in calendar, repricing-vs-refinancing decision tree and 2026 rate-shopping checklist &mdash; download the <a href="/free-report/">Singapore Mortgage Free Report</a>.</p>
 
   <div class="author-bio" style="margin-top:2.5rem;padding:1.25rem 1.4rem;border:1px solid rgba(196,151,59,.2);border-radius:10px;background:rgba(196,151,59,.05);">
     <p style="margin:0;font-size:.95rem;color:rgba(250,247,242,.75);"><strong style="color:#c4973b;">About the author &mdash;</strong> Dan Ler is a Mortgage Advisor at Nexus Mortgage SG, an independent Singapore brokerage that works with 16+ MAS-regulated lenders. Nexus is paid by the bank on disbursement, so there is no cost to the borrower.</p>
@@ -344,6 +367,7 @@
     <p>I compare every major Singapore bank's refinancing packages for your private property simultaneously, handle all coordination from IPA to legal completion, and ensure you never make a move inside your lock-in period by accident. My service is free: banks pay the referral fee.</p>
     <a href="https://wa.me/6587520859?text=Hi%20Dan%2C%20I%20am%20looking%20to%20refinance%20my%20private%20property%20loan%20and%20want%20a%20comparison%20of%20the%20best%20rates%20available." class="cta-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp Dan Now &mdash; Free Refinancing Review &#8594;</a>
     <p style="margin-top:1.2rem;font-size:.82rem;">Know your numbers: <strong><a href="https://nexusmortgage.sg/#calculator">use the free Advanced Mortgage Calculator</a></strong> to see your current vs potential instalment at today's rates.</p>
+    <p style="margin-top:.6rem;font-size:.82rem;">Or grab the full owner&rsquo;s guide: <strong><a href="/free-report/">Singapore Mortgage Free Report</a></strong> &mdash; lock-in calendar, refinance vs reprice worksheet and rate-shopping checklist.</p>
   </div>
 
   <hr>

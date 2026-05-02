@@ -93,6 +93,13 @@
     #site-mob-menu.open { display: block; }
     #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
     body.has-site-nav { padding-top: 64px; }
+    .toc { background: rgba(255,255,255,.03); border: 1px solid rgba(196,151,59,.15); border-radius: 10px; padding: 1.3rem 1.6rem; margin: 2rem 0 2.5rem; }
+    .toc-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: rgba(196,151,59,.7); margin-bottom: .8rem; }
+    .toc ol { padding-left: 1.2rem; counter-reset: toc; list-style: none; }
+    .toc ol li { counter-increment: toc; margin-bottom: .4rem; font-size: .88rem; }
+    .toc ol li::before { content: counter(toc) ". "; color: rgba(196,151,59,.5); font-weight: 600; font-size: .8rem; }
+    .toc a { color: rgba(232,227,218,.65); text-decoration: none; }
+    .toc a:hover { color: #c4973b; }
   </style>
 </head>
 <body>
@@ -151,7 +158,21 @@
 
   <img src="blog-images/self-employed-tdsr-hero.png" alt="Self-employed mortgage applicant reviewing IRAS Notice of Assessment for Singapore TDSR calculation 2026" class="hero-img">
 
-  <h2>The Rule in One Sentence</h2>
+  <div class="toc">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#rule">The rule in one sentence</a></li>
+      <li><a href="#income-compute">How banks actually compute your income</a></li>
+      <li><a href="#documentation">The documentation banks actually want</a></li>
+      <li><a href="#worked-example">Worked example: freelancer vs salaried equivalent</a></li>
+      <li><a href="#pledge-show">Pledge funds and show funds: recover lost capacity</a></li>
+      <li><a href="#stress-test">The stress test still applies</a></li>
+      <li><a href="#prep-12-24">What to do 12&ndash;24 months before applying</a></li>
+      <li><a href="#hdb-vs-private">HDB vs private: same haircut, different cap</a></li>
+    </ol>
+  </div>
+
+  <h2 id="rule">The Rule in One Sentence</h2>
 
   <p>Under the <a href="https://www.mas.gov.sg/regulation/explainers/tdsr-for-property-loans" target="_blank" rel="noopener">MAS Total Debt Servicing Ratio framework</a>, banks must apply a <strong>minimum 30% haircut</strong> to any income that is not fixed monthly salary. That includes self-employed trade income, commission, bonus, director's fee, allowance and rental. Only 70% of those streams count toward the 55% TDSR ceiling.</p>
 
@@ -172,7 +193,7 @@
     </div>
   </div>
 
-  <h2>How Banks Actually Compute Your Income</h2>
+  <h2 id="income-compute">How Banks Actually Compute Your Income</h2>
 
   <p>For a salaried applicant, the bank uses the latest payslip and CPF contribution history. For a self-employed applicant, the bank goes upstream — straight to <a href="https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/receive-tax-bill-pay-tax-check-refunds/getting-my-tax-assessment" target="_blank" rel="noopener">IRAS Notice of Assessment (NOA)</a> filings.</p>
 
@@ -191,7 +212,7 @@
   <img src="blog-images/self-employed-haircut.png" alt="Conceptual visual of the MAS 30% income haircut applied to self-employed Singapore borrowers" class="blog-img" loading="lazy">
   <p class="img-caption">The 30% haircut is not negotiable — it is written into MAS Notices 645, 1115, 831 and 128 as a minimum, meaning banks may apply more but never less. Variable income is treated identically whether it appears as commission, bonus, rental or self-employed trade.</p>
 
-  <h2>The Documentation Banks Actually Want</h2>
+  <h2 id="documentation">The Documentation Banks Actually Want</h2>
 
   <p>Self-employed underwriting hinges on a paper trail that reconciles. Income declared to IRAS must match what flows through your business bank account, what you contributed to Medisave, and what your accounting records say. Discrepancies are the single most common reason borderline files get rejected.</p>
 
@@ -204,7 +225,7 @@
 
   <p>If you only have one year of NOA, most lenders will not assess trade income at all. The standard workaround: apply while still salaried (if the transition is recent) or wait until the second NOA is issued.</p>
 
-  <h2>Worked Example: Freelancer vs Salaried Equivalent</h2>
+  <h2 id="worked-example">Worked Example: Freelancer vs Salaried Equivalent</h2>
 
   <p>Two applicants, both reporting S$120,000 a year. One is a salaried marketing manager on an employment letter; one is an independent consultant filing trade income via NOA. No existing debts, both Singapore Citizens, applying for a private condo:</p>
 
@@ -224,7 +245,7 @@
 
   <p>Same headline income, S$345,000 less qualifying loan. That is the cost of variability in MAS's eyes. The number gets worse if the two NOAs diverge sharply — most banks then take the lower of the two, not the average.</p>
 
-  <h2>Pledge Funds and Show Funds: How to Recover the Lost Capacity</h2>
+  <h2 id="pledge-show">Pledge Funds and Show Funds: How to Recover the Lost Capacity</h2>
 
   <p>MAS guidelines explicitly recognise <strong>Eligible Financial Assets</strong> as a way to supplement income for TDSR. There are two routes, and they are not the same:</p>
 
@@ -245,7 +266,7 @@
     <p><strong>The haircut applies to mixed-income too.</strong> A salaried employee earning S$5,000 fixed plus S$5,000 commission is assessed on S$5,000 + (70% &times; S$5,000) = <strong>S$8,500</strong>. The fixed component escapes; the variable component does not. Run the numbers in advance with our <a href="/affordability/">TDSR/MSR affordability calculator</a> &mdash; the haircut logic is built in.</p>
   </div>
 
-  <h2>The Stress Test Still Applies</h2>
+  <h2 id="stress-test">The Stress Test Still Applies</h2>
 
   <p>Even after the haircut, the qualifying instalment is sized at the <strong>MAS 4.00% p.a. medium-term floor</strong>, not your actual loan rate. With private home loan rates in Singapore at 1.40&ndash;1.85% in 2026, this gap is real money. The full mechanics are in our companion piece on the <a href="/blog/blog-mas-stress-test-2026.html">MAS 4% stress test</a>; for current package rates see our live <a href="/mortgage-rates/">Singapore home loan rates</a> page.</p>
 
@@ -255,7 +276,7 @@
 
   <p>If that timeline resonates, our <a href="/free-report/">Singapore Mortgage Free Report</a> lays out the full pre-purchase roadmap &mdash; NOA optimisation, pledge-fund sizing worksheet and a step-by-step self-employed checklist &mdash; all in one place, free to download.</p>
 
-  <h2>What To Do 12&ndash;24 Months Before You Apply</h2>
+  <h2 id="prep-12-24">What To Do 12&ndash;24 Months Before You Apply</h2>
 
   <ul class="verdict-list">
     <li><strong>Declare cleanly.</strong> Under-declaring trade income to lower tax also lowers your borrowing capacity by 1.43&times; (the inverse of the haircut). The Medisave you save in tax is rarely worth the qualifying loan you lose.</li>
@@ -266,7 +287,7 @@
     <li><strong>Talk to a broker, not a single bank.</strong> All MAS-regulated lenders apply the same haircut, but documentation flexibility, treatment of director's fees vs trade income, and willingness to accept overseas income all vary by lender.</li>
   </ul>
 
-  <h2>HDB vs Private: Same Haircut, Different Cap</h2>
+  <h2 id="hdb-vs-private">HDB vs Private: Same Haircut, Different Cap</h2>
 
   <p>The 30% haircut is identical for HDB and private property applicants. What changes is the second ratio. HDB and Executive Condominiums add a <strong>30% Mortgage Servicing Ratio (MSR)</strong> on top of the 55% TDSR cap &mdash; and MSR is binding for almost every self-employed HDB buyer because the 30% number is smaller than 55% even before the haircut. For private condos, only TDSR applies. See our deep-dive on <a href="/blog/blog-tdsr-msr-explained.html">TDSR for private property</a> and on <a href="/blog/blog-hdb-vs-bank-loan.html">HDB loan vs bank loan</a> for the side-by-side.</p>
 

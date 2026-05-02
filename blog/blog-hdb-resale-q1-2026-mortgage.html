@@ -272,6 +272,13 @@
     #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
     body.has-site-nav { padding-top: 64px; }
 
+    .toc { background: rgba(255,255,255,.03); border: 1px solid rgba(196,151,59,.15); border-radius: 10px; padding: 1.3rem 1.6rem; margin: 2rem 0 2.5rem; }
+    .toc-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: rgba(196,151,59,.7); margin-bottom: .8rem; }
+    .toc ol { padding-left: 1.2rem; counter-reset: toc; list-style: none; }
+    .toc ol li { counter-increment: toc; margin-bottom: .4rem; font-size: .88rem; }
+    .toc ol li::before { content: counter(toc) ". "; color: rgba(196,151,59,.5); font-weight: 600; font-size: .8rem; }
+    .toc a { color: rgba(232,227,218,.65); text-decoration: none; }
+    .toc a:hover { color: #c4973b; }
   </style>
 </head>
 <body>
@@ -329,9 +336,24 @@
 
   <img src="blog-images/hero-hdb-resale-q1-2026.png" alt="Singapore HDB residential skyline at golden hour twilight with warm window lights" class="hero-img">
 
+  <div class="toc">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#headline">The headline number that changes everything</a></li>
+      <li><a href="#what-happened">What actually happened in Q1 2026</a></li>
+      <li><a href="#why-dipped">Why prices dipped while volume jumped</a></li>
+      <li><a href="#buying">What this means if you&rsquo;re buying</a></li>
+      <li><a href="#upgrading">What this means if you&rsquo;re upgrading</a></li>
+      <li><a href="#refinancing">Refinancing: the quietest opportunity of 2026</a></li>
+      <li><a href="#structure">SORA, fixed or hybrid: which structure fits</a></li>
+      <li><a href="#action">Three things to do this month</a></li>
+      <li><a href="#signal-noise">A note on signal vs. noise</a></li>
+    </ol>
+  </div>
+
   <!-- ===================== INTRODUCTION ===================== -->
 
-  <h2>The Headline Number That Changes Everything</h2>
+  <h2 id="headline">The Headline Number That Changes Everything</h2>
 
   <p>For the first time in nearly seven years, Singapore&rsquo;s HDB resale market has cooled. The HDB Resale Price Index (RPI) clocked in at <strong>203.4 in Q1 2026</strong> &mdash; a 0.1% quarter-on-quarter dip, ending a 27-quarter streak of unbroken growth, according to the <a href="https://www.hdb.gov.sg/hdb-pulse/news/2026/1q2026-flash-rpi" target="_blank" rel="noopener">HDB&rsquo;s official flash estimate</a>.</p>
 
@@ -357,7 +379,7 @@
 
   <!-- ===================== WHAT HAPPENED ===================== -->
 
-  <h2>What Actually Happened in Q1 2026</h2>
+  <h2 id="what-happened">What Actually Happened in Q1 2026</h2>
 
   <p>Read together, the market is <em>not</em> falling &mdash; it&rsquo;s normalising. Prices barely moved while the volume of buyers in the market jumped nearly 20%. That&rsquo;s the textbook signature of a market where supply has caught up to demand, not one where buyers are walking away.</p>
 
@@ -371,7 +393,7 @@
 
   <!-- ===================== WHY DIPPED ===================== -->
 
-  <h2>Why Prices Dipped While Volume Jumped</h2>
+  <h2 id="why-dipped">Why Prices Dipped While Volume Jumped</h2>
 
   <p>The mechanics are worth understanding because they tell you what the next 12 months will probably look like.</p>
 
@@ -384,7 +406,7 @@
 
   <!-- ===================== BUYERS ===================== -->
 
-  <h2>What This Means If You&rsquo;re Buying</h2>
+  <h2 id="buying">What This Means If You&rsquo;re Buying</h2>
 
   <p>If you&rsquo;ve been waiting on the sidelines, the maths is finally tilting in your favour:</p>
 
@@ -399,7 +421,7 @@
 
   <!-- ===================== UPGRADERS ===================== -->
 
-  <h2>What This Means If You&rsquo;re Upgrading</h2>
+  <h2 id="upgrading">What This Means If You&rsquo;re Upgrading</h2>
 
   <p>Upgraders face a more delicate problem: timing. If you sell first, you may face rental costs while waiting for completion. If you buy first, you&rsquo;re hit with <strong>Additional Buyer&rsquo;s Stamp Duty</strong> at 20% on the second property, refundable only if you sell your existing home within six months &mdash; see <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/additional-buyer's-stamp-duty-(absd)" target="_blank" rel="noopener">IRAS&rsquo;s ABSD framework</a> for the full schedule.</p>
 
@@ -412,7 +434,7 @@
 
   <!-- ===================== REFINANCE ===================== -->
 
-  <h2>Refinancing: The Quietest Opportunity of 2026</h2>
+  <h2 id="refinancing">Refinancing: The Quietest Opportunity of 2026</h2>
 
   <p>If you&rsquo;re already a homeowner &mdash; especially one whose package was signed between 2022 and 2024 &mdash; Q1 2026 has handed you a window most owners are missing.</p>
 
@@ -430,7 +452,7 @@
 
   <!-- ===================== STRUCTURE ===================== -->
 
-  <h2>SORA, Fixed, or Hybrid: Which Structure Fits the New Market</h2>
+  <h2 id="structure">SORA, Fixed, or Hybrid: Which Structure Fits the New Market</h2>
 
   <p>With rates this low, the structure question matters more than chasing the absolute lowest headline.</p>
 
@@ -448,7 +470,7 @@
 
   <!-- ===================== ACTION ===================== -->
 
-  <h2>Three Things to Do This Month</h2>
+  <h2 id="action">Three Things to Do This Month</h2>
 
   <img src="blog-images/cbd-meets-hdb-action.png" alt="Singapore CBD skyline meeting HDB residential blocks at twilight &mdash; the intersection of property market shifts and financing decisions" class="blog-img" loading="lazy">
   <p class="img-caption">Q1 2026 has rewritten both the supply story and the rate story. Position your financing accordingly.</p>
@@ -457,12 +479,13 @@
     <li><strong>Re-run your numbers</strong> on our <a href="/affordability/">affordability calculator</a> using current rates. Most buyers have more borrowing room than they think, even after the LTV cut.</li>
     <li><strong>Check your refinance window.</strong> If your lock-in ends in 2026, get quotes now &mdash; banks usually need 3 months&rsquo; notice.</li>
     <li><strong>Get pre-approved before viewing.</strong> Pre-approval is free, takes 1&ndash;2 working days, and gives you genuine negotiating leverage in a market where sellers know prices are softening.</li>
+    <li><strong>Read the playbook.</strong> Download the <a href="/free-report/">Singapore Mortgage Free Report</a> &mdash; resale-specific TDSR/MSR walkthrough, valuation gap (COV) tactics and lock-in expiry checklist in one PDF.</li>
   </ol>
 
 
   <!-- ===================== SIGNAL VS NOISE ===================== -->
 
-  <h2>A Note on Signal vs. Noise</h2>
+  <h2 id="signal-noise">A Note on Signal vs. Noise</h2>
 
   <p>A 0.1% dip is not a crash. Year-on-year, HDB resale prices are still up 1.2%. Singapore&rsquo;s housing demand fundamentals &mdash; population growth, citizen household formation, and a stable labour market tracked by <a href="https://www.mom.gov.sg/" target="_blank" rel="noopener">MOM</a> &mdash; remain intact. Cross-Asia property analysts at <a href="https://realestateasia.com/residential/news/singapore-hdb-resale-prices-dip-01-in-q1-first-decline-in-nearly-seven-years" target="_blank" rel="noopener">Real Estate Asia</a> flagged the dip as a sign of &ldquo;balance,&rdquo; not weakness.</p>
 
@@ -476,6 +499,7 @@
     <p>Whether you&rsquo;re buying your first HDB, upgrading to a condo, or sitting on a 2022 fixed package, we compare 16+ MAS-regulated banks at zero cost to you.</p>
     <a href="/affordability/" class="cta-btn">Run My Numbers &rarr;</a>
     <p style="margin-top:1.2rem;font-size:.82rem;">Prefer a personal review? <strong><a href="https://wa.me/6587520859">WhatsApp Dan Ler at +65 8752 0859</a></strong> for a free portfolio assessment. Banks pay our fee &mdash; you pay nothing.</p>
+    <p style="margin-top:.6rem;font-size:.82rem;">Or grab the full playbook: <strong><a href="/free-report/">Singapore Mortgage Free Report</a></strong> &mdash; downpayment, TDSR/MSR and refinance worksheets in one PDF.</p>
   </div>
 
   <div class="author-bio" style="margin-top:2.5rem;padding:1.25rem 1.4rem;border:1px solid rgba(196,151,59,.2);border-radius:10px;background:rgba(196,151,59,.05);">
