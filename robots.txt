@@ -3,6 +3,8 @@ User-agent: *
 Allow: /
 Disallow: /login/
 Disallow: /scripts/
+Disallow: /rates.xlsx
+Disallow: /*.xlsx
 Disallow: /*?*
 
 # Crawl rate hints
