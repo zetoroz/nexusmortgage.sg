@@ -102,6 +102,13 @@
     #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
     body.has-site-nav { padding-top: 64px; }
 
+    .toc { background: rgba(255,255,255,.03); border: 1px solid rgba(196,151,59,.15); border-radius: 10px; padding: 1.3rem 1.6rem; margin: 2rem 0 2.5rem; }
+    .toc-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: rgba(196,151,59,.7); margin-bottom: .8rem; }
+    .toc ol { padding-left: 1.2rem; counter-reset: toc; list-style: none; }
+    .toc ol li { counter-increment: toc; margin-bottom: .4rem; font-size: .88rem; }
+    .toc ol li::before { content: counter(toc) ". "; color: rgba(196,151,59,.5); font-weight: 600; font-size: .8rem; }
+    .toc a { color: rgba(232,227,218,.65); text-decoration: none; }
+    .toc a:hover { color: #c4973b; }
   </style>
 </head>
 <body>
@@ -160,7 +167,19 @@
 
   <img src="blog-images/home-loan-rates-hero.png" alt="Singapore home loan interest rate comparison chart for 2026 — fixed vs SORA rates across major banks" class="hero-img">
 
-  <h2>Current Home Loan Rates in Singapore (April 2026)</h2>
+  <div class="toc">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#current-rates">Current home loan rates in Singapore (April 2026)</a></li>
+      <li><a href="#fixed-vs-sora">Fixed vs SORA: which is right for you</a></li>
+      <li><a href="#hdb-vs-private">HDB vs private property: does loan type affect rate?</a></li>
+      <li><a href="#what-affects">What affects the rate you actually get?</a></li>
+      <li><a href="#no-single-bank">Why no single bank has the best rate for everyone</a></li>
+      <li><a href="#do-now">What to do right now</a></li>
+    </ol>
+  </div>
+
+  <h2 id="current-rates">Current Home Loan Rates in Singapore (April 2026)</h2>
 
   <p>Singapore home loan rates fall into two broad categories: <strong>fixed-rate packages</strong>, which lock your interest rate for a defined period (typically 2&ndash;3 years), and <strong>floating-rate packages</strong> pegged to <a href="https://www.mas.gov.sg/monetary-policy/sora" target="_blank" rel="noopener">SORA (Singapore Overnight Rate Average)</a> published by MAS. Both are available for HDB resale flats and private property. What differs is the LTV cap, the lock-in tenor on offer, and which lenders are price-leaders for your loan quantum. For the live picture across all 16+ banks, see our <a href="/mortgage-rates/">live rate sheet across 16+ banks</a>.</p>
 
@@ -235,7 +254,7 @@
   <img src="blog-images/home-loan-board-rate.png" alt="Fixed rate 1.50% p.a. vs board rate 3.80–4.50% p.a. — the cost of not repricing your Singapore home loan" class="blog-img" loading="lazy">
   <p class="img-caption">A fixed rate at 1.50% p.a. vs a board rate at 3.80%&ndash;4.50% p.a. &mdash; on a S$700,000 loan, the difference is roughly S$1,000&ndash;S$1,400 every month. Repricing is not optional.</p>
 
-  <h2>Fixed vs SORA: Which Is Right for You in 2026?</h2>
+  <h2 id="fixed-vs-sora">Fixed vs SORA: Which Is Right for You in 2026?</h2>
 
   <div class="rate-cards">
     <div class="rate-card winner">
@@ -261,7 +280,7 @@
 
   <div class="pullquote">&ldquo;3M Compounded SORA is at 1.0201% in April 2026 &mdash; SORA-linked packages are competitive again. The decision in 2026 is less about cost and more about certainty versus flexibility. The one thing you should never do is sit on your bank&rsquo;s board rate. That is where the real money is lost.&rdquo;</div>
 
-  <h2>HDB vs Private Property: Does Your Loan Type Affect the Rate?</h2>
+  <h2 id="hdb-vs-private">HDB vs Private Property: Does Your Loan Type Affect the Rate?</h2>
 
   <p>The short answer: not materially, for bank loans. Both HDB resale buyers and private property buyers can access the same fixed and SORA-linked packages from Singapore banks. The differences lie elsewhere &mdash; mostly in how much you can borrow, not how much it costs.</p>
 
@@ -272,7 +291,7 @@
     <li><strong>Stress test is the same:</strong> All Singapore bank loans &mdash; HDB or private &mdash; are stress-tested at the <a href="/blog/blog-mas-stress-test-2026.html">MAS 4% stress test</a> floor. Your TDSR is calculated at whichever is higher: the actual rate or 4.00% p.a.</li>
   </ul>
 
-  <h2>What Affects the Rate You Actually Get?</h2>
+  <h2 id="what-affects">What Affects the Rate You Actually Get?</h2>
 
   <p>Advertised home loan rates are not guaranteed to every applicant. Banks adjust the effective rate &mdash; and their willingness to offer it &mdash; based on several factors specific to your profile.</p>
 
@@ -284,13 +303,13 @@
     <li><strong>Cashback and subsidies:</strong> Some banks offer S$2,000&ndash;S$5,000 cashback on disbursement, or full legal fee subsidies worth S$1,800&ndash;S$2,800. These do not show up in the headline rate but can shave thousands off your year-one cost. For full property-equity refinancing, see our <a href="/equity-loan/">equity / cash-out loan</a> guide.</li>
   </ul>
 
-  <h2>Why No Single Bank Has the Best Rate for Everyone</h2>
+  <h2 id="no-single-bank">Why No Single Bank Has the Best Rate for Everyone</h2>
 
   <p>Bank home loan rate promotions in Singapore change monthly. A rate DBS led in January may have been overtaken by OCBC in March and matched by UOB in April. The headline number is only part of the picture &mdash; you also need to compare legal fee subsidies, cashback clawback periods, what the rate reverts to after lock-in, and whether the lender&rsquo;s credit assessment fits your income type (salaried, variable, self-employed, or commission-based). All 16+ MAS-regulated lenders are members of the <a href="https://www.abs.org.sg" target="_blank" rel="noopener">Association of Banks in Singapore</a> and follow MAS rules &mdash; but their pricing strategies differ sharply.</p>
 
   <p>The fastest way to find the genuinely cheapest home loan rate in Singapore for your profile is to approach all 16+ lenders at once. An independent broker does exactly that &mdash; at no cost to you. The bank pays the referral fee on disbursement. You receive a side-by-side comparison of every live package, including spreads and subsidies that are not published on any bank&rsquo;s public rate sheet. Start with our <a href="/mortgage-rates/">live rate sheet across 16+ banks</a>.</p>
 
-  <h2>What to Do Right Now</h2>
+  <h2 id="do-now">What to Do Right Now</h2>
 
   <ul class="verdict-list">
     <li><strong>New purchase (HDB or private):</strong> Get In-Principle Approval (IPA) before making an offer. The IPA confirms loan eligibility and gives you a 30-day rate hold. CPF planning matters too &mdash; see <a href="/blog/blog-cpf-oa-hdb-guide.html">using CPF OA for property</a>.</li>
@@ -305,10 +324,12 @@
     <p>I compare home loan rates across all 16+ Singapore lenders simultaneously and give you a no-obligation side-by-side comparison. No bank preference, no hidden fees &mdash; my service is free and the bank pays the referral fee on disbursement.</p>
     <a href="https://wa.me/6587520859?text=Hi%20Dan%2C%20I%20want%20to%20compare%20the%20best%20home%20loan%20rates%20in%20Singapore%20for%20my%20property." class="cta-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp Dan &mdash; Free Rate Comparison &#8594;</a>
     <p style="margin-top:1.2rem;font-size:.82rem;">See how much your instalment changes at different rates: <strong><a href="https://nexusmortgage.sg/#calculator">use the free Advanced Mortgage Calculator</a></strong></p>
+    <p style="margin-top:.6rem;font-size:.82rem;">Or read first: <strong><a href="/free-report/">Singapore Mortgage Free Report</a></strong> &mdash; the full fixed-vs-SORA decision framework, rate-shopping checklist and lock-in timing worksheet in one PDF.</p>
   </div>
 
   <h2>Further Reading</h2>
   <ul class="verdict-list">
+    <li><a href="/free-report/">Singapore Mortgage Free Report</a> &mdash; Dan's complete rate-shopping playbook with worked instalment examples across fixed, SORA and hybrid packages, in one downloadable PDF</li>
     <li><a href="/blog/blog-hdb-vs-bank-loan.html">HDB Loan vs Bank Loan: Which Is Right for You?</a> &mdash; full comparison of the HDB Concessionary Loan against the best bank fixed rates available today</li>
     <li><a href="/blog/blog-when-to-refinance-singapore.html">When to Refinance Your Home Loan in Singapore (2026)</a> &mdash; the exact process and timing to move from your expiring package to the best available rate</li>
     <li><a href="/blog/blog-mas-stress-test-2026.html">Understanding the MAS 4% Stress Test (2026)</a> &mdash; how the stress floor rate determines your maximum borrowable amount at any rate level</li>
