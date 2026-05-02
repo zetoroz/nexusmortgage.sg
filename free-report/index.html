@@ -864,12 +864,13 @@ body::after {
   border-radius: 2px;
   font-weight: 600; font-size: 12px;
   letter-spacing: .04em;
-  color: var(--muted); background: transparent;
+  background: transparent;
   border: none; cursor: pointer;
   transition: color .15s ease;
   font-family: inherit;
   display: flex; align-items: center; justify-content: center; gap: 6px;
 }
+.prop-toggle .prop-btn:not(.active) { color: #0B1C3A !important; }
 .prop-toggle .prop-btn .ico { width: 13px; height: 13px; }
 .prop-toggle .prop-btn.active { color: var(--cream-100); }
 .prop-toggle .prop-indicator {
@@ -3612,6 +3613,30 @@ document.querySelectorAll('.prop-toggle').forEach(toggle => {
         hint.textContent = btn.dataset.prop === 'hdb'
           ? 'MSR cap of 30% applies to HDB & EC. Tenure default: 25y.'
           : 'No MSR cap. Private property tenure default: 30y.';
+      }
+      // Auto-update property price default (only if value still matches a known default)
+      const priceEl = $('p-price');
+      if (priceEl) {
+        const curPrice = +String(priceEl.value).replace(/,/g, '');
+        const KNOWN_PRICES = [800000, 2000000, 0];
+        if (KNOWN_PRICES.includes(curPrice) || isNaN(curPrice)) {
+          const newPrice = btn.dataset.prop === 'private' ? 2000000 : 800000;
+          priceEl.value = newPrice.toLocaleString('en-US');
+          priceEl.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      }
+    }
+
+    // Auto-update current rate default when in refinance mode (only if value still matches a known default)
+    if (toggle.dataset.form === 'refinance') {
+      const rateEl = $('r-current-rate');
+      if (rateEl) {
+        const curRate = parseFloat(rateEl.value);
+        const KNOWN_RATES = [2.6, 2.60, 3.2, 3.20, 0];
+        if (KNOWN_RATES.includes(curRate) || isNaN(curRate)) {
+          rateEl.value = btn.dataset.prop === 'hdb' ? '2.60' : '3.20';
+          rateEl.dispatchEvent(new Event('input', { bubbles: true }));
+        }
       }
     }
   });
