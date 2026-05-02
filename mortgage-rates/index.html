@@ -565,21 +565,21 @@
     }
     .ss-field input {
       width: 100%;
-      padding: 10px 12px;
-      background: rgba(0,0,0,.25);
-      border: 1px solid rgba(196,151,59,.18);
-      border-radius: 8px;
+      padding: .75rem 1rem;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(196,151,59,.2);
+      border-radius: 7px;
       color: var(--cream);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .98rem;
-      font-variant-numeric: tabular-nums;
-      transition: border-color .2s, background .2s;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9375rem;
+      transition: border-color .25s, background .25s;
     }
     .ss-field input:focus {
-      outline: none; border-color: var(--gold);
-      background: rgba(0,0,0,.35);
-      box-shadow: 0 0 0 3px rgba(196,151,59,.12);
+      outline: none;
+      border-color: rgba(196,151,59,.6);
+      background: rgba(255,255,255,.08);
     }
+    .ss-field input::placeholder { color: rgba(250,247,242,.22); }
     .ss-hint {
       font-size: .7rem; color: rgba(250,247,242,.42);
       line-height: 1.55; margin-top: 4px;
@@ -631,7 +631,10 @@
     .ss-table td:nth-child(2),
     .ss-table td:nth-child(3),
     .ss-table td:nth-child(4) {
-      text-align: right; font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+      text-align: right;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem;
+      font-variant-numeric: tabular-nums;
     }
     .ss-table tbody tr:last-child td { border-bottom: none; }
     .ss-table tbody tr.is-stress td { background: rgba(220,90,90,.06); }
@@ -643,9 +646,10 @@
     .ss-note a { color: var(--gold-light); text-decoration: none; border-bottom: 1px dashed rgba(196,151,59,.3); }
     .ss-pill {
       display: inline-block; margin-left: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .6rem; letter-spacing: .04em;
-      padding: 1px 6px; border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .68rem; font-weight: 500;
+      letter-spacing: .02em;
+      padding: 2px 8px; border-radius: 100px;
       background: rgba(196,151,59,.1);
       border: 1px solid rgba(196,151,59,.2);
       color: rgba(232,201,122,.85);
