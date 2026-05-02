@@ -9,6 +9,8 @@
   <meta name="description" content="Compare current Singapore mortgage rates from 16 banks — fixed from 1.40% p.a. plus SORA packages for HDB &amp; private property. Updated May 2026 · zero fees.">
   <meta name="keywords" content="mortgage rates Singapore, home loan rates Singapore 2026, fixed rate mortgage Singapore, SORA home loan, HDB loan rate, best mortgage rate Singapore">
   <link rel="canonical" href="https://nexusmortgage.sg/mortgage-rates/">
+  <link rel="alternate" type="application/rss+xml" title="Nexus Mortgage SG — Live SORA Rates (RSS)" href="/rates.xml">
+  <link rel="alternate" type="application/json" title="Nexus Mortgage SG — Live SORA Feed (JSON)" href="/sora-feed.json">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Mortgage Rates Singapore 2026 · Fixed &amp; SORA | Nexus">
@@ -38,6 +40,116 @@
         { "@type": "ListItem", "position": 2, "name": "Mortgage Rates", "item": "https://nexusmortgage.sg/mortgage-rates/" }
       ]
     }
+  }
+  </script>
+
+  <!-- Schema.org: Live SORA Dataset -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "Singapore Compounded SORA — Daily Snapshot",
+    "alternateName": ["SORA rate Singapore", "1M 3M 6M Compounded SORA"],
+    "description": "Daily-refreshed snapshot of 1-month, 3-month, and 6-month Compounded Singapore Overnight Rate Average (SORA) used to peg Singapore floating-rate home loans. Source: Monetary Authority of Singapore (MAS).",
+    "url": "https://nexusmortgage.sg/mortgage-rates/#sora-tracker",
+    "keywords": ["SORA", "Singapore home loan rate", "compounded SORA 3M", "MAS"],
+    "license": "https://www.mas.gov.sg/-/media/MAS/Terms-and-Conditions.pdf",
+    "creator": {
+      "@type": "GovernmentOrganization",
+      "name": "Monetary Authority of Singapore",
+      "url": "https://www.mas.gov.sg/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Nexus Mortgage SG",
+      "url": "https://nexusmortgage.sg/"
+    },
+    "spatialCoverage": "Singapore",
+    "temporalCoverage": "2018-08-01/..",
+    "isAccessibleForFree": true,
+    "distribution": [
+      { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://nexusmortgage.sg/sora-feed.json" },
+      { "@type": "DataDownload", "encodingFormat": "application/rss+xml", "contentUrl": "https://nexusmortgage.sg/rates.xml" },
+      { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://nexusmortgage.sg/rates.json" }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org: Mortgage FinancialProduct -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MortgageLoan",
+    "name": "Singapore Home Loan — SORA-pegged & Fixed-rate Comparison",
+    "description": "Independent comparison of fixed-rate and SORA-pegged home loan packages from Singapore's panel of 16+ banks for HDB, private and commercial properties. Stress-tested at the 4.00% MAS Notice 645 floor.",
+    "url": "https://nexusmortgage.sg/mortgage-rates/",
+    "loanType": "Home Loan",
+    "areaServed": "Singapore",
+    "currency": "SGD",
+    "interestRate": {
+      "@type": "QuantitativeValue",
+      "minValue": 1.40,
+      "maxValue": 4.00,
+      "unitText": "PERCENT_PER_ANNUM"
+    },
+    "loanTerm": {
+      "@type": "QuantitativeValue",
+      "unitCode": "ANN",
+      "minValue": 5,
+      "maxValue": 35
+    },
+    "amount": {
+      "@type": "MonetaryAmount",
+      "currency": "SGD",
+      "minValue": 100000,
+      "maxValue": 5000000
+    },
+    "annualPercentageRate": {
+      "@type": "QuantitativeValue",
+      "unitText": "PERCENT_PER_ANNUM",
+      "value": 4.00,
+      "description": "MAS Notice 645 stress-test floor used for TDSR computation."
+    },
+    "provider": {
+      "@type": "MortgageBroker",
+      "name": "Nexus Mortgage SG",
+      "url": "https://nexusmortgage.sg/"
+    },
+    "feesAndCommissionsSpecification": "Free service to borrowers — banks pay a referral fee on successful disbursement. No charge for advice, comparison, or application support."
+  }
+  </script>
+
+  <!-- Schema.org: FAQ — SORA & stress test -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Compounded SORA and how does it affect my home loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compounded SORA is the Singapore Overnight Rate Average compounded over 1, 3 or 6 months. From 2024, all major Singapore banks peg floating home loans to Compounded SORA + a bank spread. When SORA moves, your monthly instalment moves with it after the next reset date."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the MAS 4% stress test for Singapore mortgages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MAS Notice 645 requires lenders to compute TDSR (Total Debt Servicing Ratio) using a 4.00% medium-term interest rate floor. Even if your actual rate is 3.20%, the bank tests whether your monthly debt at 4.00% would still keep you within 55% of gross income — and 30% MSR for HDB."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do you source SORA data from?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compounded SORA values displayed on this page are sourced directly from the Monetary Authority of Singapore (MAS), refreshed daily and published in machine-readable JSON and RSS at https://nexusmortgage.sg/sora-feed.json and https://nexusmortgage.sg/rates.xml."
+        }
+      }
+    ]
   }
   </script>
 
@@ -312,6 +424,239 @@
       .prop-toggle { gap:8px; flex-wrap:wrap; }
       .ptab { font-size:.75rem; padding:7px 13px; }
     }
+
+    /* ===== LIVE SORA TRACKER ===== */
+    .sora-tracker-section { padding: 36px 0 8px; }
+    .st-head { text-align:center; margin-bottom:22px; }
+    .st-head .eyebrow {
+      font-size: .69rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600;
+    }
+    .st-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem; font-weight: 600; color: var(--cream);
+      margin-top: .35rem; letter-spacing: -0.02em;
+    }
+    .st-head h2 em { font-style: italic; color: var(--gold-light); }
+    .st-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .st-card {
+      position: relative;
+      padding: 18px 18px 16px;
+      background: linear-gradient(160deg, rgba(18,34,68,.7) 0%, rgba(11,28,58,.92) 100%);
+      border: 1px solid var(--navy-border);
+      border-radius: 12px;
+      box-shadow: 0 12px 36px -18px rgba(0,0,0,.65), inset 0 1px 0 rgba(196,151,59,.08);
+      transition: transform .25s cubic-bezier(.25,.8,.25,1), border-color .25s;
+    }
+    .st-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: 12px;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(196,151,59,.05), transparent 70%);
+      pointer-events: none;
+    }
+    .st-card:hover { transform: translateY(-2px); border-color: rgba(196,151,59,.32); }
+    .st-card-head {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 10px;
+    }
+    .st-eyebrow {
+      font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600;
+    }
+    .st-tenor {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .9rem; font-style: italic; color: var(--cream-dim);
+    }
+    .st-value-row {
+      display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px;
+    }
+    .st-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 600;
+      color: var(--gold-light); letter-spacing: -0.01em;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+    .st-value::after { content: '%'; font-size: 1.1rem; margin-left: 2px; color: rgba(232,201,122,.55); }
+    .st-delta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem; letter-spacing: .04em;
+      padding: 2px 8px; border-radius: 100px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(196,151,59,.18);
+      color: rgba(250,247,242,.5);
+      font-variant-numeric: tabular-nums;
+    }
+    .st-delta:empty { display:none; }
+    .st-delta[data-dir="up"]   { color: #f5b8b8; border-color: rgba(220,90,90,.35); background: rgba(220,90,90,.06); }
+    .st-delta[data-dir="down"] { color: #b8e8c4; border-color: rgba(70,180,110,.35); background: rgba(70,180,110,.06); }
+    .st-meta {
+      font-size: .68rem; color: rgba(250,247,242,.42);
+      letter-spacing: .04em; margin-top: 2px;
+    }
+    .st-bar {
+      margin-top: 14px; height: 4px; border-radius: 100px;
+      background: rgba(255,255,255,.04); position: relative; overflow: hidden;
+    }
+    .st-bar-fill {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      width: 0%;
+      transition: width .8s cubic-bezier(.25,.8,.25,1);
+    }
+    .st-source {
+      text-align: center; font-size: .72rem; color: rgba(250,247,242,.42);
+      margin: 8px 0 0; letter-spacing: .02em;
+    }
+    .st-source a {
+      color: var(--gold-light); text-decoration: none;
+      border-bottom: 1px dashed rgba(196,151,59,.3);
+      padding-bottom: 1px; transition: border-color .2s, color .2s;
+    }
+    .st-source a:hover { color: var(--gold); border-color: var(--gold); }
+
+    @media (max-width: 760px) {
+      .st-grid { grid-template-columns: 1fr; gap: 10px; }
+      .st-value { font-size: 2rem; }
+    }
+
+    /* ===== STRESS-TEST CALCULATOR ===== */
+    .stress-section { padding: 56px 0 32px; }
+    .stress-wrap {
+      max-width: 900px; margin: 0 auto; padding: 0 20px;
+    }
+    .stress-head { text-align:center; margin-bottom: 26px; }
+    .stress-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 600; color: var(--cream);
+      letter-spacing: -0.02em; margin-bottom: .55rem;
+    }
+    .stress-head h2 em { font-style: italic; color: var(--gold-light); }
+    .stress-head p {
+      font-size: .92rem; color: var(--cream-dim); line-height: 1.65;
+      max-width: 580px; margin: 0 auto;
+    }
+    .stress-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .stress-card {
+      background: linear-gradient(160deg, rgba(18,34,68,.7), rgba(11,28,58,.92));
+      border: 1px solid var(--navy-border);
+      border-radius: 14px;
+      padding: 22px 22px 18px;
+      box-shadow: 0 16px 40px -22px rgba(0,0,0,.7), inset 0 1px 0 rgba(196,151,59,.06);
+    }
+    .ss-form-title {
+      font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 14px;
+    }
+    .ss-field { margin-bottom: 14px; }
+    .ss-field label {
+      display: block;
+      font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+      color: rgba(250,247,242,.6); margin-bottom: 5px; font-weight: 500;
+    }
+    .ss-field input {
+      width: 100%;
+      padding: 10px 12px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(196,151,59,.18);
+      border-radius: 8px;
+      color: var(--cream);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .98rem;
+      font-variant-numeric: tabular-nums;
+      transition: border-color .2s, background .2s;
+    }
+    .ss-field input:focus {
+      outline: none; border-color: var(--gold);
+      background: rgba(0,0,0,.35);
+      box-shadow: 0 0 0 3px rgba(196,151,59,.12);
+    }
+    .ss-hint {
+      font-size: .7rem; color: rgba(250,247,242,.42);
+      line-height: 1.55; margin-top: 4px;
+    }
+    .ss-hint a { color: var(--gold-light); text-decoration: none; border-bottom: 1px dashed rgba(196,151,59,.3); }
+    .ss-out { padding: 4px 0; }
+    .ss-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 14px 18px; border-radius: 10px;
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(196,151,59,.1);
+      margin-bottom: 8px;
+    }
+    .ss-row.primary {
+      background: linear-gradient(135deg, rgba(196,151,59,.12), rgba(196,151,59,.04));
+      border-color: rgba(196,151,59,.32);
+    }
+    .ss-row.stress {
+      background: linear-gradient(135deg, rgba(220,90,90,.08), rgba(220,90,90,.02));
+      border-color: rgba(220,90,90,.32);
+    }
+    .ss-lbl { font-size: .82rem; color: var(--cream-dim); }
+    .ss-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; color: var(--gold-light);
+      font-variant-numeric: tabular-nums;
+    }
+    .ss-row.stress .ss-val { color: #f5b8b8; }
+    .ss-table {
+      width: 100%; margin-top: 10px;
+      border-collapse: separate; border-spacing: 0;
+      background: rgba(0,0,0,.18); border-radius: 10px; overflow: hidden;
+      border: 1px solid rgba(196,151,59,.1);
+    }
+    .ss-table th {
+      font-size: .62rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; text-align: left;
+      padding: 9px 14px; background: rgba(196,151,59,.06);
+      border-bottom: 1px solid rgba(196,151,59,.12);
+    }
+    .ss-table th:nth-child(2),
+    .ss-table th:nth-child(3),
+    .ss-table th:nth-child(4) { text-align: right; }
+    .ss-table td {
+      padding: 9px 14px; font-size: .82rem; color: var(--cream-dim);
+      font-variant-numeric: tabular-nums;
+      border-bottom: 1px solid rgba(196,151,59,.05);
+    }
+    .ss-table td:nth-child(2),
+    .ss-table td:nth-child(3),
+    .ss-table td:nth-child(4) {
+      text-align: right; font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+    }
+    .ss-table tbody tr:last-child td { border-bottom: none; }
+    .ss-table tbody tr.is-stress td { background: rgba(220,90,90,.06); }
+    .ss-table tbody tr.is-stress td:first-child { color: #f5b8b8; font-weight: 500; }
+    .ss-note {
+      font-size: .68rem; color: rgba(250,247,242,.4);
+      line-height: 1.55; margin-top: 10px; text-align: center;
+    }
+    .ss-note a { color: var(--gold-light); text-decoration: none; border-bottom: 1px dashed rgba(196,151,59,.3); }
+    .ss-pill {
+      display: inline-block; margin-left: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem; letter-spacing: .04em;
+      padding: 1px 6px; border-radius: 100px;
+      background: rgba(196,151,59,.1);
+      border: 1px solid rgba(196,151,59,.2);
+      color: rgba(232,201,122,.85);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 760px) {
+      .stress-grid { grid-template-columns: 1fr; }
+      .ss-val { font-size: 1.3rem; }
+    }
       /* ==== Tools dropdown items ==== */
     .tools-dd-item {
       display: block;
@@ -484,6 +829,60 @@
     </div>
   </header>
 
+  <!-- ===== LIVE SORA TRACKER ===== -->
+  <section class="sora-tracker-section" id="sora-tracker" aria-labelledby="sora-tracker-title">
+    <div class="rates-inner">
+      <div class="st-head">
+        <span class="eyebrow">Live Benchmark</span>
+        <h2 id="sora-tracker-title">Compounded <em>SORA</em> · Live</h2>
+      </div>
+      <div class="st-grid">
+        <article class="st-card" data-tenor="1m">
+          <div class="st-card-head">
+            <span class="st-eyebrow">Compounded</span>
+            <span class="st-tenor">1-Month</span>
+          </div>
+          <div class="st-value-row">
+            <span class="st-value tabular-nums" id="stk-1m">—</span>
+            <span class="st-delta" id="stk-1m-d" data-dir=""></span>
+          </div>
+          <div class="st-meta">As of <span id="stk-asof">—</span></div>
+          <div class="st-bar" aria-hidden="true"><div class="st-bar-fill" id="stk-1m-bar"></div></div>
+        </article>
+        <article class="st-card" data-tenor="3m">
+          <div class="st-card-head">
+            <span class="st-eyebrow">Compounded</span>
+            <span class="st-tenor">3-Month</span>
+          </div>
+          <div class="st-value-row">
+            <span class="st-value tabular-nums" id="stk-3m">—</span>
+            <span class="st-delta" id="stk-3m-d" data-dir=""></span>
+          </div>
+          <div class="st-meta">Most-used floating peg</div>
+          <div class="st-bar" aria-hidden="true"><div class="st-bar-fill" id="stk-3m-bar"></div></div>
+        </article>
+        <article class="st-card" data-tenor="6m">
+          <div class="st-card-head">
+            <span class="st-eyebrow">Compounded</span>
+            <span class="st-tenor">6-Month</span>
+          </div>
+          <div class="st-value-row">
+            <span class="st-value tabular-nums" id="stk-6m">—</span>
+            <span class="st-delta" id="stk-6m-d" data-dir=""></span>
+          </div>
+          <div class="st-meta">Lower volatility peg</div>
+          <div class="st-bar" aria-hidden="true"><div class="st-bar-fill" id="stk-6m-bar"></div></div>
+        </article>
+      </div>
+      <p class="st-source">
+        Source: Monetary Authority of Singapore ·
+        <a href="/rates.xml">RSS</a> ·
+        <a href="/sora-feed.json">JSON</a> ·
+        <a href="#stress-test">Stress-test &darr;</a>
+      </p>
+    </div>
+  </section>
+
   <!-- ===== RATES WIDGET ===== -->
   <section class="rates-section">
     <div class="rates-inner">
@@ -569,6 +968,84 @@
           </a>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STRESS-TEST CALCULATOR ===== -->
+  <section class="stress-section" id="stress-test" aria-labelledby="stress-title">
+    <div class="stress-wrap">
+      <div class="stress-head">
+        <span class="eyebrow" style="font-size:.69rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;">MAS Notice 645</span>
+        <h2 id="stress-title">Stress-Test Your <em>Mortgage</em> at 4%</h2>
+        <p>MAS requires lenders to compute TDSR using a 4.00% medium-term floor — even if your actual rate is lower. Use this to see your worst-case monthly instalment plus how rate hikes affect cash flow.</p>
+      </div>
+      <div class="stress-grid">
+        <form class="stress-card" id="stressForm" autocomplete="off" onsubmit="return false;">
+          <div class="ss-form-title">Loan Inputs</div>
+          <div class="ss-field">
+            <label for="ssLoan">Loan amount (S$)</label>
+            <input type="text" id="ssLoan" value="800,000" inputmode="numeric" autocomplete="off" data-fmt="num">
+          </div>
+          <div class="ss-field">
+            <label for="ssYears">Tenure (years)</label>
+            <input type="number" id="ssYears" value="30" min="5" max="35" step="1" inputmode="numeric">
+          </div>
+          <div class="ss-field">
+            <label for="ssRate">Current pegged rate (% p.a.)</label>
+            <input type="number" id="ssRate" value="3.50" step="0.01" min="0.5" max="10" inputmode="decimal">
+            <p class="ss-hint" id="ssPeggedHint">Live default: 3M Compounded SORA + 0.80% spread.</p>
+          </div>
+          <div class="ss-field">
+            <label style="opacity:.7;">Stress floor</label>
+            <input type="text" value="4.00% (MAS)" disabled style="opacity:.6;">
+          </div>
+
+        </form>
+        <div class="ss-out">
+          <div class="ss-row primary">
+            <span class="ss-lbl">Monthly at <span id="ssRateLbl">3.50</span>%</span>
+            <span class="ss-val tabular-nums" id="ssMonthly">—</span>
+          </div>
+          <div class="ss-row stress">
+            <span class="ss-lbl">Stress-tested @ 4.00%</span>
+            <span class="ss-val tabular-nums" id="ssMonthlyStress">—</span>
+          </div>
+          <table class="ss-table" aria-label="Rate sensitivity scenarios">
+            <thead>
+              <tr><th>Scenario</th><th>Rate</th><th>Monthly</th><th>Δ vs current</th></tr>
+            </thead>
+            <tbody id="ssScenTbody">
+              <tr><td colspan="4" style="text-align:center;color:rgba(250,247,242,.4);">Loading…</td></tr>
+            </tbody>
+          </table>
+
+          <!-- Min income required @ 4% stress -->
+          <div class="ss-form-title" style="margin:22px 0 10px;">Minimum Income Required @ 4% Stress</div>
+          <div class="ss-row primary">
+            <span class="ss-lbl">Private property &middot; 55% TDSR <span class="ss-pill" id="ssTdsrPill">—</span></span>
+            <span class="ss-val tabular-nums" id="ssMinPriv">—</span>
+          </div>
+          <div class="ss-row primary">
+            <span class="ss-lbl">HDB / EC &middot; 30% MSR <span class="ss-pill" id="ssMsrPill">—</span></span>
+            <span class="ss-val tabular-nums" id="ssMinHdb">—</span>
+          </div>
+          <table class="ss-table" aria-label="Minimum income breakdown">
+            <thead>
+              <tr><th>Cap</th><th>Stress Monthly</th><th>Min Gross Income</th><th>Tenure</th></tr>
+            </thead>
+            <tbody id="ssCapTbody"></tbody>
+          </table>
+
+          <p class="ss-note">
+            Min income = stress-tested monthly &divide; servicing cap.
+            Tenure auto-capped: HDB / EC max 25 years, private property max 30 years.
+            Stress floor per
+            <a href="/blog/blog-mas-stress-test-2026.html">MAS Notice 645</a>.
+            Excludes other debts &mdash; car/CC/personal loans reduce TDSR headroom.
+            For a personalised IPA, <a href="/free-report/">request your free report</a>.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -918,6 +1395,196 @@
     })
     .catch(function(){})
     .finally(renderInit);
+  </script>
+
+  <!-- ===== SORA TRACKER + STRESS-TEST WIRING ===== -->
+  <script>
+    (function () {
+      const STRESS_FLOOR = 4.0;
+      const DEFAULT_SPREAD = 0.80;
+      const TDSR_CAP = 0.55;            // private property
+      const MSR_CAP  = 0.30;            // HDB / EC
+      const HDB_MAX_TENURE = 25;        // HDB loan / bank loan on HDB
+      const PRIV_MAX_TENURE = 30;       // private property bank loan
+
+      const fmt2 = (v) => v == null ? '—' : Number(v).toFixed(2);
+      const fmtNum = (v) => v == null ? '—' : Math.round(v).toLocaleString('en-SG');
+      const fmtSGD = (v) => v == null ? '—' : 'S$' + fmtNum(v);
+      const parseNum = (s) => {
+        if (s == null) return NaN;
+        const cleaned = String(s).replace(/[^0-9.]/g, '');
+        if (!cleaned) return NaN;
+        return parseFloat(cleaned);
+      };
+      const fmtDate = (s) => {
+        if (!s) return '—';
+        const d = new Date(s);
+        if (!isNaN(d)) return d.toLocaleDateString('en-SG', { day: '2-digit', month: 'short', year: 'numeric' });
+        return s;
+      };
+      function pmt(P, annualPct, years) {
+        const i = annualPct / 100 / 12;
+        const N = years * 12;
+        if (!isFinite(i) || i <= 0) return P / N;
+        return P * i / (1 - Math.pow(1 + i, -N));
+      }
+      // Reverse PMT: max principal supportable given monthly payment, rate, tenure
+      function maxPrincipal(M, annualPct, years) {
+        const i = annualPct / 100 / 12;
+        const N = years * 12;
+        if (M <= 0 || N <= 0) return 0;
+        if (!isFinite(i) || i <= 0) return M * N;
+        return M * (1 - Math.pow(1 + i, -N)) / i;
+      }
+      function setText(id, v) { const el = document.getElementById(id); if (el) el.textContent = v; }
+      function setHTML(id, v) { const el = document.getElementById(id); if (el) el.innerHTML = v; }
+      function setBar(id, pct) {
+        const el = document.getElementById(id); if (!el) return;
+        el.style.width = Math.max(0, Math.min(100, pct)) + '%';
+      }
+      function setDelta(id, delta) {
+        const el = document.getElementById(id); if (!el) return;
+        if (delta == null || delta === 0 || !isFinite(delta)) { el.textContent = ''; el.dataset.dir = ''; return; }
+        const arrow = delta > 0 ? '↑' : '↓';
+        el.textContent = `${arrow} ${Math.abs(delta).toFixed(2)}`;
+        el.dataset.dir = delta > 0 ? 'up' : 'down';
+      }
+
+      // ===== Comma-formatting bind for [data-fmt="num"] inputs =====
+      function bindNumInput(el) {
+        if (!el) return;
+        const reformat = () => {
+          const caretFromEnd = el.value.length - (el.selectionStart ?? el.value.length);
+          const n = parseNum(el.value);
+          if (!isFinite(n)) { return; }
+          el.value = n.toLocaleString('en-SG');
+          // Restore caret near same logical position
+          const pos = Math.max(0, el.value.length - caretFromEnd);
+          try { el.setSelectionRange(pos, pos); } catch (_) {}
+        };
+        el.addEventListener('input', () => { reformat(); recomputeStress(); });
+        el.addEventListener('blur',  reformat);
+      }
+      document.querySelectorAll('input[data-fmt="num"]').forEach(bindNumInput);
+
+      let liveSora3m = null;
+
+      Promise.all([
+        fetch('/rates.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null),
+        fetch('/rates-history.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null),
+        fetch('/sora-feed.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null)
+      ]).then(([rates, hist, feed]) => {
+        const ref = (rates && rates.refRates) || {};
+        const s1 = ref.sora1m  ?? feed?.sora?.compounded_1m_pct;
+        const s3 = ref.sora3m  ?? feed?.sora?.compounded_3m_pct;
+        const s6 = ref.sora6m  ?? feed?.sora?.compounded_6m_pct;
+        liveSora3m = s3 ?? null;
+
+        setText('stk-1m', fmt2(s1));
+        setText('stk-3m', fmt2(s3));
+        setText('stk-6m', fmt2(s6));
+
+        const asOf = feed?.asOfSora || rates?.asOfSora || rates?.asOf;
+        setText('stk-asof', fmtDate(asOf));
+
+        const cap = 5;
+        if (s1 != null) setBar('stk-1m-bar', (s1 / cap) * 100);
+        if (s3 != null) setBar('stk-3m-bar', (s3 / cap) * 100);
+        if (s6 != null) setBar('stk-6m-bar', (s6 / cap) * 100);
+
+        const ch = hist && hist[0] && hist[0].refRateChanges;
+        if (ch) {
+          setDelta('stk-1m-d', ch.sora1m?.delta);
+          setDelta('stk-3m-d', ch.sora3m?.delta);
+          setDelta('stk-6m-d', ch.sora6m?.delta);
+        }
+
+        const ssRate = document.getElementById('ssRate');
+        const ssHint = document.getElementById('ssPeggedHint');
+        if (ssRate && liveSora3m != null) {
+          const eff = +(liveSora3m + DEFAULT_SPREAD).toFixed(2);
+          ssRate.value = eff.toFixed(2);
+          if (ssHint) ssHint.innerHTML =
+            `Pre-filled: 3M Compounded SORA <strong>${liveSora3m.toFixed(2)}%</strong> + 0.80% typical spread = ` +
+            `<strong>${eff.toFixed(2)}%</strong>. Edit to match your offer.`;
+        }
+        recomputeStress();
+      });
+
+      function recomputeStress() {
+        const P = parseNum(document.getElementById('ssLoan').value);
+        const Y = parseNum(document.getElementById('ssYears').value);
+        const R = parseFloat(document.getElementById('ssRate').value);
+
+        const validLoan = isFinite(P) && isFinite(Y) && isFinite(R) && P > 0 && Y > 0 && R >= 0;
+        if (!validLoan) {
+          document.getElementById('ssCapTbody').innerHTML =
+            '<tr><td colspan="4" style="text-align:center;color:rgba(250,247,242,.4);">Enter loan amount, tenure, and rate.</td></tr>';
+          return;
+        }
+
+        const monthlyCurr = pmt(P, R, Y);
+        const monthlyStress = pmt(P, STRESS_FLOOR, Y);
+        setText('ssRateLbl', R.toFixed(2));
+        setText('ssMonthly', fmtSGD(monthlyCurr));
+        setText('ssMonthlyStress', fmtSGD(monthlyStress));
+
+        const scenarios = [
+          { label: 'Current',               rate: R },
+          { label: 'Rate +1%',              rate: R + 1 },
+          { label: 'Rate +2%',              rate: R + 2 },
+          { label: 'Rate +3%',              rate: R + 3 },
+          { label: 'MAS stress floor (4%)', rate: STRESS_FLOOR, isStress: true }
+        ];
+        document.getElementById('ssScenTbody').innerHTML = scenarios.map(s => {
+          const m = pmt(P, s.rate, Y);
+          const delta = m - monthlyCurr;
+          const sign = delta >= 0 ? '+' : '−';
+          const deltaStr = delta === 0 ? '—' : `${sign}${fmtSGD(Math.abs(delta))}`;
+          return `<tr class="${s.isStress ? 'is-stress' : ''}">
+            <td>${s.label}</td>
+            <td>${s.rate.toFixed(2)}%</td>
+            <td>${fmtSGD(m)}</td>
+            <td>${deltaStr}</td>
+          </tr>`;
+        }).join('');
+
+        // ===== Min income required @ 4% stress =====
+        // HDB capped at 25y, private at 30y (regulatory max). User's ssYears tenure
+        // does NOT drive these rows — the formula uses each property type's max
+        // tenure (best-case affordability). Sensitivity table above uses ssYears.
+        const Yhdb  = Math.min(Y, HDB_MAX_TENURE);
+        const Ypriv = Math.min(Y, PRIV_MAX_TENURE);
+        const stressMonthlyHdb  = pmt(P, STRESS_FLOOR, Yhdb);
+        const stressMonthlyPriv = pmt(P, STRESS_FLOOR, Ypriv);
+        const minIncomePriv = stressMonthlyPriv / TDSR_CAP;  // 55% (private)
+        const minIncomeHdb  = stressMonthlyHdb  / MSR_CAP;   // 30% (HDB/EC)
+
+        setHTML('ssTdsrPill', `${fmtSGD(stressMonthlyPriv)}/mo &middot; ${Ypriv}y`);
+        setHTML('ssMsrPill',  `${fmtSGD(stressMonthlyHdb)}/mo &middot; ${Yhdb}y`);
+        setText('ssMinPriv', fmtSGD(minIncomePriv));
+        setText('ssMinHdb',  fmtSGD(minIncomeHdb));
+
+        const capRows = [
+          { label: 'TDSR 55% (private)', monthly: stressMonthlyPriv, income: minIncomePriv, yrs: Ypriv },
+          { label: 'MSR 30% (HDB / EC)', monthly: stressMonthlyHdb,  income: minIncomeHdb,  yrs: Yhdb  }
+        ];
+        document.getElementById('ssCapTbody').innerHTML = capRows.map(r => `
+          <tr>
+            <td>${r.label}</td>
+            <td>${fmtSGD(r.monthly)}</td>
+            <td>${fmtSGD(r.income)}</td>
+            <td>${r.yrs} yrs</td>
+          </tr>
+        `).join('');
+      }
+
+      ['ssYears','ssRate'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', recomputeStress);
+      });
+      recomputeStress();
+    })();
   </script>
 
 

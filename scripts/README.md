@@ -2,12 +2,24 @@
 
 The rates the website shows live in two layers:
 
-1. **`/login/rates.xlsx`** — your master spreadsheet, edited like any normal Excel file. Wide pivot table with one column per (lender × package × qualifying-tier).
+1. **`/rates.xlsx`** (project root) — master spreadsheet, edited like any normal Excel file. Wide pivot table with one column per (lender × package × qualifying-tier). Legacy path `/login/rates.xlsx` still supported as fallback.
 2. **`/rates.json`** — generated, normalised JSON. Read by the website at runtime.
 
-## To update rates
+## Daily SORA Auto-Refresh (CI)
 
-1. Open `/login/rates.xlsx`, edit the values you need (rates, qualifying amounts, lock-ins).
+`scripts/fetch-mas-rates.mjs` runs daily at 09:00 SGT via GitHub Action
+(`.github/workflows/fetch-mas-rates.yml`). Pipeline:
+
+1. `node scripts/fetch-mas-rates.mjs` — pull live SORA from MAS, update `rates.json.refRates`.
+2. `python3 scripts/convert-rates.py --use-json-refs` — re-read `rates.xlsx`, override refRates with the just-fetched values, recompute every package's `year1Rate` (so `/free-report/` and the PDF get fresh numbers).
+3. `node scripts/fetch-mas-rates.mjs --feeds-only` — regenerate `rates.xml` + `sora-feed.json` from the post-Python `rates.json`.
+4. Commit + push if anything changed.
+
+Set repo Variable `MAS_API_URL` to override the default endpoint when MAS publishes a known-good URL.
+
+## To update rates manually (when you change the xlsx)
+
+1. Open `/rates.xlsx`, edit the values you need (rates, qualifying amounts, lock-ins).
 2. Save the file.
 3. From the project root, run:
 
@@ -22,7 +34,17 @@ The rates the website shows live in two layers:
      Lenders:  {'DBS': 18, 'UOB': 18, 'CITI': 4, ...}
    ```
 
-4. Commit and push `login/rates.xlsx`, `rates.json`, **and `rates-history.json`**.
+4. Commit and push `rates.xlsx`, `rates.json`, **and `rates-history.json`**.
+
+## Flag: `--use-json-refs`
+
+Force `convert-rates.py` to read `refRates` from the existing `rates.json` instead
+of the xlsx's reference-rate cells. Used by the daily cron so MAS-fetched SORA
+values flow into per-package `year1Rate`. Run manually:
+
+```bash
+node scripts/fetch-mas-rates.mjs && python3 scripts/convert-rates.py --use-json-refs
+```
 
 ## Tracking changes
 
@@ -70,7 +92,7 @@ Open **`/login/rates-admin.html`** in a browser to see the live state:
 
 - **`/free-report/`** fetches `rates.json` and picks the best package per (lender, family) for the user's loan amount tier. Falls back to a baked-in 6-bank list if the JSON fails to load.
 - **`/mortgage-rates/`** fetches `rates.json` to keep its 1M SORA / 3M SORA / FHR6 reference rates and the "as of" date in sync. The full package cards on that page still use the curated inline config (richer formatting, lock-in details, after-fixed continuation strings).
-- **`/login/`** — the master xlsx lives here.
+- **`/rates.xlsx`** (root) — the master xlsx lives here. Legacy path `/login/rates.xlsx` still works as fallback.
 
 ## Schema notes
 
