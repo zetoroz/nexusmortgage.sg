@@ -3579,6 +3579,10 @@ modeToggle.addEventListener('click', e => {
   $('form-purchase').style.display = mode === 'purchase' ? '' : 'none';
   $('form-refinance').style.display = mode === 'refinance' ? '' : 'none';
   positionModeIndicator();
+  // Re-position prop indicators in the now-visible form: at page load the
+  // hidden form's toggle had offsetWidth 0, so the navy pill rendered as 0px,
+  // leaving the active button's cream text on the light track (looked missing).
+  document.querySelectorAll('.prop-toggle').forEach(positionPropIndicator);
   if (mode === 'refinance' && typeof renderRefiDashboard === 'function') renderRefiDashboard();
 });
 window.addEventListener('load', positionModeIndicator);
