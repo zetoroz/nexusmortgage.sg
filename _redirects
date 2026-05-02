@@ -1,0 +1,7 @@
+# Cloudflare Pages redirect rules.
+# Format: <source> <destination> <status>[!]
+# The trailing ! forces the rule even when a real file exists at the path.
+
+# Block public download of master rate sheet — competitor / data-leak protection.
+/rates.xlsx        /  404!
+/login/rates.xlsx  /  404!
