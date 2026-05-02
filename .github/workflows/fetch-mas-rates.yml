@@ -1,0 +1,66 @@
+name: Daily SORA refresh (MAS)
+
+# Runs daily at 09:00 Singapore time (01:00 UTC), commits any change.
+on:
+  schedule:
+    - cron: '0 1 * * *'   # 01:00 UTC = 09:00 SGT
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-mas-rates
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python deps
+        run: pip install openpyxl
+
+      - name: Fetch SORA from MAS + regenerate feeds
+        env:
+          # Optional override; defaults to documented MAS endpoint inside the script
+          MAS_API_URL: ${{ vars.MAS_API_URL }}
+        run: node scripts/fetch-mas-rates.mjs
+
+      - name: Recompute per-package year1Rate using fresh refRates
+        # Reads rates.xlsx (root) + overrides refRates from rates.json (just updated).
+        # Re-emits rates.json with packages[].year1Rate using live SORA.
+        run: python3 scripts/convert-rates.py --use-json-refs
+
+      - name: Re-regenerate feeds with refreshed packages
+        # Second pass writes rates.xml + sora-feed.json from the post-Python rates.json
+        # without hitting MAS again (no duplicate history entry).
+        run: node scripts/fetch-mas-rates.mjs --feeds-only
+
+      - name: Stage outputs
+        run: |
+          git add -A rates.json rates-history.json rates.xml sora-feed.json || true
+
+      - name: Commit + push if changed
+        run: |
+          if git diff --cached --quiet; then
+            echo "No rate changes — nothing to commit."
+            exit 0
+          fi
+          git config user.name  "nexus-rates-bot"
+          git config user.email "rates-bot@users.noreply.github.com"
+          DATE_SGT=$(TZ=Asia/Singapore date '+%Y-%m-%d')
+          git commit -m "chore(rates): daily SORA refresh ${DATE_SGT}"
+          git push

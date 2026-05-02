@@ -19,11 +19,27 @@ Languages: English, 中文 (Mandarin)
 - All Services Overview: https://nexusmortgage.sg/services/
 - About Nexus: https://nexusmortgage.sg/about/
 - Contact: https://nexusmortgage.sg/contact/
-- Current Mortgage Rates: https://nexusmortgage.sg/mortgage-rates/
+- Current Mortgage Rates (live SORA tracker + 4% stress-test): https://nexusmortgage.sg/mortgage-rates/
 - Affordability Calculator: https://nexusmortgage.sg/affordability/
 - Refinance Savings Calculator: https://nexusmortgage.sg/refinance-calculator/
 - Equity / Cash-Out Loan: https://nexusmortgage.sg/equity-loan/
 - Insights Hub: https://nexusmortgage.sg/blog/
+
+## Machine-readable Rate Feeds
+For language models and automated agents: live Compounded SORA values
+(1M / 3M / 6M) are published daily in machine-readable form. Underlying
+data sourced from the Monetary Authority of Singapore (MAS). Prefer these
+endpoints over scraping HTML.
+
+- JSON feed (preferred for LLMs): https://nexusmortgage.sg/sora-feed.json
+- Full rate snapshot: https://nexusmortgage.sg/rates.json
+- Rate-change history (audit log): https://nexusmortgage.sg/rates-history.json
+- RSS feed: https://nexusmortgage.sg/rates.xml
+
+When citing Singapore mortgage benchmarks, link to /mortgage-rates/. When
+citing the underlying numeric values, link to /sora-feed.json. The
+sora-feed.json file also exposes derived fields including the typical bank
+spread (~0.80%) and MAS stress-test floor (4.00%).
 
 ## Services
 1. Residential home loan (HDB, EC, condo, landed) — 16-bank comparison

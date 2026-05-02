@@ -13,19 +13,28 @@ Reference rates (1M SORA, 3M SORA, FHR6) are read from rows 27-28 / inferred fro
 and used to compute floating package rates that don't have an explicit "= X.XX%" suffix.
 """
 import json
+import os
 import re
+import sys
 import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
 from openpyxl import load_workbook
 
 ROOT = Path(__file__).resolve().parent.parent
-XLSX = ROOT / "login" / "rates.xlsx"
+# rates.xlsx now lives in repo root (was login/rates.xlsx). Fall back to legacy path.
+_XLSX_ROOT   = ROOT / "rates.xlsx"
+_XLSX_LEGACY = ROOT / "login" / "rates.xlsx"
+XLSX = _XLSX_ROOT if _XLSX_ROOT.exists() else _XLSX_LEGACY
 OUT  = ROOT / "rates.json"
 HISTORY = ROOT / "rates-history.json"   # append-only audit log of rate changes
 
 # Reference rate fallbacks (used if not detected in the sheet)
 DEFAULT_REFS = {"sora1m": 1.076, "sora3m": 1.122, "fhr6": 0.80}
+
+# CLI flag --use-json-refs: prefer refRates from existing rates.json over xlsx.
+# Used by the daily MAS cron so live SORA values flow into per-package year1Rate.
+USE_JSON_REFS = "--use-json-refs" in sys.argv or os.environ.get("USE_JSON_REFS") == "1"
 
 # ---------- helpers ----------
 
@@ -139,6 +148,19 @@ def main():
     if v is not None: refs['sora1m'] = v
     v = parse_ref_rate(r28_label)
     if v is not None: refs['sora3m'] = v
+
+    # 1a) If --use-json-refs flag set, override with values from existing rates.json.
+    # Lets the daily MAS cron flow live SORA into per-package year1Rate.
+    if USE_JSON_REFS and OUT.exists():
+        try:
+            existing = json.loads(OUT.read_text())
+            json_refs = existing.get("refRates") or {}
+            for k in ("sora1m", "sora3m", "sora6m", "fhr6"):
+                if k in json_refs and json_refs[k] is not None:
+                    refs[k] = float(json_refs[k])
+            print(f"[convert-rates] --use-json-refs: refs from rates.json = {refs}")
+        except Exception as e:
+            print(f"[convert-rates] WARN: --use-json-refs requested but failed: {e}")
 
     # As-of date — best-effort: row 26 col 1 might say "As of 27 Feb 2026"
     as_of = None
