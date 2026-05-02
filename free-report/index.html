@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<title>Free Mortgage Report Singapore | Personalised Bank Rates | Nexus Mortgage</title>
-<meta name="description" content="Get your free personalised mortgage report in 60 seconds. Compare rates from 16 banks, see your TDSR/MSR, monthly payment, and total interest — instantly.">
+<title>Free Mortgage Report Singapore | 16 Banks · Nexus</title>
+<meta name="description" content="Get your free personalised mortgage report in 60 seconds. Compare home loan rates from 16 Singapore banks, with TDSR/MSR & monthly payment — instantly.">
 <meta name="keywords" content="free mortgage report singapore, personalised home loan rates, mortgage calculator singapore, refinance report, TDSR MSR check">
 <meta property="og:title" content="Free Mortgage Report — See Rates From 16 Banks | Nexus Mortgage">
 <meta property="og:description" content="Compare home loan rates from 16 Singapore banks. Free personalised report with full savings breakdown — delivered to your inbox.">
@@ -16,12 +16,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="/styles.min.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- Chart.js + jsPDF moved to bottom of body / lazy-loaded for faster LCP -->
 
 <!-- tailwind config moved to tailwind.config.js -->
 
@@ -193,12 +191,12 @@ body::after {
   box-shadow:
     0 1px 0 rgba(11,18,32,.02),
     0 2px 8px rgba(11,18,32,.03);
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 14px; line-height: 1.5; color: var(--ink);
 }
 
-.console-display { font-family: 'Fraunces', serif; font-optical-sizing: auto; letter-spacing: -0.02em; }
-.console-display-num { font-family: 'Fraunces', serif; font-feature-settings: 'tnum' 1, 'lnum' 1; font-variant-numeric: tabular-nums lining-nums; }
+.console-display { font-family: 'Cormorant Garamond', serif; font-optical-sizing: auto; letter-spacing: -0.02em; }
+.console-display-num { font-family: 'Cormorant Garamond', serif; font-feature-settings: 'tnum' 1, 'lnum' 1; font-variant-numeric: tabular-nums lining-nums; }
 
 .sec-tag {
   font-size: 10px; letter-spacing: 0.16em;
@@ -262,7 +260,7 @@ body::after {
   padding-bottom: 2px;
 }
 .form-section-num {
-  font-family: 'Fraunces', serif; font-size: 11px;
+  font-family: 'Cormorant Garamond', serif; font-size: 11px;
   color: var(--muted); letter-spacing: .04em;
   font-feature-settings: 'tnum' 1, 'lnum' 1;
 }
@@ -441,7 +439,7 @@ body::after {
   text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
 }
 .metric-val {
-  font-family: 'Fraunces', serif; font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-family: 'Cormorant Garamond', serif; font-feature-settings: 'tnum' 1, 'lnum' 1;
   font-size: 28px; font-weight: 500; color: var(--ink);
   line-height: 1.05; letter-spacing: -.02em;
 }
@@ -603,7 +601,7 @@ body::after {
   color: var(--accent-strong);
 }
 .gate-card h3 {
-  font-family: 'Fraunces', serif; font-size: 22px;
+  font-family: 'Cormorant Garamond', serif; font-size: 22px;
   letter-spacing: -.01em; color: var(--ink);
   margin-bottom: 6px;
 }
@@ -837,13 +835,13 @@ body::after {
   color: var(--ink);
   font-weight: 600;
   font-size: 18px;
-  font-family: 'Fraunces', serif;
+  font-family: 'Cormorant Garamond', serif;
 }
 .res-label { font-size: 13px; color: var(--ink-2); }
 .res-sublabel { font-size: 11px; color: var(--faint); margin-top: 1px; }
 .res-value {
   font-size: 14px; font-weight: 500; color: var(--ink);
-  font-family: 'Fraunces', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-feature-settings: 'tnum' 1, 'lnum' 1;
   font-variant-numeric: tabular-nums lining-nums;
 }
@@ -857,7 +855,7 @@ body::after {
   margin-bottom: 8px;
 }
 .res-card-h3 {
-  font-family: 'Fraunces', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 17px; font-weight: 500;
   color: var(--ink);
   margin-bottom: 14px;
@@ -1052,7 +1050,7 @@ body::after {
 }
 .refi-net-cost .value {
   color: var(--navy-900); font-size: 16px; font-weight: 700;
-  font-family: 'Fraunces', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-variant-numeric: tabular-nums lining-nums;
 }
 
@@ -1181,7 +1179,7 @@ body::after {
   border-radius: 18px;
   width: 100%; max-width: 480px;
   padding: 32px 32px 28px;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   position: relative;
   animation: popIn .35s cubic-bezier(.34,1.56,.64,1);
   box-shadow: 0 30px 60px -12px rgba(11,18,32,.45);
@@ -1204,7 +1202,7 @@ body::after {
   margin-bottom: 14px;
 }
 .modal-title {
-  font-family: 'Fraunces', serif; font-size: 26px; line-height: 1.15;
+  font-family: 'Cormorant Garamond', serif; font-size: 26px; line-height: 1.15;
   letter-spacing: -.015em; color: var(--ink); margin-bottom: 6px;
 }
 .modal-sub { color: var(--muted); font-size: 14px; line-height: 1.55; margin-bottom: 20px; }
@@ -1216,7 +1214,7 @@ body::after {
   transform: translate(-50%, 80px);
   background: var(--ink); color: white;
   padding: 12px 18px; border-radius: 10px;
-  font-size: 13.5px; font-weight: 500; font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13.5px; font-weight: 500; font-family: 'DM Sans', sans-serif;
   z-index: 250; opacity: 0; pointer-events: none;
   display: flex; align-items: center; gap: 10px;
   box-shadow: 0 12px 30px rgba(11,18,32,.4);
@@ -2412,7 +2410,105 @@ body::after {
       </div>
       <div style="display:flex; align-items:center; gap:8px; font-size:.78rem; color: var(--muted);">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        Trusted by 500+ Singapore homeowners
+        Built by a Singapore mortgage advisor
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="testimonials" style="background: var(--cream-100); padding: 5rem 0; position: relative;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div style="text-align:center; margin-bottom: 3rem;">
+      <span class="sec-tag" style="color: var(--gold-500);">Client outcomes</span>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 400; color: var(--navy-900); margin-top: .5rem;">
+        Real <em style="font-style:italic; color:var(--gold-500);">savings</em>, real Singaporeans
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- TESTIMONIAL: Steven -->
+      <div class="testimonial-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem; box-shadow: 0 1px 0 rgba(11,18,32,.02), 0 8px 24px rgba(11,18,32,.04); position: relative; display: flex; flex-direction: column;">
+        <div style="display:flex; align-items:center; gap:4px; margin-bottom: 1rem; color: var(--gold-500);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size: 1.15rem; line-height: 1.55; color: var(--ink); font-style: italic; margin-bottom: 1.5rem; flex: 1;">
+          &ldquo;Refinanced from 2%+ down to 1.5%, effectively saving $400+ a month. Couldn't have asked for more — freed up extra cash for other investments.&rdquo;
+        </p>
+        <div style="border-top: 1px solid var(--border); padding-top: 1rem; display:flex; justify-content: space-between; align-items: center; gap: .75rem;">
+          <div>
+            <div style="font-weight: 600; color: var(--navy-900); font-size: .95rem;">Steven</div>
+            <div style="font-size: .82rem; color: var(--muted); margin-top: 2px;">HDB · Punggol</div>
+          </div>
+          <span style="font-size: .68rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-500); border: 1px solid rgba(196,151,59,.4); padding: 4px 10px; border-radius: 100px; white-space: nowrap;">$400+/mo saved</span>
+        </div>
+      </div>
+
+      <!-- TESTIMONIAL: Cheryl -->
+      <div class="testimonial-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem; box-shadow: 0 1px 0 rgba(11,18,32,.02), 0 8px 24px rgba(11,18,32,.04); position: relative; display: flex; flex-direction: column;">
+        <div style="display:flex; align-items:center; gap:4px; margin-bottom: 1rem; color: var(--gold-500);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size: 1.15rem; line-height: 1.55; color: var(--ink); font-style: italic; margin-bottom: 1.5rem; flex: 1;">
+          &ldquo;Fast IPA — Dan really helped us navigate the complex loan packages and shortlisted 2 to 3 packages for us to choose from based on our loan amount and needs. If you don't use a mortgage broker you're missing out, and it's free — why not?&rdquo;
+        </p>
+        <div style="border-top: 1px solid var(--border); padding-top: 1rem; display:flex; justify-content: space-between; align-items: center; gap: .75rem;">
+          <div>
+            <div style="font-weight: 600; color: var(--navy-900); font-size: .95rem;">Cheryl</div>
+            <div style="font-size: .82rem; color: var(--muted); margin-top: 2px;">HDB · Bukit Batok</div>
+          </div>
+          <span style="font-size: .68rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-500); border: 1px solid rgba(196,151,59,.4); padding: 4px 10px; border-radius: 100px; white-space: nowrap;">Fast IPA</span>
+        </div>
+      </div>
+
+      <!-- TESTIMONIAL: Hong -->
+      <div class="testimonial-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem; box-shadow: 0 1px 0 rgba(11,18,32,.02), 0 8px 24px rgba(11,18,32,.04); position: relative; display: flex; flex-direction: column;">
+        <div style="display:flex; align-items:center; gap:4px; margin-bottom: 1rem; color: var(--gold-500);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size: 1.15rem; line-height: 1.55; color: var(--ink); font-style: italic; margin-bottom: 1.5rem; flex: 1;">
+          &ldquo;Our property purchase journey was a little more complex due to some income limitations, but Dan gave us options that helped us get our dream home. Without his advice I wouldn't have been able to get the loan approved. Not only that, he advised on how we should exit if needed and how to plan the loan structure.&rdquo;
+        </p>
+        <div style="border-top: 1px solid var(--border); padding-top: 1rem; display:flex; justify-content: space-between; align-items: center; gap: .75rem;">
+          <div>
+            <div style="font-weight: 600; color: var(--navy-900); font-size: .95rem;">Hong</div>
+            <div style="font-size: .82rem; color: var(--muted); margin-top: 2px;">Condo · Bukit Panjang</div>
+          </div>
+          <span style="font-size: .68rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-500); border: 1px solid rgba(196,151,59,.4); padding: 4px 10px; border-radius: 100px; white-space: nowrap;">Loan approved</span>
+        </div>
+      </div>
+
+      <!-- TESTIMONIAL: Jude -->
+      <div class="testimonial-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem; box-shadow: 0 1px 0 rgba(11,18,32,.02), 0 8px 24px rgba(11,18,32,.04); position: relative; display: flex; flex-direction: column;">
+        <div style="display:flex; align-items:center; gap:4px; margin-bottom: 1rem; color: var(--gold-500);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size: 1.15rem; line-height: 1.55; color: var(--ink); font-style: italic; margin-bottom: 1.5rem; flex: 1;">
+          &ldquo;Upgrading from HDB to condo, I needed a loan comparison, cash flow analysis and advice on what to do after the 2-year lock-in. Dan and his team gave me all I needed and more — better than my property agent's advice. His deep knowledge of the property market and decoupling strategy really helped me achieve my goal of owning two condos.&rdquo;
+        </p>
+        <div style="border-top: 1px solid var(--border); padding-top: 1rem; display:flex; justify-content: space-between; align-items: center; gap: .75rem;">
+          <div>
+            <div style="font-weight: 600; color: var(--navy-900); font-size: .95rem;">Jude</div>
+            <div style="font-size: .82rem; color: var(--muted); margin-top: 2px;">HDB → Condo upgrader</div>
+          </div>
+          <span style="font-size: .68rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-500); border: 1px solid rgba(196,151,59,.4); padding: 4px 10px; border-radius: 100px; white-space: nowrap;">Decoupling strategy</span>
+        </div>
       </div>
     </div>
   </div>
@@ -2541,6 +2637,10 @@ body::after {
 
 <!-- ============ TOAST ============ -->
 <div class="toast" id="toast"></div>
+
+<!-- ============ CHART.JS (loaded just-in-time, not in head) ============ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
 
 <!-- ============ JAVASCRIPT ============ -->
 <script>
@@ -4080,12 +4180,12 @@ function renderPurchaserMatrix(r) {
   rows.push(`<tr style="background:rgba(196,151,59,.10); border-top:2px solid var(--navy-900);">
     <td colspan="2" style="font-weight:700; color:var(--navy-900); letter-spacing:.04em; text-transform:uppercase; font-size:11px;">Total qualifying income</td>
     <td class="right" colspan="2" style="color:var(--muted); font-size:11px;">IWAA = Σ(age × fixed) / Σ fixed</td>
-    <td class="right" style="font-weight:700; font-size:15px; color:var(--navy-900); font-family:'Fraunces',serif;">${fmtMo(totalIncome)}/mo</td>
+    <td class="right" style="font-weight:700; font-size:15px; color:var(--navy-900); font-family:'Cormorant Garamond',serif;">${fmtMo(totalIncome)}/mo</td>
   </tr>`);
   rows.push(`<tr>
     <td colspan="2" style="font-weight:600; color:var(--ink-2); font-size:12px;">Income-Weighted Average Age (IWAA)</td>
     <td class="right" colspan="2" style="color:var(--muted); font-size:11px;">Tenure cap: ${65 - Math.round(iwaa)}y for full LTV</td>
-    <td class="right" style="font-weight:700; color:var(--navy-900); font-family:'Fraunces',serif;">${iwaa.toFixed(1)} yrs</td>
+    <td class="right" style="font-weight:700; color:var(--navy-900); font-family:'Cormorant Garamond',serif;">${iwaa.toFixed(1)} yrs</td>
   </tr>`);
   $('purchaser-matrix-body').innerHTML = rows.join('');
 }
@@ -4183,7 +4283,7 @@ const CHART_COLORS = {
   // Refi current vs proposed retains semantic red/green — losing money vs saving money
   refi: { current: '#DC2626', proposed: '#059669' },
 };
-const CHART_FONT = { family: 'Plus Jakarta Sans', size: 11 };
+const CHART_FONT = { family: 'DM Sans', size: 11 };
 
 if (typeof ChartDataLabels !== 'undefined') {
   Chart.register(ChartDataLabels);
@@ -4400,10 +4500,10 @@ function drawGauge(r) {
         ctx.save();
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
         ctx.fillStyle = CHART_COLORS.ink;
-        ctx.font = '600 22px Fraunces, serif';
+        ctx.font = '600 22px "Cormorant Garamond", serif';
         ctx.fillText((pct*100).toFixed(1) + '%', cx, cy - 6);
         ctx.fillStyle = CHART_COLORS.muted;
-        ctx.font = '500 11px "Plus Jakarta Sans", sans-serif';
+        ctx.font = '500 11px "DM Sans", sans-serif';
         ctx.fillText(pct > cap ? 'OVER MAS CAP' : 'TDSR usage', cx, cy + 14);
         ctx.restore();
       }
@@ -4587,7 +4687,24 @@ document.querySelectorAll('.num-input').forEach(el => {
 })();
 
 /* ============ PDF GENERATION ============ */
-function buildReportPdf(r, lead) {
+// Lazy-load jsPDF only when user asks for the PDF (saves ~80KB on initial load).
+let _jsPDFPromise = null;
+function loadJsPDF() {
+  if (_jsPDFPromise) return _jsPDFPromise;
+  _jsPDFPromise = new Promise((resolve, reject) => {
+    if (window.jspdf && window.jspdf.jsPDF) return resolve();
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s.async = true;
+    s.onload = () => resolve();
+    s.onerror = () => { _jsPDFPromise = null; reject(new Error('Failed to load jsPDF')); };
+    document.head.appendChild(s);
+  });
+  return _jsPDFPromise;
+}
+
+async function buildReportPdf(r, lead) {
+  await loadJsPDF();
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
   const W = 210, H = 297, M = 14;
@@ -5952,7 +6069,7 @@ if (sendReportBtn) {
         bestRate: chosen.rate / 100,
         monthlyBest: chosen.monthly,
       });
-      const pdf = buildReportPdf(resultForPdf, payload.lead);
+      const pdf = await buildReportPdf(resultForPdf, payload.lead);
       payload.reportPdfBase64 = pdf.base64;
       payload.reportPdfFilename = pdf.filename;
       payload.reportPdfMime = 'application/pdf';
