@@ -1,5 +1,5 @@
 {
-  "asOf": "20 April 2026",
+  "asOf": "27 Feb 2026",
   "refRates": {
     "sora1m": 1.076,
     "sora3m": 1.122,
@@ -2163,6 +2163,6 @@
       "thereafterRaw": "1M SORA + 1.00%"
     }
   ],
-  "generatedAt": "2026-04-30T15:16:58.118784+00:00",
+  "generatedAt": "2026-05-03T04:42:46.615498+00:00",
   "xlsxFingerprint": "baab1843afb9"
 }
