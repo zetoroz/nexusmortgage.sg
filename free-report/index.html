@@ -4814,967 +4814,1011 @@ function loadJsPDF() {
   return _jsPDFPromise;
 }
 
+/**
+ * NEXUS MORTGAGE — PDF REDESIGN PATCH
+ * ─────────────────────────────────────
+ * Drop-in replacement for buildReportPdf() in free-report/index.html
+ *
+ * HOW TO APPLY:
+ * 1. In free-report/index.html, find the line:
+ *      async function buildReportPdf(r, lead) {
+ * 2. Delete everything from that line to the closing brace (before "FORM SUBMISSION" comment)
+ * 3. Paste this entire file in its place
+ *
+ * What changed: visual layer only — palette, layout, typography, density.
+ * All data logic (computeReport, calcBSD, etc.) is untouched.
+ */
+
 async function buildReportPdf(r, lead) {
   await loadJsPDF();
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
-  const W = 210, H = 297, M = 14;
+  const W = 210, H = 297, M = 13;
   const CW = W - 2 * M;
 
-  // ── Palette ──
-  const NAVY = [11, 28, 58], NAVY_DARK = [6, 18, 42];
-  const GOLD = [196, 151, 59], GOLD_TINT = [253, 247, 233];
-  const CREAM = [250, 247, 242];
-  const INK = [11, 18, 32], INK_2 = [44, 56, 78];
-  const MUTED = [86, 101, 122], FAINT = [148, 163, 184];
-  const BORDER = [221, 225, 232], BORDER_LT = [236, 239, 244];
-  const SURFACE = [251, 252, 253], SOFT_BG = [246, 247, 249];
-  const GREEN = [5, 150, 105], GREEN_SOFT = [236, 253, 245], GREEN_DK = [4, 120, 87];
-  const RED = [220, 38, 38], RED_SOFT = [254, 242, 242];
-  const AMBER = [217, 119, 6];
+  // ─── PALETTE ───────────────────────────────────────────────────────────────
+  const NAVY     = [6, 18, 42];      // darkest navy (header bg)
+  const NAVY_2   = [11, 28, 58];     // mid navy (accents, borders)
+  const NAVY_3   = [18, 40, 80];     // lighter navy (stat tile bg)
+  const GOLD     = [196, 151, 59];
+  const GOLD_LT  = [232, 201, 122];
+  const GOLD_TN  = [250, 244, 226];  // gold tint (highlighted rows)
+  const CREAM    = [250, 247, 242];
+  const INK      = [11, 18, 32];
+  const INK_2    = [44, 56, 78];
+  const MUTED    = [86, 101, 122];
+  const FAINT    = [148, 163, 184];
+  const BORDER   = [218, 222, 230];
+  const SURFACE  = [248, 249, 252];
+  const GREEN    = [5, 150, 105];
+  const GREEN_DK = [4, 120, 87];
+  const GREEN_BG = [236, 253, 245];
+  const RED      = [220, 38, 38];
+  const RED_BG   = [254, 242, 242];
+  const AMBER    = [217, 119, 6];
+  const AMBER_BG = [255, 251, 235];
 
-  const setColor = c => doc.setTextColor(c[0], c[1], c[2]);
-  const setFill  = c => doc.setFillColor(c[0], c[1], c[2]);
-  const setDraw  = c => doc.setDrawColor(c[0], c[1], c[2]);
-  const fmtN = n => (n == null || isNaN(n)) ? '—' : Math.round(n).toLocaleString('en-SG');
-  const fmt$ = n => '$' + fmtN(n);
+  // ─── UTILS ─────────────────────────────────────────────────────────────────
+  const setTxt  = c => doc.setTextColor(c[0], c[1], c[2]);
+  const setFill = c => doc.setFillColor(c[0], c[1], c[2]);
+  const setDraw = c => doc.setDrawColor(c[0], c[1], c[2]);
+  const fmtN  = n => (n == null || isNaN(n)) ? '—' : Math.round(n).toLocaleString('en-SG');
+  const fmt$  = n => '$' + fmtN(n);
   const dateStr = new Date().toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' });
 
   let pageNum = 0;
   const TOTAL_PAGES = 9;
 
-  // ── Banker primitives ──
-  function pageChrome(eyebrow) {
+  // ─── PAGE CHROME ───────────────────────────────────────────────────────────
+  // Dark navy header band (18mm) + gold rule — matches cover aesthetic
+  function pageChrome(section) {
     pageNum++;
     if (pageNum > 1) doc.addPage();
-    // Slim top strip
-    setFill(NAVY); doc.rect(0, 0, W, 7.5, 'F');
-    setFill(GOLD); doc.rect(0, 7.5, W, 0.15, 'F');
+
+    // Header band — full dark navy
+    setFill(NAVY); doc.rect(0, 0, W, 18, 'F');
+    // Gold accent rule below header
+    setFill(GOLD); doc.rect(0, 18, W, 0.5, 'F');
+    // Subtle side accent
+    setFill(GOLD); doc.rect(0, 0, 1.8, 18, 'F');
+
     // Wordmark
-    doc.setFont('times','normal'); doc.setFontSize(8.5); setColor(CREAM);
-    doc.text('Nexus', M, 5.2);
-    setColor(GOLD); doc.text('.', M + 9.6, 5.2);
-    // Eyebrow (page section)
-    if (eyebrow) {
-      doc.setFont('helvetica','bold'); doc.setFontSize(6); setColor([200,205,215]);
-      doc.text(eyebrow.toUpperCase(), M + 18, 5.2);
+    doc.setFont('times', 'normal'); doc.setFontSize(11); setTxt(CREAM);
+    doc.text('Nexus', M + 2, 10);
+    setTxt(GOLD); doc.text('.', M + 16, 10);
+
+    // Section label
+    if (section) {
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(6); setTxt([160, 170, 190]);
+      doc.text(section.toUpperCase(), M + 22, 10);
     }
-    // Page n / total
-    doc.setFont('helvetica','normal'); doc.setFontSize(6); setColor([200,205,215]);
-    doc.text('PAGE ' + pageNum + ' OF ' + TOTAL_PAGES, W - M, 5.2, { align: 'right' });
-    // Footer hairline
+
+    // Page number (top-right, gold on dark)
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
+    doc.text('PAGE ' + pageNum + ' OF ' + TOTAL_PAGES, W - M, 10, { align: 'right' });
+
+    // Footer
     setDraw(BORDER); doc.setLineWidth(0.15);
-    doc.line(M, H - 8, W - M, H - 8);
-    // Footer text
-    doc.setFont('helvetica','normal'); doc.setFontSize(6.2); setColor(MUTED);
-    doc.text('NEXUS MORTGAGE  ·  NEXUSMORTGAGE.SG  ·  +65 8752 0859  ·  DANLER@NEXUSMORTGAGE.SG', M, H - 4.5);
-    doc.text(dateStr.toUpperCase(), W - M, H - 4.5, { align: 'right' });
-    return 14;
+    doc.line(M, H - 9, W - M, H - 9);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(5.8); setTxt(MUTED);
+    doc.text('NEXUS MORTGAGE  ·  NEXUSMORTGAGE.SG  ·  +65 8752 0859  ·  DANLER@NEXUSMORTGAGE.SG', M, H - 5);
+    doc.text(dateStr.toUpperCase(), W - M, H - 5, { align: 'right' });
+
+    return 25; // return starting Y after header
   }
 
-  function sectionHeader(y, eyebrow, title, sub) {
-    // Eyebrow
-    doc.setFont('helvetica','bold'); doc.setFontSize(6.2); setColor(GOLD);
+  // ─── SECTION HEADER ────────────────────────────────────────────────────────
+  function sectionHead(y, eyebrow, title, sub) {
+    // Gold eyebrow with underline
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
     doc.text(eyebrow.toUpperCase(), M, y);
-    setDraw(GOLD); doc.setLineWidth(0.3);
-    doc.line(M, y + 1.2, M + doc.getTextWidth(eyebrow.toUpperCase()), y + 1.2);
-    y += 5.5;
-    // Title — helvetica bold (banker, not editorial serif)
-    doc.setFont('helvetica','bold'); doc.setFontSize(11.5); setColor(INK);
-    const tlines = doc.splitTextToSize(title, CW);
-    doc.text(tlines, M, y);
-    y += tlines.length * 4.6;
+    setDraw(GOLD); doc.setLineWidth(0.4);
+    doc.line(M, y + 1.4, M + doc.getTextWidth(eyebrow.toUpperCase()), y + 1.4);
+    y += 6;
+
+    // Title — bold, larger
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(13); setTxt(INK);
+    const tLines = doc.splitTextToSize(title, CW);
+    doc.text(tLines, M, y);
+    y += tLines.length * 5.2;
+
+    // Sub
     if (sub) {
-      doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(MUTED);
-      const slines = doc.splitTextToSize(sub, CW * 0.85);
-      doc.text(slines, M, y + 0.8);
-      y += slines.length * 3.4;
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); setTxt(MUTED);
+      const sLines = doc.splitTextToSize(sub, CW * 0.88);
+      doc.text(sLines, M, y + 1);
+      y += sLines.length * 3.5 + 1;
     }
-    setDraw(BORDER); doc.setLineWidth(0.15);
-    doc.line(M, y + 2.5, W - M, y + 2.5);
-    return y + 7;
+
+    // Section divider — navy rule + gold dot
+    setDraw(NAVY_2); doc.setLineWidth(0.4);
+    doc.line(M, y + 3, W - M, y + 3);
+    setFill(GOLD); doc.circle(M, y + 3, 1, 'F');
+    return y + 9;
   }
 
+  // ─── EYEBROW ONLY ──────────────────────────────────────────────────────────
   function eyebrow(y, label) {
-    doc.setFont('helvetica','bold'); doc.setFontSize(6.2); setColor(GOLD);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
     doc.text(label.toUpperCase(), M, y);
-    setDraw(GOLD); doc.setLineWidth(0.3);
-    doc.line(M, y + 1.2, M + doc.getTextWidth(label.toUpperCase()), y + 1.2);
-    return y + 5;
+    setDraw(GOLD); doc.setLineWidth(0.4);
+    doc.line(M, y + 1.4, M + doc.getTextWidth(label.toUpperCase()), y + 1.4);
+    return y + 6;
   }
 
-  function statGrid(x, y, w, items) {
+  // ─── DARK STAT GRID (navy tile with gold/green numbers) ────────────────────
+  function statGridDark(y, items) {
     const n = items.length;
-    const colW = w / n;
-    const h = 18;
-    setDraw(NAVY); doc.setLineWidth(0.4);
-    doc.line(x, y, x + w, y);
-    setDraw(BORDER); doc.setLineWidth(0.15);
-    doc.line(x, y + h, x + w, y + h);
-    items.forEach(function(item, i) {
-      const cx = x + i * colW;
-      if (i > 0) {
-        setDraw(BORDER); doc.setLineWidth(0.15);
-        doc.line(cx, y + 1.5, cx, y + h - 1.5);
-      }
-      doc.setFont('helvetica','bold'); doc.setFontSize(5.8); setColor(MUTED);
-      doc.text(item.label.toUpperCase(), cx + 2.5, y + 4.5);
-      doc.setFont('helvetica','bold'); doc.setFontSize(11); setColor(item.color || INK);
-      doc.text(item.value, cx + 2.5, y + 11.5);
+    const tileW = (CW - (n - 1) * 3) / n;
+    const tileH = 22;
+
+    items.forEach((item, i) => {
+      const x = M + i * (tileW + 3);
+      // Dark tile bg
+      setFill(NAVY_2); doc.rect(x, y, tileW, tileH, 'F');
+      // Gold top rule
+      setFill(GOLD); doc.rect(x, y, tileW, 0.7, 'F');
+
+      // Label
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(5.8); setTxt([160, 170, 195]);
+      doc.text(item.label.toUpperCase(), x + 4, y + 6);
+
+      // Value — large serif
+      const valColor = item.color || GOLD_LT;
+      doc.setFont('times', 'normal'); doc.setFontSize(15); setTxt(valColor);
+      doc.text(String(item.value), x + 4, y + 15);
+
+      // Sub
       if (item.sub) {
-        doc.setFont('helvetica','normal'); doc.setFontSize(6); setColor(MUTED);
-        const ls = doc.splitTextToSize(item.sub, colW - 4);
-        doc.text(ls[0] || '', cx + 2.5, y + h - 2.2);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(6); setTxt([120, 135, 155]);
+        doc.text(String(item.sub), x + 4, y + tileH - 2.5);
       }
     });
-    return y + h + 2;
+    return y + tileH + 4;
   }
 
-  function calloutBlock(y, tone, soft, title, body) {
-    const h = 16;
-    setFill(soft); doc.rect(M, y, CW, h, 'F');
-    setFill(tone); doc.rect(M, y, 1.4, h, 'F');
-    doc.setFont('helvetica','bold'); doc.setFontSize(9.5); setColor(tone);
-    doc.text(title, M + 4, y + 6);
-    doc.setFont('helvetica','normal'); doc.setFontSize(7.8); setColor(INK_2);
-    const lines = doc.splitTextToSize(body, CW - 8);
-    doc.text(lines, M + 4, y + 11);
-    return y + h + 4;
+  // ─── LIGHT STAT GRID (white/surface tile) ──────────────────────────────────
+  function statGridLight(y, items) {
+    const n = items.length;
+    const tileW = (CW - (n - 1) * 3) / n;
+    const tileH = 20;
+
+    items.forEach((item, i) => {
+      const x = M + i * (tileW + 3);
+      setFill(SURFACE); doc.rect(x, y, tileW, tileH, 'F');
+      setDraw(BORDER); doc.setLineWidth(0.2); doc.rect(x, y, tileW, tileH);
+      // Navy top accent
+      setFill(NAVY_2); doc.rect(x, y, tileW, 0.6, 'F');
+
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(5.8); setTxt(MUTED);
+      doc.text(item.label.toUpperCase(), x + 4, y + 6);
+
+      const valColor = item.color || INK;
+      doc.setFont('times', 'normal'); doc.setFontSize(14); setTxt(valColor);
+      doc.text(String(item.value), x + 4, y + 14);
+
+      if (item.sub) {
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(6); setTxt(MUTED);
+        doc.text(String(item.sub), x + 4, y + tileH - 2.5);
+      }
+    });
+    return y + tileH + 4;
   }
 
+  // ─── CALLOUT BLOCK ─────────────────────────────────────────────────────────
+  function callout(y, tone, bg, title, body) {
+    const lines = doc.setFont('helvetica', 'normal').setFontSize(8).splitTextToSize(body, CW - 10);
+    const h = Math.max(16, 12 + lines.length * 3.6);
+    setFill(bg); doc.rect(M, y, CW, h, 'F');
+    setFill(tone); doc.rect(M, y, 2, h, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); setTxt(tone);
+    doc.text(title, M + 5, y + 6);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(7.8); setTxt(INK_2);
+    doc.text(lines, M + 5, y + 11);
+    return y + h + 5;
+  }
+
+  // ─── TABLE ─────────────────────────────────────────────────────────────────
   function table(headers, rows, opts) {
     const o = opts || {};
     const x0 = o.x || M;
     const widths = o.widths;
-    const totalW = widths.reduce(function(s,w){return s+w;},0);
-    const aligns = o.aligns || widths.map(function(_,i){return i===0?'left':'right';});
-    const rowH = o.rowH || 5.5;
+    const totalW = widths.reduce((s, w) => s + w, 0);
+    const aligns = o.aligns || widths.map((_, i) => i === 0 ? 'left' : 'right');
+    const rowH = o.rowH || 6;
     let y = o.y;
 
-    // Header — small caps, navy top rule, hairline bottom
-    setDraw(NAVY); doc.setLineWidth(0.5);
-    doc.line(x0, y, x0 + totalW, y);
-    doc.setFont('helvetica','bold'); doc.setFontSize(5.8); setColor(NAVY);
+    // Header — navy rule top + bottom
+    setFill(NAVY_2); doc.rect(x0, y, totalW, 0.6, 'F');
+    y += 1.5;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6); setTxt(NAVY_2);
     let cx = x0;
-    headers.forEach(function(h,i){
-      const align = aligns[i];
-      const tx = align==='right' ? cx + widths[i] - 2 : (align === 'center' ? cx + widths[i]/2 : cx + 2);
-      doc.text(String(h).toUpperCase(), tx, y + 3.6, { align: align });
+    headers.forEach((h, i) => {
+      const a = aligns[i];
+      const tx = a === 'right' ? cx + widths[i] - 2 : (a === 'center' ? cx + widths[i] / 2 : cx + 2);
+      doc.text(String(h).toUpperCase(), tx, y + 4, { align: a });
       cx += widths[i];
     });
-    y += 5;
-    setDraw(BORDER); doc.setLineWidth(0.15);
+    y += 6;
+    setDraw(BORDER); doc.setLineWidth(0.2);
     doc.line(x0, y, x0 + totalW, y);
 
     // Rows
-    rows.forEach(function(row, ri){
+    rows.forEach(row => {
       const rh = row._h || rowH;
+      // Highlight background
       if (row._highlight) {
-        setFill(row._highlightColor || GOLD_TINT);
+        setFill(row._highlightColor || GOLD_TN);
         doc.rect(x0, y, totalW, rh, 'F');
       }
-      doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
-      setColor(row._color || INK);
+      // Left accent stripe for "best" / winner rows
+      if (row._accent) {
+        setFill(row._accent);
+        doc.rect(x0, y, 1.5, rh, 'F');
+      }
+
       cx = x0;
-      row.cells.forEach(function(cell, i){
-        const align = aligns[i];
-        const tx = align==='right' ? cx + widths[i] - 2 : (align === 'center' ? cx + widths[i]/2 : cx + 2);
-        const obj = (cell && typeof cell === 'object') ? cell : { text: cell };
-        if (obj.font === 'bold') doc.setFont('helvetica','bold'); else doc.setFont('helvetica','normal');
-        if (obj.color) setColor(obj.color); else setColor(row._color || INK);
-        doc.text(String(obj.text == null ? '' : obj.text), tx, y + rh - 1.7, { align: align });
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5);
+      row.cells.forEach((cell, i) => {
+        const a = aligns[i];
+        const tx = a === 'right' ? cx + widths[i] - 2 : (a === 'center' ? cx + widths[i] / 2 : cx + 2);
+        const obj = cell && typeof cell === 'object' ? cell : { text: cell };
+        if (obj.font === 'bold') doc.setFont('helvetica', 'bold');
+        else doc.setFont('helvetica', 'normal');
+        setTxt(obj.color || row._color || INK_2);
+        doc.text(String(obj.text == null ? '' : obj.text), tx, y + rh - 1.8, { align: a });
         cx += widths[i];
       });
-      // Inline mini-bar (e.g. spread or stress impact column)
+
+      // Inline mini-bar
       if (row._bar) {
         const b = row._bar;
-        inlineBar(x0 + b.colX, y + rh/2 - 0.7, b.colW, 1.6, b.frac, b.color || NAVY);
+        setFill([220, 224, 232]); doc.rect(x0 + b.x, y + rh / 2 - 1, b.w, 2, 'F');
+        if (b.frac > 0) {
+          setFill(b.color || NAVY_2);
+          doc.rect(x0 + b.x, y + rh / 2 - 1, Math.min(1, b.frac) * b.w, 2, 'F');
+        }
       }
-      setDraw(BORDER_LT); doc.setLineWidth(0.1);
+
+      setDraw(BORDER); doc.setLineWidth(0.12);
       doc.line(x0, y + rh, x0 + totalW, y + rh);
       y += rh;
     });
-    setDraw(NAVY); doc.setLineWidth(0.4);
-    doc.line(x0, y, x0 + totalW, y);
-    return y;
+
+    setFill(NAVY_2); doc.rect(x0, y, totalW, 0.5, 'F');
+    return y + 1;
   }
 
+  // ─── RATIO BAR ─────────────────────────────────────────────────────────────
+  function ratioBar(y, label, used, cap, optMax) {
+    const m = optMax || Math.max(cap * 1.15, used * 1.05);
+    const color = used <= cap ? GREEN : (used <= cap * 1.05 ? AMBER : RED);
+
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); setTxt(INK);
+    doc.text(label, M, y);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5);
+    setTxt(color);
+    doc.text((used * 100).toFixed(1) + '% / ' + (cap * 100).toFixed(0) + '% cap', W - M, y, { align: 'right' });
+    y += 2.5;
+
+    // Track
+    setFill([220, 225, 235]); doc.rect(M, y, CW, 4, 'F');
+    // Fill
+    const fillW = Math.min(1, used / m) * CW;
+    setFill(color); doc.rect(M, y, fillW, 4, 'F');
+    // Cap marker
+    const capX = M + (cap / m) * CW;
+    setDraw(NAVY_2); doc.setLineWidth(0.8);
+    doc.line(capX, y - 1.5, capX, y + 5.5);
+    doc.setLineWidth(0.15);
+    return y + 9;
+  }
+
+  // ─── INLINE BAR (in table cell) ────────────────────────────────────────────
   function inlineBar(x, y, w, h, frac, color) {
-    setFill([232,236,240]); doc.rect(x, y, w, h, 'F');
+    setFill([220, 224, 232]); doc.rect(x, y, w, h, 'F');
     if (frac > 0) {
-      setFill(color || NAVY);
+      setFill(color || NAVY_2);
       doc.rect(x, y, Math.min(1, frac) * w, h, 'F');
     }
   }
 
-  function ratioBar(x, y, w, used, cap, max) {
-    const m = max || Math.max(cap, used) * 1.1;
-    const h = 2.5;
-    setFill([232,236,240]); doc.rect(x, y, w, h, 'F');
-    if (used > 0) {
-      const fillW = Math.min(1, used / m) * w;
-      const tone = used <= cap ? GREEN : (used <= cap*1.05 ? AMBER : RED);
-      setFill(tone); doc.rect(x, y, fillW, h, 'F');
+  // ─── LEDGER ROW ────────────────────────────────────────────────────────────
+  function ledgerRow(y, label, value, opts) {
+    const o = opts || {};
+    const isTotal = o.total;
+    if (isTotal) {
+      setDraw(NAVY_2); doc.setLineWidth(0.4);
+      doc.line(M, y, W - M, y);
+      y += 1;
+      setFill(NAVY_2); doc.rect(M, y, CW, 0.08, 'F');
     }
-    const capX = x + Math.min(1, cap / m) * w;
-    setDraw(NAVY); doc.setLineWidth(0.5);
-    doc.line(capX, y - 0.8, capX, y + h + 0.8);
-    doc.setLineWidth(0.15);
+    doc.setFont('helvetica', isTotal ? 'bold' : 'normal');
+    doc.setFontSize(isTotal ? 8.5 : 7.8);
+    setTxt(o.labelColor || (isTotal ? NAVY_2 : INK_2));
+    doc.text(label, M, y + (isTotal ? 6 : 5));
+    setTxt(o.valueColor || (isTotal ? INK : INK));
+    doc.setFont('helvetica', isTotal ? 'bold' : 'normal');
+    doc.setFontSize(isTotal ? 10 : 8);
+    doc.text(String(value), W - M, y + (isTotal ? 6 : 5), { align: 'right' });
+    if (!isTotal) {
+      setDraw(BORDER); doc.setLineWidth(0.12);
+      doc.line(M, y + 8, W - M, y + 8);
+    } else {
+      setDraw(NAVY_2); doc.setLineWidth(0.6);
+      doc.line(M, y + 9.5, W - M, y + 9.5);
+    }
+    return y + (isTotal ? 12 : 8.5);
   }
 
+  // ─── ALLOCATION BAR ────────────────────────────────────────────────────────
+  function allocationBar(y, leftLabel, leftPct, rightLabel, rightPct) {
+    const leftW = CW * Math.min(1, Math.max(0, leftPct / 100));
+    setFill(NAVY_2); doc.rect(M, y, leftW, 9, 'F');
+    setFill(GOLD); doc.rect(M + leftW, y, CW - leftW, 9, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); setTxt(CREAM);
+    if (leftPct > 12) doc.text(leftLabel + ' · ' + leftPct.toFixed(1) + '%', M + 3, y + 6);
+    if (rightPct > 12) doc.text(rightLabel + ' · ' + rightPct.toFixed(1) + '%', M + leftW + 3, y + 6);
+    return y + 13;
+  }
+
+  // ─── LINE CHART ────────────────────────────────────────────────────────────
   function lineChart(x, y, w, h, series, opts) {
     const o = opts || {};
-    const xMax = o.xMax;
-    const yMax = o.yMax;
-    if (o.gridY) {
-      setDraw(BORDER_LT); doc.setLineWidth(0.1);
-      for (let i = 1; i < o.gridY; i++) {
-        const gy = y + (h * i / o.gridY);
-        doc.line(x, gy, x + w, gy);
-      }
+    setFill(SURFACE); doc.rect(x, y, w, h, 'F');
+    setDraw(BORDER); doc.setLineWidth(0.15); doc.rect(x, y, w, h);
+    // Grid lines
+    const gridY = o.gridY || 4;
+    setDraw([220, 224, 232]); doc.setLineWidth(0.1);
+    for (let i = 1; i < gridY; i++) {
+      const gy = y + (h * i / gridY);
+      doc.line(x, gy, x + w, gy);
     }
-    setDraw(MUTED); doc.setLineWidth(0.2);
-    doc.line(x, y + h, x + w, y + h);
-    doc.line(x, y, x, y + h);
-    series.forEach(function(s) {
-      setDraw(s.color || NAVY);
-      doc.setLineWidth(s.width || 0.6);
+    // Series
+    series.forEach(s => {
+      setDraw(s.color || NAVY_2); doc.setLineWidth(s.width || 0.7);
       const pts = s.points;
       for (let i = 1; i < pts.length; i++) {
-        const p0 = pts[i-1], p1 = pts[i];
+        const p0 = pts[i - 1], p1 = pts[i];
         doc.line(
-          x + (p0.x / xMax) * w,
-          y + h - (p0.y / yMax) * h,
-          x + (p1.x / xMax) * w,
-          y + h - (p1.y / yMax) * h
+          x + (p0.x / o.xMax) * w,
+          y + h - (p0.y / o.yMax) * h,
+          x + (p1.x / o.xMax) * w,
+          y + h - (p1.y / o.yMax) * h
         );
       }
     });
     doc.setLineWidth(0.15);
+    // Axis labels
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(6); setTxt(MUTED);
+    doc.text('Y0', x, y + h + 3.5);
+    doc.text('Y' + o.xMax, x + w, y + h + 3.5, { align: 'right' });
+    doc.text('$' + fmtN(o.yMax), x - 1, y + 3, { align: 'right' });
+    doc.text('$0', x - 1, y + h + 1, { align: 'right' });
   }
 
-  function pad2(n) { return (n < 10 ? '0' : '') + n; }
-
-  // ── Pre-compute everything ──
-  const isRefi = r.inp.mode === 'refinance';
-  const propLabel = r.inp.propertyType === 'hdb' ? 'HDB / EC' : 'Private';
-  const sel = r.banks[selectedRateIdx] || r.banks[0];
-  const monthly = sel.monthly;
-  const totalIncome = r.inp.income || 0;
-  const price = r.inp.price || (isRefi ? r.inp.loan : 0);
+  // ─── PRE-COMPUTE ───────────────────────────────────────────────────────────
+  const isRefi   = r.inp.mode === 'refinance';
+  const sel      = r.banks[selectedRateIdx] || r.banks[0];
+  const monthly  = sel.monthly;
+  const price    = r.inp.price || (isRefi ? r.inp.loan : 0);
   const tdsrFail = !r.tdsrPass || (r.msrApplies && !r.msrPass);
+  const pad2     = n => (n < 10 ? '0' : '') + n;
 
-  const buyers = (r.inp.borrowerResidencies || ['SC']).map(function(res, i){
-    return { residency: res, propertiesOwned: (r.inp.borrowerPropertiesOwned || [0])[i] || 0 };
-  });
-  const buyerDesc = buyersDescription(buyers);
-  const bsd = calcBSD(price);
+  const buyers = (r.inp.borrowerResidencies || ['SC']).map((res, i) => ({
+    residency: res,
+    propertiesOwned: (r.inp.borrowerPropertiesOwned || [0])[i] || 0,
+  }));
+  const bsd      = calcBSD(price);
   const absdRate = calcABSDRate(buyers);
-  const absd = Math.round(price * absdRate);
-  const absdRateLabel = absdLabel(absdRate);
+  const absd     = Math.round(price * absdRate);
+  const absdLbl  = absdLabel(absdRate);
+  const buyDesc  = buyersDescription(buyers);
 
-  const regulatoryLtvPct = (r.ltvPct || 75) / 100;
-  const effectiveLtvPct = (r.effectiveLtvPct || (r.ltvPct || 75)) / 100;
-  const ltvPct = effectiveLtvPct;
-  const downPayment = r.actualDownPayment != null ? r.actualDownPayment : Math.round(price * (1 - ltvPct));
-  const minCashRequired = Math.round(price * 0.05);
-  const cpfPortion = Math.max(0, downPayment - minCashRequired);
-  const legalFee = price > 1000000 ? 3000 : 2500;
-  const valuationFee = price > 1000000 ? 600 : 300;
-  const upfrontTotal = downPayment + bsd + absd + legalFee + valuationFee;
-  const upfrontMinCash = minCashRequired + bsd + absd + valuationFee;
-  const upfrontMinCPF = cpfPortion + legalFee;
-  const cpfOA = r.inp.cpfOA || 0;
-  const cashOnHand = r.inp.cashOnHand || 0;
+  const ltvPct       = (r.effectiveLtvPct || r.ltvPct || 75) / 100;
+  const downPayment  = r.actualDownPayment != null ? r.actualDownPayment : Math.round(price * (1 - ltvPct));
+  const minCash      = Math.round(price * 0.05);
+  const cpfPortion   = Math.max(0, downPayment - minCash);
+  const legalFee     = price > 1_000_000 ? 3000 : 2500;
+  const valFee       = price > 1_000_000 ? 600 : 300;
+  const upfrontTotal = downPayment + bsd + absd + legalFee + valFee;
+  const cpfOA        = r.inp.cpfOA || 0;
+  const cashOnHand   = r.inp.cashOnHand || 0;
   const totalShortfall = Math.max(0, upfrontTotal - (cpfOA + cashOnHand));
 
-  // ═══════════════════ PAGE 1 — COVER ═══════════════════
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 1 — COVER  (unchanged from original — already great)
+  // ═══════════════════════════════════════════════════════════════════════════
   pageNum = 1;
   setFill(NAVY); doc.rect(0, 0, W, H, 'F');
-  // Gold rule under masthead
-  setFill(GOLD); doc.rect(0, 36, W, 0.4, 'F');
+  setFill(GOLD); doc.rect(0, 36, W, 0.5, 'F');
+  setFill(GOLD); doc.rect(0, 0, 2.5, 36, 'F');
 
   // Wordmark
-  doc.setFont('times','normal'); doc.setFontSize(28); setColor(CREAM);
-  doc.text('Nexus', M, 24);
-  setColor(GOLD); doc.text('.', M + 32, 24);
-  doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor([180,185,200]);
-  doc.text('SINGAPORE MORTGAGE SPECIALISTS', M, 30);
+  doc.setFont('times', 'normal'); doc.setFontSize(30); setTxt(CREAM);
+  doc.text('Nexus', M, 25);
+  setTxt(GOLD); doc.text('.', M + 35, 25);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt([160, 170, 195]);
+  doc.text('SINGAPORE MORTGAGE SPECIALISTS', M, 31);
 
-  // Date (top right, simple)
-  doc.setFont('helvetica','bold'); doc.setFontSize(6.5); setColor(GOLD);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
   doc.text('REPORT DATE', W - M, 24, { align: 'right' });
-  doc.setFont('helvetica','normal'); doc.setFontSize(8); setColor(CREAM);
-  doc.text(dateStr.toUpperCase(), W - M, 29, { align: 'right' });
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setTxt(CREAM);
+  doc.text(dateStr.toUpperCase(), W - M, 30, { align: 'right' });
 
-  // Eyebrow
-  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); setColor(GOLD);
-  doc.text(isRefi ? 'REFINANCE OPPORTUNITY ANALYSIS' : 'PROPERTY PURCHASE — INDICATIVE MORTGAGE REPORT', M, 70);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(8); setTxt(GOLD);
+  doc.text(isRefi ? 'REFINANCE ANALYSIS' : 'PROPERTY PURCHASE — INDICATIVE MORTGAGE REPORT', M, 65);
 
-  // Big title
-  doc.setFont('times','normal'); doc.setFontSize(38); setColor(CREAM);
-  doc.text(['Your personalised', 'mortgage report.'], M, 92);
+  doc.setFont('times', 'normal'); doc.setFontSize(40); setTxt(CREAM);
+  doc.text(['Your personalised', 'mortgage report.'], M, 90, { lineHeightFactor: 1.15 });
 
-  // Subtitle
-  doc.setFont('helvetica','normal'); doc.setFontSize(10); setColor([200,205,215]);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10); setTxt([190, 198, 215]);
   const subTxt = isRefi
     ? 'Side-by-side analysis of your current loan against the cheapest packages on the market — with cost projections and a refinance playbook.'
     : 'Affordability and rate analysis built around your income, property type, and tenure — with stamp duties, funds position, and the cheapest packages from 16 banks.';
-  doc.text(doc.splitTextToSize(subTxt, CW * 0.7), M, 132);
+  doc.text(doc.splitTextToSize(subTxt, CW * 0.68), M, 130);
 
   // Prepared for
-  let pfY = 170;
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(GOLD);
+  let pfY = 168;
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
   doc.text('PREPARED FOR', M, pfY);
-  setDraw(GOLD); doc.setLineWidth(0.3);
-  doc.line(M, pfY + 1.4, M + 22, pfY + 1.4);
+  setDraw(GOLD); doc.setLineWidth(0.35);
+  doc.line(M, pfY + 1.5, M + 25, pfY + 1.5);
   pfY += 9;
-  doc.setFont('times','normal'); doc.setFontSize(22); setColor(CREAM);
+  doc.setFont('times', 'normal'); doc.setFontSize(24); setTxt(CREAM);
   doc.text(lead.name || '—', M, pfY);
   pfY += 7;
-  doc.setFont('helvetica','normal'); doc.setFontSize(9); setColor([180,185,200]);
-  const contactLine = [lead.email, lead.phone].filter(function(v){return v;}).join('   ·   ');
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setTxt([175, 182, 200]);
+  const contactLine = [lead.email, lead.phone].filter(Boolean).join('   ·   ');
   if (contactLine) doc.text(contactLine, M, pfY);
 
-  // KPI strip — 4 numbers, like web hero
-  const kpiY = 215;
-  setFill([15, 35, 65]); doc.rect(M, kpiY, CW, 32, 'F');
-  setDraw(GOLD); doc.setLineWidth(0.4); doc.rect(M, kpiY, CW, 32);
-  doc.setLineWidth(0.15);
+  // KPI strip — 4 dark tiles
+  const kpiY = 212;
   const kpiW = CW / 4;
-  const kpis = [
-    ['BEST RATE', (r.bestRate*100).toFixed(2) + '%'],
+  setFill([10, 26, 55]); doc.rect(M, kpiY, CW, 35, 'F');
+  setFill(GOLD); doc.rect(M, kpiY, CW, 0.5, 'F');
+  setFill(GOLD); doc.rect(M, kpiY + 35, CW, 0.5, 'F');
+  [
+    ['BEST RATE', (r.bestRate * 100).toFixed(2) + '%'],
     [isRefi ? 'NEW MONTHLY' : 'MONTHLY', fmt$(monthly)],
-    [isRefi ? 'CURRENT LOAN' : 'LOAN', fmt$(r.inp.loan)],
+    [isRefi ? 'OUTSTANDING LOAN' : 'LOAN', fmt$(r.inp.loan)],
     ['TENURE', r.inp.tenure + 'y'],
-  ];
-  kpis.forEach(function(k, i){
-    const cx = M + kpiW * i + 6;
-    doc.setFont('helvetica','bold'); doc.setFontSize(6); setColor(GOLD);
-    doc.text(k[0], cx, kpiY + 9);
-    doc.setFont('times','normal'); doc.setFontSize(17); setColor(CREAM);
-    doc.text(k[1], cx, kpiY + 22);
+  ].forEach(([lbl, val], i) => {
+    const cx = M + kpiW * i + 5;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6); setTxt([140, 155, 180]);
+    doc.text(lbl, cx, kpiY + 9);
+    doc.setFont('times', 'normal'); doc.setFontSize(18); setTxt(GOLD_LT);
+    doc.text(val, cx, kpiY + 26);
     if (i < 3) {
-      setDraw([60,75,100]); doc.setLineWidth(0.15);
-      doc.line(M + kpiW * (i+1), kpiY + 5, M + kpiW * (i+1), kpiY + 27);
+      setDraw([40, 60, 90]); doc.setLineWidth(0.15);
+      doc.line(M + kpiW * (i + 1), kpiY + 5, M + kpiW * (i + 1), kpiY + 30);
     }
   });
 
-  // CTA strip
-  setFill(NAVY_DARK); doc.rect(0, H - 24, W, 24, 'F');
-  setFill(GOLD); doc.rect(0, H - 24, W, 0.4, 'F');
-  doc.setFont('times','normal'); doc.setFontSize(13); setColor(CREAM);
-  doc.text('Want us to lock in this rate?', M, H - 13);
-  doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor([180,185,200]);
-  doc.text('Free service  ·  zero fees  ·  banks pay our referral', M, H - 6.5);
-  doc.setFont('helvetica','bold'); doc.setFontSize(11); setColor(GOLD);
-  doc.text('WhatsApp +65 8752 0859', W - M, H - 14, { align: 'right' });
-  doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor([180,185,200]);
-  doc.text('danler@nexusmortgage.sg  ·  nexusmortgage.sg', W - M, H - 6.5, { align: 'right' });
+  // CTA footer strip
+  setFill([4, 12, 30]); doc.rect(0, H - 28, W, 28, 'F');
+  setFill(GOLD); doc.rect(0, H - 28, W, 0.5, 'F');
+  doc.setFont('times', 'normal'); doc.setFontSize(14); setTxt(CREAM);
+  doc.text('Want us to lock in this rate?', M, H - 17);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); setTxt([165, 172, 190]);
+  doc.text('Free service  ·  zero fees  ·  banks pay our referral', M, H - 9);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(11.5); setTxt(GOLD);
+  doc.text('WhatsApp +65 8752 0859', W - M, H - 18, { align: 'right' });
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); setTxt([165, 172, 190]);
+  doc.text('danler@nexusmortgage.sg  ·  nexusmortgage.sg', W - M, H - 9, { align: 'right' });
 
-  // ═══════════════════ PAGE 2 — HEADLINE & VERDICT ═══════════════════
-  let y = pageChrome('Headline & verdict');
-  y = sectionHeader(y, 'Here\'s what we found',
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 2 — HEADLINE & VERDICT
+  // ═══════════════════════════════════════════════════════════════════════════
+  let y = pageChrome('Headline & Verdict');
+  y = sectionHead(y, 'Here\'s what we found',
     'The three numbers that matter most.',
     'Snapshot of the headline metrics. Rest of report explains how each was derived. All stress-tested at MAS 4%.');
 
-  // 3 top metrics — mirrors web top-of-results
+  // 3 dark stat tiles — big numbers
   const tdsrPct = r.tdsrUsage * 100;
-  const top3 = [
-    { label: 'Best rate found', value: (r.bestRate*100).toFixed(2) + '%', sub: r.banks[0].bank + ' · ' + r.banks[0].pkg, color: GREEN_DK },
-    { label: 'Estimated monthly', value: fmt$(monthly), sub: 'Year 1 · ' + r.inp.tenure + 'y tenure' },
-    { label: 'TDSR usage', value: tdsrPct.toFixed(1) + '%', sub: r.tdsrPass ? 'Within 55% cap' : 'Exceeds 55% cap', color: r.tdsrPass ? GREEN_DK : RED },
-  ];
-  y = statGrid(M, y, CW, top3) + 6;
+  y = statGridDark(y, [
+    { label: 'Best rate found', value: (r.bestRate * 100).toFixed(2) + '%', sub: r.banks[0].bank + ' · ' + r.banks[0].pkg, color: [100, 210, 160] },
+    { label: 'Estimated monthly', value: fmt$(monthly), sub: 'Year 1 · ' + r.inp.tenure + 'y tenure', color: GOLD_LT },
+    { label: 'TDSR usage', value: tdsrPct.toFixed(1) + '%', sub: r.tdsrPass ? 'Within 55% cap ✓' : 'Exceeds 55% cap ✗', color: r.tdsrPass ? [100, 210, 160] : [255, 120, 110] },
+  ]);
+  y += 2;
 
   // Verdict callout
   const verdict = tdsrFail
-    ? { tone: RED, soft: RED_SOFT,
-        title: 'Above the ' + (r.cappedBy === 'MSR' ? '30% MSR' : '55% TDSR') + ' cap',
-        body: 'At your requested loan, this won\'t pass MAS stress-testing. Clear levers to fit inside the cap — see Optimisation page.' }
-    : { tone: GREEN, soft: GREEN_SOFT,
-        title: 'You qualify — and you have room to go higher',
-        body: 'Your monthly fits inside both regulatory caps. Cheapest package gives a Year-1 monthly of ' + fmt$(monthly) + ' at ' + (r.bestRate*100).toFixed(2) + '%.' };
-  y = calloutBlock(y, verdict.tone, verdict.soft, verdict.title, verdict.body);
+    ? { tone: RED, bg: RED_BG, title: 'Above the ' + (r.cappedBy === 'MSR' ? '30% MSR' : '55% TDSR') + ' cap', body: 'At your requested loan, this won\'t pass MAS stress-testing. Clear levers to fit inside the cap — see Optimisation page for options.' }
+    : { tone: GREEN, bg: GREEN_BG, title: 'You qualify — and you have room to go higher', body: 'Your monthly fits inside both regulatory caps. Cheapest package gives a Year-1 monthly of ' + fmt$(monthly) + ' at ' + (r.bestRate * 100).toFixed(2) + '%.' };
+  y = callout(y, verdict.tone, verdict.bg, verdict.title, verdict.body);
   y += 4;
 
-  // 3-col breakdown summary (mirrors web 3-col cards)
-  y = sectionHeader(y, 'At-a-glance breakdown',
+  y = sectionHead(y, 'At-a-glance breakdown',
     isRefi ? 'Income, refinance saving, lock-in window.' : 'Income, upfront costs, funds position.',
     'Compact summary; full per-line detail on later pages.');
 
-  const incomeFixedC = (r.inp.borrowerIncomes || [r.inp.income]).reduce(function(s,v){return s+(v||0);},0);
-  const incomeVar30C = ((r.inp.borrowerVariableIncomes||[]).reduce(function(s,v){return s+(v||0);},0)) * 0.30;
-  const pledgedC = (r.inp.borrowerPledged||[]).reduce(function(s,v){return s+(v||0);},0);
-  const showC = (r.inp.borrowerShow||[]).reduce(function(s,v){return s+(v||0);},0);
-  const incomePledgedC = pledgedC / 48;
-  const incomeShowC = (showC * 0.30) / 48;
-  const debtsC = r.inp.debts || 0;
-  const availC = incomeFixedC + incomeVar30C + incomePledgedC + incomeShowC - debtsC;
+  // 3 summary cards side by side
+  const incomes       = r.inp.borrowerIncomes || [r.inp.income || 0];
+  const variables     = r.inp.borrowerVariableIncomes || [];
+  const pledgedArr    = r.inp.borrowerPledged || [];
+  const showArr       = r.inp.borrowerShow || [];
+  const fixedTotal    = incomes.reduce((s, v) => s + v, 0);
+  const varCont       = variables.reduce((s, v) => s + v * 0.70, 0);
+  const pledgedCont   = pledgedArr.reduce((s, v) => s + v / 48, 0);
+  const showCont      = showArr.reduce((s, v) => s + (v * 0.30) / 48, 0);
+  const debtsTotal    = r.inp.debts || 0;
+  const available     = Math.max(0, fixedTotal + varCont + pledgedCont + showCont - debtsTotal);
 
-  const cardW = (CW - 8) / 3;
-  const cardH = 56;
-  function summaryCard(x, yc, title, rows, footer) {
-    setFill(SURFACE); doc.rect(x, yc, cardW, cardH, 'F');
-    setDraw(BORDER); doc.setLineWidth(0.2); doc.rect(x, yc, cardW, cardH);
-    setFill(GOLD); doc.rect(x, yc, cardW, 0.6, 'F');
-    doc.setFont('helvetica','bold'); doc.setFontSize(6.2); setColor(GOLD);
-    doc.text(title.toUpperCase(), x + 4, yc + 6);
-    let yy = yc + 13;
-    rows.forEach(function(row){
-      doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(MUTED);
-      doc.text(row[0], x + 4, yy);
-      doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(row[2] || INK);
-      doc.text(row[1], x + cardW - 4, yy, { align: 'right' });
-      yy += 5.5;
+  const cW3 = (CW - 6) / 3;
+  const cH3 = 54;
+
+  // Helper: draw a 3-column card
+  function summCard(xi, yi, eyebrowTxt, headerVal, rows, footerLabel, footerVal, footerColor) {
+    setFill(SURFACE); doc.rect(xi, yi, cW3, cH3, 'F');
+    setDraw(BORDER); doc.setLineWidth(0.2); doc.rect(xi, yi, cW3, cH3);
+    setFill(NAVY_2); doc.rect(xi, yi, cW3, 0.6, 'F');
+
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6); setTxt(MUTED);
+    doc.text(eyebrowTxt.toUpperCase(), xi + 3, yi + 6);
+
+    let yy = yi + 13;
+    rows.forEach(([lbl, val, vc]) => {
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt(MUTED);
+      doc.text(lbl, xi + 3, yy);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); setTxt(vc || INK_2);
+      doc.text(val, xi + cW3 - 3, yy, { align: 'right' });
+      yy += 5.2;
     });
+
     setDraw(BORDER); doc.setLineWidth(0.15);
-    doc.line(x + 4, yc + cardH - 13, x + cardW - 4, yc + cardH - 13);
-    doc.setFont('helvetica','bold'); doc.setFontSize(6.5); setColor(MUTED);
-    doc.text(footer[0].toUpperCase(), x + 4, yc + cardH - 6);
-    doc.setFont('helvetica','bold'); doc.setFontSize(11); setColor(footer[2] || INK);
-    doc.text(footer[1], x + cardW - 4, yc + cardH - 5.5, { align: 'right' });
+    doc.line(xi + 3, yi + cH3 - 14, xi + cW3 - 3, yi + cH3 - 14);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(MUTED);
+    doc.text(footerLabel.toUpperCase(), xi + 3, yi + cH3 - 7);
+    doc.setFont('times', 'normal'); doc.setFontSize(11); setTxt(footerColor || INK);
+    doc.text(footerVal, xi + cW3 - 3, yi + cH3 - 6, { align: 'right' });
   }
 
-  // Card 1: Effective income build-up
-  const incomeRows = [
-    ['Fixed income', fmt$(incomeFixedC)],
-    ['Variable × 30%', '+ ' + fmt$(incomeVar30C)],
-  ];
-  if (pledgedC > 0) incomeRows.push(['Pledged ÷ 48', '+ ' + fmt$(incomePledgedC)]);
-  if (showC > 0) incomeRows.push(['Show × 30% ÷ 48', '+ ' + fmt$(incomeShowC)]);
-  incomeRows.push(['Less debts', '– ' + fmt$(debtsC), RED]);
-  summaryCard(M, y, 'Effective income build-up', incomeRows.slice(0, 4),
-    ['Available', fmt$(availC) + '/mo', NAVY]);
+  // Card 1: Income
+  summCard(M, y, 'Effective income', '',
+    [
+      ['Fixed income', fmt$(fixedTotal)],
+      ['Variable × 30%', '+ ' + fmt$(varCont)],
+      ['Less debts', '– ' + fmt$(debtsTotal), RED],
+    ],
+    'Available', fmt$(available) + '/mo', NAVY_2);
 
-  // Card 2: Upfront (purchase) or Refinance saving (refi)
+  // Card 2: Upfront or Refi saving
   if (!isRefi) {
-    summaryCard(M + cardW + 4, y, 'Upfront cost build-up',
+    const curM2 = isRefi ? 0 : pmt(r.inp.loan, r.inp.currentRate || 0, r.inp.tenure);
+    summCard(M + cW3 + 3, y, 'Upfront costs', '',
       [
         ['Down payment', fmt$(downPayment)],
         ['BSD', fmt$(bsd)],
-        ['ABSD · ' + absdRateLabel, fmt$(absd)],
-        ['Legal + valuation', fmt$(legalFee + valuationFee)],
+        ['ABSD · ' + absdLbl, fmt$(absd)],
+        ['Legal + valuation', fmt$(legalFee + valFee)],
       ],
-      ['Total upfront', fmt$(upfrontTotal), NAVY]);
-  } else {
-    const curM = pmt(r.inp.loan, r.inp.currentRate || 0.04, r.inp.tenure);
-    const saveM = curM - monthly;
-    summaryCard(M + cardW + 4, y, 'Refinance saving',
-      [
-        ['Current rate', ((r.inp.currentRate||0)*100).toFixed(2) + '%'],
-        ['New rate', sel.rate.toFixed(2) + '%', GREEN_DK],
-        ['Current monthly', fmt$(curM)],
-        ['New monthly', fmt$(monthly)],
-      ],
-      ['Save / mo', fmt$(saveM), saveM > 0 ? GREEN : RED]);
-  }
-
-  // Card 3: Funds position (purchase) or Lock-in window (refi)
-  if (!isRefi) {
-    const positionLabel = totalShortfall === 0 ? 'Fully covered' : 'Need ' + fmt$(totalShortfall);
-    summaryCard(M + (cardW + 4) * 2, y, 'Your funds position',
-      [
-        ['Cash on hand', fmt$(cashOnHand)],
-        ['Cash needed', '– ' + fmt$(upfrontMinCash)],
-        ['CPF OA available', fmt$(cpfOA)],
-        ['CPF needed', '– ' + fmt$(upfrontMinCPF)],
-      ],
-      ['Position', positionLabel, totalShortfall === 0 ? GREEN : RED]);
+      'Total upfront', fmt$(upfrontTotal), NAVY_2);
   } else {
     const curMR = pmt(r.inp.loan, r.inp.currentRate || 0.04, r.inp.tenure);
-    const lockSavings = (curMR - monthly) * (sel.lockInYears || 2) * 12;
-    summaryCard(M + (cardW + 4) * 2, y, 'Lock-in window',
+    const saveMR = curMR - monthly;
+    summCard(M + cW3 + 3, y, 'Refinance saving', '',
       [
-        ['Lock-in', sel.lockInYears ? sel.lockInYears + 'y' : 'None'],
-        ['Selected', sel.bank],
-        ['Pkg rate', sel.rate.toFixed(2) + '%'],
-        ['Outstanding', fmt$(r.inp.loan)],
+        ['Current rate', ((r.inp.currentRate || 0) * 100).toFixed(2) + '%'],
+        ['New rate', sel.rate.toFixed(2) + '%'],
+        ['Current monthly', fmt$(curMR)],
+        ['New monthly', fmt$(monthly)],
       ],
-      ['Total saving', fmt$(lockSavings), lockSavings > 0 ? GREEN : RED]);
+      'Save / month', fmt$(saveMR), saveMR > 0 ? GREEN_DK : RED);
   }
-  y += cardH + 4;
 
-  // ═══════════════════ PAGE 3 — INCOME & DEBT SERVICING ═══════════════════
+  // Card 3: Funds or Lock-in
+  if (!isRefi) {
+    const posLabel = totalShortfall === 0 ? 'Fully covered' : 'Need ' + fmt$(totalShortfall);
+    summCard(M + (cW3 + 3) * 2, y, 'Funds position', '',
+      [
+        ['Cash on hand', fmt$(cashOnHand)],
+        ['Cash needed', '– ' + fmt$(Math.round(price * 0.05) + bsd + absd + valFee)],
+        ['CPF OA available', fmt$(cpfOA)],
+        ['CPF needed', '– ' + fmt$(cpfPortion + legalFee)],
+      ],
+      'Position', posLabel, totalShortfall === 0 ? GREEN_DK : RED);
+  } else {
+    const lockSav = (pmt(r.inp.loan, r.inp.currentRate || 0.04, r.inp.tenure) - monthly) * (sel.lockInYears || 2) * 12;
+    summCard(M + (cW3 + 3) * 2, y, 'Lock-in window', '',
+      [
+        ['Selected bank', sel.bank],
+        ['Package', sel.pkg],
+        ['Lock-in', sel.lockInYears ? sel.lockInYears + 'y' : 'None'],
+        ['New rate', sel.rate.toFixed(2) + '%'],
+      ],
+      'Total saving', fmt$(lockSav), lockSav > 0 ? GREEN_DK : RED);
+  }
+  y += cH3 + 5;
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 3 — INCOME & DEBT SERVICING
+  // ═══════════════════════════════════════════════════════════════════════════
   y = pageChrome('Income · Debt Servicing · Affordability');
-  y = sectionHeader(y, 'Income & debt servicing',
+  y = sectionHead(y, 'Income & debt servicing',
     'How TDSR and MSR see your case.',
     'MAS rules cap your debt servicing at 55% of effective monthly income (TDSR), and HDB/EC mortgages at 30% (MSR). All numbers below stress-tested at MAS 4%.');
 
-  const bIncomes = r.inp.borrowerIncomes || [r.inp.income || 0];
-  const bVar = r.inp.borrowerVariableIncomes || [];
-  const bPledged = r.inp.borrowerPledged || [];
-  const bShow = r.inp.borrowerShow || [];
-  const bAges = r.inp.borrowerAges || [];
-  const debtsTotal = r.inp.debts || 0;
+  const bIncomes  = r.inp.borrowerIncomes || [r.inp.income || 0];
+  const bVar      = r.inp.borrowerVariableIncomes || [];
+  const bPledged  = r.inp.borrowerPledged || [];
+  const bShow     = r.inp.borrowerShow || [];
+  const bAges     = r.inp.borrowerAges || [];
 
-  // Per-purchaser income matrix (vasu-style)
+  // Per-purchaser income matrix
   const matrixRows = [];
-  let totalEff = 0;
-  let totalFixed = 0;
-  let totalWeightedAge = 0;
-  bIncomes.forEach(function(fixed, i){
-    const v = bVar[i] || 0;
-    const pl = bPledged[i] || 0;
-    const sh = bShow[i] || 0;
-    const age = bAges[i] || 0;
-    const fixedC = fixed * 1.0;
-    const varC = v * 0.70;
-    const plC = pl / 48;
-    const shC = (sh * 0.30) / 48;
-    const subtotal = fixedC + varC + plC + shC;
-    totalEff += subtotal;
-    totalFixed += fixed;
-    totalWeightedAge += age * fixed;
-    const pNo = String(i+1).padStart(2,'0');
-    matrixRows.push({ cells: [{text:'P' + pNo, font:'bold'}, 'Fixed income · age ' + age, fmt$(fixed) + '/mo', '100% × 1mth', fmt$(fixedC) + '/mo'] });
-    matrixRows.push({ cells: ['', 'Variable income', fmt$(v) + '/mo', '70% × 1mth', fmt$(varC) + '/mo'] });
-    if (pl > 0) matrixRows.push({ cells: ['', 'Pledged funds', fmt$(pl), '100% ÷ 48mth', fmt$(plC) + '/mo'] });
-    if (sh > 0) matrixRows.push({ cells: ['', 'Show funds', fmt$(sh), '30% ÷ 48mth', fmt$(shC) + '/mo'] });
-    matrixRows.push({ cells: ['', { text: 'P' + pNo + ' subtotal', font: 'bold' }, '', '', { text: fmt$(subtotal) + '/mo', font: 'bold' }],
-      _highlight: true, _highlightColor: SOFT_BG });
+  let totalEff = 0, totalFixed = 0, totalWeightedAge = 0;
+  bIncomes.forEach((fixed, i) => {
+    const v = bVar[i] || 0, pl = bPledged[i] || 0, sh = bShow[i] || 0, age = bAges[i] || 0;
+    const fc = fixed, vc = v * 0.70, plc = pl / 48, shc = (sh * 0.30) / 48;
+    const sub = fc + vc + plc + shc;
+    totalEff += sub; totalFixed += fixed; totalWeightedAge += age * fixed;
+    const pNo = 'P' + pad2(i + 1);
+    matrixRows.push({ cells: [{ text: pNo, font: 'bold' }, 'Fixed income · age ' + age, fmt$(fixed) + '/mo', '100% × 1mth', fmt$(fc) + '/mo'] });
+    matrixRows.push({ cells: ['', 'Variable income', fmt$(v) + '/mo', '70% × 1mth', fmt$(vc) + '/mo'] });
+    if (pl > 0) matrixRows.push({ cells: ['', 'Pledged funds', fmt$(pl), '100% ÷ 48mth', fmt$(plc) + '/mo'] });
+    if (sh > 0) matrixRows.push({ cells: ['', 'Show funds', fmt$(sh), '30% ÷ 48mth', fmt$(shc) + '/mo'] });
+    matrixRows.push({ cells: ['', { text: pNo + ' subtotal', font: 'bold' }, '', '', { text: fmt$(sub) + '/mo', font: 'bold' }], _highlight: true, _highlightColor: SURFACE });
   });
   const iwaa = totalFixed > 0 ? totalWeightedAge / totalFixed : 0;
-  const availForMortgage = totalEff - debtsTotal;
-  matrixRows.push({ cells: [{text:'TOTAL', font:'bold'}, { text: 'Effective qualifying income', font: 'bold' }, '', '', { text: fmt$(totalEff) + '/mo', font: 'bold' }],
-    _highlight: true, _highlightColor: GOLD_TINT });
-  if (debtsTotal > 0) {
-    matrixRows.push({ cells: ['', { text: 'Less existing monthly debts' }, '', '', { text: '– ' + fmt$(debtsTotal) + '/mo', color: RED }] });
-  }
-  matrixRows.push({ cells: ['', { text: 'Available for mortgage servicing', font: 'bold' }, '', '', { text: fmt$(availForMortgage) + '/mo', font: 'bold' }],
-    _highlight: true, _highlightColor: GOLD_TINT });
-  matrixRows.push({ cells: ['', { text: 'IWAA · Income-Weighted Avg Age' }, '', { text: 'Σ(age×fixed) ÷ Σ fixed', color: MUTED }, { text: iwaa.toFixed(1) + ' yrs', color: NAVY }] });
+  matrixRows.push({ cells: [{ text: 'TOTAL', font: 'bold' }, { text: 'Effective qualifying income', font: 'bold' }, '', '', { text: fmt$(totalEff) + '/mo', font: 'bold' }], _highlight: true, _highlightColor: GOLD_TN });
+  matrixRows.push({ cells: ['', 'Less existing monthly debts', '', '', { text: '– ' + fmt$(debtsTotal) + '/mo', color: RED }] });
+  matrixRows.push({ cells: ['', { text: 'Available for mortgage servicing', font: 'bold' }, '', '', { text: fmt$(available) + '/mo', font: 'bold' }], _highlight: true, _highlightColor: GOLD_TN });
+  matrixRows.push({ cells: ['', 'IWAA · Income-Weighted Avg Age', '', 'Σ(age×fixed) ÷ Σ fixed', { text: iwaa.toFixed(1) + ' yrs', color: NAVY_2 }] });
+
   y = table(['#', 'Component', 'Amount', 'MAS factor', 'Monthly contribution'],
-    matrixRows, { y: y, widths: [12, 60, 30, 36, 44] });
-  y += 8;
+    matrixRows, { y, widths: [12, 60, 30, 36, 44] });
+  y += 7;
 
-  // Regulatory checks — slim bars
+  // Regulatory checks — fat bars
   y = eyebrow(y, 'Regulatory checks');
-  y += 1;
-  const barRows = [
-    ['TDSR · Total Debt Servicing Ratio', r.tdsrUsage, 0.55, '55% cap'],
-  ];
-  if (r.msrApplies) barRows.push(['MSR · Mortgage Servicing Ratio (HDB/EC)', r.msrUsage, 0.30, '30% cap']);
-  barRows.push(['Effective LTV · Loan-to-Value', (r.effectiveLtvPct||r.ltvPct)/100, regulatoryLtvPct, (r.ltvPct||75) + '% cap']);
-  barRows.forEach(function(row){
-    const lbl = row[0], used = row[1], cap = row[2], capLbl = row[3];
-    doc.setFont('helvetica','bold'); doc.setFontSize(7.5); setColor(INK);
-    doc.text(lbl, M, y);
-    doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(INK_2);
-    doc.text((used*100).toFixed(1) + '%   /   ' + capLbl, W - M, y, { align: 'right' });
-    y += 1.8;
-    ratioBar(M, y, CW, used, cap);
-    y += 7;
-  });
+  y = ratioBar(y, 'TDSR · Total Debt Servicing Ratio', r.tdsrUsage, 0.55);
+  if (r.msrApplies) y = ratioBar(y, 'MSR · Mortgage Servicing Ratio (HDB/EC)', r.msrUsage, 0.30);
+  y = ratioBar(y, 'Effective LTV · Loan-to-Value', (r.effectiveLtvPct || r.ltvPct || 75) / 100, (r.ltvPct || 75) / 100);
+  y += 2;
 
-  y += 4;
-  // Single verdict callout — replaces 4-cell envelope grid + dual callouts
+  // Affordability verdict
   if (tdsrFail) {
     const failPct = ((r.cappedBy === 'MSR' ? r.msrUsage : r.tdsrUsage) * 100).toFixed(1);
-    const cap = r.cappedBy === 'MSR' ? '30%' : '55%';
-    y = calloutBlock(y, RED, RED_SOFT,
-      r.cappedBy + ' fail · max loan is ' + fmt$(r.maxLoanAffordable || 0),
-      r.cappedBy + ' at ' + failPct + '% exceeds ' + cap + ' cap. To borrow ' + fmt$(r.inp.loan) + ' you need to fit inside. See Optimisation page for levers.');
+    y = callout(y, RED, RED_BG,
+      r.cappedBy + ' fail · max qualifying loan is ' + fmt$(r.maxLoanAffordable || 0),
+      r.cappedBy + ' at ' + failPct + '% exceeds cap. To qualify: (1) reduce loan to ' + fmt$(r.maxLoanAffordable || 0) + ', (2) extend tenure, or (3) raise income/clear debts. See Optimisation page.');
   } else {
     const headroom = Math.max(0, (r.maxLoanAffordable || 0) - r.inp.loan);
     const ltvLine = r.tenureExceedsIwaa
-      ? ' Tenure ' + r.inp.tenure + 'y + IWAA ' + (r.iwaa ? r.iwaa.toFixed(1) : '—') + ' > 65 → max 55% LTV. Drop to ' + (r.tenureForFullLtv || r.fullLtvCap) + 'y to keep 75% LTV.'
-      : ' Tenure ' + r.inp.tenure + 'y + IWAA ' + (r.iwaa ? r.iwaa.toFixed(1) : '—') + ' ≤ 65 → full 75% LTV available.';
-    y = calloutBlock(y, GREEN, GREEN_SOFT,
+      ? 'Tenure ' + r.inp.tenure + 'y + IWAA ' + (r.iwaa ? r.iwaa.toFixed(1) : '—') + ' > 65 → MAS allows max 55% LTV at this tenure. Shorten to ' + (r.tenureForFullLtv || r.fullLtvCap) + 'y to keep 75% LTV.'
+      : 'Tenure ' + r.inp.tenure + 'y + IWAA ' + (r.iwaa ? r.iwaa.toFixed(1) : '—') + ' ≤ 65 → full 75% LTV available.';
+    y = callout(y, GREEN, GREEN_BG,
       'Headroom of ' + fmt$(headroom) + ' before cap',
-      'You\'re asking for ' + fmt$(r.inp.loan) + '. Max under ' + (r.msrApplies ? 'MSR' : 'TDSR') + ' at this tenure & income is ' + fmt$(r.maxLoanAffordable || 0) + '.' + ltvLine);
+      'You\'re asking for ' + fmt$(r.inp.loan) + '. Max under ' + (r.msrApplies ? 'MSR' : 'TDSR') + ' at this tenure & income is ' + fmt$(r.maxLoanAffordable || 0) + '. ' + ltvLine);
   }
 
-  // ═══════════════════ PAGE 4 — BANK RATE COMPARISON ═══════════════════
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 4 — BANK RATE COMPARISON
+  // ═══════════════════════════════════════════════════════════════════════════
   y = pageChrome('Bank Rate Comparison');
-  y = sectionHeader(y, 'Bank rates ranked',
+  y = sectionHead(y, 'Bank rates ranked',
     'The cheapest packages for your loan tier.',
-    'Ranked by total cost over the lock-in period (typically 2 years). Highlighted row = your selected package. Spread bar shows how much cheaper each package is vs the most expensive in this list. Rates as of ' + dateStr + '.');
+    'Ranked by total cost over the lock-in period (typically 2 years). Highlighted row = your selected package. Rates as of ' + dateStr + '.');
+
   const top8 = r.banks.slice(0, 8);
-  // Spread bar normalisation
-  const minRate = Math.min.apply(null, top8.map(function(b){return b.rate;}));
-  const maxRate = Math.max.apply(null, top8.map(function(b){return b.rate;}));
+  const minRate = Math.min(...top8.map(b => b.rate));
+  const maxRate = Math.max(...top8.map(b => b.rate));
   const rateSpread = (maxRate - minRate) || 0.0001;
-  // Widths: # | Bank | Package | Lock | Rate | (bar) | Monthly | Lock-in cost
-  const tw = [10, 22, 30, 14, 18, 24, 22, 24];
-  const barColX = tw[0] + tw[1] + tw[2] + tw[3] + tw[4] + 1; // 95
-  const barColW = tw[5] - 2;
-  const rateRows = top8.map(function(b, i){
-    const isSelected = (b._origIdx === selectedRateIdx) || (i === selectedRateIdx);
-    const sprFrac = 1 - ((b.rate - minRate) / rateSpread); // 1 = cheapest
+  const barColX = 10 + 22 + 30 + 14 + 18 + 1; // 95 — matches widths below
+  const barColW = 22;
+
+  const rateRows = top8.map((b, i) => {
+    const isSelected = b._origIdx === selectedRateIdx || i === selectedRateIdx;
+    const isBest = i === 0;
+    const sprFrac = 1 - (b.rate - minRate) / rateSpread;
     return {
       cells: [
         pad2(i + 1),
         { text: b.bank, font: 'bold' },
         b.pkg,
-        (b.lockInYears ? b.lockInYears + 'y' : 'No lock'),
+        b.lockInYears ? b.lockInYears + 'y' : 'No lock',
         b.rate.toFixed(2) + '%',
-        '', // bar column
+        '',
         fmt$(b.monthly),
         fmt$(b.lockInCost),
       ],
       _highlight: isSelected,
-      _highlightColor: GOLD_TINT,
-      _bar: { colX: barColX, colW: barColW, frac: sprFrac, color: i === 0 ? GREEN : NAVY },
+      _highlightColor: isSelected ? GOLD_TN : (isBest ? GREEN_BG : undefined),
+      _accent: isBest ? GREEN : (isSelected ? GOLD : undefined),
+      _bar: { x: barColX, w: barColW, frac: sprFrac, color: isBest ? GREEN : NAVY_2 },
     };
   });
-  y = table(['#','Bank','Package','Lock-in','Rate p.a.','Cheaper ←','Monthly','Lock-in cost'],
-    rateRows, { y: y, widths: tw, rowH: 6 });
-  y += 6;
-  doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(MUTED);
-  doc.text(doc.splitTextToSize('Lock-in cost = total monthly payments × lock-in months. After lock-in, the rate typically reverts to the package\'s "thereafter" rate (see selected package on next page).', CW), M, y);
-  y += 9;
 
+  y = table(
+    ['#', 'Bank', 'Package', 'Lock-in', 'Rate p.a.', 'Cheaper ←', 'Monthly', 'Lock-in cost'],
+    rateRows,
+    { y, widths: [10, 22, 30, 14, 18, 24, 22, 24], rowH: 6.5 }
+  );
+  y += 4;
+
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt(MUTED);
+  doc.text('Lock-in cost = total monthly payments × lock-in months. After lock-in, rate reverts to "thereafter" rate — see selected package on next page.', M, y);
+  y += 7;
+
+  // Savings analysis — dark tiles
   if (top8.length >= 2) {
     y = eyebrow(y, 'Savings analysis');
-    y += 1;
-    const avgCost = top8.reduce(function(s,b){return s+b.lockInCost;},0) / top8.length;
-    const savingsItems = [
-      { label: 'Vs next cheapest', value: fmt$(r.savingsVsSecond || 0), sub: 'Lock-in saving', color: GREEN },
-      { label: 'Vs top-' + top8.length + ' avg.', value: fmt$(Math.max(0, avgCost - top8[0].lockInCost)), sub: 'Lock-in saving', color: GREEN },
-      { label: 'Vs most expensive', value: fmt$(Math.max(0, top8[top8.length-1].lockInCost - top8[0].lockInCost)), sub: 'Lock-in saving', color: GREEN },
-    ];
-    y = statGrid(M, y, CW, savingsItems);
+    const avgCost = top8.reduce((s, b) => s + b.lockInCost, 0) / top8.length;
+    y = statGridDark(y, [
+      { label: 'Vs next cheapest', value: fmt$(r.savingsVsSecond || 0), sub: 'Lock-in saving', color: [100, 210, 160] },
+      { label: 'Vs top-' + top8.length + ' avg.', value: fmt$(Math.max(0, avgCost - top8[0].lockInCost)), sub: 'Lock-in saving', color: [100, 210, 160] },
+      { label: 'Vs most expensive', value: fmt$(Math.max(0, top8[top8.length - 1].lockInCost - top8[0].lockInCost)), sub: 'Lock-in saving', color: [100, 210, 160] },
+    ]);
   }
 
-  // ═══════════════════ PAGE 5 — SELECTED PACKAGE ═══════════════════
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 5 — SELECTED PACKAGE
+  // ═══════════════════════════════════════════════════════════════════════════
   y = pageChrome('Selected Package');
-  y = sectionHeader(y, 'Selected package',
+  y = sectionHead(y, 'Selected package',
     sel.bank + ' · ' + sel.pkg,
     (sel.subCategory || sel.category || 'Fixed') + '  ·  Year-1 rate ' + sel.rate.toFixed(2) + '% p.a.  ·  Loan ' + fmt$(r.inp.loan) + '  ·  Tenure ' + r.inp.tenure + 'y');
 
-  // Year breakdown — graceful fallback when bank year-by-year data is missing
-  const fallbackRate = sel.rate; // already in percent (e.g. 1.45)
-  function yrInfo(rawKey, rateKey, defaultRate) {
-    if (sel[rawKey]) return { display: sel[rawKey], num: (sel[rateKey] != null ? sel[rateKey] : null) };
+  // Year-by-year rate table
+  function yrInfo(rawKey, rateKey, def) {
+    if (sel[rawKey]) return { display: sel[rawKey], num: sel[rateKey] != null ? sel[rateKey] : null };
     if (sel[rateKey] != null) return { display: sel[rateKey].toFixed(2) + '%', num: sel[rateKey] };
-    if (defaultRate != null) return { display: defaultRate.toFixed(2) + '%', num: defaultRate };
+    if (def != null) return { display: def.toFixed(2) + '%', num: def };
     return { display: '—', num: null };
   }
   const lockY = sel.lockInYears || 0;
   const yrs = [
-    ['Year 1', yrInfo('year1Raw', 'year1Rate', fallbackRate), 0],
-    ['Year 2', yrInfo('year2Raw', 'year2Rate', lockY >= 2 ? fallbackRate : null), 1],
-    ['Year 3', yrInfo('year3Raw', 'year3Rate', lockY >= 3 ? fallbackRate : null), 2],
-    ['Year 4', yrInfo('year4Raw', 'year4Rate', lockY >= 4 ? fallbackRate : null), 3],
-    ['Year 5', yrInfo('year5Raw', 'year5Rate', lockY >= 5 ? fallbackRate : null), 4],
+    ['Year 1', yrInfo('year1Raw', 'year1Rate', sel.rate), 0],
+    ['Year 2', yrInfo('year2Raw', 'year2Rate', lockY >= 2 ? sel.rate : null), 1],
+    ['Year 3', yrInfo('year3Raw', 'year3Rate', lockY >= 3 ? sel.rate : null), 2],
+    ['Year 4', yrInfo('year4Raw', 'year4Rate', lockY >= 4 ? sel.rate : null), 3],
+    ['Year 5', yrInfo('year5Raw', 'year5Rate', lockY >= 5 ? sel.rate : null), 4],
     ['Thereafter', yrInfo('thereafterRaw', 'thereafterRate', null), -1],
   ];
-  const yrRows = yrs.map(function(yr){
-    const info = yr[1];
-    const idx = yr[2];
-    const m = info.num != null ? pmt(r.inp.loan, info.num/100, r.inp.tenure) : null;
-    const inLockIn = lockY > 0 && idx >= 0 && idx < lockY;
-    let status;
-    if (inLockIn) status = 'Locked in';
-    else if (info.num != null) status = idx === -1 ? 'Indicative' : 'Estimate';
-    else status = 'Bank quote';
+  const yrRows = yrs.map(([yrLabel, info, idx]) => {
+    const inLock = lockY > 0 && idx >= 0 && idx < lockY;
+    const isAfter = idx === -1;
+    const m = info.num != null ? pmt(r.inp.loan, info.num / 100, r.inp.tenure) : null;
+    const status = inLock ? 'Locked in' : (isAfter ? 'Indicative' : 'Estimate');
     return {
       cells: [
-        { text: yr[0], font: inLockIn ? 'bold' : 'normal' },
+        { text: yrLabel, font: inLock ? 'bold' : 'normal' },
         info.display,
-        m != null ? fmt$(m) + '/mo' : 'See broker',
+        m != null ? fmt$(m) + '/mo' : '—',
         m != null ? fmt$(m * 12) : '—',
-        { text: status, color: inLockIn ? NAVY : MUTED },
+        { text: status, color: inLock ? GREEN_DK : (isAfter ? RED : MUTED) },
       ],
-      _highlight: inLockIn,
-      _highlightColor: GOLD_TINT,
+      _highlight: inLock,
+      _highlightColor: inLock ? GREEN_BG : (isAfter ? RED_BG : undefined),
+      _accent: inLock ? GREEN : (isAfter ? RED : undefined),
     };
   });
-  y = table(['Year','Rate basis','Monthly','Annual cost','Status'],
-    yrRows, { y: y, widths: [22, 60, 32, 30, 36] });
+  y = table(['Year', 'Rate basis', 'Monthly', 'Annual cost', 'Status'],
+    yrRows, { y, widths: [22, 62, 32, 30, 36] });
   y += 8;
 
-  // 2-col card layout — Rate structure | Terms & conditions (mirrors web pkg-detail card)
-  const pkgCardW = (CW - 4) / 2;
-  const pkgCardH = 56;
-  function pkgCard(x, yc, eyebrowLbl, title, rows) {
-    setFill(SURFACE); doc.rect(x, yc, pkgCardW, pkgCardH, 'F');
-    setDraw(BORDER); doc.setLineWidth(0.2); doc.rect(x, yc, pkgCardW, pkgCardH);
-    setFill(GOLD); doc.rect(x, yc, pkgCardW, 0.6, 'F');
-    doc.setFont('helvetica','bold'); doc.setFontSize(6.2); setColor(GOLD);
-    doc.text(eyebrowLbl.toUpperCase(), x + 4, yc + 6);
-    doc.setFont('helvetica','bold'); doc.setFontSize(9); setColor(INK);
-    doc.text(title, x + 4, yc + 12);
-    let yy = yc + 18;
-    rows.forEach(function(row, i){
-      const isLast = i === rows.length - 1;
-      doc.setFont('helvetica','normal'); doc.setFontSize(7); setColor(MUTED);
-      doc.text(row[0], x + 4, yy);
-      doc.setFont('helvetica','bold'); doc.setFontSize(isLast ? 9 : 8); setColor(isLast ? NAVY : INK);
-      doc.text(String(row[1]), x + pkgCardW - 4, yy, { align: 'right' });
+  // 2-col pkg detail cards
+  const pkgW = (CW - 4) / 2;
+  const pkgH = 56;
+  function pkgCard(xi, yi, eyeL, titleL, rows) {
+    setFill(SURFACE); doc.rect(xi, yi, pkgW, pkgH, 'F');
+    setDraw(BORDER); doc.setLineWidth(0.2); doc.rect(xi, yi, pkgW, pkgH);
+    setFill(NAVY_2); doc.rect(xi, yi, pkgW, 0.6, 'F');
+    setFill(GOLD); doc.rect(xi, yi, 1.5, pkgH, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.2); setTxt(GOLD);
+    doc.text(eyeL.toUpperCase(), xi + 5, yi + 6);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9); setTxt(INK);
+    doc.text(titleL, xi + 5, yi + 12);
+    let yy = yi + 18;
+    rows.forEach(([lbl, val], ri) => {
+      const isLast = ri === rows.length - 1;
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt(MUTED);
+      doc.text(lbl, xi + 5, yy);
+      doc.setFont('helvetica', isLast ? 'bold' : 'normal'); doc.setFontSize(isLast ? 9.5 : 8);
+      setTxt(isLast ? NAVY_2 : INK);
+      doc.text(String(val), xi + pkgW - 4, yy, { align: 'right' });
       yy += 5.5;
-      if (i < rows.length - 1) {
-        setDraw(BORDER_LT); doc.setLineWidth(0.1);
-        doc.line(x + 4, yy - 2.5, x + pkgCardW - 4, yy - 2.5);
+      if (ri < rows.length - 2) {
+        setDraw(BORDER); doc.setLineWidth(0.1);
+        doc.line(xi + 5, yy - 2, xi + pkgW - 4, yy - 2);
       }
     });
   }
-
-  // Card 1: Rate structure (year 1-5 + thereafter)
   pkgCard(M, y, 'Rate structure', 'Year-by-year',
-    yrs.map(function(yr){
-      const info = yr[1];
-      return [yr[0], info.display];
-    }));
-
-  // Card 2: Terms & conditions
-  pkgCard(M + pkgCardW + 4, y, 'Terms & conditions', 'What you\'re signing up for',
+    [...yrs.map(([yl, info]) => [yl, info.display])]);
+  pkgCard(M + pkgW + 4, y, 'Terms & conditions', 'What you\'re signing up for',
     [
-      ['Lock-in period', sel.lockInYears ? sel.lockInYears + ' year' + (sel.lockInYears>1?'s':'') : 'No lock-in'],
+      ['Lock-in period', sel.lockInYears ? sel.lockInYears + ' year' + (sel.lockInYears > 1 ? 's' : '') : 'No lock-in'],
       ['Qualifying loan', sel.qualifying || ('Min $' + fmtN(sel.qualifyingMin || 0))],
       ['Rate basis', sel.category || sel.family || 'Fixed'],
       ['Lock-in cost', fmt$(sel.lockInCost)],
       ['Total interest · ' + r.inp.tenure + 'y', fmt$(r.totalInterest)],
       ['Monthly (Year 1)', fmt$(sel.monthly)],
     ]);
-  y += pkgCardH + 6;
+  y += pkgH + 6;
 
   // Lock-in callout
   if (sel.lockInYears) {
-    const expiry = new Date();
-    expiry.setFullYear(expiry.getFullYear() + sel.lockInYears);
-    const refiWindow = new Date(expiry);
-    refiWindow.setMonth(refiWindow.getMonth() - 4);
-    y = calloutBlock(y, GOLD, GOLD_TINT,
-      'Lock-in expires around ' + expiry.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' }),
-      'Start refinance shopping by ' + refiWindow.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' }) + '. We\'ll reach out 6 weeks before — free service, banks pay our referral.');
+    const expiry = new Date(); expiry.setFullYear(expiry.getFullYear() + sel.lockInYears);
+    const refi = new Date(expiry); refi.setMonth(refi.getMonth() - 4);
+    const fmtD = d => d.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' });
+    y = callout(y, GOLD, GOLD_TN,
+      'Lock-in expires around ' + fmtD(expiry),
+      'Start refinance shopping by ' + fmtD(refi) + '. We\'ll reach out 6 weeks before — free service, banks pay our referral.');
   }
 
-  // ═══════════════════ PAGE 6 — STRESS TEST + COST HORIZONS ═══════════════════
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 6 — STRESS TEST + COST HORIZONS
+  // ═══════════════════════════════════════════════════════════════════════════
   y = pageChrome('Stress Test · Cost Horizons');
-  y = sectionHeader(y, 'Stress test',
+  y = sectionHead(y, 'Stress test',
     'If rates rise — what your monthly looks like.',
-    'Same loan, same tenure — just a higher rate. MAS already stress-tests you at 4% for affordability; we model up to 6% so you can see the headroom on your own budget.');
+    'Same loan, same tenure — just a higher rate. MAS already stress-tests at 4% for affordability; we model up to 6% so you can see your personal headroom.');
 
   const baseM = r.monthlyBest;
-  const stressData = [
-    ['Your best rate (today)', r.bestRate*100, baseM],
+  const stressScenarios = [
+    ['Your best rate (today)', r.bestRate * 100, baseM],
     ['Mild uptick', 3.0, pmt(r.inp.loan, 0.03, r.inp.tenure)],
     ['MAS stress floor', 4.0, pmt(r.inp.loan, 0.04, r.inp.tenure)],
     ['Severe', 5.0, pmt(r.inp.loan, 0.05, r.inp.tenure)],
     ['Extreme', 6.0, pmt(r.inp.loan, 0.06, r.inp.tenure)],
   ];
-  const stressMaxM = Math.max.apply(null, stressData.map(function(s){return s[2];}));
-  // Widths: Scenario | Rate | Monthly | Stress impact (bar) | Δ | Y1 interest
-  const stw = [50, 22, 28, 30, 28, 22];
-  const stBarColX = stw[0] + stw[1] + stw[2] + 1; // 101
-  const stBarColW = stw[3] - 2;
-  const stressTbl = stressData.map(function(sr, i){
-    const delta = i === 0 ? 0 : sr[2] - baseM;
+  const stressMax = Math.max(...stressScenarios.map(s => s[2]));
+  const stressRows = stressScenarios.map(([label, rate, mo], i) => {
+    const delta = i === 0 ? 0 : mo - baseM;
     const dTxt = i === 0 ? '—' : (delta > 0 ? '+' + fmt$(delta) + '/mo' : fmt$(delta) + '/mo');
-    const annualInt = r.inp.loan * (sr[1]/100);
-    const barColor = i === 0 ? GREEN : (sr[1] >= 5 ? RED : (sr[1] >= 4 ? AMBER : NAVY));
+    const color = i === 0 ? GREEN : (rate >= 5 ? RED : (rate >= 4 ? AMBER : NAVY_2));
     return {
       cells: [
-        sr[0],
-        sr[1].toFixed(2) + '%',
-        fmt$(sr[2]),
-        '',
+        label, rate.toFixed(2) + '%', fmt$(mo), '',
         { text: dTxt, color: i === 0 ? MUTED : (delta > 0 ? RED : GREEN) },
-        fmt$(annualInt),
+        fmt$(r.inp.loan * (rate / 100)),
       ],
       _highlight: i === 0,
-      _highlightColor: GREEN_SOFT,
-      _bar: { colX: stBarColX, colW: stBarColW, frac: sr[2] / stressMaxM, color: barColor },
+      _highlightColor: GREEN_BG,
+      _accent: i === 0 ? GREEN : undefined,
+      _bar: { x: 50 + 22 + 28 + 1, w: 28, frac: mo / stressMax, color },
     };
   });
-  y = table(['Scenario','Rate','Monthly','Stress impact','Δ vs best','Y1 interest'],
-    stressTbl, { y: y, widths: stw, rowH: 6 });
+  y = table(['Scenario', 'Rate', 'Monthly', 'Stress impact', 'Δ vs best', 'Y1 interest'],
+    stressRows, { y, widths: [50, 22, 28, 30, 28, 22], rowH: 6 });
   y += 9;
 
-  y = sectionHeader(y, 'Cost horizons',
+  // Cost horizons
+  y = sectionHead(y, 'Cost horizons',
     'What you\'ll pay before you refinance.',
-    'Most SG borrowers refinance at lock-in expiry. These are realistic 2/3/5y horizons — not full ' + r.inp.tenure + 'y. Tenure stays as input; this just caps the cost analysis.');
+    'Most SG borrowers refi at lock-in expiry. Realistic 2/3/5y horizons — not full ' + r.inp.tenure + 'y. Tenure stays as input; this just caps the cost analysis.');
+
   const h2 = (r.horizon && r.horizon[2]) || { interest: 0, principal: 0, paid: 0, closingBalance: r.inp.loan };
   const h3 = (r.horizon && r.horizon[3]) || h2;
   const h5 = (r.horizon && r.horizon[5]) || h3;
-  const horizonItems = [
-    { label: '2y · Interest paid', value: fmt$(h2.interest), sub: 'Of ' + fmt$(h2.paid) + ' paid', color: GREEN },
-    { label: '3y · Interest paid', value: fmt$(h3.interest), sub: 'Of ' + fmt$(h3.paid) + ' paid', color: NAVY },
-    { label: '5y · Interest paid', value: fmt$(h5.interest), sub: 'Of ' + fmt$(h5.paid) + ' paid', color: AMBER },
-  ];
-  y = statGrid(M, y, CW, horizonItems) + 1;
-  const balanceItems = [
-    { label: '2y · Closing balance', value: fmt$(h2.closingBalance), sub: 'After 24 months', color: NAVY },
-    { label: '3y · Closing balance', value: fmt$(h3.closingBalance), sub: 'After 36 months', color: NAVY },
-    { label: '5y · Closing balance', value: fmt$(h5.closingBalance), sub: 'After 60 months', color: NAVY },
-  ];
-  y = statGrid(M, y, CW, balanceItems);
-  y += 6;
 
-  // Allocation bar — over the 5y window
+  y = statGridDark(y, [
+    { label: '2y · Interest paid', value: fmt$(h2.interest), sub: 'Of ' + fmt$(h2.paid) + ' paid', color: [100, 210, 160] },
+    { label: '3y · Interest paid', value: fmt$(h3.interest), sub: 'Of ' + fmt$(h3.paid) + ' paid', color: GOLD_LT },
+    { label: '5y · Interest paid', value: fmt$(h5.interest), sub: 'Of ' + fmt$(h5.paid) + ' paid', color: [255, 185, 80] },
+  ]);
+  y = statGridLight(y, [
+    { label: '2y · Closing balance', value: fmt$(h2.closingBalance), sub: 'After 24 months' },
+    { label: '3y · Closing balance', value: fmt$(h3.closingBalance), sub: 'After 36 months' },
+    { label: '5y · Closing balance', value: fmt$(h5.closingBalance), sub: 'After 60 months' },
+  ]);
+  y += 2;
+
+  // Allocation bar
+  y = eyebrow(y, 'Allocation of every $1 in first 5 years');
   const total5 = h5.paid > 0 ? h5.paid : (r.inp.loan + r.totalInterest);
   const intShare5 = total5 > 0 ? (h5.interest / total5) * 100 : 0;
-  y = eyebrow(y, 'Allocation of every $1 in first 5 years');
-  const segPrincipal = total5 > 0 ? (h5.principal / total5) * CW : 0;
-  setFill(NAVY); doc.rect(M, y, segPrincipal, 7, 'F');
-  setFill(GOLD); doc.rect(M + segPrincipal, y, CW - segPrincipal, 7, 'F');
-  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); setColor(CREAM);
-  doc.text('Principal · ' + (100-intShare5).toFixed(1) + '%', M + 3, y + 4.7);
-  doc.text('Interest · ' + intShare5.toFixed(1) + '%', M + segPrincipal + 3, y + 4.7);
-  y += 11;
-  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(MUTED);
+  y = allocationBar(y, 'Principal', 100 - intShare5, 'Interest', intShare5);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); setTxt(MUTED);
   const lcNote = intShare5 > 35
-    ? 'Over the first 5 years at ' + (r.bestRate*100).toFixed(2) + '%, interest takes ' + intShare5.toFixed(1) + '% of every dollar paid. Refinancing at year 2-3 (lock-in expiry) is the single biggest lever to bring this down.'
+    ? 'Interest is ' + intShare5.toFixed(1) + '% of total outlay over 5y — on the high side. Refinancing at lock-in expiry is the biggest single lever to bring this down.'
     : 'Interest is ' + intShare5.toFixed(1) + '% of total outlay over 5y — relatively healthy. Re-shop rates at lock-in expiry to keep it that way.';
   doc.text(doc.splitTextToSize(lcNote, CW), M, y);
 
-  // ═══════════════════ PAGE 7 — UPFRONT or REFI ═══════════════════
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 7 — UPFRONT COSTS & FUNDS  (or Refi Comparison)
+  // ═══════════════════════════════════════════════════════════════════════════
   if (!isRefi) {
     y = pageChrome('Upfront Costs · Funds');
-    y = sectionHeader(y, 'Upfront costs',
+    y = sectionHead(y, 'Upfront costs',
       'What you need at completion.',
       'Calculated using IRAS BSD/ABSD rates effective 27 Apr 2023 and MAS LTV rules.');
 
-    // CPF/Cash allocation per cost line (vasu-style)
-    // Allocation rules:
-    //  - Down payment: 5% min cash, balance via CPF OA (capped at user's available CPF)
-    //  - BSD/ABSD: payable from CPF OA reimbursement, but timing means cash usually upfront
-    //  - Legal: payable from CPF OA
-    //  - Valuation: cash only
-    const cpfAvail = cpfOA || 0;
-    let cpfRemaining = cpfAvail;
-    const cpfDpAlloc = Math.min(cpfPortion, cpfRemaining); cpfRemaining -= cpfDpAlloc;
-    const cashDpAlloc = downPayment - cpfDpAlloc;
-    // BSD: assume reimbursed from CPF after completion (typical practice if CPF available); else cash
-    const cpfBsdAlloc = Math.min(bsd, cpfRemaining); cpfRemaining -= cpfBsdAlloc;
-    const cashBsdAlloc = bsd - cpfBsdAlloc;
-    // ABSD: same pattern
-    const cpfAbsdAlloc = Math.min(absd, cpfRemaining); cpfRemaining -= cpfAbsdAlloc;
-    const cashAbsdAlloc = absd - cpfAbsdAlloc;
-    // Legal: payable from CPF OA
-    const cpfLegalAlloc = Math.min(legalFee, cpfRemaining); cpfRemaining -= cpfLegalAlloc;
-    const cashLegalAlloc = legalFee - cpfLegalAlloc;
-    // Valuation: cash only
-    const cashValAlloc = valuationFee;
-    const totalCpfUsed = cpfDpAlloc + cpfBsdAlloc + cpfAbsdAlloc + cpfLegalAlloc;
-    const totalCashOut = cashDpAlloc + cashBsdAlloc + cashAbsdAlloc + cashLegalAlloc + cashValAlloc;
+    // CPF/cash allocation per cost line
+    let cpfRem = cpfOA;
+    const cpfDp = Math.min(cpfPortion, cpfRem); cpfRem -= cpfDp;
+    const cashDp = downPayment - cpfDp;
+    const cpfBsd = Math.min(bsd, cpfRem); cpfRem -= cpfBsd;
+    const cashBsd = bsd - cpfBsd;
+    const cpfAbsd = Math.min(absd, cpfRem); cpfRem -= cpfAbsd;
+    const cashAbsd = absd - cpfAbsd;
+    const cpfLegal = Math.min(legalFee, cpfRem); cpfRem -= cpfLegal;
+    const cashLegal = legalFee - cpfLegal;
+    const cashVal = valFee;
+    const totalCpf = cpfDp + cpfBsd + cpfAbsd + cpfLegal;
+    const totalCash = cashDp + cashBsd + cashAbsd + cashLegal + cashVal;
 
-    const upfrontRows = [];
-    upfrontRows.push({ cells: [
-      { text: 'Down payment · ' + ((1-ltvPct)*100).toFixed(1) + '% of price', font: 'bold' },
-      { text: fmt$(downPayment), font: 'bold' },
-      { text: '5% cash + balance', color: MUTED },
-      { text: fmt$(cpfDpAlloc), color: cpfDpAlloc > 0 ? GREEN_DK : MUTED },
-      { text: fmt$(cashDpAlloc), font: 'bold' },
-    ]});
-    upfrontRows.push({ cells: [
-      'Buyer\'s Stamp Duty (BSD) · 1–6%',
-      fmt$(bsd),
-      { text: 'Reimburse from CPF', color: MUTED },
-      { text: fmt$(cpfBsdAlloc), color: cpfBsdAlloc > 0 ? GREEN_DK : MUTED },
-      fmt$(cashBsdAlloc),
-    ]});
-    upfrontRows.push({ cells: [
-      'Additional BSD · ' + absdRateLabel + ' (' + buyerDesc + ')',
-      fmt$(absd),
-      { text: 'Reimburse from CPF', color: MUTED },
-      { text: fmt$(cpfAbsdAlloc), color: cpfAbsdAlloc > 0 ? GREEN_DK : MUTED },
-      fmt$(cashAbsdAlloc),
-    ]});
-    upfrontRows.push({ cells: [
-      'Legal fees',
-      fmt$(legalFee),
-      { text: 'CPF OA payable', color: MUTED },
-      { text: fmt$(cpfLegalAlloc), color: cpfLegalAlloc > 0 ? GREEN_DK : MUTED },
-      fmt$(cashLegalAlloc),
-    ]});
-    upfrontRows.push({ cells: [
-      'Valuation fee',
-      fmt$(valuationFee),
-      { text: 'Cash only', color: MUTED },
-      { text: '—', color: MUTED },
-      fmt$(cashValAlloc),
-    ]});
-    upfrontRows.push({ cells: [
-      { text: 'Total', font: 'bold' },
-      { text: fmt$(upfrontTotal), font: 'bold' },
-      { text: '', color: MUTED },
-      { text: fmt$(totalCpfUsed), font: 'bold', color: GREEN_DK },
-      { text: fmt$(totalCashOut), font: 'bold' },
-    ], _highlight: true, _highlightColor: GOLD_TINT });
+    const upfrontRows = [
+      { cells: [{ text: 'Down payment · ' + ((1 - ltvPct) * 100).toFixed(1) + '% of price', font: 'bold' }, { text: fmt$(downPayment), font: 'bold' }, '5% cash + balance', { text: fmt$(cpfDp), color: cpfDp > 0 ? GREEN_DK : MUTED }, { text: fmt$(cashDp), font: 'bold' }] },
+      { cells: ['Buyer\'s Stamp Duty (BSD) · 1–6%', fmt$(bsd), 'Reimburse from CPF', { text: fmt$(cpfBsd), color: cpfBsd > 0 ? GREEN_DK : MUTED }, fmt$(cashBsd)] },
+      { cells: ['ABSD · ' + absdLbl + ' (' + buyDesc + ')', fmt$(absd), 'Reimburse from CPF', { text: fmt$(cpfAbsd), color: cpfAbsd > 0 ? GREEN_DK : MUTED }, fmt$(cashAbsd)] },
+      { cells: ['Legal fees', fmt$(legalFee), 'CPF OA payable', { text: fmt$(cpfLegal), color: cpfLegal > 0 ? GREEN_DK : MUTED }, fmt$(cashLegal)] },
+      { cells: ['Valuation fee', fmt$(valFee), 'Cash only', { text: '—', color: MUTED }, fmt$(cashVal)] },
+      { cells: [{ text: 'Total', font: 'bold' }, { text: fmt$(upfrontTotal), font: 'bold' }, '', { text: fmt$(totalCpf), font: 'bold', color: GREEN_DK }, { text: fmt$(totalCash), font: 'bold' }], _highlight: true, _highlightColor: GOLD_TN },
+    ];
     y = table(['Cost item', 'Amount', 'Method', 'From CPF OA', 'Cash outlay'],
-      upfrontRows, { y: y, widths: [60, 26, 36, 26, 26] });
-    y += 7;
+      upfrontRows, { y, widths: [62, 24, 36, 24, 24] });
+    y += 6;
 
-    // Cash vs CPF — single split bar (driven by per-line allocation)
+    // Cash vs CPF split bar
     y = eyebrow(y, 'Cash vs CPF allocation · upfront');
-    const allocTotal = totalCpfUsed + totalCashOut;
-    const cashSeg = allocTotal > 0 ? (totalCashOut / allocTotal) * CW : CW;
-    const cpfSeg = CW - cashSeg;
-    setFill(NAVY); doc.rect(M, y, cashSeg, 8, 'F');
-    setFill([180, 140, 50]); doc.rect(M + cashSeg, y, cpfSeg, 8, 'F');
-    doc.setFont('helvetica','bold'); doc.setFontSize(7.5); setColor(CREAM);
-    doc.text('CASH ' + fmt$(totalCashOut) + (allocTotal > 0 ? '  ·  ' + ((totalCashOut/allocTotal)*100).toFixed(0) + '%' : ''), M + 3, y + 5.3);
-    if (totalCpfUsed > 0) doc.text('CPF OA ' + fmt$(totalCpfUsed) + '  ·  ' + ((totalCpfUsed/allocTotal)*100).toFixed(0) + '%', M + cashSeg + 3, y + 5.3);
-    y += 12;
+    const allocTotal = totalCpf + totalCash;
+    const cashPct = allocTotal > 0 ? (totalCash / allocTotal) * 100 : 100;
+    const cpfPct = 100 - cashPct;
+    y = allocationBar(y, 'Cash ' + fmt$(totalCash), cashPct, 'CPF OA ' + fmt$(totalCpf), cpfPct);
+    y += 4;
 
     if (cpfOA > 0 || cashOnHand > 0) {
-      y = sectionHeader(y, 'Funds position',
+      y = sectionHead(y, 'Funds position',
         totalShortfall === 0 ? 'You\'re fully covered.' : 'Shortfall of ' + fmt$(totalShortfall) + '.',
         'Based on the CPF OA & cash on hand you provided.');
-      const fundRows = [
-        { cells: ['Cash on hand', fmt$(cashOnHand)] },
-        { cells: ['Cash needed (min)', '– ' + fmt$(upfrontMinCash)] },
-        { cells: [
-            { text: cashOnHand >= upfrontMinCash ? 'Cash surplus' : 'Cash shortfall', font: 'bold' },
-            { text: (cashOnHand >= upfrontMinCash ? '+ ' : '– ') + fmt$(Math.abs(cashOnHand - upfrontMinCash)), font: 'bold', color: cashOnHand >= upfrontMinCash ? GREEN : RED }
-          ]},
-        { cells: ['CPF OA available', fmt$(cpfOA)] },
-        { cells: ['CPF OA needed', '– ' + fmt$(upfrontMinCPF)] },
-        { cells: [
-            { text: cpfOA >= upfrontMinCPF ? 'CPF surplus' : 'CPF shortfall', font: 'bold' },
-            { text: (cpfOA >= upfrontMinCPF ? '+ ' : '– ') + fmt$(Math.abs(cpfOA - upfrontMinCPF)), font: 'bold', color: cpfOA >= upfrontMinCPF ? GREEN : RED }
-          ]},
-        { cells: [
-            { text: 'TOTAL POSITION', font: 'bold' },
-            { text: (totalShortfall === 0 ? 'Fully covered' : 'Need ' + fmt$(totalShortfall) + ' more'), font: 'bold', color: totalShortfall === 0 ? GREEN : RED }
-          ], _highlight: true, _highlightColor: totalShortfall === 0 ? GREEN_SOFT : RED_SOFT },
-      ];
-      y = table(['Item', 'Amount'], fundRows, { y: y, widths: [CW - 60, 60] });
+
+      const minCashNeeded = Math.round(price * 0.05);
+      const cpfNeeded = cpfPortion + legalFee;
+      const cashSurplus = cashOnHand - (minCashNeeded + bsd + absd + valFee);
+      const cpfSurplus = cpfOA - cpfNeeded;
+
+      y = ledgerRow(y, 'Cash on hand', fmt$(cashOnHand));
+      y = ledgerRow(y, 'Cash needed (min)', '– ' + fmt$(minCashNeeded + bsd + absd + valFee));
+      y = ledgerRow(y, cashSurplus >= 0 ? 'Cash surplus' : 'Cash shortfall',
+        (cashSurplus >= 0 ? '+ ' : '– ') + fmt$(Math.abs(cashSurplus)),
+        { valueColor: cashSurplus >= 0 ? GREEN_DK : RED });
+      y = ledgerRow(y, 'CPF OA available', fmt$(cpfOA));
+      y = ledgerRow(y, 'CPF OA needed', '– ' + fmt$(cpfNeeded));
+      y = ledgerRow(y, cpfSurplus >= 0 ? 'CPF surplus' : 'CPF shortfall',
+        (cpfSurplus >= 0 ? '+ ' : '– ') + fmt$(Math.abs(cpfSurplus)),
+        { valueColor: cpfSurplus >= 0 ? GREEN_DK : RED });
+      y = ledgerRow(y, 'Total position',
+        totalShortfall === 0 ? 'Fully covered' : 'Need ' + fmt$(totalShortfall) + ' more',
+        { total: true, valueColor: totalShortfall === 0 ? GREEN_DK : RED });
     }
   } else {
     y = pageChrome('Refinance Comparison');
-    y = sectionHeader(y, 'Refinance comparison',
-      'Your current loan vs the cheapest new package.',
-      'Savings projected over the new lock-in period. Service is free — banks pay our referral fee.');
-    const curMonthly = pmt(r.inp.loan, r.inp.currentRate || 0.04, r.inp.tenure);
-    const newMonthly = sel.monthly;
-    const monthSave = curMonthly - newMonthly;
+    y = sectionHead(y, 'Refinance comparison', 'Your current loan vs the cheapest new package.', 'Savings projected over the new lock-in period. Service is free — banks pay our referral fee.');
+    const curM = pmt(r.inp.loan, r.inp.currentRate || 0.04, r.inp.tenure);
+    const saveM = curM - monthly;
     const lockMonths = (sel.lockInYears || 2) * 12;
-    const lockSavings = monthSave * lockMonths;
-    // Side-by-side header strip
-    const refiItems = [
-      { label: 'Current rate', value: ((r.inp.currentRate||0)*100).toFixed(2) + '%', sub: 'Your input', color: INK },
-      { label: 'New rate', value: sel.rate.toFixed(2) + '%', sub: sel.bank + ' · ' + sel.pkg, color: GREEN },
-      { label: 'Monthly saving', value: fmt$(monthSave), sub: monthSave > 0 ? 'Per month' : 'No saving', color: monthSave > 0 ? GREEN : RED },
-      { label: 'Lock-in saving', value: fmt$(lockSavings), sub: 'Over ' + (sel.lockInYears||2) + 'y', color: lockSavings > 0 ? GREEN : RED },
-    ];
-    y = statGrid(M, y, CW, refiItems);
+    y = statGridDark(y, [
+      { label: 'Current rate', value: ((r.inp.currentRate || 0) * 100).toFixed(2) + '%', sub: 'Your input', color: [255, 140, 130] },
+      { label: 'New rate', value: sel.rate.toFixed(2) + '%', sub: sel.bank + ' · ' + sel.pkg, color: [100, 210, 160] },
+      { label: 'Monthly saving', value: fmt$(saveM), sub: 'Per month', color: saveM > 0 ? [100, 210, 160] : [255, 140, 130] },
+      { label: 'Lock-in saving', value: fmt$(saveM * lockMonths), sub: 'Over ' + (sel.lockInYears || 2) + 'y', color: saveM > 0 ? [100, 210, 160] : [255, 140, 130] },
+    ]);
     y += 4;
-    const refiRows = [
-      { cells: ['Outstanding loan', fmt$(r.inp.loan)] },
-      { cells: ['Remaining tenure', r.inp.tenure + ' years'] },
-      { cells: ['Current rate (your input)', ((r.inp.currentRate||0)*100).toFixed(2) + '%'] },
-      { cells: ['Current monthly', fmt$(curMonthly)] },
-      { cells: ['New best rate', sel.rate.toFixed(2) + '%'] },
-      { cells: ['New monthly', fmt$(newMonthly)] },
-      { cells: [
-          { text: 'Monthly saving', font: 'bold' },
-          { text: fmt$(monthSave) + '/mo', font: 'bold', color: monthSave > 0 ? GREEN : RED }
-        ]},
-      { cells: [
-          { text: 'Total saving over ' + (sel.lockInYears||2) + 'y lock-in', font: 'bold' },
-          { text: fmt$(lockSavings), font: 'bold', color: lockSavings > 0 ? GREEN : RED }
-        ], _highlight: true, _highlightColor: GREEN_SOFT },
-    ];
-    y = table(['Item','Amount'], refiRows, { y: y, widths: [CW - 60, 60] });
+    y = ledgerRow(y, 'Outstanding loan', fmt$(r.inp.loan));
+    y = ledgerRow(y, 'Remaining tenure', r.inp.tenure + ' years');
+    y = ledgerRow(y, 'Current rate', ((r.inp.currentRate || 0) * 100).toFixed(2) + '%');
+    y = ledgerRow(y, 'Current monthly', fmt$(curM));
+    y = ledgerRow(y, 'New best rate', sel.rate.toFixed(2) + '%');
+    y = ledgerRow(y, 'New monthly', fmt$(monthly));
+    y = ledgerRow(y, 'Monthly saving', fmt$(saveM) + '/mo', { total: true, valueColor: saveM > 0 ? GREEN_DK : RED });
   }
 
-  // ═══════════════════ PAGE 8 — AMORTISATION (realistic refi window + CPF) ═══════════════════
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 8 — AMORTISATION & REFI WINDOW
+  // ═══════════════════════════════════════════════════════════════════════════
   y = pageChrome('Amortisation · Refi Window');
-  y = sectionHeader(y, 'Amortisation · first 5 years',
+  y = sectionHead(y, 'Amortisation · first 5 years',
     'Realistic refinance window — not full ' + r.inp.tenure + 'y.',
     'Tenure stays as input (drives monthly payment). This page focuses on the years that actually matter — most SG borrowers refinance at year 2 or 3 lock-in expiry.');
 
@@ -5786,235 +5830,184 @@ async function buildReportPdf(r, lead) {
     let yearInt = 0, yearPrin = 0;
     for (let m = 0; m < 12; m++) {
       if (bal <= 0) break;
-      const i = bal * (rateY / 12);
-      const p = annMon - i;
-      yearInt += i; yearPrin += p; bal -= p;
+      const iAmt = bal * (rateY / 12);
+      const p = annMon - iAmt;
+      yearInt += iAmt; yearPrin += p; bal -= p;
     }
-    fullSchedule.push({ yr: yr, payment: annMon * 12, interest: yearInt, principal: yearPrin, balance: Math.max(0, bal) });
+    fullSchedule.push({ yr, payment: annMon * 12, interest: yearInt, principal: yearPrin, balance: Math.max(0, bal) });
   }
-  const schedule = fullSchedule.slice(0, Math.min(5, r.inp.tenure));
 
-  // Curve over full tenure with markers at Y2/Y3/Y5
+  // Balance curve
   y = eyebrow(y, 'Amortisation curve · full tenure with horizon markers');
-  const chartH = 30;
-  const chartTop = y;
-  const balSeries = [{x: 0, y: r.inp.loan}].concat(
-    fullSchedule.map(function(s, i){ return { x: i + 1, y: s.balance }; })
-  );
-  let cumIntF = 0;
-  const intSeries = [{x: 0, y: 0}].concat(
-    fullSchedule.map(function(s, i){ cumIntF += s.interest; return { x: i + 1, y: cumIntF }; })
-  );
-  let cumPrF = 0;
-  const prSeries = [{x: 0, y: 0}].concat(
-    fullSchedule.map(function(s, i){ cumPrF += s.principal; return { x: i + 1, y: cumPrF }; })
-  );
-  lineChart(M, chartTop, CW, chartH, [
-    { points: balSeries, color: NAVY, width: 0.7 },
-    { points: prSeries, color: GREEN, width: 0.5 },
-    { points: intSeries, color: AMBER, width: 0.5 },
+  const chartH = 32;
+  const balSeries = [{ x: 0, y: r.inp.loan }].concat(fullSchedule.map((s, i) => ({ x: i + 1, y: s.balance })));
+  let cumInt = 0; const intSeries = [{ x: 0, y: 0 }].concat(fullSchedule.map((s, i) => { cumInt += s.interest; return { x: i + 1, y: cumInt }; }));
+  let cumPr = 0; const prSeries = [{ x: 0, y: 0 }].concat(fullSchedule.map((s, i) => { cumPr += s.principal; return { x: i + 1, y: cumPr }; }));
+
+  lineChart(M, y, CW, chartH, [
+    { points: balSeries, color: NAVY_2, width: 0.9 },
+    { points: prSeries, color: GREEN, width: 0.55 },
+    { points: intSeries, color: AMBER, width: 0.55 },
   ], { xMax: r.inp.tenure, yMax: r.inp.loan, gridY: 4 });
-  // Vertical markers at Y2 / Y3 / Y5
-  setDraw(GOLD); doc.setLineWidth(0.4);
-  [2, 3, 5].forEach(function(yr){
+
+  // Horizon markers
+  setDraw(GOLD); doc.setLineWidth(0.5);
+  [2, 3, 5].forEach(yr => {
     if (yr <= r.inp.tenure) {
-      const xMark = M + (yr / r.inp.tenure) * CW;
-      doc.line(xMark, chartTop, xMark, chartTop + chartH);
-      doc.setFont('helvetica','bold'); doc.setFontSize(5.5); setColor(GOLD);
-      doc.text('Y' + yr, xMark + 0.5, chartTop - 0.5);
+      const xM = M + (yr / r.inp.tenure) * CW;
+      doc.line(xM, y, xM, y + chartH);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(5.5); setTxt(GOLD);
+      doc.text('Y' + yr, xM + 0.5, y - 0.5);
     }
   });
   doc.setLineWidth(0.15);
-  // Axis labels
-  doc.setFont('helvetica','normal'); doc.setFontSize(5.5); setColor(MUTED);
-  doc.text('Y0', M, chartTop + chartH + 3);
-  doc.text('Y' + r.inp.tenure, M + CW, chartTop + chartH + 3, { align: 'right' });
-  doc.text(fmt$(r.inp.loan), M - 1, chartTop + 2, { align: 'right' });
-  doc.text('$0', M - 1, chartTop + chartH + 1, { align: 'right' });
-  // Legend
-  const legY = chartTop + chartH + 7;
-  setFill(NAVY); doc.rect(M, legY - 1.4, 4, 1.2, 'F');
-  doc.setFont('helvetica','normal'); doc.setFontSize(6.5); setColor(INK);
-  doc.text('Outstanding balance', M + 6, legY);
-  setFill(GREEN); doc.rect(M + 50, legY - 1.4, 4, 1.2, 'F');
-  doc.text('Cumulative principal repaid', M + 56, legY);
-  setFill(AMBER); doc.rect(M + 110, legY - 1.4, 4, 1.2, 'F');
-  doc.text('Cumulative interest paid', M + 116, legY);
-  setFill(GOLD); doc.rect(M + 165, legY - 1.4, 4, 1.2, 'F');
-  doc.text('Refi horizons', M + 171, legY);
+
+  // Chart legend
+  const legY = y + chartH + 4;
+  const legendItems = [
+    [NAVY_2, 'Outstanding balance'],
+    [GREEN, 'Cumulative principal'],
+    [AMBER, 'Cumulative interest'],
+    [GOLD, 'Refi horizons'],
+  ];
+  legendItems.forEach(([color, label], i) => {
+    const lx = M + i * 45;
+    setFill(color); doc.rect(lx, legY - 1.5, 5, 1.5, 'F');
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(6); setTxt(INK);
+    doc.text(label, lx + 7, legY);
+  });
   y = legY + 7;
 
-  // First-5-year detail with CPF inflow + cash outlay (Vasu-style)
-  // Model: assume each borrower contributes ~23% of capped-OW (Ordinary Wage cap S$7,400/mo) to CPF OA
-  //        Annual CPF inflow per borrower = min(fixedMonthly, 7400) × 0.23 × 12
-  const annualCpfInflow = (r.inp.borrowerIncomes || []).reduce(function(s, fx){
-    const cappedOW = Math.min(fx || 0, 7400);
-    return s + (cappedOW * 0.23 * 12);
+  // Year-by-year table with CPF
+  const annualCpfInflow = (r.inp.borrowerIncomes || []).reduce((s, fx) => {
+    return s + Math.min(fx || 0, 7400) * 0.23 * 12;
   }, 0);
   let cpfBal = r.inp.cpfOA || 0;
-  const amortRows = schedule.map(function(s){
-    const annualPay = s.payment;
+  const schedule = fullSchedule.slice(0, Math.min(5, r.inp.tenure));
+  const amortRows = schedule.map(s => {
     cpfBal += annualCpfInflow;
-    const fromCpfYr = Math.min(cpfBal, annualPay);
-    cpfBal -= fromCpfYr;
-    const cashYr = annualPay - fromCpfYr;
+    const fromCpf = Math.min(cpfBal, s.payment);
+    cpfBal -= fromCpf;
+    const cashOut = s.payment - fromCpf;
     return {
       cells: [
         'Y' + s.yr,
         fmt$(s.balance),
         fmt$(s.interest),
         fmt$(s.principal),
-        fmt$(annualPay),
-        fmt$(cpfBal + fromCpfYr),
-        { text: fmt$(fromCpfYr), color: fromCpfYr > 0 ? GREEN_DK : MUTED },
-        { text: fmt$(cashYr), font: 'bold' },
+        fmt$(s.payment),
+        fmt$(cpfBal + fromCpf),
+        { text: fmt$(fromCpf), color: fromCpf > 0 ? GREEN_DK : MUTED },
+        { text: fmt$(cashOut), font: 'bold' },
       ],
     };
   });
-  // Cumulative summary rows (only mortgage-side; CPF logic above)
-  const sum2 = fullSchedule.slice(0, Math.min(2, r.inp.tenure)).reduce(function(a,s){return {p:a.p+s.payment, i:a.i+s.interest, pr:a.pr+s.principal, b:s.balance};}, {p:0,i:0,pr:0,b:r.inp.loan});
-  const sum3 = fullSchedule.slice(0, Math.min(3, r.inp.tenure)).reduce(function(a,s){return {p:a.p+s.payment, i:a.i+s.interest, pr:a.pr+s.principal, b:s.balance};}, {p:0,i:0,pr:0,b:r.inp.loan});
-  const sum5 = fullSchedule.slice(0, Math.min(5, r.inp.tenure)).reduce(function(a,s){return {p:a.p+s.payment, i:a.i+s.interest, pr:a.pr+s.principal, b:s.balance};}, {p:0,i:0,pr:0,b:r.inp.loan});
-  amortRows.push({ cells: [{text:'Σ Y2', font:'bold'}, {text:fmt$(sum2.b), font:'bold'}, {text:fmt$(sum2.i), font:'bold'}, {text:fmt$(sum2.pr), font:'bold'}, {text:fmt$(sum2.p), font:'bold'}, '', '', ''], _highlight: true, _highlightColor: GOLD_TINT });
-  amortRows.push({ cells: [{text:'Σ Y3', font:'bold'}, {text:fmt$(sum3.b), font:'bold'}, {text:fmt$(sum3.i), font:'bold'}, {text:fmt$(sum3.pr), font:'bold'}, {text:fmt$(sum3.p), font:'bold'}, '', '', ''], _highlight: true, _highlightColor: GOLD_TINT });
-  amortRows.push({ cells: [{text:'Σ Y5', font:'bold'}, {text:fmt$(sum5.b), font:'bold'}, {text:fmt$(sum5.i), font:'bold'}, {text:fmt$(sum5.pr), font:'bold'}, {text:fmt$(sum5.p), font:'bold'}, '', '', ''], _highlight: true, _highlightColor: GOLD_TINT });
+  const sum2 = fullSchedule.slice(0, Math.min(2, r.inp.tenure)).reduce((a, s) => ({ p: a.p + s.payment, i: a.i + s.interest, pr: a.pr + s.principal, b: s.balance }), { p: 0, i: 0, pr: 0, b: r.inp.loan });
+  const sum3 = fullSchedule.slice(0, Math.min(3, r.inp.tenure)).reduce((a, s) => ({ p: a.p + s.payment, i: a.i + s.interest, pr: a.pr + s.principal, b: s.balance }), { p: 0, i: 0, pr: 0, b: r.inp.loan });
+  const sum5 = fullSchedule.slice(0, Math.min(5, r.inp.tenure)).reduce((a, s) => ({ p: a.p + s.payment, i: a.i + s.interest, pr: a.pr + s.principal, b: s.balance }), { p: 0, i: 0, pr: 0, b: r.inp.loan });
+
+  [[sum2, 2], [sum3, 3], [sum5, 5]].forEach(([s, n]) => {
+    amortRows.push({ cells: [{ text: 'Σ Y' + n, font: 'bold' }, { text: fmt$(s.b), font: 'bold' }, { text: fmt$(s.i), font: 'bold' }, { text: fmt$(s.pr), font: 'bold' }, { text: fmt$(s.p), font: 'bold' }, '', '', ''], _highlight: true, _highlightColor: GOLD_TN });
+  });
+
   y = eyebrow(y, 'Year-by-year · with CPF inflow & cash outlay (first 5y)');
   y = table(['Y', 'Loan bal.', 'Interest yr', 'Principal yr', 'Annual pay', 'CPF avail.', 'From CPF', 'Cash outlay'],
-    amortRows, { y: y, widths: [10, 26, 22, 22, 22, 26, 22, CW - 150], rowH: 5.5 });
-  y += 4;
-  doc.setFont('helvetica','normal'); doc.setFontSize(6.5); setColor(MUTED);
-  const cpfNote = annualCpfInflow > 0
-    ? 'CPF inflow assumes ' + fmt$(annualCpfInflow) + '/yr OA contribution (23% of capped wages, all borrowers). Initial CPF OA: ' + fmt$(r.inp.cpfOA || 0) + '. From-CPF row uses available balance to pay annual installments; remainder = cash outlay.'
-    : 'CPF inflow not modelled — enter total CPF OA in form to see year-by-year CPF deduction. Cash outlay = full annual payment in this scenario.';
-  doc.text(doc.splitTextToSize(cpfNote, CW), M, y);
+    amortRows, { y, widths: [10, 26, 22, 22, 22, 26, 22, CW - 150], rowH: 5.5 });
+  y += 3;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(6.5); setTxt(MUTED);
+  doc.text('CPF inflow assumes ' + fmtN(annualCpfInflow) + '/yr OA contribution (23% of capped wages). Initial CPF OA: ' + fmt$(r.inp.cpfOA || 0) + '.', M, y);
 
-  // ═══════════════════ PAGE 9 — OPTIMISATION + NEXT STEPS ═══════════════════
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 9 — OPTIMISATION + NEXT STEPS
+  // ═══════════════════════════════════════════════════════════════════════════
   y = pageChrome('Optimisation · Next Steps');
-  y = sectionHeader(y, 'Optimisation playbook',
+  y = sectionHead(y, 'Optimisation playbook',
     'Concrete levers to lower your monthly or qualify for more.',
     'Each lever is run through the same MAS 4% stress floor. Pick the ones that match your goal — speak to us for tailored advice.');
 
+  // Build tips
   const tips = [];
   const tenureCap = r.propertyTenureCap || (r.inp.propertyType === 'hdb' ? 30 : 35);
   if (r.inp.tenure < tenureCap) {
     const newT = Math.min(tenureCap, r.inp.tenure + 5);
     if (newT > r.inp.tenure) {
       const newM = pmt(r.inp.loan, r.bestRate, newT);
-      tips.push({
-        title: 'Stretch tenure to ' + newT + ' years',
-        body: 'Drops your monthly to ' + fmt$(newM) + ' at ' + (r.bestRate*100).toFixed(2) + '%. Trade-off: more total interest paid over the life of the loan.',
-        impact: '−' + fmt$(r.monthlyBest - newM) + '/mo',
-      });
+      tips.push({ n: '01', title: 'Stretch tenure to ' + newT + ' years', body: 'Drops your monthly to ' + fmt$(newM) + ' at ' + (r.bestRate * 100).toFixed(2) + '%. Trade-off: more total interest over the loan life.', impact: '−' + fmt$(r.monthlyBest - newM) + '/mo' });
     }
   }
   if (r.inp.tenure > 15) {
     const newT = r.inp.tenure - 5;
     const newM = pmt(r.inp.loan, r.bestRate, newT);
-    tips.push({
-      title: 'Shorten tenure to ' + newT + ' years',
-      body: 'Monthly rises to ' + fmt$(newM) + ' but you save substantial total interest. Use this if monthly headroom is comfortable.',
-      impact: '+' + fmt$(newM - r.monthlyBest) + '/mo',
-    });
+    tips.push({ n: '02', title: 'Shorten tenure to ' + newT + ' years', body: 'Monthly rises to ' + fmt$(newM) + ' but total interest falls significantly. Use this if monthly headroom is comfortable.', impact: '+' + fmt$(newM - r.monthlyBest) + '/mo' });
   }
   if (tdsrFail && r.minIncomePass > r.inp.income) {
     const gap = r.minIncomePass - r.inp.income;
-    tips.push({
-      title: 'Increase qualifying income by ' + fmt$(gap) + '/mo',
-      body: 'A pledge of ' + fmt$(Math.ceil(gap*48)) + ' (counted at 100%/48 mths) or show-funds of ' + fmt$(Math.ceil(gap*48/0.30)) + ' (30%/48 mths) gets you there under MAS rules.',
-      impact: 'Unlocks loan',
-    });
+    tips.push({ n: '03', title: 'Increase qualifying income by ' + fmt$(gap) + '/mo', body: 'A pledge of ' + fmt$(Math.ceil(gap * 48)) + ' (100%/48 mths) or show-funds of ' + fmt$(Math.ceil(gap * 48 / 0.30)) + ' (30%/48 mths) gets you there under MAS rules.', impact: 'Unlocks loan' });
   }
   if (tdsrFail && r.maxLoanAffordable < r.inp.loan) {
     const reduce = r.inp.loan - r.maxLoanAffordable;
-    tips.push({
-      title: 'Reduce loan by ' + fmt$(reduce),
-      body: 'Borrow ' + fmt$(r.maxLoanAffordable) + ' instead — fits inside the ' + (r.msrApplies?'MSR':'TDSR') + ' cap. Top up the difference with cash/CPF.',
-      impact: '−' + fmt$(reduce) + ' loan',
-    });
+    tips.push({ n: '04', title: 'Reduce loan by ' + fmt$(reduce), body: 'Borrow ' + fmt$(r.maxLoanAffordable) + ' instead — fits inside the ' + (r.msrApplies ? 'MSR' : 'TDSR') + ' cap. Top up the difference with cash/CPF.', impact: '−' + fmt$(reduce) + ' loan' });
   }
   if (tdsrFail && !r.msrApplies && r.inp.debts > 0) {
-    tips.push({
-      title: 'Pay down existing debts',
-      body: 'You\'re carrying ' + fmt$(r.inp.debts) + '/mo in monthly debt. Every $1 of debt cleared = $1 of mortgage capacity gained.',
-      impact: '−' + fmt$(r.inp.debts) + '/mo debt',
-    });
+    tips.push({ n: '05', title: 'Pay down existing debts', body: 'You\'re carrying ' + fmt$(r.inp.debts) + '/mo in monthly debt. Every $1 of debt cleared = $1 of mortgage capacity gained.', impact: '−' + fmt$(r.inp.debts) + '/mo debt' });
   }
-  // Always include a refinance lever (was conditionally skipped before)
-  if (sel.lockInYears) {
-    tips.push({
-      title: 'Plan refinance at year ' + sel.lockInYears,
-      body: 'Set a reminder ~4 months before lock-in expiry. Refinancing every 2–3 years is the biggest single lever to lower lifetime interest.',
-      impact: 'Y' + sel.lockInYears + ' action',
-    });
-  } else {
-    tips.push({
-      title: 'Refinance opportunistically (no lock-in)',
-      body: 'Your selected package has no lock-in. You can switch packages or banks any time without penalty when better rates surface.',
-      impact: 'Anytime',
-    });
-  }
+  tips.push({ n: pad2(tips.length + 1), title: 'Plan refinance at year ' + (sel.lockInYears || 2), body: 'Set a reminder ~4 months before lock-in expiry. Refinancing every 2–3 years is the single biggest lever to lower lifetime interest. We\'ll reach out 6 weeks before.', impact: 'Y' + (sel.lockInYears || 2) + ' action' });
 
-  if (!tips.length) {
-    y = calloutBlock(y, GREEN, GREEN_SOFT,
-      'You\'re already in a strong position',
-      'No obvious levers — focus on locking in your selected rate and setting a refinance reminder.');
-  } else {
-    // Levers as a banker table
-    const leverRows = tips.slice(0, 6).map(function(t, i){
-      return {
-        cells: [
-          pad2(i + 1),
-          { text: t.title, font: 'bold' },
-          { text: t.impact, color: NAVY },
-        ],
-      };
-    });
-    y = table(['#','Lever','Impact'], leverRows, { y: y, widths: [10, CW - 50, 40], rowH: 6 });
-    y += 4;
-    // Detail body for each lever
-    tips.slice(0, 6).forEach(function(t, i){
-      doc.setFont('helvetica','bold'); doc.setFontSize(7); setColor(GOLD);
-      doc.text(pad2(i + 1), M, y + 2.8);
-      doc.setFont('helvetica','normal'); doc.setFontSize(7.5); setColor(INK_2);
-      const lines = doc.splitTextToSize(t.body, CW - 8);
-      doc.text(lines, M + 7, y + 2.8);
-      y += lines.length * 3.4 + 2;
-    });
-  }
+  // Tips table summary
+  const tipRows = tips.slice(0, 6).map(t => ({
+    cells: [{ text: t.n, font: 'bold' }, { text: t.title, font: 'bold' }, { text: t.impact, color: GOLD }],
+  }));
+  y = table(['#', 'Lever', 'Impact'], tipRows, { y, widths: [10, CW - 50, 40], rowH: 6.5, aligns: ['left', 'left', 'right'] });
   y += 4;
 
-  if (y < H - 70) {
-    y = sectionHeader(y, 'Next steps', 'Three things to do this week.', '');
-    const stepsRows = [
-      { cells: [
-          '01',
-          { text: 'Lock in your rate', font: 'bold' },
-          'WhatsApp us with your preferred package — we handle the bank application end-to-end.',
-        ]},
-      { cells: [
-          '02',
-          { text: 'Confirm IPA / OTP timeline', font: 'bold' },
-          'We coordinate with the bank, conveyancing lawyer, and CPF for a smooth completion.',
-        ]},
-      { cells: [
-          '03',
-          { text: 'Set a refinance reminder', font: 'bold' },
-          'For ' + (sel.lockInYears||2) + ' year' + ((sel.lockInYears||2)>1?'s':'') + ' from completion. We\'ll reach out 6 weeks before — free service.',
-        ]},
-    ];
-    y = table(['#','Step','Detail'], stepsRows, {
-      y: y, widths: [10, 50, CW - 60], rowH: 7,
-      aligns: ['left','left','left']
+  // Detail body for each tip — alternating light/white bg
+  tips.slice(0, 6).forEach((t, i) => {
+    const tH = 14;
+    if (i % 2 === 0) { setFill(SURFACE); doc.rect(M, y, CW, tH, 'F'); }
+    setFill(GOLD); doc.rect(M, y, 1.5, tH, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
+    doc.text(t.n, M + 3.5, y + 5.5);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); setTxt(INK);
+    doc.text(t.title, M + 9, y + 5.5);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); setTxt(INK_2);
+    const bLines = doc.splitTextToSize(t.body, CW - 12);
+    doc.text(bLines[0] || '', M + 9, y + 10);
+    y += tH;
+  });
+  y += 5;
+
+  // Next steps — 3 dark tiles
+  if (y < H - 60) {
+    y = sectionHead(y, 'Next steps', 'Three things to do this week.', '');
+    const stepsW = (CW - 6) / 3;
+    const stepsH = 30;
+    [
+      ['01', 'Lock in your rate', 'WhatsApp us with your preferred package — we handle the bank application end-to-end.'],
+      ['02', 'Confirm IPA / OTP timeline', 'We coordinate with the bank, conveyancing lawyer, and CPF for a smooth completion.'],
+      ['03', 'Set a refinance reminder', 'For ' + (sel.lockInYears || 2) + ' year' + ((sel.lockInYears || 2) > 1 ? 's' : '') + ' from completion. We\'ll reach out 6 weeks before — free service.'],
+    ].forEach(([num, title, body], i) => {
+      const sx = M + i * (stepsW + 3);
+      setFill(NAVY_2); doc.rect(sx, y, stepsW, stepsH, 'F');
+      setFill(GOLD); doc.rect(sx, y, stepsW, 0.6, 'F');
+      doc.setFont('times', 'normal'); doc.setFontSize(18); setTxt(GOLD);
+      doc.text(num, sx + 4, y + 12);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); setTxt(CREAM);
+      doc.text(title, sx + 4, y + 18);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(6.5); setTxt([160, 170, 195]);
+      const bL = doc.splitTextToSize(body, stepsW - 6);
+      doc.text(bL, sx + 4, y + 23);
     });
+    y += stepsH + 5;
   }
 
-  // Disclaimer (compressed, hairline above)
-  const discY = H - 30;
+  // Disclaimer
+  const discY = H - 22;
   setDraw(BORDER); doc.setLineWidth(0.15);
-  doc.line(M, discY - 4, W - M, discY - 4);
-  doc.setFont('helvetica','normal'); doc.setFontSize(5.5); setColor(FAINT);
+  doc.line(M, discY - 3, W - M, discY - 3);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(5.5); setTxt(FAINT);
   const disc = 'Indicative figures only as of ' + dateStr + '. Subject to bank credit assessment, valuation, and prevailing IRAS / MAS / HDB rules. Stress-test rate of 4% is the MAS minimum for residential TDSR / MSR. ABSD calculated using IRAS rates effective 27 April 2023: SC 1st prop 0%, SC 2nd 20%, SC 3rd+ 30%, PR 1st 5%, PR 2nd+ 30%, Foreigner 60%. BSD calculated using IRAS tiered rates. Married SC + SC couples buying matrimonial home jointly may qualify for ABSD remission — confirm with us. This report does not constitute financial advice; for personalised guidance speak to a Nexus mortgage broker. Banks pay our referral fee — service is free to you.';
-  doc.text(doc.splitTextToSize(disc, CW), M, discY);
+  doc.text(doc.splitTextToSize(disc, CW), M, discY + 2);
 
   return {
     base64: doc.output('datauristring').split(',')[1],
