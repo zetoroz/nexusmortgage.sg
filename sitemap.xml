@@ -91,6 +91,13 @@
 
   <!-- Blog posts (live, sorted by recency) -->
   <url>
+    <loc>https://nexusmortgage.sg/blog/blog-ipa-mortgage-broker-singapore.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://nexusmortgage.sg/blog/blog-self-employed-tdsr-singapore.html</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
