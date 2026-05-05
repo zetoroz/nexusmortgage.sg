@@ -252,6 +252,19 @@ def main():
         except Exception as e:
             print(f"  (could not read previous rates.json: {e})")
 
+    # Preserve MAS-API-sourced asOfSora written by fetch-mas-rates.mjs.
+    # convert-rates.py overwrites rates.json from xlsx; without this guard,
+    # the daily MAS asOfSora gets clobbered every run and the front end
+    # falls back to the stale "As of …" string typed into the xlsx.
+    # SORA numeric values are already preserved via --use-json-refs flag.
+    if prev:
+        prev_as_of_sora = prev.get("asOfSora")
+        if prev_as_of_sora:
+            out["asOfSora"] = prev_as_of_sora
+        prev_inner = (prev.get("refRates") or {}).get("asOfSora")
+        if prev_inner:
+            out["refRates"]["asOfSora"] = prev_inner
+
     diffs = _diff_packages(prev["packages"] if prev else [], packages) if prev else []
     refDiffs = _diff_refs(prev.get("refRates") if prev else {}, refs)
 

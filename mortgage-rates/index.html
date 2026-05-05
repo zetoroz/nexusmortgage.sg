@@ -49,8 +49,8 @@
     "@context": "https://schema.org",
     "@type": "Dataset",
     "name": "Singapore Compounded SORA — Daily Snapshot",
-    "alternateName": ["SORA rate Singapore", "1M 3M 6M Compounded SORA"],
-    "description": "Daily-refreshed snapshot of 1-month, 3-month, and 6-month Compounded Singapore Overnight Rate Average (SORA) used to peg Singapore floating-rate home loans. Source: Monetary Authority of Singapore (MAS).",
+    "alternateName": ["SORA rate Singapore", "1M 3M Compounded SORA"],
+    "description": "Daily-refreshed snapshot of 1-month and 3-month Compounded Singapore Overnight Rate Average (SORA) used to peg Singapore floating-rate home loans. Source: Monetary Authority of Singapore (MAS).",
     "url": "https://nexusmortgage.sg/mortgage-rates/#sora-tracker",
     "keywords": ["SORA", "Singapore home loan rate", "compounded SORA 3M", "MAS"],
     "license": "https://www.mas.gov.sg/-/media/MAS/Terms-and-Conditions.pdf",
@@ -440,7 +440,7 @@
     .st-head h2 em { font-style: italic; color: var(--gold-light); }
     .st-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
       margin-bottom: 14px;
     }
@@ -864,18 +864,6 @@
           </div>
           <div class="st-meta">Most-used floating peg</div>
           <div class="st-bar" aria-hidden="true"><div class="st-bar-fill" id="stk-3m-bar"></div></div>
-        </article>
-        <article class="st-card" data-tenor="6m">
-          <div class="st-card-head">
-            <span class="st-eyebrow">Compounded</span>
-            <span class="st-tenor">6-Month</span>
-          </div>
-          <div class="st-value-row">
-            <span class="st-value tabular-nums" id="stk-6m">—</span>
-            <span class="st-delta" id="stk-6m-d" data-dir=""></span>
-          </div>
-          <div class="st-meta">Lower volatility peg</div>
-          <div class="st-bar" aria-hidden="true"><div class="st-bar-fill" id="stk-6m-bar"></div></div>
         </article>
       </div>
       <p class="st-source">
@@ -1481,26 +1469,23 @@
         const ref = (rates && rates.refRates) || {};
         const s1 = ref.sora1m  ?? feed?.sora?.compounded_1m_pct;
         const s3 = ref.sora3m  ?? feed?.sora?.compounded_3m_pct;
-        const s6 = ref.sora6m  ?? feed?.sora?.compounded_6m_pct;
         liveSora3m = s3 ?? null;
 
         setText('stk-1m', fmt2(s1));
         setText('stk-3m', fmt2(s3));
-        setText('stk-6m', fmt2(s6));
 
-        const asOf = feed?.asOfSora || rates?.asOfSora || rates?.asOf;
-        setText('stk-asof', fmtDate(asOf));
+        // Trust only MAS-pipeline date fields. rates.asOf is xlsx-typed and stale.
+        const asOf = feed?.asOfSora || rates?.asOfSora || rates?.refRates?.asOfSora || null;
+        setText('stk-asof', asOf ? fmtDate(asOf) : '—');
 
         const cap = 5;
         if (s1 != null) setBar('stk-1m-bar', (s1 / cap) * 100);
         if (s3 != null) setBar('stk-3m-bar', (s3 / cap) * 100);
-        if (s6 != null) setBar('stk-6m-bar', (s6 / cap) * 100);
 
         const ch = hist && hist[0] && hist[0].refRateChanges;
         if (ch) {
           setDelta('stk-1m-d', ch.sora1m?.delta);
           setDelta('stk-3m-d', ch.sora3m?.delta);
-          setDelta('stk-6m-d', ch.sora6m?.delta);
         }
 
         const ssRate = document.getElementById('ssRate');

@@ -6301,9 +6301,13 @@ function formatAsOfDate(isoOrAny) {
 function updateFreshnessBadge() {
   const el = document.getElementById('rates-asof-date');
   if (!el) return;
-  let asOf = (RATES_DATA && RATES_DATA.asOf) ? formatAsOfDate(RATES_DATA.asOf) : null;
-  if (!asOf) asOf = formatAsOfDate(new Date()); // fallback to today if rates.json unavailable
-  el.textContent = asOf;
+  // Prefer MAS asOfSora; else generatedAt (python run timestamp — refreshes daily);
+  // else today. Skip RATES_DATA.asOf — that string is xlsx-typed and stale.
+  const src = (RATES_DATA && (RATES_DATA.asOfSora
+                              || (RATES_DATA.refRates && RATES_DATA.refRates.asOfSora)
+                              || RATES_DATA.generatedAt))
+              || new Date();
+  el.textContent = formatAsOfDate(src) || formatAsOfDate(new Date());
 }
 
 /* ============ LOAD LIVE RATES on page init ============ */
