@@ -11,26 +11,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="styles.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+        integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"
+        integrity="sha384-y49Zu59jZHJL/PLKgZPv3k2WI9c0Yp3pWB76V8OBVCb0QBKS8l4Ff3YslzHVX76Y"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+        integrity="sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"
+        integrity="sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT"
+        crossorigin="anonymous"></script>
 
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: {
-        display: ['Fraunces', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
-      },
-    },
-  },
-};
-</script>
+<!-- Tailwind config moved to login/tailwind.config.js — built to login/styles.min.css. -->
+<!-- Rebuild on class changes: cd login && npx tailwindcss -i input.css -o styles.min.css -c tailwind.config.js --minify -->
+
 
 <style>
   :root {
@@ -1576,7 +1576,7 @@ tailwind.config = {
     <div class="spinner"></div>
     <div>
       <div style="font-weight: 600; font-size: 14px;">Generating PDF…</div>
-      <div class="muted" style="font-size: 12px; margin-top: 2px;">Rendering report</div>
+      <div id="gen-overlay-sub" class="muted" style="font-size: 12px; margin-top: 2px;">Preparing report</div>
     </div>
   </div>
 </div>
@@ -3031,12 +3031,26 @@ function renderAllBorrowers() {
 /* ═══════════════════════════════════════════════════════════════
    PERSIST
    ═══════════════════════════════════════════════════════════════ */
+// State persistence — sessionStorage holds client PII (name, financials) so it auto-clears
+// when the tab/window closes. UI prefs that don't include client data could go to localStorage,
+// but state is currently a single object so we treat it all as session-scoped.
+// One-time migration: copy any pre-existing localStorage state into sessionStorage and wipe.
+(function migrateClientStateToSession() {
+  try {
+    if (sessionStorage.getItem('mc.state')) return;
+    const legacy = localStorage.getItem('mc.state');
+    if (legacy) {
+      sessionStorage.setItem('mc.state', legacy);
+      localStorage.removeItem('mc.state');
+    }
+  } catch (e) {}
+})();
 function saveState() {
-  try { localStorage.setItem('mc.state', JSON.stringify(state)); } catch(e) {}
+  try { sessionStorage.setItem('mc.state', JSON.stringify(state)); } catch(e) {}
 }
 function loadState() {
   try {
-    const raw = localStorage.getItem('mc.state');
+    const raw = sessionStorage.getItem('mc.state');
     if (!raw) return;
     const saved = JSON.parse(raw);
     Object.keys(saved).forEach(k => {
@@ -3118,6 +3132,13 @@ function showApp() {
   });
 }
 function logOut() {
+  // Wipe in-memory client PII before kicking to Access logout, so a same-tab back-nav can't
+  // recover the previous client's data. sessionStorage is per-tab; explicit clear covers
+  // the rare case where logout doesn't trigger a hard nav (e.g. SSO redirect blocked).
+  try {
+    sessionStorage.removeItem('mc.state');
+    localStorage.removeItem('mc.state'); // legacy migration safety
+  } catch (e) {}
   // Sign out of Cloudflare Access; the next load will redirect to the login flow.
   location.href = '/cdn-cgi/access/logout';
 }
@@ -3521,27 +3542,39 @@ async function generatePdf() {
   console.log('[pdf] reportEl', reportEl.scrollWidth, 'x', reportEl.scrollHeight, '· pages:', pdfPages.length);
 
   const tabName = state.active.replace(/-/g, '_');
-  const clientPart = (state.client.name || 'client').replace(/[^a-z0-9]+/gi, '_').toLowerCase();
+  // Unicode-aware filename slug — preserves CJK/Tamil/Arabic letters instead of stripping to underscores.
+  const clientPart = (state.client.name || 'client').replace(/[^\p{L}\p{N}]+/gu, '_').toLowerCase();
   const dateStr = (state.client.date || new Date().toISOString().slice(0,10)).replace(/-/g,'');
   const filename = `mortgage_${tabName}_${clientPart}_${dateStr}.pdf`;
 
   try {
     const { jsPDF } = window.jspdf;
     const pdfDoc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+    pdfDoc.setLanguage('en-SG');
+    pdfDoc.setProperties({
+      title: `Mortgage Console — ${state.client.name || 'Client'} — ${tabName}`,
+      subject: `Indicative ${tabName.replace(/_/g, ' ')} analysis`,
+      author: 'Dan Ler — Nexus Mortgage SG',
+      keywords: 'mortgage, Singapore, IPA, SORA, TDSR, MSR, ABSD, ' + tabName,
+      creator: 'nexusmortgage.sg/login'
+    });
     const pageW = 210, pageH = 297;
 
     // Render each .pdf-page div as its own A4 page (clean breaks, no mid-section cuts).
     for (let i = 0; i < pdfPages.length; i++) {
       const pageEl = pdfPages[i];
+      // Update overlay progress per page so user sees PDF gen advancing (8-20s on 9-page).
+      const sub = document.getElementById('gen-overlay-sub');
+      if (sub) sub.textContent = `Rendering page ${i + 1} of ${pdfPages.length}…`;
       const canvas = await html2canvas(pageEl, {
-        scale: 2,
+        scale: 1.5,
         useCORS: true,
         backgroundColor: '#FFFFFF',
         logging: false,
         windowWidth: pageEl.scrollWidth,
       });
       console.log(`[pdf] page ${i+1}/${pdfPages.length} canvas`, canvas.width, 'x', canvas.height);
-      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+      const imgData = canvas.toDataURL('image/jpeg', 0.85);
       if (i > 0) pdfDoc.addPage();
       const imgRatio = canvas.height / canvas.width;
       const imgWmm = pageW;
@@ -4103,6 +4136,33 @@ function init() {
   showApp();
 }
 window.addEventListener('DOMContentLoaded', init);
+
+/* ═══════════════════════════════════════════════════════════════
+   IDLE LOCK — blur PII after 15 minutes of inactivity
+   ═══════════════════════════════════════════════════════════════ */
+(function idleLock() {
+  const IDLE_MS = 15 * 60 * 1000; // 15 minutes
+  const lock = document.createElement('div');
+  lock.id = 'idle-lock';
+  lock.setAttribute('role', 'dialog');
+  lock.setAttribute('aria-modal', 'true');
+  lock.setAttribute('aria-label', 'Console idle — click to resume');
+  lock.style.cssText = 'position:fixed;inset:0;z-index:9998;display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;background:rgba(11,28,58,.92);backdrop-filter:blur(10px);font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:#FAF7F2;cursor:pointer;';
+  lock.innerHTML = '<div style="font-family:Fraunces,serif;font-size:24px;letter-spacing:-.02em">Session idle</div><div style="font-size:13px;color:rgba(250,247,242,.7);max-width:320px;text-align:center;line-height:1.6">Console blurred for client privacy. Click anywhere to resume.</div><div style="margin-top:8px;padding:8px 18px;background:#059669;color:#fff;border-radius:8px;font-size:13px;font-weight:600">Resume</div>';
+  lock.addEventListener('click', () => { lock.style.display = 'none'; resetIdle(); });
+  document.body.appendChild(lock);
+
+  let timer = null;
+  function showLock() { lock.style.display = 'flex'; }
+  function resetIdle() {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(showLock, IDLE_MS);
+  }
+  ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(evt => {
+    window.addEventListener(evt, resetIdle, { passive: true });
+  });
+  resetIdle();
+})();
 </script>
 
 </body>

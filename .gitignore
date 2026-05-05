@@ -11,6 +11,8 @@ package-lock.json
 # Build artifacts
 styles.min.css
 *.map
+# Login console ships its own pre-built Tailwind output (Cloudflare Pages has no build step yet).
+!login/styles.min.css
 
 # Temporary files
 "temporary screenshots"/

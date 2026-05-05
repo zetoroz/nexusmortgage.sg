@@ -4829,10 +4829,54 @@ function loadJsPDF() {
  * All data logic (computeReport, calcBSD, etc.) is untouched.
  */
 
+// Lightweight build-overlay (visible while PDF is being constructed)
+function _showPdfBuildOverlay() {
+  let el = document.getElementById('pdf-build-overlay');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'pdf-build-overlay';
+    el.setAttribute('role', 'status');
+    el.setAttribute('aria-live', 'polite');
+    el.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(11,28,58,.86);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;font-family:system-ui,-apple-system,sans-serif;color:#FAF7F2;';
+    el.innerHTML = '<div style="width:42px;height:42px;border:3px solid rgba(196,151,59,.3);border-top-color:#C4973B;border-radius:50%;animation:_pdfspin 0.9s linear infinite"></div><div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#C4973B;font-weight:600">Building your report</div><div id="pdf-build-sub" style="font-size:12px;color:rgba(250,247,242,.7);max-width:280px;text-align:center;line-height:1.5">Compiling 9-page mortgage analysis &mdash; this takes about 5 seconds.</div><style>@keyframes _pdfspin{to{transform:rotate(360deg)}}</style>';
+    document.body.appendChild(el);
+  } else {
+    el.style.display = 'flex';
+  }
+}
+function _hidePdfBuildOverlay() {
+  const el = document.getElementById('pdf-build-overlay');
+  if (el) el.style.display = 'none';
+}
+
 async function buildReportPdf(r, lead) {
+  _showPdfBuildOverlay();
+  try {
   await loadJsPDF();
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  doc.setLanguage('en-SG');
+  const isRefiMeta = r.inp.mode === 'refinance';
+  // jsPDF builtin Helvetica/Times = WinAnsi only; non-Latin chars (CJK/Tamil/Arabic) render as ? blanks.
+  // Detect and fall back to email or generic label for the on-page render. Metadata field uses raw value
+  // (PDF metadata supports UTF-16 via PDFLib internal encoding in jsPDF).
+  const _hasNonWinAnsi = s => typeof s === 'string' && /[^\x00-\xFF]/.test(s);
+  const _safeRender = s => {
+    if (!s) return null;
+    return _hasNonWinAnsi(s) ? null : s;
+  };
+  const leadNameRender =
+    _safeRender(lead && lead.name) ||
+    _safeRender(lead && lead.email) ||
+    'Personalised Mortgage Report';
+  const leadNameMeta = (lead && lead.name) ? lead.name : 'Personalised';
+  doc.setProperties({
+    title: 'Nexus Mortgage Report — ' + leadNameMeta,
+    subject: isRefiMeta ? 'Indicative refinance analysis' : 'Indicative property purchase mortgage analysis',
+    author: 'Nexus Mortgage SG',
+    keywords: 'mortgage, Singapore, IPA, SORA, TDSR, MSR, ABSD, refinance, home loan',
+    creator: 'nexusmortgage.sg'
+  });
   const W = 210, H = 297, M = 13;
   const CW = W - 2 * M;
 
@@ -4867,7 +4911,7 @@ async function buildReportPdf(r, lead) {
   const dateStr = new Date().toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' });
 
   let pageNum = 0;
-  const TOTAL_PAGES = 9;
+  // TOTAL_PAGES is stamped in a final pass after content renders (count varies by mode).
 
   // ─── PAGE CHROME ───────────────────────────────────────────────────────────
   // Dark navy header band (18mm) + gold rule — matches cover aesthetic
@@ -4889,18 +4933,17 @@ async function buildReportPdf(r, lead) {
 
     // Section label
     if (section) {
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(6); setTxt([160, 170, 190]);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt([160, 170, 190]);
       doc.text(section.toUpperCase(), M + 22, 10);
     }
 
-    // Page number (top-right, gold on dark)
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
-    doc.text('PAGE ' + pageNum + ' OF ' + TOTAL_PAGES, W - M, 10, { align: 'right' });
+    // Page number placeholder — final "PAGE X OF N" stamped in two-pass after rendering.
+    // (Left blank here so the count reflects branching pages e.g. refi vs purchase.)
 
     // Footer
     setDraw(BORDER); doc.setLineWidth(0.15);
     doc.line(M, H - 9, W - M, H - 9);
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(5.8); setTxt(MUTED);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt(MUTED);
     doc.text('NEXUS MORTGAGE  ·  NEXUSMORTGAGE.SG  ·  +65 8752 0859  ·  DANLER@NEXUSMORTGAGE.SG', M, H - 5);
     doc.text(dateStr.toUpperCase(), W - M, H - 5, { align: 'right' });
 
@@ -4910,7 +4953,7 @@ async function buildReportPdf(r, lead) {
   // ─── SECTION HEADER ────────────────────────────────────────────────────────
   function sectionHead(y, eyebrow, title, sub) {
     // Gold eyebrow with underline
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
     doc.text(eyebrow.toUpperCase(), M, y);
     setDraw(GOLD); doc.setLineWidth(0.4);
     doc.line(M, y + 1.4, M + doc.getTextWidth(eyebrow.toUpperCase()), y + 1.4);
@@ -4939,7 +4982,7 @@ async function buildReportPdf(r, lead) {
 
   // ─── EYEBROW ONLY ──────────────────────────────────────────────────────────
   function eyebrow(y, label) {
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
     doc.text(label.toUpperCase(), M, y);
     setDraw(GOLD); doc.setLineWidth(0.4);
     doc.line(M, y + 1.4, M + doc.getTextWidth(label.toUpperCase()), y + 1.4);
@@ -4960,7 +5003,7 @@ async function buildReportPdf(r, lead) {
       setFill(GOLD); doc.rect(x, y, tileW, 0.7, 'F');
 
       // Label
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(5.8); setTxt([160, 170, 195]);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt([160, 170, 195]);
       doc.text(item.label.toUpperCase(), x + 4, y + 6);
 
       // Value — large serif
@@ -4970,7 +5013,7 @@ async function buildReportPdf(r, lead) {
 
       // Sub
       if (item.sub) {
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(6); setTxt([120, 135, 155]);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt([120, 135, 155]);
         doc.text(String(item.sub), x + 4, y + tileH - 2.5);
       }
     });
@@ -4990,7 +5033,7 @@ async function buildReportPdf(r, lead) {
       // Navy top accent
       setFill(NAVY_2); doc.rect(x, y, tileW, 0.6, 'F');
 
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(5.8); setTxt(MUTED);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(MUTED);
       doc.text(item.label.toUpperCase(), x + 4, y + 6);
 
       const valColor = item.color || INK;
@@ -4998,7 +5041,7 @@ async function buildReportPdf(r, lead) {
       doc.text(String(item.value), x + 4, y + 14);
 
       if (item.sub) {
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(6); setTxt(MUTED);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt(MUTED);
         doc.text(String(item.sub), x + 4, y + tileH - 2.5);
       }
     });
@@ -5031,7 +5074,7 @@ async function buildReportPdf(r, lead) {
     // Header — navy rule top + bottom
     setFill(NAVY_2); doc.rect(x0, y, totalW, 0.6, 'F');
     y += 1.5;
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(6); setTxt(NAVY_2);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(NAVY_2);
     let cx = x0;
     headers.forEach((h, i) => {
       const a = aligns[i];
@@ -5190,7 +5233,7 @@ async function buildReportPdf(r, lead) {
     });
     doc.setLineWidth(0.15);
     // Axis labels
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(6); setTxt(MUTED);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt(MUTED);
     doc.text('Y0', x, y + h + 3.5);
     doc.text('Y' + o.xMax, x + w, y + h + 3.5, { align: 'right' });
     doc.text('$' + fmtN(o.yMax), x - 1, y + 3, { align: 'right' });
@@ -5242,7 +5285,7 @@ async function buildReportPdf(r, lead) {
   doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt([160, 170, 195]);
   doc.text('SINGAPORE MORTGAGE SPECIALISTS', M, 31);
 
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
   doc.text('REPORT DATE', W - M, 24, { align: 'right' });
   doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setTxt(CREAM);
   doc.text(dateStr.toUpperCase(), W - M, 30, { align: 'right' });
@@ -5261,13 +5304,13 @@ async function buildReportPdf(r, lead) {
 
   // Prepared for
   let pfY = 168;
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
   doc.text('PREPARED FOR', M, pfY);
   setDraw(GOLD); doc.setLineWidth(0.35);
   doc.line(M, pfY + 1.5, M + 25, pfY + 1.5);
   pfY += 9;
   doc.setFont('times', 'normal'); doc.setFontSize(24); setTxt(CREAM);
-  doc.text(lead.name || '—', M, pfY);
+  doc.text(leadNameRender, M, pfY);
   pfY += 7;
   doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setTxt([175, 182, 200]);
   const contactLine = [lead.email, lead.phone].filter(Boolean).join('   ·   ');
@@ -5286,7 +5329,7 @@ async function buildReportPdf(r, lead) {
     ['TENURE', r.inp.tenure + 'y'],
   ].forEach(([lbl, val], i) => {
     const cx = M + kpiW * i + 5;
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(6); setTxt([140, 155, 180]);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt([140, 155, 180]);
     doc.text(lbl, cx, kpiY + 9);
     doc.setFont('times', 'normal'); doc.setFontSize(18); setTxt(GOLD_LT);
     doc.text(val, cx, kpiY + 26);
@@ -5358,7 +5401,7 @@ async function buildReportPdf(r, lead) {
     setDraw(BORDER); doc.setLineWidth(0.2); doc.rect(xi, yi, cW3, cH3);
     setFill(NAVY_2); doc.rect(xi, yi, cW3, 0.6, 'F');
 
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(6); setTxt(MUTED);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(MUTED);
     doc.text(eyebrowTxt.toUpperCase(), xi + 3, yi + 6);
 
     let yy = yi + 13;
@@ -5372,7 +5415,7 @@ async function buildReportPdf(r, lead) {
 
     setDraw(BORDER); doc.setLineWidth(0.15);
     doc.line(xi + 3, yi + cH3 - 14, xi + cW3 - 3, yi + cH3 - 14);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(MUTED);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(MUTED);
     doc.text(footerLabel.toUpperCase(), xi + 3, yi + cH3 - 7);
     doc.setFont('times', 'normal'); doc.setFontSize(11); setTxt(footerColor || INK);
     doc.text(footerVal, xi + cW3 - 3, yi + cH3 - 6, { align: 'right' });
@@ -5612,7 +5655,7 @@ async function buildReportPdf(r, lead) {
     setDraw(BORDER); doc.setLineWidth(0.2); doc.rect(xi, yi, pkgW, pkgH);
     setFill(NAVY_2); doc.rect(xi, yi, pkgW, 0.6, 'F');
     setFill(GOLD); doc.rect(xi, yi, 1.5, pkgH, 'F');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.2); setTxt(GOLD);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
     doc.text(eyeL.toUpperCase(), xi + 5, yi + 6);
     doc.setFont('helvetica', 'bold'); doc.setFontSize(9); setTxt(INK);
     doc.text(titleL, xi + 5, yi + 12);
@@ -5856,7 +5899,7 @@ async function buildReportPdf(r, lead) {
     if (yr <= r.inp.tenure) {
       const xM = M + (yr / r.inp.tenure) * CW;
       doc.line(xM, y, xM, y + chartH);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(5.5); setTxt(GOLD);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
       doc.text('Y' + yr, xM + 0.5, y - 0.5);
     }
   });
@@ -5873,7 +5916,7 @@ async function buildReportPdf(r, lead) {
   legendItems.forEach(([color, label], i) => {
     const lx = M + i * 45;
     setFill(color); doc.rect(lx, legY - 1.5, 5, 1.5, 'F');
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(6); setTxt(INK);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt(INK);
     doc.text(label, lx + 7, legY);
   });
   y = legY + 7;
@@ -5914,7 +5957,7 @@ async function buildReportPdf(r, lead) {
   y = table(['Y', 'Loan bal.', 'Interest yr', 'Principal yr', 'Annual pay', 'CPF avail.', 'From CPF', 'Cash outlay'],
     amortRows, { y, widths: [10, 26, 22, 22, 22, 26, 22, CW - 150], rowH: 5.5 });
   y += 3;
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(6.5); setTxt(MUTED);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt(MUTED);
   doc.text('CPF inflow assumes ' + fmtN(annualCpfInflow) + '/yr OA contribution (23% of capped wages). Initial CPF OA: ' + fmt$(r.inp.cpfOA || 0) + '.', M, y);
 
 
@@ -5966,7 +6009,7 @@ async function buildReportPdf(r, lead) {
     const tH = 14;
     if (i % 2 === 0) { setFill(SURFACE); doc.rect(M, y, CW, tH, 'F'); }
     setFill(GOLD); doc.rect(M, y, 1.5, tH, 'F');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5); setTxt(GOLD);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
     doc.text(t.n, M + 3.5, y + 5.5);
     doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); setTxt(INK);
     doc.text(t.title, M + 9, y + 5.5);
@@ -5994,7 +6037,7 @@ async function buildReportPdf(r, lead) {
       doc.text(num, sx + 4, y + 12);
       doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); setTxt(CREAM);
       doc.text(title, sx + 4, y + 18);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(6.5); setTxt([160, 170, 195]);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt([160, 170, 195]);
       const bL = doc.splitTextToSize(body, stepsW - 6);
       doc.text(bL, sx + 4, y + 23);
     });
@@ -6005,14 +6048,34 @@ async function buildReportPdf(r, lead) {
   const discY = H - 22;
   setDraw(BORDER); doc.setLineWidth(0.15);
   doc.line(M, discY - 3, W - M, discY - 3);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(5.5); setTxt(FAINT);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt(FAINT);
   const disc = 'Indicative figures only as of ' + dateStr + '. Subject to bank credit assessment, valuation, and prevailing IRAS / MAS / HDB rules. Stress-test rate of 4% is the MAS minimum for residential TDSR / MSR. ABSD calculated using IRAS rates effective 27 April 2023: SC 1st prop 0%, SC 2nd 20%, SC 3rd+ 30%, PR 1st 5%, PR 2nd+ 30%, Foreigner 60%. BSD calculated using IRAS tiered rates. Married SC + SC couples buying matrimonial home jointly may qualify for ABSD remission — confirm with us. This report does not constitute financial advice; for personalised guidance speak to a Nexus mortgage broker. Banks pay our referral fee — service is free to you.';
   doc.text(doc.splitTextToSize(disc, CW), M, discY + 2);
 
+  // ─── TWO-PASS: stamp PAGE X OF N + INDICATIVE watermark on every non-cover page ─────
+  const totalPages = doc.getNumberOfPages();
+  for (let p = 2; p <= totalPages; p++) {
+    doc.setPage(p);
+    // Page-number stamp (top-right of header band, gold on dark)
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
+    doc.text('PAGE ' + p + ' OF ' + totalPages, W - M, 10, { align: 'right' });
+    // Watermark — very faint grey "INDICATIVE" diagonal (jsPDF has no opacity, use near-white grey)
+    setTxt([245, 247, 250]);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(56);
+    doc.text('INDICATIVE', W / 2, H / 2 + 5, { align: 'center', angle: 30 });
+  }
+
+  // Filename: include date + mode + loan-amount slug to avoid collisions on multi-runs.
+  const loanK = r.inp.loan ? Math.round(r.inp.loan / 1000) : 0;
+  const modeSlug = isRefi ? 'refi' : 'purchase';
+  const fnSlug = (modeSlug + '-' + loanK + 'k').replace(/[^a-z0-9-]+/gi, '');
   return {
     base64: doc.output('datauristring').split(',')[1],
-    filename: 'nexus-mortgage-report-' + new Date().toISOString().slice(0, 10) + '.pdf',
+    filename: 'nexus-mortgage-' + fnSlug + '-' + new Date().toISOString().slice(0, 10) + '.pdf',
   };
+  } finally {
+    _hidePdfBuildOverlay();
+  }
 }
 
 
