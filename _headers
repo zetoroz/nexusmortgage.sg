@@ -8,6 +8,8 @@
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
   Cache-Control: private, no-store
   Referrer-Policy: no-referrer
+  X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.sheetjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://*.cloudflareaccess.com; object-src 'none'
 
 # Master rate sheet — defense-in-depth alongside _redirects 404.
 /rates.xlsx
