@@ -53,6 +53,9 @@ spread (~0.80%) and MAS stress-test floor (4.00%).
 
 ## Blog Articles
 - EC MOP 2026 Reset (10-yr MOP, 90% first-timer quota, no DPS): https://nexusmortgage.sg/blog/ec-mop-2026-changes/
+- IPA & Independent Mortgage Broker Singapore (2026): https://nexusmortgage.sg/blog/ipa-mortgage-broker-singapore/
+- Self-Employed TDSR Singapore — 30% Income Haircut (2026): https://nexusmortgage.sg/blog/self-employed-tdsr-singapore/
+- HDB Resale Q1 2026 — First Price Dip in 7 Years: https://nexusmortgage.sg/blog/hdb-resale-q1-2026-mortgage/
 - MAS 4% Stress Test Guide (2026): https://nexusmortgage.sg/blog/mas-stress-test-2026/
 - TDSR & Stress Test for Private Property: https://nexusmortgage.sg/blog/tdsr-msr-explained/
 - HDB vs Bank Loan Guide: https://nexusmortgage.sg/blog/hdb-vs-bank-loan/
