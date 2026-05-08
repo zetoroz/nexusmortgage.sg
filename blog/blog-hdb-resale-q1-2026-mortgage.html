@@ -37,9 +37,10 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexusmortgage.sg/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://nexusmortgage.sg/blog/"},{"@type":"ListItem","position":3,"name":"HDB Resale Q1 2026 Mortgage Guide","item":"https://nexusmortgage.sg/blog/blog-hdb-resale-q1-2026-mortgage.html"}]}</script>
 
   <!-- Google Fonts (link tag loads faster than @import) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Self-hosted fonts (woff2 latin subset). Drops Google Fonts blocking chain. -->
+  <link rel="preload" href="/fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts/fonts.css">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
