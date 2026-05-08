@@ -3042,7 +3042,7 @@
                 <span id="tenure-cap-badge"
                   style="display:none;font-size:.68rem;font-weight:600;letter-spacing:.06em;padding:.15rem .55rem;border-radius:100px;background:rgba(248,113,113,.15);color:#F87171;border:1px solid rgba(248,113,113,.3);">Capped</span>
               </div>
-              <input type="number" id="c-yrs" class="calc-input" value="30" min="1" max="35" oninput="calc()">
+              <input type="number" id="c-yrs" class="calc-input" value="25" min="1" max="35" oninput="calc()">
               <p id="tenure-cap-note"
                 style="display:none;font-size:.68rem;color:#F87171;margin-top:.35rem;line-height:1.5;"></p>
             </div>
@@ -3966,6 +3966,14 @@
       ptype = t;
       document.getElementById('btn-hdb').classList.toggle('active', t === 'hdb');
       document.getElementById('btn-priv').classList.toggle('active', t === 'private');
+      document.getElementById('c-yrs').value = t === 'hdb' ? 25 : 30;
+      if (t === 'private') {
+        document.getElementById('c-price').value = fmtInput(2000000);
+        document.getElementById('c-down').value = fmtInput(500000);
+      } else {
+        document.getElementById('c-price').value = fmtInput(800000);
+        document.getElementById('c-down').value = fmtInput(200000);
+      }
       validateDown();
       calc();
     }
