@@ -1,0 +1,88 @@
+name: IndexNow ping
+
+# Pings IndexNow whenever HTML or sitemap or rate-feed files change on main.
+# Notifies Bing/Yandex/Seznam to re-crawl updated URLs immediately.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - 'sitemap.xml'
+      - 'rates.json'
+      - 'sora-feed.json'
+      - 'llms.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Build URL list from changed files
+        id: urls
+        run: |
+          set -euo pipefail
+          base="https://nexusmortgage.sg"
+          # On manual dispatch, fall back to a curated set of high-velocity URLs.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            cat > urls.json <<EOF
+          {
+            "host": "nexusmortgage.sg",
+            "key": "6eeb1bf58acb64ed2d7f369e6312e519",
+            "keyLocation": "https://nexusmortgage.sg/6eeb1bf58acb64ed2d7f369e6312e519.txt",
+            "urlList": [
+              "${base}/",
+              "${base}/mortgage-rates/",
+              "${base}/blog/",
+              "${base}/free-report/",
+              "${base}/affordability/"
+            ]
+          }
+          EOF
+          else
+            mapfile -t changed < <(git diff --name-only HEAD~1 HEAD | grep -E '\.html$|sitemap\.xml$|rates\.json$|sora-feed\.json$|llms\.txt$' || true)
+            urls=()
+            for f in "${changed[@]:-}"; do
+              case "$f" in
+                index.html) urls+=("${base}/") ;;
+                */index.html) urls+=("${base}/${f%/index.html}/") ;;
+                blog/*.html) urls+=("${base}/${f}") ;;
+                sitemap.xml|rates.json|sora-feed.json|llms.txt) urls+=("${base}/${f}") ;;
+                *.html) urls+=("${base}/${f}") ;;
+              esac
+            done
+            if [ "${#urls[@]}" -eq 0 ]; then
+              echo "no_urls=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            python3 - "${urls[@]}" <<'PY' > urls.json
+          import json, sys
+          urls = sys.argv[1:]
+          # Dedupe while preserving order
+          seen = set()
+          ordered = [u for u in urls if not (u in seen or seen.add(u))]
+          payload = {
+            "host": "nexusmortgage.sg",
+            "key": "6eeb1bf58acb64ed2d7f369e6312e519",
+            "keyLocation": "https://nexusmortgage.sg/6eeb1bf58acb64ed2d7f369e6312e519.txt",
+            "urlList": ordered[:10000]
+          }
+          print(json.dumps(payload, indent=2))
+          PY
+          fi
+          cat urls.json
+
+      - name: Submit to IndexNow (Bing)
+        if: steps.urls.outputs.no_urls != 'true'
+        run: |
+          curl -sS -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data-binary @urls.json -o response.txt -w "HTTP %{http_code}\n"
+          cat response.txt || true

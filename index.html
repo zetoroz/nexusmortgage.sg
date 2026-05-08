@@ -31,6 +31,7 @@
 {
   "@context": "https://schema.org",
   "@type": "MortgageBroker",
+  "@id": "https://nexusmortgage.sg/#organization",
   "name": "Nexus Mortgage SG",
   "url": "https://nexusmortgage.sg/",
   "logo": {
@@ -41,7 +42,7 @@
   "description": "Best home loan comparison in Singapore. We compare fixed and SORA-pegged home loan rates from 16 banks — HDB loans, private property, and refinancing. Free service, zero fees.",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "39A Jalan Pemimpin, Halcyon 1",
+    "streetAddress": "39A Jalan Pemimpin, #06-02B, Halcyon 1",
     "addressLocality": "Singapore",
     "postalCode": "577183",
     "addressCountry": "SG"
@@ -86,8 +87,19 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": "https://nexusmortgage.sg/#website",
   "url": "https://nexusmortgage.sg/",
-  "name": "Nexus Mortgage SG"
+  "name": "Nexus Mortgage SG",
+  "publisher": { "@id": "https://nexusmortgage.sg/#organization" },
+  "inLanguage": "en-SG",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://nexusmortgage.sg/blog/?s={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
 }
 </script>
 
