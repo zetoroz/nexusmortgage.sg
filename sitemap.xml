@@ -22,8 +22,8 @@
   <!-- Live bank rates -->
   <url>
     <loc>https://nexusmortgage.sg/mortgage-rates/</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 
@@ -84,7 +84,7 @@
   <!-- Blog index -->
   <url>
     <loc>https://nexusmortgage.sg/blog/</loc>
-    <lastmod>2026-04-28</lastmod>
+    <lastmod>2026-05-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
