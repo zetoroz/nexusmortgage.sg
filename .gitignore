@@ -28,8 +28,9 @@ rates-widget-wordpress.html
 rates-widget.html
 WordPress\ Migration\ Pack.md
 
-# Backup folder
+# Backup folders
 Backup/
+blog/blog-images-png-backup/
 
 # Local dev scratch files
 index-old.html
