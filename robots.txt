@@ -5,7 +5,6 @@ Disallow: /login/
 Disallow: /scripts/
 Disallow: /rates.xlsx
 Disallow: /*.xlsx
-Disallow: /*?*
 
 # AI / LLM crawlers — explicitly allowed for retrieval & citation
 User-agent: GPTBot
