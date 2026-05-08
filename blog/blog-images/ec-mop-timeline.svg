@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1344 768" role="img" aria-label="EC MOP doubled from 5 years to 10 years">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B1C3A"/>
+      <stop offset="1" stop-color="#0A1730"/>
+    </linearGradient>
+    <linearGradient id="goldA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C4973B"/>
+      <stop offset="1" stop-color="#E8C97A"/>
+    </linearGradient>
+    <linearGradient id="goldB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#A57924"/>
+      <stop offset="1" stop-color="#C4973B"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.04 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+  </defs>
+
+  <rect width="1344" height="768" fill="url(#bg)"/>
+
+  <!-- vertical guide lines -->
+  <g stroke="#C4973B" stroke-opacity="0.10" stroke-width="1">
+    <line x1="200" y1="120" x2="200" y2="640"/>
+    <line x1="372" y1="120" x2="372" y2="640"/>
+    <line x1="544" y1="120" x2="544" y2="640"/>
+    <line x1="716" y1="120" x2="716" y2="640"/>
+    <line x1="888" y1="120" x2="888" y2="640"/>
+    <line x1="1060" y1="120" x2="1060" y2="640"/>
+    <line x1="1232" y1="120" x2="1232" y2="640"/>
+  </g>
+
+  <!-- year tick markers -->
+  <g fill="#C4973B" fill-opacity="0.45" font-family="DM Sans, system-ui, sans-serif" font-size="20" letter-spacing="2" text-anchor="middle">
+    <text x="200" y="610">0</text>
+    <text x="544" y="610">5</text>
+    <text x="888" y="610">10</text>
+    <text x="1232" y="610">15</text>
+  </g>
+
+  <!-- 5 YEAR BAR (short, pale gold) -->
+  <g>
+    <text x="180" y="260" fill="#FAF7F2" font-family="DM Sans, system-ui, sans-serif" font-size="34" font-weight="500" letter-spacing="4" text-anchor="end">5 YR</text>
+    <rect x="200" y="222" width="344" height="60" rx="6" fill="url(#goldA)"/>
+    <text x="556" y="262" fill="#FAF7F2" fill-opacity="0.55" font-family="DM Sans, system-ui, sans-serif" font-size="22" letter-spacing="2">OLD MOP</text>
+  </g>
+
+  <!-- 10 YEAR BAR (long, deep gold, exactly 2x) -->
+  <g>
+    <text x="180" y="400" fill="#FAF7F2" font-family="DM Sans, system-ui, sans-serif" font-size="34" font-weight="500" letter-spacing="4" text-anchor="end">10 YR</text>
+    <rect x="200" y="362" width="688" height="60" rx="6" fill="url(#goldB)"/>
+    <text x="900" y="402" fill="#C4973B" font-family="DM Sans, system-ui, sans-serif" font-size="22" letter-spacing="2" font-weight="500">NEW MOP — 2×</text>
+  </g>
+
+  <!-- title -->
+  <text x="200" y="160" fill="#FAF7F2" font-family="Cormorant Garamond, Georgia, serif" font-size="44" font-weight="600" letter-spacing="-0.5">EC Minimum Occupation Period</text>
+  <text x="200" y="190" fill="#FAF7F2" fill-opacity="0.5" font-family="DM Sans, system-ui, sans-serif" font-size="18" letter-spacing="3">DOUBLED · 8 MAY 2026</text>
+
+  <!-- skyline silhouette -->
+  <g fill="#FAF7F2" fill-opacity="0.18" transform="translate(0,640)">
+    <path d="M0 50 L40 50 L40 30 L70 30 L70 45 L120 45 L120 20 L150 20 L150 35 L200 35 L210 18 L220 35 L260 35 L260 10 L290 10 L290 28 L340 28 L340 22 L400 22 L400 5 L420 5 L420 22 L460 22 L460 30 L520 30 L520 12 L560 12 L560 0 L580 0 L580 12 L620 12 L620 25 L680 25 L680 8 L720 8 L720 22 L780 22 L780 18 L820 18 L820 28 L880 28 L880 14 L940 14 L940 32 L990 32 L990 20 L1040 20 L1050 8 L1060 20 L1110 20 L1110 30 L1160 30 L1160 18 L1220 18 L1220 35 L1280 35 L1280 28 L1344 28 L1344 80 L0 80 Z"/>
+  </g>
+
+  <!-- subtle grain overlay -->
+  <rect width="1344" height="768" fill="white" opacity="0.02" filter="url(#grain)"/>
+</svg>
