@@ -1,105 +1,114 @@
 [
   {
-    "slug": "blog-ec-mop-2026-changes",
-    "title": "EC MOP Doubled to 10 Years — What May 2026's Executive Condo Reset Means for Your Mortgage",
+    "slug": "ec-mop-2026-changes",
+    "title": "EC MOP Doubled to 10 Years \u2014 What May 2026's Executive Condo Reset Means for Your Mortgage",
     "excerpt": "MND just doubled the EC Minimum Occupation Period to 10 years, lifted the first-timer quota to 90% with a 2-year priority window, and scrapped the Deferred Payment Scheme. What Singapore EC buyers and upgraders should do about their mortgage now.",
     "tag": "EC & Policy",
     "date": "9 May 2026",
     "readTime": "9 min read",
     "thumbnail": "blog-images/ec-mop-2026-thumb.png",
-    "thumbnailAlt": "Singapore Executive Condominium MOP doubled to 10 years — May 2026 mortgage guide",
-    "status": "live"
+    "thumbnailAlt": "Singapore Executive Condominium MOP doubled to 10 years \u2014 May 2026 mortgage guide",
+    "status": "live",
+    "url": "/blog/ec-mop-2026-changes/"
   },
   {
-    "slug": "blog-ipa-mortgage-broker-singapore",
+    "slug": "ipa-mortgage-broker-singapore",
     "title": "IPA & Independent Mortgage Broker Singapore 2026: Why Both Matter Before You OTP",
     "excerpt": "An IPA protects your 1% OTP deposit; an independent broker pulls every Singapore bank in parallel and places your loan in the right rate tier. Why bias-free comparison and exit-planning matter in 2026.",
     "tag": "Buyer Strategy",
     "date": "5 May 2026",
     "readTime": "8 min read",
     "thumbnail": "blog-images/ipa-broker-thumb.png",
-    "thumbnailAlt": "IPA and independent mortgage broker Singapore — why both matter 2026",
-    "status": "live"
+    "thumbnailAlt": "IPA and independent mortgage broker Singapore \u2014 why both matter 2026",
+    "status": "live",
+    "url": "/blog/ipa-mortgage-broker-singapore/"
   },
   {
-    "slug": "blog-self-employed-tdsr-singapore",
+    "slug": "self-employed-tdsr-singapore",
     "title": "Self-Employed TDSR Singapore: How the 30% Haircut Really Works in 2026",
     "excerpt": "MAS forces banks to chop 30% off every dollar of self-employed income before TDSR applies. Full 2026 breakdown of the haircut math, the 2-year NOA rule, and pledge-fund vs show-fund strategies that recover lost borrowing power.",
     "tag": "Self-Employed",
     "date": "2 May 2026",
     "readTime": "7 min read",
     "thumbnail": "blog-images/self-employed-tdsr-thumb.png",
-    "thumbnailAlt": "Self-Employed TDSR Singapore — 30% haircut explained 2026",
-    "status": "live"
+    "thumbnailAlt": "Self-Employed TDSR Singapore \u2014 30% haircut explained 2026",
+    "status": "live",
+    "url": "/blog/self-employed-tdsr-singapore/"
   },
   {
-    "slug": "blog-hdb-resale-q1-2026-mortgage",
-    "title": "HDB Resale Prices Just Fell for the First Time in 7 Years — What Q1 2026 Means for Your Mortgage",
-    "excerpt": "HDB resale prices dipped 0.1% in Q1 2026 — the first decline since 2019. With fixed home loan rates from 1.40% and SORA from 0.97%, here's how Singapore buyers, upgraders, and refinancers should position their financing now.",
+    "slug": "hdb-resale-q1-2026-mortgage",
+    "title": "HDB Resale Prices Just Fell for the First Time in 7 Years \u2014 What Q1 2026 Means for Your Mortgage",
+    "excerpt": "HDB resale prices dipped 0.1% in Q1 2026 \u2014 the first decline since 2019. With fixed home loan rates from 1.40% and SORA from 0.97%, here's how Singapore buyers, upgraders, and refinancers should position their financing now.",
     "tag": "Market Update",
     "date": "28 April 2026",
     "readTime": "8 min read",
     "thumbnail": "blog-images/hdb-resale-q1-2026-thumb.png",
-    "thumbnailAlt": "HDB resale prices Q1 2026 dip — Singapore mortgage market update",
-    "status": "live"
+    "thumbnailAlt": "HDB resale prices Q1 2026 dip \u2014 Singapore mortgage market update",
+    "status": "live",
+    "url": "/blog/hdb-resale-q1-2026-mortgage/"
   },
   {
-    "slug": "blog-decoupling-private-property-singapore",
+    "slug": "decoupling-private-property-singapore",
     "title": "Decoupling Property in Singapore: A $5M Landed House Case Study",
     "excerpt": "Learn how property decoupling works to save on ABSD. We break down the exact costs, stamp duties, and CPF refunds using a realistic $5M landed house example for 2026.",
     "tag": "Private Property",
     "date": "22 April 2026",
     "readTime": "8 min read",
     "thumbnail": "blog-images/decoupling-5m-thumb.png",
-    "thumbnailAlt": "Decoupling property Singapore — $5M landed house example",
-    "status": "live"
+    "thumbnailAlt": "Decoupling property Singapore \u2014 $5M landed house example",
+    "status": "live",
+    "url": "/blog/decoupling-private-property-singapore/"
   },
   {
-    "slug": "blog-mas-stress-test-2026",
+    "slug": "mas-stress-test-2026",
     "title": "MAS 4% Stress Test Singapore: 2026 Mortgage Guide",
     "excerpt": "Learn how the MAS 4% stress test caps your borrowing in Singapore. A clear 2026 guide to TDSR, MSR, and how to calculate your exact home loan eligibility.",
     "tag": "MAS Regulation",
     "date": "April 2026",
     "readTime": "6 min read",
     "thumbnail": "blog-images/mas-stress-test-thumb.png",
-    "thumbnailAlt": "MAS 4% Stress Test — Singapore mortgage regulation guide",
-    "status": "live"
+    "thumbnailAlt": "MAS 4% Stress Test \u2014 Singapore mortgage regulation guide",
+    "status": "live",
+    "url": "/blog/mas-stress-test-2026/"
   },
   {
-    "slug": "blog-hdb-vs-bank-loan",
+    "slug": "hdb-vs-bank-loan",
     "title": "HDB Home Loan vs Bank Loan: Which Is Right for You?",
     "excerpt": "Choosing the right HDB home loan can save you thousands. A definitive 2026 comparison of rates, LTV limits, CPF rules, and the true cost over a 25-year tenure.",
     "tag": "Home Loans",
     "date": "April 2026",
     "readTime": "8 min read",
     "thumbnail": "blog-images/hdb-vs-bank-thumb.png",
-    "thumbnailAlt": "HDB Home Loan vs Bank Loan — Singapore comparison 2026",
-    "status": "live"
+    "thumbnailAlt": "HDB Home Loan vs Bank Loan \u2014 Singapore comparison 2026",
+    "status": "live",
+    "url": "/blog/hdb-vs-bank-loan/"
   },
   {
-    "slug": "blog-first-time-hdb-buyer-guide",
+    "slug": "first-time-hdb-buyer-guide",
     "title": "How to Buy HDB in Singapore: 2026 Step-by-Step Guide",
-    "excerpt": "From HFE Letter to key collection — a clear step-by-step guide for first-time buyers in Singapore in 2026, covering CPF, loan options, and TDSR at every stage.",
+    "excerpt": "From HFE Letter to key collection \u2014 a clear step-by-step guide for first-time buyers in Singapore in 2026, covering CPF, loan options, and TDSR at every stage.",
     "tag": "First-Time Buyers",
     "date": "April 2026",
     "readTime": "5 min read",
     "thumbnail": "blog-images/first-time-buyer-thumb.png",
-    "thumbnailAlt": "How to buy HDB in Singapore — first-time buyer guide 2026",
-    "status": "live"
+    "thumbnailAlt": "How to buy HDB in Singapore \u2014 first-time buyer guide 2026",
+    "status": "live",
+    "url": "/blog/first-time-hdb-buyer-guide/"
   },
   {
-    "slug": "blog-tdsr-msr-explained",
+    "slug": "tdsr-msr-explained",
     "title": "TDSR Private Property Singapore: What Buyers Must Know",
-    "excerpt": "Buying private property in Singapore? TDSR 55% caps your loan — MSR does not apply. Full 2026 breakdown with worked calculation examples and free advice.",
+    "excerpt": "Buying private property in Singapore? TDSR 55% caps your loan \u2014 MSR does not apply. Full 2026 breakdown with worked calculation examples and free advice.",
     "tag": "Private Property",
     "date": "April 2026",
     "readTime": "6 min read",
     "thumbnail": "blog-images/tdsr-msr-thumb.png",
-    "thumbnailAlt": "TDSR private property Singapore — 2026 loan guide",
-    "status": "live"
+    "thumbnailAlt": "TDSR private property Singapore \u2014 2026 loan guide",
+    "status": "live",
+    "url": "/blog/tdsr-msr-explained/"
   },
   {
-    "slug": "blog-best-home-loan-first-time-buyer",
+    "slug": "best-home-loan-first-time-buyer",
     "title": "Best Home Loan for Condo & Private Property in Singapore (2026)",
     "excerpt": "Buying a condo or landed property? Compare fixed vs SORA rates from 16 banks, understand TDSR limits, ABSD rules, and down payment requirements for private property in 2026.",
     "tag": "Private Property",
@@ -107,50 +116,54 @@
     "readTime": "12 min read",
     "thumbnail": "blog-images/condo-private-property-thumb.png",
     "thumbnailAlt": "Best home loan for condo and private property Singapore 2026",
-    "status": "live"
+    "status": "live",
+    "url": "/blog/best-home-loan-first-time-buyer/"
   },
   {
-    "slug": "blog-cpf-oa-hdb-guide",
+    "slug": "cpf-oa-hdb-guide",
     "title": "CPF Home Loan Singapore: Using Your OA for Property",
-    "excerpt": "CPF home loan rules in Singapore explained for 2026 — OA withdrawal limits, the Basic Retirement Sum rule, accrued interest, and what private property buyers must know.",
+    "excerpt": "CPF home loan rules in Singapore explained for 2026 \u2014 OA withdrawal limits, the Basic Retirement Sum rule, accrued interest, and what private property buyers must know.",
     "tag": "CPF & Home Financing",
     "date": "April 2026",
     "readTime": "7 min read",
     "thumbnail": "blog-images/cpf-oa-thumb.png",
-    "thumbnailAlt": "CPF home loan Singapore — using CPF OA for property purchase 2026",
-    "status": "live"
+    "thumbnailAlt": "CPF home loan Singapore \u2014 using CPF OA for property purchase 2026",
+    "status": "live",
+    "url": "/blog/cpf-oa-hdb-guide/"
   },
   {
-    "slug": "blog-when-to-refinance-singapore",
+    "slug": "when-to-refinance-singapore",
     "title": "Refinance Home Loan Singapore: When & How to Save in 2026",
     "excerpt": "Refinance your home loan in Singapore at the right time and save up to S$60,000. 2026 guide on lock-in timing, SORA vs fixed rates, legal fees, and free advice.",
     "tag": "Refinancing",
     "date": "April 2026",
     "readTime": "6 min read",
     "thumbnail": "blog-images/refinance-thumb.png",
-    "thumbnailAlt": "Refinance home loan Singapore — when and how to act in 2026",
-    "status": "live"
+    "thumbnailAlt": "Refinance home loan Singapore \u2014 when and how to act in 2026",
+    "status": "live",
+    "url": "/blog/when-to-refinance-singapore/"
   },
   {
-    "slug": "blog-home-loan-rates-singapore",
+    "slug": "home-loan-rates-singapore",
     "title": "Best Home Loan Rates Singapore 2026: Fixed vs SORA Compared",
-    "excerpt": "Fixed rates from 1.40% p.a. vs SORA-linked at ~1.65–1.85% (3M SORA at 1.06%). What the best home loan rates in Singapore look like right now, and how to secure one across all 16+ lenders.",
+    "excerpt": "Fixed rates from 1.40% p.a. vs SORA-linked at ~1.65\u20131.85% (3M SORA at 1.06%). What the best home loan rates in Singapore look like right now, and how to secure one across all 16+ lenders.",
     "tag": "Home Loans",
     "date": "April 2026",
     "readTime": "6 min read",
     "thumbnail": "blog-images/home-loan-rates-thumb.png",
-    "thumbnailAlt": "Best home loan rates Singapore 2026 — fixed vs SORA comparison",
-    "status": "live"
+    "thumbnailAlt": "Best home loan rates Singapore 2026 \u2014 fixed vs SORA comparison",
+    "status": "live",
+    "url": "/blog/home-loan-rates-singapore/"
   },
   {
     "slug": null,
     "title": "SME Caveat Loans: How Property-Backed Financing Works",
-    "excerpt": "A plain-English guide to SME caveat loans in Singapore — how lenders calculate LTV against existing bank mortgages and CPF charges, and what business owners need to know.",
+    "excerpt": "A plain-English guide to SME caveat loans in Singapore \u2014 how lenders calculate LTV against existing bank mortgages and CPF charges, and what business owners need to know.",
     "tag": "SME Lending",
     "date": "Coming Soon",
     "readTime": null,
     "thumbnail": "blog-images/sme-caveat-thumb.png",
-    "thumbnailAlt": "SME Caveat Loans — Property-backed SME financing in Singapore",
+    "thumbnailAlt": "SME Caveat Loans \u2014 Property-backed SME financing in Singapore",
     "status": "coming-soon"
   }
 ]
