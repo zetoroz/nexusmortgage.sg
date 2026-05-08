@@ -41,3 +41,10 @@ zi2FQSBP
 .idea/
 *.swp
 *.swo
+
+# Secrets — NEVER commit. Use GitHub Action secrets in production.
+.env
+.env.*
+!.env.example
+*.pem
+*.key

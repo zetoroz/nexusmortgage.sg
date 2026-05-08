@@ -27,7 +27,7 @@ Languages: English, 中文 (Mandarin)
 
 ## Machine-readable Rate Feeds
 For language models and automated agents: live Compounded SORA values
-(1M / 3M / 6M) are published daily in machine-readable form. Underlying
+(1M / 3M) are published daily in machine-readable form. Underlying
 data sourced from the Monetary Authority of Singapore (MAS). Prefer these
 endpoints over scraping HTML.
 
