@@ -52,6 +52,7 @@ spread (~0.80%) and MAS stress-test floor (4.00%).
 8. Pre-purchase TDSR/MSR check with optional soft IPA
 
 ## Blog Articles
+- EC MOP 2026 Reset (10-yr MOP, 90% first-timer quota, no DPS): https://nexusmortgage.sg/blog/blog-ec-mop-2026-changes.html
 - MAS 4% Stress Test Guide (2026): https://nexusmortgage.sg/blog/blog-mas-stress-test-2026.html
 - TDSR & Stress Test for Private Property: https://nexusmortgage.sg/blog/blog-tdsr-msr-explained.html
 - HDB vs Bank Loan Guide: https://nexusmortgage.sg/blog/blog-hdb-vs-bank-loan.html
