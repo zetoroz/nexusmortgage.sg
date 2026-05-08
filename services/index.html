@@ -276,62 +276,7 @@
       .reveal { opacity: 1; transform: none; }
     }
   </style>
-<!-- NAV-STYLES-CANONICAL v1 -->
-<style>
-/* ===== Canonical navbar styles (shared) ===== */
-#navbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 1.35rem 0;
-  transition: background .4s, box-shadow .4s, padding .4s;
-}
-#navbar.scrolled {
-  background: rgba(6,14,31,0.96);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 2px 40px rgba(0,0,0,.45);
-  padding: .9rem 0;
-}
-#navbar .nav-link {
-  font-size: .8rem; font-weight: 500; letter-spacing: .1em;
-  text-transform: uppercase;
-  color: rgba(250,247,242,.7);
-  transition: color .25s; text-decoration: none;
-}
-#navbar .nav-link:hover { color: var(--gold-400, #E8C97A); }
-#navbar .nav-link:focus-visible { outline: 2px solid var(--gold-400, #E8C97A); outline-offset: 2px; }
-#navbar .nav-tools-btn { display: flex; align-items: center; gap: .3rem; }
-#navbar #tools-dropdown a { color: rgba(250,247,242,.85); }
-.tools-dd-item {
-  display: block; padding: .6rem 1rem;
-  color: rgba(250,247,242,.7);
-  font-size: .8rem; font-weight: 500; letter-spacing: .05em;
-  text-decoration: none; border-radius: 6px;
-  transition: background .2s, color .2s;
-}
-.tools-dd-item:hover { background: rgba(196,151,59,.12); color: var(--gold-400, #E8C97A); }
-.tools-dd-item:focus-visible { outline: 2px solid var(--gold-400, #E8C97A); outline-offset: 2px; }
-/* Canonical nav button (overrides per-page .btn-gold variants for navbar only) */
-#navbar .btn-gold {
-  display: inline-flex; align-items: center; gap: .6rem;
-  background: linear-gradient(135deg, #C4973B, #E8C97A);
-  color: #0B1C3A; font-weight: 600; font-size: .8rem;
-  letter-spacing: .04em; padding: .6rem 1.4rem;
-  border-radius: 5px; border: none; cursor: pointer;
-  transition: transform .2s, box-shadow .2s;
-  text-decoration: none;
-  box-shadow: 0 4px 24px rgba(196,151,59,.35);
-  white-space: nowrap;
-}
-#navbar .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 36px rgba(196,151,59,.5); }
-#mob-menu {
-  display: none; flex-direction: column; gap: 0;
-  background: rgba(6,14,31,.98);
-  backdrop-filter: blur(20px);
-}
-#mob-menu.open { display: flex; }
-#mob-menu .nav-link { color: rgba(250,247,242,.85); font-size: .85rem; }
-@media (min-width: 1024px) { #mob-menu { display: none !important; } }
-</style>
-<!-- /NAV-STYLES-CANONICAL -->
+<link rel="stylesheet" href="/nav.min.css">
 </head>
 
 <body>
