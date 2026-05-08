@@ -3,12 +3,15 @@
  * fetch-mas-rates.mjs — daily SORA refresh from MAS API.
  *
  * Run:  node scripts/fetch-mas-rates.mjs
- * Env:
- *   MAS_API_URL   override base endpoint (default: documented MAS API)
- *   DRY_RUN=1     parse + log, do not write
+ * Env (all optional except MAS_API_KEY in prod):
+ *   MAS_API_URL          override base endpoint (default: legacy MAS datastore)
+ *   MAS_API_KEY          API key issued by MAS API portal (NEVER commit)
+ *   MAS_API_KEY_HEADER   header name to send key in (default: "keyId")
+ *   DRY_RUN=1            parse + log, do not write
+ *   FEEDS_ONLY=1         skip MAS fetch, regenerate feeds only
  *
  * Effect:
- *   - Updates rates.json -> refRates.sora1m / sora3m / sora6m / asOfSora
+ *   - Updates rates.json -> refRates.sora1m / sora3m / asOfSora
  *   - Appends entry to rates-history.json
  *   - Regenerates rates.xml (RSS) + sora-feed.json (llms.txt feed)
  *   - Exit 0 on success or graceful skip; exit 1 only on hard parse error.
@@ -24,9 +27,22 @@ const HISTORY = path.join(ROOT, "rates-history.json");
 const RSS = path.join(ROOT, "rates.xml");
 const FEED = path.join(ROOT, "sora-feed.json");
 
-const MAS_API_URL =
-  process.env.MAS_API_URL ||
-  "https://eservices.mas.gov.sg/api/action/datastore/search.json?resource_id=9a0bf149-308c-4bb2-832c-c0c8d28ba4f9&limit=1&sort=end_of_day%20desc";
+// MAS apimg-gw endpoint for "Domestic Interest Rates - Daily" (v1.0).
+// Returns { name, elements: [{ end_of_day, comp_sora_1m, comp_sora_3m, sora, ... }] }
+// Auth: header `keyId: <MAS_API_KEY>`. Override URL via MAS_API_URL env var.
+const MAS_API_BASE =
+  "https://eservices.mas.gov.sg/apimg-gw/server/monthly_statistical_bulletin_non610mssql/domestic_interest_rates_daily/views/domestic_interest_rates_daily";
+
+function buildDefaultMasUrl() {
+  // Filter to last 45 days; MAS skips weekends/holidays so a wide window is safe.
+  const since = new Date(Date.now() - 45 * 86400_000).toISOString().slice(0, 10);
+  return `${MAS_API_BASE}?filter=end_of_day:gte:'${since}'&limit=200`;
+}
+
+const MAS_API_URL = process.env.MAS_API_URL || buildDefaultMasUrl();
+
+const MAS_API_KEY = process.env.MAS_API_KEY || "";
+const MAS_API_KEY_HEADER = process.env.MAS_API_KEY_HEADER || "keyId";
 
 const DRY = process.env.DRY_RUN === "1";
 const FEEDS_ONLY = process.argv.includes("--feeds-only") || process.env.FEEDS_ONLY === "1";
@@ -54,32 +70,53 @@ async function writeJson(p, obj) {
   await fs.writeFile(p, JSON.stringify(obj, null, 2) + "\n", "utf8");
 }
 
+function numOrNull(v) {
+  if (v == null || v === "") return null;
+  const n = parseFloat(v);
+  return Number.isFinite(n) ? n : null;
+}
+
 async function fetchMasSora() {
+  const headers = {
+    Accept: "application/json",
+    "User-Agent": "nexusmortgage-rates-bot/1.0"
+  };
+  if (MAS_API_KEY) {
+    headers[MAS_API_KEY_HEADER] = MAS_API_KEY;
+    log(`auth: sending ${MAS_API_KEY_HEADER} header (key ends ...${MAS_API_KEY.slice(-4)})`);
+  } else {
+    warn("no MAS_API_KEY env var set — calling unauthenticated (may 401)");
+  }
+
+  log(`fetching: ${MAS_API_URL.replace(/keyId=[^&]+/, "keyId=***")}`);
   const r = await fetch(MAS_API_URL, {
-    headers: { Accept: "application/json", "User-Agent": "nexusmortgage-rates-bot/1.0" },
+    headers,
     signal: AbortSignal.timeout(20_000)
   });
   if (!r.ok) throw new Error(`MAS HTTP ${r.status}`);
   const ct = r.headers.get("content-type") || "";
   if (!ct.includes("json")) throw new Error(`MAS non-JSON response (${ct})`);
   const data = await r.json();
-  const rec = data?.result?.records?.[0];
-  if (!rec) throw new Error("MAS empty record set");
 
-  const pick = (...keys) => {
-    for (const k of keys) {
-      const v = rec[k];
-      if (v != null && v !== "" && !Number.isNaN(parseFloat(v))) return parseFloat(v);
-    }
-    return null;
-  };
+  // MAS apimg-gw returns { name, elements: [...] }; older datastore returned { result: { records: [...] } }.
+  const arr = data?.elements || data?.result?.records || data?.records || data?.data || [];
+  if (!Array.isArray(arr) || !arr.length) throw new Error("MAS empty record set");
+  log(`received ${arr.length} records`);
+
+  // Sort desc by end_of_day; pick most recent with non-null comp_sora_3m
+  // (SORA series begins ~2018-08; older rows have null SORA fields).
+  arr.sort((a, b) => String(b.end_of_day || "").localeCompare(String(a.end_of_day || "")));
+  const rec =
+    arr.find(r => numOrNull(r.comp_sora_3m) != null) ||
+    arr.find(r => numOrNull(r.comp_sora_1m) != null) ||
+    arr[0];
+  log(`picked end_of_day=${rec.end_of_day}`);
 
   return {
-    asOf: rec.end_of_day || rec.eod || isoDateSGT(),
-    sora1m: pick("compounded_sora_1m", "sora_1m", "comp_sora_1m"),
-    sora3m: pick("compounded_sora_3m", "sora_3m", "comp_sora_3m"),
-    sora6m: pick("compounded_sora_6m", "sora_6m", "comp_sora_6m"),
-    soraOn: pick("sora", "sora_on")
+    asOf: rec.end_of_day || isoDateSGT(),
+    sora1m: numOrNull(rec.comp_sora_1m ?? rec.compounded_sora_1m ?? rec.sora_1m),
+    sora3m: numOrNull(rec.comp_sora_3m ?? rec.compounded_sora_3m ?? rec.sora_3m),
+    soraOn: numOrNull(rec.sora ?? rec.sora_on)
   };
 }
 
@@ -112,12 +149,13 @@ async function main() {
     const next = {
       ...prev,
       sora1m: live.sora1m ?? prev.sora1m,
-      sora3m: live.sora3m ?? prev.sora3m,
-      sora6m: live.sora6m ?? prev.sora6m
+      sora3m: live.sora3m ?? prev.sora3m
     };
+    // Drop legacy sora6m if previously populated; we no longer publish it.
+    delete next.sora6m;
 
     const changes = {};
-    for (const k of ["sora1m", "sora3m", "sora6m"]) {
+    for (const k of ["sora1m", "sora3m"]) {
       const d = delta(next[k], prev[k]);
       if (d != null && d !== 0) changes[k] = { from: prev[k], to: next[k], delta: d };
     }
@@ -174,12 +212,12 @@ async function writeRss(rates, history) {
 <title>Nexus Mortgage SG — Live SORA Rates</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
-<description>Daily Singapore SORA (1M, 3M, 6M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
+<description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
 <lastBuildDate>${updated}</lastBuildDate>
 <ttl>720</ttl>
 <item>
-<title>Current Compounded SORA — 1M ${fmt(r.sora1m)} | 3M ${fmt(r.sora3m)} | 6M ${fmt(r.sora6m)}</title>
+<title>Current Compounded SORA — 1M ${fmt(r.sora1m)} | 3M ${fmt(r.sora3m)}</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
 <guid isPermaLink="false">nexus-current-${rates.asOfSora || isoDateSGT()}</guid>
 <pubDate>${updated}</pubDate>
@@ -200,8 +238,7 @@ async function writeFeed(rates) {
     asOfSora: rates.asOfSora || null,
     sora: {
       compounded_1m_pct: r.sora1m ?? null,
-      compounded_3m_pct: r.sora3m ?? null,
-      compounded_6m_pct: r.sora6m ?? null
+      compounded_3m_pct: r.sora3m ?? null
     },
     typicalSpreadPct: 0.8,
     masStressTestFloorPct: 4.0,

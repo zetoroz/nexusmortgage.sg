@@ -37,6 +37,10 @@ jobs:
         env:
           # Optional override; defaults to documented MAS endpoint inside the script
           MAS_API_URL: ${{ vars.MAS_API_URL }}
+          # Required for authenticated MAS API portal calls. Add at:
+          # https://github.com/zetoroz/nexusmortgage.sg/settings/secrets/actions
+          MAS_API_KEY: ${{ secrets.MAS_API_KEY }}
+          MAS_API_KEY_HEADER: ${{ vars.MAS_API_KEY_HEADER }}
         run: node scripts/fetch-mas-rates.mjs
 
       - name: Recompute per-package year1Rate using fresh refRates
