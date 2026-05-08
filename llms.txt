@@ -52,16 +52,16 @@ spread (~0.80%) and MAS stress-test floor (4.00%).
 8. Pre-purchase TDSR/MSR check with optional soft IPA
 
 ## Blog Articles
-- EC MOP 2026 Reset (10-yr MOP, 90% first-timer quota, no DPS): https://nexusmortgage.sg/blog/blog-ec-mop-2026-changes.html
-- MAS 4% Stress Test Guide (2026): https://nexusmortgage.sg/blog/blog-mas-stress-test-2026.html
-- TDSR & Stress Test for Private Property: https://nexusmortgage.sg/blog/blog-tdsr-msr-explained.html
-- HDB vs Bank Loan Guide: https://nexusmortgage.sg/blog/blog-hdb-vs-bank-loan.html
-- First-Time HDB Buyer Guide (2026): https://nexusmortgage.sg/blog/blog-first-time-hdb-buyer-guide.html
-- Using CPF OA for Private Property: https://nexusmortgage.sg/blog/blog-cpf-oa-hdb-guide.html
-- When to Refinance Your Singapore Mortgage: https://nexusmortgage.sg/blog/blog-when-to-refinance-singapore.html
-- Singapore Home Loan Rates (2026): https://nexusmortgage.sg/blog/blog-home-loan-rates-singapore.html
-- Best Home Loan for Condo & Private Property (2026): https://nexusmortgage.sg/blog/blog-best-home-loan-first-time-buyer.html
-- Decoupling Private Property in Singapore: https://nexusmortgage.sg/blog/blog-decoupling-private-property-singapore.html
+- EC MOP 2026 Reset (10-yr MOP, 90% first-timer quota, no DPS): https://nexusmortgage.sg/blog/ec-mop-2026-changes/
+- MAS 4% Stress Test Guide (2026): https://nexusmortgage.sg/blog/mas-stress-test-2026/
+- TDSR & Stress Test for Private Property: https://nexusmortgage.sg/blog/tdsr-msr-explained/
+- HDB vs Bank Loan Guide: https://nexusmortgage.sg/blog/hdb-vs-bank-loan/
+- First-Time HDB Buyer Guide (2026): https://nexusmortgage.sg/blog/first-time-hdb-buyer-guide/
+- Using CPF OA for Private Property: https://nexusmortgage.sg/blog/cpf-oa-hdb-guide/
+- When to Refinance Your Singapore Mortgage: https://nexusmortgage.sg/blog/when-to-refinance-singapore/
+- Singapore Home Loan Rates (2026): https://nexusmortgage.sg/blog/home-loan-rates-singapore/
+- Best Home Loan for Condo & Private Property (2026): https://nexusmortgage.sg/blog/best-home-loan-first-time-buyer/
+- Decoupling Private Property in Singapore: https://nexusmortgage.sg/blog/decoupling-private-property-singapore/
 
 ## Key Facts
 - TDSR cap: 55% of gross monthly income (all property types)

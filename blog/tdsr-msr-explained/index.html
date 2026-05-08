@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDSR & MSR Singapore 2026: Loan Cap Calculator + Worked Examples | Nexus</title>
+  <meta name="description" content="TDSR 55% & MSR 30% Singapore 2026 explained: why MSR skips private property, 4% stress test, real worked examples on S$10K income. Free TDSR check.">
+  <meta name="keywords" content="TDSR private property Singapore 2026, TDSR 55% private condo, MAS 4% stress test private property, private property loan eligibility Singapore, TDSR calculation Singapore, mortgage borrowing limit private property">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta property="og:title" content="TDSR for Private Property Singapore: What Buyers Must Know in 2026">
+  <meta property="og:description" content="No MSR for private property — but TDSR 55% and the MAS 4% stress test still cap your home loan. Full 2026 breakdown with worked examples for Singapore buyers.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexusmortgage.sg/blog/tdsr-msr-explained/">
+  <meta property="og:image" content="https://nexusmortgage.sg/blog/blog-images/tdsr-msr-thumb.png">
+  <link rel="canonical" href="https://nexusmortgage.sg/blog/tdsr-msr-explained/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"TDSR Private Property Singapore: What Buyers Must Know in 2026","datePublished":"2026-04-06","dateModified":"2026-04-28","image":{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/tdsr-msr-hero.webp","width":1376,"height":768},"description":"TDSR for private property in Singapore (April 2026): why MSR does not apply, the 55% cap, the 4% stress test, worked examples and how much you can really borrow.","mainEntityOfPage":{"@type":"WebPage","@id":"https://nexusmortgage.sg/blog/tdsr-msr-explained/"},"author":{"@id":"https://nexusmortgage.sg/#dan-ler","@type":"Person","name":"Dan Ler","url":"https://nexusmortgage.sg","jobTitle":"Mortgage Advisor","worksFor":{"@type":"Organization","name":"Nexus Mortgage SG","url":"https://nexusmortgage.sg"}},"publisher":{"@type":"Organization","name":"Nexus Mortgage SG","url":"https://nexusmortgage.sg","logo":{"@type":"ImageObject","url":"https://nexusmortgage.sg/nexus-logo-transparent.png"}},"keywords":"TDSR private property Singapore, 55% TDSR cap, MSR HDB EC, mortgage stress test, Singapore borrowing limit, TDSR worked example, debt servicing ratio"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does MSR apply to private property in Singapore?","acceptedAnswer":{"@type":"Answer","text":"No. The 30% Mortgage Servicing Ratio (MSR) applies only to HDB flats and Executive Condominiums financed with a bank loan. For private condominiums and landed property, only the 55% TDSR cap applies."}},{"@type":"Question","name":"What is the TDSR cap for private property in 2026?","acceptedAnswer":{"@type":"Answer","text":"TDSR is capped at 55% of gross monthly income. All monthly debt obligations (the new mortgage plus car loans, personal loans, credit-card factor, and any other property loans) must fit inside that ceiling, with the new mortgage assessed at the MAS 4.00% p.a. stress floor."}},{"@type":"Question","name":"How much can I borrow for a private condo on S$15,000 monthly income?","acceptedAnswer":{"@type":"Answer","text":"With no existing debts, the 55% TDSR ceiling gives roughly S$8,250 per month. At the MAS 4% stress rate over a 30-year tenure, that supports a loan of about S$1.72 million. The 75% LTV cap on a first property may be the binding constraint instead."}},{"@type":"Question","name":"How does a credit card affect TDSR for private property?","acceptedAnswer":{"@type":"Answer","text":"MAS requires banks to count 3% of the outstanding credit-card balance as a monthly obligation, even if you pay in full each month. A S$30,000 balance therefore eats S$900 of TDSR headroom — a common reason buyers under-estimate their borrowing limit."}},{"@type":"Question","name":"How is variable income treated under TDSR?","acceptedAnswer":{"@type":"Answer","text":"Bonus, commission and rental income are subject to a 30% haircut — only 70% counts toward eligible gross income. Self-employed buyers are typically assessed on a two-year average of NOA filings, also after the haircut."}},{"@type":"Question","name":"What loan tenure applies for joint borrowers?","acceptedAnswer":{"@type":"Answer","text":"Banks use the Income-Weighted Average Age (IWAA) of all borrowers to set tenure. Maximum tenure for a private property bank loan is 35 years, but tenure beyond age 65 or longer than 30 years triggers a 5-percentage-point LTV cut."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexusmortgage.sg/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://nexusmortgage.sg/blog/"},{"@type":"ListItem","position":3,"name":"TDSR for Private Property","item":"https://nexusmortgage.sg/blog/tdsr-msr-explained/"}]}</script>
+  <!-- Self-hosted fonts (woff2 latin subset). Drops Google Fonts blocking chain. -->
+  <link rel="preload" href="/fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts/fonts.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d1117;color:#e8e3da;font-family:'DM Sans',system-ui,sans-serif;font-size:1.0625rem;line-height:1.75}
+    .blog-wrap{max-width:740px;margin:0 auto;padding:3rem 1.5rem 6rem}
+    .back-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;color:rgba(196,151,59,.7);text-decoration:none;letter-spacing:.04em;margin-bottom:2rem;text-transform:uppercase;font-weight:500}
+    .back-link:hover{color:#c4973b}
+    .hero-img{width:100%;border-radius:12px;margin-bottom:2.5rem;display:block;box-shadow:0 8px 40px rgba(0,0,0,.55),0 2px 8px rgba(196,151,59,.08)}
+    .blog-img{max-width:100%;width:100%;height:auto;object-fit:cover;border-radius:10px;display:block;margin-bottom:1rem;box-shadow:0 8px 40px rgba(0,0,0,.55),0 2px 8px rgba(196,151,59,.08)}
+    .img-caption{font-size:.78rem;color:rgba(232,227,218,.4);line-height:1.55;margin-bottom:2rem;font-style:italic}
+    .meta{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:#c4973b;margin-bottom:1.1rem;font-weight:500}
+    h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2rem,5vw,3rem);font-weight:600;line-height:1.18;letter-spacing:-.02em;color:#faf7f2;margin-bottom:1rem}
+    h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.4rem,3.5vw,1.9rem);font-weight:600;color:#faf7f2;margin:2.8rem 0 .9rem;letter-spacing:-.015em;padding-bottom:.5rem;border-bottom:1px solid rgba(196,151,59,.22)}
+    h3{font-family:'DM Sans',system-ui,sans-serif;font-size:1.05rem;font-weight:500;color:#c4973b;margin:1.8rem 0 .6rem;letter-spacing:.03em;text-transform:uppercase}
+    p{margin-bottom:1.25rem;color:rgba(232,227,218,.82)}
+    a{color:#c4973b;text-decoration:underline;text-underline-offset:3px}
+    a:hover{color:#e0b86a}
+    strong{color:rgba(250,247,242,.93)}
+    .pullquote{border-left:3px solid #c4973b;margin:2rem 0;padding:.9rem 1.4rem;background:rgba(196,151,59,.07);border-radius:0 8px 8px 0;font-style:italic;font-size:1.05rem;color:rgba(250,247,242,.7)}
+    .stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin:2rem 0}
+    .stat-box{background:rgba(255,255,255,.04);border:1px solid rgba(196,151,59,.2);border-radius:10px;padding:1.2rem 1rem;text-align:center}
+    .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:#c4973b;line-height:1;margin-bottom:.3rem}
+    .stat-desc{font-size:.75rem;color:rgba(232,227,218,.5);letter-spacing:.03em;line-height:1.45}
+    .formula-box{background:rgba(255,255,255,.03);border:1px solid rgba(196,151,59,.2);border-radius:10px;padding:1.5rem;margin:2rem 0;font-family:'DM Sans',sans-serif}
+    .formula-box .formula-label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#c4973b;font-weight:600;margin-bottom:.75rem}
+    .formula-box .formula-line{font-size:.9rem;color:rgba(232,227,218,.75);padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+    .formula-box .formula-line:last-child{border-bottom:none;color:#faf7f2;font-weight:600;padding-top:.6rem}
+    .formula-box .formula-line span{float:right;color:#c4973b}
+    .verdict-list{list-style:none;margin:.75rem 0 1.5rem}
+    .verdict-list li{display:flex;align-items:flex-start;gap:.6rem;font-size:.9rem;color:rgba(232,227,218,.8);margin-bottom:.55rem;line-height:1.55}
+    .verdict-list li::before{content:'\2192';color:#c4973b;font-weight:600;margin-top:.05rem;flex-shrink:0}
+    .highlight-box{background:rgba(196,151,59,.08);border:1px solid rgba(196,151,59,.3);border-radius:10px;padding:1.25rem 1.4rem;margin:1.5rem 0}
+    .highlight-box p{margin-bottom:0;color:rgba(250,247,242,.82)}
+    .cta-box{background:linear-gradient(135deg,rgba(196,151,59,.12) 0%,rgba(196,151,59,.04) 100%);border:1px solid rgba(196,151,59,.35);border-radius:12px;padding:2rem;margin-top:2.5rem;text-align:center}
+    .cta-box p{color:rgba(250,247,242,.75);margin-bottom:.6rem}
+    .cta-btn{display:inline-block;margin-top:.8rem;padding:.75rem 1.8rem;background:#c4973b;color:#0d1117;font-weight:600;font-size:.9rem;border-radius:6px;text-decoration:none;letter-spacing:.04em;transition:background .2s ease,transform .15s ease}
+    .cta-btn:hover{background:#e0b86a;color:#0d1117;transform:translateY(-1px)}
+    hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:3rem 0 1.5rem}
+    .disclaimer{font-size:.75rem;color:rgba(232,227,218,.3);line-height:1.6}
+    @media(max-width:600px){.stat-row{grid-template-columns:1fr 1fr}}
+    #reading-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#c4973b,#e8c97a);z-index:9999;transition:width .1s linear;pointer-events:none}
+    #btt{position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:#c4973b;color:#0d1117;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .25s cubic-bezier(.25,.8,.25,1),transform .25s cubic-bezier(.25,.8,.25,1);pointer-events:none;box-shadow:0 4px 16px rgba(196,151,59,.35)}
+    #btt.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+    #btt:hover{background:#e0b86a}
+    #btt:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
+    .back-link:focus-visible,.cta-btn:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
+    .cta-btn,.back-link{touch-action:manipulation}
+    .cta-btn{display:inline-flex;align-items:center;gap:.5rem}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#reading-progress,#btt{transition:none!important}}
+  
+    /* ==== Site nav (added to standardise blog detail posts) ==== */
+    :root { --gold-400: #C4973B; --gold-500: #E8C97A; --navy-900: #0B1C3A; --cream: #FAF7F2; }
+    #site-navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(11, 28, 58, .92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(196, 151, 59, .15); padding: .9rem 0; transition: background .25s; }
+    #site-navbar .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    #site-navbar .nav-logo { text-decoration: none; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 600; color: var(--cream); letter-spacing: .02em; }
+    #site-navbar .nav-logo .dot { color: var(--gold-400); }
+    #site-navbar .nav-links { display: none; align-items: center; gap: 1.4rem; }
+    @media (min-width: 1024px) { #site-navbar .nav-links { display: flex; } #site-navbar .mob-toggle { display: none; } }
+    #site-navbar .nav-link-item { font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250, 247, 242, .7); font-weight: 500; text-decoration: none; transition: color .25s; }
+    #site-navbar .nav-link-item:hover, #site-navbar .nav-link-item.is-current { color: var(--gold-400); }
+    #site-navbar .nav-cta { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1.1rem; background: linear-gradient(135deg, #C4973B, #E8C97A); color: #0B1C3A; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; border-radius: 100px; text-decoration: none; transition: transform .2s; }
+    #site-navbar .nav-cta:hover { transform: translateY(-1px); }
+    #site-navbar .mob-toggle { background: none; border: none; cursor: pointer; color: var(--cream); padding: .3rem; }
+    #site-navbar .tools-dd-wrap { position: relative; }
+    #site-navbar .tools-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: .3rem; font: inherit; padding: 0; font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250, 247, 242, .7); font-weight: 500; }
+    #site-navbar .tools-btn:hover { color: var(--gold-400); }
+    #site-navbar .tools-dd { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: rgba(11, 28, 58, .97); backdrop-filter: blur(16px); border: 1px solid rgba(196, 151, 59, .22); border-radius: 10px; padding: .5rem; min-width: 220px; z-index: 200; box-shadow: 0 16px 40px rgba(0, 0, 0, .4); }
+    #site-navbar .tools-dd a { display: block; padding: .55rem 1rem; color: rgba(250, 247, 242, .75); font-size: .76rem; font-weight: 500; letter-spacing: .04em; text-decoration: none; border-radius: 6px; transition: background .2s, color .2s; }
+    #site-navbar .tools-dd a:hover { background: rgba(196, 151, 59, .12); color: var(--gold-400); }
+    #site-navbar .free-report-link { color: var(--gold-400); display: inline-flex; align-items: center; gap: .35rem; }
+    #site-navbar .new-badge { font-size: .55rem; letter-spacing: .1em; padding: 1px 6px; border-radius: 100px; background: rgba(196, 151, 59, .18); color: var(--gold-400); font-weight: 600; border: 1px solid rgba(196, 151, 59, .3); }
+    #site-mob-menu { display: none; padding: .5rem 1.5rem 1rem; border-top: 1px solid rgba(196, 151, 59, .12); }
+    #site-mob-menu.open { display: block; }
+    #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
+    body.has-site-nav { padding-top: 64px; }
+
+    .toc { background: rgba(255,255,255,.03); border: 1px solid rgba(196,151,59,.15); border-radius: 10px; padding: 1.3rem 1.6rem; margin: 2rem 0 2.5rem; }
+    .toc-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: rgba(196,151,59,.7); margin-bottom: .8rem; }
+    .toc ol { padding-left: 1.2rem; counter-reset: toc; list-style: none; }
+    .toc ol li { counter-increment: toc; margin-bottom: .4rem; font-size: .88rem; }
+    .toc ol li::before { content: counter(toc) ". "; color: rgba(196,151,59,.5); font-weight: 600; font-size: .8rem; }
+    .toc a { color: rgba(232,227,218,.65); text-decoration: none; }
+    .toc a:hover { color: #c4973b; }
+  </style>
+</head>
+<body>
+<nav id="site-navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Nexus<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="/services/" class="nav-link-item">Services</a>
+      <a href="/mortgage-rates/" class="nav-link-item">Rates</a>
+      <a href="/free-report/" class="nav-link-item free-report-link">Free Report <span class="new-badge">NEW</span></a>
+      <a href="/#calculator" class="nav-link-item">Calculator</a>
+      <div class="tools-dd-wrap">
+        <button class="tools-btn" id="tools-btn" aria-haspopup="true" aria-expanded="false">Tools <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="tools-dd" id="tools-dropdown">
+          <a href="/free-report/" class="free-report-link">Free Report <span class="new-badge">NEW</span></a>
+          <a href="/#calculator">Mortgage Calculator</a>
+          <a href="/affordability/">Affordability Check</a>
+          <a href="/refinance-calculator/">Refinance Savings</a>
+          <a href="/equity-loan/">Equity / Cash-Out</a>
+          <a href="/mortgage-rates/">Current Rates</a>
+        </div>
+      </div>
+      <a href="/about/" class="nav-link-item">About</a>
+      <a href="/contact/" class="nav-link-item">Contact</a>
+      <a href="/blog/" class="nav-link-item is-current">Insights</a>
+    </div>
+    <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" rel="noopener" class="nav-cta" style="display:none;" id="nav-cta-desktop">Free Consult</a>
+    <button class="mob-toggle" onclick="document.getElementById('site-mob-menu').classList.toggle('open')" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="site-mob-menu">
+    <a href="/services/">Services</a>
+    <a href="/mortgage-rates/">Rates</a>
+    <a href="/free-report/" class="free-report-link">Free Report <span class="new-badge">NEW</span></a>
+    <a href="/#calculator">Calculator</a>
+    <a href="/affordability/">Affordability</a>
+    <a href="/equity-loan/">Equity Loan</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+    <a href="/blog/">Insights</a>
+  </div>
+</nav>
+<style>@media (min-width: 1024px) { #nav-cta-desktop { display: inline-flex !important; } }</style>
+
+<div id="reading-progress"></div>
+<article class="blog-wrap">
+
+  <a href="/blog/" class="back-link">&#8592; Back to Insights</a>
+
+  <p class="meta">Nexus Mortgage SG &nbsp;&middot;&nbsp; April 2026 &nbsp;&middot;&nbsp; 6-minute read &nbsp;&middot;&nbsp; Private Property</p>
+
+  <h1>TDSR Private Property Singapore: What Buyers Must Know in 2026</h1>
+
+  <p style="font-size:1.1rem;color:rgba(250,247,242,.65);line-height:1.7;margin-bottom:2rem;">Buying a private condo or landed home in Singapore? MSR does not touch you. The 55% TDSR cap and the MAS 4.00% p.a. stress floor do. Here is exactly how banks calculate your maximum loan in April 2026, where most buyers leave money on the table, and the one credit-card rule almost everyone forgets.</p>
+
+  <img src="../blog-images/tdsr-msr-hero.webp" alt="Visual showing TDSR at 55% of gross monthly income for private property Singapore" class="hero-img" width="1376" height="768" fetchpriority="high">
+
+  <div class="toc">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#no-msr">The one rule that sets private property apart: no MSR</a></li>
+      <li><a href="#tdsr-calc">How TDSR is actually calculated</a></li>
+      <li><a href="#cc-trap">The credit-card trap (and other TDSR killers)</a></li>
+      <li><a href="#joint-iwaa">Joint borrowers and the IWAA tenure rule</a></li>
+      <li><a href="#ltv">LTV: the other ceiling</a></li>
+      <li><a href="#worked-example">Worked example: S$15,000 income, S$2M condo</a></li>
+      <li><a href="#absd">ABSD: the cash number TDSR cannot help with</a></li>
+      <li><a href="#before-otp">What to do before you sign the OTP</a></li>
+    </ol>
+  </div>
+
+  <h2 id="no-msr">The One Rule That Sets Private Property Apart: No MSR</h2>
+
+  <p>If you have only ever bought an HDB flat before, the most useful thing to learn first is what does <em>not</em> apply. The 30% Mortgage Servicing Ratio (MSR) is an HDB and Executive Condominium rule. It does not apply to private condominiums, walk-ups, or landed homes financed with a bank loan.</p>
+
+  <p>For private property, only one ratio matters: <strong>the Total Debt Servicing Ratio (TDSR), capped at 55% of gross monthly income</strong>. This single difference is why a household earning S$15,000 a month can often borrow more for a private condo than for an HDB flat of similar value &mdash; the second 25 percentage points of headroom (55% TDSR vs 30% MSR) belong to private buyers.</p>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-num">55%</div>
+      <div class="stat-desc">TDSR cap on gross monthly income — the only ratio for private property</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">4.00%</div>
+      <div class="stat-desc">MAS stress floor used to size the qualifying instalment, p.a.</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">75%</div>
+      <div class="stat-desc">Maximum LTV on a first private property with no outstanding home loan</div>
+    </div>
+  </div>
+
+  <h2 id="tdsr-calc">How TDSR Is Actually Calculated</h2>
+
+  <p>The arithmetic is simple. The trap is the assessment rate. Banks cannot use the headline rate on your loan package &mdash; they must size the qualifying instalment using the <strong>higher of the contractual rate or 4.00% p.a.</strong>, per <a href="https://www.mas.gov.sg/regulation/explainers/tdsr-for-property-loans" target="_blank" rel="noopener">MAS TDSR rules</a>.</p>
+
+  <p>In April 2026, fixed packages start from 1.40% p.a. and SORA-linked loans typically deliver an effective 1.65%&ndash;1.85% p.a. (see our live <a href="/mortgage-rates/">current Singapore home loan rates</a>). Every one of those is below the 4% floor, so the floor wins. Your real cash outflow is one number; the number the bank uses to assess you is bigger. The full mechanics are in our companion piece on the <a href="/blog/mas-stress-test-2026/">MAS 4% stress test</a>.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">TDSR Worked Example &mdash; Single Buyer, S$12,000 income</div>
+    <div class="formula-line">Gross monthly income <span>S$12,000</span></div>
+    <div class="formula-line">55% TDSR ceiling (all debts) <span>S$6,600/mo</span></div>
+    <div class="formula-line">Less: car loan instalment <span>S$900/mo</span></div>
+    <div class="formula-line">Less: credit-card factor (S$20,000 balance × 3%) <span>S$600/mo</span></div>
+    <div class="formula-line">Available for new mortgage <span>S$5,100/mo</span></div>
+    <div class="formula-line">Qualifying loan @ 4% stress, 30yr tenure <span>~S$1,068,000</span></div>
+    <div class="formula-line">Actual instalment @ 1.65% (30yr) <span>~S$3,770/mo</span></div>
+  </div>
+
+  <p>Two things to notice. First, the buyer qualifies for an instalment of S$5,100, but their actual monthly outflow at 1.65% is only S$3,770 &mdash; a S$1,330 monthly buffer that exists by design. Second, the credit-card line item shaved S$600 off the headroom. Most buyers forget this entirely.</p>
+
+  <h2 id="cc-trap">The Credit-Card Trap (And Other TDSR Killers)</h2>
+
+  <p>Private property buyers tend to be higher earners with multiple credit cards, a car, perhaps a renovation loan from a previous home. Each line item bites into TDSR before the new mortgage even enters the picture.</p>
+
+  <img src="../blog-images/tdsr-debt-impact.webp" alt="Diagram showing how existing debts consume TDSR headroom for private property mortgage" class="blog-img" loading="lazy">
+  <p class="img-caption">Every existing obligation consumes TDSR headroom before the new mortgage is added. Credit-card balances are counted at a 3% monthly factor regardless of whether you clear the bill in full each cycle.</p>
+
+  <ul class="verdict-list">
+    <li><strong>Credit cards:</strong> 3% of the outstanding statement balance, treated as a monthly debt &mdash; even if you pay in full. A S$50,000 balance costs you S$1,500/month of TDSR room.</li>
+    <li><strong>Car loans:</strong> Full monthly instalment included until the loan is fully discharged.</li>
+    <li><strong>Personal, education, renovation loans:</strong> Full monthly instalment, regardless of how short the tail is.</li>
+    <li><strong>Existing property loans:</strong> Full instalment on every outstanding home loan you guarantee or co-borrow on.</li>
+    <li><strong>Guarantor positions:</strong> Banks may include a share of any loan you have guaranteed for a parent, sibling, or partner.</li>
+  </ul>
+
+  <div class="highlight-box">
+    <p><strong>Variable income is haircut by 30%.</strong> Bonus, commission, director's fee, and rental income only count at 70% for TDSR. A S$10,000/month commission earner is assessed on S$7,000. Self-employed buyers are assessed on a two-year NOA average, also after the 30% haircut. Plan ahead with our <a href="/affordability/">TDSR/MSR affordability calculator</a> before you book a viewing.</p>
+  </div>
+
+  <h2 id="joint-iwaa">Joint Borrowers and the IWAA Tenure Rule</h2>
+
+  <p>When two or more people borrow together, banks set the maximum loan tenure using the Income-Weighted Average Age (IWAA) of all borrowers. A 35-year-old earning S$10,000 borrowing with a 60-year-old earning S$5,000 has an IWAA of (35 × 10/15) + (60 × 5/15) = 43.3 years.</p>
+
+  <p>Maximum tenure for a private property bank loan is 35 years, but two LTV cliffs exist: any tenure beyond 30 years, or that runs past the youngest borrower's age 65, cuts the LTV by 5 percentage points (from 75% down to 55% on the first property). Adding a young, lower-earning co-borrower does not always help &mdash; the income weighting determines whether you cross the cliff. This is one reason couples often consider <a href="/blog/decoupling-private-property-singapore/">decoupling case study</a> arrangements before an upgrade.</p>
+
+  <h2 id="ltv">LTV: The Other Ceiling</h2>
+
+  <p>Even if your TDSR allows a larger loan, the Loan-to-Value (LTV) cap sets an absolute maximum on the loan as a percentage of the lower of purchase price or valuation.</p>
+
+  <ul class="verdict-list">
+    <li><strong>First property, no outstanding home loan:</strong> 75% LTV. Down payment 25%, of which at least 5% must be cash.</li>
+    <li><strong>Second property:</strong> 45% LTV. Down payment 55%, minimum 25% cash.</li>
+    <li><strong>Third or subsequent:</strong> 35% LTV. Down payment 65%, minimum 25% cash.</li>
+    <li><strong>Tenure beyond 30 years or past age 65:</strong> Each LTV tier drops by 5 percentage points.</li>
+  </ul>
+
+  <p>HDB upgraders need to think about timing. If you are still on the title of the HDB flat when the private property's Option to Purchase is exercised, the bank treats the new loan as a second-property loan &mdash; 45% LTV, not 75%. Selling the HDB first, executing simultaneous completion, or decoupling ownership are the three standard plays. None of them work as last-minute fixes; sequence matters.</p>
+
+  <h2 id="worked-example">Worked Example: S$15,000 Income, S$2M Condo</h2>
+
+  <img src="../blog-images/tdsr-worked-example.webp" alt="Step-by-step TDSR worked example for private property buyer in Singapore 2026" class="blog-img" loading="lazy">
+  <p class="img-caption">At a 4% stress floor, the qualifying instalment is roughly 60% higher than the actual outflow at a 1.65% loan rate. On a S$2M property, that gap can swing the qualifying loan by S$300,000+.</p>
+
+  <p>Take a Singapore Citizen couple, primary borrower 38, co-borrower 36, joint gross income S$15,000, no existing debts, looking at a S$2,000,000 first private property:</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Maximum Loan &mdash; First Property, 75% LTV</div>
+    <div class="formula-line">Purchase price <span>S$2,000,000</span></div>
+    <div class="formula-line">75% LTV cap <span>S$1,500,000</span></div>
+    <div class="formula-line">55% TDSR × S$15,000 <span>S$8,250/mo</span></div>
+    <div class="formula-line">Qualifying loan @ 4% stress, 30yr <span>~S$1,720,000</span></div>
+    <div class="formula-line">Binding constraint (lower of LTV vs TDSR) <span>S$1,500,000</span></div>
+    <div class="formula-line">Cash + CPF down payment required <span>S$500,000</span></div>
+  </div>
+
+  <p>For this couple, LTV is the binding constraint &mdash; their TDSR has another S$220,000 of headroom. Add a single S$80,000 car loan at S$1,400/month, however, and TDSR becomes the binding constraint, dragging the qualifying loan below S$1.45M. That is the swing buyers under-estimate.</p>
+
+  <div class="pullquote">&#8220;The buyers who get caught are not the ones who ignored TDSR. They are the ones who ran the numbers without the credit-card factor, without the variable-income haircut, and without checking how their bank treats co-borrower age.&#8221;</div>
+
+  <h2 id="absd">ABSD: The Cash Number TDSR Cannot Help With</h2>
+
+  <p>TDSR sizes your loan. <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/additional-buyer's-stamp-duty-(absd)" target="_blank" rel="noopener">Additional Buyer's Stamp Duty (ABSD)</a> sizes your cash. ABSD cannot be financed; it must be settled in cash within 14 days of the Sale & Purchase Agreement.</p>
+
+  <ul class="verdict-list">
+    <li><strong>Singapore Citizen, 1st property:</strong> 0% ABSD</li>
+    <li><strong>Singapore Citizen, 2nd:</strong> 20% ABSD</li>
+    <li><strong>Singapore Citizen, 3rd or more:</strong> 30% ABSD</li>
+    <li><strong>PR, 1st / 2nd / 3rd:</strong> 5% / 30% / 35% ABSD</li>
+    <li><strong>Foreigner, any property:</strong> 60% ABSD</li>
+  </ul>
+
+  <p>On a S$2M second property bought by a Singapore Citizen, ABSD alone is S$400,000 in cash &mdash; on top of the 25% minimum cash down payment for a second-property LTV of 45%. Buyer's Stamp Duty (BSD) on the same property adds roughly S$64,600 more. Treat these as fixed inputs to the upgrade plan, not afterthoughts.</p>
+
+  <h2 id="before-otp">What To Do Before You Sign the OTP</h2>
+
+  <p>An In-Principle Approval (IPA) is the only document that converts theory into a confirmed loan number. It is free, valid for 30 days, and based on your real income documents, real debts, and a real property quantum &mdash; all stress-tested at 4%. Run a sanity check first with the <a href="/affordability/">TDSR/MSR affordability calculator</a>, then collect IPAs from at least three lenders so you can compare quantum and rate side by side.</p>
+
+  <p>If you are weighing fixed versus floating, our <a href="/blog/home-loan-rates-singapore/">fixed vs SORA comparison</a> walks through the trade-off at 2026 spreads. Already a private owner thinking about timing your next move? See <a href="/blog/when-to-refinance-singapore/">when to refinance</a> &mdash; TDSR is reassessed at every refinancing event, so the mechanics in this article apply there too.</p>
+
+  <h2>Further Reading</h2>
+  <ul class="verdict-list">
+    <li><a href="/free-report/">Singapore Mortgage Free Report</a> &mdash; Dan's complete TDSR + MSR + ABSD + LTV stack with worked private and HDB examples in one downloadable PDF</li>
+    <li><a href="/blog/mas-stress-test-2026/">MAS 4% stress test</a> &mdash; how the floor rate is derived and applied across every Singapore home loan</li>
+    <li><a href="/blog/best-home-loan-first-time-buyer/">best loan for condo / private property</a> &mdash; package selection for first-time private buyers</li>
+    <li><a href="/blog/cpf-oa-hdb-guide/">using CPF OA for property</a> &mdash; OA withdrawal limits, BRS, and accrued interest mechanics</li>
+    <li><a href="/blog/hdb-vs-bank-loan/">HDB loan vs bank loan</a> &mdash; the MSR/TDSR contrast spelled out for HDB buyers</li>
+    <li><a href="/equity-loan/">equity / cash-out loan</a> &mdash; for owners with paid-down private property looking to recycle capital</li>
+    <li><a href="https://www.mas.gov.sg/regulation/explainers/tdsr-for-property-loans" target="_blank" rel="noopener">MAS: TDSR for Property Loans</a> &mdash; the official rules, methodology and worked examples</li>
+    <li><a href="https://www.mas.gov.sg/monetary-policy/sora" target="_blank" rel="noopener">MAS: SORA</a> &mdash; the benchmark behind floating-rate packages</li>
+  </ul>
+
+  <div class="cta-box">
+    <p style="font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#c4973b;font-weight:600;margin-bottom:.5rem;">Talk to a Mortgage Broker</p>
+    <p><strong style="color:#faf7f2;font-size:1.15rem;">Run your TDSR with Dan Ler &mdash; Nexus Mortgage SG</strong></p>
+    <p>I run your TDSR, ABSD and LTV across 16+ Singapore lenders, secure parallel IPAs, and lay out a single comparison sheet before you commit to an OTP. Free to you &mdash; the bank pays Nexus on disbursement.</p>
+    <a href="https://wa.me/6587520859?text=Hi%20Dan%2C%20I%20am%20looking%20at%20a%20private%20property%20purchase%20and%20want%20to%20understand%20my%20TDSR%20and%20maximum%20loan%20quantum." class="cta-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp Dan &mdash; Free TDSR Assessment &#8594;</a>
+    <p style="margin-top:1.2rem;font-size:.82rem;">Run the numbers first: <strong><a href="/affordability/">TDSR/MSR affordability calculator</a></strong> with built-in 2026 4% stress logic.</p>
+  </div>
+
+  <div class="author-bio" style="margin-top:2.5rem;padding:1.25rem 1.4rem;border:1px solid rgba(196,151,59,.2);border-radius:10px;background:rgba(196,151,59,.05);">
+    <p style="margin:0;font-size:.95rem;color:rgba(250,247,242,.75);"><strong style="color:#c4973b;">About the author &mdash;</strong> Dan Ler is a Mortgage Advisor at Nexus Mortgage SG, an independent Singapore brokerage that works with 16+ MAS-regulated lenders. Nexus is paid by the bank on disbursement, so there is no cost to the borrower.</p>
+  </div>
+
+  <hr>
+  <p class="disclaimer"><em>Nexus Mortgage SG is an independent Singapore mortgage brokerage. This article is general information, not financial advice. Figures reflect April 2026 market conditions and MAS rules in force at the time of writing; both are subject to change. Verify current rules at <a href="https://www.mas.gov.sg/regulation/explainers/tdsr-for-property-loans" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS: TDSR for Property Loans</a> and <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/additional-buyer's-stamp-duty-(absd)" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">IRAS: ABSD</a> before transacting.</em></p>
+
+</article>
+
+<a id="btt" href="#" aria-label="Back to top" title="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+</a>
+<script>
+(function(){
+  var prog = document.getElementById('reading-progress');
+  var btt = document.getElementById('btt');
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    prog.style.width = (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    btt.classList.toggle('visible', window.scrollY > 400);
+  }, {passive: true});
+  btt.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+
+<script>
+(function() {
+  const tBtn = document.getElementById('tools-btn');
+  const tDd = document.getElementById('tools-dropdown');
+  if (tBtn && tDd) {
+    tBtn.addEventListener('click', e => { e.stopPropagation(); const open = tDd.style.display === 'block'; tDd.style.display = open ? 'none' : 'block'; tBtn.setAttribute('aria-expanded', String(!open)); });
+    document.addEventListener('click', () => { tDd.style.display = 'none'; tBtn.setAttribute('aria-expanded', 'false'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { tDd.style.display = 'none'; tBtn.setAttribute('aria-expanded', 'false'); } });
+  }
+  document.body.classList.add('has-site-nav');
+})();
+</script>
+
+</body>
+</html>
