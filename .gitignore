@@ -42,6 +42,15 @@ zi2FQSBP
 .idea/
 *.swp
 *.swo
+.claude/
+
+# SEO audit work products (local-only)
+seo-audit-screenshots/
+seo-audit-screenshots-v2/
+ACTION-PLAN.md
+FULL-AUDIT-REPORT*.md
+VALIDATION-REPORT.md
+capture_nexus.py
 
 # Secrets — NEVER commit. Use GitHub Action secrets in production.
 .env
