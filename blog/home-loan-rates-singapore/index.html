@@ -191,8 +191,8 @@
       <div class="stat-desc">Lowest fixed rate (jumbo, 5yr lock-in, May 2026)</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num">1.0514%</div>
-      <div class="stat-desc">3M Compounded SORA (MAS, 7 May 2026)</div>
+      <div class="stat-num"><span data-sora-3m>1.0514</span>%</div>
+      <div class="stat-desc">3M Compounded SORA (MAS, <span data-sora-asof>7 May 2026</span>)</div>
     </div>
     <div class="stat-box">
       <div class="stat-num">2.60%</div>
@@ -269,18 +269,18 @@
     </div>
     <div class="rate-card">
       <h4>SORA-Linked</h4>
-      <div class="r-line"><span>3M SORA (May 2026)</span><strong>1.0514%</strong></div>
+      <div class="r-line"><span>3M SORA (<span data-sora-month>May 2026</span>)</span><strong><span data-sora-3m>1.0514</span>%</strong></div>
       <div class="r-line"><span>Bank spread</span><strong>+0.20%&ndash;0.75%</strong></div>
       <div class="r-line"><span>Effective rate</span><strong>~1.25%&ndash;1.80%</strong></div>
       <div class="r-line"><span>Best for</span><strong>Jumbo loans &amp; flexibility</strong></div>
     </div>
   </div>
 
-  <p>In May 2026, fixed and SORA-linked packages are surprisingly close. 3M Compounded SORA sits at <strong>1.0514% p.a.</strong>, with 1M Compounded SORA at <strong>1.0744% p.a.</strong> A SORA-linked package with a 0.55% bank spread runs at roughly <strong>1.60% p.a.</strong> effective. On a S$700,000 outstanding loan, that is only about S$60&ndash;S$130 per month more than the cheapest mainstream fixed rate. The trade-off now is between <em>certainty</em> (fixed) and <em>flexibility</em> (SORA, which could fall further or rise). Jumbo borrowers (S$1.5M+) often get the tightest SORA spreads of all &mdash; sometimes 0.20%&ndash;0.30% &mdash; which can make SORA cheaper than the headline fixed rate.</p>
+  <p>In May 2026, fixed and SORA-linked packages are surprisingly close. 3M Compounded SORA sits at <strong><span data-sora-3m>1.0514</span>% p.a.</strong>, with 1M Compounded SORA at <strong><span data-sora-1m>1.0744</span>% p.a.</strong> A SORA-linked package with a 0.55% bank spread runs at roughly <strong><span data-sora-3m-eff="0.55">1.60</span>% p.a.</strong> effective. On a S$700,000 outstanding loan, that is only about S$60&ndash;S$130 per month more than the cheapest mainstream fixed rate. The trade-off now is between <em>certainty</em> (fixed) and <em>flexibility</em> (SORA, which could fall further or rise). Jumbo borrowers (S$1.5M+) often get the tightest SORA spreads of all &mdash; sometimes 0.20%&ndash;0.30% &mdash; which can make SORA cheaper than the headline fixed rate.</p>
 
   <p>Why have rates fallen so far? SORA tracked global rates higher in 2022&ndash;2023, peaking above 3.7%. Through 2024 and 2025, easing inflation and softer SGD-USD funding pressure pulled SORA back down. By May 2026 it sits near multi-year lows. Banks have responded by sharpening fixed-rate offers to defend market share &mdash; which is why the gap between fixed and floating is so narrow today.</p>
 
-  <div class="pullquote">&ldquo;3M Compounded SORA is at 1.0514% in May 2026 &mdash; SORA-linked packages are competitive again. The decision in 2026 is less about cost and more about certainty versus flexibility. The one thing you should never do is sit on your bank&rsquo;s board rate. That is where the real money is lost.&rdquo;</div>
+  <div class="pullquote">&ldquo;3M Compounded SORA is at <span data-sora-3m>1.0514</span>% in May 2026 &mdash; SORA-linked packages are competitive again. The decision in 2026 is less about cost and more about certainty versus flexibility. The one thing you should never do is sit on your bank&rsquo;s board rate. That is where the real money is lost.&rdquo;</div>
 
   <h2 id="hdb-vs-private">HDB vs Private Property: Does Your Loan Type Affect the Rate?</h2>
 
@@ -375,6 +375,31 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { tDd.style.display = 'none'; tBtn.setAttribute('aria-expanded', 'false'); } });
   }
   document.body.classList.add('has-site-nav');
+})();
+</script>
+
+<script>
+// Live SORA from /sora-feed.json — keeps numbers fresh without redeploys.
+(function(){
+  fetch('/sora-feed.json', {cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+    if(!d || !d.sora) return;
+    var s3 = +d.sora.compounded_3m_pct, s1 = +d.sora.compounded_1m_pct;
+    var fmt = function(n){ return n.toFixed(4); };
+    document.querySelectorAll('[data-sora-3m]').forEach(function(el){ el.textContent = fmt(s3); });
+    document.querySelectorAll('[data-sora-1m]').forEach(function(el){ el.textContent = fmt(s1); });
+    document.querySelectorAll('[data-sora-3m-eff]').forEach(function(el){
+      var spread = parseFloat(el.getAttribute('data-sora-3m-eff')) || 0.55;
+      el.textContent = (s3 + spread).toFixed(2);
+    });
+    if(d.asOfSora){
+      var dt = new Date(d.asOfSora + 'T00:00:00Z');
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var asof = dt.getUTCDate() + ' ' + months[dt.getUTCMonth()] + ' ' + dt.getUTCFullYear();
+      var monthYear = months[dt.getUTCMonth()] + ' ' + dt.getUTCFullYear();
+      document.querySelectorAll('[data-sora-asof]').forEach(function(el){ el.textContent = asof; });
+      document.querySelectorAll('[data-sora-month]').forEach(function(el){ el.textContent = monthYear; });
+    }
+  }).catch(function(){ /* keep static fallback */ });
 })();
 </script>
 
