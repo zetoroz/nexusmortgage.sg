@@ -120,6 +120,13 @@
 
   <!-- Blog posts (live, sorted by recency) -->
   <url>
+    <loc>https://nexusmortgage.sg/blog/new-launch-financing-singapore/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://nexusmortgage.sg/blog/ec-mop-2026-changes/</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
