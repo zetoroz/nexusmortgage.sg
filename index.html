@@ -3342,7 +3342,7 @@
                   '<p style="font-size:.9rem;line-height:1.6;color:rgba(250,247,242,.75);margin-bottom:1.5rem;">' + featured.excerpt + '</p>' +
                   '<div style="display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">' +
                     '<span style="font-size:.75rem;color:rgba(250,247,242,.5);">' + (featured.readTime || '') + '</span>' +
-                    '<a href="/blog/' + featured.slug + '.html" class="article-link">Read Full Article <span>→</span></a>' +
+                    '<a href="/blog/' + featured.slug + '/" class="article-link">Read Full Article <span>→</span></a>' +
                   '</div>' +
                 '</div>';
             }
@@ -3352,7 +3352,7 @@
             var grid = document.getElementById('insight-preview-grid');
             grid.innerHTML = previews.map(function(a){
               var cta = a.status === 'live'
-                ? '<a href="/blog/' + a.slug + '.html" class="article-link">Read More <span>→</span></a>'
+                ? '<a href="/blog/' + a.slug + '/" class="article-link">Read More <span>→</span></a>'
                 : '<span style="font-size:.8rem;color:rgba(250,247,242,.35);letter-spacing:.05em;text-transform:uppercase;">Coming Soon</span>';
               return '<div class="article-card">' +
                 '<span class="article-tag">' + a.tag + '</span>' +
