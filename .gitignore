@@ -52,6 +52,10 @@ FULL-AUDIT-REPORT*.md
 VALIDATION-REPORT.md
 capture_nexus.py
 
+# Internal handoff docs (do not publish)
+GBP-handoff.md
+GBP-listing-copy.md
+
 # Secrets — NEVER commit. Use GitHub Action secrets in production.
 .env
 .env.*
