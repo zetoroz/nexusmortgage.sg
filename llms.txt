@@ -24,6 +24,8 @@ Languages: English, 中文 (Mandarin)
 - Refinance Savings Calculator: https://nexusmortgage.sg/refinance-calculator/
 - Equity / Cash-Out Loan: https://nexusmortgage.sg/equity-loan/
 - Insights Hub: https://nexusmortgage.sg/blog/
+- Privacy Policy (PDPA-aligned): https://nexusmortgage.sg/privacy/
+- Terms of Use: https://nexusmortgage.sg/terms/
 
 ## Machine-readable Rate Feeds
 For language models and automated agents: live Compounded SORA values
