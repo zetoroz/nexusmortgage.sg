@@ -1,6 +1,39 @@
 <!DOCTYPE html>
 <html lang="en-SG">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VKFWNBRM6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VKFWNBRM6');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wpg9v4xzro");
+  </script>
+  <script>
+    // GA4 click tracking: WhatsApp, phone, email
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a');
+      if (!a || typeof gtag !== 'function') return;
+      var href = a.getAttribute('href') || '';
+      var loc = a.closest('header,nav,footer,section,main');
+      var locName = loc ? (loc.tagName.toLowerCase() + (loc.id ? '#' + loc.id : '')) : 'body';
+      if (/wa\.me|whatsapp\.com/i.test(href)) {
+        gtag('event', 'whatsapp_click', { link_location: locName, link_url: href });
+      } else if (/^tel:/i.test(href)) {
+        gtag('event', 'phone_click', { link_location: locName, phone_number: href.replace('tel:','') });
+      } else if (/^mailto:/i.test(href)) {
+        gtag('event', 'email_click', { link_location: locName });
+      }
+    }, true);
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>New Launch Condo Financing Singapore (2026): PPS, IPA &amp; TOP Loans | Nexus</title>
