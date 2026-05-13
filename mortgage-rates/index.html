@@ -1364,7 +1364,14 @@
         if (data.refRates.sora1m != null) CFG.soraRate1M = data.refRates.sora1m;
         if (data.refRates.sora3m != null) CFG.soraRate3M = data.refRates.sora3m;
         if (data.refRates.fhr6   != null) CFG.fhr6Rate   = data.refRates.fhr6;
-        if (data.asOf)                    CFG.lastUpdated = data.asOf;
+        // Prefer MAS-pipeline date (asOfSora, ISO) over xlsx-typed data.asOf which is frozen at the package-list date.
+        var iso = (data.refRates && data.refRates.asOfSora) || data.asOfSora || null;
+        if (iso) {
+          var d = new Date(iso);
+          CFG.lastUpdated = isNaN(d) ? iso : d.toLocaleDateString('en-SG', { day: '2-digit', month: 'short', year: 'numeric' });
+        } else if (data.asOf) {
+          CFG.lastUpdated = data.asOf;
+        }
       }
     })
     .catch(function(){})
