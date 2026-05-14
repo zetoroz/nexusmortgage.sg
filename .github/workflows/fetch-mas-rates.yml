@@ -53,9 +53,14 @@ jobs:
         # without hitting MAS again (no duplicate history entry).
         run: node scripts/fetch-mas-rates.mjs --feeds-only
 
+      - name: Refresh live-rate snippets in page title + meta description
+        # Patches <title> and <meta name="description"> inside LIVE-RATES sentinel
+        # blocks on rate-bearing pages, using fresh fixed/SORA numbers from rates.json.
+        run: node scripts/update-rate-snippets.mjs
+
       - name: Stage outputs
         run: |
-          git add -A rates.json rates-history.json rates.xml sora-feed.json || true
+          git add -A rates.json rates-history.json rates.xml sora-feed.json blog/home-loan-rates-singapore/index.html || true
 
       - name: Commit + push if changed
         run: |
