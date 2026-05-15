@@ -136,6 +136,13 @@
 
   <!-- Blog posts (live, sorted by recency) -->
   <url>
+    <loc>https://nexusmortgage.sg/blog/singapore-pr-buy-hdb-loan-guide-2026/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://nexusmortgage.sg/blog/hudson-place-residences-financing-2026/</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
