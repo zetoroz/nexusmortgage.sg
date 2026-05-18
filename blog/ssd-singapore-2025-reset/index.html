@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VKFWNBRM6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VKFWNBRM6');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wpg9v4xzro");
+  </script>
+  <script>
+    // GA4 click tracking: WhatsApp, phone, email
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a');
+      if (!a || typeof gtag !== 'function') return;
+      var href = a.getAttribute('href') || '';
+      var loc = a.closest('header,nav,footer,section,main');
+      var locName = loc ? (loc.tagName.toLowerCase() + (loc.id ? '#' + loc.id : '')) : 'body';
+      if (/wa\.me|whatsapp\.com/i.test(href)) {
+        gtag('event', 'whatsapp_click', { link_location: locName, link_url: href });
+      } else if (/^tel:/i.test(href)) {
+        gtag('event', 'phone_click', { link_location: locName, phone_number: href.replace('tel:','') });
+      } else if (/^mailto:/i.test(href)) {
+        gtag('event', 'email_click', { link_location: locName });
+      }
+    }, true);
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSD Singapore 2026: The 4 July 2025 Reset — 16/12/8/4% Over 4 Years | Nexus</title>
+  <meta name="description" content="Singapore Seller's Stamp Duty was reset on 4 July 2025: holding period extended from 3 to 4 years, rates raised 4 percentage points. Full breakdown for private property sellers — 16% Y1, 12% Y2, 8% Y3, 4% Y4 — plus hold-vs-sell math and HDB carve-out.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SSD Singapore 2026 &mdash; The 4 July 2025 Reset Explained (16/12/8/4% over 4 years)">
+  <meta property="og:description" content="MAS reset Seller's Stamp Duty on 4 July 2025. Holding period 3 &rarr; 4 years, every tier +4 percentage points. What it costs to sell a private property within the SSD window, and the hold-vs-sell math.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexusmortgage.sg/blog/ssd-singapore-2025-reset/">
+  <meta property="og:image" content="https://nexusmortgage.sg/blog/blog-images/ssd-2025-hero.png">
+  <meta property="og:image:alt" content="Brass sand timer on marble desk next to legal documents with wax seal &mdash; SSD Singapore 2025 reset">
+  <meta property="og:image:width" content="1344">
+  <meta property="og:image:height" content="768">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SSD Singapore 2026: 4 July 2025 Reset &mdash; 16/12/8/4% Over 4 Years">
+  <meta name="twitter:description" content="MAS extended SSD holding period 3 &rarr; 4 years and raised every tier by 4pp. Full breakdown + hold-vs-sell math for Singapore private property sellers.">
+  <meta name="twitter:image" content="https://nexusmortgage.sg/blog/blog-images/ssd-2025-hero.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://nexusmortgage.sg/blog/ssd-singapore-2025-reset/">
+
+  <!-- Structured Data: Article -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SSD Singapore 2026: The 4 July 2025 Reset Explained (16/12/8/4% over 4 years)","datePublished":"2026-05-16","dateModified":"2026-05-16","image":{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/ssd-2025-hero.png","width":1344,"height":768},"description":"On 4 July 2025 MAS extended the Seller's Stamp Duty holding period from 3 to 4 years and raised every tier by 4 percentage points. The current schedule for residential property purchased on or after 4 July 2025 is 16% in Year 1, 12% in Year 2, 8% in Year 3, 4% in Year 4, and 0% after. HDB flats remain outside SSD. Full hold-vs-sell math, worked example, and exemption list.","mainEntityOfPage":{"@type":"WebPage","@id":"https://nexusmortgage.sg/blog/ssd-singapore-2025-reset/"},"author":{"@id":"https://nexusmortgage.sg/#dan-ler","@type":"Person","name":"Dan Ler","url":"https://nexusmortgage.sg","image":"https://nexusmortgage.sg/dan-ler.webp","jobTitle":"Mortgage Advisor","worksFor":{"@type":"Organization","name":"Nexus Mortgage SG","url":"https://nexusmortgage.sg"}},"publisher":{"@id":"https://nexusmortgage.sg/#organization"},"keywords":"SSD Singapore 2025 reset, Seller's Stamp Duty 2026, 4 July 2025 SSD, SSD rates Singapore, SSD holding period 4 years, IRAS SSD, MAS SSD changes, sell private property Singapore, SSD HDB exempt, residential property cooling measures"}</script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the current Seller's Stamp Duty rate in Singapore?","acceptedAnswer":{"@type":"Answer","text":"For residential property purchased on or after 4 July 2025: 16% if sold within 1 year of acquisition, 12% within 2 years, 8% within 3 years, 4% within 4 years, and 0% if held beyond 4 years. The rates apply to the higher of the selling price or the open-market value at the date of sale. SSD is administered by IRAS."}},{"@type":"Question","name":"What changed on 4 July 2025 for Singapore Seller's Stamp Duty?","acceptedAnswer":{"@type":"Answer","text":"MAS and MoF announced on 3 July 2025 two changes effective for residential property purchased from 4 July 2025: (1) the SSD holding period was extended from 3 years to 4 years, and (2) every tier of the SSD rate was raised by 4 percentage points. Pre-reset schedule (11 March 2017 to 3 July 2025) was 12%/8%/4% over 3 years; post-reset schedule is 16%/12%/8%/4% over 4 years."}},{"@type":"Question","name":"Does Seller's Stamp Duty apply to HDB flats?","acceptedAnswer":{"@type":"Answer","text":"No. HDB flats are not subject to Seller's Stamp Duty because HDB's own 5-year Minimum Occupation Period (MOP) already restricts resale within that window. SSD applies to private residential property (condominiums, landed) and to Executive Condominiums after privatisation."}},{"@type":"Question","name":"How is the SSD holding period calculated?","acceptedAnswer":{"@type":"Answer","text":"The holding period starts from the date the seller acquired the property — typically the date of acceptance of the Option to Purchase (excluding options subject to signing of a Sale and Purchase Agreement), or the date of the Sale and Purchase Agreement, or the Date of Transfer where no OTP or S&P applies. It ends on the date of disposal."}},{"@type":"Question","name":"Which property purchases follow the old SSD schedule?","acceptedAnswer":{"@type":"Answer","text":"Residential property purchased between 11 March 2017 and 3 July 2025 follows the previous SSD schedule: 12% if sold within 1 year, 8% within 2 years, 4% within 3 years, and 0% after 3 years. The 4 July 2025 reset applies only to acquisitions from that date onwards; existing owners are not retroactively moved to the new 4-year schedule."}},{"@type":"Question","name":"How much SSD do I pay on a $2 million private condo sold in Year 1?","acceptedAnswer":{"@type":"Answer","text":"At the current rates (post-4 July 2025), selling a S$2 million private property within Year 1 of acquisition triggers SSD of 16% on the higher of the sale price or market value at disposal — approximately S$320,000. The Year 2 figure would be S$240,000 (12%), Year 3 S$160,000 (8%), and Year 4 S$80,000 (4%). Beyond 4 years: zero. SSD is on top of any agent commission and lawyer fees on the sale."}},{"@type":"Question","name":"Are there any exemptions from Seller's Stamp Duty?","acceptedAnswer":{"@type":"Answer","text":"Yes. Exemptions include: licensed housing developers selling developed residential units, public authorities (HDB, JTC) acting in official duties, government land acquisitions under the Land Acquisitions Act, forced sales arising from bankruptcy, sales arising from involuntary company winding-up, foreigners required to dispose under the Residential Property Act, and certain HDB-related transactions (SERS, repossession, marriage-driven sales). Voluntary sales, gifts, and family transfers generally do not qualify for exemption — check IRAS guidance for your specific scenario."}}]}</script>
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexusmortgage.sg/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://nexusmortgage.sg/blog/"},{"@type":"ListItem","position":3,"name":"SSD Singapore 2025 Reset","item":"https://nexusmortgage.sg/blog/ssd-singapore-2025-reset/"}]}</script>
+
+  <!-- Self-hosted fonts -->
+  <link rel="preload" href="/fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts/fonts.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d1117;
+      color: #e8e3da;
+      font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.75;
+    }
+
+    .blog-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .8rem;
+      color: rgba(196,151,59,.7);
+      text-decoration: none;
+      letter-spacing: .04em;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .back-link:hover { color: #c4973b; }
+
+    .hero-img {
+      width: 100%; height: auto; aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 12px;
+      margin-bottom: 2.5rem;
+      display: block;
+      box-shadow: 0 8px 40px rgba(0,0,0,.55), 0 2px 8px rgba(196,151,59,.08);
+    }
+
+    .meta {
+      font-size: .78rem;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: #c4973b;
+      margin-bottom: 1.1rem;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      line-height: 1.18;
+      letter-spacing: -.02em;
+      color: #faf7f2;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+      font-weight: 600;
+      color: #faf7f2;
+      margin: 2.8rem 0 .9rem;
+      letter-spacing: -.015em;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid rgba(196,151,59,.22);
+    }
+
+    h3 {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #c4973b;
+      margin: 1.8rem 0 .6rem;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+
+    p { margin-bottom: 1.25rem; color: rgba(232,227,218,.82); }
+
+    a { color: #c4973b; text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: #e0b86a; }
+
+    ul, ol { margin: 0 0 1.25rem 1.5rem; color: rgba(232,227,218,.82); }
+    li { margin-bottom: .5rem; }
+
+    .pullquote {
+      border-left: 3px solid #c4973b;
+      margin: 2rem 0;
+      padding: .9rem 1.4rem;
+      background: rgba(196,151,59,.07);
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: rgba(250,247,242,.7);
+    }
+
+    .blog-img {
+      width: 100%; height: auto; aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 10px;
+      margin: 1.8rem 0;
+      display: block;
+      box-shadow: 0 4px 24px rgba(0,0,0,.45);
+    }
+    .img-caption {
+      text-align: center;
+      font-size: .75rem;
+      letter-spacing: .04em;
+      color: rgba(232,227,218,.35);
+      margin-top: -.9rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .stat-box {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(196,151,59,.2);
+      border-radius: 10px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #c4973b;
+      line-height: 1;
+      margin-bottom: .3rem;
+    }
+    .stat-desc {
+      font-size: .76rem;
+      color: rgba(232,227,218,.5);
+      letter-spacing: .03em;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(196,151,59,.12) 0%, rgba(196,151,59,.04) 100%);
+      border: 1px solid rgba(196,151,59,.35);
+      border-radius: 12px;
+      padding: 2rem 2rem;
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+    .cta-box p { color: rgba(250,247,242,.75); margin-bottom: .6rem; }
+    .cta-btn {
+      display: inline-block;
+      margin-top: .8rem;
+      padding: .75rem 1.8rem;
+      background: #c4973b;
+      color: #0d1117;
+      font-weight: 600;
+      font-size: .9rem;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: .04em;
+      transition: background .2s ease, transform .15s ease;
+    }
+    .cta-btn:hover { background: #e0b86a; color: #0d1117; transform: translateY(-1px); }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin: 3rem 0 1.5rem;
+    }
+
+    .disclaimer {
+      font-size: .75rem;
+      color: rgba(232,227,218,.3);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .stat-row { grid-template-columns: 1fr; }
+    }
+
+    #reading-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#c4973b,#e8c97a);z-index:9999;transition:width .1s linear;pointer-events:none}
+    #btt{position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:#c4973b;color:#0d1117;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .25s cubic-bezier(.25,.8,.25,1),transform .25s cubic-bezier(.25,.8,.25,1);pointer-events:none;box-shadow:0 4px 16px rgba(196,151,59,.35)}
+    #btt.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+    #btt:hover{background:#e0b86a}
+    #btt:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
+    .back-link:focus-visible,.cta-btn:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
+    .cta-btn,.back-link{touch-action:manipulation}
+    .cta-btn{display:inline-flex;align-items:center;gap:.5rem}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#reading-progress,#btt{transition:none!important}}
+
+    /* ==== Site nav ==== */
+    :root { --gold-400: #C4973B; --gold-500: #E8C97A; --navy-900: #0B1C3A; --cream: #FAF7F2; }
+    #site-navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(11, 28, 58, .92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(196, 151, 59, .15); padding: .9rem 0; transition: background .25s; }
+    #site-navbar .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    #site-navbar .nav-logo { text-decoration: none; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 600; color: var(--cream); letter-spacing: .02em; }
+    #site-navbar .nav-logo .dot { color: var(--gold-400); }
+    #site-navbar .nav-links { display: none; align-items: center; gap: 1.4rem; }
+    @media (min-width: 1024px) { #site-navbar .nav-links { display: flex; } #site-navbar .mob-toggle { display: none; } }
+    #site-navbar .nav-link-item { font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250, 247, 242, .7); font-weight: 500; text-decoration: none; transition: color .25s; }
+    #site-navbar .nav-link-item:hover, #site-navbar .nav-link-item.is-current { color: var(--gold-400); }
+    #site-navbar .nav-cta { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1.1rem; background: linear-gradient(135deg, #C4973B, #E8C97A); color: #0B1C3A; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; border-radius: 100px; text-decoration: none; transition: transform .2s; }
+    #site-navbar .nav-cta:hover { transform: translateY(-1px); }
+    #site-navbar .mob-toggle { background: none; border: none; cursor: pointer; color: var(--cream); padding: .3rem; }
+    #site-navbar .tools-dd-wrap { position: relative; }
+    #site-navbar .tools-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: .3rem; font: inherit; padding: 0; font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250, 247, 242, .7); font-weight: 500; }
+    #site-navbar .tools-btn:hover { color: var(--gold-400); }
+    #site-navbar .tools-dd { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: rgba(11, 28, 58, .97); backdrop-filter: blur(16px); border: 1px solid rgba(196, 151, 59, .22); border-radius: 10px; padding: .5rem; min-width: 220px; z-index: 200; box-shadow: 0 16px 40px rgba(0, 0, 0, .4); }
+    #site-navbar .tools-dd a { display: block; padding: .55rem 1rem; color: rgba(250, 247, 242, .75); font-size: .76rem; font-weight: 500; letter-spacing: .04em; text-decoration: none; border-radius: 6px; transition: background .2s, color .2s; }
+    #site-navbar .tools-dd a:hover { background: rgba(196, 151, 59, .12); color: var(--gold-400); }
+    #site-navbar .free-report-link { color: var(--gold-400); display: inline-flex; align-items: center; gap: .35rem; }
+    #site-navbar .new-badge { font-size: .55rem; letter-spacing: .1em; padding: 1px 6px; border-radius: 100px; background: rgba(196, 151, 59, .18); color: var(--gold-400); font-weight: 600; border: 1px solid rgba(196, 151, 59, .3); }
+    #site-mob-menu { display: none; padding: .5rem 1.5rem 1rem; border-top: 1px solid rgba(196, 151, 59, .12); }
+    #site-mob-menu.open { display: block; }
+    #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
+    body.has-site-nav { padding-top: 64px; }
+
+    .toc { background: rgba(255,255,255,.03); border: 1px solid rgba(196,151,59,.15); border-radius: 10px; padding: 1.3rem 1.6rem; margin: 2rem 0 2.5rem; }
+    .toc-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: rgba(196,151,59,.7); margin-bottom: .8rem; }
+    .toc ol { padding-left: 1.2rem; counter-reset: toc; list-style: none; }
+    .toc ol li { counter-increment: toc; margin-bottom: .4rem; font-size: .88rem; }
+    .toc ol li::before { content: counter(toc) ". "; color: rgba(196,151,59,.5); font-weight: 600; font-size: .8rem; }
+    .toc a { color: rgba(232,227,218,.65); text-decoration: none; }
+    .toc a:hover { color: #c4973b; }
+
+    .compare-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; font-size: .92rem; }
+    .compare-table th, .compare-table td { padding: .75rem .9rem; text-align: left; border-bottom: 1px solid rgba(196,151,59,.15); }
+    .compare-table th { color: #c4973b; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; font-size: .72rem; background: rgba(196,151,59,.06); }
+    .compare-table td { color: rgba(232,227,218,.78); }
+    .compare-table tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+<nav id="site-navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Nexus<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="/services/" class="nav-link-item">Services</a>
+      <a href="/mortgage-rates/" class="nav-link-item">Rates</a>
+      <a href="/free-report/" class="nav-link-item free-report-link">Free Report <span class="new-badge">NEW</span></a>
+      <a href="/#calculator" class="nav-link-item">Calculator</a>
+      <div class="tools-dd-wrap">
+        <button class="tools-btn" id="tools-btn" aria-haspopup="true" aria-expanded="false">Tools <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="tools-dd" id="tools-dropdown">
+          <a href="/free-report/" class="free-report-link">Free Report <span class="new-badge">NEW</span></a>
+          <a href="/#calculator">Mortgage Calculator</a>
+          <a href="/affordability/">Affordability Check</a>
+          <a href="/refinance-calculator/">Refinance Savings</a>
+          <a href="/equity-loan/">Equity / Cash-Out</a>
+          <a href="/mortgage-rates/">Current Rates</a>
+        </div>
+      </div>
+      <a href="/about/" class="nav-link-item">About</a>
+      <a href="/contact/" class="nav-link-item">Contact</a>
+      <a href="/blog/" class="nav-link-item is-current">Insights</a>
+    </div>
+    <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" rel="noopener" class="nav-cta" style="display:none;" id="nav-cta-desktop">Free Consult</a>
+    <button class="mob-toggle" onclick="document.getElementById('site-mob-menu').classList.toggle('open')" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="site-mob-menu">
+    <a href="/services/">Services</a>
+    <a href="/mortgage-rates/">Rates</a>
+    <a href="/free-report/" class="free-report-link">Free Report <span class="new-badge">NEW</span></a>
+    <a href="/#calculator">Calculator</a>
+    <a href="/affordability/">Affordability</a>
+    <a href="/equity-loan/">Equity Loan</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+    <a href="/blog/">Insights</a>
+  </div>
+</nav>
+<style>@media (min-width: 1024px) { #nav-cta-desktop { display: inline-flex !important; } }</style>
+
+<div id="reading-progress"></div>
+
+<article class="blog-wrap">
+
+  <a href="/blog/" class="back-link">&#8592; Back to Insights</a>
+
+  <p class="meta">Nexus Mortgage SG &nbsp;&middot;&nbsp; 16 May 2026 &nbsp;&middot;&nbsp; 9-minute read</p>
+
+  <h1>SSD Singapore 2026: The 4 July 2025 Reset Explained (16/12/8/4% over 4 Years)</h1>
+
+  <img src="../blog-images/ssd-2025-hero.webp" alt="Brass sand timer mid-flow on a polished marble desk next to a stack of legal documents with a deep red wax seal, blurred Singapore CBD skyline at dusk in the background &mdash; SSD Singapore 2025 reset" class="hero-img" width="1344" height="768" fetchpriority="high">
+
+  <div class="toc">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#reset">The 4 July 2025 SSD reset &mdash; what changed</a></li>
+      <li><a href="#current">Current SSD schedule (post-4 July 2025 purchases)</a></li>
+      <li><a href="#legacy">Pre-reset schedule (11 March 2017 to 3 July 2025 purchases)</a></li>
+      <li><a href="#hdb">HDB flats are outside SSD &mdash; here's why</a></li>
+      <li><a href="#holding-period">How the holding period is calculated</a></li>
+      <li><a href="#computation">How IRAS computes the SSD bill</a></li>
+      <li><a href="#exemptions">Exemptions and reliefs</a></li>
+      <li><a href="#worked-example">Worked example &mdash; selling a S$2M condo in Year 1 vs Year 5</a></li>
+      <li><a href="#decision">Hold-vs-sell decision framework</a></li>
+      <li><a href="#action">Three moves before you list</a></li>
+    </ol>
+  </div>
+
+
+  <!-- ===================== RESET ===================== -->
+
+  <h2 id="reset">The 4 July 2025 SSD Reset &mdash; What Changed</h2>
+
+  <p>On <strong>3 July 2025</strong>, the Ministry of Finance, the Ministry of National Development and the Monetary Authority of Singapore announced a two-part rework of the <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/selling-or-disposing-property/seller's-stamp-duty-(ssd)-for-residential-property" target="_blank" rel="noopener">Seller's Stamp Duty</a> (SSD) regime on residential property. The changes apply to <strong>all residential property purchased on or after 4 July 2025</strong>:</p>
+
+  <ol>
+    <li><strong>SSD holding period extended from 3 years to 4 years.</strong></li>
+    <li><strong>Every tier of the SSD rate raised by 4 percentage points.</strong></li>
+  </ol>
+
+  <p>It is the most material SSD shift since the <strong>11 March 2017</strong> rework, which had moved in the opposite direction &mdash; cutting the holding period from 4 years back to 3 and trimming the rates. The 2025 reset undoes that loosening and goes further. Full background in the <a href="https://www.mas.gov.sg/news/media-releases/2025/extension-of-the-holding-period-of-sellers-stamp-duty-and-higher-ssd-rates" target="_blank" rel="noopener">MAS press release</a>.</p>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-num">16%</div>
+      <div class="stat-desc">SSD rate if sold within Year 1 of acquisition</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">4 yrs</div>
+      <div class="stat-desc">New holding period before SSD falls to zero</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">+4pp</div>
+      <div class="stat-desc">Every tier raised by 4 percentage points</div>
+    </div>
+  </div>
+
+
+  <!-- ===================== CURRENT ===================== -->
+
+  <h2 id="current">Current SSD Schedule (Post-4 July 2025 Purchases)</h2>
+
+  <img src="../blog-images/ssd-2025-ladder.webp" alt="Abstract editorial visualization of a four-step descending staircase in polished navy marble with glowing gold edges, suggesting the four-year SSD declining-rate ladder" class="blog-img" loading="lazy">
+  <p class="img-caption">A four-step taper from 16% down to 4%, then zero &mdash; the post-4 July 2025 SSD ladder.</p>
+
+  <p>For residential property whose acquisition date falls on or after 4 July 2025:</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>Holding Period</th><th>SSD Rate</th><th>Applied to</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Up to 1 year</td><td><strong>16%</strong></td><td>Higher of sale price or open-market value at disposal</td></tr>
+      <tr><td>&gt;1 to 2 years</td><td><strong>12%</strong></td><td>Higher of sale price or open-market value at disposal</td></tr>
+      <tr><td>&gt;2 to 3 years</td><td><strong>8%</strong></td><td>Higher of sale price or open-market value at disposal</td></tr>
+      <tr><td>&gt;3 to 4 years</td><td><strong>4%</strong></td><td>Higher of sale price or open-market value at disposal</td></tr>
+      <tr><td>More than 4 years</td><td><strong>0%</strong></td><td>&mdash;</td></tr>
+    </tbody>
+  </table>
+
+  <p>The 16% Year-1 figure is the headline number that should anchor any short-hold investment thesis. On a S$2 million private condo, selling in Month 11 of ownership now costs <strong>S$320,000 in SSD alone</strong>, before agent commission, lawyer fees, and any mortgage break-cost.</p>
+
+
+  <!-- ===================== LEGACY ===================== -->
+
+  <h2 id="legacy">Pre-Reset Schedule (11 March 2017 to 3 July 2025 Purchases)</h2>
+
+  <p>The 2025 reset is <em>not</em> retroactive. If your property was acquired between <strong>11 March 2017 and 3 July 2025</strong>, the previous schedule continues to apply:</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>Holding Period</th><th>SSD Rate (Pre-Reset)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Up to 1 year</td><td>12%</td></tr>
+      <tr><td>&gt;1 to 2 years</td><td>8%</td></tr>
+      <tr><td>&gt;2 to 3 years</td><td>4%</td></tr>
+      <tr><td>More than 3 years</td><td>0%</td></tr>
+    </tbody>
+  </table>
+
+  <p>So if you exercised an OTP in, say, February 2025, you still complete out under the 12/8/4% three-year ladder &mdash; the 2025 reset does not reach back to touch you. The acquisition date, not the disposal date, fixes which schedule applies.</p>
+
+
+  <!-- ===================== HDB ===================== -->
+
+  <h2 id="hdb">HDB Flats Are Outside SSD &mdash; Here's Why</h2>
+
+  <p>Singapore's SSD applies to <strong>private residential property</strong> &mdash; condominiums, apartments, landed homes, and Executive Condominiums after privatisation. <strong>HDB flats are not subject to SSD</strong>. The reason is policy-design overlap: HDB already enforces a <a href="https://www.hdb.gov.sg/residential/buying-a-flat/buying-procedure-for-resale-flats/eligibility/minimum-occupation-period" target="_blank" rel="noopener">5-year Minimum Occupation Period (MOP)</a> on new BTO and HDB resale purchases, which already blocks the resale market within the SSD-relevant window. Layering SSD on top would be double-regulation.</p>
+
+  <p>Practical takeaway:</p>
+  <ul>
+    <li><strong>HDB resale or BTO buyers:</strong> SSD does not apply; the 5-year HDB MOP does. See our <a href="/blog/first-time-hdb-buyer-guide/">first-time HDB buyer guide</a> for the MOP mechanics.</li>
+    <li><strong>EC buyers:</strong> SSD does not apply during the 5-year EC MOP (HDB rules govern). After privatisation it does &mdash; the 4 July 2025 reset captures EC owners selling post-privatisation just like any other private property holder. The recent <a href="/blog/ec-mop-2026-changes/">EC MOP extension to 10 years</a> changes that timeline materially for new-rule EC buyers.</li>
+    <li><strong>Private condo / landed buyers:</strong> SSD applies; this is your tax to plan around.</li>
+  </ul>
+
+
+  <!-- ===================== HOLDING PERIOD ===================== -->
+
+  <h2 id="holding-period">How the Holding Period Is Calculated</h2>
+
+  <p>The holding period runs from the <strong>date of acquisition</strong> to the <strong>date of disposal</strong>. IRAS defines the acquisition date by priority, taking the earliest of:</p>
+
+  <ol>
+    <li>The <strong>Date of Acceptance of the Option to Purchase</strong> (excluding OTPs that are subject to signing of a Sale &amp; Purchase Agreement).</li>
+    <li>The <strong>Date of the Sale &amp; Purchase Agreement</strong> (if there is no qualifying OTP).</li>
+    <li>The <strong>Date of the Agreement for Lease</strong> (relevant for new HDB flats; not used for SSD since HDB is exempt).</li>
+    <li>The <strong>Date of Transfer</strong>, if none of the above apply.</li>
+  </ol>
+
+  <p>The disposal date follows the same logic in reverse &mdash; typically the date the new buyer accepts the OTP you grant. Subtraction of those two dates tells you which tier of the SSD table you fall into. Get the dates wrong by a single day across a tier boundary and the bill can jump by tens of thousands of dollars on a 7-figure property.</p>
+
+
+  <!-- ===================== COMPUTATION ===================== -->
+
+  <h2 id="computation">How IRAS Computes the SSD Bill</h2>
+
+  <p>SSD is calculated as <strong>the applicable rate multiplied by the higher of (a) the sale price or (b) the open-market value of the property at the date of sale</strong>. The "higher of" rule prevents under-declared sale prices being used to dodge the duty. If you sell to a connected buyer at below market, IRAS still bills you on market value.</p>
+
+  <p>Payment is due within <strong>14 days of the disposal document being signed in Singapore</strong> (or 30 days if signed overseas), via IRAS e-Stamping. Late payment attracts penalty interest, and IRAS can audit retrospectively where the sale price looks light.</p>
+
+  <div class="pullquote">
+    "SSD lands on the higher of sale price or market value. Selling cheap to a relative to dodge SSD does not work &mdash; IRAS computes on whichever number is bigger and the buyer then carries an extra under-price problem on their own future SSD clock."
+  </div>
+
+
+  <!-- ===================== EXEMPTIONS ===================== -->
+
+  <h2 id="exemptions">Exemptions and Reliefs</h2>
+
+  <p>Voluntary sales generally do not qualify for SSD exemption. The carve-outs that do exist are narrow and largely involuntary:</p>
+
+  <ul>
+    <li><strong>Licensed housing developers</strong> selling developed units in the ordinary course of business.</li>
+    <li><strong>Public authorities</strong> (HDB, JTC) acting in official capacities.</li>
+    <li><strong>Government land acquisition</strong> under the Land Acquisitions Act.</li>
+    <li><strong>Forced sales arising from bankruptcy</strong>, where the official receiver disposes of the property.</li>
+    <li><strong>Involuntary company winding-up</strong> where a corporate vehicle is forced to liquidate residential holdings.</li>
+    <li><strong>Foreigners required to dispose</strong> under the Residential Property Act.</li>
+    <li><strong>HDB SERS, repossession, and matrimonial/proceeds-of-divorce HDB sales</strong> &mdash; these are HDB-administered transactions and do not attract SSD even before considering HDB's general SSD exemption.</li>
+  </ul>
+
+  <p>Notably <em>not</em> exempt: voluntary intra-family transfers, gifts, en-bloc sales (the seller still pays SSD if within the holding window), and decoupling transactions structured under <a href="/blog/decoupling-private-property-singapore/">tenancy-in-common</a>. Decoupling within the SSD window remains a frequent and expensive surprise for couples planning their second-property ABSD route &mdash; the SSD bill is a hard cost that has to be weighed against the ABSD savings.</p>
+
+
+  <!-- ===================== WORKED ===================== -->
+
+  <h2 id="worked-example">Worked Example &mdash; Selling a S$2M Condo in Year 1 vs Year 5</h2>
+
+  <img src="../blog-images/ssd-2025-decision.webp" alt="Brass key resting at the centre of a navy marble desk with two diverging gold-leaf arrows etched into the surface &mdash; one pointing to a SOLD sign and the other to a small clock, representing the hold-versus-sell decision" class="blog-img" loading="lazy">
+  <p class="img-caption">The same property, the same buyer. The only variable that changes the bill by S$320,000 is the calendar.</p>
+
+  <p>Assume a Singapore Citizen acquired a private condo on 1 September 2025 for <strong>S$2,000,000</strong>, post-reset. The sale price assumption matches market value (so the "higher of" tie-breaker does not bite).</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>Disposal Timing</th><th>SSD Tier</th><th>SSD Payable</th><th>Net of SSD</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Within 1 year (sold by Aug 2026)</td><td>16%</td><td>S$320,000</td><td>S$1,680,000</td></tr>
+      <tr><td>Year 2 (Sep 2026 to Aug 2027)</td><td>12%</td><td>S$240,000</td><td>S$1,760,000</td></tr>
+      <tr><td>Year 3 (Sep 2027 to Aug 2028)</td><td>8%</td><td>S$160,000</td><td>S$1,840,000</td></tr>
+      <tr><td>Year 4 (Sep 2028 to Aug 2029)</td><td>4%</td><td>S$80,000</td><td>S$1,920,000</td></tr>
+      <tr><td>Year 5+ (Sep 2029 onwards)</td><td>0%</td><td>&mdash;</td><td>S$2,000,000</td></tr>
+    </tbody>
+  </table>
+
+  <p>Holding for 12 extra months (Year 4 to Year 5) is worth <strong>S$80,000 in saved SSD</strong> on this hypothetical. Holding for the full four-year window costs the buyer a 4-year opportunity-cost on capital but saves the full 16% Year-1 hit. Whether that arithmetic favours selling depends on (a) capital appreciation expectations over the holding window, (b) carrying costs (mortgage interest, maintenance, property tax), and (c) the next deal you want to redirect the capital toward.</p>
+
+
+  <!-- ===================== DECISION ===================== -->
+
+  <h2 id="decision">Hold-vs-Sell Decision Framework</h2>
+
+  <p>The reset changes the calculus in three ways:</p>
+
+  <ul>
+    <li><strong>Year 4 went from "free exit" to a 4% tax.</strong> Sellers who would have been just past the old 3-year SSD window now have an extra year of friction. If you bought in late June 2025 (pre-reset), you still complete out under the 3-year ladder &mdash; check your OTP date.</li>
+    <li><strong>The Year-1 distance from a tax-free exit is now 4 years, not 3.</strong> Short-hold investment cases &mdash; flipping a new launch at TOP, opportunistic resales &mdash; need to re-pencil the after-tax return over a 4-year (not 3-year) horizon. The IRR drag is material.</li>
+    <li><strong>Decoupling timing tightens.</strong> For couples planning to decouple to free up an ABSD slot, the SSD clock now ticks for 4 years on the bought-out spouse's title. Plan the second-property purchase against that calendar.</li>
+  </ul>
+
+  <p>Two heuristics for current owners weighing a sale:</p>
+
+  <ol>
+    <li><strong>If you are within Year 1 or Year 2 of acquisition</strong>, the SSD bill is large enough (12-16% of sale price) that most owners should explore renting out or refinancing into a holding strategy before committing to sell. Our <a href="/blog/when-to-refinance-singapore/">refinance timing guide</a> covers the alternative.</li>
+    <li><strong>If you are in Year 3 or Year 4</strong>, run the arithmetic carefully. The 4% Year-4 tier looks small but on a S$2-3M property is still S$80,000-S$120,000. A 12-month wait to the zero-tax tier may be the right call &mdash; <em>or</em> may not, if rates, market conditions, or your next purchase favour selling now. Independent stress-test recommended.</li>
+  </ol>
+
+
+  <!-- ===================== ACTION ===================== -->
+
+  <h2 id="action">Three Moves Before You List</h2>
+
+  <ol>
+    <li><strong>Confirm your acquisition date precisely.</strong> Pull the OTP acceptance date from the conveyancing file (not your memory). The single-day rule applies; a tier boundary crossed costs real money. Pre-4-Jul-2025 purchases stay on the 12/8/4% three-year ladder.</li>
+    <li><strong>Project the after-tax proceeds at each tier.</strong> The SSD line should be modelled alongside agent commission (typically 1-2%), conveyancing legal fees (S$2,500-3,500), and any mortgage break-cost. The headline sale price is not the cheque you receive.</li>
+    <li><strong>Compare against a refinance-and-hold scenario.</strong> If the SSD bill is large, locking a competitive home loan and renting out is often the higher-EV path. Our <a href="/mortgage-rates/">current rates page</a> tracks fixed and SORA packages across 16+ MAS-regulated banks.</li>
+    <li><strong>Grab the playbook.</strong> The <a href="/free-report/"><strong>Singapore Mortgage Free Report</strong></a> bundles the SSD decision table, refinance-vs-sell calculator inputs, and the decoupling timing matrix in one PDF.</li>
+  </ol>
+
+
+  <!-- ===================== CTA ===================== -->
+
+  <div class="cta-box">
+    <p><strong style="color:#faf7f2;font-size:1.1rem;">Free Sell-or-Hold Stress Test for Your Singapore Property</strong></p>
+    <p>Nexus Mortgage SG runs the SSD math, the refinance scenario and the next-property ABSD plan together. 16+ MAS-regulated banks, zero cost to the borrower.</p>
+    <a href="/affordability/" class="cta-btn">Run My Sell-or-Hold Numbers &rarr;</a>
+    <p style="margin-top:1.2rem;font-size:.82rem;">Prefer a personal review? <strong><a href="https://wa.me/6587520859">WhatsApp Dan Ler at +65 8752 0859</a></strong> for a free portfolio assessment. Banks pay our fee &mdash; you pay nothing.</p>
+    <p style="margin-top:.6rem;font-size:.82rem;">Or download the full playbook: <strong><a href="/free-report/">Singapore Mortgage Free Report</a></strong> &mdash; SSD decision table, refinance-vs-sell math, and decoupling timing matrix in one PDF.</p>
+  </div>
+
+  <div class="author-bio" style="display:flex;gap:1rem;align-items:center;margin-top:2.5rem;padding:1.25rem 1.4rem;border:1px solid rgba(196,151,59,.2);border-radius:10px;background:rgba(196,151,59,.05);"><img src="/dan-ler.webp" alt="Dan Ler &mdash; Mortgage Advisor, Nexus Mortgage SG" width="64" height="64" loading="lazy" style="width:64px;height:64px;border-radius:50%;flex-shrink:0;border:2px solid rgba(196,151,59,.35);object-fit:cover;"><p style="margin:0;font-size:.95rem;color:rgba(250,247,242,.75);"><strong style="color:#c4973b;">About the author &mdash;</strong> Dan Ler is a Mortgage Advisor at Nexus Mortgage SG, an independent Singapore brokerage that works with 16+ MAS-regulated lenders. Nexus has facilitated 500+ home loans across HDB, EC, private condo and landed property segments. Banks pay Nexus on disbursement, so there is no cost to the borrower.</p>
+  </div>
+
+  <hr>
+
+  <p class="disclaimer"><em>Nexus Mortgage SG is an independent Singapore mortgage advisory. This article is general information, not financial or tax advice. SSD treatment is administered by IRAS and depends on individual transaction specifics. Figures are illustrative and reflect IRAS, MAS, MoF and MND positions as of 16 May 2026; rules can change. Always confirm your specific liability with your conveyancing lawyer and IRAS before listing. Sources: <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/selling-or-disposing-property/seller's-stamp-duty-(ssd)-for-residential-property" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">IRAS SSD for Residential Property</a>, <a href="https://www.mas.gov.sg/news/media-releases/2025/extension-of-the-holding-period-of-sellers-stamp-duty-and-higher-ssd-rates" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS press release on SSD reset (3 July 2025)</a>, <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/buyer's-stamp-duty-(bsd)" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">IRAS BSD</a>, <a href="https://www.hdb.gov.sg/residential/buying-a-flat/buying-procedure-for-resale-flats/eligibility/minimum-occupation-period" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">HDB Minimum Occupation Period</a>.</em></p>
+
+</article>
+
+<a id="btt" href="#" aria-label="Back to top" title="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+</a>
+<script>
+(function(){
+  var prog = document.getElementById('reading-progress');
+  var btt = document.getElementById('btt');
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    prog.style.width = (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    btt.classList.toggle('visible', window.scrollY > 400);
+  }, {passive: true});
+  btt.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+
+<script>
+(function() {
+  const tBtn = document.getElementById('tools-btn');
+  const tDd = document.getElementById('tools-dropdown');
+  if (tBtn && tDd) {
+    tBtn.addEventListener('click', e => { e.stopPropagation(); const open = tDd.style.display === 'block'; tDd.style.display = open ? 'none' : 'block'; tBtn.setAttribute('aria-expanded', String(!open)); });
+    document.addEventListener('click', () => { tDd.style.display = 'none'; tBtn.setAttribute('aria-expanded', 'false'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { tDd.style.display = 'none'; tBtn.setAttribute('aria-expanded', 'false'); } });
+  }
+  document.body.classList.add('has-site-nav');
+})();
+</script>
+
+</body>
+</html>
