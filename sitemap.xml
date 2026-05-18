@@ -137,6 +137,13 @@
 
   <!-- Blog posts (live, sorted by recency) -->
   <url>
+    <loc>https://nexusmortgage.sg/blog/ssd-singapore-2025-reset/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://nexusmortgage.sg/blog/singapore-pr-buy-hdb-loan-guide-2026/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
