@@ -916,6 +916,54 @@ body::after {
   z-index: 0;
 }
 
+/* ============ Timeline (purchase / refinance step list) ============ */
+.timeline-step {
+  display: grid;
+  grid-template-columns: 36px 1fr 110px;
+  gap: 12px;
+  padding: 12px 14px;
+  border-left: 3px solid rgba(196,151,59,.35);
+  background: rgba(196,151,59,.04);
+  border-radius: 0 6px 6px 0;
+}
+.timeline-step:hover { background: rgba(196,151,59,.08); }
+.timeline-step-num {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #C4973B;
+  line-height: 1;
+}
+.timeline-step-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--navy-900);
+  margin-bottom: 4px;
+  line-height: 1.35;
+}
+.timeline-step-note {
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+.timeline-step-meta { text-align: right; }
+.timeline-step-dur {
+  color: #C4973B;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  font-size: 10.5px;
+}
+.timeline-step-cum {
+  color: var(--muted);
+  font-size: 10.5px;
+  margin-top: 3px;
+}
+@media (max-width: 600px) {
+  .timeline-step { grid-template-columns: 28px 1fr; }
+  .timeline-step-meta { grid-column: 1 / -1; text-align: left; margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(196,151,59,.15); }
+}
+
 /* Banker ledger rows: solid hairline, dense leading, tabular numerals */
 .res-row {
   display: flex; justify-content: space-between; align-items: baseline;
@@ -2101,6 +2149,23 @@ body::after {
       <div class="gated is-locked" id="reportGate">
         <div class="gated-content" style="display:flex; flex-direction:column; gap: 20px;">
 
+          <!-- ============ Purchase / Refinance Timeline ============ -->
+          <div class="console-card card-pad" id="timeline-card" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
+              <div>
+                <span class="sec-tag">Timeline</span>
+                <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;" id="timeline-title">Your purchase timeline</h3>
+                <div class="chart-sub" id="timeline-sub">Step-by-step from start to keys.</div>
+              </div>
+              <span class="pill pass" id="timeline-total-pill"><span class="dot"></span><span id="timeline-total">—</span></span>
+            </div>
+            <div id="timeline-steps" style="display:flex; flex-direction:column; gap:6px;"></div>
+            <div style="margin-top:14px; padding:12px 14px; background:rgba(11,28,58,.04); border-left:3px solid var(--navy-900); border-radius:4px; font-size:12.5px; color:var(--ink-2); line-height:1.55;">
+              <strong style="color:var(--navy-900); font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:10.5px;">Note</strong>
+              &nbsp;Cumulative durations are typical ranges, not guarantees. HDB processing, bank turnaround and developer construction milestones vary. Plan with buffer &mdash; <a href="https://wa.me/6587520859" style="color:var(--gold-500);">message Dan</a> before commitment.
+            </div>
+          </div>
+
           <!-- Bank rate comparison -->
           <div class="console-card card-pad">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
@@ -3046,6 +3111,78 @@ let rsState = {
   subCpl: 'all',         // 'all' | 'sora3m' | 'sora1m' | 'fhr' | 'combo'
   subBuc: 'all',
 };
+
+/* ============ TIMELINE DATA (purchase / refinance) ============ */
+// Variant-driven step list shown both in the on-page report card and the PDF.
+// Cumulative durations are typical ranges, not guarantees.
+const TIMELINE_VARIANTS = {
+  hdbResale: {
+    title: 'HDB resale timeline',
+    sub: 'From HFE letter to key collection.',
+    total: '~5–6 months end-to-end',
+    steps: [
+      { n: '01', label: 'Apply HFE letter via HDB Flat Portal', dur: '21–30 days', cum: '~1 month',     note: 'HFE is mandatory before any OTP — even on a bank loan. Apply for the IPA on the same dashboard.' },
+      { n: '02', label: 'HFE letter issued + multi-bank IPA returns',  dur: '7–14 days',  cum: '~1.5 months',  note: 'IPA protects your S$1,000 Option Fee. Independent broker pulls IPA across multiple banks in parallel.' },
+      { n: '03', label: 'Search and view resale flats with HFE in hand', dur: '2–6 weeks',  cum: '~2–3 months',  note: 'HFE letter valid 9 months. Newer HFEs strengthen seller acceptance.' },
+      { n: '04', label: 'Receive OTP from seller, pay Option Fee',     dur: 'Day 0',         cum: '~3 months',    note: 'HDB resale Option Fee capped at S$1,000. Non-refundable if you walk away.' },
+      { n: '05', label: 'Exercise OTP within 21 days, pay Exercise Fee', dur: '21 days',     cum: '~3.5 months',  note: 'Exercise Fee up to S$4,000. Combined OTP + Exercise deposit capped at S$5,000.' },
+      { n: '06', label: 'Submit Resale Application (buyer + seller)',  dur: '~1 week',       cum: '~3.75 months', note: 'Both parties submit independently via the HDB Resale Portal.' },
+      { n: '07', label: 'HDB processing + Completion Appointment',     dur: '8–12 weeks', cum: '~6 months',   note: 'HDB inspects, valuates, processes legal. Bank disbursement scheduled to align.' },
+      { n: '08', label: 'Completion: balance payment, BSD, key collection', dur: 'Day of appt', cum: '~6 months', note: 'BSD due within 14 days of OTP exercise. Bank loan lock-in clock starts on disbursement.' },
+    ],
+  },
+  privateCompleted: {
+    title: 'Private property (completed) timeline',
+    sub: 'Resale condo or already-TOP private property.',
+    total: '~4–5 months end-to-end',
+    steps: [
+      { n: '01', label: 'Apply IPA via independent broker (multi-bank)', dur: '7–14 days', cum: '~2 weeks', note: 'Single IPA across multiple banks — different appetites for variable, foreign or self-employed income.' },
+      { n: '02', label: 'Search and view properties with IPA in hand',  dur: '2–8 weeks', cum: '~2.5 months', note: 'IPA validity typically 30 days. Refresh if search runs long.' },
+      { n: '03', label: 'Receive OTP, pay 1% Option Fee',               dur: 'Day 0',         cum: '~2.5 months', note: 'Non-refundable if you walk. Confirm IPA covers this exact unit and quantum before committing.' },
+      { n: '04', label: 'Exercise OTP, pay 4% (total 5%) deposit',      dur: '14–21 days', cum: '~3 months',   note: 'Sign Sale & Purchase Agreement. Conveyancing lawyer instructed.' },
+      { n: '05', label: 'Pay BSD + ABSD within 14 days of exercise',   dur: '14 days',       cum: '~3.25 months', note: 'BSD on price (1–6% tiers). ABSD per profile (SC 0%, SPR 5%, foreigner 60% — FTA exceptions for US, CH, NO, LI, IS).' },
+      { n: '06', label: 'Completion: balance 20%, legal, mortgage drawdown, keys', dur: '8–12 weeks from S&P', cum: '~5–6 months', note: 'Full loan drawn. Bank lock-in clock starts on disbursement day.' },
+    ],
+  },
+  privateBuc: {
+    title: 'Private property (BUC / new launch) timeline',
+    sub: 'Building-under-construction — Normal Payment Scheme.',
+    total: '~42–54 months to CSC',
+    steps: [
+      { n: '01', label: 'Apply IPA via independent broker',            dur: '7–14 days', cum: '~2 weeks',  note: 'BUC packages include 2× free conversions (before TOP and again after TOP). Lock-in clock starts only at TOP.' },
+      { n: '02', label: 'Showflat booking, pay 5% Option Fee on the spot', dur: 'Day 0',     cum: '~2 weeks',  note: 'Booking fee 5% of price, cash. Unit reserved for ~3 weeks pending S&P signing.' },
+      { n: '03', label: 'Sign Sale & Purchase Agreement, pay further 15%', dur: '3 weeks',   cum: '~5 weeks',  note: '15% via cash or CPF OA. Total upfront after S&P: 20% of price.' },
+      { n: '04', label: 'BSD + ABSD within 14 days of S&P signing',    dur: '14 days',       cum: '~2 months', note: 'Same residential stamp duty schedule as completed property purchases.' },
+      { n: '05', label: 'Foundation milestone — bank disburses 10%', dur: '~6 months from S&P', cum: '~8 months', note: 'Monthly interest charged only on the drawn portion. Outflow modest in early construction.' },
+      { n: '06', label: 'Reinforced concrete framework — 10% disbursement', dur: '~12 months', cum: '~14 months', note: 'Loan now ~30% drawn. Instalment scales with each milestone.' },
+      { n: '07', label: 'Brick walls, ceiling, doors-windows — 5% each tier', dur: '18–30 months', cum: '~30 months', note: 'Three staged drawdowns of 5% each (15% total). Loan ~50% drawn.' },
+      { n: '08', label: 'Car park, road, drains — 5% disbursement', dur: '~36 months',   cum: '~36 months', note: 'Loan ~55% drawn. Practical completion in sight.' },
+      { n: '09', label: 'TOP — 25% disbursement, key collection',  dur: '~42 months',    cum: '~42 months', note: 'Temporary Occupation Permit issued. Loan now 80% drawn. Full instalment kicks in. Lock-in clock starts.' },
+      { n: '10', label: 'CSC — final 15%, fully disbursed',        dur: '~54 months',    cum: '~54 months', note: 'Certificate of Statutory Completion. Loan 100% drawn. Refinance window typically opens after Y2 lock-in.' },
+    ],
+  },
+  refinance: {
+    title: 'Refinance timeline',
+    sub: 'From decision to drawdown on the new package.',
+    total: '~3 months end-to-end',
+    steps: [
+      { n: '01', label: 'Serve 3-month redemption notice to current bank', dur: 'Day 0', cum: '~Day 0', note: 'Most Singapore banks require 3 months’ notice. Start 4–6 months before lock-in expiry.' },
+      { n: '02', label: 'Multi-bank scan + select target package',     dur: '1–2 weeks', cum: '~2 weeks',  note: 'Independent broker runs the file across 16+ banks. Pick lowest effective rate net of legal subsidy.' },
+      { n: '03', label: 'Submit IPA + supporting documents to new bank', dur: '1–2 weeks', cum: '~1 month', note: 'Income docs, latest NOA, CPF, current loan statement, property valuation order.' },
+      { n: '04', label: 'IPA approved, Letter of Offer issued, sign',  dur: '~1 week',       cum: '~5 weeks',  note: 'Verify rate, lock-in years, free-conversion clause, legal-subsidy clawback period.' },
+      { n: '05', label: 'Legal completion + redemption from old bank', dur: '4–6 weeks', cum: '~3 months', note: 'New bank lawyer handles. Mortgage discharge from old bank simultaneous with new drawdown.' },
+      { n: '06', label: 'Drawdown date — new lock-in clock starts', dur: 'Day of drawdown', cum: '~3 months', note: 'Align with old bank lock-in expiry to avoid penalty.' },
+    ],
+  },
+};
+
+function pickTimelineVariant(r) {
+  if (!r || !r.inp) return null;
+  if (r.inp.mode === 'refinance') return 'refinance';
+  if (r.inp.propertyType === 'hdb') return 'hdbResale';
+  if (rsState.propType === 'buc') return 'privateBuc';
+  return 'privateCompleted';
+}
 
 const RS_FIXED = ['fixed1y','fixed2y','fixed3y'];
 const RS_FLOAT = ['fhr','sora1m','sora3m','combo'];
@@ -4076,6 +4213,40 @@ function computeReport(inp) {
   };
 }
 
+/* ============ TIMELINE RENDER ============ */
+function renderTimeline(r) {
+  const card = document.getElementById('timeline-card');
+  if (!card) return;
+  const key = pickTimelineVariant(r);
+  const v = key ? TIMELINE_VARIANTS[key] : null;
+  if (!v) { card.style.display = 'none'; return; }
+
+  const titleEl = document.getElementById('timeline-title');
+  const subEl   = document.getElementById('timeline-sub');
+  const totalEl = document.getElementById('timeline-total');
+  const stepsEl = document.getElementById('timeline-steps');
+  if (titleEl) titleEl.textContent = v.title;
+  if (subEl)   subEl.textContent   = v.sub;
+  if (totalEl) totalEl.textContent = v.total;
+
+  if (stepsEl) {
+    stepsEl.innerHTML = v.steps.map(s => (
+      '<div class="timeline-step">' +
+        '<div class="timeline-step-num">' + s.n + '</div>' +
+        '<div class="timeline-step-body">' +
+          '<div class="timeline-step-label">' + s.label + '</div>' +
+          '<div class="timeline-step-note">' + s.note + '</div>' +
+        '</div>' +
+        '<div class="timeline-step-meta">' +
+          '<div class="timeline-step-dur">' + s.dur + '</div>' +
+          '<div class="timeline-step-cum">' + s.cum + '</div>' +
+        '</div>' +
+      '</div>'
+    )).join('');
+  }
+  card.style.display = '';
+}
+
 /* ============ RENDER ============ */
 function render(r) {
   // Banners — fail or eligibility — at top of report
@@ -4113,6 +4284,7 @@ function render(r) {
   renderRateSelector(r);
 
   // Render the new sections
+  renderTimeline(r);
   renderFixedVsFloating(r);
   renderYearByYear(r);
   renderLockinStrategy(r);
@@ -5460,7 +5632,58 @@ async function buildReportPdf(r, lead) {
   y += cH3 + 5;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // PAGE 3 — INCOME & DEBT SERVICING
+  // PAGE 3 — TIMELINE (variant: HDB resale / Private completed / Private BUC / Refinance)
+  // ═══════════════════════════════════════════════════════════════════════════
+  const _tlKey = (r.inp.mode === 'refinance') ? 'refinance'
+    : (r.inp.propertyType === 'hdb') ? 'hdbResale'
+    : (rsState && rsState.propType === 'buc') ? 'privateBuc'
+    : 'privateCompleted';
+  const _tlVariant = TIMELINE_VARIANTS[_tlKey];
+  if (_tlVariant) {
+    y = pageChrome(_tlVariant.title);
+    y = sectionHead(y, 'Timeline', _tlVariant.title, _tlVariant.sub + '  ·  Typical end-to-end: ' + _tlVariant.total + '.');
+
+    // Summary table: # | Step | Duration | Cumulative
+    const _tlRows = _tlVariant.steps.map(s => ({
+      cells: [
+        { text: s.n, font: 'bold', color: GOLD },
+        { text: s.label, font: 'bold' },
+        { text: s.dur },
+        { text: s.cum, color: GOLD },
+      ]
+    }));
+    y = table(['#', 'Step', 'Duration', 'Cumulative'],
+      _tlRows,
+      { y, widths: [10, CW - 80, 35, 35], rowH: 6.5, aligns: ['left', 'left', 'right', 'right'] });
+    y += 4;
+
+    // Per-step detail blocks (alternating tint, gold accent stripe, with note line)
+    _tlVariant.steps.forEach((s, i) => {
+      const tH = 13;
+      // Page-break guard
+      if (y + tH > H - 25) { y = pageChrome(_tlVariant.title); }
+      if (i % 2 === 0) { setFill(SURFACE); doc.rect(M, y, CW, tH, 'F'); }
+      setFill(GOLD); doc.rect(M, y, 1.5, tH, 'F');
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
+      doc.text(s.n, M + 3.5, y + 5);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); setTxt(INK);
+      doc.text(s.label, M + 9, y + 5);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt(INK_2);
+      const _nLines = doc.splitTextToSize(s.note, CW - 14);
+      doc.text(_nLines[0] || '', M + 9, y + 10);
+      y += tH;
+    });
+    y += 5;
+
+    // Closing callout
+    y = callout(y, NAVY_2, SURFACE,
+      'Plan with buffer',
+      'Cumulative durations are typical ranges. HDB processing, bank turnaround and developer construction milestones vary. Brief an independent broker before any commitment so the timeline can be stress-tested against your specific income profile.');
+    y += 4;
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 4 — INCOME & DEBT SERVICING
   // ═══════════════════════════════════════════════════════════════════════════
   y = pageChrome('Income · Debt Servicing · Affordability');
   y = sectionHead(y, 'Income & debt servicing',
