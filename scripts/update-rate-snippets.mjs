@@ -32,15 +32,20 @@ const ROOT = path.resolve(__dirname, "..");
 const RATES = path.join(ROOT, "rates.json");
 const DRY = process.env.DRY_RUN === "1";
 
+// Current month + year for SERP freshness signal. Re-evaluated on each cron run.
+const NOW = new Date();
+const MONTH = NOW.toLocaleString("en-SG", { month: "long" });
+const YEAR = NOW.getFullYear();
+
 // Pages that carry live rate numbers in their <title> + meta description.
 // Each entry produces both LIVE-RATES:title and LIVE-RATES:desc blocks.
 const TARGETS = [
   {
     file: "blog/home-loan-rates-singapore/index.html",
     title: ({ fixed, sora }) =>
-      `Singapore Home Loan Rates: Fixed ${fixed}%, SORA ${sora}% — Updated Weekly | Nexus`,
+      `Singapore Home Loan Rates ${MONTH} ${YEAR}: Fixed ${fixed}%, SORA ${sora}% | Nexus`,
     desc: ({ fixed, sora }) =>
-      `Live Singapore home loan rates: fixed from ${fixed}% p.a., SORA-linked from ${sora}% p.a. effective. Compare 16 MAS-regulated banks. Updated weekly. Free, zero fees.`,
+      `Singapore home loan rates ${MONTH} ${YEAR}: fixed from ${fixed}% p.a., SORA-linked from ${sora}% p.a. effective. Compare 16 MAS-regulated banks. Updated weekly. Free.`,
   },
 ];
 
