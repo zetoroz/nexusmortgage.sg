@@ -1884,5 +1884,20 @@
       }
     ],
     "summary": "19 year1Rate"
+  },
+  {
+    "generatedAt": "2026-05-27T05:20:43.812024+00:00",
+    "asOf": "27 Feb 2026",
+    "xlsxFingerprint": "baab1843afb9",
+    "packageCount": 98,
+    "refRates": {
+      "sora1m": 1.2276,
+      "sora3m": 1.0711,
+      "fhr6": 0.8,
+      "asOfSora": "2026-05-25"
+    },
+    "refRateChanges": {},
+    "packageChanges": [],
+    "summary": "No material changes."
   }
 ]

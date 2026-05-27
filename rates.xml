@@ -6,13 +6,13 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Tue, 26 May 2026 05:06:23 GMT</lastBuildDate>
+<lastBuildDate>Wed, 27 May 2026 05:20:43 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
 <title>Current Compounded SORA — 1M 1.23% | 3M 1.07%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
 <guid isPermaLink="false">nexus-current-2026-05-25</guid>
-<pubDate>Tue, 26 May 2026 05:06:23 GMT</pubDate>
+<pubDate>Wed, 27 May 2026 05:20:43 GMT</pubDate>
 <description>Latest published Compounded SORA values per MAS. As of 2026-05-25.</description>
 </item>
 <item>
