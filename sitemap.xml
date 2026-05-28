@@ -9,6 +9,14 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Definitive pillar guide -->
+  <url>
+    <loc>https://nexusmortgage.sg/singapore-mortgage-guide-2026/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
   <!-- ────────── Core landing & lead-gen ────────── -->
 
   <!-- Free personalised mortgage report (lead-gen calculator) -->
