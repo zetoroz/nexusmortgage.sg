@@ -42,10 +42,13 @@ const YEAR = NOW.getFullYear();
 const TARGETS = [
   {
     file: "blog/home-loan-rates-singapore/index.html",
+    // NOTE: sentinels live OUTSIDE these tags in the HTML, so the template emits
+    // the FULL tag. Never place LIVE-RATES comments inside <title> (RCDATA) or a
+    // content="" attribute — they render as literal text in the SERP title/description.
     title: ({ fixed, sora }) =>
-      `Singapore Home Loan Rates ${MONTH} ${YEAR}: Fixed ${fixed}%, SORA ${sora}% | Nexus`,
+      `<title>Singapore Home Loan Rates ${MONTH} ${YEAR}: Fixed ${fixed}%, SORA ${sora}% | Nexus</title>`,
     desc: ({ fixed, sora }) =>
-      `Singapore home loan rates ${MONTH} ${YEAR}: fixed from ${fixed}% p.a., SORA-linked from ${sora}% p.a. effective. Compare 16 MAS-regulated banks. Updated weekly. Free.`,
+      `<meta name="description" content="Singapore home loan rates ${MONTH} ${YEAR}: fixed from ${fixed}% p.a., SORA-linked from ${sora}% p.a. effective. Compare 16 MAS-regulated banks. Updated weekly. Free.">`,
   },
 ];
 
