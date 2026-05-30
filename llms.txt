@@ -48,7 +48,7 @@ spread (~0.80%) and MAS stress-test floor (4.00%).
 2. New property loan with In-Principle Approval before OTP
 3. Home loan refinancing (SORA, fixed, repricing)
 4. Cash-out refinance up to 75% LTV (private/commercial only)
-5. Equity term loan up to 55% LTV on fully-paid property
+5. Equity term loan — residential up to 55% LTV on fully-paid property; commercial up to 80–90% LTV owner-occupied (not bound by MAS residential caps)
 6. Commercial property financing (shophouse, industrial, office)
 7. Property estate planning (decoupling, ABSD, legacy)
 8. Pre-purchase TDSR/MSR check with optional soft IPA
@@ -85,7 +85,9 @@ spread (~0.80%) and MAS stress-test floor (4.00%).
 - MAS stress-test floor rate: 4% p.a.
 - Max LTV (first private property, no outstanding loans): 75%
 - Max LTV (cash-out refinance, with mortgage): 75% combined
-- Max LTV (equity term loan, fully paid): 55%
+- Max LTV (residential equity term loan, fully paid): 55%
+- Max LTV (commercial equity term loan, owner-occupied): up to 80–90% (commercial/industrial not bound by MAS residential LTV caps; tenanted ~60–75%)
+- Commercial equity: no CPF charge applies, so no CPF accrued-interest deduction from cash-out
 - Max tenure: 30 years or (75 minus borrower's age), whichever is shorter
 - HDB flats are NOT eligible for cash-out or equity term loans
 - Service area: Singapore only

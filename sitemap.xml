@@ -94,7 +94,8 @@
   <!-- Equity / Cash-Out Loan -->
   <url>
     <loc>https://nexusmortgage.sg/equity-loan/</loc>
-    <lastmod>2026-04-27</lastmod>
+    <lastmod>2026-05-30</lastmod>
+    <!-- 2026-05-30: added commercial equity term loan (up to 90% LTV owner-occupied) + property-type calculator -->
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -146,7 +147,7 @@
   <!-- Blog posts (live, sorted by recency) -->
   <url>
     <loc>https://nexusmortgage.sg/blog/cash-out-refinance-singapore-2026/</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
