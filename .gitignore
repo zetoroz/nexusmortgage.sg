@@ -62,3 +62,14 @@ GBP-listing-copy.md
 !.env.example
 *.pem
 *.key
+
+# Google Drive sync conflict duplicates (e.g. "CNAME 2", "favicon 2.ico")
+* 2
+* 2.*
+
+# Private / internal — not for the public static site
+login/rates.xlsx
+login/*.xlsx
+GBP-photos-todo.md
+RATES-UPDATE-GUIDE.md
+blog/blog-images/placeholder.txt
