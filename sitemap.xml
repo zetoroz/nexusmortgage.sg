@@ -145,6 +145,13 @@
 
   <!-- Blog posts (live, sorted by recency) -->
   <url>
+    <loc>https://nexusmortgage.sg/blog/cash-out-refinance-singapore-2026/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://nexusmortgage.sg/blog/joint-tenancy-vs-tenancy-in-common-singapore-2026/</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
