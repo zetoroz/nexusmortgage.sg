@@ -3395,6 +3395,7 @@
             // ── Featured card ──
             var featWrap = document.getElementById('insight-featured-wrap');
             if(featured){
+              var fHref = '/blog/' + featured.slug + '/';
               featWrap.innerHTML =
                 '<div style="background:linear-gradient(135deg,rgba(196,151,59,.08),rgba(196,151,59,.03));border:1px solid rgba(196,151,59,.2);border-radius:10px;padding:2.5rem;margin-bottom:2rem;">' +
                   '<span class="article-tag">Featured</span>' +
@@ -3402,7 +3403,7 @@
                   '<p style="font-size:.9rem;line-height:1.6;color:rgba(250,247,242,.75);margin-bottom:1.5rem;">' + featured.excerpt + '</p>' +
                   '<div style="display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">' +
                     '<span style="font-size:.75rem;color:rgba(250,247,242,.5);">' + (featured.readTime || '') + '</span>' +
-                    '<a href="/blog/' + featured.slug + '/" class="article-link">Read Full Article <span>→</span></a>' +
+                    '<a href="' + fHref + '" class="article-link">Read Full Article <span>→</span></a>' +
                   '</div>' +
                 '</div>';
             }
@@ -3411,8 +3412,9 @@
             var previews = sortedArticles.filter(function(a){ return a !== featured; }).slice(0,2);
             var grid = document.getElementById('insight-preview-grid');
             grid.innerHTML = previews.map(function(a){
+              var aHref = '/blog/' + a.slug + '/';
               var cta = a.status === 'live'
-                ? '<a href="/blog/' + a.slug + '/" class="article-link">Read More <span>→</span></a>'
+                ? '<a href="' + aHref + '" class="article-link">Read More <span>→</span></a>'
                 : '<span style="font-size:.8rem;color:rgba(250,247,242,.35);letter-spacing:.05em;text-transform:uppercase;">Coming Soon</span>';
               return '<div class="article-card">' +
                 '<span class="article-tag">' + a.tag + '</span>' +
