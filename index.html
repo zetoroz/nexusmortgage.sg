@@ -4456,8 +4456,9 @@
       }
     }
 
-    // ===== INIT =====
-    window.addEventListener('load', () => {
+    // ===== INIT (deferred off the LCP path — the calculator is below the fold) =====
+    function initCalculator() {
+      if (initCalculator.done) return; initCalculator.done = true;
       attachFormatter('c-price');
       attachFormatter('c-down');
       attachFormatter('c-income');
@@ -4474,8 +4475,18 @@
       validateDown();
       calc();
       if (typeof calcRefi === 'function') calcRefi();
+    }
+    window.addEventListener('load', () => {
+      // Run after first paint so the heavy calc() doesn't compete with LCP on mobile.
+      if ('requestIdleCallback' in window) requestIdleCallback(initCalculator, { timeout: 2000 });
+      else setTimeout(initCalculator, 200);
+      // Also init on first interaction with the calculator, whichever comes first.
+      var calcEl = document.getElementById('calculator') || document.getElementById('c-price');
+      if (calcEl) ['pointerdown', 'focusin'].forEach(function (e) {
+        calcEl.addEventListener(e, initCalculator, { once: true, passive: true });
+      });
     });
-    window.addEventListener('resize', () => { calc(); });
+    window.addEventListener('resize', () => { if (initCalculator.done) calc(); });
 
 
     // ===== SCROLL PROGRESS BAR =====
