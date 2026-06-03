@@ -146,6 +146,13 @@
 
   <!-- Blog posts (live, sorted by recency) -->
   <url>
+    <loc>https://nexusmortgage.sg/blog/how-to-apply-home-loan-singapore/</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://nexusmortgage.sg/blog/commercial-property-loan-singapore-2026/</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
