@@ -65,11 +65,21 @@ const metaFromUrl = async (url) => metaFromHtml(await (await fetch(url)).text(),
 
 // ---------- 3. Caption ----------
 
-function caption(m) {
+const HASHTAGS = '#MortgageSingapore #HomeLoanSG #SingaporeProperty #HDB #PropertySG #NexusMortgage';
+
+// platform: 'facebook' (clickable link) | 'instagram' (link not clickable in
+// captions, so point to bio) | default for LinkedIn etc.
+function caption(m, platform) {
   const out = [m.title];
   if (m.desc) out.push('', m.desc);
-  out.push('', `Read the full guide: ${m.url}`);
-  out.push('', '#MortgageSingapore #HomeLoanSG #SingaporeProperty #HDB #PropertySG #NexusMortgage');
+  if (platform === 'instagram') {
+    // IG strips caption-link clickability — drive to the bio link instead,
+    // but keep the raw URL so people can still copy-paste it.
+    out.push('', '🔗 Full guide — link in bio 👆', `(or copy: ${m.url})`);
+  } else {
+    out.push('', `Read the full guide: ${m.url}`);
+  }
+  out.push('', HASHTAGS);
   return out.join('\n');
 }
 
@@ -79,7 +89,7 @@ async function postFacebook(m) {
   if (!META_PAGE_ID || !META_PAGE_TOKEN) return skip('Facebook', 'no secrets');
   const r = await fetch(`${GRAPH}/${META_PAGE_ID}/feed`, {
     method: 'POST',
-    body: new URLSearchParams({ message: caption(m), link: m.url, access_token: META_PAGE_TOKEN }),
+    body: new URLSearchParams({ message: caption(m, 'facebook'), link: m.url, access_token: META_PAGE_TOKEN }),
   });
   return report('Facebook', r);
 }
@@ -90,7 +100,7 @@ async function postInstagram(m) {
 
   const c = await fetch(`${GRAPH}/${META_IG_USER_ID}/media`, {
     method: 'POST',
-    body: new URLSearchParams({ image_url: m.image, caption: caption(m), access_token: META_PAGE_TOKEN }),
+    body: new URLSearchParams({ image_url: m.image, caption: caption(m, 'instagram'), access_token: META_PAGE_TOKEN }),
   });
   const cj = await c.json();
   if (!c.ok || !cj.id) return fail('Instagram', cj);
