@@ -95,11 +95,33 @@ async function postInstagram(m) {
   const cj = await c.json();
   if (!c.ok || !cj.id) return fail('Instagram', cj);
 
+  // Wait for the container to finish ingesting the image before publishing.
+  // IG returns code 9007 "media not ready" if you publish too early.
+  const ready = await waitForContainer(cj.id);
+  if (!ready.ok) return fail('Instagram', ready.detail);
+
   const p = await fetch(`${GRAPH}/${META_IG_USER_ID}/media_publish`, {
     method: 'POST',
     body: new URLSearchParams({ creation_id: cj.id, access_token: META_PAGE_TOKEN }),
   });
   return report('Instagram', p);
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function waitForContainer(creationId, tries = 12, delayMs = 5000) {
+  for (let i = 0; i < tries; i++) {
+    const r = await fetch(
+      `${GRAPH}/${creationId}?fields=status_code,status&access_token=${encodeURIComponent(META_PAGE_TOKEN)}`,
+    );
+    const j = await r.json().catch(() => ({}));
+    const code = j.status_code;
+    if (code === 'FINISHED') return { ok: true };
+    if (code === 'ERROR' || code === 'EXPIRED') return { ok: false, detail: j };
+    console.log(`   IG container ${creationId}: ${code || 'IN_PROGRESS'} (try ${i + 1}/${tries})`);
+    await sleep(delayMs);
+  }
+  return { ok: false, detail: { message: 'IG container did not reach FINISHED in time' } };
 }
 
 async function postLinkedIn(m) {
