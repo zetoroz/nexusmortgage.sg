@@ -1,0 +1,47 @@
+name: Cross-post new blog articles
+
+# Fires when a NEW canonical post (blog/<slug>/index.html) lands on main.
+# The script confirms which files were ADDED and cross-posts only those,
+# ignoring legacy blog/blog-*.html flat files and edits to old posts.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blog/**/index.html'
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Optional: full URL of one post to cross-post manually'
+        required: false
+
+# Prevent overlapping runs from double-posting if you push twice fast.
+concurrency:
+  group: cross-post
+  cancel-in-progress: false
+
+jobs:
+  cross-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (need 2 commits to diff)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Cross-post
+        env:
+          # --- Facebook + Instagram (Meta Graph API) ---
+          META_PAGE_ID:    ${{ secrets.META_PAGE_ID }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
+          # --- LinkedIn (dormant until you add these secrets) ---
+          LINKEDIN_TOKEN:  ${{ secrets.LINKEDIN_TOKEN }}
+          LINKEDIN_ORG_ID: ${{ secrets.LINKEDIN_ORG_ID }}
+          # --- manual run input ---
+          MANUAL_URL:      ${{ github.event.inputs.url }}
+        run: node scripts/cross-post.mjs
