@@ -1,5 +1,12 @@
 [
   {
+    "generatedAt": "2026-06-06T04:57:12.322Z",
+    "source": "MAS",
+    "asOfSora": "2026-06-04",
+    "refRateChanges": {},
+    "summary": "SORA refresh — no change."
+  },
+  {
     "generatedAt": "2026-06-05T05:22:32.721Z",
     "source": "MAS",
     "asOfSora": "2026-06-04",
@@ -3079,5 +3086,20 @@
       }
     ],
     "summary": "19 year1Rate"
+  },
+  {
+    "generatedAt": "2026-06-06T04:57:12.612235+00:00",
+    "asOf": "27 Feb 2026",
+    "xlsxFingerprint": "baab1843afb9",
+    "packageCount": 98,
+    "refRates": {
+      "sora1m": 1.0992,
+      "sora3m": 1.0579,
+      "fhr6": 0.8,
+      "asOfSora": "2026-06-04"
+    },
+    "refRateChanges": {},
+    "packageChanges": [],
+    "summary": "No material changes."
   }
 ]
