@@ -6203,7 +6203,10 @@ async function buildReportPdf(r, lead) {
   if (tdsrFail && !r.msrApplies && r.inp.debts > 0) {
     tips.push({ n: '05', title: 'Pay down existing debts', body: 'You\'re carrying ' + fmt$(r.inp.debts) + '/mo in monthly debt. Every $1 of debt cleared = $1 of mortgage capacity gained.', impact: '-' + fmt$(r.inp.debts) + '/mo debt' });
   }
-  tips.push({ n: pad2(tips.length + 1), title: 'Plan refinance at year ' + (sel.lockInYears || 2), body: 'Set a reminder ~4 months before lock-in expiry. Refinancing every 2–3 years is the single biggest lever to lower lifetime interest. We\'ll reach out 6 weeks before.', impact: 'Y' + (sel.lockInYears || 2) + ' action' });
+  tips.push({ title: 'Plan refinance at year ' + (sel.lockInYears || 2), body: 'Set a reminder ~4 months before lock-in expiry. Refinancing every 2–3 years is the single biggest lever to lower lifetime interest. We\'ll reach out 6 weeks before.', impact: 'Y' + (sel.lockInYears || 2) + ' action' });
+
+  // Renumber sequentially so skipped levers don't leave gaps/duplicates (e.g. HDB skips the stretch-tenure lever).
+  tips.forEach((t, i) => { t.n = pad2(i + 1); });
 
   // Tips table summary
   const tipRows = tips.slice(0, 6).map(t => ({
