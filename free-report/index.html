@@ -5480,7 +5480,7 @@ async function buildReportPdf(r, lead) {
   setFill(GOLD); doc.rect(M, kpiY, CW, 0.5, 'F');
   setFill(GOLD); doc.rect(M, kpiY + 35, CW, 0.5, 'F');
   [
-    ['BEST RATE', (r.bestRate * 100).toFixed(2) + '%'],
+    [isRefi ? 'NEW RATE' : 'YOUR RATE', sel.rate.toFixed(2) + '%'],
     [isRefi ? 'NEW MONTHLY' : 'MONTHLY', fmt$(monthly)],
     [isRefi ? 'OUTSTANDING LOAN' : 'LOAN', fmt$(r.inp.loan)],
     ['TENURE', r.inp.tenure + 'y'],
@@ -5522,7 +5522,7 @@ async function buildReportPdf(r, lead) {
   y = statGridDark(y, [
     { label: 'Best rate found', value: (r.bestRate * 100).toFixed(2) + '%', sub: r.banks[0].bank + ' · ' + r.banks[0].pkg, color: [100, 210, 160] },
     { label: 'Estimated monthly', value: fmt$(monthly), sub: 'Year 1 · ' + r.inp.tenure + 'y tenure', color: GOLD_LT },
-    { label: 'TDSR usage', value: tdsrPct.toFixed(1) + '%', sub: r.tdsrPass ? 'Within 55% cap ✓' : 'Exceeds 55% cap ✗', color: r.tdsrPass ? [100, 210, 160] : [255, 120, 110] },
+    { label: 'TDSR usage', value: tdsrPct.toFixed(1) + '%', sub: r.tdsrPass ? 'Within 55% cap' : 'Exceeds 55% cap', color: r.tdsrPass ? [100, 210, 160] : [255, 120, 110] },
   ]);
   y += 2;
 
@@ -5719,7 +5719,7 @@ async function buildReportPdf(r, lead) {
   matrixRows.push({ cells: [{ text: 'TOTAL', font: 'bold' }, { text: 'Effective qualifying income', font: 'bold' }, '', '', { text: fmt$(totalEff) + '/mo', font: 'bold' }], _highlight: true, _highlightColor: GOLD_TN });
   matrixRows.push({ cells: ['', 'Less existing monthly debts', '', '', { text: '– ' + fmt$(debtsTotal) + '/mo', color: RED }] });
   matrixRows.push({ cells: ['', { text: 'Available for mortgage servicing', font: 'bold' }, '', '', { text: fmt$(available) + '/mo', font: 'bold' }], _highlight: true, _highlightColor: GOLD_TN });
-  matrixRows.push({ cells: ['', 'IWAA · Income-Weighted Avg Age', '', 'Σ(age×fixed) ÷ Σ fixed', { text: iwaa.toFixed(1) + ' yrs', color: NAVY_2 }] });
+  matrixRows.push({ cells: ['', 'IWAA · Income-Weighted Avg Age', '', 'weighted by fixed income', { text: iwaa.toFixed(1) + ' yrs', color: NAVY_2 }] });
 
   y = table(['#', 'Component', 'Amount', 'MAS factor', 'Monthly contribution'],
     matrixRows, { y, widths: [12, 60, 30, 36, 44] });
@@ -5741,8 +5741,8 @@ async function buildReportPdf(r, lead) {
   } else {
     const headroom = Math.max(0, (r.maxLoanAffordable || 0) - r.inp.loan);
     const ltvLine = r.tenureExceedsIwaa
-      ? 'Tenure ' + r.inp.tenure + 'y + IWAA ' + (r.iwaa ? r.iwaa.toFixed(1) : '—') + ' > 65 → MAS allows max 55% LTV at this tenure. Shorten to ' + (r.tenureForFullLtv || r.fullLtvCap) + 'y to keep 75% LTV.'
-      : 'Tenure ' + r.inp.tenure + 'y + IWAA ' + (r.iwaa ? r.iwaa.toFixed(1) : '—') + ' ≤ 65 → full 75% LTV available.';
+      ? 'Tenure ' + r.inp.tenure + 'y + IWAA ' + (r.iwaa ? r.iwaa.toFixed(1) : '—') + ' > 65 — MAS allows max 55% LTV at this tenure. Shorten to ' + (r.tenureForFullLtv || r.fullLtvCap) + 'y to keep 75% LTV.'
+      : 'Tenure ' + r.inp.tenure + 'y + IWAA ' + (r.iwaa ? r.iwaa.toFixed(1) : '—') + ' within 65 — full 75% LTV available.';
     y = callout(y, GREEN, GREEN_BG,
       'Headroom of ' + fmt$(headroom) + ' before cap',
       'You\'re asking for ' + fmt$(r.inp.loan) + '. Max under ' + (r.msrApplies ? 'MSR' : 'TDSR') + ' at this tenure & income is ' + fmt$(r.maxLoanAffordable || 0) + '. ' + ltvLine);
@@ -5787,7 +5787,7 @@ async function buildReportPdf(r, lead) {
   });
 
   y = table(
-    ['#', 'Bank', 'Package', 'Lock-in', 'Rate p.a.', 'Cheaper ←', 'Monthly', 'Lock-in cost'],
+    ['#', 'Bank', 'Package', 'Lock-in', 'Rate p.a.', 'Cheaper', 'Monthly', 'Lock-in cost'],
     rateRows,
     { y, widths: [10, 22, 30, 14, 18, 24, 22, 24], rowH: 6.5 }
   );
@@ -5938,7 +5938,7 @@ async function buildReportPdf(r, lead) {
       _bar: { x: 50 + 22 + 28 + 1, w: 28, frac: mo / stressMax, color },
     };
   });
-  y = table(['Scenario', 'Rate', 'Monthly', 'Stress impact', 'Δ vs best', 'Y1 interest'],
+  y = table(['Scenario', 'Rate', 'Monthly', 'Stress impact', 'vs best', 'Y1 interest'],
     stressRows, { y, widths: [50, 22, 28, 30, 28, 22], rowH: 6 });
   y += 9;
 
@@ -6158,7 +6158,7 @@ async function buildReportPdf(r, lead) {
   const sum5 = fullSchedule.slice(0, Math.min(5, r.inp.tenure)).reduce((a, s) => ({ p: a.p + s.payment, i: a.i + s.interest, pr: a.pr + s.principal, b: s.balance }), { p: 0, i: 0, pr: 0, b: r.inp.loan });
 
   [[sum2, 2], [sum3, 3], [sum5, 5]].forEach(([s, n]) => {
-    amortRows.push({ cells: [{ text: 'Σ Y' + n, font: 'bold' }, { text: fmt$(s.b), font: 'bold' }, { text: fmt$(s.i), font: 'bold' }, { text: fmt$(s.pr), font: 'bold' }, { text: fmt$(s.p), font: 'bold' }, '', '', ''], _highlight: true, _highlightColor: GOLD_TN });
+    amortRows.push({ cells: [{ text: 'Total Y' + n, font: 'bold' }, { text: fmt$(s.b), font: 'bold' }, { text: fmt$(s.i), font: 'bold' }, { text: fmt$(s.pr), font: 'bold' }, { text: fmt$(s.p), font: 'bold' }, '', '', ''], _highlight: true, _highlightColor: GOLD_TN });
   });
 
   y = eyebrow(y, 'Year-by-year · with CPF inflow & cash outlay (first 5y)');
@@ -6184,7 +6184,7 @@ async function buildReportPdf(r, lead) {
     const newT = Math.min(tenureCap, r.inp.tenure + 5);
     if (newT > r.inp.tenure) {
       const newM = pmt(r.inp.loan, r.bestRate, newT);
-      tips.push({ n: '01', title: 'Stretch tenure to ' + newT + ' years', body: 'Drops your monthly to ' + fmt$(newM) + ' at ' + (r.bestRate * 100).toFixed(2) + '%. Trade-off: more total interest over the loan life.', impact: '−' + fmt$(r.monthlyBest - newM) + '/mo' });
+      tips.push({ n: '01', title: 'Stretch tenure to ' + newT + ' years', body: 'Drops your monthly to ' + fmt$(newM) + ' at ' + (r.bestRate * 100).toFixed(2) + '%. Trade-off: more total interest over the loan life.', impact: '-' + fmt$(r.monthlyBest - newM) + '/mo' });
     }
   }
   if (r.inp.tenure > 15) {
@@ -6198,10 +6198,10 @@ async function buildReportPdf(r, lead) {
   }
   if (tdsrFail && r.maxLoanAffordable < r.inp.loan) {
     const reduce = r.inp.loan - r.maxLoanAffordable;
-    tips.push({ n: '04', title: 'Reduce loan by ' + fmt$(reduce), body: 'Borrow ' + fmt$(r.maxLoanAffordable) + ' instead — fits inside the ' + (r.msrApplies ? 'MSR' : 'TDSR') + ' cap. Top up the difference with cash/CPF.', impact: '−' + fmt$(reduce) + ' loan' });
+    tips.push({ n: '04', title: 'Reduce loan by ' + fmt$(reduce), body: 'Borrow ' + fmt$(r.maxLoanAffordable) + ' instead — fits inside the ' + (r.msrApplies ? 'MSR' : 'TDSR') + ' cap. Top up the difference with cash/CPF.', impact: '-' + fmt$(reduce) + ' loan' });
   }
   if (tdsrFail && !r.msrApplies && r.inp.debts > 0) {
-    tips.push({ n: '05', title: 'Pay down existing debts', body: 'You\'re carrying ' + fmt$(r.inp.debts) + '/mo in monthly debt. Every $1 of debt cleared = $1 of mortgage capacity gained.', impact: '−' + fmt$(r.inp.debts) + '/mo debt' });
+    tips.push({ n: '05', title: 'Pay down existing debts', body: 'You\'re carrying ' + fmt$(r.inp.debts) + '/mo in monthly debt. Every $1 of debt cleared = $1 of mortgage capacity gained.', impact: '-' + fmt$(r.inp.debts) + '/mo debt' });
   }
   tips.push({ n: pad2(tips.length + 1), title: 'Plan refinance at year ' + (sel.lockInYears || 2), body: 'Set a reminder ~4 months before lock-in expiry. Refinancing every 2–3 years is the single biggest lever to lower lifetime interest. We\'ll reach out 6 weeks before.', impact: 'Y' + (sel.lockInYears || 2) + ' action' });
 
@@ -6267,10 +6267,19 @@ async function buildReportPdf(r, lead) {
     // Page-number stamp (top-right of header band, gold on dark)
     doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
     doc.text('PAGE ' + p + ' OF ' + totalPages, W - M, 10, { align: 'right' });
-    // Watermark — very faint grey "INDICATIVE" diagonal (jsPDF has no opacity, use near-white grey)
-    setTxt([245, 247, 250]);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(56);
-    doc.text('INDICATIVE', W / 2, H / 2 + 5, { align: 'center', angle: 30 });
+    // Watermark — ghosted "INDICATIVE" via GState opacity so it never obscures the data.
+    try {
+      doc.saveGraphicsState();
+      doc.setGState(new doc.GState({ opacity: 0.05 }));
+      setTxt([90, 110, 140]);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(46);
+      doc.text('INDICATIVE', W / 2, H / 2 + 5, { align: 'center', angle: 30 });
+      doc.restoreGraphicsState();
+    } catch (e) {
+      setTxt([248, 250, 252]);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(46);
+      doc.text('INDICATIVE', W / 2, H / 2 + 5, { align: 'center', angle: 30 });
+    }
   }
 
   // Filename: include date + mode + loan-amount slug to avoid collisions on multi-runs.
