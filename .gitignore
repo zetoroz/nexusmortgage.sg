@@ -67,6 +67,9 @@ GBP-listing-copy.md
 * 2
 * 2.*
 
+# Unused image-tool drop folders (e.g. "crossport" infographic exports) — not referenced by any page
+**/crossport/
+
 # Private / internal — not for the public static site
 login/rates.xlsx
 login/*.xlsx
