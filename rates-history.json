@@ -1,5 +1,23 @@
 [
   {
+    "generatedAt": "2026-06-08T05:55:23.545Z",
+    "source": "MAS",
+    "asOfSora": "2026-06-05",
+    "refRateChanges": {
+      "sora1m": {
+        "from": 1.0992,
+        "to": 1.069,
+        "delta": -0.03
+      },
+      "sora3m": {
+        "from": 1.0579,
+        "to": 1.0641,
+        "delta": 0.006
+      }
+    },
+    "summary": "SORA update: sora1m 1.0992→1.069, sora3m 1.0579→1.0641"
+  },
+  {
     "generatedAt": "2026-06-06T04:57:12.322Z",
     "source": "MAS",
     "asOfSora": "2026-06-04",
@@ -3116,5 +3134,211 @@
     "refRateChanges": {},
     "packageChanges": [],
     "summary": "No material changes."
+  },
+  {
+    "generatedAt": "2026-06-08T05:55:23.846872+00:00",
+    "asOf": "27 Feb 2026",
+    "xlsxFingerprint": "baab1843afb9",
+    "packageCount": 98,
+    "refRates": {
+      "sora1m": 1.069,
+      "sora3m": 1.0641,
+      "fhr6": 0.8,
+      "asOfSora": "2026-06-05"
+    },
+    "refRateChanges": {},
+    "packageChanges": [
+      {
+        "key": "CITI|sora1m|1500000",
+        "lender": "CITI",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1.5M + $250K Citigold",
+        "what": "year1Rate",
+        "before": 1.2292,
+        "after": 1.199,
+        "deltaPct": -0.0302
+      },
+      {
+        "key": "UOB|sora1m|500000",
+        "lender": "UOB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $500K",
+        "what": "year1Rate",
+        "before": 1.3792,
+        "after": 1.349,
+        "deltaPct": -0.0302
+      },
+      {
+        "key": "HSBC|sora1m|1000000",
+        "lender": "HSBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1M or ($600K + $200K Funded Premier)",
+        "what": "year1Rate",
+        "before": 1.2992,
+        "after": 1.269,
+        "deltaPct": -0.0302
+      },
+      {
+        "key": "SCB|sora1m|1200000",
+        "lender": "SCB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1.2M or $1M Priority clients",
+        "what": "year1Rate",
+        "before": 1.3492,
+        "after": 1.319,
+        "deltaPct": -0.0302
+      },
+      {
+        "key": "MB|sora1m|500000",
+        "lender": "MB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $500K + $30K Privilege onboard + CC",
+        "what": "year1Rate",
+        "before": 1.3992,
+        "after": 1.369,
+        "deltaPct": -0.0302
+      },
+      {
+        "key": "OCBC|sora1m|300000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": ">$300K",
+        "what": "year1Rate",
+        "before": 1.4492,
+        "after": 1.419,
+        "deltaPct": -0.0302
+      },
+      {
+        "key": "SCB|sora1m|700000",
+        "lender": "SCB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $700K or $500K Priority clients",
+        "what": "year1Rate",
+        "before": 1.4492,
+        "after": 1.419,
+        "deltaPct": -0.0302
+      },
+      {
+        "key": "SCB|sora1m|500000",
+        "lender": "SCB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $500K or $300K Priority clients",
+        "what": "year1Rate",
+        "before": 1.5992,
+        "after": 1.569,
+        "deltaPct": -0.0302
+      },
+      {
+        "key": "HSBC|sora1m|200000",
+        "lender": "HSBC",
+        "package": "1 MTH SORA",
+        "qualifying": ">$200K",
+        "what": "year1Rate",
+        "before": 1.8492,
+        "after": 1.819,
+        "deltaPct": -0.0302
+      },
+      {
+        "key": "UOB|sora3m|500000",
+        "lender": "UOB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $500K",
+        "what": "year1Rate",
+        "before": 1.3379,
+        "after": 1.3441,
+        "deltaPct": 0.0062
+      },
+      {
+        "key": "HSBC|sora3m|1000000",
+        "lender": "HSBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $1M or ($600K + $200K Funded Premier)",
+        "what": "year1Rate",
+        "before": 1.2579,
+        "after": 1.2641,
+        "deltaPct": 0.0062
+      },
+      {
+        "key": "SCB|sora3m|1200000",
+        "lender": "SCB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $1.2M or $1M Priority clients",
+        "what": "year1Rate",
+        "before": 1.3079,
+        "after": 1.3141,
+        "deltaPct": 0.0062
+      },
+      {
+        "key": "MB|sora3m|500000",
+        "lender": "MB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $500K + $30K Privilege onboard + CC",
+        "what": "year1Rate",
+        "before": 1.3579,
+        "after": 1.3641,
+        "deltaPct": 0.0062
+      },
+      {
+        "key": "DBS|sora3m|500000",
+        "lender": "DBS",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $500K",
+        "what": "year1Rate",
+        "before": 1.4079,
+        "after": 1.4141,
+        "deltaPct": 0.0062
+      },
+      {
+        "key": "SCB|sora3m|700000",
+        "lender": "SCB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $700K or $500K Priority clients",
+        "what": "year1Rate",
+        "before": 1.4079,
+        "after": 1.4141,
+        "deltaPct": 0.0062
+      },
+      {
+        "key": "UOB|sora3m|300000",
+        "lender": "UOB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $300K",
+        "what": "year1Rate",
+        "before": 1.4379,
+        "after": 1.4441,
+        "deltaPct": 0.0062
+      },
+      {
+        "key": "HSBC|sora3m|900000",
+        "lender": "HSBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $900k or ($600k + $200K Funded Premier)",
+        "what": "year1Rate",
+        "before": 1.4579,
+        "after": 1.4641,
+        "deltaPct": 0.0062
+      },
+      {
+        "key": "SCB|sora3m|500000",
+        "lender": "SCB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $500K or $300K Priority clients",
+        "what": "year1Rate",
+        "before": 1.5579,
+        "after": 1.5641,
+        "deltaPct": 0.0062
+      },
+      {
+        "key": "HSBC|sora3m|200000",
+        "lender": "HSBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $200K",
+        "what": "year1Rate",
+        "before": 1.8079,
+        "after": 1.8141,
+        "deltaPct": 0.0062
+      }
+    ],
+    "summary": "19 year1Rate"
   }
 ]

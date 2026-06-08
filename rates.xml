@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Sun, 07 Jun 2026 05:26:10 GMT</lastBuildDate>
+<lastBuildDate>Mon, 08 Jun 2026 05:55:23 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
-<title>Current Compounded SORA — 1M 1.10% | 3M 1.06%</title>
+<title>Current Compounded SORA — 1M 1.07% | 3M 1.06%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-current-2026-06-04</guid>
-<pubDate>Sun, 07 Jun 2026 05:26:10 GMT</pubDate>
-<description>Latest published Compounded SORA values per MAS. As of 2026-06-04.</description>
+<guid isPermaLink="false">nexus-current-2026-06-05</guid>
+<pubDate>Mon, 08 Jun 2026 05:55:23 GMT</pubDate>
+<description>Latest published Compounded SORA values per MAS. As of 2026-06-05.</description>
+</item>
+<item>
+<title>SORA update: sora1m 1.0992→1.069, sora3m 1.0579→1.0641</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Mon, 08 Jun 2026 05:55:23 GMT</guid>
+<pubDate>Mon, 08 Jun 2026 05:55:23 GMT</pubDate>
+<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.0992,&quot;to&quot;:1.069,&quot;delta&quot;:-0.03},&quot;sora3m&quot;:{&quot;from&quot;:1.0579,&quot;to&quot;:1.0641,&quot;delta&quot;:0.006}}</description>
 </item>
 <item>
 <title>SORA refresh — no change.</title>
@@ -216,13 +223,6 @@
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
 <guid isPermaLink="false">nexus-rates-Tue, 12 May 2026 04:39:20 GMT</guid>
 <pubDate>Tue, 12 May 2026 04:39:20 GMT</pubDate>
-<description>{}</description>
-</item>
-<item>
-<title>No material changes.</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Wed, 13 May 2026 04:51:28 GMT</guid>
-<pubDate>Wed, 13 May 2026 04:51:28 GMT</pubDate>
 <description>{}</description>
 </item>
 </channel>
