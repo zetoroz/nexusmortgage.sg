@@ -13,6 +13,9 @@ on:
       url:
         description: 'Optional: full URL of one post to cross-post manually'
         required: false
+      image_url:
+        description: 'Optional: override image URL (overrides og:image — useful for custom social graphics)'
+        required: false
 
 # Prevent overlapping runs from double-posting if you push twice fast.
 concurrency:
@@ -43,5 +46,6 @@ jobs:
           LINKEDIN_TOKEN:  ${{ secrets.LINKEDIN_TOKEN }}
           LINKEDIN_ORG_ID: ${{ secrets.LINKEDIN_ORG_ID }}
           # --- manual run input ---
-          MANUAL_URL:      ${{ github.event.inputs.url }}
+          MANUAL_URL:       ${{ github.event.inputs.url }}
+          MANUAL_IMAGE_URL: ${{ github.event.inputs.image_url }}
         run: node scripts/cross-post.mjs

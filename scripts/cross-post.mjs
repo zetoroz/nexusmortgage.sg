@@ -15,7 +15,7 @@ import { readFileSync } from 'node:fs';
 const {
   META_PAGE_ID, META_PAGE_TOKEN, META_IG_USER_ID,
   LINKEDIN_TOKEN, LINKEDIN_ORG_ID,
-  MANUAL_URL,
+  MANUAL_URL, MANUAL_IMAGE_URL,
 } = process.env;
 
 const GRAPH = 'https://graph.facebook.com/v21.0';
@@ -184,7 +184,12 @@ async function report(p, r) {
   let hadError = false;
   for (const m of posts) {
     if (!m.title || !m.url) { console.error('Missing og:title/og:url, skipping:', m); hadError = true; continue; }
-    console.log(`\n-- Cross-posting: ${m.title}\n   ${m.url}`);
+    // Allow a custom image to override the og:image (e.g. a generated social graphic)
+    if (MANUAL_IMAGE_URL) {
+      console.log(`Using custom image override: ${MANUAL_IMAGE_URL}`);
+      m.image = MANUAL_IMAGE_URL;
+    }
+    console.log(`\n-- Cross-posting: ${m.title}\n   ${m.url}\n   image: ${m.image || '(none)'}`);
     const results = await Promise.all([postFacebook(m), postInstagram(m), postLinkedIn(m)]);
     if (results.some((r) => r.ok === false)) hadError = true;
   }
