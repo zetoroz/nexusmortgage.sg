@@ -22,10 +22,11 @@ from pathlib import Path
 from openpyxl import load_workbook
 
 ROOT = Path(__file__).resolve().parent.parent
-# rates.xlsx now lives in repo root (was login/rates.xlsx). Fall back to legacy path.
-_XLSX_ROOT   = ROOT / "rates.xlsx"
-_XLSX_LEGACY = ROOT / "login" / "rates.xlsx"
-XLSX = _XLSX_ROOT if _XLSX_ROOT.exists() else _XLSX_LEGACY
+# rates.xlsx source, newest-first: Rates/ folder, then repo root, then legacy login/.
+_XLSX_RATESDIR = ROOT / "Rates" / "rates.xlsx"
+_XLSX_ROOT     = ROOT / "rates.xlsx"
+_XLSX_LEGACY   = ROOT / "login" / "rates.xlsx"
+XLSX = next((p for p in (_XLSX_RATESDIR, _XLSX_ROOT, _XLSX_LEGACY) if p.exists()), _XLSX_LEGACY)
 OUT  = ROOT / "rates.json"
 HISTORY = ROOT / "rates-history.json"   # append-only audit log of rate changes
 
@@ -162,13 +163,15 @@ def main():
         except Exception as e:
             print(f"[convert-rates] WARN: --use-json-refs requested but failed: {e}")
 
-    # As-of date — best-effort: row 26 col 1 might say "As of 27 Feb 2026"
+    # As-of date — best-effort: row 26 col 1 might say "As of 27 Feb 2026" or "As at 11 May 2026"
     as_of = None
-    for r in range(25, 30):
+    for r in range(24, 30):
         cell = ws.cell(r, 1).value
-        if cell and 'As of' in str(cell):
-            as_of = str(cell).replace('As of', '').strip()
-            break
+        if cell:
+            m = re.match(r'\s*As\s+(?:of|at)\s+(.+)', str(cell), re.IGNORECASE)
+            if m:
+                as_of = m.group(1).strip()
+                break
     if not as_of:
         as_of = "Apr 2026"
 

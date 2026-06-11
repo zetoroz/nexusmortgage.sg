@@ -33,6 +33,24 @@ jobs:
       - name: Install Python deps
         run: pip install openpyxl
 
+      - name: Decrypt private rates workbook
+        # rates.xlsx is NOT in the repo (advisor pricing + BOC contact list).
+        # We commit only the AES-encrypted rates.xlsx.enc and decrypt it here using
+        # the RATES_XLSX_KEY secret. Without the secret, package rebuild is skipped
+        # and only the SORA refresh runs.
+        env:
+          RATES_XLSX_KEY: ${{ secrets.RATES_XLSX_KEY }}
+        run: |
+          if [ -n "$RATES_XLSX_KEY" ] && [ -f rates.xlsx.enc ]; then
+            mkdir -p Rates
+            printf '%s' "$RATES_XLSX_KEY" > /tmp/rk
+            openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in rates.xlsx.enc -out Rates/rates.xlsx -pass file:/tmp/rk
+            rm -f /tmp/rk
+            echo "Decrypted Rates/rates.xlsx ($(wc -c < Rates/rates.xlsx) bytes)"
+          else
+            echo "::warning::RATES_XLSX_KEY not set (or rates.xlsx.enc missing) — skipping package rebuild, SORA refresh only."
+          fi
+
       - name: Fetch SORA from MAS + regenerate feeds
         env:
           # Optional override; defaults to documented MAS endpoint inside the script
@@ -44,9 +62,15 @@ jobs:
         run: node scripts/fetch-mas-rates.mjs
 
       - name: Recompute per-package year1Rate using fresh refRates
-        # Reads rates.xlsx (root) + overrides refRates from rates.json (just updated).
-        # Re-emits rates.json with packages[].year1Rate using live SORA.
-        run: python3 scripts/convert-rates.py --use-json-refs
+        # Reads the decrypted Rates/rates.xlsx + overrides refRates from rates.json
+        # (just updated). Re-emits rates.json with packages[].year1Rate using live SORA.
+        # Skipped if the workbook wasn't decrypted (no RATES_XLSX_KEY secret).
+        run: |
+          if [ -f Rates/rates.xlsx ]; then
+            python3 scripts/convert-rates.py --use-json-refs
+          else
+            echo "No Rates/rates.xlsx — skipping package rebuild (SORA-only refresh)."
+          fi
 
       - name: Re-regenerate feeds with refreshed packages
         # Second pass writes rates.xml + sora-feed.json from the post-Python rates.json

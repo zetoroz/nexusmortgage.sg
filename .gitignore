@@ -76,3 +76,8 @@ login/*.xlsx
 GBP-photos-todo.md
 RATES-UPDATE-GUIDE.md
 blog/blog-images/placeholder.txt
+
+# Private rate source workbooks — NEVER commit (advisor pricing + BOC contact list).
+# CI decrypts rates.xlsx.enc via the RATES_XLSX_KEY secret to rebuild rates.json.
+/rates.xlsx
+/Rates/
