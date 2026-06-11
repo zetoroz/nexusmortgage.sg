@@ -87,6 +87,23 @@ function caption(m, platform) {
 
 async function postFacebook(m) {
   if (!META_PAGE_ID || !META_PAGE_TOKEN) return skip('Facebook', 'no secrets');
+
+  if (m.image) {
+    // Photo post — Facebook will display the custom image instead of scraping
+    // the article's og:image. The article link goes into the caption text.
+    console.log('   FB: posting as photo (custom image detected)');
+    const r = await fetch(`${GRAPH}/${META_PAGE_ID}/photos`, {
+      method: 'POST',
+      body: new URLSearchParams({
+        url: m.image,
+        message: caption(m, 'facebook'),
+        access_token: META_PAGE_TOKEN,
+      }),
+    });
+    return report('Facebook', r);
+  }
+
+  // No custom image — standard link post (FB scrapes og:image from the URL)
   const r = await fetch(`${GRAPH}/${META_PAGE_ID}/feed`, {
     method: 'POST',
     body: new URLSearchParams({ message: caption(m, 'facebook'), link: m.url, access_token: META_PAGE_TOKEN }),
