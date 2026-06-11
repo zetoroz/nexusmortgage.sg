@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en-SG">
 <head>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '27348447628084102');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=27348447628084102&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VKFWNBRM6"></script>
   <script>
@@ -282,6 +300,7 @@
     fetch(SHEET_ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) })
       .then(function(){
         if(typeof gtag==='function'){ gtag('event','generate_lead',{ currency:'SGD', value:50, form_location:SOURCE }); }
+ if(window.fbq){ fbq('track','Lead',{ currency:'SGD', value:50 }); }
         card.innerHTML = '<div class="done"><div class="ck"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2>Got it — thank you!</h2><p>Dan will WhatsApp you a 16-bank comparison shortly. Prefer to chat now? <a href="https://wa.me/6587520859" style="color:#0a7d4f;font-weight:700">Message us on WhatsApp &rarr;</a></p></div>';
       })
       .catch(function(){ btn.disabled=false; btn.textContent='Get my free comparison →'; showToast('Something went wrong — please WhatsApp us instead.', true); });
