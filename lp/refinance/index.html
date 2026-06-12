@@ -217,12 +217,10 @@
               </div>
             </div>
             <div class="q">
-              <span class="qq">Your current rate <span class="opt">· approx</span></span>
-              <div class="chips" data-group="currentRate">
-                <button type="button" class="chip" data-val="Under 2.5%">Under 2.5%</button>
-                <button type="button" class="chip" data-val="2.5%–3.5%">2.5%–3.5%</button>
-                <button type="button" class="chip" data-val="Above 3.5%">Above 3.5%</button>
-                <button type="button" class="chip" data-val="Not sure">Not sure</button>
+              <span class="qq">Your current rate <span class="opt">· on your bank letter or app</span></span>
+              <div class="phonewrap">
+                <input id="f-rate" name="rate" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3.50" required style="flex:1;min-width:0">
+                <span class="pre" style="border-right:none;border-left:1px solid #e2e6ec;white-space:nowrap">% p.a.</span>
               </div>
             </div>
             <button class="btn btn-gold" type="button" id="toStep2">See my savings &rarr;</button>
@@ -342,7 +340,8 @@
   var qbar = document.getElementById('qbar');
   var qlbl = document.getElementById('qlbl');
   var qtitle = document.getElementById('qtitle');
-  var sel = { propertyType:'', loanAmount:'', currentRate:'' };
+  var sel = { propertyType:'', loanAmount:'' };
+  function rateVal(){ return (document.getElementById('f-rate').value || '').trim().replace(',', '.').replace('%',''); }
   function showToast(msg, err){ toast.textContent = msg; toast.className = err ? 'show err' : 'show'; setTimeout(function(){toast.className='';}, 5000); }
 
   // Step 1: chip selection
@@ -360,12 +359,14 @@
   document.getElementById('toStep2').addEventListener('click', function(){
     if(!sel.propertyType){ showToast('Pick your property type.', true); return; }
     if(!sel.loanAmount){ showToast('Pick your approx outstanding loan.', true); return; }
-    if(!sel.currentRate){ showToast('Pick your current rate (or "Not sure").', true); return; }
+    var rv = rateVal();
+    if(!rv){ showToast('Enter your current rate — it\'s on your bank letter or app.', true); document.getElementById('f-rate').focus(); return; }
+    if(!/^\d{1,2}(\.\d{1,3})?$/.test(rv) || parseFloat(rv) <= 0 || parseFloat(rv) >= 12){ showToast('Enter your rate as a number, e.g. 3.50', true); document.getElementById('f-rate').focus(); return; }
     step1.classList.remove('on'); step2.classList.add('on');
     qbar.style.width = '100%'; qlbl.textContent = 'Step 2 of 2';
     qtitle.textContent = 'Where should Dan send your savings?';
-    if(typeof gtag==='function'){ gtag('event','form_qualify',{ form_location:SOURCE, property_type:sel.propertyType, loan_amount:sel.loanAmount, current_rate:sel.currentRate }); }
-    if(window.fbq){ fbq('trackCustom','QualifierComplete', sel); }
+    if(typeof gtag==='function'){ gtag('event','form_qualify',{ form_location:SOURCE, property_type:sel.propertyType, loan_amount:sel.loanAmount, current_rate:rv + '%' }); }
+    if(window.fbq){ fbq('trackCustom','QualifierComplete', { propertyType:sel.propertyType, loanAmount:sel.loanAmount, currentRate:rv + '%' }); }
     document.getElementById('f-name').focus();
   });
 
@@ -397,12 +398,12 @@
       propertyType: sel.propertyType,
       propertyStatus: '',
       loanAmount: sel.loanAmount,
-      currentRate: sel.currentRate,
+      currentRate: rateVal() + '%',
       eventId: eventId, fbp: getCk('_fbp'), fbc: getCk('_fbc'), userAgent: navigator.userAgent
     };
     fetch(SHEET_ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) })
       .then(function(){
-        if(typeof gtag==='function'){ gtag('event','generate_lead',{ currency:'SGD', value:50, form_location:SOURCE, loan_amount:sel.loanAmount, current_rate:sel.currentRate }); }
+        if(typeof gtag==='function'){ gtag('event','generate_lead',{ currency:'SGD', value:50, form_location:SOURCE, loan_amount:sel.loanAmount, current_rate:rateVal() + '%' }); }
         if(window.fbq){ fbq('track','Lead',{ currency:'SGD', value:50 }, { eventID: eventId }); }
         card.innerHTML = '<div class="done"><div class="ck"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2>Got it — thank you!</h2><p>Dan will WhatsApp you your refinance savings shortly. Prefer to chat now? <a href="https://wa.me/6587520859" style="color:#0a7d4f;font-weight:700">Message us on WhatsApp &rarr;</a></p></div>';
       })
