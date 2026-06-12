@@ -156,9 +156,10 @@
     .q .qq .opt{color:#9aa3b2;font-weight:500;text-transform:none;letter-spacing:0}
     .chips{display:flex;flex-wrap:wrap;gap:.45rem}
     .chip{flex:1 1 auto;min-width:calc(50% - .45rem);min-height:44px;padding:.7rem .7rem;border:1px solid #d9dee6;border-radius:9px;background:#fff;color:#3a4658;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;text-align:center;touch-action:manipulation;transition:border-color .15s,background .15s,color .15s,transform .1s}
-    .chip:hover{border-color:var(--gold)}
+    .chip:hover{border-color:var(--gold);box-shadow:0 0 0 1px rgba(196,151,59,.3),0 2px 10px rgba(196,151,59,.2)}
     .chip:active{transform:scale(.98)}
-    .chip.sel{border-color:var(--gold);background:linear-gradient(135deg,rgba(196,151,59,.16),rgba(232,201,122,.1));color:#0B1C3A;box-shadow:inset 0 0 0 1px var(--gold)}
+    .chip.sel{border-color:var(--gold);background:linear-gradient(135deg,rgba(196,151,59,.16),rgba(232,201,122,.1));color:#0B1C3A;box-shadow:inset 0 0 0 1px var(--gold),0 0 0 3px rgba(196,151,59,.18),0 4px 14px rgba(196,151,59,.35);animation:chippop .25s cubic-bezier(.34,1.56,.64,1)}
+    @keyframes chippop{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
     .chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     .qnav{display:flex;gap:.6rem}
     .btn-back{flex:0 0 auto;width:auto;padding:.95rem 1.15rem;background:#fff;color:#3a4658;border:1px solid #d9dee6;font-size:1.05rem}
