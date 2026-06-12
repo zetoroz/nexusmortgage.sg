@@ -4116,5 +4116,20 @@
       }
     ],
     "summary": "25 year1Rate, 19 added, 13 removed"
+  },
+  {
+    "generatedAt": "2026-06-12T05:52:59.855615+00:00",
+    "asOf": "11 May 2026",
+    "xlsxFingerprint": "506e84c9ef9d",
+    "packageCount": 106,
+    "refRates": {
+      "sora1m": 1.0495,
+      "sora3m": 1.0739,
+      "fhr6": 0.8,
+      "asOfSora": "2026-06-10"
+    },
+    "refRateChanges": {},
+    "packageChanges": [],
+    "summary": "No material changes."
   }
 ]
