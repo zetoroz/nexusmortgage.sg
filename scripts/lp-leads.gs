@@ -18,7 +18,13 @@
  *    Redeploy as a NEW version each time you paste an update.
  *
  * Columns: Timestamp | Name | Mobile | Email | Campaign/Source | Loan Amount |
- *          Current Rate (refi) | Stage | Page URL | Status
+ *          Current Rate (refi) | Stage | Page URL | Status |
+ *          Purpose | Property Type | Property Status
+ *
+ * NOTE (2026-06-13): the home-loan LP qualifier funnel now sends purpose,
+ * propertyType and propertyStatus. They are appended as columns 11-13 so the
+ * first 10 columns (and every historical row) stay exactly where they were.
+ * Add three header cells to the sheet: Purpose | Property Type | Property Status.
  */
 
 function doPost(e) {
@@ -39,7 +45,10 @@ function doPost(e) {
       data.currentRate || '',
       data.stage || 'lead-capture',
       data.pageUrl || '',
-      ''  // Status — you fill
+      '',                       // Status — you fill
+      data.purpose || '',        // Purpose (New purchase / Refinance)
+      data.propertyType || '',   // Property Type (HDB / Condo-EC / Landed / Commercial)
+      data.propertyStatus || ''  // Property Status (Resale / BUC)
     ]);
 
     // Server-side Meta CAPI (best-effort — never block lead capture).
@@ -88,7 +97,13 @@ function sendMetaCapi(data, lead) {
       action_source: 'website',
       event_source_url: data.pageUrl || 'https://nexusmortgage.sg/',
       user_data: userData,
-      custom_data: { currency: 'SGD', value: 50, lead_source: data.source || data.campaign || 'lp' }
+      custom_data: {
+        currency: 'SGD', value: 50,
+        lead_source: data.source || data.campaign || 'lp',
+        lead_purpose: data.purpose || '',
+        property_type: data.propertyType || '',
+        loan_amount_band: data.loanAmount || ''
+      }
     }]
   };
 
