@@ -416,27 +416,31 @@
         if(typeof gtag==='function'){ gtag('event','generate_lead',{ currency:'SGD', value:50, form_location:SOURCE, loan_amount:sel.loanAmount, current_rate:rateVal() + '%' }); }
         if(window.fbq){ fbq('track','Lead',{ currency:'SGD', value:50 }, { eventID: eventId }); }
 
-        // Instant indicative savings: interest-gap estimate vs 2026 from-rate,
-        // on the midpoint of the chosen outstanding-loan band.
+        // Instant indicative savings vs 2026 from-rate, on the midpoint of the
+        // chosen outstanding-loan band. Headline = amortized monthly repayment
+        // difference (25-year remaining tenure assumed); secondary = first-year
+        // interest gap (accurate early in the loan when principal barely moves).
         var BEST_FIXED = 1.40; // keep in sync with the rates shown on this LP
+        var TENURE_YRS = 25;   // assumed remaining tenure — stated in the panel
         var MIDS = { 'Under $500k':350000, '$500k–$1M':750000, '$1M–$1.5M':1250000, '$1.5M–$2M':1750000, 'Above $2M':2250000 };
         var fmt = function(n){ return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); };
+        var pmt = function(P, annualPct, years){ var r = annualPct/100/12, n = years*12; return P * r / (1 - Math.pow(1 + r, -n)); };
         var cur = parseFloat(rateVal());
         var principal = MIDS[sel.loanAmount] || 0;
         var saveHtml = '';
         if (principal && cur && (cur - BEST_FIXED) >= 0.1) {
-          var perYear = principal * (cur - BEST_FIXED) / 100;
-          var perMonth = perYear / 12;
+          var pmtDiff = pmt(principal, cur, TENURE_YRS) - pmt(principal, BEST_FIXED, TENURE_YRS);
+          var y1Interest = principal * (cur - BEST_FIXED) / 100;
           saveHtml =
             '<div class="savebox">' +
               '<div class="row"><span>Your current rate</span><b>' + cur.toFixed(2) + '% p.a.</b></div>' +
               '<div class="row"><span>2026 fixed packages from</span><b>' + BEST_FIXED.toFixed(2) + '% p.a.</b></div>' +
               '<div class="row"><span>Outstanding loan</span><b>' + sel.loanAmount + '</b></div>' +
-              '<div class="hl"><div class="per">Estimated interest saving*</div>' +
-              '<div class="amt">&asymp; ' + fmt(perMonth) + ' / month</div>' +
-              '<div class="per">&asymp; ' + fmt(perYear) + ' a year, based on ~' + fmt(principal) + ' outstanding</div></div>' +
+              '<div class="hl"><div class="per">Estimated lower monthly repayment*</div>' +
+              '<div class="amt">&asymp; ' + fmt(pmtDiff) + ' / month</div>' +
+              '<div class="per">plus &asymp; ' + fmt(y1Interest) + ' less interest in the first year &middot; based on ~' + fmt(principal) + ' over ' + TENURE_YRS + ' yrs</div></div>' +
             '</div>' +
-            '<p class="savedisc">*Indicative interest-gap estimate only, before fees and subsidies — not an offer. Actual packages depend on your property, loan size, lock-in and bank approval. Dan will WhatsApp your exact 16-bank comparison.</p>';
+            '<p class="savedisc">*Indicative estimate on an amortising loan, assuming ' + TENURE_YRS + '-year remaining tenure, before fees and subsidies — not an offer. Actual packages depend on your property, loan size, tenure, lock-in and bank approval. Dan will WhatsApp your exact 16-bank comparison.</p>';
         } else if (cur && cur <= BEST_FIXED + 0.1) {
           saveHtml = '<p style="font-size:.9rem;color:#3a4658;margin:.8rem 0">Your ' + cur.toFixed(2) + '% is already competitive — Dan will check whether any current package beats it before recommending a switch.</p>';
         }
