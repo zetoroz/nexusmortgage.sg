@@ -81,3 +81,8 @@ blog/blog-images/placeholder.txt
 # CI decrypts rates.xlsx.enc via the RATES_XLSX_KEY secret to rebuild rates.json.
 /rates.xlsx
 /Rates/
+
+# Ads audit work products (local-only, do not deploy)
+ADS-AUDIT-REPORT.md
+ADS-ACTION-PLAN.md
+ADS-QUICK-WINS.md

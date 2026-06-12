@@ -6425,7 +6425,10 @@ leadForm.addEventListener('submit', async e => {
     closeModal();
     if (typeof gtag === 'function') {
       gtag('event', 'generate_lead', { form_location: 'free_report_unlock', currency: 'SGD', value: 50 });
-      if(window.fbq){ fbq('track','Lead',{ currency:'SGD', value:50 }); }
+    }
+    if (window.fbq) {
+      var leadEventId = (self.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('lead-' + Date.now() + '-' + Math.random().toString(16).slice(2));
+      fbq('track','Lead',{ currency:'SGD', value:50 }, { eventID: leadEventId });
     }
     showToast('Report unlocked — pick a rate, then click "Email my detailed report".', 'success');
     setTimeout(() => {

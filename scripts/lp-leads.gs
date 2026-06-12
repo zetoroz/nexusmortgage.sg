@@ -1,21 +1,24 @@
 /**
  * Nexus Mortgage — Landing-Page lead endpoint (Google Apps Script Web App).
- * Appends each LP form submission as a row in the bound "Nexus — Leads" sheet.
+ * Appends each LP form submission as a row in the bound "Nexus — Leads" sheet,
+ * then sends a server-side Meta Conversions API (CAPI) "Lead" event
+ * (deduplicated with the browser Pixel via the shared eventId).
  * No Make, no Notion — the LP form POSTs straight here.
  *
- * DEPLOY (one-time, ~3 min):
+ * DEPLOY (one-time, ~4 min):
  * 1. Open the sheet "Nexus — Leads (Ads + Free Report)" → Extensions → Apps Script.
  * 2. Delete the default code, paste THIS file, Save.
- * 3. Deploy → New deployment → gear icon → type: Web app.
- *    - Description: "Nexus LP leads"
- *    - Execute as: Me
- *    - Who has access: Anyone        ← important (lets the form post without login)
- * 4. Deploy → Authorize access (sign in, Allow). Copy the Web app URL
- *    (looks like https://script.google.com/macros/s/AKfyc.../exec).
- * 5. Send Claude that /exec URL — it wires the 3 LP forms + the CSP allowance.
+ * 3. (CAPI) Project Settings → Script properties → Add:
+ *      META_PIXEL_ID    = 27348447628084102
+ *      META_CAPI_TOKEN  = <Conversions API token from Meta Events Manager
+ *                          → Settings → Conversions API → Generate access token>
+ *    Leaving META_CAPI_TOKEN unset simply skips CAPI (sheet logging still works).
+ * 4. Deploy → New deployment → Web app. Execute as: Me. Who has access: Anyone.
+ * 5. Authorize (Allow). The /exec URL is unchanged, so the LP forms keep working.
+ *    Redeploy as a NEW version each time you paste an update.
  *
- * Columns expected (row 1 headers already set):
- * Timestamp | Name | Mobile | Email | Campaign / Source | Loan Amount | Current Rate (refi) | Stage | Page URL | Status
+ * Columns: Timestamp | Name | Mobile | Email | Campaign/Source | Loan Amount |
+ *          Current Rate (refi) | Stage | Page URL | Status
  */
 
 function doPost(e) {
@@ -38,6 +41,10 @@ function doPost(e) {
       data.pageUrl || '',
       ''  // Status — you fill
     ]);
+
+    // Server-side Meta CAPI (best-effort — never block lead capture).
+    try { sendMetaCapi(data, lead); } catch (capiErr) { Logger.log('CAPI error: ' + capiErr); }
+
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -48,6 +55,51 @@ function doPost(e) {
   } finally {
     try { lock.releaseLock(); } catch (e2) {}
   }
+}
+
+/** SHA-256 -> lowercase hex (Meta requires hashed em/ph). */
+function sha256hex(s) {
+  var raw = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(s), Utilities.Charset.UTF_8);
+  return raw.map(function (b) { return ('0' + (b & 0xff).toString(16)).slice(-2); }).join('');
+}
+
+/** Send a "Lead" event to Meta Conversions API, deduped via eventId. */
+function sendMetaCapi(data, lead) {
+  var props = PropertiesService.getScriptProperties();
+  var pixelId = props.getProperty('META_PIXEL_ID') || '27348447628084102';
+  var token = props.getProperty('META_CAPI_TOKEN');
+  if (!token) return; // CAPI not configured yet — skip silently.
+
+  var email = (lead.email || '').trim().toLowerCase();
+  var phoneDigits = String(lead.phone || '').replace(/\D/g, ''); // e.g. "6512345678"
+
+  var userData = {};
+  if (email) userData.em = [sha256hex(email)];
+  if (phoneDigits) userData.ph = [sha256hex(phoneDigits)];
+  if (data.fbp) userData.fbp = data.fbp;
+  if (data.fbc) userData.fbc = data.fbc;
+  if (data.userAgent) userData.client_user_agent = data.userAgent;
+
+  var payload = {
+    data: [{
+      event_name: 'Lead',
+      event_time: Math.floor(Date.now() / 1000),
+      event_id: data.eventId || undefined,          // dedup with browser Pixel
+      action_source: 'website',
+      event_source_url: data.pageUrl || 'https://nexusmortgage.sg/',
+      user_data: userData,
+      custom_data: { currency: 'SGD', value: 50, lead_source: data.source || data.campaign || 'lp' }
+    }]
+  };
+
+  var url = 'https://graph.facebook.com/v21.0/' + pixelId + '/events?access_token=' + encodeURIComponent(token);
+  var res = UrlFetchApp.fetch(url, {
+    method: 'post',
+    contentType: 'application/json',
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  });
+  Logger.log('CAPI ' + res.getResponseCode() + ': ' + res.getContentText());
 }
 
 // Health check — visit the /exec URL in a browser; should say "OK".

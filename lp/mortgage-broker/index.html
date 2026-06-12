@@ -288,6 +288,8 @@
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showToast('Please enter a valid email.', true); return; }
     if(!consent){ showToast('Please tick the consent box.', true); return; }
     btn.disabled = true; btn.textContent = 'Sending…';
+    var getCk = function(n){ var m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)'); return m ? m.pop() : ''; };
+    var eventId = (self.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('lead-' + Date.now() + '-' + Math.random().toString(16).slice(2));
     var payload = {
       source: SOURCE,
       campaign: SOURCE,
@@ -295,12 +297,13 @@
       submittedAt: new Date().toISOString(),
       pageUrl: location.href,
       lead: { name: name, phone: '+65 ' + phoneRaw.slice(0,4) + ' ' + phoneRaw.slice(4), email: email },
-      loanAmount: (document.getElementById('f-loan').value || '').trim()
+      loanAmount: (document.getElementById('f-loan').value || '').trim(),
+      eventId: eventId, fbp: getCk('_fbp'), fbc: getCk('_fbc'), userAgent: navigator.userAgent
     };
     fetch(SHEET_ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) })
       .then(function(){
         if(typeof gtag==='function'){ gtag('event','generate_lead',{ currency:'SGD', value:50, form_location:SOURCE }); }
- if(window.fbq){ fbq('track','Lead',{ currency:'SGD', value:50 }); }
+ if(window.fbq){ fbq('track','Lead',{ currency:'SGD', value:50 }, { eventID: eventId }); }
         card.innerHTML = '<div class="done"><div class="ck"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2>Got it — thank you!</h2><p>Dan will WhatsApp you a 16-bank comparison shortly. Prefer to chat now? <a href="https://wa.me/6587520859" style="color:#0a7d4f;font-weight:700">Message us on WhatsApp &rarr;</a></p></div>';
       })
       .catch(function(){ btn.disabled=false; btn.textContent='Get my free comparison →'; showToast('Something went wrong — please WhatsApp us instead.', true); });
