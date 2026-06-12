@@ -94,6 +94,32 @@
     .btn-gold:hover{transform:translateY(-1px)}
     .btn-gold:active{transform:translateY(0)}
     .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+    /* hero rate/proof panel */
+    .ratepanel{margin-top:.2rem;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(196,151,59,.22);border-radius:14px;padding:1.05rem 1.2rem;max-width:25rem;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .ratepanel .rphead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
+    .ratepanel .rptitle{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700}
+    .ratepanel .rpdate{font-size:.64rem;color:rgba(232,227,218,.5)}
+    .rprow{display:flex;justify-content:space-between;align-items:center;padding:.42rem 0;border-top:1px solid rgba(196,151,59,.12)}
+    .rprow:first-of-type{border-top:none}
+    .rplabel{font-size:.88rem;color:rgba(232,227,218,.85)}
+    .rpval{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--gold-2);line-height:1;white-space:nowrap}
+    .rpval small{font-size:.64rem;color:rgba(232,227,218,.5);font-family:'DM Sans',sans-serif;font-weight:500}
+    .rplink{display:inline-block;margin-top:.6rem;font-size:.8rem;color:var(--gold-2);font-weight:600}
+    .rpnote{font-size:.62rem;color:rgba(232,227,218,.42);line-height:1.45;margin-top:.45rem}
+    .gaprow{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin:.5rem 0 .3rem}
+    .gapcol{text-align:center;flex:1}
+    .gaplbl{display:block;font-size:.64rem;color:rgba(232,227,218,.6);margin-bottom:.25rem}
+    .gapval{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:600;line-height:1}
+    .gapval--bad{color:#e0a3a3}
+    .gapval--good{color:#7fd1a3}
+    .gaparrow{color:var(--gold);flex-shrink:0}
+    .cmprow{display:grid;grid-template-columns:1fr 4.6rem 4.6rem;gap:.5rem;align-items:center;padding:.45rem 0;border-top:1px solid rgba(196,151,59,.12);font-size:.86rem}
+    .cmprow:first-of-type{border-top:none}
+    .cmplbl{color:rgba(232,227,218,.72)}
+    .cmpx{color:rgba(232,227,218,.45);text-align:right}
+    .cmpus{color:var(--gold-2);font-weight:700;text-align:right}
+    .cmphead .cmpx,.cmphead .cmpus{font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;color:rgba(232,227,218,.5)}
+    .cmphead .cmpus{color:var(--gold)}
     .or{text-align:center;font-size:.78rem;color:#8a93a3;margin:.8rem 0;position:relative}
     .or::before,.or::after{content:'';position:absolute;top:50%;width:38%;height:1px;background:#e2e6ec}
     .or::before{left:0}.or::after{right:0}
@@ -193,6 +219,15 @@
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>500+ home loans arranged across HDB, EC, condo &amp; landed</li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Zero cost to you — the bank pays our referral fee</li>
         </ul>
+        <div class="ratepanel">
+          <div class="rphead"><span class="rptitle">One bank vs Nexus</span></div>
+          <div class="cmprow cmphead"><span class="cmplbl"></span><span class="cmpx">One bank</span><span class="cmpus">Nexus</span></div>
+          <div class="cmprow"><span class="cmplbl">Packages shown</span><span class="cmpx">1 menu</span><span class="cmpus">All 16</span></div>
+          <div class="cmprow"><span class="cmplbl">Works for</span><span class="cmpx">the bank</span><span class="cmpus">you</span></div>
+          <div class="cmprow"><span class="cmplbl">Cost to you</span><span class="cmpx">&mdash;</span><span class="cmpus">$0</span></div>
+          <p class="rpnote">Banks pay our referral fee on disbursement &mdash; our advice is free to you.</p>
+        </div>
+
       </div>
 
       <!-- LEAD FORM -->
