@@ -138,6 +138,28 @@
     .done .ck{width:54px;height:54px;border-radius:50%;background:#e8f7ef;color:#0a7d4f;display:flex;align-items:center;justify-content:center;margin:0 auto .8rem}
     .done h2{color:var(--ink);font-size:1.5rem;margin-bottom:.4rem}
     .done p{font-size:.92rem;color:#4a5568}
+    /* qualifier funnel */
+    .qprog{display:flex;align-items:center;gap:.7rem;margin-bottom:1.1rem}
+    .qprog .bar{flex:1;height:5px;border-radius:4px;background:#e9ebf0;overflow:hidden}
+    .qprog .bar i{display:block;height:100%;width:50%;background:linear-gradient(90deg,#C4973B,#E8C97A);border-radius:4px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+    .qprog .lbl{font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#9aa3b2;white-space:nowrap}
+    .qstep{display:none}
+    .qstep.on{display:block;animation:qfade .35s ease both}
+    @keyframes qfade{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+    .q{margin-bottom:1rem}
+    .q .qq{display:block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:#3a4658;margin-bottom:.5rem}
+    .q .qq .opt{color:#9aa3b2;font-weight:500;text-transform:none;letter-spacing:0}
+    .chips{display:flex;flex-wrap:wrap;gap:.45rem}
+    .chip{flex:1 1 auto;min-width:calc(50% - .45rem);min-height:44px;padding:.7rem .7rem;border:1px solid #d9dee6;border-radius:9px;background:#fff;color:#3a4658;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;text-align:center;touch-action:manipulation;transition:border-color .15s,background .15s,color .15s,transform .1s}
+    .chip:hover{border-color:var(--gold)}
+    .chip:active{transform:scale(.98)}
+    .chip.sel{border-color:var(--gold);background:linear-gradient(135deg,rgba(196,151,59,.16),rgba(232,201,122,.1));color:#0B1C3A;box-shadow:inset 0 0 0 1px var(--gold)}
+    .chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+    .qnav{display:flex;gap:.6rem}
+    .btn-back{flex:0 0 auto;width:auto;padding:.95rem 1.15rem;background:#fff;color:#3a4658;border:1px solid #d9dee6;font-size:1.05rem}
+    .btn-back:hover{border-color:var(--gold);transform:translateY(-1px)}
+    .qhint{font-size:.78rem;color:#9aa3b2;text-align:center;margin-top:.8rem}
+    .qhint a{color:var(--gold);font-weight:600;text-decoration:underline}
     @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
   </style>
 </head>
@@ -162,40 +184,75 @@
       </div>
       <div class="card" id="formcard">
         <span class="freeflag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Free · No obligation</span>
-        <h2>See your refinance savings</h2>
-        <p class="cardsub">Tell us where to reach you. Dan will WhatsApp your savings across all 16 banks — usually within a few hours.</p>
+        <h2 id="qtitle">See your savings in 60 seconds</h2>
+        <p class="cardsub" id="qsub">Answer three quick questions and Dan WhatsApps your real savings across all 16 MAS-regulated banks — usually within hours.</p>
+        <div class="qprog"><div class="bar"><i id="qbar"></i></div><span class="lbl" id="qlbl">Step 1 of 2</span></div>
         <form id="lead-form" novalidate>
-          <div class="field">
-            <label for="f-name">Full name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Tan Wei Ming" required>
-          </div>
-          <div class="field">
-            <label for="f-phone">Mobile <span style="color:#9aa3b2;font-weight:500;text-transform:none;letter-spacing:0">· SG number</span></label>
-            <div class="phonewrap">
-              <span class="pre">+65</span>
-              <input id="f-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="8123 4567" required>
+
+          <!-- STEP 1 · qualifier -->
+          <div class="qstep on" id="step1">
+            <div class="q">
+              <span class="qq">Property type</span>
+              <div class="chips" data-group="propertyType">
+                <button type="button" class="chip" data-val="HDB">HDB flat</button>
+                <button type="button" class="chip" data-val="Condo/EC">Condo / EC</button>
+                <button type="button" class="chip" data-val="Landed">Landed</button>
+                <button type="button" class="chip" data-val="Commercial">Commercial</button>
+              </div>
             </div>
+            <div class="q">
+              <span class="qq">Outstanding loan</span>
+              <div class="chips" data-group="loanAmount">
+                <button type="button" class="chip" data-val="Under $500k">Under $500k</button>
+                <button type="button" class="chip" data-val="$500k–$1M">$500k–$1M</button>
+                <button type="button" class="chip" data-val="$1M–$1.5M">$1M–$1.5M</button>
+                <button type="button" class="chip" data-val="$1.5M–$2M">$1.5M–$2M</button>
+                <button type="button" class="chip" data-val="Above $2M">Above $2M</button>
+              </div>
+            </div>
+            <div class="q">
+              <span class="qq">Your current rate <span class="opt">· approx</span></span>
+              <div class="chips" data-group="currentRate">
+                <button type="button" class="chip" data-val="Under 2.5%">Under 2.5%</button>
+                <button type="button" class="chip" data-val="2.5%–3.5%">2.5%–3.5%</button>
+                <button type="button" class="chip" data-val="Above 3.5%">Above 3.5%</button>
+                <button type="button" class="chip" data-val="Not sure">Not sure</button>
+              </div>
+            </div>
+            <button class="btn btn-gold" type="button" id="toStep2">See my savings &rarr;</button>
+            <div class="qhint">~30 seconds · or <a href="https://wa.me/6587520859?text=Hi%20Dan%2C%20I%27d%20like%20to%20see%20my%20refinance%20savings%20across%2016%20banks." target="_blank" rel="noopener">WhatsApp Dan now</a></div>
           </div>
-          <div class="field">
-            <label for="f-email">Email</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required>
+
+          <!-- STEP 2 · contact -->
+          <div class="qstep" id="step2">
+            <div class="field">
+              <label for="f-name">Full name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Tan Wei Ming" required>
+            </div>
+            <div class="field">
+              <label for="f-phone">Mobile <span style="color:#9aa3b2;font-weight:500;text-transform:none;letter-spacing:0">· SG number</span></label>
+              <div class="phonewrap">
+                <span class="pre">+65</span>
+                <input id="f-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="8123 4567" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required>
+            </div>
+            <label class="consent"><input id="f-consent" type="checkbox"> I'd like Nexus to contact me about my enquiry and consent to my data being used per the <a href="/privacy/" target="_blank" rel="noopener">PDPA</a>.</label>
+            <div class="qnav">
+              <button class="btn btn-back" type="button" id="backStep1" aria-label="Back">&larr;</button>
+              <button class="btn btn-gold" type="submit" id="submitbtn">Show my savings &rarr;</button>
+            </div>
+            <div class="or">or</div>
+            <a class="btn btn-wa" href="https://wa.me/6587520859?text=Hi%20Dan%2C%20I%27d%20like%20to%20see%20my%20refinance%20savings%20across%2016%20banks." target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.5-1.2-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.4.5-.3.3c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.8c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.3.1.2.1.6-.1 1.1z"/></svg>
+              WhatsApp Dan now
+            </a>
+            <div class="securenote"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Encrypted. We never sell your data. Banks pay our fee.</div>
           </div>
-          <div class="field">
-            <label for="f-loan">Outstanding loan <span style="color:#9aa3b2;font-weight:500;text-transform:none;letter-spacing:0">· approx, optional</span></label>
-            <div class="phonewrap"><span class="pre">$</span><input id="f-loan" name="loan" type="text" inputmode="numeric" autocomplete="off" placeholder="e.g. 600,000"></div>
-          </div>
-          <div class="field">
-            <label for="f-rate">Current interest rate <span style="color:#9aa3b2;font-weight:500;text-transform:none;letter-spacing:0">· % p.a., optional</span></label>
-            <input id="f-rate" name="rate" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3.50">
-          </div>
-          <label class="consent"><input id="f-consent" type="checkbox"> I'd like Nexus to contact me about my enquiry and consent to my data being used per the <a href="/privacy/" target="_blank" rel="noopener">PDPA</a>.</label>
-          <button class="btn btn-gold" type="submit" id="submitbtn">Show my savings &rarr;</button>
-          <div class="or">or</div>
-          <a class="btn btn-wa" href="https://wa.me/6587520859?text=Hi%20Dan%2C%20I%27d%20like%20to%20see%20my%20refinance%20savings%20across%2016%20banks." target="_blank" rel="noopener">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.5-1.2-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.4.5-.3.3c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.8c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.3.1.2.1.6-.1 1.1z"/></svg>
-            WhatsApp Dan now
-          </a>
-          <div class="securenote"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Encrypted. We never sell your data. Banks pay our fee.</div>
+
         </form>
       </div>
     </div>
@@ -206,7 +263,7 @@
   <div class="wrap">
     <div class="stat"><div class="n">~1.40%</div><div class="l">fixed packages from, 2026</div></div>
     <div class="stat"><div class="n">16</div><div class="l">banks compared each time</div></div>
-    <div class="stat"><div class="n">Since 2017</div><div class="l">advising Singapore owners</div></div>
+    <div class="stat"><div class="n">500+</div><div class="l">home loans arranged since 2017</div></div>
     <div class="stat"><div class="n">$0</div><div class="l">cost to you — banks pay us</div></div>
   </div>
 </div>
@@ -272,7 +329,45 @@
   var btn = document.getElementById('submitbtn');
   var toast = document.getElementById('toast');
   var card = document.getElementById('formcard');
+  var step1 = document.getElementById('step1');
+  var step2 = document.getElementById('step2');
+  var qbar = document.getElementById('qbar');
+  var qlbl = document.getElementById('qlbl');
+  var qtitle = document.getElementById('qtitle');
+  var sel = { propertyType:'', loanAmount:'', currentRate:'' };
   function showToast(msg, err){ toast.textContent = msg; toast.className = err ? 'show err' : 'show'; setTimeout(function(){toast.className='';}, 5000); }
+
+  // Step 1: chip selection
+  Array.prototype.forEach.call(document.querySelectorAll('.chips'), function(group){
+    var key = group.getAttribute('data-group');
+    group.addEventListener('click', function(e){
+      var chip = e.target.closest('.chip'); if(!chip) return;
+      Array.prototype.forEach.call(group.querySelectorAll('.chip'), function(c){ c.classList.remove('sel'); });
+      chip.classList.add('sel');
+      sel[key] = chip.getAttribute('data-val');
+    });
+  });
+
+  // Step 1 -> 2
+  document.getElementById('toStep2').addEventListener('click', function(){
+    if(!sel.propertyType){ showToast('Pick your property type.', true); return; }
+    if(!sel.loanAmount){ showToast('Pick your approx outstanding loan.', true); return; }
+    if(!sel.currentRate){ showToast('Pick your current rate (or "Not sure").', true); return; }
+    step1.classList.remove('on'); step2.classList.add('on');
+    qbar.style.width = '100%'; qlbl.textContent = 'Step 2 of 2';
+    qtitle.textContent = 'Where should Dan send your savings?';
+    if(typeof gtag==='function'){ gtag('event','form_qualify',{ form_location:SOURCE, property_type:sel.propertyType, loan_amount:sel.loanAmount, current_rate:sel.currentRate }); }
+    if(window.fbq){ fbq('trackCustom','QualifierComplete', sel); }
+    document.getElementById('f-name').focus();
+  });
+
+  // back
+  document.getElementById('backStep1').addEventListener('click', function(){
+    step2.classList.remove('on'); step1.classList.add('on');
+    qbar.style.width = '50%'; qlbl.textContent = 'Step 1 of 2';
+    qtitle.textContent = 'See your savings in 60 seconds';
+  });
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var name = document.getElementById('f-name').value.trim();
@@ -290,14 +385,17 @@
       source: SOURCE, campaign: SOURCE, stage: 'lead-capture',
       submittedAt: new Date().toISOString(), pageUrl: location.href,
       lead: { name: name, phone: '+65 ' + phoneRaw.slice(0,4) + ' ' + phoneRaw.slice(4), email: email },
-      loanAmount: (document.getElementById('f-loan').value || '').trim(),
-      currentRate: (document.getElementById('f-rate').value || '').trim(),
+      purpose: 'Refinance',
+      propertyType: sel.propertyType,
+      propertyStatus: '',
+      loanAmount: sel.loanAmount,
+      currentRate: sel.currentRate,
       eventId: eventId, fbp: getCk('_fbp'), fbc: getCk('_fbc'), userAgent: navigator.userAgent
     };
     fetch(SHEET_ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) })
       .then(function(){
-        if(typeof gtag==='function'){ gtag('event','generate_lead',{ currency:'SGD', value:50, form_location:SOURCE }); }
- if(window.fbq){ fbq('track','Lead',{ currency:'SGD', value:50 }, { eventID: eventId }); }
+        if(typeof gtag==='function'){ gtag('event','generate_lead',{ currency:'SGD', value:50, form_location:SOURCE, loan_amount:sel.loanAmount, current_rate:sel.currentRate }); }
+        if(window.fbq){ fbq('track','Lead',{ currency:'SGD', value:50 }, { eventID: eventId }); }
         card.innerHTML = '<div class="done"><div class="ck"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2>Got it — thank you!</h2><p>Dan will WhatsApp you your refinance savings shortly. Prefer to chat now? <a href="https://wa.me/6587520859" style="color:#0a7d4f;font-weight:700">Message us on WhatsApp &rarr;</a></p></div>';
       })
       .catch(function(){ btn.disabled=false; btn.textContent='Show my savings →'; showToast('Something went wrong — please WhatsApp us instead.', true); });
