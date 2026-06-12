@@ -138,6 +138,13 @@
     .done .ck{width:54px;height:54px;border-radius:50%;background:#e8f7ef;color:#0a7d4f;display:flex;align-items:center;justify-content:center;margin:0 auto .8rem}
     .done h2{color:var(--ink);font-size:1.5rem;margin-bottom:.4rem}
     .done p{font-size:.92rem;color:#4a5568}
+    .savebox{background:linear-gradient(135deg,rgba(196,151,59,.1),rgba(232,201,122,.06));border:1px solid rgba(196,151,59,.35);border-radius:12px;padding:1.1rem 1.2rem;margin:1rem 0;text-align:left}
+    .savebox .row{display:flex;justify-content:space-between;gap:.8rem;font-size:.88rem;color:#3a4658;padding:.28rem 0}
+    .savebox .row b{color:#0B1C3A}
+    .savebox .hl{border-top:1px dashed rgba(196,151,59,.45);margin-top:.45rem;padding-top:.6rem}
+    .savebox .hl .amt{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#0a7d4f;line-height:1.05}
+    .savebox .hl .per{font-size:.78rem;color:#4a5568}
+    .savedisc{font-size:.68rem;color:#8a93a3;line-height:1.5;margin-top:.6rem;text-align:left}
     /* qualifier funnel */
     .qprog{display:flex;align-items:center;gap:.7rem;margin-bottom:1.1rem}
     .qprog .bar{flex:1;height:5px;border-radius:4px;background:#e9ebf0;overflow:hidden}
@@ -405,7 +412,34 @@
       .then(function(){
         if(typeof gtag==='function'){ gtag('event','generate_lead',{ currency:'SGD', value:50, form_location:SOURCE, loan_amount:sel.loanAmount, current_rate:rateVal() + '%' }); }
         if(window.fbq){ fbq('track','Lead',{ currency:'SGD', value:50 }, { eventID: eventId }); }
-        card.innerHTML = '<div class="done"><div class="ck"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2>Got it — thank you!</h2><p>Dan will WhatsApp you your refinance savings shortly. Prefer to chat now? <a href="https://wa.me/6587520859" style="color:#0a7d4f;font-weight:700">Message us on WhatsApp &rarr;</a></p></div>';
+
+        // Instant indicative savings: interest-gap estimate vs 2026 from-rate,
+        // on the midpoint of the chosen outstanding-loan band.
+        var BEST_FIXED = 1.40; // keep in sync with the rates shown on this LP
+        var MIDS = { 'Under $500k':350000, '$500k–$1M':750000, '$1M–$1.5M':1250000, '$1.5M–$2M':1750000, 'Above $2M':2250000 };
+        var fmt = function(n){ return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); };
+        var cur = parseFloat(rateVal());
+        var principal = MIDS[sel.loanAmount] || 0;
+        var saveHtml = '';
+        if (principal && cur && (cur - BEST_FIXED) >= 0.1) {
+          var perYear = principal * (cur - BEST_FIXED) / 100;
+          var perMonth = perYear / 12;
+          saveHtml =
+            '<div class="savebox">' +
+              '<div class="row"><span>Your current rate</span><b>' + cur.toFixed(2) + '% p.a.</b></div>' +
+              '<div class="row"><span>2026 fixed packages from</span><b>' + BEST_FIXED.toFixed(2) + '% p.a.</b></div>' +
+              '<div class="row"><span>Outstanding loan</span><b>' + sel.loanAmount + '</b></div>' +
+              '<div class="hl"><div class="per">Estimated interest saving*</div>' +
+              '<div class="amt">&asymp; ' + fmt(perMonth) + ' / month</div>' +
+              '<div class="per">&asymp; ' + fmt(perYear) + ' a year, based on ~' + fmt(principal) + ' outstanding</div></div>' +
+            '</div>' +
+            '<p class="savedisc">*Indicative interest-gap estimate only, before fees and subsidies — not an offer. Actual packages depend on your property, loan size, lock-in and bank approval. Dan will WhatsApp your exact 16-bank comparison.</p>';
+        } else if (cur && cur <= BEST_FIXED + 0.1) {
+          saveHtml = '<p style="font-size:.9rem;color:#3a4658;margin:.8rem 0">Your ' + cur.toFixed(2) + '% is already competitive — Dan will check whether any current package beats it before recommending a switch.</p>';
+        }
+
+        card.innerHTML = '<div class="done"><div class="ck"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2>Got it — thank you!</h2>' + saveHtml + '<p>Dan will WhatsApp your exact savings across all 16 banks shortly. Prefer to chat now? <a href="https://wa.me/6587520859" style="color:#0a7d4f;font-weight:700">Message us on WhatsApp &rarr;</a></p></div>';
+        card.scrollIntoView({ block: 'nearest' });
       })
       .catch(function(){ btn.disabled=false; btn.textContent='Show my savings →'; showToast('Something went wrong — please WhatsApp us instead.', true); });
   });
