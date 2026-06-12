@@ -161,6 +161,7 @@
     .btn-back:hover{border-color:var(--gold);transform:translateY(-1px)}
     .qhint{font-size:.78rem;color:#9aa3b2;text-align:center;margin-top:.8rem}
     .qhint a{color:var(--gold);font-weight:600;text-decoration:underline}
+    #refiBlock input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(196,151,59,.18)}
     .cond{display:none}
     .cond.on{display:block}
     /* whatsapp float */
@@ -388,6 +389,9 @@
     qbar.style.width = '50%'; qlbl.textContent = 'Step 1 of 2';
     qtitle.textContent = 'Compare 16 banks in 60 seconds';
   });
+
+  var rateEl = document.getElementById('f-rate');
+  if(rateEl){ rateEl.addEventListener('input', function(){ this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1'); }); }
 
   // --- Final submit ---
   form.addEventListener('submit', function(e){

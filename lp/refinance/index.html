@@ -84,6 +84,7 @@
     .phonewrap:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(196,151,59,.18)}
     .phonewrap .pre{padding:.7rem .6rem;background:#f3f4f7;color:#3a4658;font-weight:600;font-size:.95rem;border-right:1px solid #e2e6ec}
     .phonewrap input{border:none;box-shadow:none!important;border-radius:0}
+    .phonewrap input:focus{outline:none}
     .consent{display:flex;gap:.55rem;align-items:flex-start;font-size:.78rem;color:#4a5568;line-height:1.45;margin:.4rem 0 1rem}
     .consent input{margin-top:.2rem;accent-color:var(--gold)}
     .consent a{color:var(--gold);text-decoration:underline}
@@ -348,6 +349,8 @@
   var qlbl = document.getElementById('qlbl');
   var qtitle = document.getElementById('qtitle');
   var sel = { propertyType:'', loanAmount:'' };
+  var rateEl = document.getElementById('f-rate');
+  rateEl.addEventListener('input', function(){ this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1'); });
   function rateVal(){ return (document.getElementById('f-rate').value || '').trim().replace(',', '.').replace('%',''); }
   function showToast(msg, err){ toast.textContent = msg; toast.className = err ? 'show err' : 'show'; setTimeout(function(){toast.className='';}, 5000); }
 
