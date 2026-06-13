@@ -27,6 +27,10 @@
     gtag('js', new Date());
     gtag('config', 'G-7VKFWNBRM6');
   </script>
+  <script>
+  /* capture ad click-ids + utm (offline-conversion import + attribution) */
+  (function(){try{var p=new URLSearchParams(location.search);['gclid','gbraid','wbraid','fbclid','msclkid','utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){var v=p.get(k);if(v){try{sessionStorage.setItem('nx_'+k,v)}catch(e){}}});}catch(e){}})();
+  </script>
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
     (function(c,l,a,r,i){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};var L=0;function load(){if(L)return;L=1;var t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;var y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);}var E=["scroll","pointerdown","keydown","touchstart"];function go(){E.forEach(function(e){window.removeEventListener(e,go);});load();}E.forEach(function(e){window.addEventListener(e,go,{passive:true});});if("requestIdleCallback" in window){requestIdleCallback(load,{timeout:6000});}else{setTimeout(load,5000);}})(window, document, "clarity", "script", "wpg9v4xzro");
@@ -441,6 +445,7 @@
     if(!consent){ showToast('Please tick the consent box.', true); return; }
     btn.disabled = true; btn.textContent = 'Sending…';
     var getCk = function(n){ var m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)'); return m ? m.pop() : ''; };
+  var ssGet = function(k){ try{ return sessionStorage.getItem('nx_'+k) || ''; }catch(e){ return ''; } };
     var eventId = (self.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('lead-' + Date.now() + '-' + Math.random().toString(16).slice(2));
     var payload = {
       source: SOURCE, campaign: SOURCE, stage: 'lead-capture',
@@ -451,7 +456,9 @@
       propertyStatus: sel.propertyStatus,
       loanAmount: sel.loanAmount,
       currentRate: (document.getElementById('f-rate').value || '').trim(),
-      eventId: eventId, fbp: getCk('_fbp'), fbc: getCk('_fbc'), userAgent: navigator.userAgent
+      eventId: eventId, fbp: getCk('_fbp'), fbc: getCk('_fbc'), userAgent: navigator.userAgent,
+      gclid: ssGet('gclid'), gbraid: ssGet('gbraid'), wbraid: ssGet('wbraid'), msclkid: ssGet('msclkid'),
+      utmSource: ssGet('utm_source'), utmMedium: ssGet('utm_medium'), utmCampaign: ssGet('utm_campaign'), utmTerm: ssGet('utm_term'), utmContent: ssGet('utm_content')
     };
     fetch(SHEET_ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) })
       .then(function(){

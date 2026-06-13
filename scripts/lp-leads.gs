@@ -19,7 +19,13 @@
  *
  * Columns: Timestamp | Name | Mobile | Email | Campaign/Source | Loan Amount |
  *          Current Rate (refi) | Stage | Page URL | Status |
- *          Purpose | Property Type | Property Status
+ *          Purpose | Property Type | Property Status |
+ *          GCLID | Other Click IDs | UTM
+ *
+ * NOTE (2026-06-13b): added cols N/O/P. GCLID (col N) is the key one — store it so
+ * when a loan FUNDS you can import an offline conversion back to Google Ads and let
+ * Smart Bidding optimise to closes, not just form-fills. Add headers N1/O1/P1 =
+ * GCLID | Other Click IDs | UTM.
  *
  * NOTE (2026-06-13): the home-loan LP qualifier funnel now sends purpose,
  * propertyType and propertyStatus. They are appended as columns 11-13 so the
@@ -33,6 +39,9 @@ function doPost(e) {
     lock.waitLock(15000); // avoid two submissions clobbering the same row
     var data = JSON.parse((e && e.postData && e.postData.contents) || '{}');
     var lead = data.lead || {};
+    // tracking fields: lean LPs send top-level, free-report nests under data.tracking
+    var trk = function(k){ return (data.tracking && data.tracking[k]) || data[k] || ''; };
+    var join = function(parts){ return parts.filter(function(x){return x;}).join(' | '); };
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getSheetByName('Sheet1') || ss.getSheets()[0];
     sheet.appendRow([
@@ -48,7 +57,10 @@ function doPost(e) {
       '',                       // Status — you fill
       data.purpose || '',        // Purpose (New purchase / Refinance)
       data.propertyType || '',   // Property Type (HDB / Condo-EC / Landed / Commercial)
-      data.propertyStatus || ''  // Property Status (Resale / BUC)
+      data.propertyStatus || '', // Property Status (Resale / BUC)
+      trk('gclid'),              // GCLID — for Google offline-conversion import on funded loans
+      join([trk('gbraid'), trk('wbraid'), trk('msclkid'), trk('fbclid')]),  // Other click IDs
+      join([trk('utmSource'), trk('utmMedium'), trk('utmCampaign'), trk('utmTerm'), trk('utmContent')]) // UTM
     ]);
 
     // Server-side Meta CAPI (best-effort — never block lead capture).
