@@ -17,15 +17,17 @@
  * 5. Authorize (Allow). The /exec URL is unchanged, so the LP forms keep working.
  *    Redeploy as a NEW version each time you paste an update.
  *
- * Columns: Timestamp | Name | Mobile | Email | Campaign/Source | Loan Amount |
- *          Current Rate (refi) | Stage | Page URL | Status |
- *          Purpose | Property Type | Property Status |
- *          GCLID | Other Click IDs | UTM
+ * Columns: A Timestamp | B Name | C Mobile | D Email | E Campaign/Source | F Loan Amount |
+ *          G Current Rate (refi) | H Stage | I Page URL | J Status |
+ *          K Purpose | L Property Type | M Property Status |
+ *          N Lead ID | O Owner | P Priority  (← owned by Nexus Lead Desk CRM, leave blank here) |
+ *          Q GCLID | R Other Click IDs | S UTM
  *
- * NOTE (2026-06-13b): added cols N/O/P. GCLID (col N) is the key one — store it so
- * when a loan FUNDS you can import an offline conversion back to Google Ads and let
- * Smart Bidding optimise to closes, not just form-fills. Add headers N1/O1/P1 =
- * GCLID | Other Click IDs | UTM.
+ * NOTE (2026-06-13c): the bound sheet is also managed by the "Nexus Lead Desk" CRM,
+ * which owns N/O/P (Lead ID / Owner / Priority). So tracking goes in Q/R/S — doPost
+ * writes 3 blanks for N/O/P then GCLID/click-ids/UTM in Q/R/S. GCLID (col Q) is the key
+ * one: when a loan FUNDS, import an offline conversion to Google Ads so Smart Bidding
+ * optimises to closes, not form-fills. Add headers Q1/R1/S1 = GCLID | Other Click IDs | UTM.
  *
  * NOTE (2026-06-13): the home-loan LP qualifier funnel now sends purpose,
  * propertyType and propertyStatus. They are appended as columns 11-13 so the
@@ -57,10 +59,11 @@ function doPost(e) {
       '',                       // Status — you fill
       data.purpose || '',        // Purpose (New purchase / Refinance)
       data.propertyType || '',   // Property Type (HDB / Condo-EC / Landed / Commercial)
-      data.propertyStatus || '', // Property Status (Resale / BUC)
-      trk('gclid'),              // GCLID — for Google offline-conversion import on funded loans
-      join([trk('gbraid'), trk('wbraid'), trk('msclkid'), trk('fbclid')]),  // Other click IDs
-      join([trk('utmSource'), trk('utmMedium'), trk('utmCampaign'), trk('utmTerm'), trk('utmContent')]) // UTM
+      data.propertyStatus || '', // M Property Status (Resale / BUC)
+      '', '', '',                // N/O/P — owned by the Nexus Lead Desk CRM (Lead ID / Owner / Priority). Leave blank.
+      trk('gclid'),              // Q GCLID — for Google offline-conversion import on funded loans
+      join([trk('gbraid'), trk('wbraid'), trk('msclkid'), trk('fbclid')]),  // R Other click IDs
+      join([trk('utmSource'), trk('utmMedium'), trk('utmCampaign'), trk('utmTerm'), trk('utmContent')]) // S UTM
     ]);
 
     // Server-side Meta CAPI (best-effort — never block lead capture).
