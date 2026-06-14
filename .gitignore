@@ -87,3 +87,5 @@ ADS-AUDIT-REPORT.md
 ADS-ACTION-PLAN.md
 ADS-QUICK-WINS.md
 scripts/__pycache__/
+CANNIBALIZATION-AUDIT-*.md
+*-AUDIT-*.md

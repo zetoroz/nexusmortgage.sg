@@ -32,9 +32,10 @@ const ROOT = path.resolve(__dirname, "..");
 const RATES = path.join(ROOT, "rates.json");
 const DRY = process.env.DRY_RUN === "1";
 
-// Current month + year for SERP freshness signal. Re-evaluated on each cron run.
+// Year only for SERP freshness. Deliberately NOT month — a churning "June/July…" in the
+// title mismatches month-specific searches (e.g. "…february 2026") and tanks CTR; a year-level
+// title ranks for every month-variant. Re-evaluated on each cron run.
 const NOW = new Date();
-const MONTH = NOW.toLocaleString("en-SG", { month: "long" });
 const YEAR = NOW.getFullYear();
 
 // Pages that carry live rate numbers in their <title> + meta description.
@@ -46,9 +47,9 @@ const TARGETS = [
     // the FULL tag. Never place LIVE-RATES comments inside <title> (RCDATA) or a
     // content="" attribute — they render as literal text in the SERP title/description.
     title: ({ fixed, sora }) =>
-      `<title>Singapore Home Loan Rates ${MONTH} ${YEAR}: Fixed ${fixed}%, SORA ${sora}% | Nexus</title>`,
+      `<title>Singapore Home Loan Rates ${YEAR}: Fixed ${fixed}%, SORA ${sora}% | Nexus</title>`,
     desc: ({ fixed, sora }) =>
-      `<meta name="description" content="Singapore home loan rates ${MONTH} ${YEAR}: fixed from ${fixed}% p.a., SORA-linked from ${sora}% p.a. effective. Compare 16 MAS-regulated banks. Updated weekly. Free.">`,
+      `<meta name="description" content="Singapore home loan rates ${YEAR}: fixed from ${fixed}% p.a., SORA-linked from ${sora}% p.a. Compare 16 MAS-regulated banks. Updated weekly. Free.">`,
   },
 ];
 
