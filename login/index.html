@@ -1729,6 +1729,7 @@ const state = {
   // Rate-picker UI state
   pickerCtx: null,    // active calc key when modal is open, or 'standalone'
   rateFilters: {
+    propertyStatus: 'completed', // 'completed' | 'buc' — Completed/resale vs Building-Under-Construction rates
     section: 'all',   // 'all' | 'VARIABLE RATES' | 'FIXED RATES' | 'COMBO'
     lender: 'all',
     search: '',
@@ -3745,47 +3746,59 @@ async function loadRates() {
   // Trade-off: rates.json carries the rate numbers + lender + qualifying + lock-in,
   // but NOT the private advisor extras (bankers, subsidies, remarks) — those stay
   // out of the public file by design.
+  const SEC = { 'Variable': 'VARIABLE RATES', 'Fixed': 'FIXED RATES', 'Combo': 'COMBO' };
+  const rawOr = (raw, n) => (raw && String(raw).trim()) ? String(raw) : (n != null ? (n + ' %') : '');
+  const mapPkg = (p, propStatus) => {
+    const section = SEC[p.category] || String(p.category || '').toUpperCase();
+    return {
+      idx: 0,  // re-assigned after the Completed + BUC sets are merged
+      section,
+      secShort: sectionShort(section),
+      subType: p.subCategory || '',
+      lender: p.lender || '',
+      qualLoan: p.qualifying || '',
+      qualLoanNum: (p.qualifyingMin != null ? p.qualifyingMin : parseQualLoan(p.qualifying || '')),
+      rates: {
+        y1: rawOr(p.year1Raw, p.year1Rate),
+        y2: rawOr(p.year2Raw, p.year2Rate),
+        y3: rawOr(p.year3Raw, p.year3Rate),
+        y4: rawOr(p.year4Raw, p.year4Rate),
+        y5: rawOr(p.year5Raw, p.year5Rate),
+        thereafter: rawOr(p.thereafterRaw, p.thereafterRate),
+      },
+      ratesNum: {
+        y1: (p.year1Rate != null ? p.year1Rate : parseRateNumber(p.year1Raw)),
+        y2: (p.year2Rate != null ? p.year2Rate : parseRateNumber(p.year2Raw)),
+        y3: (p.year3Rate != null ? p.year3Rate : parseRateNumber(p.year3Raw)),
+      },
+      lockIn: (p.lockInYears != null && p.lockInYears !== '') ? (p.lockInYears + (Number(p.lockInYears) === 1 ? ' yr' : ' yrs')) : (p.lockInRaw || ''),
+      prepayment: '', tdsrRate: '', legalRebate: '', valuationSubsidy: '', freeConversion: '',
+      remarks: [], bankers: [],
+      propertyStatus: propStatus,   // 'completed' | 'buc'
+    };
+  };
   try {
     const res = await fetch('/rates.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    const src = Array.isArray(data.packages) ? data.packages : [];
-    const SEC = { 'Variable': 'VARIABLE RATES', 'Fixed': 'FIXED RATES', 'Combo': 'COMBO' };
-    const rawOr = (raw, n) => (raw && String(raw).trim()) ? String(raw) : (n != null ? (n + ' %') : '');
+    let packages = (Array.isArray(data.packages) ? data.packages : []).map(p => mapPkg(p, 'completed'));
 
-    const packages = src.map((p, i) => {
-      const section = SEC[p.category] || String(p.category || '').toUpperCase();
-      return {
-        idx: i,
-        section,
-        secShort: sectionShort(section),
-        subType: p.subCategory || '',
-        lender: p.lender || '',
-        qualLoan: p.qualifying || '',
-        qualLoanNum: (p.qualifyingMin != null ? p.qualifyingMin : parseQualLoan(p.qualifying || '')),
-        rates: {
-          y1: rawOr(p.year1Raw, p.year1Rate),
-          y2: rawOr(p.year2Raw, p.year2Rate),
-          y3: rawOr(p.year3Raw, p.year3Rate),
-          y4: rawOr(p.year4Raw, p.year4Rate),
-          y5: rawOr(p.year5Raw, p.year5Rate),
-          thereafter: rawOr(p.thereafterRaw, p.thereafterRate),
-        },
-        ratesNum: {
-          y1: (p.year1Rate != null ? p.year1Rate : parseRateNumber(p.year1Raw)),
-          y2: (p.year2Rate != null ? p.year2Rate : parseRateNumber(p.year2Raw)),
-          y3: (p.year3Rate != null ? p.year3Rate : parseRateNumber(p.year3Raw)),
-        },
-        lockIn: (p.lockInYears != null && p.lockInYears !== '') ? (p.lockInYears + (Number(p.lockInYears) === 1 ? ' yr' : ' yrs')) : '',
-        // Advisor-only fields are not in the public rates.json:
-        prepayment: '', tdsrRate: '', legalRebate: '', valuationSubsidy: '', freeConversion: '',
-        remarks: [],
-        bankers: [],
-      };
-    });
+    // BUC rates (Building Under Construction) — optional; never fail the Completed load if absent.
+    let bucDate = '';
+    try {
+      const bres = await fetch('/rates-buc.json', { cache: 'no-cache' });
+      if (bres.ok) {
+        const bdata = await bres.json();
+        bucDate = bdata.asOf || '';
+        packages = packages.concat((Array.isArray(bdata.packages) ? bdata.packages : []).map(p => mapPkg(p, 'buc')));
+      }
+    } catch (be) { console.warn('BUC rates not loaded:', be); }
+
+    packages.forEach((p, i) => { p.idx = i; });  // global idx (Completed first, BUC after — keeps existing picks valid)
 
     const refs = data.refRates || {};
     RATES.packages = packages;
+    RATES.bucDate = bucDate;
     RATES.dateStamp = data.asOf ? ('As of ' + data.asOf) : '';
     RATES.sora = {
       oneM:   (refs.sora1m != null ? ('1M Compounded SORA: ' + Number(refs.sora1m).toFixed(2) + ' %') : ''),
@@ -3817,6 +3830,7 @@ function uniqueLenders() {
 function filteredPackages() {
   const f = state.rateFilters;
   let list = RATES.packages.slice();
+  if (f.propertyStatus) list = list.filter(p => (p.propertyStatus || 'completed') === f.propertyStatus);
   if (f.section !== 'all') list = list.filter(p => p.section === f.section);
   if (f.lender !== 'all') list = list.filter(p => p.lender === f.lender);
   if (f.search) {
@@ -3906,13 +3920,19 @@ function ratePickerHtml(ctx) {
   const lc = isStandalone ? null : loanCtxFor(ctx);   // loan + tenure for the live monthly column
 
   // Filters
+  const inPs = RATES.packages.filter(p => (p.propertyStatus || 'completed') === f.propertyStatus);
   const sectionCounts = {
-    'all': RATES.packages.length,
-    'VARIABLE RATES': RATES.packages.filter(p => p.section === 'VARIABLE RATES').length,
-    'FIXED RATES': RATES.packages.filter(p => p.section === 'FIXED RATES').length,
-    'COMBO': RATES.packages.filter(p => p.section === 'COMBO').length,
+    'all': inPs.length,
+    'VARIABLE RATES': inPs.filter(p => p.section === 'VARIABLE RATES').length,
+    'FIXED RATES': inPs.filter(p => p.section === 'FIXED RATES').length,
+    'COMBO': inPs.filter(p => p.section === 'COMBO').length,
+  };
+  const psCounts = {
+    completed: RATES.packages.filter(p => (p.propertyStatus || 'completed') === 'completed').length,
+    buc: RATES.packages.filter(p => p.propertyStatus === 'buc').length,
   };
   const sectionChip = (val, label) => `<div class="filter-chip ${f.section === val ? 'active' : ''}" onclick="setRateFilter('section','${val}')">${label}<span class="count">${sectionCounts[val] || 0}</span></div>`;
+  const psChip = (val, label) => `<div class="filter-chip ${f.propertyStatus === val ? 'active' : ''}" onclick="setRateFilter('propertyStatus','${val}')">${label}<span class="count">${psCounts[val] || 0}</span></div>`;
 
   const lenderOpts = ['<option value="all">All lenders</option>']
     .concat(lenders.map(l => `<option value="${escapeHtml(l)}" ${f.lender === l ? 'selected' : ''}>${escapeHtml(l)}</option>`))
@@ -3947,6 +3967,8 @@ function ratePickerHtml(ctx) {
 
   return `
     <div class="filters-bar">
+      ${psChip('completed','Completed')}${psCounts.buc ? psChip('buc','BUC') : ''}
+      ${psCounts.buc ? '<span style="width:1px; height:22px; background:var(--border); margin:0 4px;"></span>' : ''}
       ${sectionChip('all','All')}
       ${sectionChip('VARIABLE RATES','Variable')}
       ${sectionChip('FIXED RATES','Fixed')}
@@ -3960,7 +3982,7 @@ function ratePickerHtml(ctx) {
     </div>
     <div class="rate-table-wrap">
       <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; font-size: 12px; color: var(--muted);">
-        <span>${list.length} package${list.length === 1 ? '' : 's'} · ${RATES.dateStamp || 'date stamp not found'}${RATES.sora?.oneM ? ' · ' + escapeHtml(RATES.sora.oneM) : ''}</span>
+        <span>${list.length} package${list.length === 1 ? '' : 's'} · ${(f.propertyStatus === 'buc' && RATES.bucDate) ? ('As of ' + escapeHtml(RATES.bucDate)) : (RATES.dateStamp || 'date stamp not found')}${RATES.sora?.oneM ? ' · ' + escapeHtml(RATES.sora.oneM) : ''}</span>
         ${isStandalone ? '' : `<span>${picks.length} / 4 selected</span>`}
       </div>
       <table class="rate-table">
