@@ -935,6 +935,14 @@
                   <input type="number" class="field-input has-prefix" data-bind="affordability.cpf" min="0" step="1000">
                 </div>
               </div>
+              <div class="field">
+                <label class="field-label">Indicative rate</label>
+                <div class="input-wrap">
+                  <input type="number" class="field-input has-suffix" data-bind="affordability.rate" min="0.5" max="6" step="0.05">
+                  <span class="input-suffix">%</span>
+                </div>
+                <div class="field-hint">For the real monthly on the max loan (not the 4 % stress).</div>
+              </div>
             </div>
 
             <div class="divider" style="margin: 18px 0;"></div>
@@ -953,6 +961,7 @@
               <div class="sec-tag accent-text">Maximum property price</div>
               <div class="display-num" data-out="aff.maxPropertyPrice" style="font-size: 56px; font-weight: 500; line-height: 1; margin-top: 8px; letter-spacing: -0.02em; color: var(--ink);">$ 0</div>
               <div class="muted" style="font-size: 13px; margin-top: 6px;" data-out="aff.maxPropertyNote">Enter income to compute.</div>
+              <div style="font-size: 14px; margin-top: 10px; color: var(--ink); font-weight: 600;" data-out="aff.monthlyRepay">Monthly repayment — enter income.</div>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
@@ -1683,6 +1692,7 @@ const state = {
     ltvScenario: 'full',           // 'full' | 'reduced'
     borrowers: [defaultBorrower({ age: 35, fixedIncome: 12000 })],
     commitments: 500, cash: 200000, cpf: 150000,
+    rate: 2.6,                     // indicative rate for the real (non-stress) monthly on the max loan
   },
   purchase: {
     propertyType: 'private',       // 'hdb' | 'private'
@@ -2029,6 +2039,9 @@ function calcAffordability(s) {
   const tenure = tenureForScenario(s.propertyType, iwaa, scenario);
   const maxLoan = loanFromMonthly(eligibleMonthly, RULES.stressRate, tenure);
   const maxProperty = maxLoan / ltv;
+  // Real monthly repayment on the max loan at the indicative rate (vs the 4 % stress budget)
+  const rate = (num(s.rate) > 0 ? num(s.rate) : 2.6) / 100;
+  const monthlyAtRate = pmt(maxLoan, rate, tenure);
   const cashPct = scenario === 'reduced' ? RULES.cashMin.reducedFirst : RULES.cashMin.fullFirst;
   const cashMin = maxProperty * cashPct;
   const totalDownpayment = maxProperty * (1 - ltv);
@@ -2049,6 +2062,7 @@ function calcAffordability(s) {
     available: eligibleMonthly,
     tenure, ltv, cashPct,
     maxLoan, maxProperty,
+    rate, monthlyAtRate,
     cashMin, totalDownpayment, cpfPortion,
     cashAvail, cpfAvail, fundsTotal, position, cashGap,
     tdsrPass: num(s.commitments) < tdsrCap,
@@ -2265,6 +2279,9 @@ function renderAffordability() {
   setOut('aff.maxLoan', fmt.money(r.maxLoan));
   setOut('aff.maxLoanNote', `4 % stress · ${r.tenure} yrs${r.msrBinding ? ' · MSR-bound' : ''}`);
   setOut('aff.eligibleMonthly', fmt.money(r.available));
+  setOut('aff.monthlyRepay', r.maxLoan > 0
+    ? `Monthly repayment ~ ${fmt.money(r.monthlyAtRate)} at ${(r.rate*100).toFixed(2)} % over ${r.tenure} y`
+    : 'Monthly repayment — enter income.');
   setOut('aff.cashMin', fmt.money(r.cashMin));
   setOut('aff.cashMinNote', `${(r.cashPct*100).toFixed(0)} % of price`);
   setOut('aff.cpfBalance', fmt.money(r.cpfPortion));
@@ -3126,6 +3143,7 @@ function loadState() {
     // Default tenureAuto to true if missing (keeps tenure synced to 65 - IWAA)
     if (state.purchase && state.purchase.tenureAuto == null) state.purchase.tenureAuto = true;
     if (state.sellPurchase && state.sellPurchase.newTenureAuto == null) state.sellPurchase.newTenureAuto = true;
+    if (state.affordability && state.affordability.rate == null) state.affordability.rate = 2.6;
     // 2. Old sell-purchase cpfUsed + cpfYears → cpfPrincipalAccrued
     if (state.sellPurchase && state.sellPurchase.cpfUsed != null && state.sellPurchase.cpfPrincipalAccrued == null) {
       const used = num(state.sellPurchase.cpfUsed);
@@ -3343,8 +3361,9 @@ function pdfAffordability() {
           <tr><td>TDSR cap (55 %)</td><td class="pdf-num">${fmt.money((r.fixedTotal + r.variableTotal + r.fundsBoost) * 0.55)}</td></tr>
           ${r.isHdb ? `<tr><td>MSR cap (30 %)</td><td class="pdf-num">${fmt.money((r.fixedTotal + r.variableTotal + r.fundsBoost) * 0.30)}</td></tr>` : ''}
           <tr><td>Less: existing commitments</td><td class="pdf-num">${fmt.money(r.commit)}</td></tr>
-          <tr><td><strong>Eligible monthly</strong></td><td class="pdf-num"><strong>${fmt.money(r.available)}</strong></td></tr>
+          <tr><td><strong>Eligible monthly</strong> <span style="color:#94A3B8;">(4 % stress budget)</span></td><td class="pdf-num"><strong>${fmt.money(r.available)}</strong></td></tr>
           <tr><td>Stress rate · tenure</td><td class="pdf-num">4.00 %  ·  ${r.tenure} yrs</td></tr>
+          <tr><td><strong>Monthly repayment</strong> @ ${(r.rate*100).toFixed(2)} %</td><td class="pdf-num"><strong>${fmt.money(r.monthlyAtRate)}</strong></td></tr>
         </table>
       </div>
       <div>
