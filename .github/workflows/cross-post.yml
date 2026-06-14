@@ -28,13 +28,15 @@ jobs:
     steps:
       - name: Checkout (need 2 commits to diff)
         uses: actions/checkout@v4
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
         with:
           fetch-depth: 2
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Cross-post
         env:
