@@ -2538,6 +2538,13 @@ const donutCenter = {
 };
 Chart.register(donutCenter);
 
+// Render charts synchronously (no animation). Chart.js animations run via
+// requestAnimationFrame, which the browser throttles when the tab is unfocused —
+// leaving canvases blank, which then captured blank into the PDF. Disabling
+// animation makes every chart paint immediately on create/update, so the PDF
+// (and an unfocused tab) always get a complete chart.
+Chart.defaults.animation = false;
+
 // Data labels: register globally but default-OFF; charts opt in.
 if (typeof ChartDataLabels !== 'undefined') {
   Chart.register(ChartDataLabels);
@@ -2704,7 +2711,8 @@ function drawAffIncome(s) {
 function drawRfHorizons(r) {
   const ctx = document.getElementById('chart-rf-horizons');
   if (!ctx) return;
-  if (charts['chart-rf-horizons']) charts['chart-rf-horizons'].destroy();
+  const _ex = (window.Chart && Chart.getChart) ? Chart.getChart(ctx) : charts['chart-rf-horizons'];
+  if (_ex) _ex.destroy();
   // Net savings = monthly delta × 12 × N − total switching cost
   const monthlyDelta = (r.cur || 0) - (r.nm || 0);
   const cost = r.totalCost || 0;
@@ -2722,8 +2730,11 @@ function drawRfHorizons(r) {
         legend: { display: false },
         tooltip: { callbacks: { label: c => fmt.money(c.parsed.y) + ' net' } },
         datalabels: {
-          display: true, anchor: ctx => ctx.parsed.y >= 0 ? 'end' : 'start',
-          align: ctx => ctx.parsed.y >= 0 ? 'top' : 'bottom',
+          display: true,
+          // Use the raw dataset value (always defined). ctx.parsed can be undefined
+          // on a redraw (no animation), which threw "reading 'y'".
+          anchor: ctx => (Number(ctx.dataset.data[ctx.dataIndex]) >= 0 ? 'end' : 'start'),
+          align: ctx => (Number(ctx.dataset.data[ctx.dataIndex]) >= 0 ? 'top' : 'bottom'),
           offset: 2, clip: false,
           color: chartColors.ink, font: { ...chartFontSans, weight: '600', size: 10 },
           formatter: v => (v >= 0 ? '+' : '−') + '$' + (Math.abs(v)/1000).toFixed(1) + 'k',
@@ -3547,6 +3558,17 @@ function pdfRefinance() {
 async function generatePdf() {
   $('#gen-overlay').classList.add('show');
 
+  // Force every chart to a complete, un-animated frame. Chart.js animations rely on
+  // requestAnimationFrame, which the browser throttles when the tab isn't focused —
+  // so a chart captured via toDataURL mid/pre-animation comes out blank in the PDF.
+  // A synchronous update('none') paints the final frame immediately.
+  try {
+    Object.keys(charts).forEach(function (k) {
+      const ch = charts[k];
+      if (ch) { ch.options.animation = false; ch.update('none'); }
+    });
+  } catch (_) {}
+
   // Fresh element each time, attached to document.body with inline styles.
   // position:absolute (not fixed) so html2canvas's clone iframe captures it correctly.
   const reportEl = document.createElement('div');
@@ -3611,8 +3633,15 @@ async function generatePdf() {
       const imgHmm = pageW * imgRatio;
       if (imgHmm <= pageH + 0.5) {
         pdfDoc.addImage(imgData, 'JPEG', 0, 0, imgWmm, imgHmm);
+      } else if (imgHmm <= pageH * 1.22) {
+        // A single content page that runs up to ~1.22 A4 (e.g. the affordability
+        // summary at ~341mm). Scale it down to fit one page (centered) rather than
+        // slicing — which would leave a near-empty page of one stray row + footer.
+        const scale = pageH / imgHmm;
+        const w = imgWmm * scale;
+        pdfDoc.addImage(imgData, 'JPEG', (pageW - w) / 2, 0, w, pageH);
       } else {
-        // Single .pdf-page section is still too tall — slice it across multiple A4 pages
+        // Single .pdf-page section is genuinely multi-page — slice across A4 pages
         let consumed = 0;
         let firstSlice = true;
         while (consumed < imgHmm - 0.1) {
@@ -3669,84 +3698,63 @@ function sectionShort(sec) {
 }
 
 async function loadRates() {
+  // Source of truth = /rates.json (public, committed, kept current by the rates
+  // pipeline + daily MAS bot). This replaces the old rates.xlsx path, which was
+  // gitignored (404 on the deployed console), stale, and a SheetJS-load race.
+  // Trade-off: rates.json carries the rate numbers + lender + qualifying + lock-in,
+  // but NOT the private advisor extras (bankers, subsidies, remarks) — those stay
+  // out of the public file by design.
   try {
-    if (typeof XLSX === 'undefined') {
-      RATES.error = 'SheetJS failed to load.';
-      return;
-    }
-    const res = await fetch('rates.xlsx', { cache: 'no-cache' });
+    const res = await fetch('/rates.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    const ab = await res.arrayBuffer();
-    const wb = XLSX.read(ab, { type: 'array' });
-    const ws = wb.Sheets['All Rates'];
-    if (!ws) throw new Error('Sheet "All Rates" not found.');
-    const aoa = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, defval: '' });
+    const data = await res.json();
+    const src = Array.isArray(data.packages) ? data.packages : [];
+    const SEC = { 'Variable': 'VARIABLE RATES', 'Fixed': 'FIXED RATES', 'Combo': 'COMBO' };
+    const rawOr = (raw, n) => (raw && String(raw).trim()) ? String(raw) : (n != null ? (n + ' %') : '');
 
-    const sectionRow = aoa[0] || [];
-    const subRow     = aoa[1] || [];
-    const qualRow    = aoa[2] || [];
-    const lenderRow  = aoa[3] || [];
-
-    const packages = [];
-    let curSection = '', curSub = '';
-    for (let c = 1; c < lenderRow.length; c++) {
-      if (sectionRow[c]) curSection = String(sectionRow[c]).trim();
-      if (subRow[c]) curSub = String(subRow[c]).trim();
-      const lender = lenderRow[c];
-      if (!lender || !String(lender).trim()) continue;
-      const qual = qualRow[c] != null ? String(qualRow[c]).trim() : '';
-      const pkg = {
-        idx: packages.length,
-        section: curSection,
-        secShort: sectionShort(curSection),
-        subType: curSub,
-        lender: String(lender).trim(),
-        qualLoan: qual,
-        qualLoanNum: parseQualLoan(qual),
+    const packages = src.map((p, i) => {
+      const section = SEC[p.category] || String(p.category || '').toUpperCase();
+      return {
+        idx: i,
+        section,
+        secShort: sectionShort(section),
+        subType: p.subCategory || '',
+        lender: p.lender || '',
+        qualLoan: p.qualifying || '',
+        qualLoanNum: (p.qualifyingMin != null ? p.qualifyingMin : parseQualLoan(p.qualifying || '')),
         rates: {
-          y1: aoa[4]?.[c] || '',
-          y2: aoa[5]?.[c] || '',
-          y3: aoa[6]?.[c] || '',
-          y4: aoa[7]?.[c] || '',
-          y5: aoa[8]?.[c] || '',
-          thereafter: aoa[9]?.[c] || '',
+          y1: rawOr(p.year1Raw, p.year1Rate),
+          y2: rawOr(p.year2Raw, p.year2Rate),
+          y3: rawOr(p.year3Raw, p.year3Rate),
+          y4: rawOr(p.year4Raw, p.year4Rate),
+          y5: rawOr(p.year5Raw, p.year5Rate),
+          thereafter: rawOr(p.thereafterRaw, p.thereafterRate),
         },
         ratesNum: {
-          y1: parseRateNumber(aoa[4]?.[c]),
-          y2: parseRateNumber(aoa[5]?.[c]),
-          y3: parseRateNumber(aoa[6]?.[c]),
+          y1: (p.year1Rate != null ? p.year1Rate : parseRateNumber(p.year1Raw)),
+          y2: (p.year2Rate != null ? p.year2Rate : parseRateNumber(p.year2Raw)),
+          y3: (p.year3Rate != null ? p.year3Rate : parseRateNumber(p.year3Raw)),
         },
-        lockIn: aoa[11]?.[c] || '',
-        prepayment: aoa[12]?.[c] || '',
-        tdsrRate: aoa[13]?.[c] || '',
-        legalRebate: aoa[14]?.[c] || '',
-        valuationSubsidy: aoa[15]?.[c] || '',
-        freeConversion: aoa[16]?.[c] || '',
-        remarks: [aoa[17]?.[c], aoa[18]?.[c], aoa[19]?.[c]].filter(v => v && String(v).trim()).map(String),
-        bankers: [aoa[20]?.[c], aoa[21]?.[c], aoa[22]?.[c], aoa[23]?.[c]].filter(v => v && String(v).trim()).map(String),
+        lockIn: (p.lockInYears != null && p.lockInYears !== '') ? (p.lockInYears + (Number(p.lockInYears) === 1 ? ' yr' : ' yrs')) : '',
+        // Advisor-only fields are not in the public rates.json:
+        prepayment: '', tdsrRate: '', legalRebate: '', valuationSubsidy: '', freeConversion: '',
+        remarks: [],
+        bankers: [],
       };
-      packages.push(pkg);
-    }
+    });
 
-    let dateStamp = '';
-    let oneM = '', threeM = '';
-    for (let r = 24; r < Math.min(40, aoa.length); r++) {
-      const cell = aoa[r]?.[0];
-      if (!cell) continue;
-      const t = String(cell).trim();
-      if (/^As of/i.test(t)) dateStamp = t;
-      else if (/1M COMPOUNDED SORA/i.test(t)) oneM = t;
-      else if (/3M COMPOUNDED SORA/i.test(t)) threeM = t;
-    }
-
+    const refs = data.refRates || {};
     RATES.packages = packages;
-    RATES.dateStamp = dateStamp;
-    RATES.sora = { oneM, threeM };
+    RATES.dateStamp = data.asOf ? ('As of ' + data.asOf) : '';
+    RATES.sora = {
+      oneM:   (refs.sora1m != null ? ('1M Compounded SORA: ' + Number(refs.sora1m).toFixed(2) + ' %') : ''),
+      threeM: (refs.sora3m != null ? ('3M Compounded SORA: ' + Number(refs.sora3m).toFixed(2) + ' %') : ''),
+    };
     RATES.loaded = true;
     RATES.error = '';
   } catch (e) {
     console.error('loadRates failed', e);
-    RATES.error = e.message || 'Failed to load rates.xlsx';
+    RATES.error = (e && e.message) || 'Failed to load rates.json';
     RATES.loaded = false;
   }
 }
