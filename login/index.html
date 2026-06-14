@@ -1699,7 +1699,7 @@ const state = {
     agentRate: 2.0,
     newPrice: 1900000, newType: 'private', newCitizenship: 'citizen',
     bridgingNeeded: 'no',
-    newTenure: 28, newRate: 3.5,
+    newTenure: 28, newRate: 3.5, newTenureAuto: true,
     cashOnHand: 50000, cpfAvailable: 0,
     borrowers: [defaultBorrower({ age: 42, fixedIncome: 18000 })],
     commitments: 800,
@@ -2378,6 +2378,18 @@ function renderPurchase() {
 }
 
 function renderSellPurchase() {
+  const s = state.sellPurchase;
+  // Auto-sync new-loan tenure to (65 - IWAA), capped to property-type max — until user edits
+  if (s.newTenureAuto !== false) {
+    const iwaa = computeIwaa(s.borrowers);
+    const propMax = s.newType === 'hdb' ? RULES.maxTenure.hdb : RULES.maxTenure.private;
+    const autoTenure = Math.max(5, Math.min(propMax, Math.floor(RULES.retireAge - iwaa)));
+    if (s.newTenure !== autoTenure) {
+      s.newTenure = autoTenure;
+      const inp = document.querySelector('[data-bind="sellPurchase.newTenure"]');
+      if (inp && document.activeElement !== inp) inp.value = autoTenure;
+    }
+  }
   const r = calcSellPurchase(state.sellPurchase);
   setOut('sp.netCash', fmt.money(r.netCash));
   setOut('sp.positionLabel', r.position >= 0 ? 'Surplus' : 'Shortfall (top-up needed)');
@@ -3004,8 +3016,9 @@ function bindInputs() {
     const handler = () => {
       const v = el.type === 'number' ? num(el.value) : el.value;
       setPath(state, path, v);
-      // Manual edit of purchase.tenure pins the value (stops IWAA auto-sync)
+      // Manual edit of a tenure input pins the value (stops IWAA auto-sync)
       if (path === 'purchase.tenure') state.purchase.tenureAuto = false;
+      if (path === 'sellPurchase.newTenure') state.sellPurchase.newTenureAuto = false;
       saveState();
       renderAll();
     };
@@ -3112,6 +3125,7 @@ function loadState() {
     delete state.purchasePrivate;
     // Default tenureAuto to true if missing (keeps tenure synced to 65 - IWAA)
     if (state.purchase && state.purchase.tenureAuto == null) state.purchase.tenureAuto = true;
+    if (state.sellPurchase && state.sellPurchase.newTenureAuto == null) state.sellPurchase.newTenureAuto = true;
     // 2. Old sell-purchase cpfUsed + cpfYears → cpfPrincipalAccrued
     if (state.sellPurchase && state.sellPurchase.cpfUsed != null && state.sellPurchase.cpfPrincipalAccrued == null) {
       const used = num(state.sellPurchase.cpfUsed);
