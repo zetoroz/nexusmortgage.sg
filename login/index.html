@@ -1644,7 +1644,7 @@ const RULES = {
   msr: 0.30,
   stressRate: 0.04,
   variableHaircut: 0.30,
-  cpfAccrual: 0.026,                 // CPF refund rate when OA is used for housing: OA earning rate 2.5% + 0.1% accrual = 2.6% p.a. Used in sell-purchase refund calc only.
+  cpfAccrual: 0.025,                 // CPF accrued interest = CPF Ordinary Account rate (2.5% p.a.). NOT 2.6% — that is the HDB loan rate (OA + 0.1%); the +0.1% does not apply to accrued interest. Used in the sell-purchase refund calc only.
   ltv: {
     fullFirst: 0.75,
     reducedFirst: 0.55,
@@ -3326,7 +3326,7 @@ function buildReport() {
   const footer = `<div class="pdf-footer">
     Indicative figures only. Subject to bank credit assessment, valuation, and prevailing IRAS, MAS, and HDB regulations.
     Stress-test rate of 4 % is the MAS minimum used for residential TDSR / MSR computations. ABSD reflects rates effective 27 Apr 2023.
-    IWAA = Σ(age × income) ÷ Σ(income). CPF accrued at 2.6 % p.a.
+    IWAA = Σ(age × income) ÷ Σ(income). CPF accrued at 2.5 % p.a.
   </div>`;
 
   return `
