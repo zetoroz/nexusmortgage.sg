@@ -1,5 +1,23 @@
 [
   {
+    "generatedAt": "2026-06-14T05:54:20.460Z",
+    "source": "MAS",
+    "asOfSora": "2026-06-11",
+    "refRateChanges": {
+      "sora1m": {
+        "from": 1.0495,
+        "to": 1.0451,
+        "delta": -0.004
+      },
+      "sora3m": {
+        "from": 1.0739,
+        "to": 1.0757,
+        "delta": 0.002
+      }
+    },
+    "summary": "SORA update: sora1m 1.0495→1.0451, sora3m 1.0739→1.0757"
+  },
+  {
     "generatedAt": "2026-06-11T05:54:04.269Z",
     "source": "MAS",
     "asOfSora": "2026-06-10",
@@ -4112,7 +4130,7 @@
         "package": "3YRS FIXED (3YRF)",
         "qualifying": "> $100K",
         "what": "removed",
-        "before": 2.0
+        "before": 2
       }
     ],
     "summary": "25 year1Rate, 19 added, 13 removed"
@@ -4146,5 +4164,351 @@
     "refRateChanges": {},
     "packageChanges": [],
     "summary": "No material changes."
+  },
+  {
+    "generatedAt": "2026-06-14T05:54:20.744508+00:00",
+    "asOf": "11 May 2026",
+    "xlsxFingerprint": "506e84c9ef9d",
+    "packageCount": 106,
+    "refRates": {
+      "sora1m": 1.0451,
+      "sora3m": 1.0757,
+      "fhr6": 0.8,
+      "asOfSora": "2026-06-11"
+    },
+    "refRateChanges": {},
+    "packageChanges": [
+      {
+        "key": "CITI|sora1m|1500000",
+        "lender": "CITI",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1.5M + $250K Citigold",
+        "what": "year1Rate",
+        "before": 1.1795,
+        "after": 1.1751,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "UOB|sora1m|500000",
+        "lender": "UOB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $500K",
+        "what": "year1Rate",
+        "before": 1.3295,
+        "after": 1.3251,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "HSBC|sora1m|1000000",
+        "lender": "HSBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1M or ($600K + $200K Funded Premier)",
+        "what": "year1Rate",
+        "before": 1.2495,
+        "after": 1.2451,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "MB|sora1m|1000000",
+        "lender": "MB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1M + CC",
+        "what": "year1Rate",
+        "before": 1.2495,
+        "after": 1.2451,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "OCBC|sora1m|1200000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1.2M",
+        "what": "year1Rate",
+        "before": 1.2995,
+        "after": 1.2951,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "SCB|sora1m|1200000",
+        "lender": "SCB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1.2M or $1M Priority clients",
+        "what": "year1Rate",
+        "before": 1.2995,
+        "after": 1.2951,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "RHB|sora1m|1000000",
+        "lender": "RHB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1M",
+        "what": "year1Rate",
+        "before": 1.2995,
+        "after": 1.2951,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "OCBC|sora1m|800000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $800K",
+        "what": "year1Rate",
+        "before": 1.3295,
+        "after": 1.3251,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "RHB|sora1m|500000",
+        "lender": "RHB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $500K",
+        "what": "year1Rate",
+        "before": 1.3295,
+        "after": 1.3251,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "OCBC|sora1m|700000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $700K",
+        "what": "year1Rate",
+        "before": 1.3495,
+        "after": 1.3451,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "MB|sora1m|500000",
+        "lender": "MB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $500K + CC",
+        "what": "year1Rate",
+        "before": 1.3495,
+        "after": 1.3451,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "OCBC|sora1m|300000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": ">$300K",
+        "what": "year1Rate",
+        "before": 1.3995,
+        "after": 1.3951,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "SCB|sora1m|700000",
+        "lender": "SCB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $700K or $500K Priority clients",
+        "what": "year1Rate",
+        "before": 1.3995,
+        "after": 1.3951,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "UOB|sora1m|300000",
+        "lender": "UOB",
+        "package": "1 MTH SORA",
+        "qualifying": ">$300K",
+        "what": "year1Rate",
+        "before": 1.4295,
+        "after": 1.4251,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "SCB|sora1m|500000",
+        "lender": "SCB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $500K or $300K Priority clients",
+        "what": "year1Rate",
+        "before": 1.5495,
+        "after": 1.5451,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "HSBC|sora1m|200000",
+        "lender": "HSBC",
+        "package": "1 MTH SORA",
+        "qualifying": ">$200K",
+        "what": "year1Rate",
+        "before": 1.7995,
+        "after": 1.7951,
+        "deltaPct": -0.0044
+      },
+      {
+        "key": "UOB|sora3m|500000",
+        "lender": "UOB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $500K",
+        "what": "year1Rate",
+        "before": 1.3539,
+        "after": 1.3557,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "HSBC|sora3m|1000000",
+        "lender": "HSBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $1M or ($600K + $200K Funded Premier)",
+        "what": "year1Rate",
+        "before": 1.2739,
+        "after": 1.2757,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "MB|sora3m|1000000",
+        "lender": "MB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $1M + CC",
+        "what": "year1Rate",
+        "before": 1.2739,
+        "after": 1.2757,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "OCBC|sora3m|1200000",
+        "lender": "OCBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $1.2M",
+        "what": "year1Rate",
+        "before": 1.3239,
+        "after": 1.3257,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "SCB|sora3m|1200000",
+        "lender": "SCB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $1.2M or $1M Priority clients",
+        "what": "year1Rate",
+        "before": 1.3239,
+        "after": 1.3257,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "DBS|sora3m|1500000",
+        "lender": "DBS",
+        "package": "3 MTHS SORA",
+        "qualifying": "Min >$1.5M",
+        "what": "year1Rate",
+        "before": 1.3239,
+        "after": 1.3257,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "OCBC|sora3m|800000",
+        "lender": "OCBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $800K",
+        "what": "year1Rate",
+        "before": 1.3539,
+        "after": 1.3557,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "DBS|sora3m|700000",
+        "lender": "DBS",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $700K",
+        "what": "year1Rate",
+        "before": 1.3539,
+        "after": 1.3557,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "OCBC|sora3m|700000",
+        "lender": "OCBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $700K",
+        "what": "year1Rate",
+        "before": 1.3739,
+        "after": 1.3757,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "MB|sora3m|500000",
+        "lender": "MB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $500K + CC",
+        "what": "year1Rate",
+        "before": 1.3739,
+        "after": 1.3757,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "OCBC|sora3m|300000",
+        "lender": "OCBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $300K",
+        "what": "year1Rate",
+        "before": 1.4239,
+        "after": 1.4257,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "DBS|sora3m|500000",
+        "lender": "DBS",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $500K",
+        "what": "year1Rate",
+        "before": 1.4239,
+        "after": 1.4257,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "SCB|sora3m|700000",
+        "lender": "SCB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $700K or $500K Priority clients",
+        "what": "year1Rate",
+        "before": 1.4239,
+        "after": 1.4257,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "UOB|sora3m|300000",
+        "lender": "UOB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $300K",
+        "what": "year1Rate",
+        "before": 1.4539,
+        "after": 1.4557,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "HSBC|sora3m|900000",
+        "lender": "HSBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $900k or ($600k + $200K Funded Premier)",
+        "what": "year1Rate",
+        "before": 1.4739,
+        "after": 1.4757,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "SCB|sora3m|500000",
+        "lender": "SCB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $500K or $300K Priority clients",
+        "what": "year1Rate",
+        "before": 1.5739,
+        "after": 1.5757,
+        "deltaPct": 0.0018
+      },
+      {
+        "key": "HSBC|sora3m|200000",
+        "lender": "HSBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $200K",
+        "what": "year1Rate",
+        "before": 1.8239,
+        "after": 1.8257,
+        "deltaPct": 0.0018
+      }
+    ],
+    "summary": "33 year1Rate"
   }
 ]
