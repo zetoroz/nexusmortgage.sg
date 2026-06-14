@@ -3286,7 +3286,15 @@ function buildReport() {
   else if (tab === 'sell-purchase') pdfData = pdfSellPurchase();
   else if (tab === 'refinance') pdfData = pdfRefinance();
 
-  const ratesPage = pdfRatesPage(calcKey);
+  // Loan + tenure context so each picked-rate page can show its monthly installment.
+  let loanCtx = null;
+  try {
+    if (tab === 'affordability') { const r = calcAffordability(state.affordability); loanCtx = { loan: r.maxLoan, tenure: r.tenure, label: 'estimated max loan' }; }
+    else if (tab === 'purchase') { const r = calcPurchase(state.purchase); loanCtx = { loan: r.loan, tenure: r.tenure, label: 'loan' }; }
+    else if (tab === 'sell-purchase') { const r = calcSellPurchase(state.sellPurchase); loanCtx = { loan: r.newLoan, tenure: num(state.sellPurchase.newTenure), label: 'new loan' }; }
+    else if (tab === 'refinance') { loanCtx = { loan: num(state.refinance.outstanding), tenure: num(state.refinance.newTenure) || num(state.refinance.remainingTenure), label: 'outstanding loan' }; }
+  } catch (_) {}
+  const ratesPage = pdfRatesPage(calcKey, loanCtx);
 
   const coverHeader = `<div style="display:flex; justify-content: space-between; align-items: flex-start;">
     <div>
@@ -4098,9 +4106,11 @@ window.unpickRate = function (calcKey, idx) {
 /* ═══════════════════════════════════════════════════════════════
    PDF — rates page (appended after main analysis)
    ═══════════════════════════════════════════════════════════════ */
-function pdfRatesPage(calcKey) {
+function pdfRatesPage(calcKey, loanCtx) {
   const picks = state.picks[calcKey] || [];
   if (picks.length === 0) return '';
+  const ciLoan = loanCtx && loanCtx.loan > 0 ? loanCtx.loan : 0;
+  const ciTenure = loanCtx && loanCtx.tenure > 0 ? loanCtx.tenure : 0;
   const dateStr = new Date(state.client.date || Date.now()).toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' });
   const cleanText = (t) => String(t || '').replace(/\s+/g, ' ').trim();
   const total = picks.length;
@@ -4117,6 +4127,28 @@ function pdfRatesPage(calcKey) {
     const remarks = (p.remarks || []).filter(Boolean).map(cleanText);
     const isVarOrFix = /VARIABLE|FIXED|COMBO/.test(p.section);
     const sectionLabel = (p.section || '').replace(' RATES', '');
+
+    // Monthly installment for this package on the tab's loan + tenure
+    const y1Rate = (p.ratesNum && p.ratesNum.y1 != null) ? p.ratesNum.y1 : parseRateNumber(p.rates.y1);
+    const aftRate = parseRateNumber(p.rates.thereafter);
+    const miY1 = (y1Rate != null && ciLoan > 0 && ciTenure > 0) ? pmt(ciLoan, y1Rate / 100, ciTenure) : null;
+    const miAft = (aftRate != null && ciLoan > 0 && ciTenure > 0) ? pmt(ciLoan, aftRate / 100, ciTenure) : null;
+    const miBlock = (miY1 != null) ? `
+      <div style="margin-top: 22px; padding: 16px 18px; background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 10px;">
+        <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #059669; font-weight: 700;">Estimated monthly installment</div>
+        <div style="font-size: 30px; font-weight: 600; color: #0B1220; margin-top: 4px; letter-spacing: -0.01em;">${fmt.money(miY1)} <span style="font-size: 14px; font-weight: 500; color: #56657A;">/ month</span></div>
+        <div style="font-size: 12px; color: #56657A; margin-top: 4px;">Year 1 @ ${y1Rate.toFixed(2)} % on a ${fmt.money(ciLoan)} ${escapeHtml(loanCtx.label)} over ${ciTenure} years${miAft != null ? ` · after lock-in (~${aftRate.toFixed(2)} %): <strong style="color:#0B1220;">${fmt.money(miAft)}/mo</strong>` : ''}</div>
+      </div>` : '';
+
+    // Advisor-only fields are blank when rates come from the public feed — only show what exists.
+    const legalBlock = p.legalRebate ? `
+        <div class="pdf-h3" style="margin-top: 22px;">Legal / cash rebate</div>
+        <div style="margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.6;">${escapeHtml(cleanText(p.legalRebate))}</div>
+        ${isVarOrFix ? `<div style="margin-top: 4px; font-size: 11px; color: #94A3B8;">*Only for refinancing unless otherwise stated.</div>` : ''}` : '';
+    const valBlock = p.valuationSubsidy ? `<div style="margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.6;"><strong style="color:#0B1220;">Valuation subsidy:</strong> ${escapeHtml(cleanText(p.valuationSubsidy))}</div>` : '';
+    const freeConvBlock = p.freeConversion ? `
+        <div class="pdf-h3" style="margin-top: 22px;">Free conversion benefit</div>
+        <div style="margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.6;">${escapeHtml(cleanText(p.freeConversion))}</div>` : '';
 
     return `
     <div class="pdf-page">
@@ -4135,6 +4167,8 @@ function pdfRatesPage(calcKey) {
           <div>${dateStr}</div>
         </div>
       </div>
+
+      ${miBlock}
 
       <div style="margin-top: 24px; border-top: 1px solid #E5E7EB; padding-top: 22px;">
 
@@ -4155,17 +4189,9 @@ function pdfRatesPage(calcKey) {
         </table>
         ${p.prepayment ? `<div style="margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.6;">${escapeHtml(cleanText(p.prepayment))}</div>` : ''}
 
-        <div class="pdf-h3" style="margin-top: 22px;">Legal / cash rebate</div>
-        <div style="margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.6;">
-          ${escapeHtml(cleanText(p.legalRebate) || '—')}
-        </div>
-        ${isVarOrFix && p.legalRebate ? `<div style="margin-top: 4px; font-size: 11px; color: #94A3B8;">*Only for refinancing unless otherwise stated.</div>` : ''}
-        ${p.valuationSubsidy ? `<div style="margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.6;"><strong style="color:#0B1220;">Valuation subsidy:</strong> ${escapeHtml(cleanText(p.valuationSubsidy))}</div>` : ''}
-
-        <div class="pdf-h3" style="margin-top: 22px;">Free conversion benefit</div>
-        <div style="margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.6;">
-          ${escapeHtml(cleanText(p.freeConversion) || '—')}
-        </div>
+        ${legalBlock}
+        ${valBlock}
+        ${freeConvBlock}
 
         ${remarks.length ? `
           <div class="pdf-h3" style="margin-top: 22px;">Remarks</div>
