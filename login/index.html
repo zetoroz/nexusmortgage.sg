@@ -3881,10 +3881,21 @@ window.clearPicks = function () {
   renderPickTrigger(ctx);
 };
 
+// Loan + tenure for a calculator's picked-rate monthly (mirrors buildReport's context).
+function loanCtxFor(ctx) {
+  try {
+    if (ctx === 'affordability') { const r = calcAffordability(state.affordability); return { loan: r.maxLoan, tenure: r.tenure }; }
+    if (ctx === 'purchase') { const r = calcPurchase(state.purchase); return { loan: r.loan, tenure: r.tenure }; }
+    if (ctx === 'sellPurchase') { const r = calcSellPurchase(state.sellPurchase); return { loan: r.newLoan, tenure: num(state.sellPurchase.newTenure) }; }
+    if (ctx === 'refinance') { return { loan: num(state.refinance.outstanding), tenure: num(state.refinance.newTenure) || num(state.refinance.remainingTenure) }; }
+  } catch (_) {}
+  return { loan: 0, tenure: 0 };
+}
+
 function ratePickerHtml(ctx) {
   if (!RATES.loaded) {
     return `<div class="rates-status">${RATES.error
-      ? '<span class="fail-text">Failed to load rates.xlsx — ' + escapeHtml(RATES.error) + '</span>'
+      ? '<span class="fail-text">Failed to load rates — ' + escapeHtml(RATES.error) + '</span>'
       : '<span class="spinner"></span>Loading rates…'}</div>`;
   }
   const f = state.rateFilters;
@@ -3892,6 +3903,7 @@ function ratePickerHtml(ctx) {
   const list = filteredPackages();
   const picks = ctx === 'standalone' || !ctx ? [] : state.picks[ctx] || [];
   const isStandalone = ctx === 'standalone' || !ctx;
+  const lc = isStandalone ? null : loanCtxFor(ctx);   // loan + tenure for the live monthly column
 
   // Filters
   const sectionCounts = {
@@ -3908,7 +3920,7 @@ function ratePickerHtml(ctx) {
 
   const sortClass = (k) => f.sortKey === k ? 'sortable sorted ' + (f.sortDir === 'asc' ? 'sort-asc' : 'sort-desc') : 'sortable';
 
-  const colCount = (isStandalone ? 0 : 1) + 8; // +1 for expand col
+  const colCount = 8 + (isStandalone ? 0 : 2); // +check +monthly when picking
   let rows = '';
   list.forEach(p => {
     const selected = picks.includes(p.idx);
@@ -3924,6 +3936,7 @@ function ratePickerHtml(ctx) {
         <td class="num">${escapeHtml(String(p.rates.y2).replace(/\s+/g,' '))}</td>
         <td class="num">${escapeHtml(String(p.rates.y3).replace(/\s+/g,' '))}</td>
         <td>${escapeHtml(String(p.lockIn || '—').replace(/\s+/g,' '))}</td>
+        ${isStandalone ? '' : `<td class="num" style="font-weight:600;">${(lc && lc.loan > 0 && p.ratesNum && p.ratesNum.y1 != null) ? fmt.money(pmt(lc.loan, p.ratesNum.y1 / 100, lc.tenure)) + '/mo' : '—'}</td>`}
         <td class="expand-cell">
           <button type="button" class="rate-expand-btn ${expanded ? 'open' : ''}" onclick="event.stopPropagation(); toggleRateExpand(${p.idx});" title="${expanded ? 'Hide details' : 'Show details'}">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -3961,6 +3974,7 @@ function ratePickerHtml(ctx) {
             <th class="${sortClass('y2')}" onclick="setRateSort('y2')">2nd yr</th>
             <th class="${sortClass('y3')}" onclick="setRateSort('y3')">3rd yr</th>
             <th class="${sortClass('lockIn')}" onclick="setRateSort('lockIn')">Lock-in</th>
+            ${isStandalone ? '' : '<th class="num" title="Estimated monthly installment on this client\'s loan">Est. monthly</th>'}
             <th class="expand-cell" title="Expand for full package details"></th>
           </tr>
         </thead>
@@ -4119,8 +4133,49 @@ function pdfRatesPage(calcKey, loanCtx) {
     Rates are indicative, subject to bank approval, valuation, and credit assessment. Lock-in, prepayment penalty, and rebate conditions apply per bank's letter of offer.
   </div>`;
 
-  // One A4 page per selected package — full-text remarks, no banker contacts.
-  return picks.map((idx, i) => {
+  // Page 1 of the rates section: side-by-side comparison of every picked package.
+  const cmpRows = picks.map(idx => {
+    const p = RATES.packages[idx]; if (!p) return '';
+    const y1 = (p.ratesNum && p.ratesNum.y1 != null) ? p.ratesNum.y1 : parseRateNumber(p.rates.y1);
+    const aft = parseRateNumber(p.rates.thereafter);
+    const mi = (y1 != null && ciLoan > 0 && ciTenure > 0) ? pmt(ciLoan, y1 / 100, ciTenure) : null;
+    const miA = (aft != null && ciLoan > 0 && ciTenure > 0) ? pmt(ciLoan, aft / 100, ciTenure) : null;
+    return `<tr>
+      <td><strong style="color:#0B1220;">${escapeHtml(p.lender)}</strong><div style="font-size:10.5px;color:#94A3B8;">${escapeHtml((p.section || '').replace(' RATES','') + (p.subType ? ' · ' + p.subType : ''))}</div></td>
+      <td class="pdf-num">${y1 != null ? y1.toFixed(2) + ' %' : '—'}</td>
+      <td class="pdf-num"><strong style="color:#0B1220;">${mi != null ? fmt.money(mi) : '—'}</strong></td>
+      <td class="pdf-num">${aft != null ? aft.toFixed(2) + ' %' : '—'}</td>
+      <td class="pdf-num">${miA != null ? fmt.money(miA) : '—'}</td>
+      <td class="pdf-num">${escapeHtml(cleanText(p.lockIn) || '—')}</td>
+    </tr>`;
+  }).join('');
+  const cmpHeadCell = (t, num) => `<td class="${num ? 'pdf-num' : ''}" style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#94A3B8; font-weight:600; padding-bottom:6px;">${t}</td>`;
+  const comparePage = (ciLoan > 0) ? `
+    <div class="pdf-page">
+      <div style="display:flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <div class="pdf-h3">Rate Comparison</div>
+          <div class="pdf-h1" style="margin-top: 6px;">Your ${total} shortlisted package${total === 1 ? '' : 's'}</div>
+          <div style="font-size: 12px; color: #56657A; margin-top: 6px;">Monthly installment on a <strong style="color:#0B1220;">${fmt.money(ciLoan)}</strong> ${escapeHtml((loanCtx && loanCtx.label) || 'loan')} over ${ciTenure} years</div>
+          <div style="font-size: 12px; color: #94A3B8; margin-top: 4px;">${escapeHtml(RATES.dateStamp || 'Rates as currently filed')}</div>
+        </div>
+        <div style="text-align: right; font-size: 11px; color: #56657A; line-height: 1.6;">
+          <div style="font-weight: 600; color: #0B1220;">Dan Ler</div>
+          <div>${dateStr}</div>
+        </div>
+      </div>
+      <table class="pdf-table" style="margin-top: 28px;">
+        <tr style="border-bottom: 1px solid #E5E7EB;">
+          ${cmpHeadCell('Package', false)}${cmpHeadCell('Yr-1 rate', true)}${cmpHeadCell('Monthly', true)}${cmpHeadCell('After lock-in', true)}${cmpHeadCell('Monthly (after)', true)}${cmpHeadCell('Lock-in', true)}
+        </tr>
+        ${cmpRows}
+      </table>
+      <div style="margin-top: 14px; font-size: 11.5px; color: #94A3B8; line-height: 1.6;">Year-1 monthly assumes the first-year rate held for the full tenure; "after lock-in" uses the thereafter rate. Actual repayment steps between years per each package's full schedule on the following pages.</div>
+      ${ratesFooter}
+    </div>` : '';
+
+  // Then one A4 detail page per selected package — full schedule, lock-in, MI.
+  const detailPages = picks.map((idx, i) => {
     const p = RATES.packages[idx];
     if (!p) return '';
     const sub = (p.subType || '') + (p.qualLoan ? ' · ' + p.qualLoan : '');
@@ -4204,6 +4259,8 @@ function pdfRatesPage(calcKey, loanCtx) {
       ${ratesFooter}
     </div>`;
   }).join('');
+
+  return comparePage + detailPages;
 }
 
 /* ═══════════════════════════════════════════════════════════════
