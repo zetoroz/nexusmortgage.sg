@@ -248,6 +248,8 @@
     .tools-dd-item:hover { background: rgba(196,151,59,.12); color: var(--gold-400); }
     #mob-menu { display: none; background: rgba(11,28,58,.97); backdrop-filter: blur(14px); }
     #mob-menu.open { display: block; }
+    /* mobile: btn-gold's display:inline-flex overrode Tailwind `hidden`, leaving the nav CTA a clipped sliver. */
+    @media (max-width: 1023px) { a.btn-gold.hidden { display: none !important; } }
     .btn-gold { background: var(--gold-500); color: var(--navy-950); font-weight: 700; font-size: .8rem; padding: .8rem 1.5rem; border-radius: 7px; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; transition: transform .2s, box-shadow .25s, background .25s; min-height: 44px; }
     .btn-gold:hover { background: var(--gold-400); transform: translateY(-1px); box-shadow: 0 12px 28px rgba(196,151,59,.3); }
     .btn-gold:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 3px; }

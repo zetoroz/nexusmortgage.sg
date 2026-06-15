@@ -217,6 +217,8 @@
     #mob-menu { display: none; background: rgba(11,28,58,.97); backdrop-filter: blur(14px); }
     #mob-menu.open { display: block; }
 
+    /* mobile: btn-gold's display:inline-flex overrode Tailwind `hidden`, leaving the nav CTA a clipped sliver. */
+    @media (max-width: 1023px) { a.btn-gold.hidden { display: none !important; } }
     .btn-gold {
       background: var(--gold-500); color: var(--navy-950);
       font-weight: 700; font-size: .8rem;

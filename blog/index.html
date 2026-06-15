@@ -165,6 +165,8 @@
     .nav-link:hover { color:var(--gold-400); }
     .nav-link.active { color:var(--gold-400); }
 
+    /* mobile: btn-gold's display:inline-flex overrode Tailwind `hidden`, leaving the nav CTA a clipped sliver. */
+    @media (max-width: 1023px) { a.btn-gold.hidden { display: none !important; } }
     .btn-gold {
       display:inline-flex; align-items:center; gap:.6rem;
       background:linear-gradient(135deg,#C4973B,#E8C97A);

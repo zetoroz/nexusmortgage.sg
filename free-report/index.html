@@ -697,7 +697,9 @@ body::after {
   display: block; margin-top: 4px;
   font-size: 11.5px; color: var(--muted); line-height: 1.5;
 }
-.btn-gold {
+/* mobile: btn-gold's display:inline-flex overrode Tailwind `hidden`, leaving the nav CTA a clipped sliver. */
+    @media (max-width: 1023px) { a.btn-gold.hidden { display: none !important; } }
+    .btn-gold {
   padding: .65rem 1.3rem;
   background: var(--gold-500);
   color: var(--navy-900);

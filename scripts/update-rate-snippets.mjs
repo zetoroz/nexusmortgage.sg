@@ -84,7 +84,6 @@ function freshnessPatch(html, asOf) {
   let out = html, changed = false;
   const sub = (re, rep) => { const n = out.replace(re, rep); if (n !== out) { changed = true; out = n; } };
   sub(/"dateModified":"\d{4}-\d{2}-\d{2}"/, `"dateModified":"${p.iso}"`);
-  sub(/(Mortgage Advisor &middot; Updated )\d{1,2} [A-Za-z]+ 20\d\d/, `$1${p.pretty}`);
   sub(/([Aa]s of )(?:\d{1,2} )?[A-Za-z]+ 20\d\d/g, `$1${p.pretty}`); // visible rate-freshness lines
   return { out, changed };
 }

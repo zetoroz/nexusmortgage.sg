@@ -565,6 +565,9 @@
       color: var(--gold-400);
     }
 
+    /* btn-gold sets display:inline-flex, which overrode Tailwind `hidden` and left the
+       nav CTA as a clipped sliver on mobile. Higher-specificity rule restores the hide. */
+    @media (max-width: 1023px) { a.btn-gold.hidden { display: none !important; } }
     .btn-gold {
       display: inline-flex;
       align-items: center;

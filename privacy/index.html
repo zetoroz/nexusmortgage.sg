@@ -118,6 +118,8 @@
     .skip-link { position: absolute; left: -9999px; top: 0; background: var(--navy-900); color: var(--gold-400); padding: .75rem 1.25rem; z-index: 1000; text-decoration: none; }
     .skip-link:focus { left: 1rem; top: 1rem; }
     body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); opacity: 0.4; }
+    /* mobile: btn-gold's display:inline-flex overrode Tailwind `hidden`, leaving the nav CTA a clipped sliver. */
+    @media (max-width: 1023px) { a.btn-gold.hidden { display: none !important; } }
     .btn-gold { background: var(--gold-500); color: var(--navy-950); font-weight: 700; font-size: .8rem; padding: .8rem 1.5rem; border-radius: 7px; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; transition: transform .2s, box-shadow .25s, background .25s; min-height: 44px; }
     .btn-gold:hover { background: var(--gold-400); transform: translateY(-1px); box-shadow: 0 12px 28px rgba(196,151,59,.3); }
     #wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 52px; height: 52px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 28px rgba(37,211,102,.36); z-index: 998; transition: transform .25s; }
