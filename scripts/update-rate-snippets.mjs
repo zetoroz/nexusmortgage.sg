@@ -58,6 +58,37 @@ function fmt(rate) {
   return Number(rate).toFixed(2);
 }
 
+const MONTHS = { january:1, february:2, march:3, april:4, may:5, june:6, july:7,
+  august:8, september:9, october:10, november:11, december:12 };
+
+// Parse rates.json `asOf` ("11 May 2026" or "May 2026") -> ISO + pretty display.
+function parseAsOf(s) {
+  const m = String(s || "").match(/(?:(\d{1,2})\s+)?([A-Za-z]+)\s+(\d{4})/);
+  if (!m) return null;
+  const mon = MONTHS[m[2].toLowerCase()];
+  if (!mon) return null;
+  const day = m[1] ? parseInt(m[1], 10) : 1, yr = parseInt(m[3], 10);
+  return {
+    iso: `${yr}-${String(mon).padStart(2, "0")}-${String(day).padStart(2, "0")}`,
+    pretty: m[1] ? `${day} ${m[2]} ${yr}` : `${m[2]} ${yr}`,
+  };
+}
+
+// Keep a rate page's visible freshness honest: the displayed "as of" date, the
+// author byline date, and JSON-LD dateModified all track rates.json `asOf`
+// (= when the rate sheet genuinely last changed). No date-faking — it only moves
+// when the rates do. Idempotent.
+function freshnessPatch(html, asOf) {
+  const p = parseAsOf(asOf);
+  if (!p) return { out: html, changed: false };
+  let out = html, changed = false;
+  const sub = (re, rep) => { const n = out.replace(re, rep); if (n !== out) { changed = true; out = n; } };
+  sub(/"dateModified":"\d{4}-\d{2}-\d{2}"/, `"dateModified":"${p.iso}"`);
+  sub(/(Mortgage Advisor &middot; Updated )\d{1,2} [A-Za-z]+ 20\d\d/, `$1${p.pretty}`);
+  sub(/([Aa]s of )(?:\d{1,2} )?[A-Za-z]+ 20\d\d/g, `$1${p.pretty}`); // visible rate-freshness lines
+  return { out, changed };
+}
+
 function pickRates(rates) {
   const fixed = rates.packages.filter(
     (p) => String(p.category || "").toLowerCase() === "fixed",
@@ -104,20 +135,21 @@ async function main() {
     next = r1.out;
     const r2 = patchSentinel(next, "desc", descStr);
     next = r2.out;
+    const r3 = freshnessPatch(next, rates.asOf); // visible "as of" + byline + dateModified
+    next = r3.out;
     if (!r1.changed && !r2.changed) {
-      console.warn(`[snippets] ${t.file}: no sentinels found, skipping`);
-      continue;
+      console.warn(`[snippets] ${t.file}: no title/desc sentinels found`);
     }
     if (next === html) {
       console.log(`[snippets] ${t.file}: no change`);
       continue;
     }
     if (DRY) {
-      console.log(`[snippets] DRY ${t.file}: would write new title/desc`);
+      console.log(`[snippets] DRY ${t.file}: would update title/desc${r3.changed ? " + freshness(" + rates.asOf + ")" : ""}`);
       continue;
     }
     await fs.writeFile(abs, next);
-    console.log(`[snippets] ${t.file}: updated`);
+    console.log(`[snippets] ${t.file}: updated${r3.changed ? " (freshness -> " + rates.asOf + ")" : ""}`);
   }
 }
 
