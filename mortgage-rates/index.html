@@ -1148,7 +1148,7 @@
 
   const CFG = {
 
-    lastUpdated : "11 May 2026",
+    lastUpdated : "15 June 2026",
 
     // ── Reference rates (update when these change; mirror rates.json refRates) ──
     soraRate3M  : 1.0759,  // Current 3-Month SORA % (MAS, value date 11 May 2026)
@@ -1163,25 +1163,25 @@
         id     : "f1y",
         label  : "1 Year Fixed",
         tiers  : [
-          { loan:"≥ $1,500,000", rate:1.40, best:true  },
-          { loan:"≥ $1,000,000", rate:1.43              },
+          { loan:"≥ $1,000,000", rate:1.35, best:true  },
+          { loan:"≥ $800,000",   rate:1.40              },
           { loan:"≥ $500,000",   rate:1.45              },
           { loan:"Standard",     rate:1.55              },
         ],
-        lockin     : "2-year lock-in · Free conversion after 12 months · Waiver due to sale after 12 months",
-        afterFixed : "Yr 2: 3M SORA + 0.35% · Yr 3: 3M SORA + 0.40% · Thereafter: 3M SORA + 0.75%",
+        lockin     : "2-year lock-in · 1× free conversion after 12 months · Best tiers require Premier funding (min $1M)",
+        afterFixed : "Yr 2: 1M SORA + 0.35% · Yr 3: 1M SORA + 0.40% · Thereafter: 1M SORA + 1.00%",
       },
       {
         id     : "f2y",
         label  : "2 Year Fixed",
         tiers  : [
-          { loan:"≥ $800,000",   rate:1.45, best:true  },
-          { loan:"≥ $500,000",   rate:1.55              },
-          { loan:"≥ $200,000",   rate:1.60              },
-          { loan:"≥ $100,000",   rate:1.80              },
+          { loan:"≥ $1,000,000", rate:1.40, best:true  },
+          { loan:"≥ $800,000",   rate:1.45              },
+          { loan:"≥ $600,000",   rate:1.60              },
+          { loan:"Standard",     rate:1.80              },
         ],
-        lockin     : "2-year lock-in",
-        afterFixed : "3M SORA + 1.00%",
+        lockin     : "2-year lock-in · 1× free conversion after 12 months · Best tiers require Premier funding ($200K)",
+        afterFixed : "1M SORA + 1.00%",
       },
       {
         id     : "f3y",
