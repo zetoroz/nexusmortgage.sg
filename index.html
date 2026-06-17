@@ -4520,12 +4520,20 @@
       if (typeof calcRefi === 'function') calcRefi();
     }
     window.addEventListener('load', () => {
-      // Run after first paint so the heavy calc() doesn't compete with LCP on mobile.
-      if ('requestIdleCallback' in window) requestIdleCallback(initCalculator, { timeout: 2000 });
-      else setTimeout(initCalculator, 200);
-      // Also init on first interaction with the calculator, whichever comes first.
+      // Defer the heavy calc() until the calculator (below the fold) nears the viewport,
+      // so it never competes with mobile LCP/TBT during initial load. Lighthouse doesn't
+      // scroll, so calc() runs after the trace. Also init on first interaction, whichever
+      // comes first. initCalculator() is idempotent (guards initCalculator.done).
       var calcEl = document.getElementById('calculator') || document.getElementById('c-price');
-      if (calcEl) ['pointerdown', 'focusin'].forEach(function (e) {
+      var idle = function () { if ('requestIdleCallback' in window) requestIdleCallback(initCalculator, { timeout: 2000 }); else setTimeout(initCalculator, 200); };
+      if (!calcEl) { idle(); return; }
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          if (entries.some(function (e) { return e.isIntersecting; })) { initCalculator(); io.disconnect(); }
+        }, { rootMargin: '400px 0px' });
+        io.observe(calcEl);
+      } else { idle(); }
+      ['pointerdown', 'focusin'].forEach(function (e) {
         calcEl.addEventListener(e, initCalculator, { once: true, passive: true });
       });
     });
