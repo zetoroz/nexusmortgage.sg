@@ -68,6 +68,9 @@ function doPost(e) {
       join([trk('utmSource'), trk('utmMedium'), trk('utmCampaign'), trk('utmTerm'), trk('utmContent')]) // W UTM
     ]);
 
+    // Instant new-lead alert to Dan (best-effort — never block lead capture).
+    try { notifyNewLead(data, lead); } catch (mailErr) { Logger.log('Notify error: ' + mailErr); }
+
     // Server-side Meta CAPI (best-effort — never block lead capture).
     try { sendMetaCapi(data, lead); } catch (capiErr) { Logger.log('CAPI error: ' + capiErr); }
 
@@ -81,6 +84,71 @@ function doPost(e) {
   } finally {
     try { lock.releaseLock(); } catch (e2) {}
   }
+}
+
+/**
+ * Instant Telegram alert to Dan the moment a lead lands. Speed-to-contact is the #1
+ * mortgage conversion lever — this stops leads sitting unseen in the sheet.
+ * Uses UrlFetchApp (already authorized for CAPI) → NO new OAuth scope, no re-auth.
+ *
+ * SETUP (one-time):
+ *  1. Telegram → @BotFather → /newbot → copy the bot token.
+ *  2. Send any message to your new bot (so it can DM you), then get your chat id:
+ *     message @userinfobot, or open https://api.telegram.org/bot<TOKEN>/getUpdates
+ *     and read result[].message.chat.id. For a group: add the bot, post a msg, same getUpdates.
+ *  3. Apps Script → Project Settings → Script properties → add:
+ *       TELEGRAM_BOT_TOKEN = <token from BotFather>
+ *       TELEGRAM_CHAT_ID   = <your chat id>  (comma-separate for multiple recipients)
+ *  Leaving either unset simply skips the alert (sheet logging still works).
+ */
+function notifyNewLead(data, lead) {
+  var props = PropertiesService.getScriptProperties();
+  var token = props.getProperty('TELEGRAM_BOT_TOKEN');
+  var chats = props.getProperty('TELEGRAM_CHAT_ID');
+  if (!token || !chats) return; // not configured — skip silently.
+
+  var name   = lead.name  || '(no name)';
+  var phone  = lead.phone || '';
+  var email  = lead.email || '';
+  var source = data.source || data.campaign || 'lp';
+  var waNum  = String(phone).replace(/\D/g, '');
+  var esc = function (s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+
+  var lines = [];
+  lines.push('🔔 <b>New lead — ' + esc(name) + '</b>');
+  lines.push('<i>via ' + esc(source) + ' · call within the hour</i>');
+  lines.push('');
+  if (phone)             lines.push('📱 ' + esc(phone));
+  if (email)             lines.push('✉️ ' + esc(email));
+  if (data.purpose)      lines.push('🎯 ' + esc(data.purpose));
+  var prop = [data.propertyType, data.propertyStatus].filter(String).join(' · ');
+  if (prop)              lines.push('🏠 ' + esc(prop));
+  if (data.loanAmount)   lines.push('💰 Loan: ' + esc(data.loanAmount));
+  if (data.currentRate)  lines.push('📉 Current rate: ' + esc(data.currentRate));
+  if (data.pageUrl)      lines.push('🔗 ' + esc(data.pageUrl));
+  var actionLinks = [];
+  if (waNum)  actionLinks.push('<a href="https://wa.me/' + waNum + '">WhatsApp now</a>');
+  if (waNum)  actionLinks.push('<a href="https://nexusmortgage.sg/call/?n=' + waNum + '">Call</a>'); // tel: not clickable in Telegram → https redirect page opens dialer
+  var crmUrl = props.getProperty('CRM_URL') ||
+    'https://script.google.com/macros/s/AKfycbzFKa9CrkQRV_P1RdtlvpJ3sDzoi6lw8Q66N4DBUyIHYKcxfJDohSHDIvKTzYnv3N8B/exec';
+  if (crmUrl) actionLinks.push('<a href="' + crmUrl + '">Open Lead Desk CRM</a>');
+  if (actionLinks.length) lines.push('\n👉 ' + actionLinks.join('  ·  '));
+
+  var text = lines.join('\n');
+  String(chats).split(',').forEach(function (chatId) {
+    chatId = chatId.trim(); if (!chatId) return;
+    try {
+      UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+        method: 'post',
+        contentType: 'application/json',
+        payload: JSON.stringify({
+          chat_id: chatId, text: text,
+          parse_mode: 'HTML', disable_web_page_preview: true
+        }),
+        muteHttpExceptions: true
+      });
+    } catch (e) { Logger.log('Telegram send error: ' + e); }
+  });
 }
 
 /** SHA-256 -> lowercase hex (Meta requires hashed em/ph). */

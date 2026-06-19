@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Calling…</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0f1a2e;color:#e8e3da;
+         display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;text-align:center;padding:1.5rem}
+    a{color:#c4973b;font-weight:600}
+    .n{font-size:1.4rem;margin:.6rem 0;letter-spacing:.02em}
+  </style>
+</head>
+<body>
+  <div>
+    <p>Opening your dialer…</p>
+    <p class="n" id="num"></p>
+    <p><a id="lnk" href="#">Tap here to call</a></p>
+  </div>
+  <script>
+    (function () {
+      var raw = (new URLSearchParams(location.search)).get('n') || '';
+      var n = raw.replace(/[^0-9]/g, '');
+      if (n.length >= 7) {
+        var tel = 'tel:+' + n;
+        document.getElementById('num').textContent = '+' + n;
+        document.getElementById('lnk').href = tel;
+        location.replace(tel); // auto-fire the dialer
+      } else {
+        document.getElementById('num').textContent = 'No phone number provided.';
+        document.getElementById('lnk').style.display = 'none';
+      }
+    })();
+  </script>
+</body>
+</html>
