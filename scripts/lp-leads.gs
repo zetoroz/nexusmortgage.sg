@@ -128,7 +128,6 @@ function notifyNewLead(data, lead) {
   if (data.pageUrl)      lines.push('🔗 ' + esc(data.pageUrl));
   var actionLinks = [];
   if (waNum)  actionLinks.push('<a href="https://wa.me/' + waNum + '">WhatsApp now</a>');
-  if (waNum)  actionLinks.push('<a href="https://nexusmortgage.sg/call/?n=' + waNum + '">Call</a>'); // tel: not clickable in Telegram → https redirect page opens dialer
   var crmUrl = props.getProperty('CRM_URL') ||
     'https://script.google.com/macros/s/AKfycbzFKa9CrkQRV_P1RdtlvpJ3sDzoi6lw8Q66N4DBUyIHYKcxfJDohSHDIvKTzYnv3N8B/exec';
   if (crmUrl) actionLinks.push('<a href="' + crmUrl + '">Open Lead Desk CRM</a>');
