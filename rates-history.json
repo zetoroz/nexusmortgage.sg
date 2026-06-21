@@ -5293,5 +5293,20 @@
     "refRateChanges": {},
     "packageChanges": [],
     "summary": "No material changes."
+  },
+  {
+    "generatedAt": "2026-06-21T06:07:37.073243+00:00",
+    "asOf": "11 May 2026",
+    "xlsxFingerprint": "506e84c9ef9d",
+    "packageCount": 106,
+    "refRates": {
+      "sora1m": 1.0065,
+      "sora3m": 1.0833,
+      "fhr6": 0.8,
+      "asOfSora": "2026-06-18"
+    },
+    "refRateChanges": {},
+    "packageChanges": [],
+    "summary": "No material changes."
   }
 ]
