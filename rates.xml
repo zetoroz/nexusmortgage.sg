@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Sun, 21 Jun 2026 06:07:37 GMT</lastBuildDate>
+<lastBuildDate>Mon, 22 Jun 2026 06:32:05 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
-<title>Current Compounded SORA — 1M 1.01% | 3M 1.08%</title>
+<title>Current Compounded SORA — 1M 1.00% | 3M 1.08%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-current-2026-06-18</guid>
-<pubDate>Sun, 21 Jun 2026 06:07:37 GMT</pubDate>
-<description>Latest published Compounded SORA values per MAS. As of 2026-06-18.</description>
+<guid isPermaLink="false">nexus-current-2026-06-19</guid>
+<pubDate>Mon, 22 Jun 2026 06:32:05 GMT</pubDate>
+<description>Latest published Compounded SORA values per MAS. As of 2026-06-19.</description>
+</item>
+<item>
+<title>SORA update: sora1m 1.0065→0.9984, sora3m 1.0833→1.077</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Mon, 22 Jun 2026 06:32:05 GMT</guid>
+<pubDate>Mon, 22 Jun 2026 06:32:05 GMT</pubDate>
+<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.0065,&quot;to&quot;:0.9984,&quot;delta&quot;:-0.008},&quot;sora3m&quot;:{&quot;from&quot;:1.0833,&quot;to&quot;:1.077,&quot;delta&quot;:-0.006}}</description>
 </item>
 <item>
 <title>SORA update: sora1m 1.0131→1.0065</title>
@@ -216,13 +223,6 @@
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
 <guid isPermaLink="false">nexus-rates-Fri, 08 May 2026 04:08:42 GMT</guid>
 <pubDate>Fri, 08 May 2026 04:08:42 GMT</pubDate>
-<description>{}</description>
-</item>
-<item>
-<title>No material changes.</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Fri, 08 May 2026 04:18:15 GMT</guid>
-<pubDate>Fri, 08 May 2026 04:18:15 GMT</pubDate>
 <description>{}</description>
 </item>
 </channel>
