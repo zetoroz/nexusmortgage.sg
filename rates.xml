@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Wed, 24 Jun 2026 05:04:47 GMT</lastBuildDate>
+<lastBuildDate>Thu, 25 Jun 2026 05:08:55 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
-<title>Current Compounded SORA — 1M 1.00% | 3M 1.07%</title>
+<title>Current Compounded SORA — 1M 1.01% | 3M 1.07%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-current-2026-06-23</guid>
-<pubDate>Wed, 24 Jun 2026 05:04:47 GMT</pubDate>
-<description>Latest published Compounded SORA values per MAS. As of 2026-06-23.</description>
+<guid isPermaLink="false">nexus-current-2026-06-24</guid>
+<pubDate>Thu, 25 Jun 2026 05:08:55 GMT</pubDate>
+<description>Latest published Compounded SORA values per MAS. As of 2026-06-24.</description>
+</item>
+<item>
+<title>SORA update: sora1m 1.0043→1.0075, sora3m 1.0736→1.0727</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Thu, 25 Jun 2026 05:08:54 GMT</guid>
+<pubDate>Thu, 25 Jun 2026 05:08:54 GMT</pubDate>
+<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.0043,&quot;to&quot;:1.0075,&quot;delta&quot;:0.003},&quot;sora3m&quot;:{&quot;from&quot;:1.0736,&quot;to&quot;:1.0727,&quot;delta&quot;:-0.001}}</description>
 </item>
 <item>
 <title>SORA update: sora1m 0.9984→1.0043, sora3m 1.077→1.0736</title>
@@ -216,13 +223,6 @@
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
 <guid isPermaLink="false">nexus-rates-Wed, 06 May 2026 04:35:42 GMT</guid>
 <pubDate>Wed, 06 May 2026 04:35:42 GMT</pubDate>
-<description>{}</description>
-</item>
-<item>
-<title>No material changes.</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Thu, 07 May 2026 04:36:30 GMT</guid>
-<pubDate>Thu, 07 May 2026 04:36:30 GMT</pubDate>
 <description>{}</description>
 </item>
 </channel>
