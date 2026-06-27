@@ -705,13 +705,14 @@
             <!-- Result -->
             <aside class="lg:col-span-2" aria-labelledby="result-heading">
               <div class="result-panel">
-                <span class="max-loan-headline" id="result-heading">Cash-on-cash return</span>
+                <span class="max-loan-headline" id="result-heading">Return on Capital Invested</span>
                 <div class="max-loan-amount" id="pi-coc" aria-live="polite">0%</div>
                 <p class="max-loan-sub" id="pi-coc-sub">on your capital invested</p>
 
                 <div style="margin-top:1.5rem;border-top:1px solid rgba(196,151,59,.12);padding-top:1rem;">
                   <div class="secondary-stat"><span>Gross rental yield</span><strong id="pi-gross">0%</strong></div>
                   <div class="secondary-stat"><span>Net rental yield</span><strong id="pi-net">0%</strong></div>
+                  <div class="secondary-stat"><span>Cash-on-cash (annual cashflow)</span><strong id="pi-coc2">0%</strong></div>
                   <div class="secondary-stat"><span>Monthly cashflow (after loan &amp; tax)</span><strong id="pi-cashflow">S$0</strong></div>
                   <div class="secondary-stat"><span>Cashflow if only interest counts<br><span style="font-size:.7rem;color:rgba(250,247,242,.45);">(principal is your equity)</span></span><strong id="pi-cashflow-econ">S$0</strong></div>
                 </div>
@@ -723,7 +724,6 @@
 
                 <div style="margin-top:1.25rem;border-top:1px solid rgba(196,151,59,.25);padding-top:1rem;">
                   <div style="font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#c4973b;font-weight:700;margin-bottom:.5rem;">Total return over <span id="pi-holdlabel">10</span> years</div>
-                  <div class="secondary-stat" style="align-items:baseline;"><span>Annualised return (IRR)</span><strong id="pi-irr" style="font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:#c4973b;">0%</strong></div>
                   <div class="secondary-stat"><span>Total profit / loss</span><strong id="pi-profit">S$0</strong></div>
                   <div class="secondary-stat"><span>Sale price at exit</span><strong id="pi-saleprice">S$0</strong></div>
                   <div class="secondary-stat"><span>Net sale proceeds</span><strong id="pi-netsale">S$0</strong></div>
@@ -1121,8 +1121,7 @@
       function acf(rentM){var eff=rentM*Math.max(0,12-vac);var pt=propTax(rentM*12);var op=mcst*12+pt+other;var noi=eff-op;var it=Math.max(0,noi-interestYr)*taxR;return {cf:noi-it-mortgageYr,noi:noi,pt:pt};}
       var rent=n('pi-rent'),y1=acf(rent);
       var gross=price>0?rent*12/price*100:0, net=price>0?y1.noi/price*100:0, coc=cash>0?y1.cf/cash*100:0;
-      set('pi-coc',(coc>=0?'+':'')+coc.toFixed(1)+'%');
-      set('pi-coc-sub','on '+money(cash)+' cash invested');
+      set('pi-coc2',(coc>=0?'+':'')+coc.toFixed(1)+'%');
       set('pi-gross',gross.toFixed(2)+'%'); set('pi-net',net.toFixed(2)+'%');
       set('pi-cashflow',signed(y1.cf/12)+'/mo');
       var econMo=(y1.noi-interestYr-Math.max(0,y1.noi-interestYr)*taxR)/12; set('pi-cashflow-econ',signed(econMo)+'/mo');
@@ -1137,7 +1136,7 @@
       var stream=[-cash];for(var i=0;i<cfs.length;i++){stream.push(cfs[i]+(i===cfs.length-1?netSale:0));}
       var rr=irr(stream), totalProfit=totalCf+netSale-cash;
       set('pi-holdlabel',String(hold));
-      set('pi-irr', rr===null?'n/a':(rr>=0?'+':'\u2212')+Math.abs(rr*100).toFixed(1)+'%');
+      set('pi-coc', rr===null?'n/a':(rr>=0?'+':'\u2212')+Math.abs(rr*100).toFixed(1)+'%'); set('pi-coc-sub','annualised over '+hold+' yrs, on '+money(cash));
       set('pi-profit',signed(totalProfit));
       set('pi-saleprice',money(salePrice));
       set('pi-netsale',signed(netSale));
