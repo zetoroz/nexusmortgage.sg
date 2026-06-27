@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html lang="en-SG">
 <head>
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '27348447628084102');
-  fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=27348447628084102&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel Code -->
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VKFWNBRM6"></script>
+  <!-- Analytics — lazy-loaded (GA4 + Meta Pixel). Stubs install
+       synchronously so gtag('event',…) and fbq('track',…) calls always
+       queue correctly; the real scripts load only after first user
+       interaction or after the page becomes idle. Mirrors the Microsoft
+       Clarity pattern below so all three vendors behave identically. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-7VKFWNBRM6');
+
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document);
+    fbq('init', '27348447628084102');
+    fbq('track', 'PageView');
+
+    (function(){
+      var loaded = false;
+      function inject(src){var s=document.createElement('script');s.async=true;s.src=src;document.head.appendChild(s);}
+      function load(){
+        if (loaded) return; loaded = true;
+        inject('https://www.googletagmanager.com/gtag/js?id=G-7VKFWNBRM6');
+        inject('https://connect.facebook.net/en_US/fbevents.js');
+      }
+      var events = ['scroll','pointerdown','keydown','touchstart'];
+      function fire(){events.forEach(function(e){window.removeEventListener(e, fire);}); load();}
+      events.forEach(function(e){window.addEventListener(e, fire, {passive:true});});
+      if ('requestIdleCallback' in window) requestIdleCallback(load, {timeout:5000});
+      else setTimeout(load, 3000);
+    })();
   </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=27348447628084102&ev=PageView&noscript=1" /></noscript>
   <script>
   /* capture ad click-ids + utm (offline-conversion import + attribution) */
   (function(){try{var p=new URLSearchParams(location.search);['gclid','gbraid','wbraid','fbclid','msclkid','utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){var v=p.get(k);if(v){try{sessionStorage.setItem('nx_'+k,v)}catch(e){}}});}catch(e){}})();

@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="en-SG">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VKFWNBRM6"></script>
+  <!-- Analytics — GA4 lazy-loaded. Stub installs synchronously so
+       gtag('event',…) calls always queue correctly; gtag.js itself loads
+       only after first user interaction or once the page becomes idle. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-7VKFWNBRM6');
+
+    (function(){
+      var loaded = false;
+      function load(){
+        if (loaded) return; loaded = true;
+        var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-7VKFWNBRM6';document.head.appendChild(s);
+      }
+      var events = ['scroll','pointerdown','keydown','touchstart'];
+      function fire(){events.forEach(function(e){window.removeEventListener(e, fire);}); load();}
+      events.forEach(function(e){window.addEventListener(e, fire, {passive:true});});
+      if ('requestIdleCallback' in window) requestIdleCallback(load, {timeout:5000});
+      else setTimeout(load, 3000);
+    })();
   </script>
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
