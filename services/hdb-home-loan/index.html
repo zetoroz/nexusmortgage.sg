@@ -303,8 +303,8 @@
     .prose ul { padding-left: 1.25rem; margin: 0 0 1.25rem; }
     .prose li { font-size: 1rem; line-height: 1.78; color: rgba(11,28,58,.78); margin-bottom: .45rem; }
     .prose strong { color: var(--navy-900); font-weight: 600; }
-    .prose a { color: var(--gold-500); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .2s; }
-    .prose a:hover, .prose a:focus-visible { color: var(--navy-900); }
+    .prose a:not(.btn-gold):not(.btn-ghost) { color: var(--gold-500); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .2s; }
+    .prose a:not(.btn-gold):not(.btn-ghost):hover, .prose a:not(.btn-gold):not(.btn-ghost):focus-visible { color: var(--navy-900); }
 
     .rate-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
