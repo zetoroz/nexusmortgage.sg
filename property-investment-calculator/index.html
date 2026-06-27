@@ -1143,6 +1143,7 @@
       set('pi-totalcf',signed(totalCf));
     }
     ids.forEach(function(id){var e=document.getElementById(id);if(e){e.addEventListener('input',run);e.addEventListener('change',run);}});
+    ['pi-price','pi-legal','pi-rent','pi-mcst','pi-other'].forEach(function(id){var e=document.getElementById(id);if(e){e.addEventListener('input',function(){var v=e.value.replace(/[^0-9]/g,'');e.value=v===''?'':Number(v).toLocaleString('en-SG');});}});
     run();
   })();
   </script>
