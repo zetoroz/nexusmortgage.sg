@@ -84,7 +84,7 @@ jobs:
 
       - name: Stage outputs
         run: |
-          git add -A rates.json rates-history.json rates.xml sora-feed.json blog/home-loan-rates-singapore/index.html || true
+          git add -A rates.json rates-history.json rates.xml sora-feed.json blog/home-loan-rates-singapore/index.html sora-rates-singapore/index.html || true
 
       - name: Commit + push if changed
         run: |
