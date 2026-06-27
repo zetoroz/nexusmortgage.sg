@@ -199,6 +199,19 @@
     .qprog .bar{flex:1;height:5px;border-radius:4px;background:#e9ebf0;overflow:hidden}
     .qprog .bar i{display:block;height:100%;width:50%;background:linear-gradient(90deg,#C4973B,#E8C97A);border-radius:4px;transition:width .4s cubic-bezier(.4,0,.2,1)}
     .qprog .lbl{font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#9aa3b2;white-space:nowrap}
+    .rateteaser{background:#fbfaf7;border:1px solid rgba(196,151,59,.28);border-radius:12px;padding:.85rem .95rem;margin-bottom:1.1rem}
+    .rt-head{display:flex;align-items:center;gap:.4rem;font-size:.9rem;font-weight:700;color:#0a7d4f;line-height:1.25}
+    .rt-head svg{flex-shrink:0}
+    .rt-sub{font-size:.79rem;color:#4a5568;margin:.2rem 0 .7rem;line-height:1.45}
+    .rt-row{display:flex;align-items:center;gap:.55rem;background:#fff;border:1px solid #ece0c6;border-radius:8px;padding:.5rem .6rem;margin-bottom:.4rem}
+    .rt-row:last-of-type{margin-bottom:0}
+    .rt-rank{width:1.3rem;height:1.3rem;border-radius:50%;background:#f3e6c8;color:#8a6a1f;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .rt-bank{flex:1;font-size:.84rem;color:var(--ink);filter:blur(4.5px);user-select:none;white-space:nowrap;overflow:hidden}
+    .rt-rate{font-size:.9rem;font-weight:700;color:#0f6e56;white-space:nowrap}
+    .rt-rate .bd{filter:blur(3px)}
+    .rt-rate.lk{filter:blur(3.5px);color:var(--ink)}
+    .rt-lock{color:#b6bcc7;flex-shrink:0;display:flex}
+    .rt-foot{font-size:.68rem;color:#9aa3b2;margin-top:.55rem;text-align:center}
     .qstep{display:none}
     .qstep.on{display:block;animation:qfade .35s ease both}
     @keyframes qfade{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
@@ -307,6 +320,14 @@
 
           <!-- STEP 2 · contact -->
           <div class="qstep" id="step2">
+            <div class="rateteaser" id="rateteaser">
+              <div class="rt-head"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0a7d4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> 3 of 16 banks could cut your repayment</div>
+              <div class="rt-sub">Most refinancers sit above 3% — these are far lower. Unlock your exact monthly saving below.</div>
+              <div class="rt-row"><span class="rt-rank">1</span><span class="rt-bank">SORA-pegged</span><span class="rt-rate">1.0<span class="bd">7</span>%</span></div>
+              <div class="rt-row"><span class="rt-rank">2</span><span class="rt-bank">1-mth SORA</span><span class="rt-rate lk">1.13%</span><span class="rt-lock"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span></div>
+              <div class="rt-row"><span class="rt-rank">3</span><span class="rt-bank">2-yr fixed</span><span class="rt-rate lk">1.35%</span><span class="rt-lock"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span></div>
+              <div class="rt-foot">As of 11 May 2026 · no obligation · banks pay our fee</div>
+            </div>
             <div class="field">
               <label for="f-name">Full name</label>
               <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Tan Wei Ming" required>
@@ -445,6 +466,7 @@
     if(!rv){ showToast('Enter your current rate — it\'s on your bank letter or app.', true); document.getElementById('f-rate').focus(); return; }
     if(!/^\d{1,2}(\.\d{1,3})?$/.test(rv) || parseFloat(rv) <= 0 || parseFloat(rv) >= 12){ showToast('Enter your rate as a number, e.g. 3.50', true); document.getElementById('f-rate').focus(); return; }
     step1.classList.remove('on'); step2.classList.add('on');
+    var rtl=document.getElementById('rt-loan'); if(rtl) rtl.textContent = sel.loanAmount ? ' for your '+sel.loanAmount+' loan' : '';
     qbar.style.width = '100%'; qlbl.textContent = 'Step 2 of 2';
     qtitle.textContent = 'Where should Dan send your savings?';
     if(typeof gtag==='function'){ gtag('event','form_qualify',{ form_location:SOURCE, property_type:sel.propertyType, loan_amount:sel.loanAmount, current_rate:rv + '%' }); }
@@ -525,6 +547,29 @@
       })
       .catch(function(){ btn.disabled=false; btn.textContent='Show my savings →'; showToast('Something went wrong — please WhatsApp us instead.', true); });
   });
+})();
+</script>
+<script>
+(function(){
+  var tz=document.getElementById('rateteaser'); if(!tz) return;
+  fetch('/rates.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+    var ps=(d.packages||[]).filter(function(p){return p.year1Rate>0;}).sort(function(a,b){return a.year1Rate-b.year1Rate;});
+    if(ps.length<3){ tz.style.display='none'; return; }
+    var pick=[],seen={};
+    for(var i=0;i<ps.length&&pick.length<3;i++){var k=(ps[i].subCategory||ps[i].category||'');if(!seen[k]){seen[k]=1;pick.push(ps[i]);}}
+    if(pick.length<3) pick=ps.slice(0,3);
+    var rows=tz.querySelectorAll('.rt-row');
+    pick.forEach(function(p,i){
+      if(!rows[i])return;
+      var rate=(Math.round(p.year1Rate*100)/100).toFixed(2);
+      var bank=rows[i].querySelector('.rt-bank'), rt=rows[i].querySelector('.rt-rate');
+      if(bank) bank.textContent=(p.subCategory||p.category||'').toString();
+      if(rt){ if(i===0){rt.className='rt-rate';rt.innerHTML=rate.slice(0,3)+'<span class="bd">'+rate.slice(3)+'</span>%';}
+        else{rt.className='rt-rate lk';rt.textContent=rate+'%';} }
+    });
+    var foot=tz.querySelector('.rt-foot');
+    if(foot&&d.asOf) foot.textContent='As of '+d.asOf+' \u00b7 no obligation \u00b7 banks pay our fee';
+  }).catch(function(){ tz.style.display='none'; });
 })();
 </script>
 </body>
