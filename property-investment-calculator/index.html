@@ -692,6 +692,14 @@
                   <div><label class="field-label" for="pi-tax">Your income tax rate (%)</label><input type="text" id="pi-tax" class="field-input" inputmode="decimal" value="0"><p class="field-helper">optional &mdash; applied to taxable rental income</p></div>
                 </div>
               </div>
+              <div class="applicant-card">
+                <h4>The Hold &amp; Exit</h4>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div><label class="field-label" for="pi-hold">Holding period (years)</label><input type="text" id="pi-hold" class="field-input" inputmode="numeric" value="10"></div>
+                  <div><label class="field-label" for="pi-apprec">Capital appreciation (%/yr)</label><input type="text" id="pi-apprec" class="field-input" inputmode="decimal" value="3"><p class="field-helper">your assumption for price growth</p></div>
+                  <div><label class="field-label" for="pi-rentgrow">Rent growth (%/yr)</label><input type="text" id="pi-rentgrow" class="field-input" inputmode="decimal" value="2"></div>
+                </div>
+              </div>
             </div>
 
             <!-- Result -->
@@ -710,6 +718,16 @@
                   <div class="secondary-stat"><span>Cash invested</span><strong id="pi-cash">S$0</strong></div>
                   <div class="secondary-stat"><span>Est. stamp duty (BSD + ABSD)</span><strong id="pi-duty">S$0</strong></div>
                   <div class="secondary-stat"><span>Est. property tax / year</span><strong id="pi-ptax">S$0</strong></div>
+                </div>
+
+                <div style="margin-top:1.25rem;border-top:1px solid rgba(196,151,59,.25);padding-top:1rem;">
+                  <div style="font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#c4973b;font-weight:700;margin-bottom:.5rem;">Total return over <span id="pi-holdlabel">10</span> years</div>
+                  <div class="secondary-stat" style="align-items:baseline;"><span>Annualised return (IRR)</span><strong id="pi-irr" style="font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:#c4973b;">0%</strong></div>
+                  <div class="secondary-stat"><span>Total profit / loss</span><strong id="pi-profit">S$0</strong></div>
+                  <div class="secondary-stat"><span>Sale price at exit</span><strong id="pi-saleprice">S$0</strong></div>
+                  <div class="secondary-stat"><span>Net sale proceeds</span><strong id="pi-netsale">S$0</strong></div>
+                  <div class="secondary-stat"><span>Total rental cashflow</span><strong id="pi-totalcf">S$0</strong></div>
+                  <p style="font-size:.72rem;color:rgba(250,247,242,.5);margin:.6rem 0 0;line-height:1.5;">IRR uses your appreciation and rent-growth assumptions and includes equity built by paying down the loan, less ~2% agent fee and any SSD. An estimate, not a forecast.</p>
                 </div>
 
                 <div class="cta-block">
@@ -1083,31 +1101,45 @@
 
   <script>
   (function(){
-    var ids=['pi-price','pi-down','pi-absd','pi-legal','pi-rate','pi-tenure','pi-rent','pi-mcst','pi-vacancy','pi-other','pi-tax'];
+    var ids=['pi-price','pi-down','pi-absd','pi-legal','pi-rate','pi-tenure','pi-rent','pi-mcst','pi-vacancy','pi-other','pi-tax','pi-hold','pi-apprec','pi-rentgrow'];
     function n(id){var e=document.getElementById(id);if(!e)return 0;var v=(e.value||'').replace(/[^0-9.]/g,'');v=parseFloat(v);return isFinite(v)?v:0;}
     function money(x){return 'S$'+Math.round(x).toLocaleString('en-SG');}
+    function signed(x){return (x<0?'\u2212S$':'S$')+Math.abs(Math.round(x)).toLocaleString('en-SG');}
     function bands(amt,b){var d=0,r=amt;for(var i=0;i<b.length;i++){var x=Math.min(r,b[i][0]);if(x<=0)break;d+=x*b[i][1];r-=x;}return d;}
     function bsd(p){return bands(p,[[180000,.01],[180000,.02],[640000,.03],[500000,.04],[1500000,.05],[Infinity,.06]]);}
     function propTax(av){return bands(av,[[30000,.12],[15000,.20],[15000,.28],[Infinity,.36]]);}
     function inst(D,rate,yrs){if(D<=0)return 0;var r=rate/100/12,k=yrs*12;if(r<=0)return k?D/k:0;return D*r/(1-Math.pow(1+r,-k));}
+    function bal(loan,rate,yrs,p){var r=rate/100/12,k=yrs*12;p=Math.min(p,k);if(r<=0)return loan*(1-p/k);var m=inst(loan,rate,yrs);return Math.max(0,loan*Math.pow(1+r,p)-m*((Math.pow(1+r,p)-1)/r));}
+    function irr(cf){function npv(r){var s=0;for(var i=0;i<cf.length;i++)s+=cf[i]/Math.pow(1+r,i);return s;}var lo=-0.95,hi=2;if(npv(lo)*npv(hi)>0)return null;for(var i=0;i<200;i++){var mid=(lo+hi)/2,v=npv(mid);if(Math.abs(v)<0.5)return mid;if(npv(lo)*v<0)hi=mid;else lo=mid;}return (lo+hi)/2;}
     function set(id,t){var e=document.getElementById(id);if(e)e.textContent=t;}
     function run(){
       var price=n('pi-price'),down=price*n('pi-down')/100,loan=price-down;
+      var rate=n('pi-rate'),tenure=n('pi-tenure'),vac=n('pi-vacancy'),mcst=n('pi-mcst'),other=n('pi-other'),taxR=n('pi-tax')/100;
       var duty=bsd(price)+price*n('pi-absd')/100, cash=down+duty+n('pi-legal');
-      var rent=n('pi-rent'),grossAnnual=rent*12,eff=rent*Math.max(0,12-n('pi-vacancy'));
-      var ptax=propTax(grossAnnual), op=n('pi-mcst')*12+ptax+n('pi-other');
-      var noi=eff-op, mortgageYr=inst(loan,n('pi-rate'),n('pi-tenure'))*12, interestYr=loan*n('pi-rate')/100;
-      var incomeTax=Math.max(0,noi-interestYr)*n('pi-tax')/100;
-      var netCf=noi-mortgageYr-incomeTax;
-      var gross=price>0?grossAnnual/price*100:0, net=price>0?noi/price*100:0, coc=cash>0?netCf/cash*100:0;
+      var mortgageYr=inst(loan,rate,tenure)*12, interestYr=loan*rate/100;
+      function acf(rentM){var eff=rentM*Math.max(0,12-vac);var pt=propTax(rentM*12);var op=mcst*12+pt+other;var noi=eff-op;var it=Math.max(0,noi-interestYr)*taxR;return {cf:noi-it-mortgageYr,noi:noi,pt:pt};}
+      var rent=n('pi-rent'),y1=acf(rent);
+      var gross=price>0?rent*12/price*100:0, net=price>0?y1.noi/price*100:0, coc=cash>0?y1.cf/cash*100:0;
       set('pi-coc',(coc>=0?'+':'')+coc.toFixed(1)+'%');
       set('pi-coc-sub','on '+money(cash)+' cash invested');
-      set('pi-gross',gross.toFixed(2)+'%');
-      set('pi-net',net.toFixed(2)+'%');
-      set('pi-cashflow',(netCf<0?'−S$':'S$')+Math.abs(Math.round(netCf/12)).toLocaleString('en-SG')+'/mo');
-      set('pi-cash',money(cash));
-      set('pi-duty',money(duty));
-      set('pi-ptax',money(ptax));
+      set('pi-gross',gross.toFixed(2)+'%'); set('pi-net',net.toFixed(2)+'%');
+      set('pi-cashflow',signed(y1.cf/12)+'/mo');
+      set('pi-cash',money(cash)); set('pi-duty',money(duty)); set('pi-ptax',money(y1.pt));
+      var hold=Math.max(1,Math.round(n('pi-hold'))), apprec=n('pi-apprec')/100, rg=n('pi-rentgrow')/100;
+      var cfs=[],rm=rent,totalCf=0;
+      for(var y=1;y<=hold;y++){var c=acf(rm).cf;cfs.push(c);totalCf+=c;rm=rm*(1+rg);}
+      var salePrice=price*Math.pow(1+apprec,hold);
+      var loanBal=bal(loan,rate,tenure,hold*12);
+      var ssdRate=hold>=4?0:[0.16,0.12,0.08,0.04][Math.min(Math.ceil(hold),4)-1];
+      var netSale=salePrice-loanBal-salePrice*ssdRate-salePrice*0.02;
+      var stream=[-cash];for(var i=0;i<cfs.length;i++){stream.push(cfs[i]+(i===cfs.length-1?netSale:0));}
+      var rr=irr(stream), totalProfit=totalCf+netSale-cash;
+      set('pi-holdlabel',String(hold));
+      set('pi-irr', rr===null?'n/a':(rr>=0?'+':'\u2212')+Math.abs(rr*100).toFixed(1)+'%');
+      set('pi-profit',signed(totalProfit));
+      set('pi-saleprice',money(salePrice));
+      set('pi-netsale',signed(netSale));
+      set('pi-totalcf',signed(totalCf));
     }
     ids.forEach(function(id){var e=document.getElementById(id);if(e){e.addEventListener('input',run);e.addEventListener('change',run);}});
     run();
