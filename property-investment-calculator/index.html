@@ -713,6 +713,7 @@
                   <div class="secondary-stat"><span>Gross rental yield</span><strong id="pi-gross">0%</strong></div>
                   <div class="secondary-stat"><span>Net rental yield</span><strong id="pi-net">0%</strong></div>
                   <div class="secondary-stat"><span>Monthly cashflow (after loan &amp; tax)</span><strong id="pi-cashflow">S$0</strong></div>
+                  <div class="secondary-stat"><span>Cashflow if only interest counts<br><span style="font-size:.7rem;color:rgba(250,247,242,.45);">(principal is your equity)</span></span><strong id="pi-cashflow-econ">S$0</strong></div>
                 </div>
                 <div style="margin-top:1rem;border-top:1px solid rgba(196,151,59,.12);padding-top:1rem;">
                   <div class="secondary-stat"><span>Cash invested</span><strong id="pi-cash">S$0</strong></div>
@@ -1124,6 +1125,7 @@
       set('pi-coc-sub','on '+money(cash)+' cash invested');
       set('pi-gross',gross.toFixed(2)+'%'); set('pi-net',net.toFixed(2)+'%');
       set('pi-cashflow',signed(y1.cf/12)+'/mo');
+      var econMo=(y1.noi-interestYr-Math.max(0,y1.noi-interestYr)*taxR)/12; set('pi-cashflow-econ',signed(econMo)+'/mo');
       set('pi-cash',money(cash)); set('pi-duty',money(duty)); set('pi-ptax',money(y1.pt));
       var hold=Math.max(1,Math.round(n('pi-hold'))), apprec=n('pi-apprec')/100, rg=n('pi-rentgrow')/100;
       var cfs=[],rm=rent,totalCf=0;
