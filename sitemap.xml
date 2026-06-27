@@ -91,6 +91,13 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Property investment / rental yield calculator -->
+  <url>
+    <loc>https://nexusmortgage.sg/property-investment-calculator/</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <!-- Refinance savings calculator -->
   <url>
     <loc>https://nexusmortgage.sg/refinance-calculator/</loc>
