@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Sun, 28 Jun 2026 05:20:22 GMT</lastBuildDate>
+<lastBuildDate>Mon, 29 Jun 2026 05:54:23 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
-<title>Current Compounded SORA — 1M 1.02% | 3M 1.07%</title>
+<title>Current Compounded SORA — 1M 1.07% | 3M 1.08%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-current-2026-06-25</guid>
-<pubDate>Sun, 28 Jun 2026 05:20:22 GMT</pubDate>
-<description>Latest published Compounded SORA values per MAS. As of 2026-06-25.</description>
+<guid isPermaLink="false">nexus-current-2026-06-26</guid>
+<pubDate>Mon, 29 Jun 2026 05:54:23 GMT</pubDate>
+<description>Latest published Compounded SORA values per MAS. As of 2026-06-26.</description>
+</item>
+<item>
+<title>SORA update: sora1m 1.0156→1.0727, sora3m 1.0725→1.0806</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Mon, 29 Jun 2026 05:54:22 GMT</guid>
+<pubDate>Mon, 29 Jun 2026 05:54:22 GMT</pubDate>
+<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.0156,&quot;to&quot;:1.0727,&quot;delta&quot;:0.057},&quot;sora3m&quot;:{&quot;from&quot;:1.0725,&quot;to&quot;:1.0806,&quot;delta&quot;:0.008}}</description>
 </item>
 <item>
 <title>SORA refresh — no change.</title>
@@ -216,13 +223,6 @@
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
 <guid isPermaLink="false">nexus-rates-Thu, 30 Apr 2026 15:16:58 GMT</guid>
 <pubDate>Thu, 30 Apr 2026 15:16:58 GMT</pubDate>
-<description>{}</description>
-</item>
-<item>
-<title>No material changes.</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Sun, 03 May 2026 04:42:46 GMT</guid>
-<pubDate>Sun, 03 May 2026 04:42:46 GMT</pubDate>
 <description>{}</description>
 </item>
 </channel>
