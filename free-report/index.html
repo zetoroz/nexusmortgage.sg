@@ -6414,10 +6414,11 @@ leadForm.addEventListener('submit', async e => {
   // Cache lead info for the later send-report step
   leadInfo = { name, phone: '+65 ' + phoneRaw.slice(0,4) + ' ' + phoneRaw.slice(4), email };
 
-  const payload = buildPayload(leadInfo);
-  payload.stage = 'lead-capture';   // Make scenario routes by stage — this path notifies but does NOT email PDF
-
   try {
+    // Build inside try: if payload assembly throws, the catch shows an error
+    // toast + re-enables the button instead of silently stranding the lead.
+    const payload = buildPayload(leadInfo);
+    payload.stage = 'lead-capture';   // Make scenario routes by stage — this path notifies but does NOT email PDF
     if (MAKE_WEBHOOK_URL) {
       const res = await fetch(MAKE_WEBHOOK_URL, {
         method: 'POST',
