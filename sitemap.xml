@@ -433,4 +433,23 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://nexusmortgage.sg/blog/reprice-vs-refinance-singapore/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nexusmortgage.sg/blog/fdr-fhr-dmr-home-loan-pegs-singapore/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nexusmortgage.sg/blog/singapore-mortgage-rate-outlook-2026/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

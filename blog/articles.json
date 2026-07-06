@@ -1,5 +1,41 @@
 [
   {
+    "slug": "singapore-mortgage-rate-outlook-2026",
+    "title": "Singapore Mortgage Rate Outlook 2026: Where SORA & Fixed Rates Sit Now",
+    "excerpt": "Where Singapore mortgage rates sit in mid-2026 (3-month SORA near 1.08%), what actually drives them, and what UOB and DBS research expects. A balanced outlook — not a forecast.",
+    "tag": "Market Update",
+    "date": "3 July 2026",
+    "readTime": "9 min read",
+    "thumbnail": "blog-images/condo-fixed-vs-sora.webp",
+    "thumbnailAlt": "Singapore skyline with a rate curve — 2026 SORA and fixed home loan rate outlook",
+    "status": "live",
+    "url": "/blog/singapore-mortgage-rate-outlook-2026/"
+  },
+  {
+    "slug": "reprice-vs-refinance-singapore",
+    "title": "Reprice vs Refinance in Singapore 2026: Which Actually Saves More?",
+    "excerpt": "Reprice (stay with your bank) or refinance (switch banks)? The cost, speed and savings compared, when each wins, and the lock-in timing trap. 2026.",
+    "tag": "Refinancing",
+    "date": "3 July 2026",
+    "readTime": "8 min read",
+    "thumbnail": "blog-images/refinance-thumb.webp",
+    "thumbnailAlt": "Two paths diverging — reprice with the same bank vs refinance to a new bank in Singapore",
+    "status": "live",
+    "url": "/blog/reprice-vs-refinance-singapore/"
+  },
+  {
+    "slug": "fdr-fhr-dmr-home-loan-pegs-singapore",
+    "title": "FDR, FHR & DMR: Singapore's Fixed-Deposit Home Loan Pegs Explained",
+    "excerpt": "FHR, FDR, FDMR, FDPR and DMR are bank fixed-deposit home-loan pegs. What each means, how they differ from SORA, why they are stable but bank-controlled, and how to choose.",
+    "tag": "Home Loans",
+    "date": "3 July 2026",
+    "readTime": "8 min read",
+    "thumbnail": "blog-images/home-loan-board-rate.webp",
+    "thumbnailAlt": "Bank board with fixed-deposit rate pegs — FHR, FDR, DMR home loan pegs Singapore explained",
+    "status": "live",
+    "url": "/blog/fdr-fhr-dmr-home-loan-pegs-singapore/"
+  },
+  {
     "slug": "foreigner-pr-private-property-singapore",
     "title": "Foreigner & PR Buying Private Property Singapore 2026: ABSD & Loan Guide",
     "excerpt": "Foreigners pay 60% ABSD on Singapore residential property; PRs pay 5% — and US and EFTA nationals are exempt under FTAs. What each can buy, 75% LTV bank loans with no CPF, and the full cash you need up front.",
