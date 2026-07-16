@@ -69,8 +69,10 @@ const SORA_TARGETS = [
   {
     file: "sora-rates-singapore/index.html",
     fragments: ({ sora1m, sora3m, asOfSoraIso, asOfSoraHuman, effective, jumboLow, jumboHigh, stdLow, stdHigh, smallLow, smallHigh, commLow, commHigh }) => ({
-      "title": `SORA Rate Today Singapore: 1M ${sora1m}% &amp; 3M ${sora3m}% (Updated Daily) | Nexus`,
-      "desc": `Live Singapore SORA rate today: 1M Compounded SORA ${sora1m}%, 3M Compounded SORA ${sora3m}% as of ${asOfSoraHuman}. Daily MAS feed, historical trend, home-loan effective rate.`,
+      // Full-tag rebuilds — sentinels must wrap the WHOLE tag from outside
+      // (sentinels inside <title> RCDATA / content="" render as literal SERP text).
+      "titletag": `<title>SORA Rate Today Singapore: 1M ${sora1m}% &amp; 3M ${sora3m}% (Updated Daily) | Nexus</title>`,
+      "desctag": `<meta name="description" content="Live Singapore SORA rate today: 1M Compounded SORA ${sora1m}%, 3M Compounded SORA ${sora3m}% as of ${asOfSoraHuman}. Daily MAS feed, historical trend, home-loan effective rate.">`,
       "1m": sora1m,
       "3m": sora3m,
       "3m2": sora3m,
@@ -248,3 +250,6 @@ main().catch((err) => {
   console.error("[snippets] FAIL:", err);
   process.exit(1);
 });
+
+// Keep the static crawler-visible rates table on /mortgage-rates/ in sync daily.
+await import("./build-rates-static-table.mjs");

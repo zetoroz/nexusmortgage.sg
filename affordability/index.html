@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-SG">
 
 <head>
   <!-- Analytics — lazy-loaded (GA4 + Meta Pixel). Stubs install
@@ -153,6 +153,38 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Banks haircut variable and self-employed income to 70% of the declared figure under MAS guidelines. Bonuses, commissions, rental income, and freelance income are all treated as variable. Fixed salary is used at 100%."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is the calculator using 4% instead of my actual interest rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MAS requires banks to stress-test every residential loan at a 4% p.a. medium-term rate, even if your actual package is much lower. This protects borrowers against rate rises. Your repayment is charged at the real rate, but your maximum loan is sized at 4%."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does age affect how much I can borrow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 75% LTV bank loan must end by age 65 with a maximum 30-year tenure (25 years for HDB). Joint borrowers use an income-weighted average age (IWAA), so an older higher-earning co-borrower shortens the tenure, which raises the stressed monthly payment and reduces the maximum loan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do credit cards reduce my home loan eligibility?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Outstanding card balances count toward TDSR at the higher of 5% of the balance or S$50 per card each month. A S$30,000 balance costs S$1,500 of monthly TDSR room — roughly S$300,000 of borrowing power at a 30-year tenure. Paying cards down before applying directly raises your maximum loan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is refinancing also subject to TDSR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For an owner-occupied home, refinancing is generally exempt from the 55% TDSR cap, so you can usually switch to a cheaper package even if your ratios are tight. TDSR applies in full when purchasing, and to investment-property refinancing unless transitional conditions are met."
       }
     }
   ]
@@ -670,6 +702,7 @@
           <span aria-current="page">Affordability Calculator</span>
         </nav>
         <h1 class="page-title">Home Loan Affordability <em>Calculator Singapore</em></h1>
+        <p style="margin:.5rem 0 0;font-size:.8rem;color:rgba(250,247,242,.55);">By <a href="/about/" style="color:var(--gold-400);font-weight:600;text-decoration:none;">Dan Ler</a>, Mortgage Advisor &middot; Updated 16 July 2026</p>
         <p class="lede">
           Know your exact borrowing limit before you place an OTP. This free tool runs the
           MAS 4% stress test, applies the 30% MSR cap for HDB, and 70% haircut on variable income —
@@ -905,6 +938,43 @@
       </div>
     </section>
 
+
+    <!-- ===== MORE WORKED EXAMPLES ===== -->
+    <section class="content-section cream">
+      <div class="container-narrow">
+        <span class="sec-tag">More Scenarios</span>
+        <h2 class="sec-title" style="color:var(--navy-900);">Private Property, Joint Applicants <em>and the Tenure Cap</em></h2>
+        <div style="display:grid;grid-template-columns:1fr;gap:2rem;" class="md:grid-cols-2">
+          <div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--navy-900);margin:0 0 .5rem;">A couple buying a private condo</h3>
+            <p style="font-size:.92rem;line-height:1.8;color:rgba(11,28,58,.7);">
+              Sarah (34, S$9,000 fixed) and Wei Ming (36, S$6,000 fixed + S$1,500 variable) buy a S$1.6m condo. No MSR here &mdash; only the <strong>55% TDSR</strong> applies, stress-tested at 4%:
+            </p>
+            <ul style="font-size:.9rem;line-height:1.8;color:rgba(11,28,58,.7);margin-top:.8rem;padding-left:1.2rem;">
+              <li>Stress income: 9,000 + 6,000 + (70% &times; 1,500) = <strong>S$16,050/mo</strong></li>
+              <li>TDSR room (no other debts): 55% &times; 16,050 = <strong>S$8,827/mo</strong></li>
+              <li>At 4% stress, 30-year tenure &rarr; supports a loan well above the <strong>75% LTV cap of S$1.2m</strong> &mdash; so LTV, not TDSR, is their binding limit</li>
+            </ul>
+            <p style="font-size:.85rem;color:rgba(11,28,58,.55);margin-top:1rem;line-height:1.7;">
+              This is common for dual-income private buyers: the <a href="/blog/tdsr-msr-explained/" style="color:var(--gold-500);font-weight:600;">TDSR</a> passes easily and the real constraint is the downpayment and <a href="/stamp-duty-calculator/" style="color:var(--gold-500);font-weight:600;">stamp duty</a> cash.
+            </p>
+          </div>
+          <div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--navy-900);margin:0 0 .5rem;">How age shortens your tenure (IWAA)</h3>
+            <p style="font-size:.92rem;line-height:1.8;color:rgba(11,28,58,.7);">
+              Joint borrowers get an <strong>income-weighted average age</strong> (IWAA). If Sarah (34) earns twice what a 58-year-old co-borrower does, the IWAA is pulled young and tenure stays long. Flip the incomes and the IWAA rises &mdash; a 75% LTV bank loan must end by <strong>age 65 and 30 years max</strong> (25 for HDB), so an older IWAA cuts the tenure, which raises the stressed monthly and shrinks the loan even when income is high.
+            </p>
+            <p style="font-size:.92rem;line-height:1.8;color:rgba(11,28,58,.7);margin-top:.8rem;">
+              Rule of thumb: every 5 years of tenure lost cuts the maximum loan by roughly 12&ndash;15% at the 4% stress rate. If the calculator shows a tenure-capped result, restructuring who borrows can matter more than earning more.
+            </p>
+            <p style="font-size:.8rem;color:rgba(11,28,58,.5);margin-top:1rem;line-height:1.6;">
+              Rules per <a href="https://www.mas.gov.sg/regulation/notices/notice-645" target="_blank" rel="noopener" style="color:var(--gold-500);">MAS Notice 645 (TDSR)</a> and <a href="https://www.hdb.gov.sg/residential/buying-a-flat/financing-a-flat-purchase" target="_blank" rel="noopener" style="color:var(--gold-500);">HDB financing rules</a>. See live packages on our <a href="/mortgage-rates/" style="color:var(--gold-500);font-weight:600;">rates page</a> or unlock equity via a <a href="/equity-loan/" style="color:var(--gold-500);font-weight:600;">cash-out loan</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== FAQ ===== -->
     <section class="content-section dark">
       <div class="container-narrow" style="max-width:760px;">
@@ -940,6 +1010,46 @@
           </button>
           <div class="faq-a">
             <p>Banks haircut variable and self-employed income to 70% of the declared figure under MAS guidelines. Bonuses, commissions, rental income, and freelance income are all treated as variable. Fixed salary is used at 100%.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>Why is the calculator using 4% instead of my actual interest rate?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>MAS requires banks to stress-test every residential loan at a 4% p.a. medium-term rate, even if your actual package is much lower. This protects borrowers against rate rises. Your repayment is charged at the real rate, but your maximum loan is sized at 4%.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>How does age affect how much I can borrow?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>A 75% LTV bank loan must end by age 65 with a maximum 30-year tenure (25 years for HDB). Joint borrowers use an income-weighted average age (IWAA), so an older higher-earning co-borrower shortens the tenure, which raises the stressed monthly payment and reduces the maximum loan.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>Do credit cards reduce my home loan eligibility?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Yes. Outstanding card balances count toward TDSR at the higher of 5% of the balance or S$50 per card each month. A S$30,000 balance costs S$1,500 of monthly TDSR room — roughly S$300,000 of borrowing power at a 30-year tenure. Paying cards down before applying directly raises your maximum loan.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>Is refinancing also subject to TDSR?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>For an owner-occupied home, refinancing is generally exempt from the 55% TDSR cap, so you can usually switch to a cheaper package even if your ratios are tight. TDSR applies in full when purchasing, and to investment-property refinancing unless transitional conditions are met. See our <a href="/refinance-calculator/" style="color:var(--gold-400);">refinance savings calculator</a>.</p>
           </div>
         </div>
 

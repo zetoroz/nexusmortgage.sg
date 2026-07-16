@@ -144,6 +144,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Calculators hub -->
+  <url>
+    <loc>https://nexusmortgage.sg/calculators/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- Stamp duty (BSD + ABSD) calculator -->
   <url>
     <loc>https://nexusmortgage.sg/stamp-duty-calculator/</loc>
