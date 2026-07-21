@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <!-- Analytics — lazy-loaded (GA4 + Meta Pixel). Stubs install
+       synchronously so gtag('event',…) and fbq('track',…) calls always
+       queue correctly; the real scripts load only after first user
+       interaction or after the page becomes idle. Mirrors the Microsoft
+       Clarity pattern below so all three vendors behave identically. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VKFWNBRM6');
+
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document);
+    fbq('init', '27348447628084102');
+    fbq('track', 'PageView');
+
+    (function(){
+      var loaded = false;
+      function inject(src){var s=document.createElement('script');s.async=true;s.src=src;document.head.appendChild(s);}
+      function load(){
+        if (loaded) return; loaded = true;
+        inject('https://www.googletagmanager.com/gtag/js?id=G-7VKFWNBRM6');
+        inject('https://connect.facebook.net/en_US/fbevents.js');
+      }
+      var events = ['scroll','pointerdown','keydown','touchstart'];
+      function fire(){events.forEach(function(e){window.removeEventListener(e, fire);}); load();}
+      events.forEach(function(e){window.addEventListener(e, fire, {passive:true});});
+      if ('requestIdleCallback' in window) requestIdleCallback(load, {timeout:5000});
+      else setTimeout(load, 3000);
+    })();
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=27348447628084102&ev=PageView&noscript=1" /></noscript>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};var L=0;function load(){if(L)return;L=1;var t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;var y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);}var E=["scroll","pointerdown","keydown","touchstart"];function go(){E.forEach(function(e){window.removeEventListener(e,go);});load();}E.forEach(function(e){window.addEventListener(e,go,{passive:true});});if("requestIdleCallback" in window){requestIdleCallback(load,{timeout:6000});}else{setTimeout(load,5000);}})(window, document, "clarity", "script", "wpg9v4xzro");
+  </script>
+  <script>
+    // GA4 click tracking: WhatsApp, phone, email
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a');
+      if (!a || typeof gtag !== 'function') return;
+      var href = a.getAttribute('href') || '';
+      var loc = a.closest('header,nav,footer,section,main');
+      var locName = loc ? (loc.tagName.toLowerCase() + (loc.id ? '#' + loc.id : '')) : 'body';
+      if (/wa\.me|whatsapp\.com/i.test(href)) {
+        gtag('event', 'whatsapp_click', { link_location: locName, link_url: href });
+      } else if (/^tel:/i.test(href)) {
+        gtag('event', 'phone_click', { link_location: locName, phone_number: href.replace('tel:','') });
+      } else if (/^mailto:/i.test(href)) {
+        gtag('event', 'email_click', { link_location: locName });
+      }
+    }, true);
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thomson Reserve (Former Thomson View): Financing Guide 2026 | Nexus</title>
+  <meta name="description" content="Thomson Reserve (ex-Thomson View): 1,268 units, 99-yr, D20, preview Sep/Oct 2026. No price yet. Size your budget: 75% LTV, TDSR, ABSD for upgraders.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Thomson Reserve (Former Thomson View) &mdash; Financing Guide Before the 2026 Preview">
+  <meta property="og:description" content="UOL, SingLand and CapitaLand Development's 1,268-unit Upper Thomson project. Preview targeted Sep/Oct 2026 with pricing still to come. How to size your budget, clear TDSR and handle ABSD as an HDB upgrader before launch day.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexusmortgage.sg/blog/thomson-reserve-financing-2026/">
+  <meta property="og:image" content="https://nexusmortgage.sg/blog/blog-images/thomson-reserve-hero.jpg">
+  <meta property="og:image:alt" content="Thomson Reserve at Upper Thomson, Singapore, at twilight: high-rise residential towers on elevated ground surrounded by rainforest and reservoir">
+  <meta property="og:image:width" content="1376">
+  <meta property="og:image:height" content="768">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:locale" content="en_SG">
+  <meta property="og:site_name" content="Nexus Mortgage SG">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Thomson Reserve: Financing Guide Before the 2026 Preview">
+  <meta name="twitter:description" content="1,268 units, 99-yr, Upper Thomson MRT 2-min walk. Pricing not released. The LTV, TDSR, ABSD and IPA moves to make before preview day.">
+  <meta name="twitter:image" content="https://nexusmortgage.sg/blog/blog-images/thomson-reserve-hero.jpg">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://nexusmortgage.sg/blog/thomson-reserve-financing-2026/">
+  <!-- GEO-TARGETING:auto -->
+    <meta name="geo.region" content="SG">
+    <meta name="geo.placename" content="Upper Thomson, Singapore">
+    <meta name="geo.position" content="1.35430;103.83250">
+    <meta name="ICBM" content="1.35430, 103.83250">
+    <link rel="alternate" hreflang="en-sg" href="https://nexusmortgage.sg/blog/thomson-reserve-financing-2026/">
+    <link rel="alternate" hreflang="x-default" href="https://nexusmortgage.sg/blog/thomson-reserve-financing-2026/">
+
+  <!-- Structured Data: Article -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Thomson Reserve (Former Thomson View): Financing Guide Before the 2026 Preview","datePublished":"2026-07-21","dateModified":"2026-07-21","inLanguage":"en-SG","articleSection":"New Launch & Private","wordCount":2600,"image":[{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/thomson-reserve-hero.jpg","width":1376,"height":768}],"description":"Thomson Reserve is the redevelopment of the former Thomson View, by a UOL Group, Singapore Land Group and CapitaLand Development consortium. About 1,268 units on a 540,314 sqft site at Bright Hill Drive in District 20, on a 99-year lease, with preview targeted for September or October 2026. Pricing and unit mix are not released yet, so this guide covers what is confirmed and how to get financing-ready first: 75% LTV, Buyer's Stamp Duty, TDSR at the MAS 4% floor, ABSD planning for HDB upgraders, BUC progressive payments and IPA timing.","mainEntityOfPage":{"@type":"WebPage","@id":"https://nexusmortgage.sg/blog/thomson-reserve-financing-2026/"},"author":{"@id":"https://nexusmortgage.sg/#dan-ler","@type":"Person","name":"Dan Ler","url":"https://nexusmortgage.sg/about/","image":"https://nexusmortgage.sg/dan-ler.webp","jobTitle":"Mortgage Advisor","worksFor":{"@type":"Organization","name":"Nexus Mortgage SG","url":"https://nexusmortgage.sg"}},"publisher":{"@id":"https://nexusmortgage.sg/#organization"},"keywords":"Thomson Reserve, Thomson Reserve price, former Thomson View, Thomson Reserve financing, Upper Thomson new launch, District 20 new launch 2026, UOL CapitaLand SingLand, HDB upgrader ABSD, BUC progressive payment, Ai Tong School 1km"}</script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the price of Thomson Reserve?", "acceptedAnswer": {"@type": "Answer", "text": "No price has been released. As of 21 July 2026 the developer has not published a price list, unit sizes or a psf range for Thomson Reserve, and the preview is targeted for September or October 2026. Any figure quoted online today is an estimate rather than a developer number. Until the list is out, the useful step is to work out your own ceiling: on a 75% loan over 30 years, a S$2M purchase needs roughly S$13,000 a month in gross income to clear TDSR, and a S$2.5M purchase about S$16,300."}}, {"@type": "Question", "name": "When does Thomson Reserve launch, and has pricing been released?", "acceptedAnswer": {"@type": "Answer", "text": "The preview is targeted for September or October 2026. As of 21 July 2026 the developer has not released pricing, the unit mix or a TOP date, so any specific price figure circulating online is speculation. The practical move while you wait is to fix your own budget: get an In-Principle Approval so you know your borrowing limit before the price list appears."}}, {"@type": "Question", "name": "Who is the developer of Thomson Reserve and what was on the site before?", "acceptedAnswer": {"@type": "Answer", "text": "Thomson Reserve is being developed by a consortium of UOL Group, Singapore Land Group (SingLand) and CapitaLand Development. It is the redevelopment of the former Thomson View condominium, which was sold through a collective sale. The site sits at 1, 3, 5, 7, 9 and 11 Bright Hill Drive in District 20."}}, {"@type": "Question", "name": "How many units does Thomson Reserve have, and what is the tenure?", "acceptedAnswer": {"@type": "Answer", "text": "About 1,268 residential units on a 540,314 sqft elevated site, on a 99-year lease. The plan is six towers: four 21-storey blocks forming the Classic Collection and two 30-storey blocks forming the Luxury Collection, with 1,014 car park lots, an 80% provision."}}, {"@type": "Question", "name": "I own an HDB flat. Can I buy Thomson Reserve, and what happens with ABSD?", "acceptedAnswer": {"@type": "Answer", "text": "You can buy private property once your flat has cleared its Minimum Occupation Period, and you may keep the flat. Buying a second residential property as a Singapore Citizen attracts 20% ABSD, payable in cash upfront, which on a S$2M purchase is S$400,000. A married couple with at least one Singapore Citizen can apply for a refund if they sell their first residential property within six months. Because Thomson Reserve is uncompleted, that six-month window runs from the issue date of the TOP or CSC, whichever is earlier, which in practice means TOP since it always comes first, rather than from the purchase date, which gives a longer runway. IRAS does not extend that deadline, and the refund application must be filed within six months of the sale, so confirm your eligibility against the IRAS rules before you commit."}}, {"@type": "Question", "name": "How much income do I need to buy at Thomson Reserve?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the price you buy at, and MAS makes banks test you at a 4% medium-term rate rather than the rate you actually pay. As a rough guide on a 75% loan over 30 years: a S$2M purchase needs roughly S$13,000 a month in gross income to clear the 55% TDSR cap, and a S$2.5M purchase needs about S$16,300. Those figures assume no other debt, since car loans and credit card minimums come off the same 55% headroom."}}, {"@type": "Question", "name": "Can I lock a fixed rate for a Thomson Reserve purchase?", "acceptedAnswer": {"@type": "Answer", "text": "Not during construction. New-launch loans are floating-rate, priced off Compounded SORA plus a spread, because fixed packages are sold on completed properties. While the project is being built you are choosing between floating packages, where the spread, lock-in and free-conversion terms matter most. Fixed becomes available at TOP, when you can reprice or refinance."}}]}</script>
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexusmortgage.sg/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://nexusmortgage.sg/blog/"},{"@type":"ListItem","position":3,"name":"Thomson Reserve &mdash; Financing Guide","item":"https://nexusmortgage.sg/blog/thomson-reserve-financing-2026/"}]}</script>
+
+  <!-- Self-hosted fonts (woff2 latin subset). Drops Google Fonts blocking chain. -->
+  <link rel="preload" href="/fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts/fonts.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d1117;
+      color: #e8e3da;
+      font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.75;
+    }
+
+    .blog-wrap { max-width: 740px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-size: .8rem; color: rgba(196,151,59,.7); text-decoration: none;
+      letter-spacing: .04em; margin-bottom: 2rem; text-transform: uppercase; font-weight: 500;
+    }
+    .back-link:hover { color: #c4973b; }
+
+    .hero-img {
+      width: 100%; height: auto; aspect-ratio: 16 / 9;
+      object-fit: cover; object-position: center;
+      border-radius: 12px; margin-bottom: 2.5rem; display: block;
+      box-shadow: 0 8px 40px rgba(0,0,0,.55), 0 2px 8px rgba(196,151,59,.08);
+    }
+
+    .meta {
+      font-size: .78rem; letter-spacing: .07em; text-transform: uppercase;
+      color: #c4973b; margin-bottom: 1.1rem; font-weight: 500;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem); font-weight: 600;
+      line-height: 1.18; letter-spacing: -.02em; color: #faf7f2; margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.4rem, 3.5vw, 1.9rem); font-weight: 600; color: #faf7f2;
+      margin: 2.8rem 0 .9rem; letter-spacing: -.015em;
+      padding-bottom: .5rem; border-bottom: 1px solid rgba(196,151,59,.22);
+    }
+
+    h3 {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1.05rem; font-weight: 500; color: #c4973b;
+      margin: 1.8rem 0 .6rem; letter-spacing: .03em; text-transform: uppercase;
+    }
+
+    p { margin-bottom: 1.25rem; color: rgba(232,227,218,.82); }
+
+    a { color: #c4973b; text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: #e0b86a; }
+
+    ul, ol { margin: 0 0 1.25rem 1.5rem; color: rgba(232,227,218,.82); }
+    li { margin-bottom: .5rem; }
+
+    .pullquote {
+      border-left: 3px solid #c4973b; margin: 2rem 0; padding: .9rem 1.4rem;
+      background: rgba(196,151,59,.07); border-radius: 0 8px 8px 0;
+      font-style: italic; font-size: 1.05rem; color: rgba(250,247,242,.7);
+    }
+
+    .img-caption {
+      text-align: center; font-size: .75rem; letter-spacing: .04em;
+      color: rgba(232,227,218,.35); margin-top: -.9rem; margin-bottom: 1.8rem;
+    }
+
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+    .stat-box {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(196,151,59,.2);
+      border-radius: 10px; padding: 1.2rem 1rem; text-align: center;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 600;
+      color: #c4973b; line-height: 1; margin-bottom: .3rem;
+    }
+    .stat-desc { font-size: .76rem; color: rgba(232,227,218,.5); letter-spacing: .03em; }
+
+    .faq-q { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 600; color: #faf7f2; margin: 1.6rem 0 .5rem; }
+    .cta-box {
+      background: linear-gradient(135deg, rgba(196,151,59,.12) 0%, rgba(196,151,59,.04) 100%);
+      border: 1px solid rgba(196,151,59,.35); border-radius: 12px;
+      padding: 2rem 2rem; margin-top: 2.5rem; text-align: center;
+    }
+    .cta-box p { color: rgba(250,247,242,.75); margin-bottom: .6rem; }
+    .cta-btn {
+      display: inline-block; margin-top: .8rem; padding: .75rem 1.8rem;
+      background: #c4973b; color: #0d1117; font-weight: 600; font-size: .9rem;
+      border-radius: 6px; text-decoration: none; letter-spacing: .04em;
+      transition: background .2s ease, transform .15s ease;
+    }
+    .cta-btn:hover { background: #e0b86a; color: #0d1117; transform: translateY(-1px); }
+
+    hr { border: none; border-top: 1px solid rgba(255,255,255,.08); margin: 3rem 0 1.5rem; }
+
+    .disclaimer { font-size: .75rem; color: rgba(232,227,218,.3); line-height: 1.6; }
+
+    .notice {
+      background: rgba(196,151,59,.08); border: 1px solid rgba(196,151,59,.28);
+      border-left: 4px solid #c4973b; border-radius: 8px;
+      padding: 1rem 1.3rem; margin: 1.8rem 0; font-size: .95rem;
+      color: rgba(232,227,218,.8);
+    }
+
+    @media (max-width: 600px) { .stat-row { grid-template-columns: 1fr; } }
+
+    #reading-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#c4973b,#e8c97a);z-index:9999;transition:width .1s linear;pointer-events:none}
+    #btt{position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:#c4973b;color:#0d1117;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .25s cubic-bezier(.25,.8,.25,1),transform .25s cubic-bezier(.25,.8,.25,1);pointer-events:none;box-shadow:0 4px 16px rgba(196,151,59,.35)}
+    #btt.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+    #btt:hover{background:#e0b86a}
+    #btt:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
+    .back-link:focus-visible,.cta-btn:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
+    .cta-btn,.back-link{touch-action:manipulation}
+    .cta-btn{display:inline-flex;align-items:center;gap:.5rem}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#reading-progress,#btt{transition:none!important}}
+
+    /* ==== Site nav ==== */
+    :root { --gold-400: #C4973B; --gold-500: #E8C97A; --navy-900: #0B1C3A; --cream: #FAF7F2; }
+    #site-navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(11, 28, 58, .92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(196, 151, 59, .15); padding: .9rem 0; transition: background .25s; }
+    #site-navbar .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    #site-navbar .nav-logo { text-decoration: none; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 600; color: var(--cream); letter-spacing: .02em; }
+    #site-navbar .nav-logo .dot { color: var(--gold-400); }
+    #site-navbar .nav-links { display: none; align-items: center; gap: 1.4rem; }
+    @media (min-width: 1024px) { #site-navbar .nav-links { display: flex; } #site-navbar .mob-toggle { display: none; } }
+    #site-navbar .nav-link-item { font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250, 247, 242, .7); font-weight: 500; text-decoration: none; transition: color .25s; }
+    #site-navbar .nav-link-item:hover, #site-navbar .nav-link-item.is-current { color: var(--gold-400); }
+    #site-navbar .nav-cta { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1.1rem; background: linear-gradient(135deg, #C4973B, #E8C97A); color: #0B1C3A; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; border-radius: 100px; text-decoration: none; transition: transform .2s; }
+    #site-navbar .nav-cta:hover { transform: translateY(-1px); }
+    #site-navbar .mob-toggle { background: none; border: none; cursor: pointer; color: var(--cream); padding: .3rem; }
+    #site-navbar .tools-dd-wrap { position: relative; }
+    #site-navbar .tools-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: .3rem; font: inherit; padding: 0; font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250, 247, 242, .7); font-weight: 500; }
+    #site-navbar .tools-btn:hover { color: var(--gold-400); }
+    #site-navbar .tools-dd { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: rgba(11, 28, 58, .97); backdrop-filter: blur(16px); border: 1px solid rgba(196, 151, 59, .22); border-radius: 10px; padding: .5rem; min-width: 220px; z-index: 200; box-shadow: 0 16px 40px rgba(0, 0, 0, .4); }
+    #site-navbar .tools-dd a { display: block; padding: .55rem 1rem; color: rgba(250, 247, 242, .75); font-size: .76rem; font-weight: 500; letter-spacing: .04em; text-decoration: none; border-radius: 6px; transition: background .2s, color .2s; }
+    #site-navbar .tools-dd a:hover { background: rgba(196, 151, 59, .12); color: var(--gold-400); }
+    #site-navbar .free-report-link { color: var(--gold-400); display: inline-flex; align-items: center; gap: .35rem; }
+    #site-navbar .new-badge { font-size: .55rem; letter-spacing: .1em; padding: 1px 6px; border-radius: 100px; background: rgba(196, 151, 59, .18); color: var(--gold-400); font-weight: 600; border: 1px solid rgba(196, 151, 59, .3); }
+    #site-mob-menu { display: none; padding: .5rem 1.5rem 1rem; border-top: 1px solid rgba(196, 151, 59, .12); }
+    #site-mob-menu.open { display: block; }
+    #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
+    body.has-site-nav { padding-top: 64px; }
+
+    .toc { background: rgba(255,255,255,.03); border: 1px solid rgba(196,151,59,.15); border-radius: 10px; padding: 1.3rem 1.6rem; margin: 2rem 0 2.5rem; }
+    .toc-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: rgba(196,151,59,.7); margin-bottom: .8rem; }
+    .toc ol { padding-left: 1.2rem; counter-reset: toc; list-style: none; }
+    .toc ol li { counter-increment: toc; margin-bottom: .4rem; font-size: .88rem; }
+    .toc ol li::before { content: counter(toc) ". "; color: rgba(196,151,59,.5); font-weight: 600; font-size: .8rem; }
+    .toc a { color: rgba(232,227,218,.65); text-decoration: none; }
+    .toc a:hover { color: #c4973b; }
+
+    .compare-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; font-size: .92rem; }
+    .compare-table th, .compare-table td { padding: .75rem .9rem; text-align: left; border-bottom: 1px solid rgba(196,151,59,.15); }
+    .compare-table th { color: #c4973b; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; font-size: .72rem; background: rgba(196,151,59,.06); }
+    .compare-table td { color: rgba(232,227,218,.78); }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .table-scroll { overflow-x: auto; }
+  </style>
+</head>
+<body>
+<nav id="site-navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Nexus<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="/services/" class="nav-link-item">Services</a>
+      <a href="/mortgage-rates/" class="nav-link-item">Rates</a>
+      <a href="/free-report/" class="nav-link-item free-report-link">Free Report <span class="new-badge">NEW</span></a>
+      <a href="/#calculator" class="nav-link-item">Calculator</a>
+      <div class="tools-dd-wrap">
+        <button class="tools-btn" id="tools-btn" aria-haspopup="true" aria-expanded="false">Tools <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="tools-dd" id="tools-dropdown">
+          <a href="/free-report/" class="free-report-link">Free Report <span class="new-badge">NEW</span></a>
+          <a href="/#calculator">Mortgage Calculator</a>
+          <a href="/affordability/">Affordability Check</a>
+          <a href="/refinance-calculator/">Refinance Savings</a>
+          <a href="/equity-loan/">Equity / Cash-Out</a>
+          <a href="/mortgage-rates/">Current Rates</a>
+          <a href="/sora-rates-singapore/">Live SORA Rate</a>
+        </div>
+      </div>
+      <a href="/about/" class="nav-link-item">About</a>
+      <a href="/contact/" class="nav-link-item">Contact</a>
+      <a href="/blog/" class="nav-link-item is-current">Insights</a>
+    </div>
+    <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" rel="noopener" class="nav-cta" style="display:none;" id="nav-cta-desktop">Free Consult</a>
+    <button class="mob-toggle" onclick="document.getElementById('site-mob-menu').classList.toggle('open')" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="site-mob-menu">
+    <a href="/services/">Services</a>
+    <a href="/mortgage-rates/">Rates</a>
+    <a href="/free-report/" class="free-report-link">Free Report <span class="new-badge">NEW</span></a>
+    <a href="/#calculator">Calculator</a>
+    <a href="/affordability/">Affordability</a>
+    <a href="/equity-loan/">Equity Loan</a>
+    <a href="/sora-rates-singapore/">SORA Rate</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+    <a href="/blog/">Insights</a>
+  </div>
+</nav>
+<style>@media (min-width: 1024px) { #nav-cta-desktop { display: inline-flex !important; } }</style>
+
+<div id="reading-progress"></div>
+
+<article class="blog-wrap">
+
+  <a href="/blog/" class="back-link">&#8592; Back to Insights</a>
+
+  <p class="meta">Nexus Mortgage SG &nbsp;&middot;&nbsp; 21 July 2026 &nbsp;&middot;&nbsp; 11-minute read</p>
+
+  <h1>Thomson Reserve (Former Thomson View): Financing Guide Before the 2026 Preview</h1>
+  <p class="article-byline" style="margin:.5rem 0 1.4rem;font-size:.8rem;color:rgba(232,227,218,.55);font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.01em;">By <a href="/about/" style="color:#c4973b;font-weight:600;text-decoration:none;">Dan Ler</a>, Mortgage Advisor</p>
+
+  <img src="../blog-images/thomson-reserve-hero.webp" alt="Thomson Reserve at Upper Thomson, Singapore, at twilight: tall residential towers on elevated ground wrapped in rainforest canopy with a reservoir and the city skyline beyond" class="hero-img" width="1376" height="768" fetchpriority="high">
+
+  <div style="background:rgba(196,151,59,.09); border:1px solid rgba(196,151,59,.3); border-left:4px solid #c4973b; border-radius:8px; padding:1.1rem 1.4rem; margin-bottom:2.5rem;">
+    <div style="font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:#c4973b; font-weight:700; margin-bottom:.5rem;">Short answer</div>
+    <p style="margin:0; color:rgba(250,247,242,.9); font-size:1rem; line-height:1.65;"><strong>Thomson Reserve is the redevelopment of the former Thomson View</strong>, by a consortium of <strong>UOL Group, Singapore Land Group and CapitaLand Development</strong>. About <strong>1,268 units</strong> on a 540,314 sqft elevated site at Bright Hill Drive in District 20, on a 99-year lease, two minutes' walk from Upper Thomson MRT. Preview is targeted for <strong>September or October 2026</strong>. Pricing, unit mix and TOP are not released yet, so nobody can quote you a real price today. What you can do now is fix your own number: sort your 75% LTV and TDSR headroom, plan the stamp duty, and if you are upgrading from an HDB flat, work out the ABSD and sale timing early. That is the work that decides whether you can act on preview day.</p>
+  </div>
+
+  <p style="text-align:center;font-size:.9rem;margin:-1.2rem 0 2.2rem;color:rgba(232,227,218,.6);">Want your number before the price list drops? <a href="/affordability/">Run a quick affordability check</a> or <a href="https://wa.me/6587520859?text=Hi%2C%20I%27m%20looking%20at%20Thomson%20Reserve.">WhatsApp Dan</a>.</p>
+
+  <div class="toc">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#confirmed">What is confirmed, and what is not</a></li>
+      <li><a href="#price">Thomson Reserve price: what is known so far</a></li>
+      <li><a href="#location">The location: MRT, schools, nature</a></li>
+      <li><a href="#why-now">Why the pre-launch window matters</a></li>
+      <li><a href="#budget">Sizing your budget before pricing lands</a></li>
+      <li><a href="#tdsr">TDSR and the MAS 4% stress test</a></li>
+      <li><a href="#upgraders">HDB upgraders: ABSD and sale timing</a></li>
+      <li><a href="#progressive">Progressive payments through construction</a></li>
+      <li><a href="#rate-strategy">The rate decision: floating now, fixed at TOP</a></li>
+      <li><a href="#action">Four moves before preview day</a></li>
+      <li><a href="#faq">Common questions</a></li>
+    </ol>
+  </div>
+
+
+  <!-- ===================== CONFIRMED ===================== -->
+
+  <h2 id="confirmed">What Is Confirmed, and What Is Not</h2>
+
+  <p>Thomson Reserve is the new name for the former <strong>Thomson View</strong> site, one of the larger collective sales of recent years. The buyer was a consortium of three well-known Singapore developers: <strong>UOL Group</strong>, <strong>Singapore Land Group (SingLand)</strong> and <strong>CapitaLand Development</strong>. Here is what has been put out so far.</p>
+
+  <div class="table-scroll">
+  <table class="compare-table">
+    <thead>
+      <tr><th>Detail</th><th>Confirmed position</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Developer</td><td>UOL Group, SingLand, CapitaLand Development</td></tr>
+      <tr><td>Address</td><td>1, 3, 5, 7, 9, 11 Bright Hill Drive</td></tr>
+      <tr><td>District</td><td>D20 (Ang Mo Kio / Bishan / Thomson)</td></tr>
+      <tr><td>Total units</td><td>Approx. 1,268</td></tr>
+      <tr><td>Tenure</td><td>99-year leasehold</td></tr>
+      <tr><td>Site area</td><td>540,314 sqft</td></tr>
+      <tr><td>Configuration</td><td>4 towers at 21 storeys (Classic Collection), 2 towers at 30 storeys (Luxury Collection)</td></tr>
+      <tr><td>Car park</td><td>1,014 lots (about 80% provision)</td></tr>
+      <tr><td>Target preview</td><td>September / October 2026</td></tr>
+      <tr><td>Pricing, unit mix, TOP</td><td>Not released</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p style="font-size:.8rem;color:rgba(232,227,218,.45);margin-top:-1rem;">Source: developer and appointed-marketing materials for the project, compiled 21 July 2026. Details remain subject to change until the developer publishes final figures.</p>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-num">1,268</div>
+      <div class="stat-desc">Units across six towers</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">2 min</div>
+      <div class="stat-desc">Walk to Upper Thomson MRT (TE8)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">99-yr</div>
+      <div class="stat-desc">Fresh leasehold tenure</div>
+    </div>
+  </div>
+
+
+  <!-- ===================== PRICE ===================== -->
+
+  <h2 id="price">Thomson Reserve Price: What Is Known So Far</h2>
+
+  <div class="notice">
+    <strong style="color:#c4973b;">No price list yet.</strong> As of 21 July 2026 the developer has not published pricing, unit sizes or a TOP date for Thomson Reserve. Any specific psf figure you see quoted right now is someone's estimate, not a developer number. This guide deliberately does not invent one. We will update this page the day real pricing is released.
+  </div>
+
+  <p>That puts this Upper Thomson new launch in an unusual spot for buyers. You cannot compare it on price yet, but you can do the one piece of work that price will not change: establishing how much you can actually borrow and what that costs you monthly. When the list lands, you then shop inside a number you already trust. The rest of this guide is how to arrive at that number.</p>
+
+
+  <!-- ===================== LOCATION ===================== -->
+
+  <h2 id="location">The Location: MRT, Schools, Nature</h2>
+
+  <p>Upper Thomson is a mature estate, and the site itself is elevated with a large frontage, which is unusual for a plot this size. Three things drive demand here.</p>
+
+  <h3>Transport</h3>
+  <p>Upper Thomson MRT (TE8) on the Thomson-East Coast Line is about a two-minute walk. Caldecott is one stop away and connects to the Circle Line, Bright Hill is one stop, Stevens is two, and Orchard is five. The CBD is within nine stops, and the line runs through to Marina Bay and on to the east. Longer term, the <a href="https://www.lta.gov.sg/" target="_blank" rel="noopener">North-South Corridor</a> is being built as a 21.5km walk-cycle-ride route from Woodlands to the ECP, with express bus lanes and a cycling path, which should ease the drive south.</p>
+
+  <h3>Schools</h3>
+  <p><strong>Ai Tong School sits within 1km</strong>, about a four-minute walk, which matters for P1 registration priority. Catholic High School, CHIJ St Nicholas Girls' School, Marymount Convent and Ang Mo Kio Primary are within roughly 1 to 2km, and Raffles Institution and Eunoia Junior College are nearby. For a lot of buyers in this pocket, the 1km ballot is the reason they are looking at all.</p>
+
+  <h3>Nature and daily needs</h3>
+  <p>MacRitchie Reservoir and the Central Catchment Nature Reserve are on the doorstep, with Windsor Nature Park a short cycle and the TreeTop Walk beyond that. Thomson Plaza is about a three-minute walk for groceries and food, and Junction 8 is three MRT stops. Mount Alvernia Hospital is close by.</p>
+
+  <p>None of this sets your loan size. A bank values the unit off transacted comparables and the unit's own attributes. It does explain why a project like this tends to hold demand, which matters for resale liquidity later.</p>
+
+
+  <!-- ===================== WHY NOW ===================== -->
+
+  <h2 id="why-now">Why the Pre-Launch Window Matters</h2>
+
+  <p>Most buyers do this backwards. They wait for the price list, fall for a stack, then scramble to work out whether the bank will lend them enough. At a 1,268-unit launch that scramble is expensive, because the well-priced stacks in the popular sizes go first.</p>
+
+  <p>The gap between now and a September or October preview is the useful part. Nothing is stopping you from establishing your borrowing ceiling today. When the list appears you are then choosing between units you can actually finance, rather than working out affordability under time pressure with a cheque book open.</p>
+
+  <div class="pullquote">
+    "At a launch this size, the constraint on preview day is rarely the unit. It is how fast you can prove you can pay for it."
+  </div>
+
+
+  <!-- ===================== BUDGET ===================== -->
+
+  <h2 id="budget">Sizing Your Budget Before Pricing Lands</h2>
+
+  <p>This is private property, so it is a bank loan. No HDB concessionary rate and no MSR cap, just <a href="https://www.mas.gov.sg/regulation/notices/notice-645" target="_blank" rel="noopener">MAS Notice 645</a> TDSR at 55% of gross monthly income. You can borrow up to 75% on a first property, over a tenure that stops at 30 years or age 65, whichever comes first.</p>
+
+  <p>Since there is no price list yet, work the other way round. Start from a purchase price you are comfortable with and see what it demands of you. The figures below are a planning tool, not a quote for any Thomson Reserve unit.</p>
+
+  <div class="table-scroll">
+  <table class="compare-table">
+    <thead>
+      <tr><th>Purchase price</th><th>5% cash at OTP</th><th>25% down total</th><th>Loan @ 75%</th><th>Buyer's Stamp Duty</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>S$1.5M</td><td>S$75,000</td><td>S$375,000</td><td>S$1.125M</td><td>~S$44,600</td></tr>
+      <tr><td>S$2.0M</td><td>S$100,000</td><td>S$500,000</td><td>S$1.50M</td><td>~S$69,600</td></tr>
+      <tr><td>S$2.5M</td><td>S$125,000</td><td>S$625,000</td><td>S$1.875M</td><td>~S$94,600</td></tr>
+      <tr><td>S$3.0M</td><td>S$150,000</td><td>S$750,000</td><td>S$2.25M</td><td>~S$119,600</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="img-caption" style="margin-top:-1.4rem;"><em>Illustrative planning examples, not Thomson Reserve prices. No price list has been released.</em></p>
+
+  <p>Two notes on that table. The 5% at OTP is cash, and the remaining 20% can be cash or CPF at Sale and Purchase signing. Buyer's Stamp Duty is due within 14 days of the OTP and is tiered, so it climbs faster than the price does: doubling the price from S$1.5M to S$3.0M nearly triples the BSD (<a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/buyer's-stamp-duty-(bsd)" target="_blank" rel="noopener">IRAS BSD</a>). Our <a href="/blog/stamp-duty-singapore-guide-2026/">stamp duty guide</a> breaks the tiers down.</p>
+
+
+  <!-- ===================== TDSR ===================== -->
+
+  <h2 id="tdsr">TDSR and the MAS 4% Stress Test</h2>
+
+  <p>MAS makes every bank test your loan at a <strong>4% medium-term rate</strong>, whatever rate you actually take. Your limit is worked out at that 4%, not at the SORA-pegged rate you will really start on, and the 55% TDSR cap applies to that stressed figure.</p>
+
+  <div class="table-scroll">
+  <table class="compare-table">
+    <thead>
+      <tr><th>Purchase price</th><th>Loan @ 75%</th><th>Stress instalment (4%, 30y)</th><th>Gross income needed</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>S$1.5M</td><td>S$1.125M</td><td>~S$5,370/mo</td><td>~S$9,800/mo</td></tr>
+      <tr><td>S$2.0M</td><td>S$1.50M</td><td>~S$7,160/mo</td><td>~S$13,000/mo</td></tr>
+      <tr><td>S$2.5M</td><td>S$1.875M</td><td>~S$8,950/mo</td><td>~S$16,300/mo</td></tr>
+      <tr><td>S$3.0M</td><td>S$2.25M</td><td>~S$10,740/mo</td><td>~S$19,500/mo</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="img-caption" style="margin-top:-1.4rem;"><em>Illustrative planning examples, not Thomson Reserve prices. No price list has been released.</em></p>
+
+  <p>That 30-year column assumes you are 35 or younger, since the longest tenure that still allows 75% LTV needs the loan to finish by age 65. In your 40s you either shorten the tenure, which lifts the instalment, or take 55% LTV and put 45% down.</p>
+
+  <p>Those income floors also assume no other debt. A car loan, credit card minimums and personal loan instalments come off your 55% headroom first, and bonus or self-employed income gets a haircut (see the <a href="/blog/self-employed-tdsr-singapore/">self-employed TDSR guide</a>). For joint applicants and the income-weighted-average-age rule, the <a href="/blog/tdsr-msr-explained/">TDSR breakdown</a> has the mechanics.</p>
+
+
+  <!-- ===================== UPGRADERS ===================== -->
+
+  <h2 id="upgraders">HDB Upgraders: ABSD and Sale Timing</h2>
+
+  <p>A large share of interest in this pocket comes from HDB owners in Bishan, Ang Mo Kio and Thomson who want to stay in the area. If that is you, the financing question is less about the loan and more about <strong>ABSD and timing</strong>, and it is worth thinking through well before preview day.</p>
+
+  <p>Once your flat has cleared its Minimum Occupation Period you can buy private property and keep the flat. The catch is that buying a second residential property as a Singapore Citizen attracts <strong>20% ABSD</strong>, and that is <a href="/blog/cpf-oa-hdb-guide/">payable in cash</a> upfront. On a S$2M purchase that is S$400,000 on top of your downpayment and BSD.</p>
+
+  <p>There are two broad routes:</p>
+
+  <ol>
+    <li>Sell the flat first, then buy. You purchase as a first property, so no ABSD at all. The trade-off is timing and where you live in between, which is what a <a href="/blog/bridging-loan-singapore-2026/">bridging loan</a> is designed to cover.</li>
+    <li>Or buy first and claim the refund later. A married couple with at least one Singapore Citizen can apply to have the ABSD refunded if they sell their first residential property within six months. Because Thomson Reserve is uncompleted, that six-month clock runs from the issue date of the TOP or CSC, whichever is earlier, which in practice means TOP since it always comes first, rather than from your purchase date. That is a longer runway than most people expect, but three conditions bite: you fund the 20% in cash upfront and wait to get it back, IRAS does not grant extensions to that six-month deadline, and the couple must stay married with no change of ownership in the new property. The refund application itself must be filed within six months of selling the first property.</li>
+  </ol>
+
+  <p>Which one is better depends on your cash position, your flat's value and how comfortable you are carrying two properties. Check your eligibility against the <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/additional-buyer's-stamp-duty-(absd)" target="_blank" rel="noopener">IRAS ABSD rules</a> rather than assuming, because the remission conditions are strict on both the marriage and the six-month window. We walk through the full comparison in the <a href="/blog/hdb-to-condo-upgrade-singapore/">HDB to condo upgrade guide</a>, and the <a href="/blog/avoid-absd-second-property-singapore/">ABSD on a second property</a> piece covers the legitimate routes. If you already own private property, <a href="/blog/decoupling-private-property-singapore/">decoupling</a> is a separate conversation with its own costs.</p>
+
+  <p>One more thing for upgraders: if you plan to use CPF from the flat sale, remember the <a href="/blog/cpf-accrued-interest-property-sale-2026/">accrued interest refund</a> comes off your proceeds. Model the actual cash you walk away with, not the sale price.</p>
+
+  <div class="notice">
+    <strong style="color:#c4973b;">Upgrading from an HDB flat?</strong> The sell-first versus buy-first call is worth getting right before you hold an OTP, because it moves several hundred thousand dollars of cash timing. <a href="https://wa.me/6587520859?text=Hi%2C%20I%27m%20upgrading%20from%20an%20HDB%20flat%20and%20want%20to%20work%20out%20the%20ABSD%20and%20sale%20timing%20for%20Thomson%20Reserve.">Send Dan your numbers</a> and we will map the ABSD and sale timing against your flat's value and cash position, at no cost.
+  </div>
+
+
+  <!-- ===================== PROGRESSIVE ===================== -->
+
+  <h2 id="progressive">Progressive Payments Through Construction</h2>
+
+  <p>As a Building-Under-Construction purchase, Thomson Reserve will use the <strong>Normal Payment Scheme</strong>. The bank disburses your loan in stages as the developer hits construction milestones rather than in one lump sum. The schedule is fixed by statute and applies to every buyer the same way:</p>
+
+  <div class="table-scroll">
+  <table class="compare-table">
+    <thead>
+      <tr><th>Stage</th><th>% of Purchase Price</th><th>Typical Timing</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>OTP booking fee</td><td>5%</td><td>Day 0 (cash)</td></tr>
+      <tr><td>S&amp;P exercise</td><td>15%</td><td>Within 8 weeks (cash/CPF)</td></tr>
+      <tr><td>Foundation</td><td>10%</td><td>~Month 6</td></tr>
+      <tr><td>Reinforced concrete framework</td><td>10%</td><td>~Month 12</td></tr>
+      <tr><td>Brick walls</td><td>5%</td><td>~Month 18</td></tr>
+      <tr><td>Ceiling</td><td>5%</td><td>~Month 24</td></tr>
+      <tr><td>Doors, windows, plastering</td><td>5%</td><td>~Month 30</td></tr>
+      <tr><td>Car park, road, drains</td><td>5%</td><td>~Month 36</td></tr>
+      <tr><td>TOP (Temporary Occupation Permit)</td><td>25%</td><td>~Month 42</td></tr>
+      <tr><td>CSC (Certificate of Statutory Completion)</td><td>15%</td><td>~Month 54</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>Your instalment climbs in steps as the loan draws down. Early on it is small, because the bank only charges interest on the portion released. By TOP you are paying on the full loan. So size your budget on the TOP-stage instalment from the start. That full-loan figure is what you carry for the next 25 to 30 years, and for an HDB upgrader who is still servicing a flat, the overlap period is the one to stress-test. The <a href="/free-report/"><strong>Singapore Mortgage Free Report</strong></a> includes the full schedule with a cashflow worksheet.</p>
+
+
+  <!-- ===================== RATE STRATEGY ===================== -->
+
+  <h2 id="rate-strategy">The Rate Decision: Floating Now, Fixed at TOP</h2>
+
+  <p>One point catches most buyers out: <strong>a new-launch loan is floating-rate.</strong> The bank prices the progressive-disbursement loan off SORA, usually 1-month or 3-month Compounded SORA plus a spread. Fixed-rate packages are sold on completed properties, so they are not available while the project is being built. During construction your only real choice is which floating package, which makes the spread, the lock-in and the free-conversion terms the things to compare (here is the <a href="/mortgage-rates/">live rate comparison</a>).</p>
+
+  <p>With a multi-year construction period, there are two stages to think about. While the loan is part-drawn, a move in SORA applies to only a fraction of it, so the dollar impact is small. At completion the whole loan is drawn, the full menu including fixed opens up, and that is the rate that matters for the long run. The sensible approach is a floating package with good conversion terms now, then reprice or refinance at TOP. The <a href="/blog/new-launch-financing-singapore/">new-launch financing guide</a> covers the BUC mechanics in full.</p>
+
+
+  <!-- ===================== ACTION ===================== -->
+
+  <h2 id="action">Four Moves Before Preview Day</h2>
+
+  <ol>
+    <li>Fix your ceiling. Run your <a href="/affordability/">affordability check</a> at the 4% stress floor and settle on a number you can defend, so you shop within it instead of stretching on the day.</li>
+    <li>Get an <a href="/blog/ipa-mortgage-broker-singapore/">In-Principle Approval</a>. It takes roughly two weeks through several banks at once, and it is what protects your option fee if a bank later declines. Do it before September, not during preview week. <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20to%20start%20an%20IPA%20ahead%20of%20the%20Thomson%20Reserve%20preview."><strong>Start your IPA here</strong></a>.</li>
+    <li>If you own an HDB flat, decide your ABSD route now. Sell-first and buy-first have very different cash requirements, and you want that settled before you are holding an OTP.</li>
+    <li>Plan for the TOP-stage instalment, not the booking one, and check it still holds if rates move against you.</li>
+  </ol>
+
+
+  <!-- ===================== FAQ ===================== -->
+
+  <h2 id="faq">Frequently Asked Questions</h2>
+
+  <div class="faq-q">What is the price of Thomson Reserve?</div>
+  <p>No price has been released. As of 21 July 2026 the developer has not published a price list, unit sizes or a psf range for Thomson Reserve, and the preview is targeted for September or October 2026. Any figure quoted online today is an estimate rather than a developer number. Until the list is out, the useful step is to work out your own ceiling: on a 75% loan over 30 years, a S$2M purchase needs roughly S$13,000 a month in gross income to clear TDSR, and a S$2.5M purchase about S$16,300.</p>
+
+  <div class="faq-q">When does Thomson Reserve launch, and has pricing been released?</div>
+  <p>The preview is targeted for September or October 2026. As of 21 July 2026 the developer has not released pricing, the unit mix or a TOP date, so any specific price figure circulating online is speculation. The practical move while you wait is to fix your own budget: get an In-Principle Approval so you know your borrowing limit before the price list appears.</p>
+
+  <div class="faq-q">Who is the developer of Thomson Reserve and what was on the site before?</div>
+  <p>Thomson Reserve is being developed by a consortium of UOL Group, Singapore Land Group (SingLand) and CapitaLand Development. It is the redevelopment of the former Thomson View condominium, which was sold through a collective sale. The site sits at 1, 3, 5, 7, 9 and 11 Bright Hill Drive in District 20.</p>
+
+  <div class="faq-q">How many units does Thomson Reserve have, and what is the tenure?</div>
+  <p>About 1,268 residential units on a 540,314 sqft elevated site, on a 99-year lease. The plan is six towers: four 21-storey blocks forming the Classic Collection and two 30-storey blocks forming the Luxury Collection, with 1,014 car park lots, an 80% provision.</p>
+
+  <div class="faq-q">I own an HDB flat. Can I buy Thomson Reserve, and what happens with ABSD?</div>
+  <p>You can buy private property once your flat has cleared its Minimum Occupation Period, and you may keep the flat. Buying a second residential property as a Singapore Citizen attracts 20% ABSD, payable in cash upfront, which on a S$2M purchase is S$400,000. A married couple with at least one Singapore Citizen can apply for a refund if they sell their first residential property within six months. Because Thomson Reserve is uncompleted, that six-month window runs from the issue date of the TOP or CSC, whichever is earlier, which in practice means TOP since it always comes first, rather than from the purchase date, which gives a longer runway. IRAS does not extend that deadline, and the refund application must be filed within six months of the sale, so confirm your eligibility against the IRAS rules before you commit.</p>
+
+  <div class="faq-q">How much income do I need to buy at Thomson Reserve?</div>
+  <p>It depends on the price you buy at, and MAS makes banks test you at a 4% medium-term rate rather than the rate you actually pay. As a rough guide on a 75% loan over 30 years: a S$2M purchase needs roughly S$13,000 a month in gross income to clear the 55% TDSR cap, and a S$2.5M purchase needs about S$16,300. Those figures assume no other debt, since car loans and credit card minimums come off the same 55% headroom.</p>
+
+  <div class="faq-q">Can I lock a fixed rate for a Thomson Reserve purchase?</div>
+  <p>Not during construction. New-launch loans are floating-rate, priced off Compounded SORA plus a spread, because fixed packages are sold on completed properties. While the project is being built you are choosing between floating packages, where the spread, lock-in and free-conversion terms matter most. Fixed becomes available at TOP, when you can reprice or refinance.</p>
+
+
+  <!-- ===================== CTA ===================== -->
+
+  <div class="cta-box">
+    <p><strong style="color:#faf7f2;font-size:1.1rem;">Know Your Number Before Thomson Reserve Previews</strong></p>
+    <p>Nexus Mortgage SG compares 16+ MAS-regulated banks at no cost: IPA in about two weeks, your TDSR ceiling at the 4% floor, the ABSD and sale-timing plan if you are upgrading from an HDB flat, and the BUC cashflow modelled to TOP.</p>
+    <a href="/affordability/" class="cta-btn">Work Out My Thomson Reserve Budget &rarr;</a>
+    <p style="margin-top:1.2rem;font-size:.82rem;">Prefer to talk it through? <strong><a href="https://wa.me/6587520859?text=Hi%2C%20I%27m%20looking%20at%20Thomson%20Reserve%20and%20want%20to%20get%20financing-ready%20before%20the%20preview.">WhatsApp Dan Ler at +65 8752 0859</a></strong> for a free review. Banks pay our fee, so you pay nothing.</p>
+    <p style="margin-top:.6rem;font-size:.82rem;">Or download the full guide: <strong><a href="/free-report/">Singapore Mortgage Free Report</a></strong>, with the BUC timeline, 16-bank rate comparison, TDSR stress test, upfront costs and the refinance-at-TOP plan in one PDF.</p>
+  </div>
+
+  <div style="background:rgba(196,151,59,.07); border:1px solid rgba(196,151,59,.22); border-left:3px solid #c4973b; border-radius:8px; padding:1rem 1.3rem; margin-top:2.5rem; font-size:.95rem; color:rgba(232,227,218,.78);">
+    <strong style="color:#c4973b;">Part of:</strong> <a href="/singapore-mortgage-guide-2026/">The Complete Singapore Mortgage Guide 2026</a>, a 22-section pillar covering TDSR, MSR, MAS 4% stress, HFE, HDB and private routes, decoupling, refinancing, SSD and CPF on sale.
+  </div>
+<div class="author-bio" style="display:flex;gap:1rem;align-items:center;margin-top:2.5rem;padding:1.25rem 1.4rem;border:1px solid rgba(196,151,59,.2);border-radius:10px;background:rgba(196,151,59,.05);"><img src="/dan-ler.webp" alt="Dan Ler, Mortgage Advisor at Nexus Mortgage SG" width="64" height="64" loading="lazy" style="width:64px;height:64px;border-radius:50%;flex-shrink:0;border:2px solid rgba(196,151,59,.35);object-fit:cover;"><p style="margin:0;font-size:.95rem;color:rgba(250,247,242,.75);"><strong style="color:#c4973b;">About the author:</strong> <a href="/about/" style="color:#c4973b;font-weight:600;">Dan Ler</a> has advised on Singapore home loans since 2017 at Nexus Mortgage SG, an independent brokerage comparing 16+ MAS-regulated lenders. Nexus has facilitated 500+ home loans across HDB, EC, private condo and landed property segments. Banks pay Nexus on disbursement, so there is no cost to the borrower.</p>
+  </div>
+
+  <hr>
+
+  <p class="disclaimer"><em>Nexus Mortgage SG is an independent Singapore mortgage advisory. This article is general information, not financial advice, and is not a sale offer for Thomson Reserve. Nexus is not the appointed sales or marketing agent for the project. Project details are drawn from developer and marketing materials current at 21 July 2026 and remain subject to change; pricing, unit mix and TOP had not been released at the time of writing. The purchase-price figures used in the tables are illustrative planning examples, not quoted prices. Loan, TDSR, BSD, ABSD and CPF figures reflect MAS, IRAS and CPF positions as of publication; rules and bank rates can change. Sources: <a href="https://www.mas.gov.sg/regulation/notices/notice-645" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS Notice 645 (TDSR)</a>, <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/buyer's-stamp-duty-(bsd)" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">IRAS BSD</a>, <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/additional-buyer's-stamp-duty-(absd)" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">IRAS ABSD</a>, <a href="https://www.cpf.gov.sg/member/home-ownership" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">CPF Home Ownership</a>, <a href="https://www.ura.gov.sg/Corporate/Planning/Master-Plan" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">URA Master Plan</a>.</em></p>
+
+</article>
+
+<a id="btt" href="#" aria-label="Back to top" title="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+</a>
+<script>
+(function(){
+  var prog = document.getElementById('reading-progress');
+  var btt = document.getElementById('btt');
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    prog.style.width = (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    btt.classList.toggle('visible', window.scrollY > 400);
+  }, {passive: true});
+  btt.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+
+<script>
+(function() {
+  const tBtn = document.getElementById('tools-btn');
+  const tDd = document.getElementById('tools-dropdown');
+  if (tBtn && tDd) {
+    tBtn.addEventListener('click', e => { e.stopPropagation(); const open = tDd.style.display === 'block'; tDd.style.display = open ? 'none' : 'block'; tBtn.setAttribute('aria-expanded', String(!open)); });
+    document.addEventListener('click', () => { tDd.style.display = 'none'; tBtn.setAttribute('aria-expanded', 'false'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { tDd.style.display = 'none'; tBtn.setAttribute('aria-expanded', 'false'); } });
+  }
+  document.body.classList.add('has-site-nav');
+})();
+</script>
+
+</body>
+</html>
