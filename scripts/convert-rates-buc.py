@@ -31,40 +31,21 @@ OUT = ROOT / "rates-buc.json"
 RATES_JSON = ROOT / "rates.json"
 
 
-def _sheet_date(path):
-    """Sort key from a filename like '01 July 2026 (For Advisors Only) - PTE BUC.xlsx'.
-
-    Advisor sheets are dropped in dated, so the filename date is the freshness
-    signal. Falls back to mtime when the name has no parseable date.
-    """
-    name = os.path.basename(path)
-    m = re.search(r'(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})', name)
-    if m:
-        try:
-            return datetime.strptime(f"{m.group(1)} {m.group(2)[:3]} {m.group(3)}", "%d %b %Y")
-        except ValueError:
-            pass
-    return datetime.fromtimestamp(os.path.getmtime(path))
-
-
 def find_buc():
     """Newest BUC sheet, searched recursively.
 
     Was: non-recursive glob + hits[0]. That silently missed sheets dropped into
     a subfolder, and with more than one BUC file present it picked whichever the
     filesystem happened to list first — which could be a stale sheet. On a rates
-    page that means publishing outdated pricing, so pick the newest explicitly
-    and skip anything filed under archive/.
+    page that means publishing outdated pricing, so pick the newest explicitly.
+    Selection is shared with convert-rates.py via cr.dated_sheets.
     """
-    hits = glob.glob(str(ROOT / "Rates" / "**" / "*BUC*.xlsx"), recursive=True) \
-         + glob.glob(str(ROOT / "*BUC*.xlsx"))
-    hits = [h for h in hits if "archive" not in Path(h).parts]
+    hits = cr.dated_sheets("BUC") + [Path(h) for h in glob.glob(str(ROOT / "*BUC*.xlsx"))]
     if not hits:
         return None
-    hits.sort(key=_sheet_date, reverse=True)
     if len(hits) > 1:
-        print(f"[buc] {len(hits)} BUC sheets found; using newest: {os.path.basename(hits[0])}")
-    return hits[0]
+        print(f"[buc] {len(hits)} BUC sheets found; using newest: {os.path.basename(str(hits[0]))}")
+    return str(hits[0])
 
 
 def category_from_sub(sub):
@@ -99,19 +80,18 @@ def main():
     ws = wb["BUC"]
     last = ws.max_column
 
-    as_of = None
-    for r in range(1, 30):
-        c = ws.cell(r, 1).value
-        if c:
-            m = re.match(r"\s*As\s+(?:of|at)\s+(.+)", str(c), re.IGNORECASE)
-            if m:
-                as_of = m.group(1).strip()
-                break
+    # Filename date wins over the in-sheet "As at" cell, which the advisor sheets
+    # routinely leave on an earlier month (the 1 Jul 2026 BUC sheet still said
+    # "As at 11 May 2026"). Cell is the fallback for sheets with no dated name.
+    as_of = cr.as_of_from_filename(src)
     if not as_of:
-        # BUC sheet has no "As at" cell — the date lives in the filename, e.g. "26 May 2026 ... PTE BUC.xlsx"
-        m = re.search(r"(\d{1,2}\s+[A-Za-z]{3,9}\s+20\d\d)", Path(src).name)
-        if m:
-            as_of = m.group(1)
+        for r in range(1, 30):
+            c = ws.cell(r, 1).value
+            if c:
+                m = re.match(r"\s*As\s+(?:of|at)\s+(.+)", str(c), re.IGNORECASE)
+                if m:
+                    as_of = m.group(1).strip()
+                    break
 
     subcats = cr.forward_fill([ws.cell(2, c).value for c in range(2, last + 1)])
     quals   = [ws.cell(3, c).value for c in range(2, last + 1)]

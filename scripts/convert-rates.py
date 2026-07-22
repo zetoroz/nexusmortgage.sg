@@ -16,6 +16,7 @@ import json
 import os
 import re
 import sys
+import glob
 import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
@@ -26,7 +27,84 @@ ROOT = Path(__file__).resolve().parent.parent
 _XLSX_RATESDIR = ROOT / "Rates" / "rates.xlsx"
 _XLSX_ROOT     = ROOT / "rates.xlsx"
 _XLSX_LEGACY   = ROOT / "login" / "rates.xlsx"
-XLSX = next((p for p in (_XLSX_RATESDIR, _XLSX_ROOT, _XLSX_LEGACY) if p.exists()), _XLSX_LEGACY)
+
+
+def _sheet_date(path):
+    """Sort key for an advisor sheet, from a filename like
+    '13 July 2026 (For Advisors Only) - PTE COMPLETED.xlsx'.
+
+    Sheets arrive dated, so the filename is the freshness signal. The "As at"
+    cell inside them is unreliable — it is often left on a previous month's
+    date. Falls back to mtime when the name has no parseable date.
+    """
+    p = Path(path)
+    m = re.search(r'(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})', p.name)
+    if m:
+        try:
+            return datetime.strptime(f"{m.group(1)} {m.group(2)[:3]} {m.group(3)}", "%d %b %Y")
+        except ValueError:
+            pass
+    return datetime.fromtimestamp(os.path.getmtime(p))
+
+
+def _parse_as_of(text):
+    """'13 July 2026' / 'As at 11 May 2026' / 'Apr 2026' -> datetime, or None."""
+    if not text:
+        return None
+    s = re.sub(r'^\s*As\s+(?:of|at)\s+', '', str(text), flags=re.IGNORECASE).strip()
+    for fmt in ("%d %B %Y", "%d %b %Y", "%B %Y", "%b %Y"):
+        try:
+            return datetime.strptime(s, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def as_of_from_filename(path):
+    """'13 July 2026 (...) - PTE COMPLETED.xlsx' -> '13 July 2026'.
+
+    Returns None when the name carries no date (e.g. the fixed rates.xlsx), so
+    the caller can fall back to the in-sheet cell.
+    """
+    m = re.search(r'(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})', Path(path).name)
+    if not m:
+        return None
+    try:
+        datetime.strptime(f"{m.group(1)} {m.group(2)[:3]} {m.group(3)}", "%d %b %Y")
+    except ValueError:
+        return None
+    return f"{int(m.group(1))} {m.group(2)} {m.group(3)}"
+
+
+def dated_sheets(keyword):
+    """Advisor sheets under Rates/ whose filename contains `keyword`, newest first.
+
+    Recursive so a sheet dropped into a subfolder is still found, and anything
+    filed under archive/ is skipped. Matching is case-insensitive on the name so
+    behaviour is identical on case-sensitive filesystems (CI) and macOS.
+    """
+    hits = [Path(h) for h in glob.glob(str(ROOT / "Rates" / "**" / "*.xlsx"), recursive=True)]
+    hits = [h for h in hits
+            if "archive" not in h.parts
+            and not h.name.startswith("~$")          # Excel lock files
+            and keyword.upper() in h.name.upper()]
+    hits.sort(key=_sheet_date, reverse=True)
+    return hits
+
+
+def _find_completed():
+    """Newest dated COMPLETED sheet, else the fixed rates.xlsx fallbacks.
+
+    Keeps CI working: the dated sheets are gitignored, so in the daily bot's
+    checkout there are none and this falls through to the decrypted rates.xlsx.
+    """
+    hits = dated_sheets("COMPLETED")
+    if hits:
+        return hits[0]
+    return next((p for p in (_XLSX_RATESDIR, _XLSX_ROOT, _XLSX_LEGACY) if p.exists()), _XLSX_LEGACY)
+
+
+XLSX = _find_completed()
 OUT  = ROOT / "rates.json"
 HISTORY = ROOT / "rates-history.json"   # append-only audit log of rate changes
 
@@ -36,6 +114,10 @@ DEFAULT_REFS = {"sora1m": 1.076, "sora3m": 1.122, "fhr6": 0.80}
 # CLI flag --use-json-refs: prefer refRates from existing rates.json over xlsx.
 # Used by the daily MAS cron so live SORA values flow into per-package year1Rate.
 USE_JSON_REFS = "--use-json-refs" in sys.argv or os.environ.get("USE_JSON_REFS") == "1"
+
+# CLI flag --force: write even when the source workbook is older than the
+# already-published rates.json (see the staleness guard in main()).
+FORCE = "--force" in sys.argv
 
 # ---------- helpers ----------
 
@@ -138,6 +220,12 @@ def parse_ref_rate(label_text):
 # ---------- main ----------
 
 def main():
+    # Log the chosen source: silently parsing the wrong (stale) sheet is the
+    # failure mode that matters here, so make the pick visible every run.
+    _all = dated_sheets("COMPLETED")
+    if len(_all) > 1:
+        print(f"[convert-rates] {len(_all)} completed sheets found; using newest")
+    print(f"[convert-rates] source: {XLSX.relative_to(ROOT) if XLSX.is_relative_to(ROOT) else XLSX}")
     wb = load_workbook(XLSX, data_only=True)
     ws = wb["All Rates"]
 
@@ -164,14 +252,20 @@ def main():
             print(f"[convert-rates] WARN: --use-json-refs requested but failed: {e}")
 
     # As-of date — best-effort: row 26 col 1 might say "As of 27 Feb 2026" or "As at 11 May 2026"
-    as_of = None
-    for r in range(24, 30):
-        cell = ws.cell(r, 1).value
-        if cell:
-            m = re.match(r'\s*As\s+(?:of|at)\s+(.+)', str(cell), re.IGNORECASE)
-            if m:
-                as_of = m.group(1).strip()
-                break
+    # Filename date wins over the in-sheet "As at" cell. The advisor sheets ship
+    # with that cell left on an earlier month (the 13 Jul 2026 sheet still said
+    # "As at 11 May 2026"), and publishing July pricing under a May date is worse
+    # than useless on a rates page. Fall back to the cell only for the fixed
+    # rates.xlsx, which carries no date in its name.
+    as_of = as_of_from_filename(XLSX)
+    if not as_of:
+        for r in range(24, 30):
+            cell = ws.cell(r, 1).value
+            if cell:
+                m = re.match(r'\s*As\s+(?:of|at)\s+(.+)', str(cell), re.IGNORECASE)
+                if m:
+                    as_of = m.group(1).strip()
+                    break
     if not as_of:
         as_of = "Apr 2026"
 
@@ -267,6 +361,23 @@ def main():
         prev_inner = (prev.get("refRates") or {}).get("asOfSora")
         if prev_inner:
             out["refRates"]["asOfSora"] = prev_inner
+
+    # ---- Staleness guard ----
+    # Refuse to overwrite newer published rates with an older workbook. The CI
+    # job decrypts rates.xlsx.enc, so whenever that blob lags behind a sheet that
+    # was published from a workstation, the nightly run would silently roll the
+    # site back to the older pricing. Skip instead of failing: the SORA refresh
+    # in the surrounding job is still valid and should complete.
+    if prev and not FORCE:
+        prev_dt = _parse_as_of(prev.get("asOf"))
+        cur_dt  = _parse_as_of(as_of)
+        if prev_dt and cur_dt and cur_dt < prev_dt:
+            print(f"::warning::[convert-rates] SKIPPED write — source sheet is older than published rates.")
+            print(f"  source   : {XLSX.name} (asOf {as_of})")
+            print(f"  published: rates.json (asOf {prev.get('asOf')})")
+            print(f"  rates.json left untouched. If this is CI, rates.xlsx.enc needs re-encrypting")
+            print(f"  from the newer sheet. Override with --force.")
+            return
 
     diffs = _diff_packages(prev["packages"] if prev else [], packages) if prev else []
     refDiffs = _diff_refs(prev.get("refRates") if prev else {}, refs)
