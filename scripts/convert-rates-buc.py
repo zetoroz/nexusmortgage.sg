@@ -15,7 +15,8 @@ from rates.json so floating BUC rates track the same live SORA.
 Run from repo root:  python3 scripts/convert-rates-buc.py
 Source: Rates/<...BUC...>.xlsx  (private, gitignored — same as the Completed sheet).
 """
-import json, re, glob, importlib.util
+import json, re, os, glob, importlib.util
+from datetime import datetime
 from pathlib import Path
 from openpyxl import load_workbook
 
@@ -30,9 +31,40 @@ OUT = ROOT / "rates-buc.json"
 RATES_JSON = ROOT / "rates.json"
 
 
+def _sheet_date(path):
+    """Sort key from a filename like '01 July 2026 (For Advisors Only) - PTE BUC.xlsx'.
+
+    Advisor sheets are dropped in dated, so the filename date is the freshness
+    signal. Falls back to mtime when the name has no parseable date.
+    """
+    name = os.path.basename(path)
+    m = re.search(r'(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})', name)
+    if m:
+        try:
+            return datetime.strptime(f"{m.group(1)} {m.group(2)[:3]} {m.group(3)}", "%d %b %Y")
+        except ValueError:
+            pass
+    return datetime.fromtimestamp(os.path.getmtime(path))
+
+
 def find_buc():
-    hits = glob.glob(str(ROOT / "Rates" / "*BUC*.xlsx")) + glob.glob(str(ROOT / "*BUC*.xlsx"))
-    return hits[0] if hits else None
+    """Newest BUC sheet, searched recursively.
+
+    Was: non-recursive glob + hits[0]. That silently missed sheets dropped into
+    a subfolder, and with more than one BUC file present it picked whichever the
+    filesystem happened to list first — which could be a stale sheet. On a rates
+    page that means publishing outdated pricing, so pick the newest explicitly
+    and skip anything filed under archive/.
+    """
+    hits = glob.glob(str(ROOT / "Rates" / "**" / "*BUC*.xlsx"), recursive=True) \
+         + glob.glob(str(ROOT / "*BUC*.xlsx"))
+    hits = [h for h in hits if "archive" not in Path(h).parts]
+    if not hits:
+        return None
+    hits.sort(key=_sheet_date, reverse=True)
+    if len(hits) > 1:
+        print(f"[buc] {len(hits)} BUC sheets found; using newest: {os.path.basename(hits[0])}")
+    return hits[0]
 
 
 def category_from_sub(sub):

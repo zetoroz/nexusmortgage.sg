@@ -11729,5 +11729,687 @@
       }
     ],
     "summary": "33 year1Rate"
+  },
+  {
+    "generatedAt": "2026-07-22T08:47:50.384757+00:00",
+    "asOf": "13 July 2026",
+    "xlsxFingerprint": "42a283a7e95a",
+    "packageCount": 114,
+    "refRates": {
+      "sora1m": 1.2217,
+      "sora3m": 1.1494,
+      "fhr6": 0.8,
+      "asOfSora": "2026-07-21"
+    },
+    "refRateChanges": {},
+    "packageChanges": [
+      {
+        "key": "OCBC|sora1m|1500000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1.5M",
+        "what": "added",
+        "after": 1.4217
+      },
+      {
+        "key": "HSBC|sora1m|800000",
+        "lender": "HSBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $800K + $200K Funded Premier",
+        "what": "added",
+        "after": 1.4217
+      },
+      {
+        "key": "OCBC|sora1m|900000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $900K",
+        "what": "added",
+        "after": 1.4717
+      },
+      {
+        "key": "HSBC|sora1m|1000000",
+        "lender": "HSBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1M or ($600K + $200K Funded Premier)",
+        "what": "year1Rate",
+        "before": 1.4217,
+        "after": 1.4717,
+        "deltaPct": 0.05
+      },
+      {
+        "key": "OCBC|sora1m|500000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $500K",
+        "what": "added",
+        "after": 1.5017
+      },
+      {
+        "key": "OCBC|sora1m|300000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": ">$300K",
+        "what": "year1Rate",
+        "before": 1.5717,
+        "after": 1.5217,
+        "deltaPct": -0.05
+      },
+      {
+        "key": "MB|sora1m|1000000",
+        "lender": "MB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1M + CC",
+        "what": "year1Rate",
+        "before": 1.4217,
+        "after": 1.5217,
+        "deltaPct": 0.1
+      },
+      {
+        "key": "MB|sora1m|500000",
+        "lender": "MB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $500K + CC",
+        "what": "year1Rate",
+        "before": 1.5217,
+        "after": 1.6217,
+        "deltaPct": 0.1
+      },
+      {
+        "key": "OCBC|sora3m|1500000",
+        "lender": "OCBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $1.5M",
+        "what": "added",
+        "after": 1.3494
+      },
+      {
+        "key": "HSBC|sora3m|800000",
+        "lender": "HSBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $800K + $200K Funded Premier",
+        "what": "added",
+        "after": 1.3494
+      },
+      {
+        "key": "OCBC|sora3m|900000",
+        "lender": "OCBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $900K",
+        "what": "added",
+        "after": 1.3994
+      },
+      {
+        "key": "HSBC|sora3m|1000000",
+        "lender": "HSBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $1M or ($600K + $200K Funded Premier)",
+        "what": "year1Rate",
+        "before": 1.3494,
+        "after": 1.3994,
+        "deltaPct": 0.05
+      },
+      {
+        "key": "OCBC|sora3m|500000",
+        "lender": "OCBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $500K",
+        "what": "added",
+        "after": 1.4294
+      },
+      {
+        "key": "OCBC|sora3m|300000",
+        "lender": "OCBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $300K",
+        "what": "year1Rate",
+        "before": 1.4994,
+        "after": 1.4494,
+        "deltaPct": -0.05
+      },
+      {
+        "key": "UOB|fixed1y|1200000",
+        "lender": "UOB",
+        "package": "1YR FIXED (1YRF)",
+        "qualifying": "> $1.2M",
+        "what": "added",
+        "after": 1.4
+      },
+      {
+        "key": "RHB|fixed1y|500000",
+        "lender": "RHB",
+        "package": "1YR FIXED (1YRF)",
+        "qualifying": "> $500K",
+        "what": "year1Rate",
+        "before": 1.43,
+        "after": 1.45,
+        "deltaPct": 0.02
+      },
+      {
+        "key": "OCBC|fixed1y|300000",
+        "lender": "OCBC",
+        "package": "1YR FIXED (1YRF)",
+        "qualifying": "> $300K",
+        "what": "year1Rate",
+        "before": 1.55,
+        "after": 1.5,
+        "deltaPct": -0.05
+      },
+      {
+        "key": "UOB|fixed1y|1000000",
+        "lender": "UOB",
+        "package": "1YR FIXED (1YRF)",
+        "qualifying": "> $1M",
+        "what": "year1Rate",
+        "before": 1.43,
+        "after": 1.5,
+        "deltaPct": 0.07
+      },
+      {
+        "key": "HSBC|fixed1y|800000",
+        "lender": "HSBC",
+        "package": "1YR FIXED (1YRF)",
+        "qualifying": "> $800K or ($600K + $200K Funded Premier)",
+        "what": "year1Rate",
+        "before": 1.4,
+        "after": 1.55,
+        "deltaPct": 0.15
+      },
+      {
+        "key": "SCB|fixed2y|1500000",
+        "lender": "SCB",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $1.5M or $1.2M Priority clients",
+        "what": "added",
+        "after": 1.4
+      },
+      {
+        "key": "OCBC|fixed2y|2000000",
+        "lender": "OCBC",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $2M",
+        "what": "added",
+        "after": 1.4
+      },
+      {
+        "key": "UOB|fixed2y|1200000",
+        "lender": "UOB",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $1.2M",
+        "what": "added",
+        "after": 1.5
+      },
+      {
+        "key": "DBS|fixed2y|1500000",
+        "lender": "DBS",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $1.5M",
+        "what": "year1Rate",
+        "before": 1.63,
+        "after": 1.7,
+        "deltaPct": 0.07
+      },
+      {
+        "key": "OCBC|fixed2y|900000",
+        "lender": "OCBC",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $900K",
+        "what": "added",
+        "after": 1.5
+      },
+      {
+        "key": "UOB|fixed2y|1000000",
+        "lender": "UOB",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $1M",
+        "what": "year1Rate",
+        "before": 1.68,
+        "after": 1.5,
+        "deltaPct": -0.18
+      },
+      {
+        "key": "UOB|fixed2y|600000",
+        "lender": "UOB",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $600K",
+        "what": "added",
+        "after": 1.55
+      },
+      {
+        "key": "OCBC|fixed2y|700000",
+        "lender": "OCBC",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $700K",
+        "what": "year1Rate",
+        "before": 1.6,
+        "after": 1.55,
+        "deltaPct": -0.05
+      },
+      {
+        "key": "BOC|fixed2y|500000",
+        "lender": "BOC",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $500K + CC",
+        "what": "year1Rate",
+        "before": 1.55,
+        "after": 1.6,
+        "deltaPct": 0.05
+      },
+      {
+        "key": "HSBC|fixed2y|800000",
+        "lender": "HSBC",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $800K or ($600K + $200K Funded Premier)",
+        "what": "year1Rate",
+        "before": 1.5,
+        "after": 1.6,
+        "deltaPct": 0.1
+      },
+      {
+        "key": "UOB|fixed2y|900000",
+        "lender": "UOB",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $900K",
+        "what": "added",
+        "after": 1.6
+      },
+      {
+        "key": "UOB|fixed2y|500000",
+        "lender": "UOB",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $500K",
+        "what": "year1Rate",
+        "before": 1.7,
+        "after": 1.6,
+        "deltaPct": -0.1
+      },
+      {
+        "key": "DBS|fixed2y|2000000",
+        "lender": "DBS",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $2M",
+        "what": "added",
+        "after": 1.68
+      },
+      {
+        "key": "DBS|fixed2y|1000000",
+        "lender": "DBS",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $1M",
+        "what": "added",
+        "after": 1.73
+      },
+      {
+        "key": "DBS|fixed2y|500000",
+        "lender": "DBS",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $500K",
+        "what": "added",
+        "after": 1.75
+      },
+      {
+        "key": "DBS|fixed2y|200000",
+        "lender": "DBS",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $200K",
+        "what": "year1Rate",
+        "before": 1.75,
+        "after": 1.78,
+        "deltaPct": 0.03
+      },
+      {
+        "key": "BOC|fixed3y|700000",
+        "lender": "BOC",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $700K + CC",
+        "what": "added",
+        "after": 1.6
+      },
+      {
+        "key": "DBS|fixed3y|1500000",
+        "lender": "DBS",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $1.5M",
+        "what": "year1Rate",
+        "before": 1.68,
+        "after": 1.88,
+        "deltaPct": 0.2
+      },
+      {
+        "key": "HSBC|fixed3y|1000000",
+        "lender": "HSBC",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $1M",
+        "what": "added",
+        "after": 1.65
+      },
+      {
+        "key": "OCBC|fixed3y|1200000",
+        "lender": "OCBC",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $1.2M",
+        "what": "added",
+        "after": 1.6
+      },
+      {
+        "key": "SCB|fixed3y|1500000",
+        "lender": "SCB",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $1.5M or $1.2M Priority clients",
+        "what": "added",
+        "after": 1.6
+      },
+      {
+        "key": "UOB|fixed3y|600000",
+        "lender": "UOB",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $600K",
+        "what": "added",
+        "after": 1.65
+      },
+      {
+        "key": "OCBC|fixed3y|700000",
+        "lender": "OCBC",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $700K",
+        "what": "year1Rate",
+        "before": 1.6,
+        "after": 1.65,
+        "deltaPct": 0.05
+      },
+      {
+        "key": "OCBC|fixed3y|700000",
+        "lender": "OCBC",
+        "what": "lockInYears",
+        "before": 3,
+        "after": 2
+      },
+      {
+        "key": "BOC|fixed3y|500000",
+        "lender": "BOC",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $500K + CC",
+        "what": "year1Rate",
+        "before": 1.6,
+        "after": 1.68,
+        "deltaPct": 0.08
+      },
+      {
+        "key": "SCB|fixed3y|1200000",
+        "lender": "SCB",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $1.2M or $1M Priority clients",
+        "what": "year1Rate",
+        "before": 1.88,
+        "after": 1.68,
+        "deltaPct": -0.2
+      },
+      {
+        "key": "UOB|fixed3y|200000",
+        "lender": "UOB",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $200K",
+        "what": "year1Rate",
+        "before": 1.65,
+        "after": 1.7,
+        "deltaPct": 0.05
+      },
+      {
+        "key": "UOB|fixed3y|200000",
+        "lender": "UOB",
+        "what": "lockInYears",
+        "before": 3,
+        "after": 2
+      },
+      {
+        "key": "DBS|fixed3y|2000000",
+        "lender": "DBS",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $2M",
+        "what": "added",
+        "after": 1.85
+      },
+      {
+        "key": "DBS|fixed3y|1000000",
+        "lender": "DBS",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $1M",
+        "what": "added",
+        "after": 1.9
+      },
+      {
+        "key": "DBS|fixed3y|500000",
+        "lender": "DBS",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $500K",
+        "what": "added",
+        "after": 1.92
+      },
+      {
+        "key": "DBS|fixed3y|200000",
+        "lender": "DBS",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $200K",
+        "what": "added",
+        "after": 1.98
+      },
+      {
+        "key": "DBS|fixed3y|100000",
+        "lender": "DBS",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $100K",
+        "what": "added",
+        "after": 2.0
+      },
+      {
+        "key": "UOB|sora1m|1000000",
+        "lender": "UOB",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1M",
+        "what": "removed",
+        "before": 1.13
+      },
+      {
+        "key": "CITI|sora1m|1500000",
+        "lender": "CITI",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1.5M + $250K Citigold",
+        "what": "removed",
+        "before": 1.3517
+      },
+      {
+        "key": "OCBC|sora1m|1200000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $1.2M",
+        "what": "removed",
+        "before": 1.4717
+      },
+      {
+        "key": "OCBC|sora1m|800000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $800K",
+        "what": "removed",
+        "before": 1.5017
+      },
+      {
+        "key": "OCBC|sora1m|700000",
+        "lender": "OCBC",
+        "package": "1 MTH SORA",
+        "qualifying": "> $700K",
+        "what": "removed",
+        "before": 1.5217
+      },
+      {
+        "key": "UOB|sora3m|1000000",
+        "lender": "UOB",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $1M",
+        "what": "removed",
+        "before": 1.07
+      },
+      {
+        "key": "OCBC|sora3m|1200000",
+        "lender": "OCBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $1.2M",
+        "what": "removed",
+        "before": 1.3994
+      },
+      {
+        "key": "OCBC|sora3m|800000",
+        "lender": "OCBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $800K",
+        "what": "removed",
+        "before": 1.4294
+      },
+      {
+        "key": "OCBC|sora3m|700000",
+        "lender": "OCBC",
+        "package": "3 MTHS SORA",
+        "qualifying": "> $700K",
+        "what": "removed",
+        "before": 1.4494
+      },
+      {
+        "key": "UOB|fixed1y|1500000",
+        "lender": "UOB",
+        "package": "1YR FIXED (1YRF)",
+        "qualifying": "> $1.5M",
+        "what": "removed",
+        "before": 1.4
+      },
+      {
+        "key": "UOB|fixed1y|500000",
+        "lender": "UOB",
+        "package": "1YR FIXED (1YRF)",
+        "qualifying": "> $500K",
+        "what": "removed",
+        "before": 1.45
+      },
+      {
+        "key": "HSBC|fixed2y|1200000",
+        "lender": "HSBC",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $1.2M or ($1M + $200K Funded Premier)",
+        "what": "removed",
+        "before": 1.4
+      },
+      {
+        "key": "BOC|fixed2y|800000",
+        "lender": "BOC",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $800K + CC",
+        "what": "removed",
+        "before": 1.45
+      },
+      {
+        "key": "OCBC|fixed2y|1000000",
+        "lender": "OCBC",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $1M",
+        "what": "removed",
+        "before": 1.5
+      },
+      {
+        "key": "UOB|fixed2y|1500000",
+        "lender": "UOB",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $1.5M",
+        "what": "removed",
+        "before": 1.65
+      },
+      {
+        "key": "UOB|fixed2y|200000",
+        "lender": "UOB",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $200K",
+        "what": "removed",
+        "before": 1.6
+      },
+      {
+        "key": "UOB|fixed2y|2000000",
+        "lender": "UOB",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $2M",
+        "what": "removed",
+        "before": 1.63
+      },
+      {
+        "key": "OCBC|fixed2y|300000",
+        "lender": "OCBC",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $300K",
+        "what": "removed",
+        "before": 1.65
+      },
+      {
+        "key": "DBS|fixed2y|300000",
+        "lender": "DBS",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $300K",
+        "what": "removed",
+        "before": 1.68
+      },
+      {
+        "key": "HSBC|fixed2y|900000",
+        "lender": "HSBC",
+        "package": "2YRS FIXED (2YRF)",
+        "qualifying": "> $900K or ($600K + $200K Funded Premier)",
+        "what": "removed",
+        "before": 1.83
+      },
+      {
+        "key": "BOC|fixed3y|800000",
+        "lender": "BOC",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $800K + CC",
+        "what": "removed",
+        "before": 1.5
+      },
+      {
+        "key": "UOB|fixed3y|700000",
+        "lender": "UOB",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $700K",
+        "what": "removed",
+        "before": 1.6
+      },
+      {
+        "key": "OCBC|fixed3y|600000",
+        "lender": "OCBC",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $600K",
+        "what": "removed",
+        "before": 1.65
+      },
+      {
+        "key": "UOB|fixed3y|500000",
+        "lender": "UOB",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $500K",
+        "what": "removed",
+        "before": 1.68
+      },
+      {
+        "key": "DBS|fixed3y|300000",
+        "lender": "DBS",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $300K",
+        "what": "removed",
+        "before": 1.78
+      },
+      {
+        "key": "HSBC|fixed3y|1500000",
+        "lender": "HSBC",
+        "package": "3YRS FIXED (3YRF)",
+        "qualifying": "> $1.5M or ($900k + $200K Funded Premier)",
+        "what": "removed",
+        "before": 1.88
+      }
+    ],
+    "summary": "28 added, 22 year1Rate, 2 lockInYears, 26 removed"
   }
 ]
