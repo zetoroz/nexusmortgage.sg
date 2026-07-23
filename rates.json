@@ -1,10 +1,10 @@
 {
   "asOf": "13 July 2026",
   "refRates": {
-    "sora1m": 1.2217,
-    "sora3m": 1.1494,
+    "sora1m": 1.2309,
+    "sora3m": 1.1545,
     "fhr6": 0.8,
-    "asOfSora": "2026-07-21"
+    "asOfSora": "2026-07-22"
   },
   "packages": [
     {
@@ -2436,9 +2436,9 @@
       "qualifying": "> $100K",
       "qualifyingMin": 100000,
       "lockInYears": 3,
-      "year1Rate": 2.0,
-      "year2Rate": 2.0,
-      "year3Rate": 2.0,
+      "year1Rate": 2,
+      "year2Rate": 2,
+      "year3Rate": 2,
       "year4Rate": 2.1494,
       "year5Rate": 2.1494,
       "thereafterRate": 2.1494,
@@ -2458,9 +2458,9 @@
       "qualifying": "> $700K or $500K Priority clients",
       "qualifyingMin": 700000,
       "lockInYears": 3,
-      "year1Rate": 2.0,
-      "year2Rate": 2.0,
-      "year3Rate": 2.0,
+      "year1Rate": 2,
+      "year2Rate": 2,
+      "year3Rate": 2,
       "year4Rate": 1.7717,
       "year5Rate": 2.2217,
       "thereafterRate": 2.2217,
@@ -2518,5 +2518,5 @@
   ],
   "generatedAt": "2026-07-22T08:47:50.384757+00:00",
   "xlsxFingerprint": "42a283a7e95a",
-  "asOfSora": "2026-07-21"
+  "asOfSora": "2026-07-22"
 }

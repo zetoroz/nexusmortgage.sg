@@ -1,5 +1,23 @@
 [
   {
+    "generatedAt": "2026-07-23T04:17:53.851Z",
+    "source": "MAS",
+    "asOfSora": "2026-07-22",
+    "refRateChanges": {
+      "sora1m": {
+        "from": 1.2217,
+        "to": 1.2309,
+        "delta": 0.009
+      },
+      "sora3m": {
+        "from": 1.1494,
+        "to": 1.1545,
+        "delta": 0.005
+      }
+    },
+    "summary": "SORA update: sora1m 1.2217→1.2309, sora3m 1.1494→1.1545"
+  },
+  {
     "generatedAt": "2026-07-22T04:19:55.902Z",
     "source": "MAS",
     "asOfSora": "2026-07-21",
@@ -12199,7 +12217,7 @@
         "package": "3YRS FIXED (3YRF)",
         "qualifying": "> $100K",
         "what": "added",
-        "after": 2.0
+        "after": 2
       },
       {
         "key": "UOB|sora1m|1000000",
