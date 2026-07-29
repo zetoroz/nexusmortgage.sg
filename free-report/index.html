@@ -1494,6 +1494,180 @@ body::after {
   .metric-val { font-size: 24px; }
   .console-card { border-radius: 12px; }
 }
+
+/* ═══════════ REPORT v2 — statement-grade chrome ═══════════ */
+#reportWrap { scroll-margin-top: 96px; }
+#reportWrap [id] { scroll-margin-top: 170px; }
+
+/* Masthead — report identity strip */
+.rpt-masthead {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  padding-bottom: 14px; margin-bottom: 0;
+  border-bottom: 1px solid var(--border-strong);
+}
+.rpt-masthead .rm-kicker {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold-500); margin-bottom: 6px;
+}
+.rpt-masthead h2 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 500;
+  font-size: clamp(1.7rem, 3vw, 2.3rem); color: var(--navy-900);
+  letter-spacing: -.015em; line-height: 1.1;
+}
+.rpt-masthead .rm-meta {
+  display: flex; gap: 18px; flex-wrap: wrap;
+  font-size: 11px; color: var(--muted); letter-spacing: .05em;
+  text-transform: uppercase; font-weight: 600; padding-bottom: 6px;
+}
+.rpt-masthead .rm-meta b { color: var(--ink); font-weight: 700; }
+.rpt-masthead .rm-meta span { display: inline-flex; align-items: center; gap: 6px; }
+.rpt-masthead .rm-meta .rm-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold-500); }
+
+/* Verdict band — the payoff panel */
+.verdict-band {
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(120% 160% at 85% -20%, rgba(196,151,59,.16), transparent 55%),
+    radial-gradient(90% 140% at 0% 110%, rgba(30,58,92,.55), transparent 60%),
+    linear-gradient(150deg, var(--navy-900), var(--navy-950));
+  border: 1px solid rgba(196,151,59,.25);
+  border-radius: 8px;
+  padding: 26px 28px 22px;
+  margin: 22px 0 24px;
+  box-shadow: 0 18px 44px -18px rgba(6,14,31,.45);
+}
+.verdict-band::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-500) 30%, var(--gold-300) 50%, var(--gold-500) 70%, transparent);
+}
+.vb-verdict {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem); font-weight: 500;
+  color: var(--cream-100); letter-spacing: -.01em; line-height: 1.35;
+  margin-bottom: 4px;
+}
+.vb-verdict .vb-hl { color: var(--gold-300); font-style: italic; }
+.vb-sub { font-size: 12.5px; color: rgba(250,247,242,.55); margin-bottom: 20px; }
+.vb-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  border-top: 1px solid rgba(250,247,242,.12);
+}
+.vb-stat { padding: 16px 22px 2px; border-left: 1px solid rgba(250,247,242,.12); }
+.vb-stat:first-child { border-left: 0; padding-left: 0; }
+.vb-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: rgba(250,247,242,.5); margin-bottom: 8px;
+}
+.vb-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-feature-settings: 'tnum' 1, 'lnum' 1; font-variant-numeric: tabular-nums lining-nums;
+  font-size: clamp(30px, 3.6vw, 42px); font-weight: 500; line-height: 1;
+  color: var(--cream-100); letter-spacing: -.02em;
+}
+.vb-num .vb-unit { font-size: .45em; color: rgba(250,247,242,.55); font-weight: 400; margin-left: 2px; }
+.vb-num .vb-cur { font-size: .55em; color: rgba(250,247,242,.55); font-weight: 400; margin-right: 2px; }
+.vb-stat .vb-foot { font-size: 11.5px; color: rgba(250,247,242,.5); margin-top: 8px; min-height: 16px; }
+.vb-stat .pill { background: rgba(250,247,242,.08); }
+.vb-stat .pill.pass { background: rgba(5,150,105,.18); color: #7CE0BD; }
+.vb-stat .pill.pass .dot { background: #34D399; }
+.vb-stat .pill.fail { background: rgba(220,38,38,.2); color: #FCA5A5; }
+.vb-stat .pill.fail .dot { background: #F87171; }
+.vb-stat .pill.warn { background: rgba(217,119,6,.2); color: #FCD34D; }
+.vb-stat .pill.warn .dot { background: #FBBF24; }
+@media (max-width: 760px) {
+  .verdict-band { padding: 20px 18px 16px; }
+  .vb-stats { grid-template-columns: 1fr; border-top: 0; }
+  .vb-stat { border-left: 0; border-top: 1px solid rgba(250,247,242,.12); padding: 14px 0 2px; }
+  .vb-stat:first-child { border-top: 1px solid rgba(250,247,242,.12); }
+}
+
+/* Section index — pills. NOTE: html/body use overflow-x:hidden, which kills
+   position:sticky, so stickiness is done in JS via .is-fixed. */
+.rpt-secnav {
+  position: relative; z-index: 40;
+  display: flex; gap: 6px; overflow-x: auto;
+  padding: 8px; margin: 0 0 22px;
+  background: rgba(250,247,242,.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  box-shadow: 0 6px 18px -8px rgba(11,18,32,.12);
+  scrollbar-width: none;
+}
+.rpt-secnav.is-fixed {
+  position: fixed; top: 104px; left: var(--secnav-left, 16px); width: var(--secnav-w, auto);
+}
+.rpt-secnav::-webkit-scrollbar { display: none; }
+.rpt-secnav a {
+  flex: 0 0 auto;
+  font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  padding: 6px 13px; border-radius: 100px;
+  transition: color .18s, background-color .18s;
+}
+.rpt-secnav a:hover { color: var(--navy-900); background: var(--cream-200); }
+.rpt-secnav a:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 1px; }
+.rpt-secnav a.active { color: var(--cream-100); background: var(--navy-900); }
+@media (max-width: 640px) { .rpt-secnav { top: 104px; border-radius: 10px; } }
+
+/* Section numbering */
+.sec-tag .sec-num {
+  color: var(--gold-500); font-weight: 700; margin-right: 6px;
+  font-feature-settings: 'tnum' 1; letter-spacing: .08em;
+}
+
+/* Affordability v2 — dominant number + cap meter */
+.aff-hero { display: flex; align-items: flex-end; gap: 28px; flex-wrap: wrap; margin-bottom: 18px; }
+.aff-hero .ah-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-feature-settings: 'tnum' 1, 'lnum' 1; font-variant-numeric: tabular-nums lining-nums;
+  font-size: clamp(34px, 4.2vw, 50px); font-weight: 500; line-height: .95;
+  color: var(--navy-900); letter-spacing: -.02em;
+}
+.aff-hero .ah-num .ah-cur { font-size: .5em; color: var(--muted); font-weight: 400; }
+.aff-hero .ah-side { font-size: 12.5px; color: var(--muted); line-height: 1.55; padding-bottom: 4px; max-width: 420px; }
+.aff-hero .ah-side b { color: var(--ink); }
+.cap-meter { position: relative; height: 10px; border-radius: 100px; background: var(--surface-3); margin: 26px 0 6px; }
+.cap-meter .cm-fill {
+  position: absolute; left: 0; top: 0; bottom: 0; border-radius: 100px;
+  background: linear-gradient(90deg, var(--navy-900), #1E3A5C);
+}
+.cap-meter .cm-mark { position: absolute; top: -5px; width: 2px; height: 20px; background: var(--border-strong); }
+.cap-meter .cm-mark.binding { background: var(--gold-500); width: 3px; }
+.cap-labels { position: relative; height: 30px; font-size: 10px; color: var(--muted); }
+.cap-labels .cl {
+  position: absolute; transform: translateX(-50%); top: 4px;
+  text-align: center; letter-spacing: .06em; text-transform: uppercase; font-weight: 600;
+  white-space: nowrap;
+}
+.cap-labels .cl b { display: block; color: var(--ink); font-size: 11px; letter-spacing: 0; }
+.cap-labels .cl.binding { color: var(--gold-500); }
+.cap-labels .cl.binding b { color: var(--navy-900); }
+.aff-caps { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-top: 16px; }
+.aff-cap {
+  padding: 10px 12px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 4px;
+  font-size: 10.5px; color: var(--muted); letter-spacing: .04em;
+}
+.aff-cap b {
+  display: block; font-family: 'Cormorant Garamond', serif; font-weight: 500;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-size: 19px; color: var(--ink); margin: 3px 0 2px; letter-spacing: -.01em;
+}
+.aff-cap.binding { border-color: var(--gold-500); box-shadow: 0 0 0 1px var(--gold-500) inset; }
+.aff-cap.binding .ac-chip {
+  display: inline-block; font-size: 8.5px; font-weight: 700; letter-spacing: .1em;
+  color: var(--navy-900); background: var(--gold-300);
+  padding: 1px 6px; border-radius: 100px; margin-left: 5px; vertical-align: 1px;
+}
+.aff-cap .ac-chip { display: none; }
+.aff-cap.binding .ac-chip { display: inline-block; }
+
+/* Verdict stat status tints (render() toggles these on #m-tdsr-card) */
+.vb-stat.tinted-fail .vb-num { color: #FCA5A5; }
+.vb-stat.tinted-warn .vb-num { color: #FCD34D; }
+.vb-stat.tinted-green .vb-num { color: var(--cream-100); }
 </style>
 
 <!-- JSON-LD: WebPage + Service + FAQPage -->
@@ -2065,12 +2239,17 @@ body::after {
     <!-- ============ REPORT (initially hidden) ============ -->
     <div id="reportWrap" style="display:none; margin-top: 36px;">
 
-      <!-- Top metrics: ALWAYS visible (even when locked) -->
-      <div style="text-align:center; margin-bottom: 1.5rem;">
-        <span class="sec-tag" style="color: var(--gold-500); display:inline-block; margin-bottom:8px;">Step 2 of 2 · Your report</span>
-        <h2 style="font-family:'Cormorant Garamond',serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 400; color: var(--navy-900); letter-spacing: -.015em;">
-          Here's what we found
-        </h2>
+      <!-- Report masthead — statement identity -->
+      <div class="rpt-masthead">
+        <div>
+          <div class="rm-kicker">Step 2 of 2 · Mortgage Assessment</div>
+          <h2>Your report</h2>
+        </div>
+        <div class="rm-meta">
+          <span><span class="rm-dot"></span>Prepared <b id="rpt-date">—</b></span>
+          <span><span class="rm-dot"></span>Rates as of <b id="rpt-asof">—</b></span>
+          <span><span class="rm-dot"></span><b>16</b>&nbsp;banks compared</span>
+        </div>
       </div>
 
       <!-- Unlock banner — shown when numbers are blurred -->
@@ -2087,24 +2266,40 @@ body::after {
         </button>
       </div>
 
-      <!-- Visible top metrics -->
-      <div class="grid md:grid-cols-3 gap-4" style="margin-bottom: 24px;">
-        <div class="metric-card tinted-green">
-          <div class="metric-label">Best rate found</div>
-          <div class="metric-val console-display-num"><span id="m-best-rate">—</span><span class="small">% p.a.</span></div>
-          <div class="metric-sub" id="m-best-bank">—</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Estimated monthly payment</div>
-          <div class="metric-val console-display-num"><span class="small">$</span><span id="m-monthly">—</span></div>
-          <div class="metric-sub" id="m-monthly-sub">at best rate, principal + interest</div>
-        </div>
-        <div class="metric-card" id="m-tdsr-card">
-          <div class="metric-label">TDSR / MSR check</div>
-          <div class="metric-val console-display-num"><span id="m-tdsr-pct">—</span><span class="small">%</span></div>
-          <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;" id="m-pills"></div>
+      <!-- Verdict band — headline numbers, always visible -->
+      <div class="verdict-band">
+        <div class="vb-verdict" id="v-verdict">Here's what we found.</div>
+        <div class="vb-sub" id="v-verdict-sub">Calculated to MAS rules — stress-tested at the 4% floor.</div>
+        <div class="vb-stats">
+          <div class="vb-stat">
+            <div class="vb-label">Best rate found</div>
+            <div class="vb-num"><span id="m-best-rate">—</span><span class="vb-unit">% p.a.</span></div>
+            <div class="vb-foot" id="m-best-bank">—</div>
+          </div>
+          <div class="vb-stat">
+            <div class="vb-label">Monthly payment</div>
+            <div class="vb-num"><span class="vb-cur">$</span><span id="m-monthly">—</span></div>
+            <div class="vb-foot" id="m-monthly-sub">at best rate, principal + interest</div>
+          </div>
+          <div class="vb-stat" id="m-tdsr-card">
+            <div class="vb-label">Income used · TDSR</div>
+            <div class="vb-num"><span id="m-tdsr-pct">—</span><span class="vb-unit">%</span></div>
+            <div class="vb-foot" style="display:flex; gap:6px; flex-wrap:wrap;" id="m-pills"></div>
+          </div>
         </div>
       </div>
+
+      <!-- Section index -->
+      <nav class="rpt-secnav" id="rpt-secnav" aria-label="Report sections">
+        <a href="#afford-card" data-sec="afford-card">Overview</a>
+        <a href="#breakdown-cards" data-sec="breakdown-cards">Breakdown</a>
+        <a href="#timeline-card" data-sec="timeline-card">Timeline</a>
+        <a href="#sec-rates" data-sec="sec-rates">Bank rates</a>
+        <a href="#fixed-vs-floating-card" data-sec="fixed-vs-floating-card">Strategy</a>
+        <a href="#stress-card" data-sec="stress-card">Stress &amp; cost</a>
+        <a href="#sec-charts" data-sec="sec-charts">Charts</a>
+        <a href="#sec-next" data-sec="sec-next">Next step</a>
+      </nav>
 
       <!-- Affordability: shortfall (TDSR fail) or headroom (TDSR pass) -->
       <div id="afford-card" class="console-card card-pad" style="display:none; margin-bottom:24px;">
@@ -2154,7 +2349,7 @@ body::after {
       <div id="purchaser-matrix-card" class="console-card card-pad" style="display:none; margin-bottom:24px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
           <div>
-            <span class="sec-tag">Income matrix</span>
+            <span class="sec-tag"><span class="sec-num">02</span>Income matrix</span>
             <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">Income build-up — per purchaser</h3>
             <div class="chart-sub">Each component × MAS factor = monthly contribution. Weighted age (IWAA) drives max-LTV tenure cap.</div>
           </div>
@@ -2187,7 +2382,7 @@ body::after {
           <div class="console-card card-pad" id="timeline-card" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
               <div>
-                <span class="sec-tag">Timeline</span>
+                <span class="sec-tag"><span class="sec-num">03</span>Timeline</span>
                 <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;" id="timeline-title">Your purchase timeline</h3>
                 <div class="chart-sub" id="timeline-sub">Step-by-step from start to keys.</div>
               </div>
@@ -2201,10 +2396,10 @@ body::after {
           </div>
 
           <!-- Bank rate comparison -->
-          <div class="console-card card-pad">
+          <div class="console-card card-pad" id="sec-rates">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
               <div>
-                <span class="sec-tag">Bank rates</span>
+                <span class="sec-tag"><span class="sec-num">04</span>Bank rates</span>
                 <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">Top packages, ranked by total cost</h3>
               </div>
               <span class="pill pass" id="bestSavingsPill"><span class="dot"></span>Save $—</span>
@@ -2270,7 +2465,7 @@ body::after {
           <div class="console-card card-pad" id="fixed-vs-floating-card" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
               <div>
-                <span class="sec-tag">Strategy</span>
+                <span class="sec-tag"><span class="sec-num">05</span>Strategy</span>
                 <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">Fixed vs Floating — head-to-head</h3>
               </div>
               <div style="font-size:11.5px; color:var(--faint); max-width:340px; text-align:right;">
@@ -2285,7 +2480,7 @@ body::after {
           <div class="console-card card-pad" id="year-by-year-card" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
               <div>
-                <span class="sec-tag">Year-by-year</span>
+                <span class="sec-tag"><span class="sec-num">06</span>Year-by-year</span>
                 <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">How your rate changes after the lock-in</h3>
                 <div class="chart-sub" id="ybr-sub">For your selected package — rate, monthly payment, and what changes when.</div>
               </div>
@@ -2310,7 +2505,7 @@ body::after {
           <div class="console-card card-pad" id="stress-card" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
               <div>
-                <span class="sec-tag">Stress test</span>
+                <span class="sec-tag"><span class="sec-num">07</span>Stress test</span>
                 <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">If rates rise — what happens to your monthly?</h3>
                 <div class="chart-sub" id="stress-sub">Same loan, same tenure — just a higher rate.</div>
               </div>
@@ -2338,7 +2533,7 @@ body::after {
           <div class="console-card card-pad" id="totalcost-card" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
               <div>
-                <span class="sec-tag">Cost horizons</span>
+                <span class="sec-tag"><span class="sec-num">08</span>Cost horizons</span>
                 <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">What you'll pay before you refinance</h3>
                 <div class="chart-sub">Most SG borrowers refi at lock-in expiry — these are realistic 2/3/5y horizons. Tenure on file: <span id="tc-tenure">—</span>y.</div>
               </div>
@@ -2386,7 +2581,7 @@ body::after {
           <div class="console-card card-pad" id="optim-card" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
               <div>
-                <span class="sec-tag">Optimisation</span>
+                <span class="sec-tag"><span class="sec-num">09</span>Optimisation</span>
                 <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;">Levers you can pull to lower your monthly or qualify for more</h3>
                 <div class="chart-sub">Each suggestion is run through the same MAS 4% stress floor.</div>
               </div>
@@ -2398,7 +2593,7 @@ body::after {
           <div class="console-card card-pad" id="pkg-detail-card" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 14px;">
               <div>
-                <span class="sec-tag">Selected package</span>
+                <span class="sec-tag"><span class="sec-num">10</span>Selected package</span>
                 <h3 class="console-display" style="font-size: 22px; margin-top: 4px; font-weight: 500;" id="pkg-detail-title">—</h3>
                 <div class="chart-sub" id="pkg-detail-sub">Full terms for the rate you've chosen above.</div>
               </div>
@@ -2434,7 +2629,7 @@ body::after {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               </div>
               <div style="flex:1;">
-                <span class="sec-tag" style="color:var(--accent-strong);">Plan ahead</span>
+                <span class="sec-tag" style="color:var(--accent-strong);"><span class="sec-num">11</span>Plan ahead</span>
                 <h3 class="console-display" style="font-size:18px; margin-top:4px; font-weight:500;" id="lockin-title">Your lock-in playbook</h3>
                 <div id="lockin-body" style="font-size:13.5px; color:var(--ink-2); line-height:1.65; margin-top:6px;"></div>
               </div>
@@ -2442,10 +2637,10 @@ body::after {
           </div>
 
           <!-- Charts row 1 -->
-          <div class="grid lg:grid-cols-2 gap-5">
+          <div class="grid lg:grid-cols-2 gap-5" id="sec-charts">
             <div class="chart-card">
               <h4>Bank rate comparison</h4>
-              <div class="chart-sub">Total cost over 2-year lock-in — lower is better.</div>
+              <div class="chart-sub">Total cost over the lock-in — labels show the premium vs the best bank.</div>
               <div class="chart-h-lg"><canvas id="chart-bank"></canvas></div>
             </div>
             <div class="chart-card">
@@ -2496,10 +2691,10 @@ body::after {
           </div>
 
           <!-- Action strip -->
-          <div class="console-card" style="background: linear-gradient(135deg, var(--accent-soft) 0%, var(--surface) 70%); padding: 22px;">
+          <div class="console-card" id="sec-next" style="background: linear-gradient(135deg, var(--accent-soft) 0%, var(--surface) 70%); padding: 22px;">
             <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap: 16px;">
               <div>
-                <div class="sec-tag" style="color: var(--accent-strong);">Next step</div>
+                <div class="sec-tag" style="color: var(--accent-strong);"><span class="sec-num">12</span>Next step</div>
                 <div class="console-display" style="font-size: 20px; margin-top: 4px; color: var(--ink);">Want us to lock in the best rate?</div>
                 <div style="color: var(--muted); font-size: 13.5px; margin-top: 2px;">Your dedicated broker will call within 24 hours — zero fees, banks pay us.</div>
               </div>
@@ -2879,7 +3074,7 @@ function showEligibilityBanner(loanAmount, eligibleCount, totalCount) {
     wrap.insertBefore(banner, wrap.firstChild);
   }
   const pct = totalCount ? Math.round((eligibleCount / totalCount) * 100) : 0;
-  banner.innerHTML = '<span><strong style="color:var(--navy-900); font-weight:700;">' + eligibleCount + '</strong> of ' + totalCount + ' packages eligible for your <strong>$' + (loanAmount||0).toLocaleString('en-SG') + '</strong> loan ' + (pct ? '(' + pct + '%)' : '') + '</span><span style="color:var(--muted); font-size:11px; letter-spacing:.04em; text-transform:uppercase;">As of ' + (RATES_DATA && RATES_DATA.asOf ? RATES_DATA.asOf : '—') + '</span>';
+  banner.innerHTML = '<span><strong style="color:var(--navy-900); font-weight:700;">' + eligibleCount + '</strong> of ' + totalCount + ' packages eligible for your <strong>$' + (loanAmount||0).toLocaleString('en-SG') + '</strong> loan ' + (pct ? '(' + pct + '%)' : '') + '</span><span style="color:var(--muted); font-size:11px; letter-spacing:.04em; text-transform:uppercase;">As of ' + formatAsOfDate((RATES_DATA && (RATES_DATA.asOfSora || (RATES_DATA.refRates && RATES_DATA.refRates.asOfSora) || RATES_DATA.generatedAt || RATES_DATA.asOf)) || Date.now()) + '</span>';
 }
 
 /**
@@ -4290,6 +4485,31 @@ function render(r) {
     showEligibilityBanner(r.inp.loan || 0, counts.eligible, counts.total);
   }
 
+  // Masthead — prepared date + rates as-of
+  const mdEl = $('rpt-date');
+  if (mdEl) mdEl.textContent = new Date().toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' });
+  const asofEl = $('rpt-asof');
+  if (asofEl) asofEl.textContent = formatAsOfDate(
+    (RATES_DATA && (RATES_DATA.asOfSora || (RATES_DATA.refRates && RATES_DATA.refRates.asOfSora) || RATES_DATA.generatedAt)) || Date.now()
+  );
+
+  // Verdict line — plain-English summary of the whole report
+  const vEl = $('v-verdict'), vSub = $('v-verdict-sub');
+  if (vEl) {
+    const fmt$ = v => '$' + fmt(Math.round(v || 0));
+    const pct1 = v => (v * 100).toFixed(1) + '%';
+    if (r.inp.mode === 'refinance' && r.refi) {
+      vEl.innerHTML = `Refinancing this loan saves you <span class="vb-hl">${fmt$(r.refi.lockInSavings)}</span> over the lock-in.`;
+      if (vSub) vSub.textContent = `Versus staying on your current rate — best of 16 banks, stress-tested at the MAS 4% floor.`;
+    } else if (!r.tdsrPass || (r.msrApplies && !r.msrPass)) {
+      vEl.innerHTML = `This loan needs adjusting — <span class="vb-hl">${r.cappedBy} at ${pct1(r.cappedBy === 'MSR' ? r.msrUsage : r.tdsrUsage)}</span> exceeds the cap.`;
+      if (vSub) vSub.textContent = `Your workable options are in the Affordability section below.`;
+    } else {
+      vEl.innerHTML = `You qualify for this <span class="vb-hl">${fmt$(r.inp.loan)}</span> loan — using ${pct1(r.tdsrUsage)} of income, well within MAS caps.`;
+      if (vSub) vSub.textContent = `Calculated to MAS rules — stress-tested at the 4% floor, ranked across 16 banks.`;
+    }
+  }
+
   // Top metrics (visible)
   $('m-best-rate').textContent = (r.bestRate * 100).toFixed(2);
   $('m-best-bank').textContent = `${r.banks[0].bank} · ${r.banks[0].pkg}`;
@@ -4348,31 +4568,54 @@ function render(r) {
     const ltvNote = r.tenureExceedsIwaa
       ? `Tenure ${r.inp.tenure}y + IWAA ${r.iwaa ? r.iwaa.toFixed(1) : '—'} > 65 → MAS allows max <strong>55% LTV</strong> at this tenure. Drop tenure to <strong>${r.tenureForFullLtv || r.fullLtvCap}y</strong> or shorter to keep <strong>75% LTV</strong>.`
       : `Tenure ${r.inp.tenure}y + IWAA ${r.iwaa ? r.iwaa.toFixed(1) : '—'} ≤ 65 → full <strong>75% LTV</strong> available.`;
-    const cardsHtml = `
-      <div style="display:grid; grid-template-columns:1fr 1fr ${r.msrApplies ? '1fr ' : ''}1fr; gap:10px;">
-        <div style="padding:14px; background:white; border:1px solid var(--border); border-top:2px solid var(--navy-900); border-radius:4px;">
-          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:700;">Max loan · TDSR 55%</div>
-          <div class="console-display-num" style="font-size:22px;">$${fmtN0(r.maxLoanTdsr)}</div>
-          <div style="font-size:11px; color:var(--muted); margin-top:6px; padding-top:6px; border-top:1px solid var(--border);">@ ${r.inp.tenure}y · MAS 4% stress</div>
-        </div>
-        ${r.msrApplies ? `
-        <div style="padding:14px; background:white; border:1px solid var(--border); border-top:2px solid var(--navy-900); border-radius:4px;">
-          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:700;">Max loan · MSR 30%</div>
-          <div class="console-display-num" style="font-size:22px;">$${fmtN0(r.maxLoanMsr)}</div>
-          <div style="font-size:11px; color:var(--muted); margin-top:6px; padding-top:6px; border-top:1px solid var(--border);">HDB / EC mortgage cap</div>
-        </div>` : ''}
-        <div style="padding:14px; background:white; border:1px solid var(--border); border-top:2px solid var(--gold-500); border-radius:4px;">
-          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:700;">Max loan · 75% LTV</div>
-          <div class="console-display-num" style="font-size:22px; color:${ltvAvail >= 75 ? '#0B1C3A' : '#94A3B8'};">$${fmtN0(r.maxLoanAt75Ltv)}</div>
-          <div style="font-size:11px; color:var(--muted); margin-top:6px; padding-top:6px; border-top:1px solid var(--border);">${ltvAvail >= 75 ? 'Standard MAS cap' : 'Need tenure ≤ ' + (r.tenureForFullLtv || r.fullLtvCap) + 'y'}</div>
-        </div>
-        <div style="padding:14px; background:white; border:1px solid var(--border); border-top:2px solid var(--gold-500); border-radius:4px;">
-          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:700;">Max loan · 55% LTV</div>
-          <div class="console-display-num" style="font-size:22px;">$${fmtN0(r.maxLoanAt55Ltv)}</div>
-          <div style="font-size:11px; color:var(--muted); margin-top:6px; padding-top:6px; border-top:1px solid var(--border);">If tenure > IWAA ceiling</div>
-        </div>
+    // ── v2: dominant max-loan number + cap meter, caps subordinate ──
+    const relevantLtvCap = ltvAvail >= 75 ? r.maxLoanAt75Ltv : r.maxLoanAt55Ltv;
+    const capList = [
+      { key: 'TDSR', label: 'TDSR 55%', sub: `@ ${r.inp.tenure}y · MAS 4% stress`, val: r.maxLoanTdsr },
+      ...(r.msrApplies ? [{ key: 'MSR', label: 'MSR 30%', sub: 'HDB / EC mortgage cap', val: r.maxLoanMsr }] : []),
+      { key: 'LTV', label: ltvAvail >= 75 ? 'LTV 75%' : 'LTV 55%',
+        sub: ltvAvail >= 75 ? 'Standard MAS cap' : 'Tenure > IWAA ceiling', val: relevantLtvCap },
+    ];
+    // binding = the cap that actually bites (argmin), shown as the headline number
+    const minCap = capList.reduce((m, c) => (c.val || Infinity) < (m.val || Infinity) ? c : m, capList[0]);
+    const bindingKey = minCap.key;
+    const maxAfford = minCap.val || 0;
+    const scale = Math.max(...capList.map(c => c.val || 0), r.inp.loan || 0) * 1.06 || 1;
+    const pctOf = v => Math.min(100, Math.max(0, (v || 0) / scale * 100));
+    // caps below the bar (staggered on collision); requested loan above the bar
+    const marks = capList.map(c => ({ ...c, pct: pctOf(c.val) })).sort((a, b) => a.pct - b.pct);
+    let lastPct = -20;
+    marks.forEach(m => { m.row = (m.pct - lastPct < 12) ? 1 : 0; lastPct = m.row ? lastPct : m.pct; });
+    const lblPct = v => Math.min(93, Math.max(7, v)); // keep labels inside the card
+    const meterHtml = `
+      <div class="cap-labels" style="height:24px;">
+        <div class="cl" style="left:${lblPct(pctOf(r.inp.loan))}%; top:0; color:var(--navy-900);"><b class="num">$${fmtN0(r.inp.loan)} · your loan</b></div>
       </div>
-      <div style="font-size:12.5px; color:var(--ink-2); line-height:1.6; padding:10px 14px; background:rgba(196,151,59,.08); border-left:3px solid var(--gold-500); border-radius:4px;">
+      <div class="cap-meter" style="margin-top:2px;">
+        <div class="cm-fill" style="width:${pctOf(r.inp.loan)}%;"></div>
+        ${marks.map(m => `<div class="cm-mark${m.key === bindingKey ? ' binding' : ''}" style="left:${m.pct}%;"></div>`).join('')}
+      </div>
+      <div class="cap-labels" style="height:${marks.some(m => m.row) ? 74 : 34}px;">
+        ${marks.map(m => `<div class="cl${m.key === bindingKey ? ' binding' : ''}" style="left:${lblPct(m.pct)}%; top:${m.row ? 42 : 4}px;"><b class="num">$${fmtN0(m.val)}</b>${m.label}</div>`).join('')}
+      </div>`;
+    const cardsHtml = `
+      <div class="aff-hero">
+        <div>
+          <div style="font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:6px;">Your maximum loan</div>
+          <div class="ah-num num"><span class="ah-cur">$</span>${fmtN0(maxAfford)}</div>
+        </div>
+        <div class="ah-side">The lowest of the MAS caps below — set by <b>${minCap.label}</b>. Every cap is computed on your actual numbers; the bar shows where your requested loan sits.</div>
+      </div>
+      ${meterHtml}
+      <div class="aff-caps">
+        ${capList.map(c => `
+        <div class="aff-cap${c.key === bindingKey ? ' binding' : ''}">
+          ${c.label}<span class="ac-chip">binding</span>
+          <b class="num">$${fmtN0(c.val)}</b>
+          ${c.sub}
+        </div>`).join('')}
+      </div>
+      <div style="font-size:12.5px; color:var(--ink-2); line-height:1.6; padding:10px 14px; background:rgba(196,151,59,.08); border-left:3px solid var(--gold-500); border-radius:4px; margin-top:14px;">
         <strong style="color:var(--navy-900); font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:10.5px;">LTV Tradeoff</strong> &nbsp;${ltvNote}
       </div>
     `;
@@ -4380,7 +4623,7 @@ function render(r) {
       affordCard.style.borderColor = 'rgba(220,38,38,.35)';
       affordCard.style.background = 'rgba(220,38,38,.04)';
       affordTag.style.color = '#DC2626';
-      affordTag.textContent = `${r.cappedBy} shortfall`;
+      affordTag.innerHTML = `<span class="sec-num">01</span>${r.cappedBy} shortfall`;
       const failPct = ((r.cappedBy === 'MSR' ? r.msrUsage : r.tdsrUsage) * 100).toFixed(1);
       const cap = r.cappedBy === 'MSR' ? '30%' : '55%';
       affordTitle.textContent = `${r.cappedBy} ${failPct}% — exceeds ${cap} cap`;
@@ -4397,7 +4640,7 @@ function render(r) {
       affordCard.style.borderColor = 'rgba(5,150,105,.25)';
       affordCard.style.background = 'rgba(5,150,105,.04)';
       affordTag.style.color = '#059669';
-      affordTag.textContent = 'Affordability headroom';
+      affordTag.innerHTML = '<span class="sec-num">01</span>Affordability headroom';
       affordTitle.textContent = `You qualify — binding constraint: ${r.bindingConstraint}`;
       const headroomLoan = Math.max(0, r.maxLoanAffordable - r.inp.loan);
       const headroomLine = headroomLoan > 0
@@ -4420,6 +4663,59 @@ function render(r) {
 
   // Charts
   drawCharts(r);
+
+  // Section index — scroll-spy
+  initSecNav();
+}
+
+/* Sticky section-nav scroll-spy (idempotent).
+   position:sticky is dead here (overflow-x:hidden ancestors), so fix in JS. */
+let SECNAV_WIRED = false;
+function initSecNav() {
+  const nav = $('rpt-secnav');
+  if (!nav || SECNAV_WIRED) return;
+  SECNAV_WIRED = true;
+  const links = [...nav.querySelectorAll('a[data-sec]')];
+  const setActive = id => links.forEach(a => a.classList.toggle('active', a.dataset.sec === id));
+  const targets = links.map(a => document.getElementById(a.dataset.sec)).filter(Boolean);
+  // placeholder keeps layout height when the nav goes fixed
+  const ph = document.createElement('div');
+  ph.style.display = 'none';
+  nav.parentNode.insertBefore(ph, nav.nextSibling);
+  const FIXED_TOP = 104;
+  const spyAndPin = () => {
+    // pin while the report (from nav's natural spot to end of gate) is in view
+    const rw = $('reportWrap');
+    const navHome = ph.style.display === 'none' ? nav : ph; // element sitting at the natural slot
+    const homeTop = navHome.getBoundingClientRect().top;
+    const rwBottom = rw.getBoundingClientRect().bottom;
+    const shouldFix = homeTop <= FIXED_TOP && rwBottom > FIXED_TOP + 160;
+    if (shouldFix && !nav.classList.contains('is-fixed')) {
+      const r = nav.getBoundingClientRect();
+      nav.style.setProperty('--secnav-left', r.left + 'px');
+      nav.style.setProperty('--secnav-w', r.width + 'px');
+      ph.style.height = r.height + 'px';
+      ph.style.display = 'block';
+      nav.classList.add('is-fixed');
+    } else if (!shouldFix && nav.classList.contains('is-fixed')) {
+      nav.classList.remove('is-fixed');
+      ph.style.display = 'none';
+    }
+    let current = targets[0] && targets[0].id;
+    for (const t of targets) {
+      if (t.getBoundingClientRect().top - 190 <= 0) current = t.id;
+    }
+    if (current) setActive(current);
+  };
+  window.addEventListener('scroll', spyAndPin, { passive: true });
+  window.addEventListener('resize', () => {
+    if (nav.classList.contains('is-fixed')) {
+      const r = ph.getBoundingClientRect();
+      nav.style.setProperty('--secnav-left', r.left + 'px');
+      nav.style.setProperty('--secnav-w', r.width + 'px');
+    }
+  });
+  spyAndPin();
 }
 
 /* Per-purchaser income matrix (Vasu-style) */
@@ -4583,15 +4879,22 @@ const CHART_COLORS = {
 };
 const CHART_FONT = { family: 'DM Sans', size: 11 };
 
-if (typeof ChartDataLabels !== 'undefined') {
+/* Chart.js + datalabels load via deferred CDN scripts, so registration must be
+   lazy — at parse time ChartDataLabels doesn't exist yet and a top-level check
+   silently skips registration (= no labels on any chart). */
+let DATALABELS_REGISTERED = false;
+function ensureDatalabels() {
+  if (DATALABELS_REGISTERED || typeof ChartDataLabels === 'undefined' || typeof Chart === 'undefined') return;
   Chart.register(ChartDataLabels);
   Chart.defaults.set('plugins.datalabels', { display: false });
+  DATALABELS_REGISTERED = true;
 }
 
 /* ============ DRAW CHARTS ============ */
 function destroyChart(id) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } }
 
 function drawCharts(r) {
+  ensureDatalabels();
   drawBankBar(r);
   drawComposition(r);
   drawGauge(r);
@@ -4686,13 +4989,19 @@ function drawBankBar(r) {
   destroyChart('chart-bank');
   const top = r.banks.slice(0, 6);
   const ctx = $('chart-bank');
+  // Costs cluster within a few % of each other — start the axis just below the
+  // cheapest so the differences are actually visible, and label the delta vs best.
+  const costs = top.map(b => Math.round(b.lockInCost));
+  const best = Math.min(...costs);
+  const spread = Math.max(...costs) - best;
+  const xMin = Math.max(0, Math.floor((best - Math.max(spread * 0.35, best * 0.004)) / 500) * 500);
   charts['chart-bank'] = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: top.map(b => b.bank),
       datasets: [{
         label: 'Total cost (lock-in)',
-        data: top.map(b => Math.round(b.lockInCost)),
+        data: costs,
         backgroundColor: top.map((_, i) => i === 0 ? CHART_COLORS.bars[0] : CHART_COLORS.bars[i+1] || '#94A3B8'),
         borderRadius: 6,
         maxBarThickness: 38,
@@ -4704,16 +5013,16 @@ function drawBankBar(r) {
         legend: { display: false },
         tooltip: { callbacks: { label: c => '$' + fmt(c.parsed.x) + ' over ' + LOCK_IN_YEARS + 'y lock-in' } },
         datalabels: {
-          display: true, anchor: 'end', align: 'end',
-          font: { ...CHART_FONT, weight: '600' }, color: CHART_COLORS.ink,
-          formatter: v => '$' + fmt(Math.round(v / 1000)) + 'k',
+          display: true, anchor: 'end', align: 'start', offset: 8, clamp: true,
+          font: { ...CHART_FONT, weight: '700', size: 11 }, color: '#FFFFFF',
+          formatter: v => v === best ? 'BEST · $' + fmt(v) : '+$' + fmt(v - best) + ' vs best',
         },
       },
       scales: {
-        x: { grid: { color: CHART_COLORS.border }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint, callback: v => '$' + (v/1000).toFixed(0) + 'k' } },
+        x: { min: xMin, grid: { color: CHART_COLORS.border }, ticks: { font: CHART_FONT, color: CHART_COLORS.faint, callback: v => '$' + (v/1000).toFixed(1) + 'k' } },
         y: { grid: { display: false }, ticks: { font: { ...CHART_FONT, weight: '600' }, color: CHART_COLORS.ink } },
       },
-      layout: { padding: { right: 50 } },
+      layout: { padding: { right: 64 } },
     }
   });
 }
