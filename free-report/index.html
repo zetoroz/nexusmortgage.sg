@@ -5334,7 +5334,7 @@ function _showPdfBuildOverlay() {
     el.setAttribute('role', 'status');
     el.setAttribute('aria-live', 'polite');
     el.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(11,28,58,.86);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;font-family:system-ui,-apple-system,sans-serif;color:#FAF7F2;';
-    el.innerHTML = '<div style="width:42px;height:42px;border:3px solid rgba(196,151,59,.3);border-top-color:#C4973B;border-radius:50%;animation:_pdfspin 0.9s linear infinite"></div><div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#C4973B;font-weight:600">Building your report</div><div id="pdf-build-sub" style="font-size:12px;color:rgba(250,247,242,.7);max-width:280px;text-align:center;line-height:1.5">Compiling 9-page mortgage analysis &mdash; this takes about 5 seconds.</div><style>@keyframes _pdfspin{to{transform:rotate(360deg)}}</style>';
+    el.innerHTML = '<div style="width:42px;height:42px;border:3px solid rgba(196,151,59,.3);border-top-color:#C4973B;border-radius:50%;animation:_pdfspin 0.9s linear infinite"></div><div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#C4973B;font-weight:600">Building your report</div><div id="pdf-build-sub" style="font-size:12px;color:rgba(250,247,242,.7);max-width:280px;text-align:center;line-height:1.5">Compiling your mortgage analysis &mdash; this takes about 5 seconds.</div><style>@keyframes _pdfspin{to{transform:rotate(360deg)}}</style>';
     document.body.appendChild(el);
   } else {
     el.style.display = 'flex';
@@ -5425,12 +5425,13 @@ async function buildReportPdf(r, lead) {
     // Wordmark
     doc.setFont('times', 'normal'); doc.setFontSize(11); setTxt(CREAM);
     doc.text('Nexus', M + 2, 10);
-    setTxt(GOLD); doc.text('.', M + 16, 10);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(5.5); setTxt(GOLD);
+    doc.text('M O R T G A G E', M + 15.5, 9.8);
 
     // Section label
     if (section) {
       doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt([160, 170, 190]);
-      doc.text(section.toUpperCase(), M + 22, 10);
+      doc.text(section.toUpperCase(), M + 40, 10);
     }
 
     // Page number placeholder — final "PAGE X OF N" stamped in two-pass after rendering.
@@ -5738,7 +5739,7 @@ async function buildReportPdf(r, lead) {
 
   // ─── PRE-COMPUTE ───────────────────────────────────────────────────────────
   const isRefi   = r.inp.mode === 'refinance';
-  const sel      = r.banks[selectedRateIdx] || r.banks[0];
+  const sel      = r.banks[r._selIdx != null ? r._selIdx : selectedRateIdx] || r.banks[0];
   const monthly  = sel.monthly;
   const price    = r.inp.price || (isRefi ? r.inp.loan : 0);
   const tdsrFail = !r.tdsrPass || (r.msrApplies && !r.msrPass);
@@ -5777,7 +5778,8 @@ async function buildReportPdf(r, lead) {
   // Wordmark
   doc.setFont('times', 'normal'); doc.setFontSize(30); setTxt(CREAM);
   doc.text('Nexus', M, 25);
-  setTxt(GOLD); doc.text('.', M + 35, 25);
+  doc.setFont('times', 'italic'); doc.setFontSize(30); setTxt(GOLD);
+  doc.text('Mortgage', M + 37, 25);
   doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt([160, 170, 195]);
   doc.text('SINGAPORE MORTGAGE SPECIALISTS', M, 31);
 
@@ -5986,21 +5988,8 @@ async function buildReportPdf(r, lead) {
     y = pageChrome(_tlVariant.title);
     y = sectionHead(y, 'Timeline', _tlVariant.title, _tlVariant.sub + '  ·  Typical end-to-end: ' + _tlVariant.total + '.');
 
-    // Summary table: # | Step | Duration | Cumulative
-    const _tlRows = _tlVariant.steps.map(s => ({
-      cells: [
-        { text: s.n, font: 'bold', color: GOLD },
-        { text: s.label, font: 'bold' },
-        { text: s.dur },
-        { text: s.cum, color: GOLD },
-      ]
-    }));
-    y = table(['#', 'Step', 'Duration', 'Cumulative'],
-      _tlRows,
-      { y, widths: [10, CW - 80, 35, 35], rowH: 6.5, aligns: ['left', 'left', 'right', 'right'] });
-    y += 4;
-
     // Per-step detail blocks (alternating tint, gold accent stripe, with note line)
+    // Duration + cumulative ride on the right of each block — no separate summary table.
     _tlVariant.steps.forEach((s, i) => {
       const tH = 13;
       // Page-break guard
@@ -6011,8 +6000,12 @@ async function buildReportPdf(r, lead) {
       doc.text(s.n, M + 3.5, y + 5);
       doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); setTxt(INK);
       doc.text(s.label, M + 9, y + 5);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
+      doc.text(s.dur, M + CW - 3, y + 5, { align: 'right' });
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(6.5); setTxt(MUTED);
+      doc.text(s.cum, M + CW - 3, y + 10, { align: 'right' });
       doc.setFont('helvetica', 'normal'); doc.setFontSize(7); setTxt(INK_2);
-      const _nLines = doc.splitTextToSize(s.note, CW - 14);
+      const _nLines = doc.splitTextToSize(s.note, CW - 50);
       doc.text(_nLines[0] || '', M + 9, y + 10);
       y += tH;
     });
@@ -6096,17 +6089,21 @@ async function buildReportPdf(r, lead) {
     'The cheapest packages for your loan tier.',
     'Ranked by total cost over the lock-in period (typically 2 years). Highlighted row = your selected package. Rates as of ' + dateStr + '.');
 
-  const top8 = r.banks.slice(0, 8);
-  const minRate = Math.min(...top8.map(b => b.rate));
-  const maxRate = Math.max(...top8.map(b => b.rate));
-  const rateSpread = (maxRate - minRate) || 0.0001;
+  // Rank by what the subhead promises: total cost over the lock-in. Selection is
+  // matched by object identity — index-based matching breaks when banks is reordered.
+  const ranked = r.banks.slice().sort((a, b) => a.lockInCost - b.lockInCost);
+  const top8 = ranked.slice(0, 8);
+  if (!top8.includes(sel)) top8.push(sel); // selected always visible, even outside top 8
+  const minCost = top8[0].lockInCost;
+  const maxCost = Math.max(...top8.map(b => b.lockInCost));
+  const costSpread = (maxCost - minCost) || 1;
   const barColX = 10 + 22 + 30 + 14 + 18 + 1; // 95 — matches widths below
   const barColW = 22;
 
   const rateRows = top8.map((b, i) => {
-    const isSelected = b._origIdx === selectedRateIdx || i === selectedRateIdx;
+    const isSelected = b === sel;
     const isBest = i === 0;
-    const sprFrac = 1 - (b.rate - minRate) / rateSpread;
+    const sprFrac = 1 - (b.lockInCost - minCost) / costSpread;
     return {
       cells: [
         pad2(i + 1),
@@ -6138,12 +6135,21 @@ async function buildReportPdf(r, lead) {
 
   // Savings analysis — dark tiles
   if (top8.length >= 2) {
-    y = eyebrow(y, 'Savings analysis');
+    y = eyebrow(y, 'Your selection vs the market');
     const avgCost = top8.reduce((s, b) => s + b.lockInCost, 0) / top8.length;
+    const cheapestAlt = top8.find(b => b !== sel) || sel;
+    const worst = ranked[ranked.length - 1];
+    const sgn$ = v => (v < 0 ? '- ' : '') + fmt$(Math.abs(Math.round(v))); // ASCII minus — U+2212 is outside WinAnsi, renders as a quote in jsPDF Helvetica
+    const col = v => v >= 0 ? [100, 210, 160] : [255, 140, 130];
+    const dCheap = sel === top8[0] ? (cheapestAlt.lockInCost - sel.lockInCost) : (top8[0].lockInCost - sel.lockInCost);
+    const dAvg   = avgCost - sel.lockInCost;
+    const dWorst = worst.lockInCost - sel.lockInCost;
     y = statGridDark(y, [
-      { label: 'Vs next cheapest', value: fmt$(r.savingsVsSecond || 0), sub: 'Lock-in saving', color: [100, 210, 160] },
-      { label: 'Vs top-' + top8.length + ' avg.', value: fmt$(Math.max(0, avgCost - top8[0].lockInCost)), sub: 'Lock-in saving', color: [100, 210, 160] },
-      { label: 'Vs most expensive', value: fmt$(Math.max(0, top8[top8.length - 1].lockInCost - top8[0].lockInCost)), sub: 'Lock-in saving', color: [100, 210, 160] },
+      sel === top8[0]
+        ? { label: 'Vs next cheapest', value: sgn$(dCheap), sub: 'You hold the cheapest package', color: col(dCheap) }
+        : { label: 'Vs cheapest', value: sgn$(dCheap), sub: dCheap < 0 ? 'Premium over cheapest' : 'Lock-in saving', color: col(dCheap) },
+      { label: 'Vs top-' + top8.length + ' avg.', value: sgn$(dAvg), sub: dAvg >= 0 ? 'Cheaper than average' : 'Above average', color: col(dAvg) },
+      { label: 'Vs most expensive', value: sgn$(dWorst), sub: 'Lock-in saving', color: col(dWorst) },
     ]);
   }
 
@@ -6245,9 +6251,9 @@ async function buildReportPdf(r, lead) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // PAGE 6 — STRESS TEST + COST HORIZONS
+  // STRESS TEST — continues on the selected-package page (fixed content, always fits)
   // ═══════════════════════════════════════════════════════════════════════════
-  y = pageChrome('Stress Test · Cost Horizons');
+  y += 6;
   y = sectionHead(y, 'Stress test',
     'If rates rise — what your monthly looks like.',
     'Same loan, same tenure — just a higher rate. MAS already stress-tests at 4% for affordability; we model up to 6% so you can see your personal headroom.');
@@ -6281,7 +6287,8 @@ async function buildReportPdf(r, lead) {
     stressRows, { y, widths: [50, 22, 28, 30, 28, 22], rowH: 6 });
   y += 9;
 
-  // Cost horizons
+  // Cost horizons — new page; upfront costs follow on the same page
+  y = pageChrome('Cost Horizons · Upfront Costs');
   y = sectionHead(y, 'Cost horizons',
     'What you\'ll pay before you refinance.',
     'Most SG borrowers refi at lock-in expiry. Realistic 2/3/5y horizons — not full ' + r.inp.tenure + 'y. Tenure stays as input; this just caps the cost analysis.');
@@ -6318,7 +6325,7 @@ async function buildReportPdf(r, lead) {
   // PAGE 7 — UPFRONT COSTS & FUNDS  (or Refi Comparison)
   // ═══════════════════════════════════════════════════════════════════════════
   if (!isRefi) {
-    y = pageChrome('Upfront Costs · Funds');
+    y += 10;
     y = sectionHead(y, 'Upfront costs',
       'What you need at completion.',
       'Calculated using IRAS BSD/ABSD rates effective 27 Apr 2023 and MAS LTV rules.');
@@ -6358,6 +6365,7 @@ async function buildReportPdf(r, lead) {
     y += 4;
 
     if (cpfOA > 0 || cashOnHand > 0) {
+      if (y + 78 > H - 25) y = pageChrome('Funds Position'); // ledger won't fit — break
       y = sectionHead(y, 'Funds position',
         totalShortfall === 0 ? 'You\'re fully covered.' : 'Shortfall of ' + fmt$(totalShortfall) + '.',
         'Based on the CPF OA & cash on hand you provided.');
@@ -6547,14 +6555,7 @@ async function buildReportPdf(r, lead) {
   // Renumber sequentially so skipped levers don't leave gaps/duplicates (e.g. HDB skips the stretch-tenure lever).
   tips.forEach((t, i) => { t.n = pad2(i + 1); });
 
-  // Tips table summary
-  const tipRows = tips.slice(0, 6).map(t => ({
-    cells: [{ text: t.n, font: 'bold' }, { text: t.title, font: 'bold' }, { text: t.impact, color: GOLD }],
-  }));
-  y = table(['#', 'Lever', 'Impact'], tipRows, { y, widths: [10, CW - 50, 40], rowH: 6.5, aligns: ['left', 'left', 'right'] });
-  y += 4;
-
-  // Detail body for each tip — alternating light/white bg
+  // Lever blocks — title + impact on the right, body below (no duplicate summary table)
   tips.slice(0, 6).forEach((t, i) => {
     const tH = 14;
     if (i % 2 === 0) { setFill(SURFACE); doc.rect(M, y, CW, tH, 'F'); }
@@ -6563,6 +6564,8 @@ async function buildReportPdf(r, lead) {
     doc.text(t.n, M + 3.5, y + 5.5);
     doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); setTxt(INK);
     doc.text(t.title, M + 9, y + 5.5);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); setTxt(GOLD);
+    doc.text(t.impact, M + CW - 3, y + 5.5, { align: 'right' });
     doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); setTxt(INK_2);
     const bLines = doc.splitTextToSize(t.body, CW - 12);
     doc.text(bLines[0] || '', M + 9, y + 10);
@@ -6612,14 +6615,14 @@ async function buildReportPdf(r, lead) {
     // Watermark — ghosted "INDICATIVE" via GState opacity so it never obscures the data.
     try {
       doc.saveGraphicsState();
-      doc.setGState(new doc.GState({ opacity: 0.05 }));
+      doc.setGState(new doc.GState({ opacity: 0.03 }));
       setTxt([90, 110, 140]);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(46);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(30);
       doc.text('INDICATIVE', W / 2, H / 2 + 5, { align: 'center', angle: 30 });
       doc.restoreGraphicsState();
     } catch (e) {
-      setTxt([248, 250, 252]);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(46);
+      setTxt([243, 245, 248]);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(30);
       doc.text('INDICATIVE', W / 2, H / 2 + 5, { align: 'center', angle: 30 });
     }
   }
@@ -6800,6 +6803,7 @@ if (sendReportBtn) {
       const banksReordered = [chosen, ...lastResult.banks.filter((_, i) => i !== selectedRateIdx)];
       const resultForPdf = Object.assign({}, lastResult, {
         banks: banksReordered,
+        _selIdx: 0, // chosen moved to front — buildReportPdf must not reuse the old index
         bestRate: chosen.rate / 100,
         monthlyBest: chosen.monthly,
       });
