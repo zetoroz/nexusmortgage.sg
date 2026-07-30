@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Wed, 29 Jul 2026 04:14:59 GMT</lastBuildDate>
+<lastBuildDate>Thu, 30 Jul 2026 04:09:29 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
-<title>Current Compounded SORA — 1M 1.21% | 3M 1.16%</title>
+<title>Current Compounded SORA — 1M 1.20% | 3M 1.15%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-current-2026-07-28</guid>
-<pubDate>Wed, 29 Jul 2026 04:14:59 GMT</pubDate>
-<description>Latest published Compounded SORA values per MAS. As of 2026-07-28.</description>
+<guid isPermaLink="false">nexus-current-2026-07-29</guid>
+<pubDate>Thu, 30 Jul 2026 04:09:29 GMT</pubDate>
+<description>Latest published Compounded SORA values per MAS. As of 2026-07-29.</description>
+</item>
+<item>
+<title>SORA update: sora1m 1.2077→1.1957, sora3m 1.1592→1.1548</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Thu, 30 Jul 2026 04:09:28 GMT</guid>
+<pubDate>Thu, 30 Jul 2026 04:09:28 GMT</pubDate>
+<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.2077,&quot;to&quot;:1.1957,&quot;delta&quot;:-0.012},&quot;sora3m&quot;:{&quot;from&quot;:1.1592,&quot;to&quot;:1.1548,&quot;delta&quot;:-0.004}}</description>
 </item>
 <item>
 <title>SORA update: sora1m 1.2239→1.2077, sora3m 1.163→1.1592</title>
@@ -217,13 +224,6 @@
 <guid isPermaLink="false">nexus-rates-Thu, 11 Jun 2026 05:54:04 GMT</guid>
 <pubDate>Thu, 11 Jun 2026 05:54:04 GMT</pubDate>
 <description>{&quot;sora1m&quot;:{&quot;from&quot;:1.069,&quot;to&quot;:1.0495,&quot;delta&quot;:-0.019},&quot;sora3m&quot;:{&quot;from&quot;:1.0641,&quot;to&quot;:1.0739,&quot;delta&quot;:0.01}}</description>
-</item>
-<item>
-<title>SORA update: sora1m 1.0992→1.069, sora3m 1.0579→1.0641</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Mon, 08 Jun 2026 05:55:23 GMT</guid>
-<pubDate>Mon, 08 Jun 2026 05:55:23 GMT</pubDate>
-<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.0992,&quot;to&quot;:1.069,&quot;delta&quot;:-0.03},&quot;sora3m&quot;:{&quot;from&quot;:1.0579,&quot;to&quot;:1.0641,&quot;delta&quot;:0.006}}</description>
 </item>
 </channel>
 </rss>
