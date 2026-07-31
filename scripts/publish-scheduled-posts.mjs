@@ -63,6 +63,17 @@ for (const a of articles) {
   a.status = "live";
   published.push(a);
 
+  // held pages carry a noindex meta until publish day — strip it
+  const pagePath = p("blog/" + a.slug + "/index.html");
+  try {
+    let page = readFileSync(pagePath, "utf8");
+    const stripped = page.replace(/^\s*<meta name="robots" content="noindex[^"]*">\s*\n/m, "");
+    if (stripped !== page && !DRY) writeFileSync(pagePath, stripped);
+    if (stripped !== page) console.log("  noindex stripped: " + a.slug);
+  } catch (e) {
+    console.error("  WARN could not read page for noindex strip: " + a.slug + " (" + e.message + ")");
+  }
+
   const url = "https://nexusmortgage.sg" + a.url;
   if (!sitemap.includes(url + "</loc>")) {
     const block = `${SITEMAP_MARKER}

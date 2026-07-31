@@ -43,6 +43,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add blog/articles.json blog/index.html sitemap.xml llms.txt
+          for s in ${{ steps.pub.outputs.slugs }}; do git add "blog/$s/index.html"; done
           git commit -m "blog: publish scheduled post(s): ${{ steps.pub.outputs.slugs }}"
           git pull --rebase origin main
           git push origin main
