@@ -164,10 +164,10 @@ BODY = r'''
   <p>If you still think of your loan as a SIBOR loan, it is worth ten minutes of checking. A converted loan carries a margin set under the original contract, potentially years ago, in a very different rate environment.</p>
 
   <ol>
-    <li><strong>Ask your bank three things in writing:</strong> what benchmark the loan is pegged to now, what the current effective rate is, and whether any lock-in or clawback still applies.</li>
-    <li><strong>Separate the benchmark from the spread.</strong> The benchmark is market-set and identical for everyone. The spread is contractual and is the part that varies between borrowers and lenders.</li>
-    <li><strong>Compare against current packages.</strong> Check your effective rate against <a href="/mortgage-rates/">today's rates across the banks</a>. Conversion protected continuity; it did not keep you competitive.</li>
-    <li><strong>Check whether repricing or refinancing wins.</strong> A legacy spread is a common reason a loan quietly drifts above market. Our guides on <a href="/blog/when-to-refinance-singapore/">when to refinance</a> and <a href="/blog/reprice-vs-refinance-singapore/">repricing versus refinancing</a> set out the trade-off, including break costs and notice periods.</li>
+    <li>Ask your bank three things in writing: what benchmark the loan is pegged to now, what the current effective rate is, and whether any lock-in or clawback still applies.</li>
+    <li>Separate the benchmark from the spread. The benchmark is market-set and identical for everyone. The spread is contractual, and it is the part that varies between borrowers and lenders.</li>
+    <li>Check your effective rate against <a href="/mortgage-rates/">today's rates across the banks</a>. Conversion protected continuity. It did not keep you competitive.</li>
+    <li>Work out whether repricing or refinancing wins. A legacy spread is a common reason a loan quietly drifts above market. Our guides on <a href="/blog/when-to-refinance-singapore/">when to refinance</a> and <a href="/blog/reprice-vs-refinance-singapore/">repricing versus refinancing</a> set out the trade-off, including break costs and notice periods.</li>
   </ol>
 
   <p>Being on a converted loan is not itself a problem. Being on a converted loan with a spread nobody has looked at since it was written usually is.</p>
