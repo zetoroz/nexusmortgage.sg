@@ -93,8 +93,11 @@ function doPost(e) {
       '', '', '', '', '', '', '', // N..T — owned by the Nexus Lead Desk CRM (Lead ID/Owner/Priority/Status/Follow-up/Notes/Updated). Leave blank.
       trk('gclid'),              // U GCLID — for Google offline-conversion import on funded loans
       join([trk('gbraid'), trk('wbraid'), trk('msclkid'), trk('fbclid')]),  // V Other click IDs
-      join([trk('utmSource'), trk('utmMedium'), trk('utmCampaign'), trk('utmTerm'), trk('utmContent')]) // W UTM
+      join([trk('utmSource'), trk('utmMedium'), trk('utmCampaign'), trk('utmTerm'), trk('utmContent')]), // W UTM
+      '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', // X..AO — free-report calc block, blank for plain forms
+      data.message || data.notes || '' // AP Message — homepage/contact "notes" field
     ]);
+    try { ensureExtraHeaders(sheet); } catch (hErr) { Logger.log('Headers error: ' + hErr); }
 
     // Instant new-lead alert to Dan (best-effort — never block lead capture).
     try { notifyNewLead(data, lead); } catch (mailErr) { Logger.log('Notify error: ' + mailErr); }
@@ -125,7 +128,8 @@ var FR_HEADERS = [
   'Mode', 'Property Price', 'Tenure (yrs)', 'Income (effective)', 'Borrower Incomes',
   'Borrower Ages', 'Monthly Debts', 'CPF OA', 'Cash on Hand', 'Best Rate', 'Best Bank',
   'Best Package', 'Monthly Payment', 'TDSR Usage', 'Max Loan', 'Capped By',
-  'Selected Package', 'Report Emailed At'
+  'Selected Package', 'Report Emailed At',
+  'Message' // AP — homepage/contact "notes" field (plain-form rows leave X..AO blank)
 ];
 
 function handleFreeReport(sheet, data, lead, trk, join) {
@@ -145,7 +149,7 @@ function handleFreeReport(sheet, data, lead, trk, join) {
   data.currentRate = data.currentRate ||
     (inp.currentRate ? (inp.currentRate * 100).toFixed(2) + '%' : '');
 
-  try { ensureFreeReportHeaders(sheet); } catch (hErr) { Logger.log('FR headers error: ' + hErr); }
+  try { ensureExtraHeaders(sheet); } catch (hErr) { Logger.log('FR headers error: ' + hErr); }
 
   var emailed = false, emailError = '';
   if (stage === 'send-report') {
@@ -207,7 +211,8 @@ function appendFreeReportRow(sheet, data, lead, trk, join, inp, s, selStr, stage
     s.maxLoanAffordable || '',
     s.cappedBy || '',
     selStr,
-    stage === 'send-report' ? new Date().toISOString() : ''
+    stage === 'send-report' ? new Date().toISOString() : '',
+    '' // AP Message — free-report has no notes field
   ]);
 }
 
@@ -234,7 +239,7 @@ function updateFreeReportRow(sheet, lead, selStr) {
 }
 
 /** One-time: write X1..AO1 headers if the calc block is still headerless. */
-function ensureFreeReportHeaders(sheet) {
+function ensureExtraHeaders(sheet) {
   var probe = sheet.getRange(1, FR_COL_START).getValue();
   if (probe !== '' && probe != null) return;
   sheet.getRange(1, FR_COL_START, 1, FR_HEADERS.length).setValues([FR_HEADERS]);
@@ -353,6 +358,8 @@ function notifyNewLead(data, lead) {
   if (prop)              lines.push('🏠 ' + esc(prop));
   if (data.loanAmount)   lines.push('💰 Loan: ' + esc(data.loanAmount));
   if (data.currentRate)  lines.push('📉 Current rate: ' + esc(data.currentRate));
+  var msg = data.message || data.notes || '';
+  if (msg)               lines.push('📝 ' + esc(String(msg).slice(0, 300)));
   // Free-report extras: what the calculator showed them / what they picked.
   var s = data.summary || {};
   if (data.selected && data.selected.bank) {

@@ -838,11 +838,26 @@
       errBox.style.display = 'none';
 
       try {
-        const data = new FormData(form);
-        const res = await fetch('https://hook.us2.make.com/hunu1e89qu3y2ilij55jq7vy2kznl9uu', {
+        const f = Object.fromEntries(new FormData(form));
+        // Shared eventId so the browser Pixel + server CAPI dedup into ONE Lead event.
+        const eventId = (self.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('lead-' + Date.now() + '-' + Math.random().toString(16).slice(2));
+        const cookie = n => { try { const m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]+)')); return m ? decodeURIComponent(m[1]) : ''; } catch (e) { return ''; } };
+        // Apps Script lead endpoint (scripts/lp-leads.gs) — sheet + CRM + Telegram + CAPI.
+        // text/plain = simple CORS request (Apps Script can't answer preflight); response readable.
+        const res = await fetch('https://script.google.com/macros/s/AKfycbyzmm8SWo-MHe3P5OCpFvSIt1TckZkEoqu5smAWTy6Ii2DE87RM14VBLw6CqqFZYSpA/exec', {
           method: 'POST',
-          body: JSON.stringify(Object.fromEntries(data)),
-          headers: { 'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            source: 'contact-page',
+            submittedAt: new Date().toISOString(),
+            stage: 'lead-capture',
+            pageUrl: location.href,
+            lead: { name: f.name || '', phone: f.phone || '', email: f.email || '' },
+            purpose: f.loan_purpose || '',
+            loanAmount: f.loan_amount || '',
+            message: f.notes || '',
+            eventId, userAgent: navigator.userAgent, fbp: cookie('_fbp'), fbc: cookie('_fbc')
+          })
         });
 
         if (res.ok) {
@@ -851,8 +866,8 @@
           document.getElementById('thankyou').scrollIntoView({ behavior: 'smooth', block: 'center' });
           if (typeof gtag === 'function') {
             gtag('event', 'generate_lead', { form_location: 'contact_page', currency: 'SGD', value: 50 });
-            if(window.fbq){ fbq('track','Lead',{ currency:'SGD', value:50 }); }
           }
+          if (window.fbq) { fbq('track', 'Lead', { currency: 'SGD', value: 50 }, { eventID: eventId }); }
         } else {
           throw new Error('Server error');
         }
