@@ -556,7 +556,7 @@
       .then(function(){
         if(typeof gtag==='function'){ gtag('event','generate_lead',{ currency:'SGD', value:50, form_location:SOURCE, purpose:sel.purpose, loan_amount:sel.loanAmount }); }
         if(window.fbq){ fbq('track','Lead',{ currency:'SGD', value:50 }, { eventID: eventId }); }
-        card.innerHTML = '<div class="done"><div class="ck"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2>Got it — thank you!</h2><p>We'll WhatsApp you the cheapest 16-bank packages shortly. Prefer to chat now? <a href="https://wa.me/6587520859" style="color:#0a7d4f;font-weight:700">Message us on WhatsApp &rarr;</a></p></div>';
+        card.innerHTML = '<div class="done"><div class="ck"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2>Got it — thank you!</h2><p>We\'ll WhatsApp you the cheapest 16-bank packages shortly. Prefer to chat now? <a href="https://wa.me/6587520859" style="color:#0a7d4f;font-weight:700">Message us on WhatsApp &rarr;</a></p></div>';
       })
       .catch(function(){ btn.disabled=false; btn.textContent='Get my free comparison →'; showToast('Something went wrong. Please WhatsApp us instead.', true); });
   });
