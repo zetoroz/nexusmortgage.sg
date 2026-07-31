@@ -6356,8 +6356,8 @@ async function buildReportPdf(r, lead) {
     const cashDp = downPayment - cpfDp;
     const cpfBsd = Math.min(bsd, cpfRem); cpfRem -= cpfBsd;
     const cashBsd = bsd - cpfBsd;
-    const cpfAbsd = Math.min(absd, cpfRem); cpfRem -= cpfAbsd;
-    const cashAbsd = absd - cpfAbsd;
+    const cpfAbsd = 0; // ABSD is CASH ONLY — CPF cannot fund it (advisor rule; remission if eligible)
+    const cashAbsd = absd;
     const cpfLegal = Math.min(legalFee, cpfRem); cpfRem -= cpfLegal;
     const cashLegal = legalFee - cpfLegal;
     const cashVal = valFee;
@@ -6367,7 +6367,7 @@ async function buildReportPdf(r, lead) {
     const upfrontRows = [
       { cells: [{ text: 'Down payment · ' + ((1 - ltvPct) * 100).toFixed(1) + '% of price', font: 'bold' }, { text: fmt$(downPayment), font: 'bold' }, '5% cash + balance', { text: fmt$(cpfDp), color: cpfDp > 0 ? GREEN_DK : MUTED }, { text: fmt$(cashDp), font: 'bold' }] },
       { cells: ['Buyer\'s Stamp Duty (BSD) · 1–6%', fmt$(bsd), 'Paid from CPF OA', { text: fmt$(cpfBsd), color: cpfBsd > 0 ? GREEN_DK : MUTED }, fmt$(cashBsd)] },
-      { cells: ['ABSD · ' + absdLbl + ' (' + buyDesc + ')', fmt$(absd), 'Paid from CPF OA', { text: fmt$(cpfAbsd), color: cpfAbsd > 0 ? GREEN_DK : MUTED }, fmt$(cashAbsd)] },
+      { cells: ['ABSD · ' + absdLbl + ' (' + buyDesc + ')', fmt$(absd), 'Cash only', { text: '—', color: MUTED }, fmt$(cashAbsd)] },
       { cells: ['Legal fees', fmt$(legalFee), 'CPF OA payable', { text: fmt$(cpfLegal), color: cpfLegal > 0 ? GREEN_DK : MUTED }, fmt$(cashLegal)] },
       { cells: ['Valuation fee', fmt$(valFee), 'Cash only', { text: '—', color: MUTED }, fmt$(cashVal)] },
       { cells: [{ text: 'Total', font: 'bold' }, { text: fmt$(upfrontTotal), font: 'bold' }, '', { text: fmt$(totalCpf), font: 'bold', color: GREEN_DK }, { text: fmt$(totalCash), font: 'bold' }], _highlight: true, _highlightColor: GOLD_TN },
