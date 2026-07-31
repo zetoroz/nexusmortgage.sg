@@ -3002,23 +3002,17 @@ body::after {
 <!-- ============ JAVASCRIPT ============ -->
 <script>
 /* ============ CONFIG ============ */
-// Primary lead endpoint — the Apps Script bound to the "Nexus — Leads" sheet
+// Lead endpoint — the Apps Script bound to the "Nexus — Leads" sheet
 // (scripts/lp-leads.gs). Appends the row, emails the PDF from danler@, fires
 // Telegram + Meta CAPI. Same /exec deployment the lean LPs post to.
+// (Make k85r scenario retired 1 Aug 2026 — this is the only wire now.)
 const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyzmm8SWo-MHe3P5OCpFvSIt1TckZkEoqu5smAWTy6Ii2DE87RM14VBLw6CqqFZYSpA/exec';
-// Legacy Make k85r scenario — kept as a best-effort secondary fire during the
-// transition. Retire the scenario (and delete this const) once the sheet flow is verified.
-const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/k85r6qpuqd3p3npd9w7xe86jyc8dl7y9';
 
-// POST the lead to the sheet endpoint (primary, awaited) and dual-fire the legacy
-// Make webhook (fire-and-forget). text/plain keeps the primary a "simple" CORS
+// POST the lead to the sheet endpoint. text/plain keeps it a "simple" CORS
 // request — Apps Script can't answer an OPTIONS preflight — and the /exec response
 // carries Access-Control-Allow-Origin:* so the JSON result IS readable.
 async function postLead(payload) {
   const body = JSON.stringify(payload);
-  if (MAKE_WEBHOOK_URL) {
-    try { fetch(MAKE_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body }).catch(() => {}); } catch (_) {}
-  }
   if (!SHEET_ENDPOINT) {
     console.log('[FREE-REPORT] No SHEET_ENDPOINT — would POST:', payload);
     await new Promise(r => setTimeout(r, 600));
