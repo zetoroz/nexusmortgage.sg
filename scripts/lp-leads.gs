@@ -68,16 +68,6 @@ function doPost(e) {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getSheetByName('Sheet1') || ss.getSheets()[0];
 
-    // GBP weekly-post draft (cloud routine) — Telegram delivery only, NO sheet row.
-    if (data.type === 'gbp-draft') {
-      var delivered = false;
-      try { sendTelegramText(String(data.text || '').slice(0, 3900)); delivered = true; }
-      catch (gbpErr) { Logger.log('GBP draft TG error: ' + gbpErr); }
-      return ContentService
-        .createTextOutput(JSON.stringify({ ok: true, delivered: delivered }))
-        .setMimeType(ContentService.MimeType.JSON);
-    }
-
     // FREE-REPORT branch — calculator page sends a much richer payload (inputs/summary/PDF).
     if (String(data.source || '').indexOf('free-report') !== -1) {
       var frResult = handleFreeReport(sheet, data, lead, trk, join);
@@ -408,24 +398,6 @@ function notifyNewLead(data, lead) {
         muteHttpExceptions: true
       });
     } catch (e) { Logger.log('Telegram send error: ' + e); }
-  });
-}
-
-/** Plain-text Telegram broadcast to the configured chat(s) — used by the GBP
- *  weekly-post routine. No parse_mode so pasted drafts can't break on < > &. */
-function sendTelegramText(text) {
-  var props = PropertiesService.getScriptProperties();
-  var token = props.getProperty('TELEGRAM_BOT_TOKEN');
-  var chats = props.getProperty('TELEGRAM_CHAT_ID');
-  if (!token || !chats || !text) return;
-  String(chats).split(',').forEach(function (chatId) {
-    chatId = chatId.trim(); if (!chatId) return;
-    UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
-      method: 'post',
-      contentType: 'application/json',
-      payload: JSON.stringify({ chat_id: chatId, text: text, disable_web_page_preview: true }),
-      muteHttpExceptions: true
-    });
   });
 }
 
