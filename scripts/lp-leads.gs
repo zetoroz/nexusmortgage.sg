@@ -35,6 +35,25 @@
  * propertyType and propertyStatus. They are appended as columns 11-13 so the
  * first 10 columns (and every historical row) stay exactly where they were.
  * Add three header cells to the sheet: Purpose | Property Type | Property Status.
+ *
+ * NOTE (2026-07-30): FREE-REPORT branch. The /free-report calculator now POSTs
+ * here too (source "nexusmortgage.sg/free-report"), replacing the Make k85r
+ * scenario. Two stages:
+ *   - stage "lead-capture": append row (A-M lead + U/V/W tracking + X..AO calc
+ *     data, N..T left blank for the CRM) + Telegram + Meta CAPI.
+ *   - stage "send-report": update the lead's existing row (stage, selected
+ *     package, emailed-at), email the client-side-built PDF (base64 in payload)
+ *     via GmailApp from the danler@nexusmortgage.sg alias, Telegram note.
+ *     No CAPI (the Lead event already fired at lead-capture).
+ * Calc columns X..AO are auto-headered on first free-report submission.
+ *
+ * ⚠️ REDEPLOY WARNING: GmailApp adds a NEW OAuth scope (mail.google.com).
+ * After pasting this update you MUST open any function in the editor → Run →
+ * grant the new permission, THEN Deploy → New version. A missing scope fails
+ * silently inside try/catch (same trap as the UrlFetchApp/Telegram outage).
+ * Also confirm danler@nexusmortgage.sg is a registered "Send mail as" alias in
+ * Gmail Settings → Accounts of the deploying account — GmailApp can only send
+ * from registered aliases (we fall back to the account's own address if not).
  */
 
 function doPost(e) {
@@ -48,6 +67,15 @@ function doPost(e) {
     var join = function(parts){ return parts.filter(function(x){return x;}).join(' | '); };
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getSheetByName('Sheet1') || ss.getSheets()[0];
+
+    // FREE-REPORT branch — calculator page sends a much richer payload (inputs/summary/PDF).
+    if (String(data.source || '').indexOf('free-report') !== -1) {
+      var frResult = handleFreeReport(sheet, data, lead, trk, join);
+      return ContentService
+        .createTextOutput(JSON.stringify(frResult))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     sheet.appendRow([
       data.submittedAt || new Date().toISOString(),
       lead.name || '',
@@ -86,6 +114,201 @@ function doPost(e) {
   }
 }
 
+/* ===================== FREE-REPORT (calculator) branch ===================== */
+
+// Calc-data columns start at X (24). N..T (14-20) stay CRM-owned, U/V/W (21-23) = tracking.
+var FR_COL_START = 24;                 // X
+var FR_COL_STAGE = 8;                  // H
+var FR_COL_SELECTED = 40;              // AN Selected Package
+var FR_COL_EMAILED = 41;               // AO Report Emailed At
+var FR_HEADERS = [
+  'Mode', 'Property Price', 'Tenure (yrs)', 'Income (effective)', 'Borrower Incomes',
+  'Borrower Ages', 'Monthly Debts', 'CPF OA', 'Cash on Hand', 'Best Rate', 'Best Bank',
+  'Best Package', 'Monthly Payment', 'TDSR Usage', 'Max Loan', 'Capped By',
+  'Selected Package', 'Report Emailed At'
+];
+
+function handleFreeReport(sheet, data, lead, trk, join) {
+  var inp = data.inputs || {};
+  var s = data.summary || {};
+  var sel = data.selected || null;
+  var stage = data.stage || 'lead-capture';
+  var selStr = sel
+    ? sel.bank + ' — ' + sel.package + ' @ ' + sel.ratePct + '% (S$' + sel.monthly + '/mo)'
+    : '';
+
+  // Normalise free-report fields into the flat shape notifyNewLead/sendMetaCapi expect.
+  data.purpose = data.purpose || (inp.mode === 'refinance' ? 'Refinance' : 'New purchase');
+  data.propertyType = data.propertyType || inp.propertyType || '';
+  data.propertyStatus = data.propertyStatus || ''; // undefined survives filter(String) → stray " · " in Telegram
+  data.loanAmount = data.loanAmount || (inp.loan ? 'S$' + Number(inp.loan).toLocaleString('en-SG') : '');
+  data.currentRate = data.currentRate ||
+    (inp.currentRate ? (inp.currentRate * 100).toFixed(2) + '%' : '');
+
+  try { ensureFreeReportHeaders(sheet); } catch (hErr) { Logger.log('FR headers error: ' + hErr); }
+
+  var emailed = false, emailError = '';
+  if (stage === 'send-report') {
+    if (!updateFreeReportRow(sheet, lead, selStr)) {
+      appendFreeReportRow(sheet, data, lead, trk, join, inp, s, selStr, stage);
+    }
+    try {
+      emailed = sendReportEmail(data, lead, s, sel);
+    } catch (mailErr) {
+      emailError = String(mailErr);
+      Logger.log('Report email error: ' + mailErr);
+    }
+    try { notifyNewLead(data, lead); } catch (tgErr) { Logger.log('Notify error: ' + tgErr); }
+  } else {
+    appendFreeReportRow(sheet, data, lead, trk, join, inp, s, selStr, stage);
+    try { notifyNewLead(data, lead); } catch (tgErr) { Logger.log('Notify error: ' + tgErr); }
+    try { sendMetaCapi(data, lead); } catch (capiErr) { Logger.log('CAPI error: ' + capiErr); }
+  }
+
+  var out = { ok: true, stage: stage };
+  if (stage === 'send-report') { out.emailed = emailed; if (emailError) out.emailError = emailError; }
+  return out;
+}
+
+function appendFreeReportRow(sheet, data, lead, trk, join, inp, s, selStr, stage) {
+  sheet.appendRow([
+    data.submittedAt || new Date().toISOString(),
+    lead.name || '',
+    "'" + (lead.phone || ''),
+    lead.email || '',
+    data.source || 'nexusmortgage.sg/free-report',
+    inp.loan || '',
+    data.currentRate || '',
+    stage,
+    data.pageUrl || '',
+    '',                        // J Status — you fill
+    data.purpose || '',
+    data.propertyType || '',
+    '',                        // M Property Status — not captured by the calculator
+    '', '', '', '', '', '', '', // N..T — CRM-owned, leave blank
+    trk('gclid'),
+    join([trk('gbraid'), trk('wbraid'), trk('msclkid'), trk('fbclid')]),
+    join([trk('utmSource'), trk('utmMedium'), trk('utmCampaign'), trk('utmTerm'), trk('utmContent')]),
+    // X..AO — calculator inputs + computed results
+    inp.mode || '',
+    inp.price || '',
+    inp.tenure || '',
+    inp.income ? Math.round(inp.income) : '',
+    (inp.borrowerIncomes || []).join(' + '),
+    (inp.borrowerAges || []).join(' / '),
+    inp.debts || '',
+    inp.cpfOA || '',
+    inp.cashOnHand || '',
+    s.bestRate != null ? s.bestRate + '%' : '',
+    s.bestBank || '',
+    s.bestPackage || '',
+    s.monthlyPayment || '',
+    s.tdsrUsagePct != null ? s.tdsrUsagePct + '%' : '',
+    s.maxLoanAffordable || '',
+    s.cappedBy || '',
+    selStr,
+    stage === 'send-report' ? new Date().toISOString() : ''
+  ]);
+}
+
+/** Find the lead's lead-capture row (bottom-up, by email + free-report source) and
+ *  stamp stage/selected-package/emailed-at on it instead of duplicating a CRM row. */
+function updateFreeReportRow(sheet, lead, selStr) {
+  var email = String(lead.email || '').trim().toLowerCase();
+  if (!email) return false;
+  var last = sheet.getLastRow();
+  if (last < 2) return false;
+  var start = Math.max(2, last - 200); // recent rows only — submission pairs are minutes apart
+  var vals = sheet.getRange(start, 1, last - start + 1, 5).getValues(); // A..E
+  for (var i = vals.length - 1; i >= 0; i--) {
+    if (String(vals[i][3]).trim().toLowerCase() === email &&
+        String(vals[i][4]).indexOf('free-report') !== -1) {
+      var row = start + i;
+      sheet.getRange(row, FR_COL_STAGE).setValue('send-report');
+      sheet.getRange(row, FR_COL_SELECTED, 1, 2)
+        .setValues([[selStr, new Date().toISOString()]]);
+      return true;
+    }
+  }
+  return false;
+}
+
+/** One-time: write X1..AO1 headers if the calc block is still headerless. */
+function ensureFreeReportHeaders(sheet) {
+  var probe = sheet.getRange(1, FR_COL_START).getValue();
+  if (probe !== '' && probe != null) return;
+  sheet.getRange(1, FR_COL_START, 1, FR_HEADERS.length).setValues([FR_HEADERS]);
+}
+
+/**
+ * Email the client-built PDF report to the lead, sent from the
+ * danler@nexusmortgage.sg alias (falls back to the account's own address if the
+ * alias isn't registered in Gmail → Settings → Accounts → "Send mail as").
+ */
+function sendReportEmail(data, lead, s, sel) {
+  if (!lead.email || !data.reportPdfBase64) return false;
+  var blob = Utilities.newBlob(
+    Utilities.base64Decode(data.reportPdfBase64),
+    data.reportPdfMime || 'application/pdf',
+    data.reportPdfFilename || 'nexus-mortgage-report.pdf'
+  );
+
+  var firstName = String(lead.name || '').trim().split(/\s+/)[0] || 'there';
+  var bank = (sel && sel.bank) || s.bestBank || '';
+  var pkg = (sel && sel.package) || s.bestPackage || '';
+  var rate = (sel && sel.ratePct != null) ? sel.ratePct : s.bestRate;
+  var monthly = (sel && sel.monthly) || s.monthlyPayment || '';
+  var fmt = function (n) { return Number(n).toLocaleString('en-SG'); };
+
+  var subject = 'Your mortgage report' + (bank ? ' — ' + bank + ' from ' + rate + '%' : '') + ' | Nexus Mortgage';
+
+  var rows = [];
+  if (bank) rows.push(['Selected package', bank + (pkg ? ' — ' + pkg : '') + (rate != null ? ' @ ' + rate + '%' : '')]);
+  if (monthly) rows.push(['Est. monthly repayment', 'S$' + fmt(monthly) + '/mo']);
+  if (s.tdsrUsagePct != null) rows.push(['TDSR usage (4% stress test)', s.tdsrUsagePct + '%']);
+  if (s.maxLoanAffordable) rows.push(['Max loan you qualify for', 'S$' + fmt(s.maxLoanAffordable)]);
+  var tableRows = rows.map(function (r) {
+    return '<tr><td style="padding:8px 16px 8px 0;color:#5a6474;font-size:14px;">' + r[0] +
+           '</td><td style="padding:8px 0;color:#122843;font-size:14px;font-weight:600;">' + r[1] + '</td></tr>';
+  }).join('');
+
+  var htmlBody =
+    '<div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#122843;">' +
+      '<p style="font-size:16px;line-height:1.7;">Hi ' + firstName + ',</p>' +
+      '<p style="font-size:16px;line-height:1.7;">Thanks for running the numbers with us — your personalised ' +
+        'mortgage report is attached as a PDF.</p>' +
+      (tableRows ? '<table style="border-collapse:collapse;margin:16px 0;">' + tableRows + '</table>' : '') +
+      '<p style="font-size:16px;line-height:1.7;">Rates move weekly and the attached figures are indicative — ' +
+        'when you\'re ready, I\'ll confirm the live package and handle the paperwork with the bank. ' +
+        'My service is free to you (banks pay our referral fee).</p>' +
+      '<p style="font-size:16px;line-height:1.7;"><a href="https://wa.me/6587520859" ' +
+        'style="color:#C4973B;font-weight:600;">WhatsApp me at 8752 0859</a> or just reply to this email.</p>' +
+      '<p style="font-size:16px;line-height:1.7;">Dan Ler<br>' +
+        '<span style="color:#5a6474;font-size:14px;">Nexus Mortgage — nexusmortgage.sg</span></p>' +
+    '</div>';
+
+  var plainBody = 'Hi ' + firstName + ',\n\nThanks for running the numbers with us — your personalised ' +
+    'mortgage report is attached as a PDF.\n\n' +
+    rows.map(function (r) { return r[0] + ': ' + r[1]; }).join('\n') +
+    '\n\nRates move weekly and the attached figures are indicative — when you\'re ready, I\'ll confirm the ' +
+    'live package and handle the paperwork with the bank. My service is free to you.\n\n' +
+    'WhatsApp me at 8752 0859 (https://wa.me/6587520859) or just reply to this email.\n\n' +
+    'Dan Ler\nNexus Mortgage — nexusmortgage.sg';
+
+  var opts = {
+    name: 'Dan Ler — Nexus Mortgage',
+    replyTo: 'danler@nexusmortgage.sg',
+    htmlBody: htmlBody,
+    attachments: [blob]
+  };
+  var alias = 'danler@nexusmortgage.sg';
+  try {
+    if (GmailApp.getAliases().indexOf(alias) !== -1) opts.from = alias;
+  } catch (aliasErr) { Logger.log('Alias check error: ' + aliasErr); }
+  GmailApp.sendEmail(lead.email, subject, plainBody, opts);
+  return true;
+}
+
 /**
  * Instant Telegram alert to Dan the moment a lead lands. Speed-to-contact is the #1
  * mortgage conversion lever — this stops leads sitting unseen in the sheet.
@@ -114,9 +337,14 @@ function notifyNewLead(data, lead) {
   var waNum  = String(phone).replace(/\D/g, '');
   var esc = function (s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
 
+  var isReportSent = data.stage === 'send-report';
   var lines = [];
-  lines.push('🔔 <b>New lead — ' + esc(name) + '</b>');
-  lines.push('<i>via ' + esc(source) + ' · call within the hour</i>');
+  lines.push(isReportSent
+    ? '📄 <b>Report emailed — ' + esc(name) + '</b>'
+    : '🔔 <b>New lead — ' + esc(name) + '</b>');
+  lines.push(isReportSent
+    ? '<i>via ' + esc(source) + ' · picked a package — hot, call now</i>'
+    : '<i>via ' + esc(source) + ' · call within the hour</i>');
   lines.push('');
   if (phone)             lines.push('📱 ' + esc(phone));
   if (email)             lines.push('✉️ ' + esc(email));
@@ -125,6 +353,22 @@ function notifyNewLead(data, lead) {
   if (prop)              lines.push('🏠 ' + esc(prop));
   if (data.loanAmount)   lines.push('💰 Loan: ' + esc(data.loanAmount));
   if (data.currentRate)  lines.push('📉 Current rate: ' + esc(data.currentRate));
+  // Free-report extras: what the calculator showed them / what they picked.
+  var s = data.summary || {};
+  if (data.selected && data.selected.bank) {
+    lines.push('✅ Chose: ' + esc(data.selected.bank +
+      (data.selected.package ? ' — ' + data.selected.package : '') +
+      (data.selected.ratePct != null ? ' @ ' + data.selected.ratePct + '%' : '') +
+      (data.selected.monthly ? ' · S$' + data.selected.monthly + '/mo' : '')));
+  } else if (s.bestBank) {
+    lines.push('🏆 Best shown: ' + esc(s.bestBank +
+      (s.bestRate != null ? ' @ ' + s.bestRate + '%' : '') +
+      (s.monthlyPayment ? ' · S$' + s.monthlyPayment + '/mo' : '')));
+  }
+  if (s.tdsrUsagePct != null) {
+    lines.push('📊 TDSR ' + esc(String(s.tdsrUsagePct)) + '%' +
+      (s.maxLoanAffordable ? ' · max loan S$' + esc(String(s.maxLoanAffordable)) : ''));
+  }
   if (data.pageUrl)      lines.push('🔗 ' + esc(data.pageUrl));
   var actionLinks = [];
   if (waNum)  actionLinks.push('<a href="https://wa.me/' + waNum + '">WhatsApp now</a>');
