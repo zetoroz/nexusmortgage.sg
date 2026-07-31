@@ -1,8 +1,8 @@
 SLUG = "sibor-rate-singapore-discontinued"
-TITLE = "SIBOR Rate Singapore: Discontinued &mdash; What Replaced It | Nexus"
+TITLE = "SIBOR Rate Singapore: Discontinued. What Replaced It | Nexus"
 DESC = ("Looking up the SIBOR rate today? SIBOR was last published on 31 December 2024 and no longer exists. "
         "What replaced it, what happened to SIBOR-pegged home loans, and what to do now.")
-OG_TITLE = "SIBOR Rate Singapore: The Benchmark Is Gone &mdash; Here's What Replaced It"
+OG_TITLE = "SIBOR Rate Singapore: The Benchmark Is Gone. Here's What Replaced It"
 OG_DESC = ("SIBOR ceased after 31 December 2024 and SOR ended on 30 June 2023. Compounded SORA replaced both. "
            "What happened to legacy SIBOR mortgages, how the conversion worked, and how to check what you are paying now.")
 KEYWORDS = ("SIBOR rate, SIBOR rate today, 3 month SIBOR, 1 month SIBOR, SIBOR discontinued, SIBOR to SORA, "
@@ -33,7 +33,7 @@ FAQ = [
 BODY = r'''
   <div class="short-answer">
     <div class="sa-title">Short answer</div>
-    <p><strong>SIBOR no longer exists.</strong> It was last published on <strong>31 December 2024</strong> and discontinued immediately after. SOR, the older Swap Offer Rate, ended earlier on <strong>30 June 2023</strong>. Both were replaced by <strong>Compounded SORA</strong>. If you had a SIBOR-pegged mortgage, your bank converted it &mdash; automatically in June 2024 if you did not switch yourself. An industry adjustment spread was applied so the change was broadly value-neutral at that moment. The number to look up now is 3M Compounded SORA.</p>
+    <p><strong>SIBOR no longer exists.</strong> It was last published on <strong>31 December 2024</strong> and discontinued immediately after. SOR, the older Swap Offer Rate, ended earlier on <strong>30 June 2023</strong>. Both were replaced by <strong>Compounded SORA</strong>. If you had a SIBOR-pegged mortgage, your bank converted it, automatically in June 2024 if you did not switch yourself. An industry adjustment spread was applied so the change was broadly value-neutral at that moment. The number to look up now is 3M Compounded SORA.</p>
   </div>
 
   <div class="toc">
@@ -96,9 +96,9 @@ BODY = r'''
     </tbody>
   </table>
 
-  <p>One point is widely misunderstood, so it is worth being precise. Retail home loans in Singapore use <strong>compounded-in-advance</strong> SORA: the rate for your coming period is computed from the <em>preceding</em> three months of already-published daily SORA. So you do still know your rate at the start of the period. What changed is not when you find out, but what the number is built from &mdash; realised overnight transactions rather than a forward-looking panel submission.</p>
+  <p>One point is widely misunderstood, so it is worth being precise. Retail home loans in Singapore use <strong>compounded-in-advance</strong> SORA: the rate for your coming period is computed from the <em>preceding</em> three months of already-published daily SORA. So you do still know your rate at the start of the period. What changed is what the number is built from. It is now realised overnight transactions rather than a forward-looking panel submission.</p>
 
-  <p>The practical upshot: SORA is steadier. A single volatile week moves a three-month average far less than it moved a forward-looking term rate. For a borrower, that means fewer sharp surprises &mdash; but also that a falling market reaches your instalment more slowly. SC-STS chose the 3-month tenor for the retail package precisely because it is more stable than 1-month and less lagged than 6-month.</p>
+  <p>The practical upshot: SORA is steadier. A single volatile week moves a three-month average far less than it moved a forward-looking term rate. For a borrower, that means fewer sharp surprises, but also that a falling market reaches your instalment more slowly. SC-STS chose the 3-month tenor for the retail package precisely because it is more stable than 1-month and less lagged than 6-month.</p>
 
   <p>For how the two published tenors behave against each other, see our <a href="/sora-rates-singapore/">live SORA rate page</a>, which covers 1M versus 3M and how each feeds your effective rate.</p>
 
@@ -117,7 +117,7 @@ BODY = r'''
     </tbody>
   </table>
 
-  <p>The SCP repriced your loan as <strong>3-month Compounded SORA + your existing loan margin + an adjustment spread</strong>. Your original contractual margin was carried over unchanged &mdash; it was not renegotiated.</p>
+  <p>The SCP repriced your loan as <strong>3-month Compounded SORA + your existing loan margin + an adjustment spread</strong>. Your original contractual margin was carried over unchanged. It was not renegotiated.</p>
 
   <h3>The terms SC-STS recommended</h3>
 
@@ -125,9 +125,9 @@ BODY = r'''
 
   <p>One detail was genuinely valuable. Switching to the SCP or to a prevailing package <em>within the same bank</em> was not treated as a refinancing under MAS property loan rules. TDSR, LTV and MSR were therefore not recomputed. Moving to a different bank did not get that relief.</p>
 
-  <p>There was an asymmetry worth knowing about. The SCP added no new lock-in &mdash; but taking a bank's <em>prevailing</em> package instead could impose a fresh one of two or three years. Some borrowers made that trade without registering it.</p>
+  <p>There was an asymmetry worth knowing about. The SCP added no new lock-in, but taking a bank's <em>prevailing</em> package instead could impose a fresh one of two or three years. Some borrowers made that trade without registering it.</p>
 
-  <p>The design goal was continuity, not repricing. The conversion was intended to leave you in broadly the same economic position on the day it happened. Your loan kept its contractual margin; only the benchmark underneath it changed &mdash; and that is the point most borrowers miss, because it is where the money is.</p>
+  <p>The design goal was continuity, not repricing. The conversion was intended to leave you in broadly the same economic position on the day it happened. Your loan kept its contractual margin; only the benchmark underneath it changed. That is the point most borrowers miss, because it is where the money is.</p>
 
   <h2 id="spread">The Adjustment Spread, in Plain Terms</h2>
 
@@ -155,13 +155,13 @@ BODY = r'''
     </tbody>
   </table>
 
-  <p>So roughly a quarter to a third of a percentage point, permanently added to the SORA component. That spread is <strong>fixed for the remaining life of the loan</strong> &mdash; it does not decay or get revisited.</p>
+  <p>So roughly a quarter to a third of a percentage point, permanently added to the SORA component. That spread is <strong>fixed for the remaining life of the loan</strong>. It does not decay or get revisited.</p>
 
   <p>Because it was calibrated to a five-year historical median rather than to conditions on the conversion date, the switch was broadly value-neutral at that moment. It was never a promise about the future, and rates have moved a great deal since.</p>
 
   <h2 id="now">What to Do Now</h2>
 
-  <p>If you still think of your loan as a SIBOR loan, it is worth ten minutes of checking. A converted loan carries a margin set under the original contract &mdash; potentially years ago, in a very different rate environment.</p>
+  <p>If you still think of your loan as a SIBOR loan, it is worth ten minutes of checking. A converted loan carries a margin set under the original contract, potentially years ago, in a very different rate environment.</p>
 
   <ol>
     <li><strong>Ask your bank three things in writing:</strong> what benchmark the loan is pegged to now, what the current effective rate is, and whether any lock-in or clawback still applies.</li>
@@ -209,7 +209,7 @@ BODY = r'''
     <em>This article is general information for Singapore borrowers. It is not financial advice. Benchmark
     transition dates and the industry conversion approach reflect published guidance from MAS and the
     Steering Committee for SOR &amp; SIBOR Transition to SORA (SC-STS) as at August 2026. The treatment of
-    any individual loan depends on your contract and your bank &mdash; confirm your current peg, effective
+    any individual loan depends on your contract and your bank. Confirm your current peg, effective
     rate and lock-in with your lender in writing. Sources:
     <a href="https://www.mas.gov.sg/regulation/interest-rate-benchmarks-transition" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS: Interest Rate Benchmarks Transition</a>,
     <a href="https://www.mas.gov.sg/monetary-policy/sora" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS: SORA</a>,
