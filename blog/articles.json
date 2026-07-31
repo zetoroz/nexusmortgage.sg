@@ -1,17 +1,5 @@
 [
  {
-  "slug": "hdb-15-month-wait-out-removed-2026",
-  "url": "/blog/hdb-15-month-wait-out-removed-2026/",
-  "status": "live",
-  "title": "15-Month Wait-Out Period Removed: Private Owners Can Buy HDB Resale Immediately",
-  "excerpt": "MND scrapped the 15-month wait-out with immediate effect on 28 July 2026 — private property owners and ex-owners of all ages can buy a non-subsidised HDB resale flat right away. What the headlines skipped: the 30-month wait still bars HDB loans, grants and BTO, and you must sell all private property within 6 months of completing. The bank-loan math for right-sizers, with a worked S$700k example.",
-  "tag": "Market Update",
-  "date": "1 August 2026",
-  "readTime": "8 min read",
-  "thumbnail": "blog-images/hdb-15-month-wait-out-removed-thumb.webp",
-  "thumbnailAlt": "Singapore HDB blocks beside private condo towers at dusk with an open gate motif — 15-month wait-out period removed"
- },
- {
   "slug": "second-property-loan-ltv-singapore",
   "title": "Second Property Loan in Singapore: LTV, Cash and TDSR",
   "excerpt": "A second housing loan is capped at 45% LTV, not 75% — and at least 25% of the price must be hard cash that CPF cannot touch. It drops to 25% LTV if the tenure runs past age 65. TDSR still applies at the 4% floor with your existing mortgage counted in, and ABSD of 20% sits on top for a Singapore Citizen. Full 2026 limits for second and third loans, a worked S$1.5M example, and why a fully repaid loan does not count against you.",
@@ -34,6 +22,18 @@
   "thumbnailAlt": "Navy chart showing the SIBOR line ending and the SORA line continuing below it — SIBOR discontinued in Singapore",
   "status": "scheduled",
   "url": "/blog/sibor-rate-singapore-discontinued/"
+ },
+ {
+  "slug": "hdb-15-month-wait-out-removed-2026",
+  "url": "/blog/hdb-15-month-wait-out-removed-2026/",
+  "status": "live",
+  "title": "15-Month Wait-Out Period Removed: Private Owners Can Buy HDB Resale Immediately",
+  "excerpt": "MND scrapped the 15-month wait-out with immediate effect on 28 July 2026 — private property owners and ex-owners of all ages can buy a non-subsidised HDB resale flat right away. What the headlines skipped: the 30-month wait still bars HDB loans, grants and BTO, and you must sell all private property within 6 months of completing. The bank-loan math for right-sizers, with a worked S$700k example.",
+  "tag": "Market Update",
+  "date": "1 August 2026",
+  "readTime": "8 min read",
+  "thumbnail": "blog-images/hdb-15-month-wait-out-removed-thumb.webp",
+  "thumbnailAlt": "Singapore HDB blocks beside private condo towers at dusk with an open gate motif — 15-month wait-out period removed"
  },
  {
   "slug": "thomson-reserve-financing-2026",
