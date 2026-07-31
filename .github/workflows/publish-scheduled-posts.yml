@@ -1,0 +1,66 @@
+name: Publish scheduled blog posts
+
+# Flips articles.json entries from "scheduled" to "live" on their publish date
+# (Singapore time), rebakes the /blog/ grid, adds sitemap.xml + llms.txt entries,
+# commits, and pings IndexNow directly (pushes made with GITHUB_TOKEN do not
+# trigger the push-based indexnow-ping workflow).
+on:
+  schedule:
+    - cron: '20 1 * * *'   # 01:20 UTC = 09:20 SGT, after the 09:00 SORA bot
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-scheduled-posts
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Publish due posts
+        id: pub
+        run: |
+          set -euo pipefail
+          node scripts/publish-scheduled-posts.mjs | tee publish.log
+          slugs=$(grep '^PUBLISHED ' publish.log | awk '{print $2}' | paste -sd ' ' - || true)
+          echo "slugs=${slugs}" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push
+        if: steps.pub.outputs.slugs != ''
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add blog/articles.json blog/index.html sitemap.xml llms.txt
+          git commit -m "blog: publish scheduled post(s): ${{ steps.pub.outputs.slugs }}"
+          git pull --rebase origin main
+          git push origin main
+
+      - name: Ping IndexNow
+        if: steps.pub.outputs.slugs != ''
+        run: |
+          set -euo pipefail
+          base="https://nexusmortgage.sg"
+          urls=$(for s in ${{ steps.pub.outputs.slugs }}; do printf '"%s/blog/%s/",' "$base" "$s"; done)
+          cat > urls.json <<EOF
+          {
+            "host": "nexusmortgage.sg",
+            "key": "6eeb1bf58acb64ed2d7f369e6312e519",
+            "keyLocation": "https://nexusmortgage.sg/6eeb1bf58acb64ed2d7f369e6312e519.txt",
+            "urlList": [ ${urls} "${base}/blog/", "${base}/sitemap.xml" ]
+          }
+          EOF
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data @urls.json -o /dev/null -w "IndexNow HTTP %{http_code}\n"
