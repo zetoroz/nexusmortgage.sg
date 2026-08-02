@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <!-- Analytics — lazy-loaded (GA4 + Meta Pixel). Stubs install
+       synchronously so gtag('event',…) and fbq('track',…) calls always
+       queue correctly; the real scripts load only after first user
+       interaction or after the page becomes idle. Mirrors the Microsoft
+       Clarity pattern below so all three vendors behave identically. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VKFWNBRM6');
+
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document);
+    fbq('init', '27348447628084102');
+    fbq('track', 'PageView');
+
+    (function(){
+      var loaded = false;
+      function inject(src){var s=document.createElement('script');s.async=true;s.src=src;document.head.appendChild(s);}
+      function load(){
+        if (loaded) return; loaded = true;
+        inject('https://www.googletagmanager.com/gtag/js?id=G-7VKFWNBRM6');
+        inject('https://connect.facebook.net/en_US/fbevents.js');
+      }
+      var events = ['scroll','pointerdown','keydown','touchstart'];
+      function fire(){events.forEach(function(e){window.removeEventListener(e, fire);}); load();}
+      events.forEach(function(e){window.addEventListener(e, fire, {passive:true});});
+      if ('requestIdleCallback' in window) requestIdleCallback(load, {timeout:5000});
+      else setTimeout(load, 3000);
+    })();
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=27348447628084102&ev=PageView&noscript=1" /></noscript>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};var L=0;function load(){if(L)return;L=1;var t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;var y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);}var E=["scroll","pointerdown","keydown","touchstart"];function go(){E.forEach(function(e){window.removeEventListener(e,go);});load();}E.forEach(function(e){window.addEventListener(e,go,{passive:true});});if("requestIdleCallback" in window){requestIdleCallback(load,{timeout:6000});}else{setTimeout(load,5000);}})(window, document, "clarity", "script", "wpg9v4xzro");
+  </script>
+  <script>
+    // GA4 click tracking: WhatsApp, phone, email
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a');
+      if (!a || typeof gtag !== 'function') return;
+      var href = a.getAttribute('href') || '';
+      var loc = a.closest('header,nav,footer,section,main');
+      var locName = loc ? (loc.tagName.toLowerCase() + (loc.id ? '#' + loc.id : '')) : 'body';
+      if (/wa\.me|whatsapp\.com/i.test(href)) {
+        gtag('event', 'whatsapp_click', { link_location: locName, link_url: href });
+      } else if (/^tel:/i.test(href)) {
+        gtag('event', 'phone_click', { link_location: locName, phone_number: href.replace('tel:','') });
+      } else if (/^mailto:/i.test(href)) {
+        gtag('event', 'email_click', { link_location: locName });
+      }
+    }, true);
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DBS vs UOB vs OCBC Home Loans 2026: Compared | Nexus</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="The three local banks compared on what persists: FHR board vs pure SORA pegs, lock-ins, quantum tiers and subsidies — and which profile each bank actually fits.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="DBS vs UOB vs OCBC Home Loans 2026 &mdash; Which Bank Fits Your Profile?">
+  <meta property="og:description" content="Rates rotate weekly; structure persists. Peg transparency, thereafter rates, quantum tiers and subsidy math across Singapore's big three, plus when a foreign bank beats them all.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexusmortgage.sg/blog/dbs-vs-uob-vs-ocbc-home-loan-2026/">
+  <meta property="og:image" content="https://nexusmortgage.sg/blog/blog-images/dbs-uob-ocbc-comparison-hero.png">
+  <meta property="og:image:alt" content="DBS vs UOB vs OCBC Home Loans 2026 - Which Bank Fits Your Profile?">
+  <meta property="og:image:width" content="1344">
+  <meta property="og:image:height" content="768">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DBS vs UOB vs OCBC Home Loans 2026 - Which Bank Fits Your Profile?">
+  <meta name="twitter:description" content="The three local banks compared on what persists: FHR board vs pure SORA pegs, lock-ins, quantum tiers and subsidies — and which profile each bank actu">
+  <meta name="twitter:image" content="https://nexusmortgage.sg/blog/blog-images/dbs-uob-ocbc-comparison-hero.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://nexusmortgage.sg/blog/dbs-vs-uob-vs-ocbc-home-loan-2026/">
+  <!-- GEO-TARGETING:auto -->
+  <meta property="og:locale" content="en_SG">
+    <meta name="geo.region" content="SG">
+    <meta name="geo.placename" content="Singapore">
+    <meta name="geo.position" content="1.45173;103.79212">
+    <meta name="ICBM" content="1.45173, 103.79212">
+    <link rel="alternate" hreflang="en-sg" href="https://nexusmortgage.sg/blog/dbs-vs-uob-vs-ocbc-home-loan-2026/">
+    <link rel="alternate" hreflang="x-default" href="https://nexusmortgage.sg/blog/dbs-vs-uob-vs-ocbc-home-loan-2026/">
+
+  <!-- Structured Data: Article -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DBS vs UOB vs OCBC Home Loans 2026: Which Bank Fits Your Profile?","datePublished":"2026-08-24","dateModified":"2026-08-24","image":{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/dbs-uob-ocbc-comparison-hero.png","width":1344,"height":768},"description":"Structural comparison of Singapore's three local banks for home loans in 2026: DBS's bank-administered FHR board rate versus the pure 3M compounded SORA pegs at UOB and OCBC, how lock-ins and thereafter rates work, why quantum tiers decide which advertised rate you can actually get, how legal and valuation subsidies change the net math on larger refinancing loans, and which borrower profile each bank fits. Includes when foreign banks like HSBC, Standard Chartered, Maybank or CIMB beat all three.","mainEntityOfPage":{"@type":"WebPage","@id":"https://nexusmortgage.sg/blog/dbs-vs-uob-vs-ocbc-home-loan-2026/"},"author":{"@id":"https://nexusmortgage.sg/#dan-ler","@type":"Person","name":"Dan Ler","url":"https://nexusmortgage.sg/about/","image":"https://nexusmortgage.sg/dan-ler.webp","jobTitle":"Mortgage Advisor","worksFor":{"@type":"Organization","name":"Nexus Mortgage","url":"https://nexusmortgage.sg"}},"publisher":{"@id":"https://nexusmortgage.sg/#organization"},"keywords":"DBS vs UOB vs OCBC home loan, best bank home loan Singapore 2026, DBS FHR vs SORA, UOB home loan comparison, OCBC home loan comparison, bank home loan Singapore compare, home loan subsidy Singapore"}</script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which bank has the lowest home loan rate in Singapore right now?","acceptedAnswer":{"@type":"Answer","text":"It rotates weekly with promotions and quantum tiers, which is why this page compares structure instead of quoting a number that would be stale by the time you read it. The live 16-bank comparison on our rates page carries current pricing, and packages in the low-1% range have been the competitive zone through 2026."}},{"@type":"Question","name":"What is the difference between DBS FHR and a SORA-pegged loan?","acceptedAnswer":{"@type":"Answer","text":"FHR is a board rate administered by DBS, historically slow-moving in both directions. 3M compounded SORA is the published MAS benchmark — market-driven and fully transparent, moving with Singapore interest rates. FHR cushions spikes; SORA passes through falls. Neither dominates in all conditions."}},{"@type":"Question","name":"Do all three banks offer legal and valuation subsidies?","acceptedAnswer":{"@type":"Answer","text":"Commonly, on new-purchase and refinancing packages, scaled to loan size — with OCBC notably leaning on subsidies for larger refinancing quantums. Always compare the package net of subsidy over your intended holding period, not the headline rate alone."}},{"@type":"Question","name":"Is it better to go to the bank directly or through a broker?","acceptedAnswer":{"@type":"Answer","text":"Same rates either way — banks pay the broker on disbursement, so the borrower price is identical. The difference is coverage: a bank's officer can only quote their own shelf; a broker compares 16+ lenders including weeks when a foreign bank undercuts all three locals. There is no scenario where the borrower pays more via a broker."}},{"@type":"Question","name":"Can I switch banks after my lock-in ends?","acceptedAnswer":{"@type":"Answer","text":"Yes — that is refinancing, and post-lock-in there is no penalty. The alternative is repricing onto a new package with your current bank, which is cheaper and faster but limited to that bank's shelf. The trade-off is worked through in our reprice-vs-refinance guide."}}]}</script>
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexusmortgage.sg/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://nexusmortgage.sg/blog/"},{"@type":"ListItem","position":3,"name":"DBS vs UOB vs OCBC — 2026 Comparison","item":"https://nexusmortgage.sg/blog/dbs-vs-uob-vs-ocbc-home-loan-2026/"}]}</script>
+
+  <!-- Google Fonts -->
+  <!-- Self-hosted fonts (woff2 latin subset). Drops Google Fonts blocking chain. -->
+  <link rel="preload" href="/fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts/fonts.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d1117;
+      color: #e8e3da;
+      font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.75;
+    }
+
+    .blog-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .8rem;
+      color: rgba(196,151,59,.7);
+      text-decoration: none;
+      letter-spacing: .04em;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .back-link:hover { color: #c4973b; }
+
+    .hero-img {
+      width: 100%; height: auto; aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 12px;
+      margin-bottom: 2.5rem;
+      display: block;
+      box-shadow: 0 8px 40px rgba(0,0,0,.55), 0 2px 8px rgba(196,151,59,.08);
+    }
+
+    .meta {
+      font-size: .78rem;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: #c4973b;
+      margin-bottom: 1.1rem;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      line-height: 1.18;
+      letter-spacing: -.02em;
+      color: #faf7f2;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+      font-weight: 600;
+      color: #faf7f2;
+      margin: 2.8rem 0 .9rem;
+      letter-spacing: -.015em;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid rgba(196,151,59,.22);
+    }
+
+    h3 {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #c4973b;
+      margin: 1.8rem 0 .6rem;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+
+    p { margin-bottom: 1.25rem; color: rgba(232,227,218,.82); }
+
+    a { color: #c4973b; text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: #e0b86a; }
+
+    ul, ol { margin: 0 0 1.25rem 1.5rem; color: rgba(232,227,218,.82); }
+    li { margin-bottom: .5rem; }
+
+    .pullquote {
+      border-left: 3px solid #c4973b;
+      margin: 2rem 0;
+      padding: .9rem 1.4rem;
+      background: rgba(196,151,59,.07);
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: rgba(250,247,242,.7);
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .stat-box {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(196,151,59,.2);
+      border-radius: 10px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #c4973b;
+      line-height: 1;
+      margin-bottom: .3rem;
+    }
+    .stat-desc {
+      font-size: .76rem;
+      color: rgba(232,227,218,.5);
+      letter-spacing: .03em;
+    }
+
+    .faq-q { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 600; color: #faf7f2; margin: 1.6rem 0 .5rem; }
+    .cta-box {
+      background: linear-gradient(135deg, rgba(196,151,59,.12) 0%, rgba(196,151,59,.04) 100%);
+      border: 1px solid rgba(196,151,59,.35);
+      border-radius: 12px;
+      padding: 2rem 2rem;
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+    .cta-box p { color: rgba(250,247,242,.75); margin-bottom: .6rem; }
+    .cta-btn {
+      display: inline-block;
+      margin-top: .8rem;
+      padding: .75rem 1.8rem;
+      background: #c4973b;
+      color: #0d1117;
+      font-weight: 600;
+      font-size: .9rem;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: .04em;
+      transition: background .2s ease, transform .15s ease;
+    }
+    .cta-btn:hover { background: #e0b86a; color: #0d1117; transform: translateY(-1px); }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin: 3rem 0 1.5rem;
+    }
+
+    .disclaimer {
+      font-size: .75rem;
+      color: rgba(232,227,218,.3);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .stat-row { grid-template-columns: 1fr; }
+    }
+
+    #reading-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#c4973b,#e8c97a);z-index:9999;transition:width .1s linear;pointer-events:none}
+    #btt{position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:#c4973b;color:#0d1117;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .25s cubic-bezier(.25,.8,.25,1),transform .25s cubic-bezier(.25,.8,.25,1);pointer-events:none;box-shadow:0 4px 16px rgba(196,151,59,.35)}
+    #btt.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+    #btt:hover{background:#e0b86a}
+    #btt:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
+    .back-link:focus-visible,.cta-btn:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
+    .cta-btn,.back-link{touch-action:manipulation}
+    .cta-btn{display:inline-flex;align-items:center;gap:.5rem}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#reading-progress,#btt{transition:none!important}}
+
+    /* ==== Site nav ==== */
+    :root { --gold-400: #C4973B; --gold-500: #E8C97A; --navy-900: #0B1C3A; --cream: #FAF7F2; }
+    #site-navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(11, 28, 58, .92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(196, 151, 59, .15); padding: .9rem 0; transition: background .25s; }
+    #site-navbar .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    #site-navbar .nav-logo { text-decoration: none; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 600; color: var(--cream); letter-spacing: .02em; }
+    #site-navbar .nav-logo .dot { color: var(--gold-400); }
+    #site-navbar .nav-links { display: none; align-items: center; gap: 1.4rem; }
+    @media (min-width: 1024px) { #site-navbar .nav-links { display: flex; } #site-navbar .mob-toggle { display: none; } }
+    #site-navbar .nav-link-item { font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250, 247, 242, .7); font-weight: 500; text-decoration: none; transition: color .25s; }
+    #site-navbar .nav-link-item:hover, #site-navbar .nav-link-item.is-current { color: var(--gold-400); }
+    #site-navbar .nav-cta { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1.1rem; background: linear-gradient(135deg, #C4973B, #E8C97A); color: #0B1C3A; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; border-radius: 100px; text-decoration: none; transition: transform .2s; }
+    #site-navbar .nav-cta:hover { transform: translateY(-1px); }
+    #site-navbar .mob-toggle { background: none; border: none; cursor: pointer; color: var(--cream); padding: .3rem; }
+    #site-navbar .tools-dd-wrap { position: relative; }
+    #site-navbar .tools-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: .3rem; font: inherit; padding: 0; font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250, 247, 242, .7); font-weight: 500; }
+    #site-navbar .tools-btn:hover { color: var(--gold-400); }
+    #site-navbar .tools-dd { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: rgba(11, 28, 58, .97); backdrop-filter: blur(16px); border: 1px solid rgba(196, 151, 59, .22); border-radius: 10px; padding: .5rem; min-width: 220px; z-index: 200; box-shadow: 0 16px 40px rgba(0, 0, 0, .4); }
+    #site-navbar .tools-dd a { display: block; padding: .55rem 1rem; color: rgba(250, 247, 242, .75); font-size: .76rem; font-weight: 500; letter-spacing: .04em; text-decoration: none; border-radius: 6px; transition: background .2s, color .2s; }
+    #site-navbar .tools-dd a:hover { background: rgba(196, 151, 59, .12); color: var(--gold-400); }
+    #site-navbar .free-report-link { color: var(--gold-400); display: inline-flex; align-items: center; gap: .35rem; }
+    #site-navbar .new-badge { font-size: .55rem; letter-spacing: .1em; padding: 1px 6px; border-radius: 100px; background: rgba(196, 151, 59, .18); color: var(--gold-400); font-weight: 600; border: 1px solid rgba(196, 151, 59, .3); }
+    #site-mob-menu { display: none; padding: .5rem 1.5rem 1rem; border-top: 1px solid rgba(196, 151, 59, .12); }
+    #site-mob-menu.open { display: block; }
+    #site-mob-menu a { display: block; padding: .8rem 0; color: rgba(250, 247, 242, .8); text-decoration: none; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid rgba(196, 151, 59, .08); }
+    body.has-site-nav { padding-top: 64px; }
+
+    .toc { background: rgba(255,255,255,.03); border: 1px solid rgba(196,151,59,.15); border-radius: 10px; padding: 1.3rem 1.6rem; margin: 2rem 0 2.5rem; }
+    .toc-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: rgba(196,151,59,.7); margin-bottom: .8rem; }
+    .toc ol { padding-left: 1.2rem; counter-reset: toc; list-style: none; }
+    .toc ol li { counter-increment: toc; margin-bottom: .4rem; font-size: .88rem; }
+    .toc ol li::before { content: counter(toc) ". "; color: rgba(196,151,59,.5); font-weight: 600; font-size: .8rem; }
+    .toc a { color: rgba(232,227,218,.65); text-decoration: none; }
+    .toc a:hover { color: #c4973b; }
+
+    .compare-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; font-size: .92rem; }
+    .compare-table th, .compare-table td { padding: .75rem .9rem; text-align: left; border-bottom: 1px solid rgba(196,151,59,.15); }
+    .compare-table th { color: #c4973b; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; font-size: .72rem; background: rgba(196,151,59,.06); }
+    .compare-table td { color: rgba(232,227,218,.78); }
+    .compare-table tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+<nav id="site-navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Nexus<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="/services/" class="nav-link-item">Services</a>
+      <a href="/mortgage-rates/" class="nav-link-item">Rates</a>
+      <a href="/free-report/" class="nav-link-item free-report-link">Free Report <span class="new-badge">NEW</span></a>
+      <a href="/#calculator" class="nav-link-item">Calculator</a>
+      <div class="tools-dd-wrap">
+        <button class="tools-btn" id="tools-btn" aria-haspopup="true" aria-expanded="false">Tools <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="tools-dd" id="tools-dropdown">
+          <a href="/free-report/" class="free-report-link">Free Report <span class="new-badge">NEW</span></a>
+          <a href="/#calculator">Mortgage Calculator</a>
+          <a href="/affordability/">Affordability Check</a>
+          <a href="/refinance-calculator/">Refinance Savings</a>
+          <a href="/equity-loan/">Equity / Cash-Out</a>
+          <a href="/mortgage-rates/">Current Rates</a>
+          <a href="/sora-rates-singapore/">Live SORA Rate</a>
+        </div>
+      </div>
+      <a href="/about/" class="nav-link-item">About</a>
+      <a href="/contact/" class="nav-link-item">Contact</a>
+      <a href="/blog/" class="nav-link-item is-current">Insights</a>
+    </div>
+    <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" rel="noopener" class="nav-cta" style="display:none;" id="nav-cta-desktop">Free Consult</a>
+    <button class="mob-toggle" onclick="document.getElementById('site-mob-menu').classList.toggle('open')" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="site-mob-menu">
+    <a href="/services/">Services</a>
+    <a href="/mortgage-rates/">Rates</a>
+    <a href="/free-report/" class="free-report-link">Free Report <span class="new-badge">NEW</span></a>
+    <a href="/#calculator">Calculator</a>
+    <a href="/affordability/">Affordability</a>
+    <a href="/equity-loan/">Equity Loan</a>
+    <a href="/sora-rates-singapore/">SORA Rate</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+    <a href="/blog/">Insights</a>
+  </div>
+</nav>
+<style>@media (min-width: 1024px) { #nav-cta-desktop { display: inline-flex !important; } }</style>
+
+<div id="reading-progress"></div>
+
+<article class="blog-wrap">
+
+  <a href="/blog/" class="back-link">&#8592; Back to Insights</a>
+
+  <p class="meta">Nexus Mortgage SG &nbsp;&middot;&nbsp; 24 August 2026 &nbsp;&middot;&nbsp; 8-minute read</p>
+
+  <h1>DBS vs UOB vs OCBC Home Loans 2026: Which Bank Fits Your Profile?</h1>
+  <p class="article-byline" style="margin:.5rem 0 1.4rem;font-size:.8rem;color:rgba(232,227,218,.55);font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.01em;">By <a href="/about/" style="color:#c4973b;font-weight:600;text-decoration:none;">Dan Ler</a>, Mortgage Advisor</p>
+
+  <img src="../blog-images/dbs-uob-ocbc-comparison-hero.webp" alt="Three abstract bank towers in navy and gold on a balance scale, symbolising the DBS, UOB and OCBC home loan comparison" class="hero-img" width="1344" height="768" fetchpriority="high">
+
+  <div class="toc">
+    <div class="toc-title">In this article</div>
+    <ol>
+      <li><a href="#how-to-compare">How to actually compare banks (not just rates)</a></li>
+      <li><a href="#pegs">Rate structures: FHR boards vs pure SORA</a></li>
+      <li><a href="#lockins">Lock-ins, quantum tiers and subsidies</a></li>
+      <li><a href="#profiles">Which bank, by borrower profile</a></li>
+      <li><a href="#beyond">Beyond the big three</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </div>
+
+  <p>"Which bank has the best home loan" is the most-asked question in this business, and the honest answer is that it changes weekly and depends on your loan size, property type and how long you plan to hold the package. This page compares the three local giants structurally — the things that stay true between rate refreshes. For today's actual numbers, the live 16-bank table on our <a href="/mortgage-rates/">rates page</a> is refreshed continuously, and each bank has its own detail page: <a href="/dbs-home-loan/">DBS</a>, <a href="/uob-home-loan/">UOB</a>, <a href="/ocbc-home-loan/">OCBC</a>.</p>
+
+  <!-- ===================== HOW ===================== -->
+
+  <h2 id="how-to-compare">How to Actually Compare Banks (Not Just Rates)</h2>
+
+  <p>Headline rates across the big three usually sit within a few basis points of each other — competition sees to that. Where borrowers actually win or lose money is in the structure around the rate:</p>
+
+  <ul>
+    <li><strong>What the floating rate is pegged to</strong>, and who controls it.</li>
+    <li><strong>What happens after the lock-in</strong> — the thereafter rate and how easy repricing is.</li>
+    <li><strong>Quantum tiers</strong> — the rate you see advertised often needs a minimum loan size.</li>
+    <li><strong>Subsidies</strong> — legal and valuation support that offsets switching costs, usually scaled to loan size.</li>
+  </ul>
+
+  <!-- ===================== PEGS ===================== -->
+
+  <h2 id="pegs">Rate Structures: FHR Boards vs Pure SORA</h2>
+
+  <table class="compare-table">
+    <tr><th>Bank</th><th>Fixed packages</th><th>Floating peg</th><th>Structural note</th></tr>
+    <tr><td><a href="/dbs-home-loan/">DBS</a></td><td>Yes, multiple lock-ins</td><td>FHR (Fixed Home Rate) board <em>and</em> 3M compounded SORA</td><td>FHR is set by DBS off its fixed-deposit rates — bank-administered, historically stable but not market-driven</td></tr>
+    <tr><td><a href="/uob-home-loan/">UOB</a></td><td>Yes, multiple lock-ins</td><td>3M compounded SORA</td><td>Pure market peg — the bank controls only the spread, not the benchmark</td></tr>
+    <tr><td><a href="/ocbc-home-loan/">OCBC</a></td><td>Yes, multiple lock-ins</td><td>3M compounded SORA</td><td>Pure market peg; subsidy support on larger loans offsets most switching costs</td></tr>
+  </table>
+
+  <p>The peg question matters more than most borrowers realise. A <strong>3M compounded SORA</strong> package moves with the published MAS benchmark (<a href="/sora-rates-singapore/">live SORA here</a>) — transparent both ways. A <strong>board rate like DBS's FHR</strong> is administered by the bank: it has historically moved slowly, which cushions you when market rates spike, but the bank decides when and how it moves. Neither is strictly better; they are different risk postures. The history of these peg families is in the <a href="/blog/fdr-fhr-dmr-home-loan-pegs-singapore/">FDR/FHR/DMR guide</a>.</p>
+
+  <!-- ===================== LOCKINS ===================== -->
+
+  <h2 id="lockins">Lock-ins, Quantum Tiers and Subsidies</h2>
+
+  <ul>
+    <li><strong>Lock-ins</strong> at all three run the familiar shape: promotional years one and two, a thereafter rate that jumps, and a penalty (typically ~1.5%) for leaving early. The "thereafter" line is where cheap packages get expensive — diarise the expiry and reprice or refinance on schedule (<a href="/blog/reprice-vs-refinance-singapore/">the decision framework</a>).</li>
+    <li><strong>Quantum tiers:</strong> advertised rates generally carry minimum loan sizes. Small loans (under roughly the few-hundred-thousand mark) often price a notch higher everywhere — sometimes the "best bank" for a small loan is simply the one whose tier you clear.</li>
+    <li><strong>Subsidies:</strong> new-purchase and refinancing packages frequently include legal/valuation subsidies, scaled to quantum — OCBC in particular leans on subsidy support for larger refinancing loans. A slightly higher rate with a full subsidy can beat a lower rate without one over a 2-year horizon; we do that arithmetic on every case.</li>
+  </ul>
+
+  <!-- ===================== PROFILES ===================== -->
+
+  <h2 id="profiles">Which Bank, by Borrower Profile</h2>
+
+  <ul>
+    <li><strong>Rate-spike worrier, wants floating:</strong> the DBS FHR board has historically been the gentler ride in rising-rate years; pure SORA at UOB/OCBC is the better ride down when the benchmark falls. Decide which direction you are insuring against.</li>
+    <li><strong>Transparency-first borrower:</strong> pure 3M SORA (UOB/OCBC) — you can verify every reprice against the published benchmark.</li>
+    <li><strong>Large refinancing loan:</strong> get the subsidy math quoted at all three; on bigger quantums the subsidy differences often decide it, not the rate.</li>
+    <li><strong>Small loan:</strong> check quantum tiers first — the "best" advertised rate may not be available to you at all.</li>
+    <li><strong>HDB borrower choosing a bank over the HDB loan:</strong> all three price HDB packages; the real decision is the <a href="/blog/hdb-vs-bank-loan/">HDB-loan-vs-bank fork</a> before the bank beauty parade.</li>
+  </ul>
+
+  <p class="pullquote">The truthful comparison is never "DBS vs UOB vs OCBC" in the abstract — it is "these three quotes, for this loan size, this week." Structure persists; rates rotate.</p>
+
+  <!-- ===================== BEYOND ===================== -->
+
+  <h2 id="beyond">Beyond the Big Three</h2>
+
+  <p>The local trio write most of Singapore's mortgages, but the sharpest package on a given week is frequently a foreign or mid-tier lender fighting for share — <a href="/hsbc-home-loan/">HSBC</a>, <a href="/standard-chartered-home-loan/">Standard Chartered</a>, <a href="/maybank-home-loan/">Maybank</a>, CIMB, RHB and others. Our recent <a href="/blog/sme-equity-term-loan-industrial-property-2026/">SME case study</a> closed at CIMB precisely because the big three were not the best fit that week. A broker's 16-bank comparison exists because the answer moves; the live table is on the <a href="/mortgage-rates/">rates page</a>.</p>
+
+  <!-- ===================== FAQ ===================== -->
+
+  <h2 id="faq">Frequently Asked Questions</h2>
+
+  <div class="faq-q">Which bank has the lowest home loan rate in Singapore right now?</div>
+  <p>It rotates weekly with promotions and quantum tiers, which is why this page compares structure instead of quoting a number that would be stale by the time you read it. The live 16-bank comparison on our rates page carries current pricing, and packages in the low-1% range have been the competitive zone through 2026.</p>
+
+  <div class="faq-q">What is the difference between DBS FHR and a SORA-pegged loan?</div>
+  <p>FHR is a board rate administered by DBS, historically slow-moving in both directions. 3M compounded SORA is the published MAS benchmark — market-driven and fully transparent, moving with Singapore interest rates. FHR cushions spikes; SORA passes through falls. Neither dominates in all conditions.</p>
+
+  <div class="faq-q">Do all three banks offer legal and valuation subsidies?</div>
+  <p>Commonly, on new-purchase and refinancing packages, scaled to loan size — with OCBC notably leaning on subsidies for larger refinancing quantums. Always compare the package net of subsidy over your intended holding period, not the headline rate alone.</p>
+
+  <div class="faq-q">Is it better to go to the bank directly or through a broker?</div>
+  <p>Same rates either way — banks pay the broker on disbursement, so the borrower price is identical. The difference is coverage: a bank's officer can only quote their own shelf; a broker compares 16+ lenders including weeks when a foreign bank undercuts all three locals. There is no scenario where the borrower pays more via a broker.</p>
+
+  <div class="faq-q">Can I switch banks after my lock-in ends?</div>
+  <p>Yes — that is refinancing, and post-lock-in there is no penalty. The alternative is repricing onto a new package with your current bank, which is cheaper and faster but limited to that bank's shelf. The trade-off is worked through in our reprice-vs-refinance guide.</p>
+
+  <!-- ===================== CTA ===================== -->
+
+  <div class="cta-box">
+    <p><strong style="color:#faf7f2;font-size:1.1rem;">Get All Three Quoted &mdash; Plus the 13 Banks They Compete With</strong></p>
+    <p>Your loan size and profile decide which bank actually wins this week. We pull live pricing across 16+ MAS-regulated lenders and show the net-of-subsidy math, free.</p>
+    <a href="/free-report/" class="cta-btn">Compare 16 Banks Free &rarr;</a>
+    <p style="margin-top:1.2rem;font-size:.82rem;">Prefer a personal comparison? <strong><a href="https://wa.me/6587520859">WhatsApp Dan Ler at +65 8752 0859</a></strong>. Banks pay our fee &mdash; you pay nothing.</p>
+  </div>
+
+    <div style="background:rgba(196,151,59,.07); border:1px solid rgba(196,151,59,.22); border-left:3px solid #c4973b; border-radius:8px; padding:1rem 1.3rem; margin-top:2.5rem; font-size:.95rem; color:rgba(232,227,218,.78);">
+    <strong style="color:#c4973b;">Part of:</strong> <a href="/singapore-mortgage-guide-2026/">The Complete Singapore Mortgage Guide 2026</a> &mdash; 22-section pillar covering TDSR, MSR, MAS 4% stress, HFE, HDB and private routes, decoupling, refinancing, SSD and CPF on sale.
+  </div>
+<div class="author-bio" style="display:flex;gap:1rem;align-items:center;margin-top:2.5rem;padding:1.25rem 1.4rem;border:1px solid rgba(196,151,59,.2);border-radius:10px;background:rgba(196,151,59,.05);"><img src="/dan-ler.webp" alt="Dan Ler &mdash; Mortgage Advisor, Nexus Mortgage SG" width="64" height="64" loading="lazy" style="width:64px;height:64px;border-radius:50%;flex-shrink:0;border:2px solid rgba(196,151,59,.35);object-fit:cover;"><p style="margin:0;font-size:.95rem;color:rgba(250,247,242,.75);"><strong style="color:#c4973b;">About the author &mdash;</strong> <a href="/about/" style="color:#c4973b;font-weight:600;">Dan Ler</a> has advised on Singapore home loans since 2017 at Nexus Mortgage SG, an independent brokerage comparing 16+ MAS-regulated lenders. Nexus has facilitated 500+ home loans across HDB, EC, private condo and landed property segments. Banks pay Nexus on disbursement, so there is no cost to the borrower.</p>
+  </div>
+
+
+        <hr class="divider">
+
+        <h2 style="font-size:1.1rem; margin-bottom:1rem;">Further reading</h2>
+        <ul class="checklist" style="margin-bottom:2rem;">
+            <li><a href="../fdr-fhr-dmr-home-loan-pegs-singapore/">FDR, FHR and DMR pegs explained</a> &mdash; the board-rate history behind the DBS structure</li>
+            <li><a href="../fixed-vs-floating-home-loan-singapore/">Fixed vs floating in 2026</a> &mdash; the decision that comes before the bank decision</li>
+            <li><a href="../reprice-vs-refinance-singapore/">Reprice vs refinance</a> &mdash; what to do when your lock-in ends</li>
+            <li><a href="/mortgage-rates/">Live 16-bank rate table</a> &mdash; today's actual numbers for all three banks and their competitors</li>
+            <li><a href="/free-report/">Free Singapore mortgage report</a> &mdash; your personalised 16-bank comparison in one PDF</li>
+        </ul>
+
+<hr>
+
+  <p class="disclaimer"><em>Nexus Mortgage SG is an independent Singapore mortgage advisory. This article is general information, not financial advice, and deliberately avoids quoting package rates that change weekly — see the live rates page for current pricing. Bank structures described reflect publicly available package information as of 24 August 2026. Sources: <a href="https://www.mas.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS</a>, <a href="https://www.abs.org.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">ABS (SORA administration)</a>, bank published rate boards via our <a href="/mortgage-rates/" style="color:rgba(196,151,59,.5);">rates page</a>.</em></p>
+
+</article>
+
+<a id="btt" href="#" aria-label="Back to top" title="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+</a>
+<script>
+(function(){
+  var prog = document.getElementById('reading-progress');
+  var btt = document.getElementById('btt');
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    prog.style.width = (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    btt.classList.toggle('visible', window.scrollY > 400);
+  }, {passive: true});
+  btt.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+
+<script>
+(function() {
+  const tBtn = document.getElementById('tools-btn');
+  const tDd = document.getElementById('tools-dropdown');
+  if (tBtn && tDd) {
+    tBtn.addEventListener('click', e => { e.stopPropagation(); const open = tDd.style.display === 'block'; tDd.style.display = open ? 'none' : 'block'; tBtn.setAttribute('aria-expanded', String(!open)); });
+    document.addEventListener('click', () => { tDd.style.display = 'none'; tBtn.setAttribute('aria-expanded', 'false'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { tDd.style.display = 'none'; tBtn.setAttribute('aria-expanded', 'false'); } });
+  }
+  document.body.classList.add('has-site-nav');
+})();
+</script>
+
+</body>
+</html>
