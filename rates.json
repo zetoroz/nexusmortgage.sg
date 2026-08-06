@@ -1,10 +1,10 @@
 {
   "asOf": "13 July 2026",
   "refRates": {
-    "sora1m": 1.1119,
-    "sora3m": 1.1246,
+    "sora1m": 1.0942,
+    "sora3m": 1.1181,
     "fhr6": 0.8,
-    "asOfSora": "2026-08-04"
+    "asOfSora": "2026-08-05"
   },
   "packages": [
     {
@@ -2518,5 +2518,5 @@
   ],
   "generatedAt": "2026-07-22T08:47:50.384757+00:00",
   "xlsxFingerprint": "42a283a7e95a",
-  "asOfSora": "2026-08-04"
+  "asOfSora": "2026-08-05"
 }
