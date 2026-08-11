@@ -1,0 +1,53 @@
+name: URA price index refresh
+
+# URA refreshes PMI_Resi_Transaction end-of-day every Tuesday and Friday, so we pull the
+# following morning: 01:00 UTC = 09:00 SGT on Wednesday and Saturday.
+on:
+  schedule:
+    - cron: '0 1 * * 3,6'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-ura-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch URA transactions + rebuild price index
+        env:
+          # Required. Add at:
+          # https://github.com/zetoroz/nexusmortgage.sg/settings/secrets/actions
+          URA_ACCESS_KEY: ${{ secrets.URA_ACCESS_KEY }}
+        run: node scripts/fetch-ura-data.mjs
+
+      - name: Stage outputs
+        # Raw URA payloads are never committed — only the derived aggregate.
+        # TODO: add singapore-property-price-index/index.html + a snippet updater
+        # (mirroring update-rate-snippets.mjs) once the public page ships.
+        run: |
+          git add -A ura-prices.json ura-history.json ura-feed.json ura.xml || true
+
+      - name: Commit + push if changed
+        run: |
+          if git diff --cached --quiet; then
+            echo "No index change — nothing to commit."
+            exit 0
+          fi
+          git config user.name  "nexus-rates-bot"
+          git config user.email "rates-bot@users.noreply.github.com"
+          DATE_SGT=$(TZ=Asia/Singapore date '+%Y-%m-%d')
+          git commit -m "chore(ura): price index refresh ${DATE_SGT}"
+          git push

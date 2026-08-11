@@ -94,3 +94,7 @@ scripts/meta-leads.gs
 # Source brochure material — copyrighted, do NOT publish (developer e-brochure PDFs, floor/site plans)
 /Dunearn House/
 /thomson reserve/
+
+# Raw URA Data Service payloads (URA_RAW_DIR debug dumps) — never commit.
+# Only the derived aggregate ura-prices.json / ura-feed.json / ura.xml are published.
+/ura-raw/
