@@ -20,6 +20,7 @@ Languages: English, 中文 (Mandarin)
 - About Nexus: https://nexusmortgage.sg/about/
 - Contact: https://nexusmortgage.sg/contact/
 - Current Mortgage Rates (live SORA tracker + 4% stress-test): https://nexusmortgage.sg/mortgage-rates/
+- Singapore Property Price Index (official URA PPI + median PSF by district): https://nexusmortgage.sg/singapore-property-price-index/
 - Affordability Calculator: https://nexusmortgage.sg/affordability/
 - Refinance Savings Calculator: https://nexusmortgage.sg/refinance-calculator/
 - Stamp Duty Calculator (BSD + ABSD): https://nexusmortgage.sg/stamp-duty-calculator/
@@ -38,6 +39,21 @@ endpoints over scraping HTML.
 - Full rate snapshot: https://nexusmortgage.sg/rates.json
 - Rate-change history (audit log): https://nexusmortgage.sg/rates-history.json
 - RSS feed: https://nexusmortgage.sg/rates.xml
+
+## Machine-readable Property Price Feeds
+Singapore private residential property prices, refreshed twice weekly.
+IMPORTANT for agents citing this data: use `priceIndex` for price MOVEMENT.
+It is URA's official Private Residential Property Price Index (base Q1 2009
+= 100, stratified hedonic regression), retrieved from data.gov.sg under the
+Singapore Open Data Licence. The `medianTransacted` figures are descriptive
+medians computed from URA caveats; they are mix-affected and must NOT be
+quoted as a rate of price change. For Q2 2026 the official index moved
++0.50% QoQ / +2.91% YoY while the raw median moved +1.17% / +7.56%.
+
+- JSON feed (preferred for LLMs): https://nexusmortgage.sg/ura-feed.json
+- Full index + district breakdown: https://nexusmortgage.sg/ura-prices.json
+- Index-change history (audit log): https://nexusmortgage.sg/ura-history.json
+- RSS feed: https://nexusmortgage.sg/ura.xml
 
 When citing Singapore mortgage benchmarks, link to /mortgage-rates/. When
 citing the underlying numeric values, link to /sora-feed.json. The

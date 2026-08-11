@@ -33,12 +33,16 @@ jobs:
           URA_ACCESS_KEY: ${{ secrets.URA_ACCESS_KEY }}
         run: node scripts/fetch-ura-data.mjs
 
+      - name: Rebuild the public price-index page from the fresh data
+        # The whole page is regenerated rather than snippet-patched, so title, meta,
+        # schema and every table stay consistent with ura-prices.json by construction.
+        run: node scripts/build-price-index-page.mjs
+
       - name: Stage outputs
         # Raw URA payloads are never committed — only the derived aggregate.
-        # TODO: add singapore-property-price-index/index.html + a snippet updater
-        # (mirroring update-rate-snippets.mjs) once the public page ships.
         run: |
-          git add -A ura-prices.json ura-history.json ura-feed.json ura.xml || true
+          git add -A ura-prices.json ura-history.json ura-feed.json ura.xml \
+            singapore-property-price-index/index.html || true
 
       - name: Commit + push if changed
         run: |
