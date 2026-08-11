@@ -46,8 +46,30 @@ h = sub1(r'<link rel="canonical" href=".*?">',
 h = re.sub(r'<link rel="alternate" hreflang="(en-sg|x-default)" href=".*?">',
            lambda m: '<link rel="alternate" hreflang="%s" href="%s">' % (m.group(1), URL), h)
 
-# drop og:image block (new articles ship without a hero image)
+# ---- og:image ------------------------------------------------------------
+# Articles with their own hero set OG_IMAGE (+ optional alt/dims/type) in their
+# module. Everything else falls back to the site card so the page still previews
+# on social and in AI surfaces. This block used to strip og:image outright, which
+# shipped new articles with no preview image at all.
+OG_IMAGE = getattr(A, "OG_IMAGE", "https://nexusmortgage.sg/og-image.png")
+OG_IMAGE_ALT = getattr(A, "OG_IMAGE_ALT", A.OG_TITLE)
+OG_IMAGE_W = getattr(A, "OG_IMAGE_W", 1024)
+OG_IMAGE_H = getattr(A, "OG_IMAGE_H", 1024)
+# NOTE: /og-image.png is really a 1024x1024 JPEG despite the .png name.
+OG_IMAGE_TYPE = getattr(A, "OG_IMAGE_TYPE", "image/jpeg")
+
 h = re.sub(r'\s*<meta property="og:image(?::[a-z]+)?" content=".*?">', '', h)
+h = re.sub(r'\s*<meta name="twitter:image" content=".*?">', '', h)
+og_block = (
+    '\n  <meta property="og:image" content="%s">'
+    '\n  <meta property="og:image:alt" content="%s">'
+    '\n  <meta property="og:image:width" content="%d">'
+    '\n  <meta property="og:image:height" content="%d">'
+    '\n  <meta property="og:image:type" content="%s">'
+    '\n  <meta name="twitter:image" content="%s">'
+) % (OG_IMAGE, OG_IMAGE_ALT, OG_IMAGE_W, OG_IMAGE_H, OG_IMAGE_TYPE, OG_IMAGE)
+h = sub1(r'(<meta property="og:url" content=".*?">)',
+         '<meta property="og:url" content="%s">%s' % (URL, og_block), h, "og:image block")
 
 # ---- Article schema ------------------------------------------------------
 art = {
@@ -98,7 +120,16 @@ head_html = ('\n\n  <a href="/blog/" class="back-link">&#8592; Back to Insights<
 
 m = re.search(r'<article[^>]*>', h)
 end = h.rfind("</article>")
-h = h[:m.end()] + head_html + A.BODY + "\n\n" + h[end:]
+
+# The E-E-A-T author-bio box lives near the end of the template's <article>, so
+# replacing the body wholesale used to delete it. Carry it across explicitly:
+# without it the article keeps only the byline and loses the author credentials
+# block that Google and AI surfaces read for authorship.
+bio = re.search(r'<div class="author-bio".*?</div>', h[m.end():end], re.S)
+if not bio:
+    raise SystemExit("FAILED to find author-bio block in template")
+
+h = h[:m.end()] + head_html + A.BODY + "\n\n  " + bio.group(0) + "\n\n" + h[end:]
 
 out = "blog/%s/index.html" % A.SLUG
 os.makedirs(os.path.dirname(out), exist_ok=True)
