@@ -2,7 +2,7 @@
   "source": "Urban Redevelopment Authority (URA) Data Service, PMI_Resi_Transaction",
   "attribution": "Contains information from URA accessed via the URA Data Service.",
   "note": "Aggregated caveat data. Indicative only, not a valuation.",
-  "generatedAt": "2026-08-11T19:48:17.520Z",
+  "generatedAt": "2026-08-12T03:22:47.521Z",
   "asOf": "2026-08-12",
   "priceIndex": {
     "source": "URA Private Residential Property Price Index via data.gov.sg",
