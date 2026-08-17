@@ -90,7 +90,7 @@
     <link rel="alternate" hreflang="x-default" href="https://nexusmortgage.sg/blog/singapore-property-cooling-measures-2026/">
 
   <!-- Structured Data: Article -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Singapore Property Cooling Measures in 2026: Every Rule That Affects Your Purchase","datePublished":"2026-08-20","dateModified":"2026-08-20","image":{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/cooling-measures-2026-hero.png","width":1344,"height":768},"description":"Consolidated, current map of Singapore's property cooling measures as of August 2026: ABSD at the 27 April 2023 schedule (SC 0/20/30%, PR 5/30/35%, foreigner 60%), LTV limits 75/45/35% with tenure and age-65 triggers, TDSR 55% at the MAS 4% stress floor, MSR 30% for HDB and new ECs, the 4 July 2025 SSD reset (16/12/8/4% over four years), the 20 August 2024 HDB loan LTV alignment at 75%, and the 28 July 2026 removal of the 15-month wait-out period. With a timeline of every measure and links to the detailed guide for each.","mainEntityOfPage":{"@type":"WebPage","@id":"https://nexusmortgage.sg/blog/singapore-property-cooling-measures-2026/"},"author":{"@id":"https://nexusmortgage.sg/#dan-ler","@type":"Person","name":"Dan Ler","url":"https://nexusmortgage.sg/about/","image":"https://nexusmortgage.sg/dan-ler.webp","jobTitle":"Mortgage Advisor","worksFor":{"@type":"Organization","name":"Nexus Mortgage","url":"https://nexusmortgage.sg"}},"publisher":{"@id":"https://nexusmortgage.sg/#organization"},"keywords":"Singapore property cooling measures 2026, ABSD rates 2026, LTV limits Singapore, TDSR 55%, MSR 30%, SSD four years, 15-month wait-out removed, MAS stress test 4%, property rules Singapore"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Singapore Property Cooling Measures in 2026: Every Rule That Affects Your Purchase","datePublished":"2026-08-20","dateModified":"2026-08-20","image":[{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/cooling-measures-2026-hero.png","width":1344,"height":768},{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/cooling-measures-map.png","width":1344,"height":768},{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/cooling-measures-timeline.png","width":1344,"height":768}],"description":"Consolidated, current map of Singapore's property cooling measures as of August 2026: ABSD at the 27 April 2023 schedule (SC 0/20/30%, PR 5/30/35%, foreigner 60%), LTV limits 75/45/35% with tenure and age-65 triggers, TDSR 55% at the MAS 4% stress floor, MSR 30% for HDB and new ECs, the 4 July 2025 SSD reset (16/12/8/4% over four years), the 20 August 2024 HDB loan LTV alignment at 75%, and the 28 July 2026 removal of the 15-month wait-out period. With a timeline of every measure and links to the detailed guide for each.","mainEntityOfPage":{"@type":"WebPage","@id":"https://nexusmortgage.sg/blog/singapore-property-cooling-measures-2026/"},"author":{"@id":"https://nexusmortgage.sg/#dan-ler","@type":"Person","name":"Dan Ler","url":"https://nexusmortgage.sg/about/","image":"https://nexusmortgage.sg/dan-ler.webp","jobTitle":"Mortgage Advisor","worksFor":{"@type":"Organization","name":"Nexus Mortgage","url":"https://nexusmortgage.sg"}},"publisher":{"@id":"https://nexusmortgage.sg/#organization"},"keywords":"Singapore property cooling measures 2026, ABSD rates 2026, LTV limits Singapore, TDSR 55%, MSR 30%, SSD four years, 15-month wait-out removed, MAS stress test 4%, property rules Singapore"}</script>
 
   <!-- Structured Data: FAQPage -->
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What cooling measures apply to a first-time Singaporean buyer in 2026?","acceptedAnswer":{"@type":"Answer","text":"The friendly end of the stack: 0% ABSD, 75% LTV (within the tenure and age-65 caps), TDSR 55% at the 4% floor, MSR 30% if the property is an HDB flat or new EC, and SSD only if you sell within four years of buying. Ordinary BSD applies to everyone."}},{"@type":"Question","name":"Can I use CPF to pay ABSD?","acceptedAnswer":{"@type":"Answer","text":"No. ABSD is payable in cash; CPF cannot fund it. BSD, by contrast, can be settled directly from CPF OA through your conveyancing law firm. Sequencing the sale and purchase, or qualifying for the married-couple remission, is how buyers legally avoid fronting ABSD at all."}},{"@type":"Question","name":"Were any cooling measures relaxed in 2026?","acceptedAnswer":{"@type":"Answer","text":"Yes — two moves in the loosening direction: the May 2026 EC reset (which restructured rather than tightened), and the 28 July 2026 removal of the 15-month wait-out period for private owners buying HDB resale. The core ABSD, LTV, TDSR and SSD settings are unchanged."}},{"@type":"Question","name":"What is the stress-test rate for Singapore home loans?","acceptedAnswer":{"@type":"Answer","text":"Banks must assess residential loans at a floor of 4% regardless of the package rate. A loan that fits at an advertised 1.4% must still pass TDSR and MSR at 4%. That is why calculators that use the advertised rate overstate what you can borrow."}},{"@type":"Question","name":"Do cooling measures apply to commercial or industrial property?","acceptedAnswer":{"@type":"Answer","text":"Largely no: ABSD, SSD (residential schedule) and MSR do not apply to commercial and industrial assets, which is one reason SME owners can gear them harder — see the industrial equity term loan case study. TDSR still applies to individuals borrowing personally."}}]}</script>
@@ -203,6 +203,8 @@
       font-size: 1.05rem;
       color: rgba(250,247,242,.7);
     }
+    .blog-img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: center; border-radius: 10px; margin: 1.8rem 0; display: block; box-shadow: 0 4px 24px rgba(0,0,0,.45); }
+    .img-caption { text-align: center; font-size: .75rem; letter-spacing: .04em; color: rgba(232,227,218,.35); margin-top: -.9rem; margin-bottom: 1.8rem; }
 
     .stat-row {
       display: grid;
@@ -273,7 +275,11 @@
     }
 
     #reading-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#c4973b,#e8c97a);z-index:9999;transition:width .1s linear;pointer-events:none}
-    #btt{position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:#c4973b;color:#0d1117;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .25s cubic-bezier(.25,.8,.25,1),transform .25s cubic-bezier(.25,.8,.25,1);pointer-events:none;box-shadow:0 4px 16px rgba(196,151,59,.35)}
+    #wa-float{position:fixed;bottom:1.5rem;right:1.5rem;width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(37,211,102,.36);z-index:998;transition:transform .25s}
+    #wa-float:hover{transform:scale(1.07)}
+    #wa-float:focus-visible{outline:3px solid #c4973b;outline-offset:3px}
+    @media(prefers-reduced-motion:reduce){#wa-float{transition:none}}
+    #btt{position:fixed;bottom:5.5rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:#c4973b;color:#0d1117;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .25s cubic-bezier(.25,.8,.25,1),transform .25s cubic-bezier(.25,.8,.25,1);pointer-events:none;box-shadow:0 4px 16px rgba(196,151,59,.35)}
     #btt.visible{opacity:1;transform:translateY(0);pointer-events:auto}
     #btt:hover{background:#e0b86a}
     #btt:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
@@ -400,6 +406,9 @@
   <!-- ===================== MAP ===================== -->
 
   <h2 id="map">The 2026 Map: What Applies to Whom</h2>
+  <img src="../blog-images/cooling-measures-map.webp" width="1344" height="768" alt="Table of Singapore property cooling measures in 2026 with the trigger and current setting for each" class="blog-img" loading="lazy">
+  <p class="img-caption">Six rules. Most buyers only ever meet three of them.</p>
+
 
   <table class="compare-table">
     <tr><th>Rule</th><th>Bites when&hellip;</th><th>Current setting</th></tr>
@@ -456,6 +465,9 @@
   <!-- ===================== TIMELINE ===================== -->
 
   <h2 id="timeline">Timeline: How We Got Here</h2>
+  <img src="../blog-images/cooling-measures-timeline.webp" width="1344" height="768" alt="Timeline of Singapore property cooling measures from April 2023 to the July 2026 wait-out removal" class="blog-img" loading="lazy">
+  <p class="img-caption">Four years of tightening, then the first loosening in July 2026.</p>
+
 
   <table class="compare-table">
     <tr><th>Date</th><th>Measure</th></tr>
@@ -520,6 +532,10 @@
   <p class="disclaimer"><em>Nexus Mortgage SG is an independent Singapore mortgage advisory. This article is general information, not financial advice. Rates and rules reflect IRAS, MAS, MND and HDB positions as of 20 August 2026 and can change with a single press release. Sources: <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">IRAS property stamp duty</a>, <a href="https://www.mas.gov.sg/regulation/notices/notice-645" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS Notice 645 (TDSR)</a>, <a href="https://www.mnd.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MND</a>, <a href="https://www.hdb.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">HDB</a>, <a href="https://www.ura.gov.sg/Corporate/Property" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">URA</a>.</em></p>
 
 </article>
+
+<a id="wa-float" href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+a+free+mortgage+consultation." target="_blank" rel="noopener" aria-label="WhatsApp Nexus Mortgage">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
 <a id="btt" href="#" aria-label="Back to top" title="Back to top">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>

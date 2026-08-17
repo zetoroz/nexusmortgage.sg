@@ -58,7 +58,7 @@ BODY = r'''
 
   <p>MAS sets the limits by <em>how many housing loans you already have outstanding</em>, not by how many properties you own.</p>
 
-  <table>
+  <table class="compare-table">
     <thead>
       <tr><th>Outstanding housing loans</th><th>Max LTV</th><th>Minimum cash</th></tr>
     </thead>
@@ -84,7 +84,7 @@ BODY = r'''
     <li>Loan tenure <strong>plus your current age</strong> exceeds <strong>65 years</strong>.</li>
   </ul>
 
-  <table>
+  <table class="compare-table">
     <thead>
       <tr><th>Outstanding loans</th><th>Standard tier</th><th>Reduced tier</th><th>Cash either way</th></tr>
     </thead>
@@ -116,7 +116,7 @@ BODY = r'''
 
   <p>Additional Buyer's Stamp Duty is separate from the loan rules, payable in cash within 14 days, and it is not financeable. Current rates, in force since 27 April 2023:</p>
 
-  <table>
+  <table class="compare-table">
     <thead>
       <tr><th>Buyer profile</th><th>2nd property</th><th>3rd and subsequent</th></tr>
     </thead>
@@ -135,7 +135,7 @@ BODY = r'''
 
   <p>Take a S$1,500,000 condo as a second property, bought by a Singapore Citizen aged 40 with one outstanding housing loan, on a 25-year tenure. Age 40 plus 25 years equals 65, which does not exceed 65, so the standard 45% tier applies.</p>
 
-  <table>
+  <table class="compare-table">
     <thead>
       <tr><th>Item</th><th>Amount</th></tr>
     </thead>
@@ -214,3 +214,56 @@ BODY = r'''
     <a href="https://www.mas.gov.sg/regulation/explainers/tdsr-for-property-loans/calculating-tdsr" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS: Calculating TDSR</a>,
     <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/additional-buyer%27s-stamp-duty-(absd)" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">IRAS: ABSD</a>.</em></p>
 '''
+
+# Rendered by scripts/build-article-infographics.py and placed by
+# scripts/insert-article-images.py. Numbers must match the BODY above.
+IMAGES = [{'out': 'second-property-loan-hero',
+  'type': 'hero',
+  'kicker': 'Nexus Mortgage SG · Second property',
+  'title': 'Your second home loan is capped at 45%. Here is what that costs.',
+  'sub': 'One outstanding housing loan drops the LTV to 45% and pushes the minimum cash to 25%. '
+         'Add ABSD and the up-front figure moves well past three quarters of a million on a S$1.5M '
+         'purchase.',
+  'chips': ['45% LTV', '25% cash', '20% ABSD', '55% TDSR']},
+ {'out': 'second-property-ltv-ladder',
+  'type': 'ladder',
+  'kicker': 'MAS loan-to-value limits',
+  'title': 'Every outstanding loan cuts the next one',
+  'source': 'A fully repaid loan does not count. Tenure past 30 years or age 65 drops each tier '
+            'further, to 25% and 15%.',
+  'rows': [{'label': 'No outstanding loan', 'value': '75%', 'note': '5% minimum cash', 'pct': 100},
+           {'label': 'One outstanding loan',
+            'value': '45%',
+            'note': '25% minimum cash',
+            'pct': 60,
+            'highlight': True},
+           {'label': 'Two or more', 'value': '35%', 'note': '25% minimum cash', 'pct': 47}],
+  'anchor': 'ltv',
+  'alt': 'Bar chart of Singapore LTV limits: 75% with no outstanding loan, 45% with one, 35% with '
+         'two or more',
+  'caption': 'Every loan you still carry cuts the next one. Repaid loans do not count.'},
+ {'out': 'second-property-cash-stack',
+  'type': 'math',
+  'kicker': 'Second property · Worked example',
+  'title': 'What a S$1.5M second home costs up front',
+  'source': 'Singapore Citizen, aged 40, one outstanding housing loan, 25-year tenure, so the 45% '
+            'LTV tier applies.',
+  'rows': [{'label': 'Cash downpayment',
+            'note': '25% of price, CPF not allowed',
+            'value': 'S$375,000'},
+           {'op': '+',
+            'label': 'Balance downpayment',
+            'note': '30%, cash or CPF OA',
+            'value': 'S$450,000'},
+           {'op': '+', 'label': "Buyer's Stamp Duty", 'value': '~S$44,600'},
+           {'op': '+',
+            'label': 'ABSD at 20%',
+            'note': 'Cash, payable within 14 days',
+            'value': 'S$300,000'}],
+  'total': {'label': 'Cash needed before CPF contributes',
+            'note': 'Maximum loan is capped at S$675,000',
+            'value': '~S$719,600'},
+  'anchor': 'worked',
+  'alt': 'Worked calculation of the up-front cash needed for a S$1.5 million second property in '
+         'Singapore',
+  'caption': 'Nearly S$720,000 in cash before CPF contributes anything.'}]

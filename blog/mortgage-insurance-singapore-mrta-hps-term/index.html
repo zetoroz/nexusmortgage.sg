@@ -89,7 +89,7 @@
     <link rel="alternate" hreflang="x-default" href="https://nexusmortgage.sg/blog/mortgage-insurance-singapore-mrta-hps-term/">
 
   <!-- Structured Data: Article -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"MRTA vs HPS vs Term Life: Mortgage Insurance in Singapore, Explained","datePublished":"2026-08-17","dateModified":"2026-08-17","image":{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/mortgage-insurance-singapore-hero.png","width":1344,"height":768},"description":"How the three mortgage-protection routes in Singapore compare: CPF's Home Protection Scheme (mandatory for HDB owners paying instalments with CPF, premiums from OA, cover to 65), Mortgage Reducing Term Assurance (cheapest, reduction schedule fixed at purchase, usually assigned to the bank), and level term life (portable, pays the family, survives refinancing). Comparison table, profile-based picks and the three traps: fire insurance confusion, MRTA drift after restructuring, and assuming the bank requires cover.","mainEntityOfPage":{"@type":"WebPage","@id":"https://nexusmortgage.sg/blog/mortgage-insurance-singapore-mrta-hps-term/"},"author":{"@id":"https://nexusmortgage.sg/#dan-ler","@type":"Person","name":"Dan Ler","url":"https://nexusmortgage.sg/about/","image":"https://nexusmortgage.sg/dan-ler.webp","jobTitle":"Mortgage Advisor","worksFor":{"@type":"Organization","name":"Nexus Mortgage","url":"https://nexusmortgage.sg"}},"publisher":{"@id":"https://nexusmortgage.sg/#organization"},"keywords":"mortgage insurance Singapore, MRTA vs term life, HPS Home Protection Scheme, MRTA Singapore, mortgage reducing term assurance, HDB HPS exemption, home loan insurance, term life mortgage cover"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"MRTA vs HPS vs Term Life: Mortgage Insurance in Singapore, Explained","datePublished":"2026-08-17","dateModified":"2026-08-17","image":[{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/mortgage-insurance-singapore-hero.png","width":1344,"height":768},{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/mortgage-insurance-compare.png","width":1344,"height":768},{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/mortgage-insurance-which-way.png","width":1344,"height":768}],"description":"How the three mortgage-protection routes in Singapore compare: CPF's Home Protection Scheme (mandatory for HDB owners paying instalments with CPF, premiums from OA, cover to 65), Mortgage Reducing Term Assurance (cheapest, reduction schedule fixed at purchase, usually assigned to the bank), and level term life (portable, pays the family, survives refinancing). Comparison table, profile-based picks and the three traps: fire insurance confusion, MRTA drift after restructuring, and assuming the bank requires cover.","mainEntityOfPage":{"@type":"WebPage","@id":"https://nexusmortgage.sg/blog/mortgage-insurance-singapore-mrta-hps-term/"},"author":{"@id":"https://nexusmortgage.sg/#dan-ler","@type":"Person","name":"Dan Ler","url":"https://nexusmortgage.sg/about/","image":"https://nexusmortgage.sg/dan-ler.webp","jobTitle":"Mortgage Advisor","worksFor":{"@type":"Organization","name":"Nexus Mortgage","url":"https://nexusmortgage.sg"}},"publisher":{"@id":"https://nexusmortgage.sg/#organization"},"keywords":"mortgage insurance Singapore, MRTA vs term life, HPS Home Protection Scheme, MRTA Singapore, mortgage reducing term assurance, HDB HPS exemption, home loan insurance, term life mortgage cover"}</script>
 
   <!-- Structured Data: FAQPage -->
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is mortgage insurance compulsory in Singapore?","acceptedAnswer":{"@type":"Answer","text":"Only in one case: HDB owners who service their loan with CPF must be covered under the Home Protection Scheme, unless exempted on the strength of existing private policies. For private property there is no legal or bank requirement to carry mortgage insurance — only fire insurance on the building is required by lenders."}},{"@type":"Question","name":"What is the difference between HPS and MRTA?","acceptedAnswer":{"@type":"Answer","text":"Both are reducing cover that tracks your loan down. HPS is CPF-run, HDB-only, paid from CPF OA and capped at age 65. MRTA is a private policy for any property, paid in cash, with the reduction schedule fixed at purchase and the payout usually assigned to the bank."}},{"@type":"Question","name":"Should I buy MRTA or term life for a private property loan?","acceptedAnswer":{"@type":"Answer","text":"MRTA is cheaper for the same starting cover; term life is portable, pays your family rather than the bank, and keeps a level sum assured while the loan shrinks. Broadly: hold-to-term borrowers lean MRTA, movers and families with dependants lean term. Ronald Cheong, a financial advisor with Prestige Raffles, can price both for your age and health: WhatsApp +65 9369 8284."}},{"@type":"Question","name":"What happens to my MRTA when I refinance?","acceptedAnswer":{"@type":"Answer","text":"The policy usually cannot transfer to the new loan, especially across banks or properties. You either keep the old policy running against its original schedule (risking a cover gap) or buy fresh cover at your current age. Factor this into the refinancing math — we flag it on every case, and refer the re-cover to Ronald Cheong at Prestige Raffles on +65 9369 8284."}},{"@type":"Question","name":"Does HPS cover both owners of a flat fully?","acceptedAnswer":{"@type":"Answer","text":"Each owner elects a share of cover, and the shares must total at least 100% of the loan obligation. At the default proportional split, one owner's death clears only their share. Couples who want either death to fully clear the flat should each elect 100% — the premium difference is usually modest."}}]}</script>
@@ -202,6 +202,8 @@
       font-size: 1.05rem;
       color: rgba(250,247,242,.7);
     }
+    .blog-img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: center; border-radius: 10px; margin: 1.8rem 0; display: block; box-shadow: 0 4px 24px rgba(0,0,0,.45); }
+    .img-caption { text-align: center; font-size: .75rem; letter-spacing: .04em; color: rgba(232,227,218,.35); margin-top: -.9rem; margin-bottom: 1.8rem; }
 
     .stat-row {
       display: grid;
@@ -272,7 +274,11 @@
     }
 
     #reading-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#c4973b,#e8c97a);z-index:9999;transition:width .1s linear;pointer-events:none}
-    #btt{position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:#c4973b;color:#0d1117;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .25s cubic-bezier(.25,.8,.25,1),transform .25s cubic-bezier(.25,.8,.25,1);pointer-events:none;box-shadow:0 4px 16px rgba(196,151,59,.35)}
+    #wa-float{position:fixed;bottom:1.5rem;right:1.5rem;width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(37,211,102,.36);z-index:998;transition:transform .25s}
+    #wa-float:hover{transform:scale(1.07)}
+    #wa-float:focus-visible{outline:3px solid #c4973b;outline-offset:3px}
+    @media(prefers-reduced-motion:reduce){#wa-float{transition:none}}
+    #btt{position:fixed;bottom:5.5rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:#c4973b;color:#0d1117;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .25s cubic-bezier(.25,.8,.25,1),transform .25s cubic-bezier(.25,.8,.25,1);pointer-events:none;box-shadow:0 4px 16px rgba(196,151,59,.35)}
     #btt.visible{opacity:1;transform:translateY(0);pointer-events:auto}
     #btt:hover{background:#e0b86a}
     #btt:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
@@ -499,6 +505,9 @@
   <!-- ===================== COMPARE ===================== -->
 
   <h2 id="compare">Side-by-Side Comparison</h2>
+  <img src="../blog-images/mortgage-insurance-compare.webp" width="1344" height="768" alt="Comparison table of HPS, MRTA and level term life cover across payout, portability and premiums" class="blog-img" loading="lazy">
+  <p class="img-caption">The row that decides most private-property cases is whether the cover survives refinancing.</p>
+
 
   <table class="compare-table">
     <tr><th>Feature</th><th>HPS</th><th>MRTA</th><th>Level term</th></tr>
@@ -535,6 +544,9 @@
   <!-- ===================== PICK ===================== -->
 
   <h2 id="pick">How to Pick, by Profile</h2>
+  <img src="../blog-images/mortgage-insurance-which-way.webp" width="1344" height="768" alt="Two-column card showing when to lean towards MRTA and when to lean towards level term life" class="blog-img" loading="lazy">
+  <p class="img-caption">If your mortgage plans involve movement, buy cover that moves with you.</p>
+
 
   <ul>
     <li><strong>HDB owner paying with CPF:</strong> you are in HPS by default, and for most flats that is the right, cheapest answer. Consider the exemption route only if you already carry substantial private cover — and check the household share election so one death clears the whole loan, not half of it. Background: <a href="/blog/cpf-oa-hdb-guide/">how CPF OA funds an HDB flat</a> and <a href="/blog/hdb-vs-bank-loan/">HDB loan vs bank loan</a>.</li>
@@ -631,6 +643,10 @@
   <p class="disclaimer"><em>Nexus Mortgage SG is an independent Singapore mortgage advisory, not a licensed insurance intermediary. This article is general information on how insurance products interact with home loans, not financial or insurance advice; consult a licensed financial adviser for policy recommendations. Ronald Cheong is a financial advisor with Prestige Raffles and operates independently of Nexus Mortgage SG; any quotation, recommendation or advice on a policy is his and follows his firm's own advisory process. Positions as of 17 August 2026. Sources: <a href="https://www.cpf.gov.sg/member/home-ownership" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">CPF Home Ownership / HPS</a>, <a href="https://www.hdb.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">HDB</a>, <a href="https://www.mas.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS</a>, <a href="https://www.moneysense.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MoneySense</a>.</em></p>
 
 </article>
+
+<a id="wa-float" href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+a+free+mortgage+consultation." target="_blank" rel="noopener" aria-label="WhatsApp Nexus Mortgage">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
 <a id="btt" href="#" aria-label="Back to top" title="Back to top">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>

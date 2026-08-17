@@ -53,7 +53,7 @@ BODY = r'''
 
   <p>If you have landed here searching for &ldquo;SIBOR rate today&rdquo; or &ldquo;3 month SIBOR rate&rdquo;, the short version is that there is nothing to look up. The benchmark was retired, and no current figure is published for any tenor.</p>
 
-  <table>
+  <table class="compare-table">
     <thead>
       <tr><th>Benchmark</th><th>Status</th><th>Final date</th></tr>
     </thead>
@@ -83,7 +83,7 @@ BODY = r'''
 
   <p>The distinction that matters to a borrower is direction in time.</p>
 
-  <table>
+  <table class="compare-table">
     <thead>
       <tr><th></th><th>SIBOR (retired)</th><th>Compounded SORA (current)</th></tr>
     </thead>
@@ -106,7 +106,7 @@ BODY = r'''
 
   <p>Nobody was left holding a loan pegged to a benchmark that no longer published. The industry route was the <strong>SORA Conversion Package (SCP)</strong>, and it ran in two stages.</p>
 
-  <table>
+  <table class="compare-table">
     <thead>
       <tr><th>Window</th><th>What happened</th></tr>
     </thead>
@@ -145,7 +145,7 @@ BODY = r'''
 
   <p>The final retail figures applied at automatic conversion were:</p>
 
-  <table>
+  <table class="compare-table">
     <thead>
       <tr><th>Conversion</th><th>Adjustment spread</th></tr>
     </thead>
@@ -217,3 +217,49 @@ BODY = r'''
     <a href="http://abs.org.sg/docs/library/response-to-feedback-on-consultation-on-adjustment-spreads-for-the-conversion-of-legacy-sibor-loans-to-sora.pdf" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">SC-STS: Adjustment Spreads for the Conversion of SIBOR Loans to SORA (30 June 2023)</a>,
     <a href="https://abs.org.sg/docs/library/timelines-to-cease-issuance-of-sor-derivatives-and-sibor-linked-financial-products.pdf" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">SC-STS: Timelines to Cease Issuance of SOR- and SIBOR-Linked Products</a>.</em></p>
 '''
+
+# Rendered by scripts/build-article-infographics.py and placed by
+# scripts/insert-article-images.py. Numbers must match the BODY above.
+IMAGES = [{'out': 'sibor-rate-singapore-hero',
+  'type': 'hero',
+  'kicker': 'Nexus Mortgage SG · Benchmarks',
+  'title': 'SIBOR is gone. What replaced it, and what it means for your loan.',
+  'sub': 'Every SIBOR tenor has been retired and Singapore home loans now peg to compounded SORA. '
+         'The timeline, the adjustment spread, and what to check on your own package.',
+  'chips': ['SIBOR retired', 'SOR retired', 'Compounded SORA']},
+ {'out': 'sibor-sora-timeline',
+  'type': 'timeline',
+  'kicker': 'Benchmark transition',
+  'title': 'How Singapore retired SIBOR',
+  'source': 'Compounded SORA is now the single benchmark, published every business day by MAS.',
+  'steps': [{'when': 'Mar 2022', 'label': '6-month SIBOR', 'note': 'Discontinued first'},
+            {'when': 'Jun 2023', 'label': 'SOR retired', 'note': 'All Swap Offer Rate tenors'},
+            {'when': 'Dec 2024', 'label': '1M and 3M SIBOR', 'note': 'Last publication'},
+            {'when': 'Today',
+             'label': 'Compounded SORA',
+             'note': 'The only benchmark left',
+             'highlight': True}],
+  'anchor': 'gone',
+  'alt': 'Timeline of the SIBOR and SOR retirement in Singapore ending with compounded SORA',
+  'caption': 'Every SIBOR tenor is now retired. Nothing is left to convert.'},
+ {'out': 'sibor-vs-sora-compare',
+  'type': 'compare',
+  'kicker': 'What actually changed',
+  'title': 'A panel estimate replaced by a real average',
+  'accent': 1,
+  'cols': ['SIBOR (retired)', 'Compounded SORA'],
+  'source': 'Conversion spreads were fixed at 0.2426% from 1M SIBOR and 0.3571% from 3M SIBOR.',
+  'rows': [{'label': 'Based on',
+            'cells': ['Panel bank submissions', 'Actual overnight transactions']},
+           {'label': 'Direction',
+            'cells': ['Forward-looking term rate', 'Backward-looking average']},
+           {'label': 'Known when',
+            'cells': ['At the start of the period', 'Accrues across the period']},
+           {'label': 'Behaviour',
+            'cells': ['Moved on expectations, could jump', 'Smoother, averaging damps spikes']},
+           {'label': 'Tenors',
+            'cells': ['1M, 3M, 6M, 12M', 'Overnight, 1M, 3M and 6M compounded']}],
+  'anchor': 'difference',
+  'alt': 'Comparison of retired SIBOR against compounded SORA on basis, direction and behaviour',
+  'caption': 'SIBOR was an estimate of what banks would charge. SORA is a record of what they '
+             'did.'}]

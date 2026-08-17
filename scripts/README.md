@@ -111,3 +111,89 @@ The script picks up any column whose row 4 (Lenders) is non-empty and whose year
 1. Add the columns in the xlsx following the same row layout.
 2. Re-run the script.
 3. If the lender's display name should be different from its xlsx code (e.g. `MB` → `Maybank`), update `LENDER_DISPLAY` in `/free-report/index.html`.
+
+---
+
+# Article Infographics
+
+Blog articles carry a hero plus **two in-article images**. In-article images are
+brand infographics rendered from HTML, not stock photos and not AI renders, so
+they can be re-rendered whenever a rule or a rate changes.
+
+Thumbnails (`*-thumb.webp`) are for the `/blog/` grid only and must never be
+used as an in-article image.
+
+## New articles
+
+`new-article.py` now owns both. Define `IMAGES` in the article module and the
+generator merges the specs, renders them, and places them:
+
+```bash
+python3 scripts/new-article.py scripts/articles/my_article.py
+```
+
+It refuses to run if the template has lost the floating WhatsApp button or the
+in-article image CSS, and warns if an article ends up without a hero plus two
+cards. `--no-images` defers the image step.
+
+`scripts/articles/sibor.py` is the worked reference: it carries `IMAGES`, and
+re-running it reproduces the published article byte for byte.
+
+The floating WhatsApp button is inherited from the template, so it needs no
+per-article config. `scripts/add-wa-float.py` backfills it into existing
+articles if one ever slips through.
+
+## Adding images to an existing article
+
+1. Add two entries to **`scripts/infographic-specs.json`**:
+
+   ```json
+   {
+     "out": "my-article-ltv-ladder",
+     "slug": "my-article-slug",
+     "type": "ladder",
+     "kicker": "Section label",
+     "title": "The point the card makes",
+     "source": "Assumptions and caveats, shown small at the foot.",
+     "rows": [ { "label": "...", "value": "45%", "pct": 60, "highlight": true } ],
+     "anchor": "ltv",
+     "alt": "Descriptive alt text for screen readers and image search",
+     "caption": "A takeaway, not a repeat of the title."
+   }
+   ```
+
+   `anchor` is the `id` of the `<h2>` the image is inserted after.
+   Pull the numbers from the article itself so the card and the prose agree.
+
+2. Render, then place:
+
+   ```bash
+   python3 scripts/build-article-infographics.py       # all, or pass a name filter
+   python3 scripts/insert-article-images.py            # --dry-run to preview
+   ```
+
+Both scripts are idempotent. `insert-article-images.py` also adds the
+`.blog-img` / `.img-caption` CSS if the article lacks it, promotes a `hero`
+card into `og:image` / `twitter:image`, and rebuilds the Article JSON-LD
+`image` array to match the page.
+
+## Tables
+
+Tables in `BODY` must carry `class="compare-table"`. A bare `<table>` inherits
+no styling and renders as unformatted text.
+
+## Card types
+
+| `type` | Shape | Use for |
+|---|---|---|
+| `ladder` | Horizontal bars | Tiers and bands: BSD, LTV, SSD, land psf |
+| `compare` | Column table | 2 to 4 options across several features |
+| `timeline` | Nodes plus cards | Sequences and dates |
+| `math` | Stacked sum with total | Worked cash examples |
+| `stat` | Big number tiles | Three headline figures |
+| `split` | Two-column decision | This-or-that choices |
+| `hero` | Navy banner | Article hero when there is no photo |
+
+Output is 1344x768 `.png` + `.webp` in `blog/blog-images/`, matching every
+other blog image. Rendering needs `chrome-headless-shell`; override the path
+with `CHROME_BIN` if Playwright's copy moves.

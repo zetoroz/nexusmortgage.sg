@@ -90,7 +90,7 @@
     <link rel="alternate" hreflang="x-default" href="https://nexusmortgage.sg/blog/dbs-vs-uob-vs-ocbc-home-loan-2026/">
 
   <!-- Structured Data: Article -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DBS vs UOB vs OCBC Home Loans 2026: Which Bank Fits Your Profile?","datePublished":"2026-08-24","dateModified":"2026-08-24","image":{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/dbs-uob-ocbc-comparison-hero.png","width":1344,"height":768},"description":"Structural comparison of Singapore's three local banks for home loans in 2026: DBS's bank-administered FHR board rate versus the pure 3M compounded SORA pegs at UOB and OCBC, how lock-ins and thereafter rates work, why quantum tiers decide which advertised rate you can actually get, how legal and valuation subsidies change the net math on larger refinancing loans, and which borrower profile each bank fits. Includes when foreign banks like HSBC, Standard Chartered, Maybank or CIMB beat all three.","mainEntityOfPage":{"@type":"WebPage","@id":"https://nexusmortgage.sg/blog/dbs-vs-uob-vs-ocbc-home-loan-2026/"},"author":{"@id":"https://nexusmortgage.sg/#dan-ler","@type":"Person","name":"Dan Ler","url":"https://nexusmortgage.sg/about/","image":"https://nexusmortgage.sg/dan-ler.webp","jobTitle":"Mortgage Advisor","worksFor":{"@type":"Organization","name":"Nexus Mortgage","url":"https://nexusmortgage.sg"}},"publisher":{"@id":"https://nexusmortgage.sg/#organization"},"keywords":"DBS vs UOB vs OCBC home loan, best bank home loan Singapore 2026, DBS FHR vs SORA, UOB home loan comparison, OCBC home loan comparison, bank home loan Singapore compare, home loan subsidy Singapore"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DBS vs UOB vs OCBC Home Loans 2026: Which Bank Fits Your Profile?","datePublished":"2026-08-24","dateModified":"2026-08-24","image":[{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/dbs-uob-ocbc-comparison-hero.png","width":1344,"height":768},{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/big-three-peg-choice.png","width":1344,"height":768},{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/big-three-banks-compare.png","width":1344,"height":768}],"description":"Structural comparison of Singapore's three local banks for home loans in 2026: DBS's bank-administered FHR board rate versus the pure 3M compounded SORA pegs at UOB and OCBC, how lock-ins and thereafter rates work, why quantum tiers decide which advertised rate you can actually get, how legal and valuation subsidies change the net math on larger refinancing loans, and which borrower profile each bank fits. Includes when foreign banks like HSBC, Standard Chartered, Maybank or CIMB beat all three.","mainEntityOfPage":{"@type":"WebPage","@id":"https://nexusmortgage.sg/blog/dbs-vs-uob-vs-ocbc-home-loan-2026/"},"author":{"@id":"https://nexusmortgage.sg/#dan-ler","@type":"Person","name":"Dan Ler","url":"https://nexusmortgage.sg/about/","image":"https://nexusmortgage.sg/dan-ler.webp","jobTitle":"Mortgage Advisor","worksFor":{"@type":"Organization","name":"Nexus Mortgage","url":"https://nexusmortgage.sg"}},"publisher":{"@id":"https://nexusmortgage.sg/#organization"},"keywords":"DBS vs UOB vs OCBC home loan, best bank home loan Singapore 2026, DBS FHR vs SORA, UOB home loan comparison, OCBC home loan comparison, bank home loan Singapore compare, home loan subsidy Singapore"}</script>
 
   <!-- Structured Data: FAQPage -->
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which bank has the lowest home loan rate in Singapore right now?","acceptedAnswer":{"@type":"Answer","text":"It rotates weekly with promotions and quantum tiers, which is why this page compares structure instead of quoting a number that would be stale by the time you read it. The live 16-bank comparison on our rates page carries current pricing, and packages in the low-1% range have been the competitive zone through 2026."}},{"@type":"Question","name":"What is the difference between DBS FHR and a SORA-pegged loan?","acceptedAnswer":{"@type":"Answer","text":"FHR is a board rate administered by DBS, historically slow-moving in both directions. 3M compounded SORA is the published MAS benchmark — market-driven and fully transparent, moving with Singapore interest rates. FHR cushions spikes; SORA passes through falls. Neither dominates in all conditions."}},{"@type":"Question","name":"Do all three banks offer legal and valuation subsidies?","acceptedAnswer":{"@type":"Answer","text":"Commonly, on new-purchase and refinancing packages, scaled to loan size — with OCBC notably leaning on subsidies for larger refinancing quantums. Always compare the package net of subsidy over your intended holding period, not the headline rate alone."}},{"@type":"Question","name":"Is it better to go to the bank directly or through a broker?","acceptedAnswer":{"@type":"Answer","text":"Same rates either way — banks pay the broker on disbursement, so the borrower price is identical. The difference is coverage: a bank's officer can only quote their own shelf; a broker compares 16+ lenders including weeks when a foreign bank undercuts all three locals. There is no scenario where the borrower pays more via a broker."}},{"@type":"Question","name":"Can I switch banks after my lock-in ends?","acceptedAnswer":{"@type":"Answer","text":"Yes — that is refinancing, and post-lock-in there is no penalty. The alternative is repricing onto a new package with your current bank, which is cheaper and faster but limited to that bank's shelf. The trade-off is worked through in our reprice-vs-refinance guide."}}]}</script>
@@ -203,6 +203,8 @@
       font-size: 1.05rem;
       color: rgba(250,247,242,.7);
     }
+    .blog-img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: center; border-radius: 10px; margin: 1.8rem 0; display: block; box-shadow: 0 4px 24px rgba(0,0,0,.45); }
+    .img-caption { text-align: center; font-size: .75rem; letter-spacing: .04em; color: rgba(232,227,218,.35); margin-top: -.9rem; margin-bottom: 1.8rem; }
 
     .stat-row {
       display: grid;
@@ -273,7 +275,11 @@
     }
 
     #reading-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#c4973b,#e8c97a);z-index:9999;transition:width .1s linear;pointer-events:none}
-    #btt{position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:#c4973b;color:#0d1117;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .25s cubic-bezier(.25,.8,.25,1),transform .25s cubic-bezier(.25,.8,.25,1);pointer-events:none;box-shadow:0 4px 16px rgba(196,151,59,.35)}
+    #wa-float{position:fixed;bottom:1.5rem;right:1.5rem;width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(37,211,102,.36);z-index:998;transition:transform .25s}
+    #wa-float:hover{transform:scale(1.07)}
+    #wa-float:focus-visible{outline:3px solid #c4973b;outline-offset:3px}
+    @media(prefers-reduced-motion:reduce){#wa-float{transition:none}}
+    #btt{position:fixed;bottom:5.5rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:#c4973b;color:#0d1117;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .25s cubic-bezier(.25,.8,.25,1),transform .25s cubic-bezier(.25,.8,.25,1);pointer-events:none;box-shadow:0 4px 16px rgba(196,151,59,.35)}
     #btt.visible{opacity:1;transform:translateY(0);pointer-events:auto}
     #btt:hover{background:#e0b86a}
     #btt:focus-visible{outline:2px solid #c4973b;outline-offset:3px}
@@ -399,6 +405,9 @@
   <!-- ===================== HOW ===================== -->
 
   <h2 id="how-to-compare">How to Actually Compare Banks (Not Just Rates)</h2>
+  <img src="../blog-images/big-three-peg-choice.webp" width="1344" height="768" alt="Two-column card comparing a bank board-pegged loan against a pure compounded SORA loan" class="blog-img" loading="lazy">
+  <p class="img-caption">Whoever sets the peg decides how much of your rate you can predict.</p>
+
 
   <p>Headline rates across the big three usually sit within a few basis points of each other — competition sees to that. Where borrowers actually win or lose money is in the structure around the rate:</p>
 
@@ -412,6 +421,9 @@
   <!-- ===================== PEGS ===================== -->
 
   <h2 id="pegs">Rate Structures: FHR Boards vs Pure SORA</h2>
+  <img src="../blog-images/big-three-banks-compare.webp" width="1344" height="768" alt="Comparison of DBS, UOB and OCBC home loans by floating peg, who sets it and what the bank controls" class="blog-img" loading="lazy">
+  <p class="img-caption">DBS controls both the peg and the spread. UOB and OCBC control only the spread.</p>
+
 
   <table class="compare-table">
     <tr><th>Bank</th><th>Fixed packages</th><th>Floating peg</th><th>Structural note</th></tr>
@@ -519,6 +531,10 @@
   <p class="disclaimer"><em>Nexus Mortgage SG is an independent Singapore mortgage advisory. This article is general information, not financial advice, and deliberately avoids quoting package rates that change weekly — see the live rates page for current pricing. Bank structures described reflect publicly available package information as of 24 August 2026. Sources: <a href="https://www.mas.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS</a>, <a href="https://www.abs.org.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">ABS (SORA administration)</a>, bank published rate boards via our <a href="/mortgage-rates/" style="color:rgba(196,151,59,.5);">rates page</a>.</em></p>
 
 </article>
+
+<a id="wa-float" href="https://wa.me/6587520859?text=Hi%2C+I%27d+like+a+free+mortgage+consultation." target="_blank" rel="noopener" aria-label="WhatsApp Nexus Mortgage">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
 <a id="btt" href="#" aria-label="Back to top" title="Back to top">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>

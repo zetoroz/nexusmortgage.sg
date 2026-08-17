@@ -5,18 +5,29 @@ Clones blog/how-to-apply-home-loan-singapore/index.html (head, analytics, nav,
 footer, styling all inherited), then swaps the head metadata, the JSON-LD
 blocks and the <article> body for the new piece.
 
-Usage:  python3 scripts/new-article.py <module_under_scripts/articles/>
+Usage:  python3 scripts/new-article.py <module_under_scripts/articles/> [--no-images]
 The module must define: SLUG, TITLE, DESC, OG_TITLE, OG_DESC, KEYWORDS,
 SECTION, DATE_HUMAN, DATE_ISO, READ_TIME, WORDS, H1, BODY, FAQ (list of
 (question, answer) pairs), BREADCRUMB_NAME.
+
+It should also define IMAGES: a list of infographic specs (see
+scripts/README.md). They are merged into scripts/infographic-specs.json,
+rendered, and placed into the article automatically. House standard is a hero
+plus two in-article cards; anything less prints a warning. Pass --no-images to
+defer, then run the two image scripts by hand later.
 """
-import re, sys, os, json, importlib.util
+import re, sys, os, json, subprocess, importlib.util
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 TEMPLATE = "blog/how-to-apply-home-loan-singapore/index.html"
 
-spec = importlib.util.spec_from_file_location("art", sys.argv[1])
+ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
+if not ARGS:
+    raise SystemExit("Usage: python3 scripts/new-article.py <module> [--no-images]")
+MODULE = ARGS[0]
+
+spec = importlib.util.spec_from_file_location("art", MODULE)
 A = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(A)
 
@@ -131,7 +142,56 @@ if not bio:
 
 h = h[:m.end()] + head_html + A.BODY + "\n\n  " + bio.group(0) + "\n\n" + h[end:]
 
+# ---- template guarantees -------------------------------------------------
+# Both of these were silently lost once before: the in-article images stopped
+# when the workflow changed in June 2026, and the floating WhatsApp button
+# never made it into the article template at all while every other page had
+# one. Fail loudly here rather than discover it months later.
+for needle, what in (
+    ('id="wa-float"', "floating WhatsApp button"),
+    (".blog-img", "in-article image CSS"),
+):
+    if needle not in h:
+        raise SystemExit(
+            "FAILED: template %s is missing the %s. Fix the template before "
+            "publishing, or every new article inherits the gap." % (TEMPLATE, what)
+        )
+
 out = "blog/%s/index.html" % A.SLUG
 os.makedirs(os.path.dirname(out), exist_ok=True)
 open(out, "w", encoding="utf-8").write(h)
 print("wrote", out, "(%d bytes)" % len(h))
+
+# ---- images --------------------------------------------------------------
+IMAGES = getattr(A, "IMAGES", [])
+if "--no-images" in sys.argv:
+    print("skipped images (--no-images); run the image scripts before publishing")
+elif not IMAGES:
+    print("\n  WARNING: %s defines no IMAGES, so it ships with no hero and no\n"
+          "  in-article cards. Add an IMAGES list (see scripts/README.md) and\n"
+          "  re-run, or run the two image scripts by hand." % os.path.basename(MODULE))
+else:
+    specs_path = "scripts/infographic-specs.json"
+    specs = json.load(open(specs_path, encoding="utf-8"))
+    by_out = {s["out"]: i for i, s in enumerate(specs)}
+    for img in IMAGES:
+        img = dict(img, slug=A.SLUG)
+        if img["out"] in by_out:
+            specs[by_out[img["out"]]] = img      # re-running an article updates in place
+        else:
+            specs.append(img)
+    json.dump(specs, open(specs_path, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+    print("merged %d image spec(s) into %s" % (len(IMAGES), specs_path))
+
+    for cmd in (["scripts/build-article-infographics.py", A.SLUG],
+                ["scripts/insert-article-images.py"]):
+        r = subprocess.run([sys.executable] + cmd, cwd=ROOT)
+        if r.returncode != 0:
+            raise SystemExit("FAILED: %s exited %d" % (cmd[0], r.returncode))
+
+    placed = open(out, encoding="utf-8").read().count('class="blog-img"')
+    hero = any(i.get("type") == "hero" for i in IMAGES)
+    if placed < 2 or not hero:
+        print("\n  WARNING: %s ended up with %d in-article card(s) and %s hero.\n"
+              "  House standard is a hero plus two cards."
+              % (A.SLUG, placed, "a" if hero else "no"))

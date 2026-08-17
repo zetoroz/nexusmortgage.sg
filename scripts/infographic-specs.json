@@ -1,0 +1,1466 @@
+[
+  {
+    "out": "stamp-duty-bsd-ladder",
+    "slug": "stamp-duty-singapore-guide-2026",
+    "type": "ladder",
+    "kicker": "Buyer's Stamp Duty · Residential",
+    "title": "BSD is charged in slices, not one flat rate",
+    "source": "Marginal rates: each band applies only to the portion of price inside it.",
+    "rows": [
+      {
+        "label": "First S$180,000",
+        "value": "1%",
+        "pct": 17
+      },
+      {
+        "label": "Next S$180,000 (to S$360k)",
+        "value": "2%",
+        "pct": 33
+      },
+      {
+        "label": "Next S$640,000 (to S$1m)",
+        "value": "3%",
+        "pct": 50
+      },
+      {
+        "label": "Next S$500,000 (to S$1.5m)",
+        "value": "4%",
+        "pct": 67
+      },
+      {
+        "label": "Next S$1,500,000 (to S$3m)",
+        "value": "5%",
+        "pct": 83
+      },
+      {
+        "label": "Above S$3,000,000",
+        "value": "6%",
+        "pct": 100,
+        "highlight": true
+      }
+    ],
+    "anchor": "bsd",
+    "alt": "Bar chart of Singapore Buyer's Stamp Duty bands from 1% on the first S$180,000 up to 6% above S$3,000,000",
+    "caption": "Only the slice above S$3m is taxed at 6%. On a S$2m purchase the blended rate lands near 3.5%, not 5%."
+  },
+  {
+    "out": "stamp-duty-absd-by-buyer",
+    "slug": "stamp-duty-singapore-guide-2026",
+    "type": "compare",
+    "kicker": "Additional Buyer's Stamp Duty",
+    "title": "ABSD depends on who is buying, not what",
+    "cols": [
+      "1st property",
+      "2nd",
+      "3rd or more"
+    ],
+    "source": "ABSD is payable in cash within 14 days of the contract date, on top of BSD.",
+    "rows": [
+      {
+        "label": "Singapore Citizen",
+        "cells": [
+          "0%",
+          "20%",
+          "30%"
+        ]
+      },
+      {
+        "label": "Permanent Resident",
+        "cells": [
+          "5%",
+          "30%",
+          "35%"
+        ]
+      },
+      {
+        "label": "Foreigner",
+        "cells": [
+          "60%",
+          "60%",
+          "60%"
+        ]
+      },
+      {
+        "label": "Entity / company / trust",
+        "cells": [
+          "65%",
+          "65%",
+          "65%"
+        ]
+      }
+    ],
+    "anchor": "absd",
+    "alt": "Table of Singapore ABSD rates by buyer profile and property count, from 0% to 65%",
+    "caption": "Residency and property count set the rate. The property itself makes no difference."
+  },
+  {
+    "out": "bridging-loan-cost-ladder",
+    "slug": "bridging-loan-singapore-2026",
+    "type": "ladder",
+    "kicker": "Bridging loan · What it costs",
+    "title": "You only pay for the window the bridge is open",
+    "source": "Indicative interest at the upper end of a 4% a year bridging rate. Actual pricing varies by bank.",
+    "rows": [
+      {
+        "label": "S$200,000 bridged",
+        "value": "~S$2,000",
+        "note": "held 3 months",
+        "pct": 25
+      },
+      {
+        "label": "S$320,000 bridged",
+        "value": "~S$3,200",
+        "note": "held 3 months",
+        "pct": 40
+      },
+      {
+        "label": "S$400,000 bridged",
+        "value": "~S$8,000",
+        "note": "held 6 months",
+        "pct": 100,
+        "highlight": true
+      }
+    ],
+    "anchor": "costs",
+    "alt": "Bar chart of indicative bridging loan interest by amount bridged and holding period",
+    "caption": "The headline rate looks high until you notice it only runs for the weeks the bridge is open."
+  },
+  {
+    "out": "bridging-loan-sequence",
+    "slug": "bridging-loan-singapore-2026",
+    "type": "timeline",
+    "kicker": "How a bridge actually runs",
+    "title": "Four steps from OTP to clean loan",
+    "source": "The bank sizes the bridge against your expected net sale proceeds, not your income.",
+    "steps": [
+      {
+        "when": "Step 1",
+        "label": "Secure your buyer",
+        "note": "Signed OTP on the home you are selling"
+      },
+      {
+        "when": "Step 2",
+        "label": "Apply alongside",
+        "note": "Bridge plus the new home loan together"
+      },
+      {
+        "when": "Step 3",
+        "label": "Bridge pays the gap",
+        "note": "Covers the downpayment tranche at purchase"
+      },
+      {
+        "when": "Step 4",
+        "label": "Sale completes",
+        "note": "Proceeds clear the bridge automatically",
+        "highlight": true
+      }
+    ],
+    "anchor": "how-it-works",
+    "alt": "Four-step timeline of a Singapore bridging loan from signed OTP to the sale clearing the bridge",
+    "caption": "The bridge is sized against your expected sale proceeds, which is why the OTP comes first."
+  },
+  {
+    "out": "fixed-vs-floating-compare",
+    "slug": "fixed-vs-floating-home-loan-singapore",
+    "type": "compare",
+    "kicker": "Singapore home loans",
+    "title": "Fixed or floating, line by line",
+    "cols": [
+      "Fixed",
+      "Floating (SORA)"
+    ],
+    "source": "Floating packages reprice every three months as compounded SORA moves.",
+    "rows": [
+      {
+        "label": "Monthly payment",
+        "cells": [
+          "Locked for the fixed term",
+          "Moves every 3 months"
+        ]
+      },
+      {
+        "label": "If rates rise",
+        "cells": [
+          "Protected",
+          "You absorb it"
+        ]
+      },
+      {
+        "label": "If rates fall",
+        "cells": [
+          "No benefit until you reprice",
+          "Benefits automatically"
+        ]
+      },
+      {
+        "label": "Starting rate when SORA is low",
+        "cells": [
+          "Slight premium for certainty",
+          "Usually lower"
+        ]
+      },
+      {
+        "label": "Free conversion during lock-in",
+        "cells": [
+          "Rare",
+          "Often allowed"
+        ]
+      },
+      {
+        "label": "Best for",
+        "cells": [
+          "Predictability, tight budgets",
+          "Flexibility, riding low rates"
+        ]
+      }
+    ],
+    "anchor": "the-differences",
+    "alt": "Comparison table of fixed versus SORA-floating home loans across payment, rate risk and conversion",
+    "caption": "The rate gap is the smallest difference between them. Everything else on this card matters more."
+  },
+  {
+    "out": "fixed-vs-floating-decide",
+    "slug": "fixed-vs-floating-home-loan-singapore",
+    "type": "split",
+    "kicker": "A simple way to decide",
+    "title": "Which one is actually yours?",
+    "source": "Neither is safer in the abstract. The right answer depends on the budget behind the loan.",
+    "sides": [
+      {
+        "head": "Take fixed",
+        "sub": "Certainty is worth the premium",
+        "points": [
+          "A payment rise would hurt your budget",
+          "You think rates rise more than they fall",
+          "You want to set it and forget it",
+          "Peace of mind beats the last 0.1%"
+        ]
+      },
+      {
+        "head": "Take floating",
+        "sub": "You can absorb movement",
+        "points": [
+          "Cashflow handles a quarterly swing",
+          "SORA is low or flat, so you start cheaper",
+          "Many packages allow free conversion",
+          "You will reprice in a year or two anyway"
+        ]
+      }
+    ],
+    "anchor": "how-to-decide",
+    "alt": "Two-column decision card listing when a fixed home loan wins and when a floating loan wins",
+    "caption": "The question is not which rate is lower today. It is which one your budget can live with."
+  },
+  {
+    "out": "foreigner-absd-by-profile",
+    "slug": "foreigner-pr-private-property-singapore",
+    "type": "stat",
+    "kicker": "Same condo, three buyers",
+    "title": "ABSD is the number that decides it",
+    "source": "Rates as at 2026. FTA-exempt nationals are treated as Singapore Citizens for ABSD purposes.",
+    "tiles": [
+      {
+        "num": "60%",
+        "label": "Foreigner, no FTA exemption",
+        "note": "S$1,200,000 on a S$2m condo",
+        "highlight": true
+      },
+      {
+        "num": "5%",
+        "label": "Permanent Resident, first property",
+        "note": "S$100,000, and CPF may be used"
+      },
+      {
+        "num": "0%",
+        "label": "FTA-exempt national, first property",
+        "note": "Treated as a Citizen buying their first home"
+      }
+    ],
+    "anchor": "absd",
+    "alt": "Three ABSD rates compared: 60% for a foreigner, 5% for a PR and 0% for an FTA-exempt national",
+    "caption": "Same condo, same loan, three different tax bills. Profile decides the cash, not the property."
+  },
+  {
+    "out": "foreigner-cash-stack",
+    "slug": "foreigner-pr-private-property-singapore",
+    "type": "math",
+    "kicker": "Worked example · S$2m condo",
+    "title": "What a foreigner puts down on day one",
+    "source": "Foreigner with no FTA exemption, first property, 75% loan. No CPF may be used at any stage.",
+    "rows": [
+      {
+        "label": "Downpayment at 25%",
+        "note": "All cash, CPF not available",
+        "value": "S$500,000"
+      },
+      {
+        "op": "+",
+        "label": "ABSD at 60%",
+        "note": "Cash, within 14 days",
+        "value": "S$1,200,000"
+      },
+      {
+        "op": "+",
+        "label": "Buyer's Stamp Duty",
+        "value": "S$69,600"
+      },
+      {
+        "op": "+",
+        "label": "Legal and valuation",
+        "value": "~S$3,000"
+      }
+    ],
+    "total": {
+      "label": "Cash needed up front",
+      "note": "On top of a S$1,500,000 bank loan. An FTA-exempt buyer needs about S$572,600.",
+      "value": "~S$1,772,600"
+    },
+    "anchor": "example",
+    "alt": "Worked calculation of the up-front cash a foreigner needs for a S$2 million Singapore condo",
+    "caption": "The ABSD alone is more than twice the downpayment."
+  },
+  {
+    "out": "reprice-vs-refi-split",
+    "slug": "reprice-vs-refinance-singapore",
+    "type": "split",
+    "kicker": "When the teaser rate ends",
+    "title": "Reprice or refinance?",
+    "accent": 1,
+    "source": "Legal and valuation costs on a refinance are often offset by the incoming bank's subsidy.",
+    "sides": [
+      {
+        "head": "Reprice",
+        "sub": "Stay with your bank",
+        "points": [
+          "No legal or valuation cost",
+          "~S$200 to S$800 admin fee",
+          "Done in about 2 to 3 weeks",
+          "Only your own bank's packages",
+          "Best for speed and smaller loans"
+        ]
+      },
+      {
+        "head": "Refinance",
+        "sub": "Move to a new bank",
+        "points": [
+          "~S$1,800 to S$2,500 legal and valuation",
+          "Often offset by a subsidy",
+          "Takes about 4 to 6 weeks",
+          "Every package across 16 banks",
+          "Best for bigger savings on larger loans"
+        ]
+      }
+    ],
+    "anchor": "compare",
+    "alt": "Side-by-side card comparing repricing with your existing bank against refinancing to a new one",
+    "caption": "Repricing is cheaper and faster. Refinancing opens the whole market. Loan size usually decides it."
+  },
+  {
+    "out": "reprice-refi-timing",
+    "slug": "reprice-vs-refinance-singapore",
+    "type": "timeline",
+    "kicker": "The lock-in trap",
+    "title": "Start four to six months early",
+    "source": "A letter of offer is usually valid for that window, so the new rate can start the day the old one steps up.",
+    "steps": [
+      {
+        "when": "6 to 4 months out",
+        "label": "Start comparing",
+        "note": "Line up offers before the step-up"
+      },
+      {
+        "when": "3 to 2 months out",
+        "label": "Accept and process",
+        "note": "Refinance takes 4 to 6 weeks"
+      },
+      {
+        "when": "Lock-in ends",
+        "label": "New rate begins",
+        "note": "No overlap, no penalty",
+        "highlight": true
+      },
+      {
+        "when": "Too early",
+        "label": "~1.5% penalty",
+        "note": "Switching inside lock-in wipes the saving"
+      }
+    ],
+    "anchor": "timing",
+    "alt": "Timeline showing when to start a reprice or refinance relative to the end of the lock-in period",
+    "caption": "Start too late and you pay the step-up rate. Start too early and you pay the penalty."
+  },
+  {
+    "out": "home-loan-pegs-families",
+    "slug": "fdr-fhr-dmr-home-loan-pegs-singapore",
+    "type": "split",
+    "kicker": "Your rate = peg + spread",
+    "title": "Two families of floating peg",
+    "accent": 0,
+    "source": "Only the peg moves over time. The spread is fixed when you sign.",
+    "sides": [
+      {
+        "head": "Market-pegged",
+        "sub": "SORA",
+        "points": [
+          "Compounded Singapore Overnight Rate Average",
+          "Published daily by MAS",
+          "Neither you nor the bank can influence it",
+          "Fully transparent, externally administered"
+        ]
+      },
+      {
+        "head": "Board-pegged",
+        "sub": "FHR · FDR · FDMR · FDPR · DMR",
+        "points": [
+          "Set by the bank off its own deposit rates",
+          "Moves when the bank decides to move it",
+          "Historically less abrupt than SORA",
+          "Peg and tenure vary by bank, and change"
+        ]
+      }
+    ],
+    "anchor": "families",
+    "alt": "Two-column card contrasting market-pegged SORA loans with bank board-pegged FHR and FDR loans",
+    "caption": "Every acronym on your loan document belongs to one of these two columns."
+  },
+  {
+    "out": "home-loan-pegs-compare",
+    "slug": "fdr-fhr-dmr-home-loan-pegs-singapore",
+    "type": "compare",
+    "kicker": "Reading the acronyms",
+    "title": "Who controls the part that moves",
+    "cols": [
+      "SORA",
+      "FHR (DBS)",
+      "FDR / FDMR"
+    ],
+    "source": "FHR, FDR, FDMR, FDPR and DMR are all bank-set deposit pegs under different labels.",
+    "rows": [
+      {
+        "label": "Set by",
+        "cells": [
+          "MAS, from real trades",
+          "DBS, off its own FD rates",
+          "The bank, off a chosen FD tenure"
+        ]
+      },
+      {
+        "label": "Transparency",
+        "cells": [
+          "Published daily",
+          "Bank-published",
+          "Bank-published"
+        ]
+      },
+      {
+        "label": "How it moves",
+        "cells": [
+          "Smoothly, backward-looking",
+          "Less abruptly, historically",
+          "Less abruptly, historically"
+        ]
+      },
+      {
+        "label": "Can the bank change it?",
+        "cells": [
+          "No",
+          "Yes",
+          "Yes"
+        ]
+      },
+      {
+        "label": "Typical tenor",
+        "cells": [
+          "1M or 3M compounded",
+          "e.g. FHR6, the 6-month FD",
+          "6, 8, 18, 24 or 36 months"
+        ]
+      }
+    ],
+    "anchor": "choose",
+    "alt": "Comparison of SORA, DBS FHR and fixed-deposit pegs by who sets them and how they move",
+    "caption": "The real question is not the current number. It is who is allowed to change it."
+  },
+  {
+    "out": "rate-outlook-where-rates-sit",
+    "slug": "singapore-mortgage-rate-outlook-2026",
+    "type": "stat",
+    "kicker": "Singapore home loan rates",
+    "title": "Where rates sit in 2026",
+    "source": "Compounded SORA as published by MAS. Package rates move; check the live tracker before deciding.",
+    "tiles": [
+      {
+        "num": "1.09%",
+        "label": "3-month compounded SORA",
+        "note": "The benchmark most floating loans peg to",
+        "highlight": true
+      },
+      {
+        "num": "1.4–1.8%",
+        "label": "Typical 2-year fixed",
+        "note": "Headline packages across the 16 banks"
+      },
+      {
+        "num": "1.1–1.5%",
+        "label": "All-in floating",
+        "note": "SORA plus the bank's spread"
+      }
+    ],
+    "anchor": "now",
+    "alt": "Three key Singapore mortgage rate figures for 2026: SORA, typical fixed and all-in floating",
+    "caption": "Rates near their lowest in years, but the spread between banks is where the saving sits."
+  },
+  {
+    "out": "rate-outlook-drivers",
+    "slug": "singapore-mortgage-rate-outlook-2026",
+    "type": "split",
+    "kicker": "What actually drives your rate",
+    "title": "The half that moves, and the half that does not",
+    "source": "Two SORA loans can differ by a wide margin, and the peg is identical in both. The spread is where banks compete.",
+    "sides": [
+      {
+        "head": "The peg",
+        "sub": "Moves for the whole market",
+        "points": [
+          "The US Federal Reserve, with a lag",
+          "MAS policy, managed through the exchange rate",
+          "SORA averages actual overnight borrowing",
+          "3-month SORA lags 1-month by design"
+        ]
+      },
+      {
+        "head": "The spread",
+        "sub": "Fixed the day you sign",
+        "points": [
+          "Set by each bank's funding cost",
+          "Reflects appetite for your profile",
+          "Varies with loan quantum and property type",
+          "The only part worth shopping across banks"
+        ]
+      }
+    ],
+    "anchor": "drivers",
+    "alt": "Two-column card separating the moving peg from the fixed bank spread in a Singapore mortgage rate",
+    "caption": "You cannot shop the peg. You can absolutely shop the spread."
+  },
+  {
+    "out": "caveat-vs-bank-cashout",
+    "slug": "caveat-loan-singapore",
+    "type": "compare",
+    "kicker": "Check the cheaper route first",
+    "title": "Caveat loan or bank cash-out?",
+    "accent": 1,
+    "cols": [
+      "Caveat loan",
+      "Bank cash-out / equity"
+    ],
+    "source": "If your profile qualifies, a bank equity loan unlocks the same equity at ordinary home-loan rates.",
+    "rows": [
+      {
+        "label": "Speed",
+        "cells": [
+          "1 to 3 days",
+          "Weeks"
+        ]
+      },
+      {
+        "label": "Cost",
+        "cells": [
+          "High, private lending",
+          "Low, home-loan rates"
+        ]
+      },
+      {
+        "label": "TDSR / income check",
+        "cells": [
+          "Minimal",
+          "Full assessment"
+        ]
+      },
+      {
+        "label": "Tenure",
+        "cells": [
+          "Short-term, exit-driven",
+          "Long-term"
+        ]
+      },
+      {
+        "label": "Best when",
+        "cells": [
+          "Speed or access matters",
+          "Cost matters and you can wait"
+        ]
+      }
+    ],
+    "anchor": "vs-bank",
+    "alt": "Comparison of a caveat loan against a bank cash-out refinance on speed, cost and income assessment",
+    "caption": "Always price the bank route first. Speed is the only thing a caveat loan wins on."
+  },
+  {
+    "out": "caveat-loan-sequence",
+    "slug": "caveat-loan-singapore",
+    "type": "timeline",
+    "kicker": "How a caveat loan works",
+    "title": "Equity in, caveat on, caveat off",
+    "source": "No TDSR income assessment and no MAS LTV cap, which is why funds can move in days.",
+    "steps": [
+      {
+        "when": "First",
+        "label": "Valuation and equity",
+        "note": "Value less the existing mortgage"
+      },
+      {
+        "when": "On approval",
+        "label": "Caveat is lodged",
+        "note": "Registered against the title"
+      },
+      {
+        "when": "Days later",
+        "label": "Funds released",
+        "note": "No TDSR queue to clear",
+        "highlight": true
+      },
+      {
+        "when": "On repayment",
+        "label": "Caveat withdrawn",
+        "note": "Title is clear again"
+      }
+    ],
+    "anchor": "how",
+    "alt": "Four-step timeline of a caveat loan from valuation and equity through to the caveat being withdrawn",
+    "caption": "No TDSR queue and no LTV cap, which is exactly why it costs more."
+  },
+  {
+    "out": "thomson-reserve-cash-tiers",
+    "slug": "thomson-reserve-financing-2026",
+    "type": "compare",
+    "kicker": "Thomson Reserve · Budgeting before pricing",
+    "title": "What each price band asks for up front",
+    "cols": [
+      "S$1.5M",
+      "S$2.0M",
+      "S$2.5M",
+      "S$3.0M"
+    ],
+    "source": "Indicative only. Pricing is not confirmed; figures assume a 75% LTV first housing loan.",
+    "rows": [
+      {
+        "label": "5% cash at OTP",
+        "cells": [
+          "S$75,000",
+          "S$100,000",
+          "S$125,000",
+          "S$150,000"
+        ]
+      },
+      {
+        "label": "25% down in total",
+        "cells": [
+          "S$375,000",
+          "S$500,000",
+          "S$625,000",
+          "S$750,000"
+        ]
+      },
+      {
+        "label": "Loan at 75%",
+        "cells": [
+          "S$1.125M",
+          "S$1.50M",
+          "S$1.875M",
+          "S$2.25M"
+        ]
+      },
+      {
+        "label": "Buyer's Stamp Duty",
+        "cells": [
+          "~S$44,600",
+          "~S$69,600",
+          "~S$94,600",
+          "~S$119,600"
+        ]
+      },
+      {
+        "label": "Gross income needed",
+        "cells": [
+          "~S$9,800/mo",
+          "~S$13,000/mo",
+          "~S$16,300/mo",
+          "~S$19,500/mo"
+        ]
+      }
+    ],
+    "anchor": "budget",
+    "alt": "Table of cash, downpayment, loan and stamp duty across S$1.5M to S$3M price bands at Thomson Reserve",
+    "caption": "Work backwards from the income floor, not forwards from the unit you like."
+  },
+  {
+    "out": "thomson-progressive-timeline",
+    "slug": "thomson-reserve-financing-2026",
+    "type": "timeline",
+    "kicker": "Buildings under construction",
+    "title": "Progressive payments draw the loan down slowly",
+    "source": "Interest accrues only on what has been drawn, so early instalments are small and rise through construction.",
+    "steps": [
+      {
+        "when": "Day 0",
+        "label": "OTP booking fee",
+        "note": "5% of price, in cash"
+      },
+      {
+        "when": "Week 8",
+        "label": "S&P exercise",
+        "note": "15%, cash or CPF"
+      },
+      {
+        "when": "Month 6",
+        "label": "Foundation",
+        "note": "10%, first loan drawdown"
+      },
+      {
+        "when": "Month 12",
+        "label": "RC framework",
+        "note": "10%"
+      },
+      {
+        "when": "Month 18–36",
+        "label": "Walls to roads",
+        "note": "5% at each stage",
+        "highlight": true
+      }
+    ],
+    "anchor": "progressive",
+    "alt": "Timeline of progressive payment stages for a Singapore building-under-construction purchase",
+    "caption": "Interest accrues only on what has been drawn, so the early instalments are small."
+  },
+  {
+    "out": "hdb-waitout-what-changed",
+    "slug": "hdb-15-month-wait-out-removed-2026",
+    "type": "split",
+    "kicker": "Announced 28 July 2026",
+    "title": "One rule went. The rest did not.",
+    "accent": 0,
+    "source": "The first loosening of the private-to-HDB rules since 2022. Everything in the right column is unchanged.",
+    "sides": [
+      {
+        "head": "Removed",
+        "sub": "Effective 28 July 2026",
+        "points": [
+          "The 15-month wait to buy a non-subsidised HDB resale flat",
+          "Gone for all ages and all flat types",
+          "Ex-private owners can buy resale immediately"
+        ]
+      },
+      {
+        "head": "Still applies",
+        "sub": "Unchanged",
+        "points": [
+          "30-month wait for a new BTO flat",
+          "30-month wait for a resale flat with a CPF grant",
+          "30-month wait for a new Executive Condominium",
+          "30-month wait for a resale flat on an HDB loan",
+          "Dispose of all private property; HFE letter before OTP"
+        ]
+      }
+    ],
+    "anchor": "still-applies",
+    "alt": "Two-column card showing the 15-month HDB wait-out removed against the 30-month rules that remain",
+    "caption": "One rule went. Five stayed, and the 30-month HDB loan wait is the one that catches people."
+  },
+  {
+    "out": "hdb-waitout-worked-numbers",
+    "slug": "hdb-15-month-wait-out-removed-2026",
+    "type": "stat",
+    "kicker": "Worked example · S$700,000 resale flat",
+    "title": "What the financing looks like now",
+    "source": "Bank loan at 75% LTV over 25 years, ending before age 65. MSR tested at the 4% stress floor.",
+    "tiles": [
+      {
+        "num": "S$525k",
+        "label": "Loan at 75% LTV",
+        "note": "S$35,000 cash plus S$140,000 cash or CPF down"
+      },
+      {
+        "num": "S$2,075",
+        "label": "Monthly at a 1.40% fixed package",
+        "note": "The instalment you actually pay"
+      },
+      {
+        "num": "S$9,300",
+        "label": "Gross household income needed",
+        "note": "To clear the MSR test at 4%, ≈S$2,771",
+        "highlight": true
+      }
+    ],
+    "anchor": "example",
+    "alt": "Three financing figures for a S$700,000 HDB resale flat: loan, monthly repayment and income needed",
+    "caption": "The instalment is S$2,075. The number that decides approval is the S$2,771 stress figure."
+  },
+  {
+    "out": "sme-equity-deal-shape",
+    "slug": "sme-equity-term-loan-industrial-property-2026",
+    "type": "stat",
+    "kicker": "Case study · Industrial equity term loan",
+    "title": "A S$4M gap closed against a property already owned",
+    "source": "CIMB fixed at 1.18% year 1 and 1.38% year 2, over a 15-year tenure.",
+    "tiles": [
+      {
+        "num": "S$5.8M",
+        "label": "Industrial property valuation",
+        "note": "Asset the business already owned outright"
+      },
+      {
+        "num": "S$4.0M",
+        "label": "Equity term loan drawn",
+        "note": "About 69% of valuation",
+        "highlight": true
+      },
+      {
+        "num": "S$24.3k",
+        "label": "Monthly instalment, year 1",
+        "note": "≈S$96,000 interest across the 2-year fixed"
+      }
+    ],
+    "anchor": "structure",
+    "alt": "Three figures from an industrial equity term loan case: S$5.8M valuation, S$4M loan, S$24.3k monthly",
+    "caption": "The asset was already owned. Nothing new was pledged and nothing was sold."
+  },
+  {
+    "out": "sme-equity-routes-compared",
+    "slug": "sme-equity-term-loan-industrial-property-2026",
+    "type": "compare",
+    "kicker": "The alternatives, honestly",
+    "title": "Why the equity term loan won",
+    "accent": 2,
+    "cols": [
+      "Unsecured SME loan",
+      "Caveat loan",
+      "Equity term loan"
+    ],
+    "source": "Equipment financing was workable but piecemeal at this scale, so it was not the primary route.",
+    "rows": [
+      {
+        "label": "Quantum",
+        "cells": [
+          "Hundreds of thousands",
+          "Large, equity-based",
+          "Millions, valuation-based"
+        ]
+      },
+      {
+        "label": "Speed",
+        "cells": [
+          "Fast",
+          "Days",
+          "Weeks"
+        ]
+      },
+      {
+        "label": "Cost",
+        "cells": [
+          "High",
+          "Highest",
+          "Lowest at this quantum"
+        ]
+      },
+      {
+        "label": "Verdict",
+        "cells": [
+          "Too small for a S$4M gap",
+          "The bridge if timing were desperate",
+          "Chosen"
+        ]
+      }
+    ],
+    "anchor": "alternatives",
+    "alt": "Comparison of unsecured SME lending, a caveat loan and an equity term loan on quantum, speed and cost",
+    "caption": "At S$4M the unsecured route was never large enough, and the caveat route was never cheap enough."
+  },
+  {
+    "out": "mortgage-insurance-compare",
+    "slug": "mortgage-insurance-singapore-mrta-hps-term",
+    "type": "compare",
+    "kicker": "Mortgage protection · Singapore",
+    "title": "Three ways to cover the same loan",
+    "accent": 2,
+    "cols": [
+      "HPS",
+      "MRTA",
+      "Level term"
+    ],
+    "source": "HPS is CPF-run and HDB-only. MRTA and level term are private-market policies.",
+    "rows": [
+      {
+        "label": "Property type",
+        "cells": [
+          "HDB only",
+          "Any",
+          "Any, not property-linked"
+        ]
+      },
+      {
+        "label": "Mandatory?",
+        "cells": [
+          "Yes, if CPF pays",
+          "No",
+          "No"
+        ]
+      },
+      {
+        "label": "Sum assured",
+        "cells": [
+          "Reducing",
+          "Reducing, fixed schedule",
+          "Level"
+        ]
+      },
+      {
+        "label": "Premiums",
+        "cells": [
+          "From CPF OA",
+          "Cheapest of the three",
+          "Highest of the three"
+        ]
+      },
+      {
+        "label": "Payout goes to",
+        "cells": [
+          "Clears the HDB loan",
+          "Usually the bank",
+          "Your beneficiaries"
+        ]
+      },
+      {
+        "label": "Survives refinancing",
+        "cells": [
+          "Follows the HDB loan",
+          "Usually not",
+          "Yes, fully portable"
+        ]
+      },
+      {
+        "label": "Cover past age 65",
+        "cells": [
+          "No",
+          "Follows the loan term",
+          "Yes, to your chosen term"
+        ]
+      }
+    ],
+    "anchor": "compare",
+    "alt": "Comparison table of HPS, MRTA and level term life cover across payout, portability and premiums",
+    "caption": "The row that decides most private-property cases is whether the cover survives refinancing."
+  },
+  {
+    "out": "mortgage-insurance-which-way",
+    "slug": "mortgage-insurance-singapore-mrta-hps-term",
+    "type": "split",
+    "kicker": "Private property, choosing between the two",
+    "title": "Which way does your loan lean?",
+    "accent": 1,
+    "source": "HDB owners paying with CPF are in HPS by default. This is the private-property fork.",
+    "sides": [
+      {
+        "head": "Lean MRTA",
+        "sub": "Cheapest for pure loan cover",
+        "points": [
+          "You intend to hold the property to term",
+          "Budget is tight and cover is the priority",
+          "No dependants relying on a surplus",
+          "You accept that the payout clears the bank"
+        ]
+      },
+      {
+        "head": "Lean level term",
+        "sub": "Portable, pays the family",
+        "points": [
+          "You are likely to refinance or upgrade",
+          "You have dependants who need a surplus",
+          "You want cover past the loan's end",
+          "One policy can replace term plus MRTA"
+        ]
+      }
+    ],
+    "anchor": "pick",
+    "alt": "Two-column card showing when to lean towards MRTA and when to lean towards level term life",
+    "caption": "If your mortgage plans involve movement, buy cover that moves with you."
+  },
+  {
+    "out": "cooling-measures-map",
+    "slug": "singapore-property-cooling-measures-2026",
+    "type": "compare",
+    "kicker": "Singapore cooling measures · 2026",
+    "title": "Every rule, and when it bites",
+    "cols": [
+      "Bites when",
+      "Current setting"
+    ],
+    "source": "Positions as at August 2026. Rules change; confirm against IRAS, HDB and MAS before committing.",
+    "rows": [
+      {
+        "label": "ABSD",
+        "cells": [
+          "Buying beyond your first home",
+          "SC 20/30% · PR 5/30/35% · foreigner 60%"
+        ]
+      },
+      {
+        "label": "LTV limits",
+        "cells": [
+          "Taking any housing loan",
+          "75% first · 45% second · 35% third+"
+        ]
+      },
+      {
+        "label": "TDSR",
+        "cells": [
+          "Any property loan from a bank",
+          "55% of gross income at the 4% floor"
+        ]
+      },
+      {
+        "label": "MSR",
+        "cells": [
+          "HDB flats and new ECs",
+          "30% of gross income"
+        ]
+      },
+      {
+        "label": "SSD",
+        "cells": [
+          "Selling inside four years",
+          "16 / 12 / 8 / 4%, then zero"
+        ]
+      },
+      {
+        "label": "Wait-outs",
+        "cells": [
+          "Ex-private owners entering HDB",
+          "15-month removed; 30-month still applies"
+        ]
+      }
+    ],
+    "anchor": "map",
+    "alt": "Table of Singapore property cooling measures in 2026 with the trigger and current setting for each",
+    "caption": "Six rules. Most buyers only ever meet three of them."
+  },
+  {
+    "out": "cooling-measures-timeline",
+    "slug": "singapore-property-cooling-measures-2026",
+    "type": "timeline",
+    "kicker": "How we got here",
+    "title": "Four years of tightening, then one loosening",
+    "source": "28 July 2026 is the first loosening of the private-to-HDB rules since the 2022 package.",
+    "steps": [
+      {
+        "when": "Apr 2023",
+        "label": "ABSD raised",
+        "note": "To today's schedule"
+      },
+      {
+        "when": "Aug 2024",
+        "label": "HDB loan LTV cut",
+        "note": "To 75%, aligned with banks"
+      },
+      {
+        "when": "Jul 2025",
+        "label": "SSD reset",
+        "note": "Back to four years, 16/12/8/4%"
+      },
+      {
+        "when": "May 2026",
+        "label": "EC reset",
+        "note": "10-year MOP, 90% first-timer quota"
+      },
+      {
+        "when": "Jul 2026",
+        "label": "15-month wait removed",
+        "note": "The first loosening",
+        "highlight": true
+      }
+    ],
+    "anchor": "timeline",
+    "alt": "Timeline of Singapore property cooling measures from April 2023 to the July 2026 wait-out removal",
+    "caption": "Four years of tightening, then the first loosening in July 2026."
+  },
+  {
+    "out": "big-three-banks-compare",
+    "slug": "dbs-vs-uob-vs-ocbc-home-loan-2026",
+    "type": "compare",
+    "kicker": "DBS · UOB · OCBC",
+    "title": "The structural difference between the big three",
+    "cols": [
+      "DBS",
+      "UOB",
+      "OCBC"
+    ],
+    "source": "All three offer fixed packages at multiple lock-ins. The floating peg is where they genuinely diverge.",
+    "rows": [
+      {
+        "label": "Floating peg",
+        "cells": [
+          "FHR board and 3M SORA",
+          "3M compounded SORA",
+          "3M compounded SORA"
+        ]
+      },
+      {
+        "label": "Who sets the peg",
+        "cells": [
+          "DBS, off its FD rates",
+          "MAS, from real trades",
+          "MAS, from real trades"
+        ]
+      },
+      {
+        "label": "Bank controls",
+        "cells": [
+          "Peg and spread",
+          "Spread only",
+          "Spread only"
+        ]
+      },
+      {
+        "label": "Fixed packages",
+        "cells": [
+          "Multiple lock-ins",
+          "Multiple lock-ins",
+          "Multiple lock-ins"
+        ]
+      },
+      {
+        "label": "Noted for",
+        "cells": [
+          "Board-rate stability",
+          "Pure market transparency",
+          "Subsidy on larger loans"
+        ]
+      }
+    ],
+    "anchor": "pegs",
+    "alt": "Comparison of DBS, UOB and OCBC home loans by floating peg, who sets it and what the bank controls",
+    "caption": "DBS controls both the peg and the spread. UOB and OCBC control only the spread."
+  },
+  {
+    "out": "big-three-peg-choice",
+    "slug": "dbs-vs-uob-vs-ocbc-home-loan-2026",
+    "type": "split",
+    "kicker": "Not just the headline rate",
+    "title": "The question underneath the comparison",
+    "source": "Compare the peg, the spread, the lock-in and the subsidy together. A low year-one rate can hide all three.",
+    "sides": [
+      {
+        "head": "Board-pegged",
+        "sub": "DBS FHR",
+        "points": [
+          "The bank sets the part that moves",
+          "Historically smoother than market SORA",
+          "You are trusting the bank's pricing policy",
+          "Check how the peg has actually moved"
+        ]
+      },
+      {
+        "head": "Pure SORA",
+        "sub": "UOB and OCBC",
+        "points": [
+          "MAS publishes the peg from real trades",
+          "The bank controls only the spread",
+          "Fully transparent, but it moves with the market",
+          "Compare spreads, not headline rates"
+        ]
+      }
+    ],
+    "anchor": "how-to-compare",
+    "alt": "Two-column card comparing a bank board-pegged loan against a pure compounded SORA loan",
+    "caption": "Whoever sets the peg decides how much of your rate you can predict."
+  },
+  {
+    "out": "sibor-sora-timeline",
+    "type": "timeline",
+    "kicker": "Benchmark transition",
+    "title": "How Singapore retired SIBOR",
+    "source": "Compounded SORA is now the single benchmark, published every business day by MAS.",
+    "steps": [
+      {
+        "when": "Mar 2022",
+        "label": "6-month SIBOR",
+        "note": "Discontinued first"
+      },
+      {
+        "when": "Jun 2023",
+        "label": "SOR retired",
+        "note": "All Swap Offer Rate tenors"
+      },
+      {
+        "when": "Dec 2024",
+        "label": "1M and 3M SIBOR",
+        "note": "Last publication"
+      },
+      {
+        "when": "Today",
+        "label": "Compounded SORA",
+        "note": "The only benchmark left",
+        "highlight": true
+      }
+    ],
+    "anchor": "gone",
+    "alt": "Timeline of the SIBOR and SOR retirement in Singapore ending with compounded SORA",
+    "caption": "Every SIBOR tenor is now retired. Nothing is left to convert.",
+    "slug": "sibor-rate-singapore-discontinued"
+  },
+  {
+    "out": "sibor-vs-sora-compare",
+    "type": "compare",
+    "kicker": "What actually changed",
+    "title": "A panel estimate replaced by a real average",
+    "accent": 1,
+    "cols": [
+      "SIBOR (retired)",
+      "Compounded SORA"
+    ],
+    "source": "Conversion spreads were fixed at 0.2426% from 1M SIBOR and 0.3571% from 3M SIBOR.",
+    "rows": [
+      {
+        "label": "Based on",
+        "cells": [
+          "Panel bank submissions",
+          "Actual overnight transactions"
+        ]
+      },
+      {
+        "label": "Direction",
+        "cells": [
+          "Forward-looking term rate",
+          "Backward-looking average"
+        ]
+      },
+      {
+        "label": "Known when",
+        "cells": [
+          "At the start of the period",
+          "Accrues across the period"
+        ]
+      },
+      {
+        "label": "Behaviour",
+        "cells": [
+          "Moved on expectations, could jump",
+          "Smoother, averaging damps spikes"
+        ]
+      },
+      {
+        "label": "Tenors",
+        "cells": [
+          "1M, 3M, 6M, 12M",
+          "Overnight, 1M, 3M and 6M compounded"
+        ]
+      }
+    ],
+    "anchor": "difference",
+    "alt": "Comparison of retired SIBOR against compounded SORA on basis, direction and behaviour",
+    "caption": "SIBOR was an estimate of what banks would charge. SORA is a record of what they did.",
+    "slug": "sibor-rate-singapore-discontinued"
+  },
+  {
+    "out": "sibor-rate-singapore-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Benchmarks",
+    "title": "SIBOR is gone. What replaced it, and what it means for your loan.",
+    "sub": "Every SIBOR tenor has been retired and Singapore home loans now peg to compounded SORA. The timeline, the adjustment spread, and what to check on your own package.",
+    "chips": [
+      "SIBOR retired",
+      "SOR retired",
+      "Compounded SORA"
+    ],
+    "slug": "sibor-rate-singapore-discontinued"
+  },
+  {
+    "out": "second-property-ltv-ladder",
+    "type": "ladder",
+    "kicker": "MAS loan-to-value limits",
+    "title": "Every outstanding loan cuts the next one",
+    "source": "A fully repaid loan does not count. Tenure past 30 years or age 65 drops each tier further, to 25% and 15%.",
+    "rows": [
+      {
+        "label": "No outstanding loan",
+        "value": "75%",
+        "note": "5% minimum cash",
+        "pct": 100
+      },
+      {
+        "label": "One outstanding loan",
+        "value": "45%",
+        "note": "25% minimum cash",
+        "pct": 60,
+        "highlight": true
+      },
+      {
+        "label": "Two or more",
+        "value": "35%",
+        "note": "25% minimum cash",
+        "pct": 47
+      }
+    ],
+    "anchor": "ltv",
+    "alt": "Bar chart of Singapore LTV limits: 75% with no outstanding loan, 45% with one, 35% with two or more",
+    "caption": "Every loan you still carry cuts the next one. Repaid loans do not count.",
+    "slug": "second-property-loan-ltv-singapore"
+  },
+  {
+    "out": "second-property-cash-stack",
+    "type": "math",
+    "kicker": "Second property · Worked example",
+    "title": "What a S$1.5M second home costs up front",
+    "source": "Singapore Citizen, aged 40, one outstanding housing loan, 25-year tenure, so the 45% LTV tier applies.",
+    "rows": [
+      {
+        "label": "Cash downpayment",
+        "note": "25% of price, CPF not allowed",
+        "value": "S$375,000"
+      },
+      {
+        "op": "+",
+        "label": "Balance downpayment",
+        "note": "30%, cash or CPF OA",
+        "value": "S$450,000"
+      },
+      {
+        "op": "+",
+        "label": "Buyer's Stamp Duty",
+        "value": "~S$44,600"
+      },
+      {
+        "op": "+",
+        "label": "ABSD at 20%",
+        "note": "Cash, payable within 14 days",
+        "value": "S$300,000"
+      }
+    ],
+    "total": {
+      "label": "Cash needed before CPF contributes",
+      "note": "Maximum loan is capped at S$675,000",
+      "value": "~S$719,600"
+    },
+    "anchor": "worked",
+    "alt": "Worked calculation of the up-front cash needed for a S$1.5 million second property in Singapore",
+    "caption": "Nearly S$720,000 in cash before CPF contributes anything.",
+    "slug": "second-property-loan-ltv-singapore"
+  },
+  {
+    "out": "second-property-loan-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Second property",
+    "title": "Your second home loan is capped at 45%. Here is what that costs.",
+    "sub": "One outstanding housing loan drops the LTV to 45% and pushes the minimum cash to 25%. Add ABSD and the up-front figure moves well past three quarters of a million on a S$1.5M purchase.",
+    "chips": [
+      "45% LTV",
+      "25% cash",
+      "20% ABSD",
+      "55% TDSR"
+    ],
+    "slug": "second-property-loan-ltv-singapore"
+  },
+  {
+    "out": "lentor-land-price-ladder",
+    "slug": "lentor-gardens-residences-financing-2026",
+    "type": "ladder",
+    "kicker": "Lentor GLS cycle · Land cost",
+    "title": "Where the land price sits in the Lentor run",
+    "source": "Land cost per square foot per plot ratio, by award date. A lower land cost gives the developer room on launch pricing.",
+    "rows": [
+      {
+        "label": "Lentor Central Residences · Sep 2023",
+        "value": "S$982",
+        "pct": 22
+      },
+      {
+        "label": "Lentor Mansion · Apr 2023",
+        "value": "S$985",
+        "pct": 22
+      },
+      {
+        "label": "Lentor Hills Residences · Jan 2022",
+        "value": "S$1,060",
+        "pct": 42
+      },
+      {
+        "label": "Hillock Green · Sep 2022",
+        "value": "S$1,108",
+        "pct": 55
+      },
+      {
+        "label": "Lentor Modern · Jul 2021",
+        "value": "S$1,204",
+        "pct": 80
+      },
+      {
+        "label": "Lentor Central parcel · Mar 2026",
+        "value": "S$1,278",
+        "note": "record",
+        "pct": 100,
+        "highlight": true
+      }
+    ],
+    "anchor": "headline",
+    "alt": "Bar chart of Lentor GLS land prices per square foot per plot ratio from S$982 to a record S$1,278",
+    "caption": "Land cost sets the floor under launch pricing, and this parcel sits near the bottom of the cycle."
+  },
+  {
+    "out": "lentor-tdsr-by-unit",
+    "slug": "lentor-gardens-residences-financing-2026",
+    "type": "compare",
+    "kicker": "Lentor Gardens · Income floor by unit",
+    "title": "What the 4% stress test asks of each unit type",
+    "cols": [
+      "2-Bedroom",
+      "3-Bedroom",
+      "4-Bedroom"
+    ],
+    "source": "Indicative. Loan at 75% LTV over 30 years, stress-tested at the MAS 4% floor with no other debt.",
+    "rows": [
+      {
+        "label": "Size",
+        "cells": [
+          "646–732 sqft",
+          "872–1,012 sqft",
+          "1,184–1,356 sqft"
+        ]
+      },
+      {
+        "label": "Indicative price",
+        "cells": [
+          "~S$1.39–1.57M",
+          "~S$1.87–2.18M",
+          "~S$2.55–2.92M"
+        ]
+      },
+      {
+        "label": "Loan at 75% LTV",
+        "cells": [
+          "~S$1.13M",
+          "~S$1.53M",
+          "~S$2.05M"
+        ]
+      },
+      {
+        "label": "Stress instalment",
+        "cells": [
+          "~S$5,390/mo",
+          "~S$7,300/mo",
+          "~S$9,780/mo"
+        ]
+      },
+      {
+        "label": "Gross income floor",
+        "cells": [
+          "~S$9,800/mo",
+          "~S$13,300/mo",
+          "~S$17,800/mo"
+        ]
+      }
+    ],
+    "anchor": "tdsr",
+    "alt": "Table of loan quantum, stress-test instalment and income floor for 2, 3 and 4-bedroom Lentor units",
+    "caption": "The stress instalment, not the actual one, is what the bank approves you against."
+  }
+]

@@ -98,3 +98,4 @@ scripts/meta-leads.gs
 # Raw URA Data Service payloads (URA_RAW_DIR debug dumps) — never commit.
 # Only the derived aggregate ura-prices.json / ura-feed.json / ura.xml are published.
 /ura-raw/
+scripts/articles/__pycache__/
