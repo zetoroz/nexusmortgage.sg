@@ -92,7 +92,7 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"MRTA vs HPS vs Term Life: Mortgage Insurance in Singapore, Explained","datePublished":"2026-08-17","dateModified":"2026-08-17","image":{"@type":"ImageObject","url":"https://nexusmortgage.sg/blog/blog-images/mortgage-insurance-singapore-hero.png","width":1344,"height":768},"description":"How the three mortgage-protection routes in Singapore compare: CPF's Home Protection Scheme (mandatory for HDB owners paying instalments with CPF, premiums from OA, cover to 65), Mortgage Reducing Term Assurance (cheapest, reduction schedule fixed at purchase, usually assigned to the bank), and level term life (portable, pays the family, survives refinancing). Comparison table, profile-based picks and the three traps: fire insurance confusion, MRTA drift after restructuring, and assuming the bank requires cover.","mainEntityOfPage":{"@type":"WebPage","@id":"https://nexusmortgage.sg/blog/mortgage-insurance-singapore-mrta-hps-term/"},"author":{"@id":"https://nexusmortgage.sg/#dan-ler","@type":"Person","name":"Dan Ler","url":"https://nexusmortgage.sg/about/","image":"https://nexusmortgage.sg/dan-ler.webp","jobTitle":"Mortgage Advisor","worksFor":{"@type":"Organization","name":"Nexus Mortgage","url":"https://nexusmortgage.sg"}},"publisher":{"@id":"https://nexusmortgage.sg/#organization"},"keywords":"mortgage insurance Singapore, MRTA vs term life, HPS Home Protection Scheme, MRTA Singapore, mortgage reducing term assurance, HDB HPS exemption, home loan insurance, term life mortgage cover"}</script>
 
   <!-- Structured Data: FAQPage -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is mortgage insurance compulsory in Singapore?","acceptedAnswer":{"@type":"Answer","text":"Only in one case: HDB owners who service their loan with CPF must be covered under the Home Protection Scheme, unless exempted on the strength of existing private policies. For private property there is no legal or bank requirement to carry mortgage insurance — only fire insurance on the building is required by lenders."}},{"@type":"Question","name":"What is the difference between HPS and MRTA?","acceptedAnswer":{"@type":"Answer","text":"Both are reducing cover that tracks your loan down. HPS is CPF-run, HDB-only, paid from CPF OA and capped at age 65. MRTA is a private policy for any property, paid in cash, with the reduction schedule fixed at purchase and the payout usually assigned to the bank."}},{"@type":"Question","name":"Should I buy MRTA or term life for a private property loan?","acceptedAnswer":{"@type":"Answer","text":"MRTA is cheaper for the same starting cover; term life is portable, pays your family rather than the bank, and keeps a level sum assured while the loan shrinks. Broadly: hold-to-term borrowers lean MRTA, movers and families with dependants lean term. A licensed financial adviser can price both for your age and health."}},{"@type":"Question","name":"What happens to my MRTA when I refinance?","acceptedAnswer":{"@type":"Answer","text":"The policy usually cannot transfer to the new loan, especially across banks or properties. You either keep the old policy running against its original schedule (risking a cover gap) or buy fresh cover at your current age. Factor this into the refinancing math — we flag it on every case."}},{"@type":"Question","name":"Does HPS cover both owners of a flat fully?","acceptedAnswer":{"@type":"Answer","text":"Each owner elects a share of cover, and the shares must total at least 100% of the loan obligation. At the default proportional split, one owner's death clears only their share. Couples who want either death to fully clear the flat should each elect 100% — the premium difference is usually modest."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is mortgage insurance compulsory in Singapore?","acceptedAnswer":{"@type":"Answer","text":"Only in one case: HDB owners who service their loan with CPF must be covered under the Home Protection Scheme, unless exempted on the strength of existing private policies. For private property there is no legal or bank requirement to carry mortgage insurance — only fire insurance on the building is required by lenders."}},{"@type":"Question","name":"What is the difference between HPS and MRTA?","acceptedAnswer":{"@type":"Answer","text":"Both are reducing cover that tracks your loan down. HPS is CPF-run, HDB-only, paid from CPF OA and capped at age 65. MRTA is a private policy for any property, paid in cash, with the reduction schedule fixed at purchase and the payout usually assigned to the bank."}},{"@type":"Question","name":"Should I buy MRTA or term life for a private property loan?","acceptedAnswer":{"@type":"Answer","text":"MRTA is cheaper for the same starting cover; term life is portable, pays your family rather than the bank, and keeps a level sum assured while the loan shrinks. Broadly: hold-to-term borrowers lean MRTA, movers and families with dependants lean term. Ronald Cheong, a financial advisor with Prestige Raffles, can price both for your age and health: WhatsApp +65 9369 8284."}},{"@type":"Question","name":"What happens to my MRTA when I refinance?","acceptedAnswer":{"@type":"Answer","text":"The policy usually cannot transfer to the new loan, especially across banks or properties. You either keep the old policy running against its original schedule (risking a cover gap) or buy fresh cover at your current age. Factor this into the refinancing math — we flag it on every case, and refer the re-cover to Ronald Cheong at Prestige Raffles on +65 9369 8284."}},{"@type":"Question","name":"Does HPS cover both owners of a flat fully?","acceptedAnswer":{"@type":"Answer","text":"Each owner elects a share of cover, and the shares must total at least 100% of the loan obligation. At the default proportional split, one owner's death clears only their share. Couples who want either death to fully clear the flat should each elect 100% — the premium difference is usually modest."}}]}</script>
 
   <!-- Structured Data: BreadcrumbList -->
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexusmortgage.sg/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://nexusmortgage.sg/blog/"},{"@type":"ListItem","position":3,"name":"Mortgage Insurance: MRTA vs HPS vs Term","item":"https://nexusmortgage.sg/blog/mortgage-insurance-singapore-mrta-hps-term/"}]}</script>
@@ -320,6 +320,55 @@
     .compare-table th { color: #c4973b; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; font-size: .72rem; background: rgba(196,151,59,.06); }
     .compare-table td { color: rgba(232,227,218,.78); }
     .compare-table tr:last-child td { border-bottom: none; }
+
+    /* ==== Adviser referral card + CTA rows ==== */
+    .adviser-card {
+      display: flex; gap: 1.1rem; align-items: flex-start;
+      background: linear-gradient(135deg, rgba(37,211,102,.08) 0%, rgba(196,151,59,.05) 100%);
+      border: 1px solid rgba(196,151,59,.32);
+      border-radius: 12px;
+      padding: 1.5rem 1.6rem;
+      margin: 2.4rem 0;
+    }
+    .adviser-avatar {
+      width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(196,151,59,.15);
+      border: 2px solid rgba(196,151,59,.4);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.4rem; font-weight: 600; color: #c4973b; letter-spacing: .02em;
+    }
+    .adviser-card p:last-of-type { margin-bottom: 0; }
+    .adviser-name { color: #faf7f2; font-size: 1.05rem; font-weight: 600; }
+    .adviser-role {
+      display: block; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(196,151,59,.75); font-weight: 500; margin: .15rem 0 .7rem;
+    }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .7rem 1.35rem; background: #25D366; color: #06251a;
+      font-weight: 600; font-size: .86rem; border-radius: 6px;
+      text-decoration: none; letter-spacing: .02em;
+      transition: background .2s ease, transform .15s ease;
+    }
+    .btn-wa:hover { background: #3ce07c; color: #06251a; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .7rem 1.35rem; border: 1px solid rgba(196,151,59,.45);
+      color: #c4973b; font-weight: 600; font-size: .86rem; border-radius: 6px;
+      text-decoration: none; transition: background .2s ease, transform .15s ease;
+    }
+    .btn-outline:hover { background: rgba(196,151,59,.12); color: #e0b86a; transform: translateY(-1px); }
+    .cta-row { display: flex; flex-wrap: wrap; gap: .7rem; justify-content: center; margin-top: 1.2rem; }
+    .cta-row .cta-btn, .cta-row .btn-wa, .cta-row .btn-outline { margin-top: 0; }
+    .btn-wa:focus-visible, .btn-outline:focus-visible { outline: 2px solid #c4973b; outline-offset: 3px; }
+    .btn-wa, .btn-outline { touch-action: manipulation; }
+    @media (max-width: 600px) {
+      .adviser-card { flex-direction: column; gap: .9rem; padding: 1.3rem 1.2rem; }
+      .cta-row { flex-direction: column; }
+      .cta-row a { justify-content: center; }
+      .btn-wa, .btn-outline { font-size: .8rem; padding: .75rem 1rem; justify-content: center; }
+    }
   </style>
 </head>
 <body>
@@ -402,7 +451,7 @@
 
   <p>In Singapore the choice comes down to three instruments: the CPF Board's <strong>Home Protection Scheme (HPS)</strong> for HDB flats, <strong>Mortgage Reducing Term Assurance (MRTA)</strong> from private insurers, and ordinary <strong>level term life insurance</strong> used to cover the mortgage. They solve the same problem with very different mechanics, and the right answer depends on your property type, health, family situation and refinancing plans.</p>
 
-  <p>One scope note before the detail: Nexus is a mortgage brokerage, not an insurance adviser. This article explains how the products interact with your home loan, because that is where we see the decisions go wrong. For advice on a specific policy, speak to a licensed financial adviser.</p>
+  <p>One scope note before the detail: Nexus is a mortgage brokerage, not an insurance adviser. This article explains how the products interact with your home loan, because that is where we see the decisions go wrong. For the policy side, we refer readers to <strong><a href="https://wa.me/6593698284?text=Hi%20Ronald%2C%20I%20read%20the%20Nexus%20article%20on%20MRTA%20vs%20HPS%20vs%20term%20life%20and%20would%20like%20to%20review%20my%20mortgage%20cover." target="_blank" rel="noopener">Ronald Cheong</a></strong>, a financial advisor with Prestige Raffles, who prices HPS exemption, MRTA and level term against a real loan schedule rather than a generic quote.</p>
 
   <!-- ===================== HPS ===================== -->
 
@@ -462,16 +511,39 @@
     <tr><td>Cover past age 65</td><td>No</td><td>Follows the loan term</td><td>Yes, to the term you choose</td></tr>
   </table>
 
+  <!-- ===================== ADVISER CTA (mid-article) ===================== -->
+
+  <div class="adviser-card">
+    <div class="adviser-avatar" aria-hidden="true">RC</div>
+    <div>
+      <span class="adviser-name">Want the two private options priced side by side?</span>
+      <span class="adviser-role">Ronald Cheong &middot; Financial Advisor, Prestige Raffles</span>
+      <p>The table above shows the mechanics. What it cannot show is the premium gap for <em>your</em> age, health and loan tenure, and that gap is usually what decides it. Ronald quotes MRTA and level term on the same loan schedule so you compare like for like, and he handles the CPF HPS exemption paperwork if you already carry enough private cover.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem;">
+        <a href="https://wa.me/6593698284?text=Hi%20Ronald%2C%20I%27d%20like%20MRTA%20and%20level%20term%20quoted%20on%20my%20home%20loan.%20I%20came%20from%20the%20Nexus%20Mortgage%20insurance%20article." target="_blank" rel="noopener" class="btn-wa">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.8h-.02a9.8 9.8 0 01-4.99-1.37l-.36-.21-3.71.97.99-3.62-.23-.37a9.79 9.79 0 01-1.5-5.22c0-5.4 4.4-9.8 9.82-9.8a9.75 9.75 0 016.93 2.88 9.72 9.72 0 012.87 6.93c0 5.4-4.4 9.8-9.8 9.8M20.52 3.45A11.7 11.7 0 0012.05 0C5.5 0 .18 5.32.17 11.86c0 2.09.55 4.13 1.59 5.93L.07 24l6.35-1.66a11.9 11.9 0 005.67 1.44h.01c6.55 0 11.87-5.32 11.88-11.86a11.8 11.8 0 00-3.46-8.47"/></svg>
+          WhatsApp Ronald &middot; +65 9369 8284
+        </a>
+        <a href="https://www.linkedin.com/in/cheongsteron/" target="_blank" rel="noopener" class="btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5M2.4 21h5.16V9H2.4zM9.9 9h4.95v1.64h.07c.69-1.24 2.38-2.55 4.9-2.55 5.24 0 6.2 3.3 6.2 7.6V21h-5.16v-4.67c0-1.11-.02-2.55-1.6-2.55-1.6 0-1.85 1.22-1.85 2.47V21H9.9z"/></svg>
+          LinkedIn profile
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- ===================== PICK ===================== -->
 
   <h2 id="pick">How to Pick, by Profile</h2>
 
   <ul>
-    <li><strong>HDB owner paying with CPF:</strong> you are in HPS by default, and for most flats that is the right, cheapest answer. Consider the exemption route only if you already carry substantial private cover — and check the household share election so one death clears the whole loan, not half of it.</li>
+    <li><strong>HDB owner paying with CPF:</strong> you are in HPS by default, and for most flats that is the right, cheapest answer. Consider the exemption route only if you already carry substantial private cover — and check the household share election so one death clears the whole loan, not half of it. Background: <a href="/blog/cpf-oa-hdb-guide/">how CPF OA funds an HDB flat</a> and <a href="/blog/hdb-vs-bank-loan/">HDB loan vs bank loan</a>.</li>
     <li><strong>Private property, tight budget, stable plans:</strong> MRTA covers the pure mortgage risk at the lowest premium. Best when you intend to hold the property and the loan to term.</li>
-    <li><strong>Private property, dependants, or likely to refinance/upgrade:</strong> level term. Every refinancing we broker for MRTA holders surfaces the same friction — the old policy does not follow. If your mortgage plans involve movement, buy cover that moves with you.</li>
-    <li><strong>Joint borrowers:</strong> whatever the instrument, check what happens on the <em>first</em> death. Cover sized to each person's half leaves the survivor with half a mortgage and one income.</li>
+    <li><strong>Private property, dependants, or likely to refinance/upgrade:</strong> level term. Every refinancing we broker for MRTA holders surfaces the same friction — the old policy does not follow. If your mortgage plans involve movement, buy cover that moves with you. See <a href="/blog/reprice-vs-refinance-singapore/">reprice vs refinance</a> and <a href="/blog/hdb-to-condo-upgrade-singapore/">HDB to condo upgrading</a> for the moves that trigger it.</li>
+    <li><strong>Joint borrowers:</strong> whatever the instrument, check what happens on the <em>first</em> death. Cover sized to each person's half leaves the survivor with half a mortgage and one income. How you hold the title matters here too: see <a href="/blog/joint-tenancy-vs-tenancy-in-common-singapore-2026/">joint tenancy vs tenancy in common</a>.</li>
   </ul>
+
+  <p>If you want the numbers rather than the principle, <a href="https://wa.me/6593698284?text=Hi%20Ronald%2C%20I%20fit%20one%20of%20the%20profiles%20in%20the%20Nexus%20mortgage%20insurance%20article%20and%20would%20like%20cover%20sized%20properly." target="_blank" rel="noopener"><strong>send Ronald your profile on WhatsApp</strong></a> and he will size the cover against your actual outstanding balance. If you would rather not message, <a href="/contact/#contact-form">leave your details on the enquiry form</a> and we will loop him in.</p>
 
   <p class="pullquote">The insurance question is really a mortgage-strategy question: how long will this exact loan, on this exact property, actually exist?</p>
 
@@ -481,7 +553,7 @@
 
   <ol>
     <li><strong>Confusing fire insurance with mortgage insurance.</strong> The fire policy your bank requires (and HDB's fire insurance for flats) covers the building's structure, not your loan. It does nothing for your family if a borrower dies. You may need both; they are not substitutes.</li>
-    <li><strong>Letting MRTA drift below the real balance.</strong> Refinancing to a longer tenure or adding an equity loan raises your outstanding above the policy's reduction curve. Whenever we restructure a loan, the insurance sizing should be re-checked the same week.</li>
+    <li><strong>Letting MRTA drift below the real balance.</strong> Refinancing to a longer tenure or adding an <a href="/blog/cash-out-refinance-singapore-2026/">equity or cash-out loan</a> raises your outstanding above the policy's reduction curve. Whenever we restructure a loan, the insurance sizing should be re-checked the same week, which is why we hand the new schedule straight to <a href="https://wa.me/6593698284?text=Hi%20Ronald%2C%20I%27ve%20just%20restructured%20my%20home%20loan%20and%20need%20my%20mortgage%20cover%20re-checked." target="_blank" rel="noopener">Ronald</a> on cases where cover is already in place.</li>
     <li><strong>Assuming the bank requires it.</strong> For private property, mortgage insurance is not legally required, and reluctant buyers sometimes skip cover entirely because "the bank didn't ask." The bank protects itself with the property as collateral. The insurance is for your family, not the bank.</li>
   </ol>
 
@@ -496,10 +568,10 @@
   <p>Both are reducing cover that tracks your loan down. HPS is CPF-run, HDB-only, paid from CPF OA and capped at age 65. MRTA is a private policy for any property, paid in cash, with the reduction schedule fixed at purchase and the payout usually assigned to the bank.</p>
 
   <div class="faq-q">Should I buy MRTA or term life for a private property loan?</div>
-  <p>MRTA is cheaper for the same starting cover; term life is portable, pays your family rather than the bank, and keeps a level sum assured while the loan shrinks. Broadly: hold-to-term borrowers lean MRTA, movers and families with dependants lean term. A licensed financial adviser can price both for your age and health.</p>
+  <p>MRTA is cheaper for the same starting cover; term life is portable, pays your family rather than the bank, and keeps a level sum assured while the loan shrinks. Broadly: hold-to-term borrowers lean MRTA, movers and families with dependants lean term. Ronald Cheong, a financial advisor with Prestige Raffles, can price both for your age and health: <a href="https://wa.me/6593698284?text=Hi%20Ronald%2C%20please%20price%20MRTA%20and%20level%20term%20for%20my%20age%20and%20loan." target="_blank" rel="noopener">WhatsApp +65 9369 8284</a>.</p>
 
   <div class="faq-q">What happens to my MRTA when I refinance?</div>
-  <p>The policy usually cannot transfer to the new loan, especially across banks or properties. You either keep the old policy running against its original schedule (risking a cover gap) or buy fresh cover at your current age. Factor this into the refinancing math — we flag it on every case.</p>
+  <p>The policy usually cannot transfer to the new loan, especially across banks or properties. You either keep the old policy running against its original schedule (risking a cover gap) or buy fresh cover at your current age. Factor this into the <a href="/blog/reprice-vs-refinance-singapore/">refinancing math</a> — we flag it on every case, and refer the re-cover to Ronald Cheong at Prestige Raffles on +65 9369 8284.</p>
 
   <div class="faq-q">Does HPS cover both owners of a flat fully?</div>
   <p>Each owner elects a share of cover, and the shares must total at least 100% of the loan obligation. At the default proportional split, one owner's death clears only their share. Couples who want either death to fully clear the flat should each elect 100% — the premium difference is usually modest.</p>
@@ -507,11 +579,20 @@
   <!-- ===================== CTA ===================== -->
 
   <div class="cta-box">
-    <p><strong style="color:#faf7f2;font-size:1.1rem;">Restructuring a Loan? Re-check the Cover the Same Week</strong></p>
-    <p>Every refinance, cash-out or upgrade changes what your mortgage insurance needs to do. We map the loan side across 16+ MAS-regulated banks, free, and flag where the cover no longer fits.</p>
-    <a href="/free-report/" class="cta-btn">Get My Free Mortgage Report &rarr;</a>
-    <p style="margin-top:1.2rem;font-size:.82rem;">Prefer a personal review? <strong><a href="https://wa.me/6587520859">WhatsApp Dan Ler at +65 8752 0859</a></strong>. Banks pay our fee &mdash; you pay nothing.</p>
-    <p style="margin-top:.6rem;font-size:.82rem;">For policy-specific insurance advice, consult a licensed financial adviser.</p>
+    <p><strong style="color:#faf7f2;font-size:1.15rem;">Get Your Mortgage Cover Sized Properly</strong></p>
+    <p>HPS share elections, MRTA that has drifted below the real balance, level term for a family that will move again: all of it is a five-minute conversation once someone has the loan schedule in front of them.</p>
+    <p style="margin-top:1rem;"><strong style="color:#faf7f2;">Ronald Cheong</strong><br>
+    <span style="font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(196,151,59,.8);">Financial Advisor, Prestige Raffles</span></p>
+    <div class="cta-row">
+      <a href="https://wa.me/6593698284?text=Hi%20Ronald%2C%20I%20read%20the%20Nexus%20Mortgage%20article%20on%20MRTA%20vs%20HPS%20vs%20term%20life%20and%20would%20like%20a%20mortgage%20insurance%20review." target="_blank" rel="noopener" class="btn-wa">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.8h-.02a9.8 9.8 0 01-4.99-1.37l-.36-.21-3.71.97.99-3.62-.23-.37a9.79 9.79 0 01-1.5-5.22c0-5.4 4.4-9.8 9.82-9.8a9.75 9.75 0 016.93 2.88 9.72 9.72 0 012.87 6.93c0 5.4-4.4 9.8-9.8 9.8M20.52 3.45A11.7 11.7 0 0012.05 0C5.5 0 .18 5.32.17 11.86c0 2.09.55 4.13 1.59 5.93L.07 24l6.35-1.66a11.9 11.9 0 005.67 1.44h.01c6.55 0 11.87-5.32 11.88-11.86a11.8 11.8 0 00-3.46-8.47"/></svg>
+        WhatsApp +65 9369 8284
+      </a>
+      <a href="/contact/#contact-form" class="btn-outline">Send an enquiry instead &rarr;</a>
+    </div>
+    <p style="margin-top:.9rem;font-size:.78rem;color:rgba(232,227,218,.5);">Or view Ronald's <a href="https://www.linkedin.com/in/cheongsteron/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.75);">LinkedIn profile</a> first.</p>
+    <hr style="margin:1.8rem 0 1.4rem;">
+    <p style="font-size:.86rem;"><strong style="color:#faf7f2;">On the loan side</strong>, Nexus maps your options across 16+ MAS-regulated banks so the cover is sized against the right balance. <a href="/free-report/"><strong>Get the free mortgage report</strong></a>, or WhatsApp <a href="https://wa.me/6587520859?text=Hi%20Dan%2C%20I%20read%20the%20mortgage%20insurance%20article%20and%20would%20like%20a%20loan%20review.">Dan Ler at +65 8752 0859</a>. Banks pay our fee, you pay nothing.</p>
   </div>
 
     <div style="background:rgba(196,151,59,.07); border:1px solid rgba(196,151,59,.22); border-left:3px solid #c4973b; border-radius:8px; padding:1rem 1.3rem; margin-top:2.5rem; font-size:.95rem; color:rgba(232,227,218,.78);">
@@ -528,13 +609,26 @@
             <li><a href="../cpf-oa-hdb-guide/">CPF OA and your HDB loan</a> &mdash; how OA funds the flat, and what HPS premiums sit alongside</li>
             <li><a href="../reprice-vs-refinance-singapore/">Reprice vs refinance</a> &mdash; the restructuring moves that should trigger an insurance re-check</li>
             <li><a href="../hdb-vs-bank-loan/">HDB loan vs bank loan</a> &mdash; the financing fork that decides whether HPS applies</li>
+            <li><a href="../refinance-hdb-loan-to-bank-loan-2026/">Refinancing an HDB loan to a bank loan</a> &mdash; the switch that ends HPS eligibility and forces a private policy</li>
+            <li><a href="../cash-out-refinance-singapore-2026/">Cash-out refinancing and equity loans</a> &mdash; the fastest way to leave MRTA cover below the real balance</li>
+            <li><a href="../joint-tenancy-vs-tenancy-in-common-singapore-2026/">Joint tenancy vs tenancy in common</a> &mdash; how the title holding changes what a payout actually settles</li>
+            <li><a href="../hdb-to-condo-upgrade-singapore/">HDB to condo upgrading</a> &mdash; why movers usually want portable cover</li>
             <li><a href="../decoupling-private-property-singapore/">Decoupling property</a> &mdash; ownership changes that orphan property-tied policies</li>
             <li><a href="/free-report/">Free Singapore mortgage report</a> &mdash; Dan's full written breakdown with a 16-bank comparison</li>
         </ul>
 
+        <div class="cta-row" style="justify-content:flex-start;margin-bottom:2.5rem;">
+          <a href="https://wa.me/6593698284?text=Hi%20Ronald%2C%20I%27d%20like%20to%20talk%20through%20my%20mortgage%20insurance%20options." target="_blank" rel="noopener" class="btn-wa">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.8h-.02a9.8 9.8 0 01-4.99-1.37l-.36-.21-3.71.97.99-3.62-.23-.37a9.79 9.79 0 01-1.5-5.22c0-5.4 4.4-9.8 9.82-9.8a9.75 9.75 0 016.93 2.88 9.72 9.72 0 012.87 6.93c0 5.4-4.4 9.8-9.8 9.8M20.52 3.45A11.7 11.7 0 0012.05 0C5.5 0 .18 5.32.17 11.86c0 2.09.55 4.13 1.59 5.93L.07 24l6.35-1.66a11.9 11.9 0 005.67 1.44h.01c6.55 0 11.87-5.32 11.88-11.86a11.8 11.8 0 00-3.46-8.47"/></svg>
+            Ask Ronald about cover
+          </a>
+          <a href="/contact/#contact-form" class="btn-outline">Enquiry form</a>
+          <a href="/blog/" class="btn-outline">More insights</a>
+        </div>
+
 <hr>
 
-  <p class="disclaimer"><em>Nexus Mortgage SG is an independent Singapore mortgage advisory, not a licensed insurance intermediary. This article is general information on how insurance products interact with home loans, not financial or insurance advice; consult a licensed financial adviser for policy recommendations. Positions as of 17 August 2026. Sources: <a href="https://www.cpf.gov.sg/member/home-ownership" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">CPF Home Ownership / HPS</a>, <a href="https://www.hdb.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">HDB</a>, <a href="https://www.mas.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS</a>, <a href="https://www.moneysense.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MoneySense</a>.</em></p>
+  <p class="disclaimer"><em>Nexus Mortgage SG is an independent Singapore mortgage advisory, not a licensed insurance intermediary. This article is general information on how insurance products interact with home loans, not financial or insurance advice; consult a licensed financial adviser for policy recommendations. Ronald Cheong is a financial advisor with Prestige Raffles and operates independently of Nexus Mortgage SG; any quotation, recommendation or advice on a policy is his and follows his firm's own advisory process. Positions as of 17 August 2026. Sources: <a href="https://www.cpf.gov.sg/member/home-ownership" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">CPF Home Ownership / HPS</a>, <a href="https://www.hdb.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">HDB</a>, <a href="https://www.mas.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS</a>, <a href="https://www.moneysense.gov.sg/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MoneySense</a>.</em></p>
 
 </article>
 
