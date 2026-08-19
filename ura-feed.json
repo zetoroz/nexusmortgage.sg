@@ -17,25 +17,25 @@
   "medianTransacted": {
     "note": "Median transacted PSF from URA caveats. Mix-affected and NOT a price index. For price movement use priceIndex (official URA PPI).",
     "median_psf_sgd": 1991,
-    "units_transacted": 7189
+    "units_transacted": 7191
   },
   "byMarketSegment": {
     "CCR": {
       "name": "Core Central Region",
       "median_psf_sgd": 2268,
       "median_price_sgd": 2900000,
-      "units": 787
+      "units": 788
     },
     "RCR": {
       "name": "Rest of Central Region",
       "median_psf_sgd": 2287,
       "median_price_sgd": 2058000,
-      "units": 1740
+      "units": 1741
     },
     "OCR": {
       "name": "Outside Central Region",
       "median_psf_sgd": 1832,
-      "median_price_sgd": 1927000,
+      "median_price_sgd": 1926000,
       "units": 4662
     }
   },
@@ -89,5 +89,5 @@
       "median_psf_sgd": 1991
     }
   ],
-  "updatedAt": "2026-08-15T02:13:00.620Z"
+  "updatedAt": "2026-08-19T02:17:42.184Z"
 }
