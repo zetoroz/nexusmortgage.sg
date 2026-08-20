@@ -221,6 +221,12 @@
 
   <!-- Blog posts (live, sorted by recency) -->
   <url>
+    <loc>https://nexusmortgage.sg/blog/singapore-property-cooling-measures-2026/</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://nexusmortgage.sg/blog/mortgage-insurance-singapore-mrta-hps-term/</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
