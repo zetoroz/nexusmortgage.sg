@@ -1462,5 +1462,160 @@
     "anchor": "tdsr",
     "alt": "Table of loan quantum, stress-test instalment and income floor for 2, 3 and 4-bedroom Lentor units",
     "caption": "The stress instalment, not the actual one, is what the bank approves you against."
+  },
+  {
+    "out": "hdb-loan-salary-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · HDB Loans",
+    "title": "Your salary, your loan, your ceiling.",
+    "sub": "Thirty per cent of gross income sets the instalment. HDB discounts it at 3%, a bank at 4%, and the gap between the two is about 10% of your loan. The full table from S$5,000 to S$16,000.",
+    "chips": [
+      "30% MSR cap",
+      "3% vs 4% floor",
+      "75% LTV"
+    ],
+    "slug": "hdb-loan-how-much-can-i-borrow-2026"
+  },
+  {
+    "out": "hdb-loan-salary-table",
+    "type": "compare",
+    "kicker": "Gross monthly household income",
+    "title": "Same income, two lenders, two answers",
+    "source": "Assumes a 25-year tenure, no other debt, and a 75% loan-to-value limit. HDB sizes the loan at a 3% floor rate; banks must use the MAS 4% medium-term floor.",
+    "cols": [
+      "MSR cap",
+      "HDB loan (3%)",
+      "Bank loan (4%)",
+      "Max flat price"
+    ],
+    "accent": 3,
+    "rows": [
+      {
+        "label": "S$5,000",
+        "cells": [
+          "S$1,500",
+          "~S$316,300",
+          "~S$284,200",
+          "~S$421,700"
+        ]
+      },
+      {
+        "label": "S$7,000",
+        "cells": [
+          "S$2,100",
+          "~S$442,800",
+          "~S$397,900",
+          "~S$590,500"
+        ]
+      },
+      {
+        "label": "S$9,000",
+        "cells": [
+          "S$2,700",
+          "~S$569,400",
+          "~S$511,500",
+          "~S$759,200"
+        ]
+      },
+      {
+        "label": "S$11,000",
+        "cells": [
+          "S$3,300",
+          "~S$695,900",
+          "~S$625,200",
+          "~S$927,900"
+        ]
+      },
+      {
+        "label": "S$13,000",
+        "cells": [
+          "S$3,900",
+          "~S$822,400",
+          "~S$738,900",
+          "~S$1,096,600"
+        ]
+      },
+      {
+        "label": "S$16,000 (ceiling)",
+        "cells": [
+          "S$4,800",
+          "~S$1,012,200",
+          "~S$909,400",
+          "~S$1,349,600"
+        ]
+      }
+    ],
+    "anchor": "table",
+    "alt": "Table of Singapore HDB loan and bank loan quantums by gross monthly household income from S$5,000 to the S$16,000 ceiling, with maximum flat price at 75% loan-to-value",
+    "caption": "The lender charging 2.6% lends you more than the lender charging 1.40%.",
+    "slug": "hdb-loan-how-much-can-i-borrow-2026"
+  },
+  {
+    "out": "hdb-loan-salary-age",
+    "type": "ladder",
+    "kicker": "Same S$8,000 income · HDB loan",
+    "title": "Age, not salary, is the biggest haircut",
+    "source": "HDB tenure is the lower of 25 years or 65 minus the income-weighted average age of the buyers.",
+    "rows": [
+      {
+        "label": "Average age 40 or below",
+        "value": "~S$506,100",
+        "pct": 100
+      },
+      {
+        "label": "Average age 45 (20-year tenure)",
+        "value": "~S$432,800",
+        "pct": 86
+      },
+      {
+        "label": "Average age 50 (15-year tenure)",
+        "value": "~S$347,500",
+        "pct": 69
+      },
+      {
+        "label": "Average age 55 (10-year tenure)",
+        "value": "~S$248,600",
+        "pct": 49,
+        "highlight": true
+      }
+    ],
+    "anchor": "age",
+    "alt": "Bar chart showing maximum HDB loan on S$8,000 income falling from about S$506,000 at a 25-year tenure to about S$249,000 at a 10-year tenure as buyer age rises",
+    "caption": "A 55-year-old couple on S$8,000 borrows half what a 35-year-old couple on S$8,000 borrows.",
+    "slug": "hdb-loan-how-much-can-i-borrow-2026"
+  },
+  {
+    "out": "hdb-loan-salary-cash",
+    "type": "math",
+    "kicker": "Worked example · S$674,000 resale flat",
+    "title": "The ceiling that binds before MSR does",
+    "source": "HDB concessionary loan at 75% LTV. On a bank loan, at least 5% of the price (S$33,700) must be in cash and cannot come from CPF.",
+    "rows": [
+      {
+        "label": "Downpayment at 25%",
+        "note": "CPF OA in full on an HDB loan",
+        "value": "S$168,600"
+      },
+      {
+        "op": "+",
+        "label": "Buyer's Stamp Duty",
+        "note": "Cash first, CPF reimbursable",
+        "value": "~S$14,800"
+      },
+      {
+        "op": "+",
+        "label": "Legal and valuation",
+        "value": "~S$2,800"
+      }
+    ],
+    "total": {
+      "label": "Needed before renovation",
+      "note": "Renovation adds S$40,000 to S$80,000, cash only",
+      "value": "~S$186,200"
+    },
+    "anchor": "second-ceiling",
+    "alt": "Breakdown of the roughly S$186,200 needed at purchase for a S$674,000 HDB resale flat: 25% downpayment, buyer stamp duty, and legal and valuation fees",
+    "caption": "Two buyers on S$8,000 accumulate that much CPF OA in roughly eight years.",
+    "slug": "hdb-loan-how-much-can-i-borrow-2026"
   }
 ]
