@@ -11,6 +11,30 @@
   X-Frame-Options: DENY
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.sheetjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://*.cloudflareaccess.com; object-src 'none'
 
+# Long-lived caching for assets that never change in place. CSS/JS are NOT
+# fingerprinted, so they deliberately keep the short default: a long max-age
+# would strand returning visitors on stale styles after a deploy.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=2592000
+
+/*.png
+  Cache-Control: public, max-age=2592000
+
+/*.jpg
+  Cache-Control: public, max-age=2592000
+
+/*.svg
+  Cache-Control: public, max-age=2592000
+
+/*.ico
+  Cache-Control: public, max-age=2592000
+
 # Master rate sheet — defense-in-depth alongside _redirects 404.
 /rates.xlsx
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet

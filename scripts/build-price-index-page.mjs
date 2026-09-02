@@ -312,8 +312,8 @@ async function main() {
   let h = await fs.readFile(SHELL, "utf8");
   const pi = d.priceIndex;
 
-  const title = `Singapore Property Price Index ${qLabel(pi.quarter)}: URA PPI ${pi.allResidential} (${pct(pi.qoqPct)} QoQ) | Nexus`;
-  const desc = `Official URA private residential property price index at ${pi.allResidential} for ${qLabel(pi.quarter)}, ${pct(pi.qoqPct)} QoQ and ${pct(pi.yoyPct)} YoY. Median transacted PSF ${sgd(d.medianTransacted.medianPsf)} with a full district breakdown.`;
+  const title = `Singapore Property Price Index ${qLabel(pi.quarter)}: URA PPI ${pi.allResidential}`;
+  const desc = `URA private residential property price index ${pi.allResidential} for ${qLabel(pi.quarter)}, ${pct(pi.qoqPct)} QoQ and ${pct(pi.yoyPct)} YoY. Median PSF ${sgd(d.medianTransacted.medianPsf)}, full district breakdown.`;
 
   // Head metadata. The SORA shell wraps title/description in LIVE-SORA sentinels;
   // strip those so update-rate-snippets.mjs never patches this page by mistake.

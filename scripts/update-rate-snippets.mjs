@@ -56,7 +56,7 @@ const RATE_TARGETS = [
   {
     file: "blog/home-loan-rates-singapore/index.html",
     title: ({ fixed, sora }) =>
-      `<title>Singapore Home Loan Rates ${YEAR}: Fixed ${fixed}%, SORA ${sora}% | Nexus</title>`,
+      `<title>Singapore Home Loan Rates ${YEAR}: Fixed ${fixed}%, SORA ${sora}%</title>`,
     desc: ({ fixed, sora }) =>
       `<meta name="description" content="Singapore home loan rates ${YEAR}: fixed from ${fixed}% p.a., SORA-linked from ${sora}% p.a. Compare 16 MAS-regulated banks. Updated weekly. Free.">`,
   },
@@ -71,8 +71,8 @@ const SORA_TARGETS = [
     fragments: ({ sora1m, sora3m, asOfSoraIso, asOfSoraHuman, effective, jumboLow, jumboHigh, stdLow, stdHigh, smallLow, smallHigh, commLow, commHigh }) => ({
       // Full-tag rebuilds — sentinels must wrap the WHOLE tag from outside
       // (sentinels inside <title> RCDATA / content="" render as literal SERP text).
-      "titletag": `<title>SORA Rate Today Singapore: 1M ${sora1m}% &amp; 3M ${sora3m}% (Updated Daily) | Nexus</title>`,
-      "desctag": `<meta name="description" content="Live Singapore SORA rate today: 1M Compounded SORA ${sora1m}%, 3M Compounded SORA ${sora3m}% as of ${asOfSoraHuman}. Daily MAS feed, historical trend, home-loan effective rate.">`,
+      "titletag": `<title>SORA Rate Today Singapore: 1M ${sora1m}%, 3M ${sora3m}% | Nexus</title>`,
+      "desctag": `<meta name="description" content="Live Singapore SORA today: 1M Compounded SORA ${sora1m}%, 3M ${sora3m}% as of ${asOfSoraHuman}. Daily MAS feed, trend and home-loan effective rate.">`,
       "1m": sora1m,
       "3m": sora3m,
       "3m2": sora3m,

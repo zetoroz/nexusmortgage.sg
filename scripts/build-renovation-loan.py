@@ -30,10 +30,10 @@ asof_human = f"{int(d)} {MONTHS[int(m)-1]} {y}"
 h = SRC.read_text(encoding="utf-8")
 
 # ---- head metadata -----------------------------------------------------
-TITLE = "Renovation Loan Singapore: The S$30,000 Cap Explained | Nexus"
-DESC = (f"Singapore renovation loans are capped at S$30,000 or 6x monthly income. "
+TITLE = "Renovation Loan Singapore: The S$30,000 Cap | Nexus"
+DESC = (f"Singapore renovation loans cap at S$30,000 or 6x monthly income. "
         f"Compare reno loan EIR against an equity term loan from ~{eff}% p.a. "
-        f"Independent broker, no fee.")
+        f"No broker fee.")
 swaps = [
  (r"<title>.*?</title>", f"<title>{TITLE}</title>"),
  (r'<meta name="description" content="[^"]*">',

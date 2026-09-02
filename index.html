@@ -752,7 +752,7 @@
       font-weight: 500;
       letter-spacing: .09em;
       text-transform: uppercase;
-      color: rgba(250, 247, 242, .45);
+      color: rgba(250, 247, 242, .72);
     }
 
     .calc-input {
@@ -1388,7 +1388,7 @@
     /* ===== FOOTER CSS-BASED HOVER (replaces inline JS) ===== */
     .footer-link {
       font-size: .875rem;
-      color: rgba(250, 247, 242, .4);
+      color: rgba(250, 247, 242, .72);
       text-decoration: none;
       transition: color .2s;
     }
@@ -2210,7 +2210,7 @@
   </div>
 
   <!-- =========== LIVE SORA TICKER =========== -->
-  <a class="sora-ticker" id="soraTicker" href="/sora-rates-singapore/" aria-label="Live Compounded SORA from MAS — see full SORA explainer">
+  <a class="sora-ticker" id="soraTicker" href="/sora-rates-singapore/" aria-label="Compounded SORA 1M and 3M, live from MAS. See the full SORA explainer.">
     <div class="sora-ticker-inner">
       <span class="sora-ticker-pulse" aria-hidden="true"></span>
       <span class="sora-ticker-label">Compounded SORA</span>
@@ -2319,7 +2319,7 @@
 
       <a href="https://wa.me/6587520859?text=Hi%2C%20I%27d%20like%20a%20free%20mortgage%20consultation." target="_blank" rel="noopener" class="hidden lg:inline-flex btn-gold" style="padding:.6rem 1.4rem;font-size:.78rem;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="margin-right:.4rem;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Free Consultation</a>
 
-      <button class="lg:hidden p-1.5" onclick="toggleMenu()"
+      <button class="lg:hidden p-1.5" onclick="toggleMenu()" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu"
         style="background:none;border:none;cursor:pointer;color:#FAF7F2;">
         <svg id="menu-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="2">
@@ -2450,7 +2450,7 @@
           <div style="color:rgba(250,247,242,.28);font-size:.7rem;margin-top:.3rem;line-height:1.5;">Banks pay our referral</div>
         </div>
         <div style="padding:1.75rem 1.5rem;text-align:center;border-right:1px solid rgba(196,151,59,.12);">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:2.75rem;font-weight:300;color:var(--gold-400);line-height:1;margin-bottom:.3rem;">8</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2.75rem;font-weight:300;color:var(--gold-400);line-height:1;margin-bottom:.3rem;">9</div>
           <div style="color:rgba(250,247,242,.7);font-size:.78rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;">Service Types</div>
           <div style="color:rgba(250,247,242,.28);font-size:.7rem;margin-top:.3rem;line-height:1.5;">Residential &amp; commercial</div>
         </div>
@@ -2662,39 +2662,39 @@
               <table style="width:100%; border-collapse:collapse; font-size:.875rem;">
                 <thead>
                   <tr style="background:var(--navy-900);">
-                    <th style="padding:.75rem 1rem; text-align:left; color:rgba(250,247,242,.55); font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; font-weight:500; border-radius:6px 0 0 0;"></th>
-                    <th style="padding:.75rem 1rem; text-align:center; color:var(--gold-400); font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; font-weight:600;">HDB Loan</th>
-                    <th style="padding:.75rem 1rem; text-align:center; color:var(--gold-400); font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; font-weight:600; border-radius:0 6px 0 0;">Bank Loan</th>
+                    <th scope="col" style="padding:.75rem 1rem; text-align:left; color:rgba(250,247,242,.55); font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; font-weight:500; border-radius:6px 0 0 0;"></th>
+                    <th scope="col" style="padding:.75rem 1rem; text-align:center; color:var(--gold-400); font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; font-weight:600;">HDB Loan</th>
+                    <th scope="col" style="padding:.75rem 1rem; text-align:center; color:var(--gold-400); font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; font-weight:600; border-radius:0 6px 0 0;">Bank Loan</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr style="border-bottom:1px solid rgba(196,151,59,.1);">
-                    <td style="padding:.75rem 1rem; color:#374151; font-weight:500;">Current Rate</td>
+                    <th scope="row" style="padding:.75rem 1rem; color:#374151; font-weight:500;">Current Rate</th>
                     <td style="padding:.75rem 1rem; text-align:center; color:#374151;">2.6% p.a.</td>
                     <td style="padding:.75rem 1rem; text-align:center; color:#059669; font-weight:600;">From 1.40%</td>
                   </tr>
                   <tr style="border-bottom:1px solid rgba(196,151,59,.1); background:rgba(196,151,59,.03);">
-                    <td style="padding:.75rem 1rem; color:#374151; font-weight:500;">Down Payment (Cash)</td>
+                    <th scope="row" style="padding:.75rem 1rem; color:#374151; font-weight:500;">Down Payment (Cash)</th>
                     <td style="padding:.75rem 1rem; text-align:center; color:#059669; font-weight:600;">$0 cash</td>
                     <td style="padding:.75rem 1rem; text-align:center; color:#374151;">Min 5% cash</td>
                   </tr>
                   <tr style="border-bottom:1px solid rgba(196,151,59,.1);">
-                    <td style="padding:.75rem 1rem; color:#374151; font-weight:500;">LTV</td>
+                    <th scope="row" style="padding:.75rem 1rem; color:#374151; font-weight:500;">LTV</th>
                     <td style="padding:.75rem 1rem; text-align:center; color:#374151;">75%</td>
                     <td style="padding:.75rem 1rem; text-align:center; color:#374151;">75%</td>
                   </tr>
                   <tr style="border-bottom:1px solid rgba(196,151,59,.1); background:rgba(196,151,59,.03);">
-                    <td style="padding:.75rem 1rem; color:#374151; font-weight:500;">Lock-In Period</td>
+                    <th scope="row" style="padding:.75rem 1rem; color:#374151; font-weight:500;">Lock-In Period</th>
                     <td style="padding:.75rem 1rem; text-align:center; color:#059669; font-weight:600;">None</td>
                     <td style="padding:.75rem 1rem; text-align:center; color:#374151;">2–3 years</td>
                   </tr>
                   <tr style="border-bottom:1px solid rgba(196,151,59,.1);">
-                    <td style="padding:.75rem 1rem; color:#374151; font-weight:500;">For Private Property</td>
+                    <th scope="row" style="padding:.75rem 1rem; color:#374151; font-weight:500;">For Private Property</th>
                     <td style="padding:.75rem 1rem; text-align:center; color:#DC2626; font-weight:600;">✗ No</td>
                     <td style="padding:.75rem 1rem; text-align:center; color:#059669; font-weight:600;">✓ Yes</td>
                   </tr>
                   <tr style="background:rgba(196,151,59,.03);">
-                    <td style="padding:.75rem 1rem; color:#374151; font-weight:500;">Can Refinance Later</td>
+                    <th scope="row" style="padding:.75rem 1rem; color:#374151; font-weight:500;">Can Refinance Later</th>
                     <td style="padding:.75rem 1rem; text-align:center; color:#374151;">To bank only</td>
                     <td style="padding:.75rem 1rem; text-align:center; color:#059669; font-weight:600;">✓ Any bank</td>
                   </tr>
@@ -3117,7 +3117,7 @@
             <div>
               <p class="calc-label mb-1.5">Purchase Price (S$)</p>
               <input type="text" inputmode="numeric" id="c-price" class="calc-input" value="800,000"
-                oninput="onPriceChange()">
+                oninput="onPriceChange()" aria-label="Purchase Price (S$)">
             </div>
             <div>
               <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.375rem;">
@@ -3125,7 +3125,7 @@
                 <span id="dp-pct-badge"
                   style="font-size:.68rem;font-weight:600;letter-spacing:.06em;padding:.15rem .55rem;border-radius:100px;background:rgba(196,151,59,.15);color:var(--gold-400);border:1px solid rgba(196,151,59,.25);">25.0%</span>
               </div>
-              <input type="text" inputmode="numeric" id="c-down" class="calc-input" value="200,000"
+              <input type="text" inputmode="numeric" id="c-down" class="calc-input" value="200,000" aria-label="Down Payment (S$)"
                 oninput="onDownChange()">
               <div id="dp-warning"
                 style="display:none;margin-top:.4rem;font-size:.73rem;color:#F87171;align-items:center;gap:.35rem;">
@@ -3144,7 +3144,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
             <div>
               <p class="calc-label mb-1.5">Interest Rate (% p.a.)</p>
-              <input type="number" id="c-rate" class="calc-input" value="2.00" step="0.05" oninput="calc()">
+              <input type="number" id="c-rate" class="calc-input" value="2.00" step="0.05" oninput="calc()" aria-label="Interest Rate (% p.a.)">
             </div>
             <div>
               <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.375rem;">
@@ -3152,7 +3152,7 @@
                 <span id="tenure-cap-badge"
                   style="display:none;font-size:.68rem;font-weight:600;letter-spacing:.06em;padding:.15rem .55rem;border-radius:100px;background:rgba(248,113,113,.15);color:#F87171;border:1px solid rgba(248,113,113,.3);">Capped</span>
               </div>
-              <input type="number" id="c-yrs" class="calc-input" value="25" min="1" max="35" oninput="calc()">
+              <input type="number" id="c-yrs" class="calc-input" value="25" min="1" max="35" oninput="calc()" aria-label="Loan Tenure (Years)">
               <p id="tenure-cap-note"
                 style="display:none;font-size:.68rem;color:#F87171;margin-top:.35rem;line-height:1.5;"></p>
             </div>
@@ -3182,7 +3182,7 @@
             <!-- ── SIMPLE PANEL ── -->
             <div id="simple-panel">
               <p class="calc-label mb-1.5">Gross Monthly Income (S$)</p>
-              <input type="text" inputmode="numeric" id="c-income" class="calc-input" value="8,000" oninput="calc()">
+              <input type="text" inputmode="numeric" id="c-income" class="calc-input" value="8,000" oninput="calc()" aria-label="Gross Monthly Income (S$)">
             </div>
 
             <!-- ── ADVANCED PANEL ── -->
@@ -3247,11 +3247,11 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <p class="calc-label mb-1.5">Car / Personal Loans (S$)</p>
-                    <input type="text" inputmode="numeric" id="c-debts" class="calc-input" value="0" oninput="calc()">
+                    <input type="text" inputmode="numeric" id="c-debts" class="calc-input" value="0" oninput="calc()" aria-label="Car / Personal Loans (S$)">
                   </div>
                   <div>
                     <p class="calc-label mb-1.5">No. of Credit Cards</p>
-                    <input type="number" id="c-cards" class="calc-input" value="0" min="0" max="30" oninput="calc()">
+                    <input type="number" id="c-cards" class="calc-input" value="0" min="0" max="30" oninput="calc()" aria-label="No. of Credit Cards">
                   </div>
                 </div>
                 <p style="font-size:.68rem;color:rgba(250,247,242,.28);margin-top:.45rem;line-height:1.5;">Each credit
@@ -3324,11 +3324,11 @@
               <table class="amort-tbl">
                 <thead style="position:sticky;top:0;background:#0B1C3A;z-index:1;">
                   <tr>
-                    <th>Year</th>
-                    <th>Monthly</th>
-                    <th>Principal</th>
-                    <th>Interest</th>
-                    <th>Balance</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Monthly</th>
+                    <th scope="col">Principal</th>
+                    <th scope="col">Interest</th>
+                    <th scope="col">Balance</th>
                   </tr>
                 </thead>
                 <tbody id="amort-body"></tbody>
@@ -3657,9 +3657,9 @@
                 fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg></div>
-            <h4
+            <h3
               style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#0B1C3A;margin-bottom:.35rem;">
-              Fully Transparent</h4>
+              Fully Transparent</h3>
             <p style="font-size:.8125rem;color:#6B7280;line-height:1.62;">No hidden packages, no conflicts of interest.
               Every option is laid out clearly for you.</p>
           </div>
@@ -3669,9 +3669,9 @@
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 8v4l3 3" />
               </svg></div>
-            <h4
+            <h3
               style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#0B1C3A;margin-bottom:.35rem;">
-              Fast Turnaround</h4>
+              Fast Turnaround</h3>
             <p style="font-size:.8125rem;color:#6B7280;line-height:1.62;">Same-day comparisons. We move at your pace —
               especially for urgent property purchases.</p>
           </div>
@@ -3683,9 +3683,9 @@
                 <path d="M23 21v-2a4 4 0 00-3-3.87" />
                 <path d="M16 3.13a4 4 0 010 7.75" />
               </svg></div>
-            <h4
+            <h3
               style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#0B1C3A;margin-bottom:.35rem;">
-              All Client Types</h4>
+              All Client Types</h3>
             <p style="font-size:.8125rem;color:#6B7280;line-height:1.62;">Singapore citizens, PRs, foreigners,
               self-employed — we handle every borrower profile.</p>
           </div>
@@ -3695,9 +3695,9 @@
                 <line x1="12" y1="1" x2="12" y2="23" />
                 <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
               </svg></div>
-            <h4
+            <h3
               style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#FAF7F2;margin-bottom:.35rem;">
-              Zero Fees</h4>
+              Zero Fees</h3>
             <p style="font-size:.8125rem;color:rgba(250,247,242,.5);line-height:1.62;">Referral fee paid by the bank
               upon successful loan disbursement. You pay absolutely nothing.</p>
           </div>

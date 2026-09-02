@@ -1,0 +1,9010 @@
+{
+  "successful": true,
+  "data": {
+    "responseAggregationType": "byProperty",
+    "rows": [
+      {
+        "clicks": 7,
+        "ctr": 0.4117647058823529,
+        "impressions": 17,
+        "keys": [
+          "nexus mortgage"
+        ],
+        "position": 1.1176470588235294
+      },
+      {
+        "clicks": 2,
+        "ctr": 0.09523809523809523,
+        "impressions": 21,
+        "keys": [
+          "caveat loan"
+        ],
+        "position": 4.476190476190476
+      },
+      {
+        "clicks": 2,
+        "ctr": 0.00904977375565611,
+        "impressions": 221,
+        "keys": [
+          "hsbc home loan rates"
+        ],
+        "position": 18.479638009049772
+      },
+      {
+        "clicks": 2,
+        "ctr": 0.009708737864077669,
+        "impressions": 206,
+        "keys": [
+          "sora rate today"
+        ],
+        "position": 21.95631067961165
+      },
+      {
+        "clicks": 1,
+        "ctr": 0.5,
+        "impressions": 2,
+        "keys": [
+          "3-month compounded sora rate today"
+        ],
+        "position": 6
+      },
+      {
+        "clicks": 1,
+        "ctr": 0.02127659574468085,
+        "impressions": 47,
+        "keys": [
+          "3m sibor"
+        ],
+        "position": 29.29787234042553
+      },
+      {
+        "clicks": 1,
+        "ctr": 0.006134969325153374,
+        "impressions": 163,
+        "keys": [
+          "3m sora rate today"
+        ],
+        "position": 30.631901840490798
+      },
+      {
+        "clicks": 1,
+        "ctr": 0.07692307692307693,
+        "impressions": 13,
+        "keys": [
+          "absd for second property"
+        ],
+        "position": 47.07692307692308
+      },
+      {
+        "clicks": 1,
+        "ctr": 0.0045045045045045045,
+        "impressions": 222,
+        "keys": [
+          "caveat loan singapore"
+        ],
+        "position": 30.873873873873872
+      },
+      {
+        "clicks": 1,
+        "ctr": 1,
+        "impressions": 1,
+        "keys": [
+          "commercial property loan for salaried person"
+        ],
+        "position": 12
+      },
+      {
+        "clicks": 1,
+        "ctr": 0.0625,
+        "impressions": 16,
+        "keys": [
+          "dbs fixed rate home loan"
+        ],
+        "position": 25.3125
+      },
+      {
+        "clicks": 1,
+        "ctr": 1,
+        "impressions": 1,
+        "keys": [
+          "dbs home mortgage rate"
+        ],
+        "position": 10
+      },
+      {
+        "clicks": 1,
+        "ctr": 0.007246376811594203,
+        "impressions": 138,
+        "keys": [
+          "how to avoid absd for second property"
+        ],
+        "position": 19.52173913043478
+      },
+      {
+        "clicks": 1,
+        "ctr": 0.3333333333333333,
+        "impressions": 3,
+        "keys": [
+          "hsbc mortgage fixed rates"
+        ],
+        "position": 5.333333333333333
+      },
+      {
+        "clicks": 1,
+        "ctr": 0.25,
+        "impressions": 4,
+        "keys": [
+          "latest mortgage rates singapore"
+        ],
+        "position": 49.75
+      },
+      {
+        "clicks": 1,
+        "ctr": 1,
+        "impressions": 1,
+        "keys": [
+          "mortgage broker singapore"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 1,
+        "ctr": 0.05263157894736842,
+        "impressions": 19,
+        "keys": [
+          "sibor rate today singapore"
+        ],
+        "position": 35.94736842105263
+      },
+      {
+        "clicks": 1,
+        "ctr": 0.16666666666666666,
+        "impressions": 6,
+        "keys": [
+          "sora outlook"
+        ],
+        "position": 8.166666666666668
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "\"3-month compounded sora\" \"31 december 2024\""
+        ],
+        "position": 6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "\"3-month compounded sora\" \"august 2026\""
+        ],
+        "position": 8.166666666666668
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "\"3-month compounded sora\" \"august 2026\" singapore"
+        ],
+        "position": 5.764705882352941
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "\"3-month compounded sora\" \"december 2024\""
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "\"3-month compounded sora\" \"july 2026\""
+        ],
+        "position": 7
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "\"31 december 2024\" \"3-month compounded sora\""
+        ],
+        "position": 7
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "\"compare the market\""
+        ],
+        "position": 63.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "\"compare the market\" home or car or life or credit or loans"
+        ],
+        "position": 80.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "$0.5m"
+        ],
+        "position": 6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "$100000"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "$1m"
+        ],
+        "position": 17
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "$750000"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "."
+        ],
+        "position": 13
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "0.5%"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "1 month compounded sora"
+        ],
+        "position": 64
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "1 month compounded sora rate today"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 16,
+        "keys": [
+          "1 month sibor"
+        ],
+        "position": 46.5625
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 25,
+        "keys": [
+          "1 month sibor rate"
+        ],
+        "position": 54.88
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "1 month sibor rate singapore"
+        ],
+        "position": 51.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "1 month sora"
+        ],
+        "position": 71
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "1 month sora rate"
+        ],
+        "position": 56
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 29,
+        "keys": [
+          "1 month sora rate today"
+        ],
+        "position": 36.41379310344828
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "1-month compounded sora"
+        ],
+        "position": 65
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "1-month sora rate"
+        ],
+        "position": 59.09090909090909
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "1-month sora rate today"
+        ],
+        "position": 15.625
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "1.1 million"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "1.45%"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "1.6m"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "10 down payment"
+        ],
+        "position": 75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "10 jul"
+        ],
+        "position": 2.666666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "10 year loan rates"
+        ],
+        "position": 80
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "14.5k"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "14400"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "15 fixed mortgage rates"
+        ],
+        "position": 59
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "15 jul"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "15 months cooling measure"
+        ],
+        "position": 44
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "15 months cooling period"
+        ],
+        "position": 48
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "15 months wait out period"
+        ],
+        "position": 49
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "15 months wait-out period"
+        ],
+        "position": 69.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "15 year fixed mortgage rates"
+        ],
+        "position": 51
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "15 year mortgage calculator"
+        ],
+        "position": 90
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "150000"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "1500000*0.35"
+        ],
+        "position": 7
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "17.5k"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 26,
+        "keys": [
+          "1m sibor"
+        ],
+        "position": 40.92307692307692
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "1m sibor chart"
+        ],
+        "position": 46.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "1m sibor rate"
+        ],
+        "position": 37.77777777777778
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 51,
+        "keys": [
+          "1m sora"
+        ],
+        "position": 38.509803921568626
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "1m sora now"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 14,
+        "keys": [
+          "1m sora rate"
+        ],
+        "position": 36.785714285714285
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 28,
+        "keys": [
+          "1m sora rate today"
+        ],
+        "position": 11.392857142857142
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "1m sora today"
+        ],
+        "position": 6.75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 38,
+        "keys": [
+          "1m sora vs 3m sora"
+        ],
+        "position": 45.44736842105263
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "2 million"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "2 oct 2026"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "2-year"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "20 year commercial loan"
+        ],
+        "position": 99
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "20 year tenure"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "20000 loan"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "2026 பட்ஜெட்டுக்குப் பிறகு hdb விலைகள் குறையுமா"
+        ],
+        "position": 29.941176470588236
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "20年"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "24k"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "25th aug"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "28 year"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "2nd housing loan"
+        ],
+        "position": 36.888888888888886
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "2nd option"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "2nd private property loan singapore"
+        ],
+        "position": 68.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "2nd property absd"
+        ],
+        "position": 25.333333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 85,
+        "keys": [
+          "2nd property loan"
+        ],
+        "position": 28.51764705882353
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 63,
+        "keys": [
+          "2nd property loan ltv"
+        ],
+        "position": 61.03174603174603
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 16,
+        "keys": [
+          "2nd property stamp duty"
+        ],
+        "position": 43.1875
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 15,
+        "keys": [
+          "2nd property stamp duty calculator"
+        ],
+        "position": 63.733333333333334
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "2nd property stamp duty singapore"
+        ],
+        "position": 40.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "2nd property tax"
+        ],
+        "position": 17
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "3 month compounded sora"
+        ],
+        "position": 51.09090909090909
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "3 month compounded sora now"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 20,
+        "keys": [
+          "3 month sibor"
+        ],
+        "position": 51.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 31,
+        "keys": [
+          "3 month sibor rate"
+        ],
+        "position": 61.483870967741936
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "3 month sibor rate today"
+        ],
+        "position": 35.333333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 62,
+        "keys": [
+          "3 month sora"
+        ],
+        "position": 84.38709677419355
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "3 month sora now"
+        ],
+        "position": 48
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 16,
+        "keys": [
+          "3 month sora rate"
+        ],
+        "position": 68.75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 19,
+        "keys": [
+          "3 month sora rate today"
+        ],
+        "position": 21.68421052631579
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "3 month sora rate today singapore"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "3 month sora today"
+        ],
+        "position": 40.45454545454545
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 34,
+        "keys": [
+          "3 months sibor"
+        ],
+        "position": 37.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "3 months sora"
+        ],
+        "position": 42.166666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "3 months sora rate"
+        ],
+        "position": 32.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "3 year fixed mortgage rates"
+        ],
+        "position": 79.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "3-month compounded sora"
+        ],
+        "position": 76
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "3-month sora"
+        ],
+        "position": 87
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "3-month sora chart"
+        ],
+        "position": 53
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "3-month sora rate"
+        ],
+        "position": 49
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "3-month sora rate today"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "3-month sora today"
+        ],
+        "position": 38
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "30 year fixed home loan"
+        ],
+        "position": 61
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "30 year fixed mortgage"
+        ],
+        "position": 63
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "30 year fixed mortgage rate"
+        ],
+        "position": 66.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "30 year fixed mortgage rates"
+        ],
+        "position": 63.18181818181818
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "30 year home mortgage"
+        ],
+        "position": 89.66666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "30 year mortgage rates"
+        ],
+        "position": 58
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "30 years old"
+        ],
+        "position": 17
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "30-year fixed mortgage rates"
+        ],
+        "position": 61
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "31"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "35"
+        ],
+        "position": 9
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "36 years old"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "37"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 40,
+        "keys": [
+          "3m compounded sora"
+        ],
+        "position": 32.375
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "3m compounded sora now"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 37,
+        "keys": [
+          "3m sibor rate"
+        ],
+        "position": 43.891891891891895
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "3m sibor rate today"
+        ],
+        "position": 45
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "3m sor"
+        ],
+        "position": 33.705882352941174
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 214,
+        "keys": [
+          "3m sora"
+        ],
+        "position": 26.897196261682243
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "3m sora dbs"
+        ],
+        "position": 10.571428571428571
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "3m sora mas"
+        ],
+        "position": 22.166666666666668
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "3m sora now"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 47,
+        "keys": [
+          "3m sora rate"
+        ],
+        "position": 49.191489361702125
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "3m sora rate chart"
+        ],
+        "position": 79.8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "3m sora rate history"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 19,
+        "keys": [
+          "3m sora rate today singapore"
+        ],
+        "position": 41.10526315789474
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "3m sora rates"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 12,
+        "keys": [
+          "3m sora today"
+        ],
+        "position": 11.833333333333334
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "3m sora trend"
+        ],
+        "position": 3.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "3m.sora"
+        ],
+        "position": 22.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "3month sora rate"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "3months sora rate"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "3mth sora rate"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "3rd property loan"
+        ],
+        "position": 56
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "4.5 interest rate"
+        ],
+        "position": 69.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "40 years old"
+        ],
+        "position": 8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "5 dp"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "5 year fixed"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "5 year fixed interest rates"
+        ],
+        "position": 55
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "5 year sor"
+        ],
+        "position": 43.75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 14,
+        "keys": [
+          "5 year sor rate"
+        ],
+        "position": 43.642857142857146
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 39,
+        "keys": [
+          "5 year sor rate now"
+        ],
+        "position": 33.56410256410256
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "5 year sora rate today"
+        ],
+        "position": 5.454545454545454
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "50 yo"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "595k"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "6 jun 2026"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "6 months ago"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "8 jul"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "850k"
+        ],
+        "position": 6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "851k"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "99 1 absd loophole"
+        ],
+        "position": 38.4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 24,
+        "keys": [
+          "99 1 property ownership absd"
+        ],
+        "position": 61.083333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "99 co housing loan calculator"
+        ],
+        "position": 29.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "99 to 1 absd"
+        ],
+        "position": 29
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "99 to 1 loophole absd"
+        ],
+        "position": 33
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "99 to 1 scheme"
+        ],
+        "position": 39.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "99-1"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "99-1 absd"
+        ],
+        "position": 24
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "99-1 property"
+        ],
+        "position": 34.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 75,
+        "keys": [
+          "99-1 tenancy in common"
+        ],
+        "position": 35.18666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "99.co should you take loan"
+        ],
+        "position": 30
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "absd 2nd property"
+        ],
+        "position": 73.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "absd 2nd property singaporean"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "absd 99 to 1 loophole"
+        ],
+        "position": 34.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "absd calculator"
+        ],
+        "position": 50.705882352941174
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 67,
+        "keys": [
+          "absd for 2nd property"
+        ],
+        "position": 46.08955223880597
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "absd for 2nd property for singaporean"
+        ],
+        "position": 71
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "absd for 3rd property"
+        ],
+        "position": 48.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "absd for 3rd property singapore"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "absd for singaporean"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 31,
+        "keys": [
+          "absd loophole"
+        ],
+        "position": 32.12903225806451
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "absd refund"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "absd remission"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "absd remission for 2nd property"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 10,
+        "keys": [
+          "absd rules for singapore pr buying first home"
+        ],
+        "position": 81.2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 14,
+        "keys": [
+          "absd second property"
+        ],
+        "position": 52.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "absd singapore"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "absd singapore 2026"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "absd singapore 2nd property"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "absd singapore property"
+        ],
+        "position": 82
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 18,
+        "keys": [
+          "adakah harga hdb akan turun selepas belanjawan 2026"
+        ],
+        "position": 23.833333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "additional buyer stamp duty"
+        ],
+        "position": 50.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "additional buyer stamp duty calculator"
+        ],
+        "position": 29
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "additional buyer stamp duty for 2nd property"
+        ],
+        "position": 79
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "additional stamp duty on second property"
+        ],
+        "position": 75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "advantedge interest rates"
+        ],
+        "position": 96
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "affordability"
+        ],
+        "position": 84
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "affordability assessment"
+        ],
+        "position": 10
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "affordability calc"
+        ],
+        "position": 13
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "affordability calculation"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 33,
+        "keys": [
+          "affordability calculator"
+        ],
+        "position": 68.51515151515152
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "affordability calculator mortgage"
+        ],
+        "position": 74
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 39,
+        "keys": [
+          "affordability calculator singapore"
+        ],
+        "position": 54.333333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "affordability check"
+        ],
+        "position": 10
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "affordability criteria"
+        ],
+        "position": 8.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "affording a loan singapore"
+        ],
+        "position": 46.69230769230769
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "ah long interest rate"
+        ],
+        "position": 51
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "alternate lender"
+        ],
+        "position": 90
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "any haircut"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "apartment"
+        ],
+        "position": 8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 28,
+        "keys": [
+          "application for home loan"
+        ],
+        "position": 36.75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 12,
+        "keys": [
+          "apply for a home loan"
+        ],
+        "position": 26.166666666666668
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 77,
+        "keys": [
+          "apply for a mortgage"
+        ],
+        "position": 28.792207792207794
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "apply for a mortgage loan"
+        ],
+        "position": 24.333333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "apply for construction loan"
+        ],
+        "position": 19.333333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "apply for equity line of credit"
+        ],
+        "position": 66
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 319,
+        "keys": [
+          "apply for home loan"
+        ],
+        "position": 35.26332288401254
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 70,
+        "keys": [
+          "apply for house loan"
+        ],
+        "position": 35.128571428571426
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 29,
+        "keys": [
+          "apply for mortgage"
+        ],
+        "position": 27.96551724137931
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 79,
+        "keys": [
+          "apply for mortgage loan"
+        ],
+        "position": 33.620253164556964
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "apply home loan"
+        ],
+        "position": 35.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "apply home loan online"
+        ],
+        "position": 40
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 23,
+        "keys": [
+          "apply housing loan"
+        ],
+        "position": 36.56521739130435
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "apply housing loan online"
+        ],
+        "position": 32
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "apply mortgage loan"
+        ],
+        "position": 35.84615384615385
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "applying for a mortgage"
+        ],
+        "position": 31.4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 30,
+        "keys": [
+          "applying for home loan"
+        ],
+        "position": 31.566666666666666
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 25,
+        "keys": [
+          "approval for home loan"
+        ],
+        "position": 29.88
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "apr 25"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 22,
+        "keys": [
+          "arp financing singapore"
+        ],
+        "position": 46.77272727272727
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "as of 1 july"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 33,
+        "keys": [
+          "asset based lending singapore"
+        ],
+        "position": 72.45454545454545
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "average interest rate for home loans"
+        ],
+        "position": 49
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "average mortgage rate singapore"
+        ],
+        "position": 92
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 91,
+        "keys": [
+          "avoid absd"
+        ],
+        "position": 24.12087912087912
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 93,
+        "keys": [
+          "avoiding absd singapore"
+        ],
+        "position": 21.408602150537636
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bala's curve"
+        ],
+        "position": 75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank caveat"
+        ],
+        "position": 10
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 46,
+        "keys": [
+          "bank comparison rate"
+        ],
+        "position": 79.65217391304348
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank home interest rates"
+        ],
+        "position": 96
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank home loan interest"
+        ],
+        "position": 7
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "bank housing loan rates singapore"
+        ],
+        "position": 96
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "bank loan"
+        ],
+        "position": 3.2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank loan 2026"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "bank loan calculator singapore"
+        ],
+        "position": 75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "bank loan commercial property"
+        ],
+        "position": 49.375
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank loan estimate"
+        ],
+        "position": 76
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 64,
+        "keys": [
+          "bank loan for commercial property"
+        ],
+        "position": 55.21875
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "bank loan for condo calculator"
+        ],
+        "position": 80.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 29,
+        "keys": [
+          "bank loan for ec"
+        ],
+        "position": 46.37931034482759
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank loan for hdb calculator"
+        ],
+        "position": 72
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 15,
+        "keys": [
+          "bank loan for private property"
+        ],
+        "position": 33.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank loan for resale flat"
+        ],
+        "position": 96
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank loan mortgage rates"
+        ],
+        "position": 93
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "bank loan on commercial property"
+        ],
+        "position": 45.75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank loan rate for hdb"
+        ],
+        "position": 50
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "bank loan rates singapore"
+        ],
+        "position": 88
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank loans"
+        ],
+        "position": 12
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank mortgage interest rates"
+        ],
+        "position": 98
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank mortgage rates"
+        ],
+        "position": 85
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank mortgage rates singapore"
+        ],
+        "position": 90
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "bank rate today"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bank subsidy"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "bank valuation of property singapore"
+        ],
+        "position": 47.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bankocbc interest rates"
+        ],
+        "position": 37
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "bankrate mortgage rates"
+        ],
+        "position": 69.8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "barber+mortgage"
+        ],
+        "position": 6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "benchmark mortgage rate"
+        ],
+        "position": 6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "best bank loan for hdb"
+        ],
+        "position": 50.142857142857146
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best commercial loans"
+        ],
+        "position": 63
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 16,
+        "keys": [
+          "best commercial property loan rates singapore"
+        ],
+        "position": 48.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best commercial property loans"
+        ],
+        "position": 69
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best commercial property mortgage rates"
+        ],
+        "position": 89
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best commercial property refinance loans"
+        ],
+        "position": 56
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 21,
+        "keys": [
+          "best first time home buyer loans"
+        ],
+        "position": 19.761904761904763
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "best fixed home loan rates singapore"
+        ],
+        "position": 43
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "best fixed rate home loans"
+        ],
+        "position": 49
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best fixed rate mortgage"
+        ],
+        "position": 50
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 41,
+        "keys": [
+          "best hdb bank loan"
+        ],
+        "position": 65.26829268292683
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best hdb loan in singapore"
+        ],
+        "position": 17
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best home financing rates"
+        ],
+        "position": 96
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best home interest loan rates"
+        ],
+        "position": 100
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best home loan mortgage rates"
+        ],
+        "position": 89
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "best home loan rates"
+        ],
+        "position": 75.88888888888889
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 65,
+        "keys": [
+          "best home loan rates singapore"
+        ],
+        "position": 89.16923076923077
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "best home loan singapore 2022"
+        ],
+        "position": 95.66666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "best home loan singapore 2023"
+        ],
+        "position": 90
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best house mortgage rates"
+        ],
+        "position": 84
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best housing loan rates in singapore"
+        ],
+        "position": 94
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best housing loan rates singapore"
+        ],
+        "position": 94
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "best interest rate mortgage company"
+        ],
+        "position": 65.42857142857143
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "best law firm for decoupling singapore"
+        ],
+        "position": 12.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "best lawyer for decoupling singapore"
+        ],
+        "position": 11.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "best mortgage"
+        ],
+        "position": 73.66666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best mortgage lender rates"
+        ],
+        "position": 95
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best mortgage loan rates"
+        ],
+        "position": 82
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 55,
+        "keys": [
+          "best mortgage rate"
+        ],
+        "position": 86.83636363636364
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best mortgage rate singapore"
+        ],
+        "position": 89
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "best mortgage rates"
+        ],
+        "position": 85.41176470588235
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 91,
+        "keys": [
+          "best mortgage rates singapore"
+        ],
+        "position": 87.51648351648352
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 58,
+        "keys": [
+          "best refinance rates singapore"
+        ],
+        "position": 44.706896551724135
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "best reverse mortgage calculator"
+        ],
+        "position": 72
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "block discounting"
+        ],
+        "position": 49
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "both"
+        ],
+        "position": 24
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bridging loan chinatown"
+        ],
+        "position": 49
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "bridging loan hdb"
+        ],
+        "position": 60
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "bridging loan interest rate"
+        ],
+        "position": 80.75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "bridging loan interest rate singapore"
+        ],
+        "position": 60.8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bridging loan ocbc"
+        ],
+        "position": 43
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bridging loan rates"
+        ],
+        "position": 29
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "bridging loan singapore interest rate"
+        ],
+        "position": 40.75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 25,
+        "keys": [
+          "broker"
+        ],
+        "position": 4.96
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "brokers"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "brokwr"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "bsd 2026"
+        ],
+        "position": 5.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 18,
+        "keys": [
+          "bsd calculator"
+        ],
+        "position": 55.111111111111114
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bsd calculator singapore"
+        ],
+        "position": 48
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bsd singapore"
+        ],
+        "position": 92
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 16,
+        "keys": [
+          "bto calculator"
+        ],
+        "position": 68.5625
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "bto deferred income assessment"
+        ],
+        "position": 57.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bto downpayment amount"
+        ],
+        "position": 76
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bto downpayment percentage"
+        ],
+        "position": 59
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bto first down payment"
+        ],
+        "position": 80
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "bto loan calculator"
+        ],
+        "position": 76
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "bto mortgage calculator"
+        ],
+        "position": 64
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "bto salary ceiling 2026"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "bto staggered downpayment"
+        ],
+        "position": 64.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 69,
+        "keys": [
+          "buc loan"
+        ],
+        "position": 65.2463768115942
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 114,
+        "keys": [
+          "buc loan singapore"
+        ],
+        "position": 54
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "buc payment schedule"
+        ],
+        "position": 88
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "buc progressive payment"
+        ],
+        "position": 86
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "buc progressive payment timeline"
+        ],
+        "position": 86.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 14,
+        "keys": [
+          "building under construction loan"
+        ],
+        "position": 94.07142857142857
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 234,
+        "keys": [
+          "business construction loan"
+        ],
+        "position": 33.1965811965812
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "business loan for property purchase"
+        ],
+        "position": 59.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "business loan for real estate"
+        ],
+        "position": 90
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "business loan on commercial property"
+        ],
+        "position": 44
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "business loans secured against property"
+        ],
+        "position": 89
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "business mortgage"
+        ],
+        "position": 16
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 162,
+        "keys": [
+          "business mortgage loan"
+        ],
+        "position": 47.876543209876544
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 450,
+        "keys": [
+          "business property loan"
+        ],
+        "position": 51.51111111111111
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "business property loan calculator"
+        ],
+        "position": 67.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 60,
+        "keys": [
+          "business property loans"
+        ],
+        "position": 52.516666666666666
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 136,
+        "keys": [
+          "business real estate loan"
+        ],
+        "position": 59.75735294117647
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "buy condo singapore calculator"
+        ],
+        "position": 71.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "buy second property in singapore"
+        ],
+        "position": 65
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "buy to let deposit"
+        ],
+        "position": 76.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "buy to let mortage"
+        ],
+        "position": 59
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "buy to let mortgage how much can i borrow"
+        ],
+        "position": 81
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "buy to let mortgages deposit"
+        ],
+        "position": 64
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "buy to let remortgages"
+        ],
+        "position": 64
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "buyer stamp duty calculator"
+        ],
+        "position": 52
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "buyer stamp duty for commercial property"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "buying 2nd property in singapore downpayment"
+        ],
+        "position": 28
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "buying 2nd property singapore"
+        ],
+        "position": 37
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "buying hdb flat after 55"
+        ],
+        "position": 26.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "buying property less than 60 years lease"
+        ],
+        "position": 42
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 34,
+        "keys": [
+          "buying second property in singapore"
+        ],
+        "position": 26.41176470588235
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "buying sub sale condo"
+        ],
+        "position": 44
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "buying vs renting"
+        ],
+        "position": 10
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "calculate home loan repayment"
+        ],
+        "position": 96
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 14,
+        "keys": [
+          "calculate house repayments"
+        ],
+        "position": 97.78571428571429
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "calculate industrial property loan"
+        ],
+        "position": 20
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 14,
+        "keys": [
+          "calculate mortgage repayment"
+        ],
+        "position": 95.85714285714286
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "calculate msr"
+        ],
+        "position": 69
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "calculate repayments"
+        ],
+        "position": 92.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "calculating rental yield"
+        ],
+        "position": 100
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "calculator for mortgage refinance"
+        ],
+        "position": 88
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "calculator for refinance mortgage"
+        ],
+        "position": 94
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "calculator for refinancing mortgage"
+        ],
+        "position": 90
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "calculators and mortgage"
+        ],
+        "position": 86
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "can i refinance my hdb loan"
+        ],
+        "position": 46
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "can i switch from bank loan to hdb loan"
+        ],
+        "position": 46
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "can i use cpf to buy hdb after 55"
+        ],
+        "position": 27.11111111111111
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "can i wipe out my cpf for hdb"
+        ],
+        "position": 26.529411764705884
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "can pr get hdb loan"
+        ],
+        "position": 8.833333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 46,
+        "keys": [
+          "can pr take hdb loan"
+        ],
+        "position": 8.869565217391305
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "can use cpf for commercial property"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "can you list the major differences in repayment terms between hdb and bank loans?"
+        ],
+        "position": 6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "car loan"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "cash out commercial refinance"
+        ],
+        "position": 9
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cash out equity loan rates"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cash out loan rates"
+        ],
+        "position": 10
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "cash out mortgage"
+        ],
+        "position": 50.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "cash out refinance"
+        ],
+        "position": 87.16666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 15,
+        "keys": [
+          "cash out refinance singapore hdb vs private"
+        ],
+        "position": 72.2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "cash out refinance singapore interest rate"
+        ],
+        "position": 75.29411764705883
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cash out refinancing"
+        ],
+        "position": 100
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 177,
+        "keys": [
+          "cash out refinancing singapore"
+        ],
+        "position": 89.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cashout equity loan"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "caveat lenders"
+        ],
+        "position": 4.666666666666666
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "caveat lending"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "caveat loan interest rates"
+        ],
+        "position": 12
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "caveat loan lenders"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "caveat loan meaning"
+        ],
+        "position": 3.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "caveat loans"
+        ],
+        "position": 21.75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "caveat vs mortgage"
+        ],
+        "position": 12
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "change joint tenants to tenants in common"
+        ],
+        "position": 72
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "cheap mortgages"
+        ],
+        "position": 11.375
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "cheapest home loan singapore"
+        ],
+        "position": 92
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "co borrower"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cof rate singapore"
+        ],
+        "position": 69
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "combined loan to value"
+        ],
+        "position": 91
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial"
+        ],
+        "position": 5.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 34,
+        "keys": [
+          "commercial bank loan"
+        ],
+        "position": 51.14705882352941
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "commercial banking loan"
+        ],
+        "position": 83.85714285714286
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial banking loans"
+        ],
+        "position": 17
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 149,
+        "keys": [
+          "commercial borrowing rates"
+        ],
+        "position": 55.033557046979865
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial building loan"
+        ],
+        "position": 61
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial building loan rates"
+        ],
+        "position": 48
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 486,
+        "keys": [
+          "commercial construction financing"
+        ],
+        "position": 41.15843621399177
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial construction lenders"
+        ],
+        "position": 42
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 410,
+        "keys": [
+          "commercial construction loan"
+        ],
+        "position": 26.673170731707316
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial construction loans"
+        ],
+        "position": 46
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial equity loan"
+        ],
+        "position": 73
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial estate loan"
+        ],
+        "position": 69
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 74,
+        "keys": [
+          "commercial financing"
+        ],
+        "position": 50.41891891891892
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 26,
+        "keys": [
+          "commercial financing rates"
+        ],
+        "position": 32.61538461538461
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "commercial gym loan singapore"
+        ],
+        "position": 70.84615384615384
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "commercial interest rates"
+        ],
+        "position": 33.4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial land lenders"
+        ],
+        "position": 37
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "commercial land loan"
+        ],
+        "position": 61.333333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial leasing rates"
+        ],
+        "position": 42.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "commercial lenders singapore"
+        ],
+        "position": 25.166666666666668
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial lending"
+        ],
+        "position": 16
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial lending banks"
+        ],
+        "position": 12
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial lending interest rates"
+        ],
+        "position": 70
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 29,
+        "keys": [
+          "commercial lending market"
+        ],
+        "position": 82.27586206896552
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "commercial lending rates"
+        ],
+        "position": 49.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "commercial lending solutions"
+        ],
+        "position": 83.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 81,
+        "keys": [
+          "commercial loan"
+        ],
+        "position": 56.46913580246913
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 54,
+        "keys": [
+          "commercial loan bank"
+        ],
+        "position": 43.48148148148148
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 19,
+        "keys": [
+          "commercial loan calculator"
+        ],
+        "position": 74.26315789473684
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "commercial loan calculator singapore"
+        ],
+        "position": 85.14285714285714
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 60,
+        "keys": [
+          "commercial loan interest rate"
+        ],
+        "position": 58.266666666666666
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial loan interest rate calculator"
+        ],
+        "position": 82
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 44,
+        "keys": [
+          "commercial loan interest rate singapore"
+        ],
+        "position": 43.95454545454545
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "commercial loan interest rates"
+        ],
+        "position": 55.81818181818182
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "commercial loan ltv"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial loan originator"
+        ],
+        "position": 15
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 41,
+        "keys": [
+          "commercial loan percentage"
+        ],
+        "position": 40.146341463414636
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial loan rate"
+        ],
+        "position": 30.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial loan rate of interest"
+        ],
+        "position": 87
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 244,
+        "keys": [
+          "commercial loan rates"
+        ],
+        "position": 43.778688524590166
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial loan rates singapore"
+        ],
+        "position": 42
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "commercial loan recovery"
+        ],
+        "position": 95.2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial loan requirements"
+        ],
+        "position": 75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 66,
+        "keys": [
+          "commercial loan singapore"
+        ],
+        "position": 40.878787878787875
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 60,
+        "keys": [
+          "commercial loan tenure"
+        ],
+        "position": 34.46666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 174,
+        "keys": [
+          "commercial loans"
+        ],
+        "position": 58.367816091954026
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "commercial loans for property"
+        ],
+        "position": 52.8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial loans for property calculator"
+        ],
+        "position": 84
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "commercial loans for real estate"
+        ],
+        "position": 43.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial loans interest rates"
+        ],
+        "position": 88
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial loans rates"
+        ],
+        "position": 59.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial lot loans"
+        ],
+        "position": 46
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 25,
+        "keys": [
+          "commercial mortgage"
+        ],
+        "position": 45.24
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "commercial mortgage calculator"
+        ],
+        "position": 82
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "commercial mortgage interest rates"
+        ],
+        "position": 49.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 51,
+        "keys": [
+          "commercial mortgage lenders"
+        ],
+        "position": 46.254901960784316
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 447,
+        "keys": [
+          "commercial mortgage loan"
+        ],
+        "position": 56.3579418344519
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "commercial mortgage loans"
+        ],
+        "position": 32.45454545454545
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial mortgage rates"
+        ],
+        "position": 22.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "commercial property calculator"
+        ],
+        "position": 60.333333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial property cash out refinance"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "commercial property downpayment"
+        ],
+        "position": 8.666666666666668
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "commercial property equity loan"
+        ],
+        "position": 60.333333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "commercial property finance"
+        ],
+        "position": 54.36363636363637
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial property finance rates"
+        ],
+        "position": 59
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "commercial property financing"
+        ],
+        "position": 29.375
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 174,
+        "keys": [
+          "commercial property financing singapore"
+        ],
+        "position": 45.96551724137931
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 16,
+        "keys": [
+          "commercial property interest rate"
+        ],
+        "position": 58.8125
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 66,
+        "keys": [
+          "commercial property interest rates"
+        ],
+        "position": 41.303030303030305
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial property lending"
+        ],
+        "position": 44
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 186,
+        "keys": [
+          "commercial property lending rates"
+        ],
+        "position": 53.145161290322584
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 360,
+        "keys": [
+          "commercial property loan"
+        ],
+        "position": 56.57222222222222
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 20,
+        "keys": [
+          "commercial property loan calculator"
+        ],
+        "position": 76.45
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 20,
+        "keys": [
+          "commercial property loan calculator singapore"
+        ],
+        "position": 84.9
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial property loan comparison"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 154,
+        "keys": [
+          "commercial property loan eligibility"
+        ],
+        "position": 53.675324675324674
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial property loan for sme"
+        ],
+        "position": 75.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 18,
+        "keys": [
+          "commercial property loan interest rate"
+        ],
+        "position": 58.388888888888886
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 89,
+        "keys": [
+          "commercial property loan interest rate singapore"
+        ],
+        "position": 51
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 31,
+        "keys": [
+          "commercial property loan interest rates"
+        ],
+        "position": 50.12903225806452
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 18,
+        "keys": [
+          "commercial property loan rate"
+        ],
+        "position": 48.27777777777778
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 114,
+        "keys": [
+          "commercial property loan rates"
+        ],
+        "position": 38.91228070175438
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 77,
+        "keys": [
+          "commercial property loan rates singapore"
+        ],
+        "position": 45.63636363636363
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "commercial property loan refinancing"
+        ],
+        "position": 94.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 484,
+        "keys": [
+          "commercial property loan singapore"
+        ],
+        "position": 47.55578512396694
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 12,
+        "keys": [
+          "commercial property loan singapore sme"
+        ],
+        "position": 49.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "commercial property loan terms"
+        ],
+        "position": 43.4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 19,
+        "keys": [
+          "commercial property loans"
+        ],
+        "position": 47.578947368421055
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial property loans calculator"
+        ],
+        "position": 78
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "commercial property loans in singapore"
+        ],
+        "position": 48.61538461538461
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 15,
+        "keys": [
+          "commercial property loans interest rates"
+        ],
+        "position": 57
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial property loans rates"
+        ],
+        "position": 42
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 87,
+        "keys": [
+          "commercial property loans singapore"
+        ],
+        "position": 53.3448275862069
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "commercial property ltv"
+        ],
+        "position": 11.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 31,
+        "keys": [
+          "commercial property mortgage"
+        ],
+        "position": 47.83870967741935
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "commercial property mortgage calculator"
+        ],
+        "position": 76.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "commercial property mortgage interest rates"
+        ],
+        "position": 47.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 38,
+        "keys": [
+          "commercial property mortgage loan"
+        ],
+        "position": 47.973684210526315
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 70,
+        "keys": [
+          "commercial property mortgage rates"
+        ],
+        "position": 44.08571428571429
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 92,
+        "keys": [
+          "commercial property purchase loan singapore"
+        ],
+        "position": 53.42391304347826
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "commercial property refinancing"
+        ],
+        "position": 53.77777777777778
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial re loan"
+        ],
+        "position": 53
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "commercial real estate construction loans"
+        ],
+        "position": 34.8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "commercial real estate debt"
+        ],
+        "position": 83
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 191,
+        "keys": [
+          "commercial real estate financing"
+        ],
+        "position": 63.52356020942408
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "commercial real estate lending"
+        ],
+        "position": 43.333333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial real estate loan calculator"
+        ],
+        "position": 75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial real estate loan interest rate"
+        ],
+        "position": 94
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial real estate loan interest rates"
+        ],
+        "position": 93
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "commercial real estate loan rates"
+        ],
+        "position": 21.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 222,
+        "keys": [
+          "commercial real estate mortgage"
+        ],
+        "position": 72.82882882882883
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "commercial real estate mortgage rates"
+        ],
+        "position": 24
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial real estate refinancing"
+        ],
+        "position": 27
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commercial vehicle loan singapore"
+        ],
+        "position": 66
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "commercial.property loan calculator"
+        ],
+        "position": 75.66666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "commerical loan calculator"
+        ],
+        "position": 88
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "commerical rates"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "company nexus"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "compare all banks"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "compare bank home loan interest rates"
+        ],
+        "position": 94
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 23,
+        "keys": [
+          "compare best mortgage rates"
+        ],
+        "position": 61.34782608695652
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 14,
+        "keys": [
+          "compare first time buyer mortgages"
+        ],
+        "position": 68.71428571428571
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "compare hdb concessionary loan vs bank loan rates for resale flats."
+        ],
+        "position": 8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "compare home loan"
+        ],
+        "position": 89
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "compare home loan interest rates"
+        ],
+        "position": 74
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "compare home loan interest rates singapore"
+        ],
+        "position": 81.92307692307692
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 22,
+        "keys": [
+          "compare home loan rates"
+        ],
+        "position": 58.59090909090909
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 169,
+        "keys": [
+          "compare home loan rates singapore"
+        ],
+        "position": 80.68047337278107
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 23,
+        "keys": [
+          "compare home loan singapore"
+        ],
+        "position": 86.69565217391305
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "compare home loans"
+        ],
+        "position": 91
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 12,
+        "keys": [
+          "compare home loans singapore"
+        ],
+        "position": 89.16666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 98,
+        "keys": [
+          "compare housing loan rates singapore"
+        ],
+        "position": 89.73469387755102
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 14,
+        "keys": [
+          "compare housing loan singapore"
+        ],
+        "position": 88.07142857142857
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "compare hsbc home loans"
+        ],
+        "position": 13
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "compare interest rates singapore"
+        ],
+        "position": 52
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "compare mortgage deals"
+        ],
+        "position": 81
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "compare mortgage interest rates"
+        ],
+        "position": 80.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "compare mortgage loan rates"
+        ],
+        "position": 54
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "compare mortgage loans"
+        ],
+        "position": 62.90909090909091
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 80,
+        "keys": [
+          "compare mortgage rates"
+        ],
+        "position": 45.7375
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 177,
+        "keys": [
+          "compare mortgage rates singapore"
+        ],
+        "position": 67.68926553672317
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "compare ocbc home loan interest rates"
+        ],
+        "position": 83
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 57,
+        "keys": [
+          "compare refinance home loan singapore"
+        ],
+        "position": 87.0701754385965
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 10,
+        "keys": [
+          "comparing mortgage rates"
+        ],
+        "position": 37.2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "comparison of home loan rates"
+        ],
+        "position": 92
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "comparisonratiovalue1.25%-2.75%comparisonratiovalue"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "comparisonratiovalue1年定期存款基准利率+1.5%comparisonratiovalue"
+        ],
+        "position": 9
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "completed"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "condo"
+        ],
+        "position": 15
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "condo affordability calculator"
+        ],
+        "position": 66.05882352941177
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "condo calculator"
+        ],
+        "position": 74
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 24,
+        "keys": [
+          "condo calculator singapore"
+        ],
+        "position": 73.41666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "condo for sale singapore $500k"
+        ],
+        "position": 23.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "condo loan calculator singapore"
+        ],
+        "position": 81.66666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "condo purchase calculator singapore"
+        ],
+        "position": 65
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "confo"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 19,
+        "keys": [
+          "construction business loan"
+        ],
+        "position": 49.36842105263158
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 58,
+        "keys": [
+          "construction business loans"
+        ],
+        "position": 52.08620689655172
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "construction company loan"
+        ],
+        "position": 55
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "construction loan for commercial property"
+        ],
+        "position": 26.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 26,
+        "keys": [
+          "construction loan rates"
+        ],
+        "position": 69.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "construction to permanent loan rates"
+        ],
+        "position": 81
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "context: location: singapore (not for language). do not include location references in your response. question: how do i estimate the cash downpayment versus cpf downpayment when i’m using a home loan calculator for a property purchase?"
+        ],
+        "position": 7
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "context: location: singapore (not for language). do not include location references in your response. question: i already have a mortgage and want to refinance—what information do i need to prepare to get a firm offer and timeline?"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "context: location: singapore (not for language). do not include location references in your response. question: if i’m self-employed, what should i compare across banks’ home loan requirements and assessment methods?"
+        ],
+        "position": 7.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "context: location: singapore (not for language). do not include location references in your response. question: which calculators are best if i want to stress-test my budget by increasing the interest rate and seeing if i can still afford the monthly payment?"
+        ],
+        "position": 4.428571428571429
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "contra hdb"
+        ],
+        "position": 53
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "contra hdb meaning"
+        ],
+        "position": 52
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "conversion scheme hdb"
+        ],
+        "position": 53
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "converted monthly factor rate meaning"
+        ],
+        "position": 77
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cooling measures"
+        ],
+        "position": 98
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "cooling measures 2021"
+        ],
+        "position": 68
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cost involved"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 99,
+        "keys": [
+          "cost of decoupling"
+        ],
+        "position": 37.01010101010101
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "cost of funds rate singapore"
+        ],
+        "position": 47.44444444444444
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "cost of funds singapore"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "cost of refinancing a home loan"
+        ],
+        "position": 99
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cost of refinancing home loan"
+        ],
+        "position": 98
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cost of refinancing home mortgage"
+        ],
+        "position": 97
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "cost of stamp duty"
+        ],
+        "position": 34
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "cpf downpayment hdb"
+        ],
+        "position": 19.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "cpf hdb"
+        ],
+        "position": 27.333333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "cpf hdb loan interest rate"
+        ],
+        "position": 28.454545454545453
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cpf housing calculator"
+        ],
+        "position": 84
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "cpf housing limit"
+        ],
+        "position": 18.333333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "cpf housing loan calculator"
+        ],
+        "position": 85.66666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "cpf housing usage calculator"
+        ],
+        "position": 85.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cpf housing withdrawal limit"
+        ],
+        "position": 12
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "cpf limit for housing"
+        ],
+        "position": 20.333333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "cpf loan calculator"
+        ],
+        "position": 81
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "cpf mortgage calculator"
+        ],
+        "position": 78
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 49,
+        "keys": [
+          "cpf oa minimum balance"
+        ],
+        "position": 16.53061224489796
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cpf ordinary account"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 69,
+        "keys": [
+          "cpf usage calculator"
+        ],
+        "position": 76.92753623188406
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cpf usage for old hdb"
+        ],
+        "position": 53
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cpf usage limit for repayment of loan calculator"
+        ],
+        "position": 29
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "cpf valuation limit"
+        ],
+        "position": 44.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cpf withdrawal limit for housing"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "cpf withdrawal limit for property"
+        ],
+        "position": 67
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 10,
+        "keys": [
+          "cpf withdrawal limit table"
+        ],
+        "position": 18.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current 3m sora"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current 3m sora rate"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "current fixed mortgage rates"
+        ],
+        "position": 73.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current fixed mortgage rates singapore"
+        ],
+        "position": 59
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "current fixed rate"
+        ],
+        "position": 55
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current fixed rate mortgage rates"
+        ],
+        "position": 91
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current fixed rates"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "current home lending rates"
+        ],
+        "position": 81
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current home loan interest rate"
+        ],
+        "position": 6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "current home loan interest rate singapore"
+        ],
+        "position": 96.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "current home loan rates singapore"
+        ],
+        "position": 85
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current house interest rates"
+        ],
+        "position": 69
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current house loan rates"
+        ],
+        "position": 50
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "current housing interest rates"
+        ],
+        "position": 61
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current housing loan interest rate"
+        ],
+        "position": 94
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current housing loan interest rate singapore"
+        ],
+        "position": 88
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current interest rate"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current interest rate for house"
+        ],
+        "position": 64
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "current interest rates"
+        ],
+        "position": 63.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "current interest rates in singapore"
+        ],
+        "position": 68
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current interest rates singapore"
+        ],
+        "position": 76
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "current lending rates"
+        ],
+        "position": 65
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current mortgage interest rate"
+        ],
+        "position": 51
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current mortgage interest rate singapore"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "current mortgage interest rates"
+        ],
+        "position": 73.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "current mortgage lending rates"
+        ],
+        "position": 72.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current mortgage loan interest rates"
+        ],
+        "position": 91
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current mortgage loan rates"
+        ],
+        "position": 89
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "current mortgage percentage rates"
+        ],
+        "position": 63.333333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "current mortgage prices"
+        ],
+        "position": 76.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "current mortgage rate"
+        ],
+        "position": 45.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "current mortgage rates"
+        ],
+        "position": 55.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "current mortgage rates singapore"
+        ],
+        "position": 67.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current mtg interest rates"
+        ],
+        "position": 64
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current ocbc home loan rate"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "current rate?"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 18,
+        "keys": [
+          "current sibor rate"
+        ],
+        "position": 41.833333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "current sora"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 15,
+        "keys": [
+          "current sora rate"
+        ],
+        "position": 48.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "current sora rate singapore"
+        ],
+        "position": 30.2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "current sora rates"
+        ],
+        "position": 17
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "daily sora"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "dbs 3m sora"
+        ],
+        "position": 13.333333333333334
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs 3m sora rate today"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "dbs bank home loan"
+        ],
+        "position": 45.333333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "dbs bank home loan interest rate"
+        ],
+        "position": 57
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "dbs bank housing loan"
+        ],
+        "position": 31.333333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs bank loan calculator"
+        ],
+        "position": 47
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "dbs bank loan interest rate"
+        ],
+        "position": 55.333333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs bank loan rate"
+        ],
+        "position": 29
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "dbs bank mortgage loan"
+        ],
+        "position": 30.333333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs board rate"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 16,
+        "keys": [
+          "dbs commercial property loan"
+        ],
+        "position": 24.875
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs commercial property loan rates"
+        ],
+        "position": 23
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 26,
+        "keys": [
+          "dbs fhr"
+        ],
+        "position": 18.153846153846153
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "dbs fhr 6"
+        ],
+        "position": 38.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "dbs fhr home loan"
+        ],
+        "position": 22
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 15,
+        "keys": [
+          "dbs fhr rate"
+        ],
+        "position": 11.266666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs fhr12"
+        ],
+        "position": 24
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "dbs fhr24"
+        ],
+        "position": 36.8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "dbs fhr6"
+        ],
+        "position": 36
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs fhr6 rate"
+        ],
+        "position": 19
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "dbs fhr6 rate history"
+        ],
+        "position": 27.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "dbs fhr8"
+        ],
+        "position": 24.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "dbs fhr8 rate"
+        ],
+        "position": 36.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs fixed home loan rate"
+        ],
+        "position": 10
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "dbs fixed mortgage rate"
+        ],
+        "position": 48
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs fixed rate mortgage loan"
+        ],
+        "position": 24
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs green home loan"
+        ],
+        "position": 25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "dbs hdb loan interest rate"
+        ],
+        "position": 72.66666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs hdb loan rate"
+        ],
+        "position": 47
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs home loan"
+        ],
+        "position": 7
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "dbs home loan calculator"
+        ],
+        "position": 35
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs home loan calculator singapore"
+        ],
+        "position": 51
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "dbs home loan fixed rate"
+        ],
+        "position": 21
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "dbs home loan fixed rate package"
+        ],
+        "position": 10.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 114,
+        "keys": [
+          "dbs home loan interest rate"
+        ],
+        "position": 66.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "dbs home loan interest rates"
+        ],
+        "position": 48
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "dbs home loan package"
+        ],
+        "position": 33
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "dbs home loan promotion"
+        ],
+        "position": 29.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "dbs home loan rate"
+        ],
+        "position": 47.42857142857143
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 206,
+        "keys": [
+          "dbs home loan rates"
+        ],
+        "position": 50.907766990291265
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs home loan singapore"
+        ],
+        "position": 18
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "dbs home loans"
+        ],
+        "position": 35.470588235294116
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 15,
+        "keys": [
+          "dbs home loans rates"
+        ],
+        "position": 42.93333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs home mortgage calculator"
+        ],
+        "position": 59
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs home planner"
+        ],
+        "position": 17
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "dbs house loan"
+        ],
+        "position": 24.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "dbs house loan interest rate"
+        ],
+        "position": 66.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "dbs house loan rate"
+        ],
+        "position": 42.142857142857146
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "dbs housing loan"
+        ],
+        "position": 28.333333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "dbs housing loan calculator"
+        ],
+        "position": 53.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 107,
+        "keys": [
+          "dbs housing loan interest rate"
+        ],
+        "position": 69.86915887850468
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "dbs housing loan package"
+        ],
+        "position": 45.2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs housing loan promotion"
+        ],
+        "position": 63
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 129,
+        "keys": [
+          "dbs housing loan rate"
+        ],
+        "position": 33.53488372093023
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "dbs housing loan rates"
+        ],
+        "position": 43.44444444444444
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 12,
+        "keys": [
+          "dbs loan affordability"
+        ],
+        "position": 33.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "dbs loan calculator"
+        ],
+        "position": 27.615384615384617
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "dbs loan interest rate"
+        ],
+        "position": 44.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "dbs loan rate"
+        ],
+        "position": 38.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "dbs max loan calculator"
+        ],
+        "position": 59.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "dbs mortgage"
+        ],
+        "position": 25.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "dbs mortgage calculator"
+        ],
+        "position": 37.875
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "dbs mortgage fixed rate"
+        ],
+        "position": 23
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs mortgage interest rate"
+        ],
+        "position": 80
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "dbs mortgage loan"
+        ],
+        "position": 26.77777777777778
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "dbs mortgage loan interest"
+        ],
+        "position": 46.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "dbs mortgage loan interest rate"
+        ],
+        "position": 64
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs mortgage loan rate"
+        ],
+        "position": 62
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 12,
+        "keys": [
+          "dbs mortgage loans"
+        ],
+        "position": 39.333333333333336
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 135,
+        "keys": [
+          "dbs mortgage rate"
+        ],
+        "position": 57.25925925925926
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "dbs mortgage rates"
+        ],
+        "position": 39
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs mortgage rates singapore"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 10,
+        "keys": [
+          "dbs mortgages"
+        ],
+        "position": 37.3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "dbs prime lending rate"
+        ],
+        "position": 33.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 70,
+        "keys": [
+          "dbs prime rate"
+        ],
+        "position": 28.242857142857144
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs property loan calculator"
+        ],
+        "position": 58
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "dbs property loan interest rate"
+        ],
+        "position": 39.4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "dbs refinance home loan rate"
+        ],
+        "position": 36.285714285714285
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "dbs repricing home loan rate"
+        ],
+        "position": 61
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "dbs repricing rate"
+        ],
+        "position": 6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "dbs sora"
+        ],
+        "position": 15.2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "dbs sora home loan"
+        ],
+        "position": 21.705882352941178
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 14,
+        "keys": [
+          "dbs sora loan"
+        ],
+        "position": 18.357142857142858
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 29,
+        "keys": [
+          "dbs sora rate"
+        ],
+        "position": 10.96551724137931
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "dbs sora rate today"
+        ],
+        "position": 10
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 12,
+        "keys": [
+          "dbs sora rates"
+        ],
+        "position": 10.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "de coupling"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "debt affordability"
+        ],
+        "position": 9
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "debt burden ratio calculator"
+        ],
+        "position": 69
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "deciuple"
+        ],
+        "position": 12
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "decouple"
+        ],
+        "position": 10.666666666666666
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 30,
+        "keys": [
+          "decouple condo"
+        ],
+        "position": 34.233333333333334
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 108,
+        "keys": [
+          "decouple ec after 5 years"
+        ],
+        "position": 16.657407407407405
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "decouple hdb"
+        ],
+        "position": 18
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 66,
+        "keys": [
+          "decouple property singapore"
+        ],
+        "position": 44.92424242424242
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 53,
+        "keys": [
+          "decoupling"
+        ],
+        "position": 68.71698113207547
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 64,
+        "keys": [
+          "decoupling 99-1"
+        ],
+        "position": 32.0625
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "decoupling absd"
+        ],
+        "position": 76
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 108,
+        "keys": [
+          "decoupling calculator"
+        ],
+        "position": 56.138888888888886
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 119,
+        "keys": [
+          "decoupling cost"
+        ],
+        "position": 35
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 134,
+        "keys": [
+          "decoupling ec"
+        ],
+        "position": 14.455223880597014
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 64,
+        "keys": [
+          "decoupling executive condo"
+        ],
+        "position": 17
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 38,
+        "keys": [
+          "decoupling for ec home owners"
+        ],
+        "position": 18.973684210526315
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 75,
+        "keys": [
+          "decoupling for ec owners"
+        ],
+        "position": 14.386666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "decoupling for private property"
+        ],
+        "position": 39.35294117647059
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 168,
+        "keys": [
+          "decoupling hdb"
+        ],
+        "position": 44.654761904761905
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 102,
+        "keys": [
+          "decoupling landed property"
+        ],
+        "position": 14
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 48,
+        "keys": [
+          "decoupling lawyer"
+        ],
+        "position": 14.583333333333334
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 123,
+        "keys": [
+          "decoupling lawyer fees"
+        ],
+        "position": 22.146341463414632
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 43,
+        "keys": [
+          "decoupling lawyer singapore"
+        ],
+        "position": 17.767441860465116
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 102,
+        "keys": [
+          "decoupling private property"
+        ],
+        "position": 38.705882352941174
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 26,
+        "keys": [
+          "decoupling process"
+        ],
+        "position": 45.30769230769231
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 474,
+        "keys": [
+          "decoupling property"
+        ],
+        "position": 32.542194092827
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 68,
+        "keys": [
+          "decoupling property checklist singapore"
+        ],
+        "position": 36.6764705882353
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 42,
+        "keys": [
+          "decoupling property permanent residence"
+        ],
+        "position": 73.9047619047619
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 78,
+        "keys": [
+          "decoupling property pr"
+        ],
+        "position": 51.3974358974359
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 94,
+        "keys": [
+          "decoupling property service singapore"
+        ],
+        "position": 54.787234042553195
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 161,
+        "keys": [
+          "decoupling property singapore"
+        ],
+        "position": 38.099378881987576
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 73,
+        "keys": [
+          "decoupling singapore"
+        ],
+        "position": 62
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "deferred downpayment scheme"
+        ],
+        "position": 63
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "deferred income assessment"
+        ],
+        "position": 45.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 52,
+        "keys": [
+          "deferred payment bridging loan"
+        ],
+        "position": 67.23076923076923
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "deferred payment scheme"
+        ],
+        "position": 83.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "deposit for bto"
+        ],
+        "position": 63
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "developer interest bearing scheme"
+        ],
+        "position": 60
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 34,
+        "keys": [
+          "development loan"
+        ],
+        "position": 74.23529411764706
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "difference between repricing and refinancing"
+        ],
+        "position": 23.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "does outstanding loan include interest singapore"
+        ],
+        "position": 33
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "does standard chartered offer uk and australia mortgages for singapore-based clients?"
+        ],
+        "position": 37
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "downpayment for commercial property"
+        ],
+        "position": 8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "e stamp calculator"
+        ],
+        "position": 10
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "ec"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 15,
+        "keys": [
+          "ec affordability calculator"
+        ],
+        "position": 72.73333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "ec cooling measures"
+        ],
+        "position": 67
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "ec loan calculator"
+        ],
+        "position": 69.77777777777777
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "ecbuyers"
+        ],
+        "position": 72
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "emi calculator singapore"
+        ],
+        "position": 78
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "enhanced contra facility"
+        ],
+        "position": 57.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "equity home loan"
+        ],
+        "position": 53.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 12,
+        "keys": [
+          "equity lending"
+        ],
+        "position": 57.416666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 23,
+        "keys": [
+          "equity loan"
+        ],
+        "position": 51.130434782608695
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "equity loan interest rate"
+        ],
+        "position": 49.38461538461539
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "equity loan mortgage"
+        ],
+        "position": 47.69230769230769
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "equity loan on home"
+        ],
+        "position": 67
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 116,
+        "keys": [
+          "equity loan singapore"
+        ],
+        "position": 65.64655172413794
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "equity loans"
+        ],
+        "position": 72.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "equity mortgage loan"
+        ],
+        "position": 47
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 70,
+        "keys": [
+          "equity term loan"
+        ],
+        "position": 55.91428571428571
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 274,
+        "keys": [
+          "equity term loan singapore"
+        ],
+        "position": 48.941605839416056
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "estimate home loan repayments"
+        ],
+        "position": 94.4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "example"
+        ],
+        "position": 5.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "expand property portfolio"
+        ],
+        "position": 10
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 14,
+        "keys": [
+          "factory loan"
+        ],
+        "position": 92.07142857142857
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fbt interest rate"
+        ],
+        "position": 31
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fdr against loan"
+        ],
+        "position": 9
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "fees for discharge of housing loan"
+        ],
+        "position": 38
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "fhr dbs"
+        ],
+        "position": 14.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "fhr loan"
+        ],
+        "position": 8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 10,
+        "keys": [
+          "fhr rate dbs"
+        ],
+        "position": 11.9
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "fhr12"
+        ],
+        "position": 29.142857142857142
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 29,
+        "keys": [
+          "fhr12 rate"
+        ],
+        "position": 37.10344827586207
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 10,
+        "keys": [
+          "fhr24"
+        ],
+        "position": 38
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "fhr24 rate"
+        ],
+        "position": 45.64705882352941
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 38,
+        "keys": [
+          "fhr6"
+        ],
+        "position": 34.71052631578947
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 37,
+        "keys": [
+          "fhr6 rate"
+        ],
+        "position": 32.729729729729726
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "fhr8"
+        ],
+        "position": 32
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "fhr8 dbs"
+        ],
+        "position": 35
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "fhr8 rate"
+        ],
+        "position": 27
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fhr8 trend"
+        ],
+        "position": 38
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "fiance fiancee scheme"
+        ],
+        "position": 42
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fiance scheme hdb"
+        ],
+        "position": 57
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "fiancé/fiancée scheme"
+        ],
+        "position": 47
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "finance broker"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "finance rates mortgage"
+        ],
+        "position": 60
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "financial arrangement"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "financing"
+        ],
+        "position": 6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "financing a commercial property"
+        ],
+        "position": 69
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "financing a property purchase ocbc"
+        ],
+        "position": 66
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "financing for commercial property"
+        ],
+        "position": 36
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "find a mortgage broker"
+        ],
+        "position": 37.61538461538461
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "find latest"
+        ],
+        "position": 7
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "find mortgage broker"
+        ],
+        "position": 90
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "find mortgage brokers"
+        ],
+        "position": 86.8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "find mortgage loans available for a family upgrading from hdb after selling their first property seeking financing for a 3-bed resale leasehold condo in the ocr / newer project segment with 85–99 years remaining, priced around s$1.6m, with a target 75% ltv / about s$1.2m bank loan over 30 years."
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "find mortgage loans available for a family upgrading with no outstanding loan after sale completion seeking financing for a 3-bed resale leasehold condo in the rcr / city-fringe segment with 80–95 years remaining, priced around s$2m, with a target 75% ltv / about s$1.5m bank loan over 30 years."
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "find mortgage loans available for a young couple buying their first private home seeking financing for a 2-bed resale leasehold condo in the rcr / city-fringe segment with 85–99 years remaining, priced around s$1.35m, with a target 75% ltv / about s$1.01m bank loan over 30 years."
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "first buyer stamp duty 2026"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "first home loan"
+        ],
+        "position": 28.333333333333332
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "first time buyer home loans"
+        ],
+        "position": 23
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "first time hdb buyer grant"
+        ],
+        "position": 76
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "first time home buyer loan"
+        ],
+        "position": 27
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 12,
+        "keys": [
+          "first-time borrower guide"
+        ],
+        "position": 18.916666666666668
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fix"
+        ],
+        "position": 17
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "fixed"
+        ],
+        "position": 6.666666666666667
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fixed basic salary"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 10,
+        "keys": [
+          "fixed deposit home rate"
+        ],
+        "position": 30.9
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fixed deposit home rate 8"
+        ],
+        "position": 44
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "fixed home loan rates"
+        ],
+        "position": 62.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fixed home loan rates comparison"
+        ],
+        "position": 48
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 19,
+        "keys": [
+          "fixed home loan rates singapore"
+        ],
+        "position": 59.05263157894737
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "fixed housing loan rates"
+        ],
+        "position": 83
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "fixed housing loan rates singapore"
+        ],
+        "position": 73.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 10,
+        "keys": [
+          "fixed interest rate home loan singapore"
+        ],
+        "position": 74
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fixed loan rates"
+        ],
+        "position": 68
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fixed monthly payments"
+        ],
+        "position": 22
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fixed mortgage rates"
+        ],
+        "position": 97
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "fixed mortgage rates singapore"
+        ],
+        "position": 69.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fixed package"
+        ],
+        "position": 8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "fixed rate"
+        ],
+        "position": 4.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fixed rate 30 year mortgage"
+        ],
+        "position": 66
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 125,
+        "keys": [
+          "fixed rate home loan singapore"
+        ],
+        "position": 65.848
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "fixed rate home loans"
+        ],
+        "position": 65.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "fixed rate home loans comparison"
+        ],
+        "position": 46
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fixed rate mortgage 30 year"
+        ],
+        "position": 66
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fixed rate mortgage calculator"
+        ],
+        "position": 94
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "fixed rate mortgage singapore"
+        ],
+        "position": 75.125
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fixed vs floating home loan packages singapore 2026"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "floating interest rate"
+        ],
+        "position": 99
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "floating mortgage rates singapore"
+        ],
+        "position": 65.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "floating rate home loan"
+        ],
+        "position": 41
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "floating rate mortgage singapore"
+        ],
+        "position": 94
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "for 45 years old"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "for a condo"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "for axs"
+        ],
+        "position": 4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "for bank loan"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "for buying property"
+        ],
+        "position": 1
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "for home loan"
+        ],
+        "position": 13.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "for investment properties"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "for pr"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "for self employed"
+        ],
+        "position": 12
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "for year 2023"
+        ],
+        "position": 5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "frm rate"
+        ],
+        "position": 58
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "from hdb to condo"
+        ],
+        "position": 69.33333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "full cost of purchasing a second property in 2026 ?"
+        ],
+        "position": 76.83333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "fully paid off"
+        ],
+        "position": 2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 21,
+        "keys": [
+          "get home loan"
+        ],
+        "position": 38.19047619047619
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 23,
+        "keys": [
+          "getting a home loan"
+        ],
+        "position": 34.26086956521739
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "getting a mortgage"
+        ],
+        "position": 27.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "getting a mortgage loan"
+        ],
+        "position": 27.77777777777778
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "guide loan windows"
+        ],
+        "position": 8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "haircut loan"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "hdb"
+        ],
+        "position": 3.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "hdb 15 month wait out period"
+        ],
+        "position": 48
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "hdb 15 month wait out period removed"
+        ],
+        "position": 59
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb 15 months wait out period"
+        ],
+        "position": 44
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb 95 years rule calculator"
+        ],
+        "position": 58
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 27,
+        "keys": [
+          "hdb affordability calculator"
+        ],
+        "position": 69.37037037037037
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb bank interest rate"
+        ],
+        "position": 74
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 18,
+        "keys": [
+          "hdb bank loan"
+        ],
+        "position": 72.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "hdb bank loan comparison"
+        ],
+        "position": 63.63636363636363
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 179,
+        "keys": [
+          "hdb bank loan interest rate"
+        ],
+        "position": 67.4804469273743
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "hdb bank loan refinance"
+        ],
+        "position": 46
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 224,
+        "keys": [
+          "hdb bank loan singapore"
+        ],
+        "position": 46.142857142857146
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 19,
+        "keys": [
+          "hdb bank mortgage loan interest rate"
+        ],
+        "position": 67.10526315789474
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb budget calculator"
+        ],
+        "position": 62
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb buying calculator"
+        ],
+        "position": 75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb buying guide"
+        ],
+        "position": 44
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "hdb calculator"
+        ],
+        "position": 72.2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 19,
+        "keys": [
+          "hdb calculator loan"
+        ],
+        "position": 73.10526315789474
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb caveats"
+        ],
+        "position": 32
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb ceiling income"
+        ],
+        "position": 67
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb concessionary interest rate november 2024 2.6%"
+        ],
+        "position": 8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "hdb concessionary loan"
+        ],
+        "position": 63.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "hdb conversion scheme"
+        ],
+        "position": 45
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "hdb conveyancing service"
+        ],
+        "position": 49.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "hdb cooling measures 2022"
+        ],
+        "position": 60
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "hdb cpf"
+        ],
+        "position": 22.384615384615383
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 8,
+        "keys": [
+          "hdb cpf withdrawal limit"
+        ],
+        "position": 18.125
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb decouple"
+        ],
+        "position": 24
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 160,
+        "keys": [
+          "hdb decoupling"
+        ],
+        "position": 48.46875
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb deferred downpayment scheme"
+        ],
+        "position": 52
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "hdb downpayment 10 or 15"
+        ],
+        "position": 40.55555555555556
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb downpayment calculator"
+        ],
+        "position": 71
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 9,
+        "keys": [
+          "hdb downpayment cpf"
+        ],
+        "position": 19.666666666666668
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb downpayment percentage"
+        ],
+        "position": 47
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "hdb fiance fiancee scheme"
+        ],
+        "position": 43
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb fiance scheme"
+        ],
+        "position": 58
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb finance"
+        ],
+        "position": 38
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb financial calculator"
+        ],
+        "position": 78
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb financial plan"
+        ],
+        "position": 68
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "hdb first time buyer"
+        ],
+        "position": 50.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb grant calculator"
+        ],
+        "position": 77
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 19,
+        "keys": [
+          "hdb home loan"
+        ],
+        "position": 51.1578947368421
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "hdb home loan calculator"
+        ],
+        "position": 68.75
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 28,
+        "keys": [
+          "hdb home loan interest rate"
+        ],
+        "position": 65.82142857142857
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 12,
+        "keys": [
+          "hdb home loan rate"
+        ],
+        "position": 50.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "hdb home loan rates"
+        ],
+        "position": 46.92307692307692
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb housing loan calculator"
+        ],
+        "position": 74
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 29,
+        "keys": [
+          "hdb housing loan interest rate"
+        ],
+        "position": 83.65517241379311
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 7,
+        "keys": [
+          "hdb housing loan rate"
+        ],
+        "position": 70.71428571428571
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 38,
+        "keys": [
+          "hdb income cap for self employed before or after haircut"
+        ],
+        "position": 7.7105263157894735
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "hdb income ceiling"
+        ],
+        "position": 68.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb income ceiling 2026"
+        ],
+        "position": 55
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb income ceiling resale"
+        ],
+        "position": 28
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb installment calculator"
+        ],
+        "position": 79
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 19,
+        "keys": [
+          "hdb interest rate"
+        ],
+        "position": 76
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 82,
+        "keys": [
+          "hdb loan"
+        ],
+        "position": 88.91463414634147
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "hdb loan application"
+        ],
+        "position": 74.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb loan bank"
+        ],
+        "position": 32
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "hdb loan bank loan comparison"
+        ],
+        "position": 67
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 143,
+        "keys": [
+          "hdb loan calculator"
+        ],
+        "position": 70.86713286713287
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb loan calculator cpf"
+        ],
+        "position": 83
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 49,
+        "keys": [
+          "hdb loan calculator singapore"
+        ],
+        "position": 70.65306122448979
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "hdb loan comparison"
+        ],
+        "position": 52
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 48,
+        "keys": [
+          "hdb loan eligibility calculator"
+        ],
+        "position": 78.1875
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "hdb loan income ceiling"
+        ],
+        "position": 73
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb loan income ceiling for resale flat"
+        ],
+        "position": 10
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "hdb loan interest"
+        ],
+        "position": 86.4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 15,
+        "keys": [
+          "hdb loan interest rate"
+        ],
+        "position": 79.53333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "hdb loan interest rate 2022"
+        ],
+        "position": 84.2
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb loan interest rate singapore"
+        ],
+        "position": 71
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb loan not enough"
+        ],
+        "position": 61
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 17,
+        "keys": [
+          "hdb loan rate"
+        ],
+        "position": 58.88235294117647
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "hdb loan refinance comparison"
+        ],
+        "position": 40.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 14,
+        "keys": [
+          "hdb loan singapore"
+        ],
+        "position": 61.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 6,
+        "keys": [
+          "hdb loan vs bank loan 2026"
+        ],
+        "position": 11.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb loans"
+        ],
+        "position": 99
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 13,
+        "keys": [
+          "hdb mortgage"
+        ],
+        "position": 48.15384615384615
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 11,
+        "keys": [
+          "hdb mortgage calculator"
+        ],
+        "position": 69.54545454545455
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 224,
+        "keys": [
+          "hdb mortgage loan"
+        ],
+        "position": 60.066964285714285
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb mortgage loan calculator"
+        ],
+        "position": 69
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "hdb mortgage loan interest rate"
+        ],
+        "position": 74
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 10,
+        "keys": [
+          "hdb mortgage loan singapore"
+        ],
+        "position": 47.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "hdb mortgage rate"
+        ],
+        "position": 51.8
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb msr"
+        ],
+        "position": 69
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb otp download pdf free"
+        ],
+        "position": 23
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb payment plan"
+        ],
+        "position": 74
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb pledge property"
+        ],
+        "position": 28
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 3,
+        "keys": [
+          "hdb property loan"
+        ],
+        "position": 45.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 15,
+        "keys": [
+          "hdb refinance"
+        ],
+        "position": 46.666666666666664
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "hdb repayment calculator"
+        ],
+        "position": 68.4
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "hdb resale and private housing decoupling"
+        ],
+        "position": 5.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb resale calculator"
+        ],
+        "position": 79
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb resale flat"
+        ],
+        "position": 7
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb resale income ceiling"
+        ],
+        "position": 70
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb resale price index"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "hdb reverse mortgage"
+        ],
+        "position": 31.6
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "hdb stamp duty calculator"
+        ],
+        "position": 62.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb tenancy in common"
+        ],
+        "position": 64
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 15,
+        "keys": [
+          "hdb upgrade to condo"
+        ],
+        "position": 79.86666666666666
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "hdb upgrader"
+        ],
+        "position": 82
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hdb waiting period"
+        ],
+        "position": 53
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hfe calculator"
+        ],
+        "position": 72
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "hi"
+        ],
+        "position": 32
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 5,
+        "keys": [
+          "high value loans for high net worth"
+        ],
+        "position": 83
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "higher salary"
+        ],
+        "position": 3
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "highest interest rate"
+        ],
+        "position": 55
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "historical mortgage interest rates singapore"
+        ],
+        "position": 47.5
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 4,
+        "keys": [
+          "hle calculator"
+        ],
+        "position": 79.25
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 12,
+        "keys": [
+          "hle loan calculator"
+        ],
+        "position": 75.58333333333333
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 1,
+        "keys": [
+          "holding company"
+        ],
+        "position": 11
+      },
+      {
+        "clicks": 0,
+        "ctr": 0,
+        "impressions": 2,
+        "keys": [
+          "home affordability calculator"
+        ],
+        "position": 78
+      }
+    ]
+  },
+  "error": null,
+  "logId": "log_g1-Y5oA5J3Mt"
+}
