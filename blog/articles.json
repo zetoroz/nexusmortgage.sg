@@ -12,6 +12,54 @@
     "thumbnailAlt": "Table of maximum HDB loan and flat price by gross monthly income under the 30% MSR cap in 2026"
   },
   {
+    "slug": "hdb-income-ceiling-16000-2026",
+    "url": "/blog/hdb-income-ceiling-16000-2026/",
+    "status": "scheduled",
+    "title": "HDB Income Ceiling Raised to S$16,000: What It Actually Changes for Your Loan",
+    "excerpt": "The ceiling for a new subsidised flat, the HDB concessionary loan and the CPF Housing Grant moved to S$16,000 on 24 August 2026, with singles at S$8,000 and ECs at S$18,000. What it unlocks, the MSR math on S$114,000 of extra borrowing capacity, the EC tender-date trap, and the one grant ceiling that stayed at S$9,000.",
+    "tag": "HDB & Eligibility",
+    "date": "24 August 2026",
+    "readTime": "9 min read",
+    "thumbnail": "blog-images/income-ceiling-16k-thumb.webp",
+    "thumbnailAlt": "Bar chart of Singapore housing income ceilings from 24 August 2026, with the EHG cap unchanged at S$9,000"
+  },
+  {
+    "slug": "ehg-income-ceiling-9000-2026",
+    "url": "/blog/ehg-income-ceiling-9000-2026/",
+    "status": "scheduled",
+    "title": "The EHG Ceiling Stayed at S$9,000: What That Actually Costs You",
+    "excerpt": "Singapore's largest housing grant is worth up to S$120,000 and its income ceiling did not move on 24 August 2026, leaving it S$7,000 below the flat ceiling. Why crossing it does not cost you S$120,000, how the 12-month income assessment really works, and the CPF accrued-interest bill nobody prices in.",
+    "tag": "HDB & Eligibility",
+    "date": "28 August 2026",
+    "readTime": "8 min read",
+    "thumbnail": "blog-images/ehg-ceiling-thumb.webp",
+    "thumbnailAlt": "Enhanced CPF Housing Grant income ceiling unchanged at S$9,000 against a S$16,000 flat ceiling"
+  },
+  {
+    "slug": "en-bloc-consent-threshold-2026",
+    "url": "/blog/en-bloc-consent-threshold-2026/",
+    "status": "scheduled",
+    "title": "En Bloc at 65%: What the 2026 Bill Proposes, and What It Does to Your Money",
+    "excerpt": "The Land Titles (Strata) (Amendment) Bill 2026 would cut collective sale consent to 70% at 40 years and 65% at 60, but also raises the requisition bar to 35% and halves the signature window. Plus the three financing questions owners get wrong: the CPF refund, the SSD waiver that only applies to court-ordered sales, and the ABSD clock on the replacement home.",
+    "tag": "Property Market",
+    "date": "2 September 2026",
+    "readTime": "9 min read",
+    "thumbnail": "blog-images/en-bloc-threshold-thumb.webp",
+    "thumbnailAlt": "Proposed Singapore en bloc consent thresholds of 70% at 40 years and 65% at 60 years"
+  },
+  {
+    "slug": "november-2026-bto-hfe-deadline",
+    "url": "/blog/november-2026-bto-hfe-deadline/",
+    "status": "scheduled",
+    "title": "The November 2026 BTO Launch: Your Real Deadline Is 25 September",
+    "excerpt": "About 7,960 flats across six towns, moved from October so households newly eligible at S$16,000 could apply. The site-by-site line-up, what Prime classification and its resale clawback do to your exit equity, and the ballot math on why a family with children may be better off waiting for February 2027.",
+    "tag": "HDB & Eligibility",
+    "date": "8 September 2026",
+    "readTime": "8 min read",
+    "thumbnail": "blog-images/nov-2026-bto-thumb.webp",
+    "thumbnailAlt": "November 2026 BTO launch across six Singapore towns with a 25 September HFE deadline"
+  },
+  {
     "slug": "dbs-vs-uob-vs-ocbc-home-loan-2026",
     "url": "/blog/dbs-vs-uob-vs-ocbc-home-loan-2026/",
     "status": "live",
@@ -350,7 +398,7 @@
   {
     "slug": "hdb-resale-above-income-ceiling-2026",
     "title": "Above the HDB Income Ceiling? Buy Resale Anyway — HFE + Bank Loan + IPA Guide (2026)",
-    "excerpt": "HDB resale has no income ceiling on the purchase itself. The S$14,000 family / S$21,000 extended / S$7,000 singles ceiling blocks only the HDB concessionary loan and the CPF Housing Grants. Full 2026 playbook for high-income HDB resale buyers: HFE letter is still required, bank loan at 75% LTV with MAS 4% stress floor, why IPA matters more, six common traps and a worked S$700K example.",
+    "excerpt": "HDB resale has no income ceiling on the purchase itself. The S$16,000 family / S$8,000 singles ceiling, raised on 24 August 2026, blocks the HDB concessionary loan and the CPF Housing Grants, not the flat. The EHG cap stayed at S$9,000. Full bank-loan playbook: HFE letter, 75% LTV, IPA timing and the MSR/TDSR math at the MAS 4% floor.",
     "tag": "HDB & Eligibility",
     "date": "21 May 2026",
     "readTime": "9 min read",
