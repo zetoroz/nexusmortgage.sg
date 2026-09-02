@@ -87,7 +87,10 @@ const SORA_TARGETS = [
       "standard": `${stdLow}–${stdHigh}`,
       "small": `${smallLow}–${smallHigh}`,
       "commercial": `${commLow}–${commHigh}`,
-      "datemod": asOfSoraIso,
+      // NOTE: dateModified is NOT a sentinel. It lives inside a JSON-LD script,
+      // where HTML comments are raw text, not comments — wrapping it in
+      // sentinels put the markers inside the date string and made the field
+      // unreadable to every schema consumer. It is patched by soraJsonLdPatch().
     }),
   },
 ];
@@ -177,11 +180,36 @@ function pickSora(rates) {
   const [commLow, commHigh]   = band(1.00, 1.80);
   return {
     sora1m, sora3m, effective,
+    // Unrounded, for the Dataset's variableMeasured. Prose shows 2dp; the
+    // machine-readable node should carry the same precision as sora-feed.json.
+    sora1mRaw: r.sora1m, sora3mRaw: r.sora3m,
     asOfSoraIso: p.iso,
     asOfSoraHuman: p.pretty,
     jumboLow, jumboHigh, stdLow, stdHigh,
     smallLow, smallHigh, commLow, commHigh,
   };
+}
+
+// JSON-LD on the SORA page can't use sentinels: inside a <script type=
+// "application/ld+json"> an HTML comment is raw text, so the markers end up
+// inside the JSON value. Patch those fields by direct substitution instead.
+// Keeps the Dataset node's freshness and measured values honest — they track
+// refRates.asOfSora (when MAS last published), not when the file was written.
+function soraJsonLdPatch(html, { asOfSoraIso, sora1mRaw, sora3mRaw }) {
+  let out = html, changed = false;
+  const sub = (re, rep) => { const n = out.replace(re, rep); if (n !== out) { changed = true; out = n; } };
+
+  // Article + Dataset dateModified, and the Dataset's open temporal range end.
+  sub(/"dateModified":"\d{4}-\d{2}-\d{2}"/g, `"dateModified":"${asOfSoraIso}"`);
+  sub(/("temporalCoverage":"\d{4}-\d{2}-\d{2}\/)[^"]*"/g, `$1${asOfSoraIso}"`);
+
+  // variableMeasured values, matched on their name so order can't misalign them.
+  const measured = (name, v) =>
+    sub(new RegExp(`("name":"${name}"[^}]*?"value":)[\\d.]+`, "g"), `$1${v}`);
+  measured("1-Month Compounded SORA", sora1mRaw);
+  measured("3-Month Compounded SORA", sora3mRaw);
+
+  return { out, changed };
 }
 
 function patchSentinel(html, prefix, key, value) {
@@ -225,6 +253,8 @@ async function processSoraTarget(t, sora) {
     if (r.changed) anyChanged = true;
   }
   if (!anyChanged) console.warn(`[snippets] ${t.file}: no LIVE-SORA sentinels found`);
+  const j = soraJsonLdPatch(next, sora);
+  next = j.out;
   if (next === html) return { file: t.file, status: "no-change" };
   if (DRY) return { file: t.file, status: "would-update" };
   await fs.writeFile(abs, next);

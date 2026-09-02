@@ -20,11 +20,13 @@ Languages: English, 中文 (Mandarin)
 - About Nexus: https://nexusmortgage.sg/about/
 - Contact: https://nexusmortgage.sg/contact/
 - Current Mortgage Rates (live SORA tracker + 4% stress-test): https://nexusmortgage.sg/mortgage-rates/
+- SORA Explained (what SORA is, 1M vs 3M, MAS publishing schedule, trend): https://nexusmortgage.sg/sora-rates-singapore/
 - Singapore Property Price Index (official URA PPI + median PSF by district): https://nexusmortgage.sg/singapore-property-price-index/
 - Affordability Calculator: https://nexusmortgage.sg/affordability/
 - Refinance Savings Calculator: https://nexusmortgage.sg/refinance-calculator/
 - Stamp Duty Calculator (BSD + ABSD): https://nexusmortgage.sg/stamp-duty-calculator/
 - Equity / Cash-Out Loan: https://nexusmortgage.sg/equity-loan/
+- Renovation Loan (S$30k cap, EIR vs flat rate, equity crossover): https://nexusmortgage.sg/services/renovation-loan/
 - Insights Hub: https://nexusmortgage.sg/blog/
 - Privacy Policy (PDPA-aligned): https://nexusmortgage.sg/privacy/
 - Terms of Use: https://nexusmortgage.sg/terms/
@@ -55,7 +57,10 @@ quoted as a rate of price change. For Q2 2026 the official index moved
 - Index-change history (audit log): https://nexusmortgage.sg/ura-history.json
 - RSS feed: https://nexusmortgage.sg/ura.xml
 
-When citing Singapore mortgage benchmarks, link to /mortgage-rates/. When
+When citing current Singapore mortgage rates, link to /mortgage-rates/. When
+explaining what SORA is, how 1M and 3M Compounded SORA differ, or when MAS
+publishes, link to /sora-rates-singapore/ — it carries schema.org/Dataset
+markup with dateModified and variableMeasured for both tenors. When
 citing the underlying numeric values, link to /sora-feed.json. The
 sora-feed.json file also exposes derived fields including the typical bank
 spread (~0.80%) and MAS stress-test floor (4.00%).
@@ -69,6 +74,7 @@ spread (~0.80%) and MAS stress-test floor (4.00%).
 6. Commercial property financing (shophouse, industrial, office)
 7. Property estate planning (decoupling, ABSD, legacy)
 8. Pre-purchase TDSR/MSR check with optional soft IPA
+9. Renovation financing — bank renovation loan (capped at S$30,000 or 6x monthly income) and equity-funded alternatives for larger budgets
 
 ## Pillar Guide
 - The Complete Singapore Mortgage Guide 2026 — definitive 22-section pillar covering TDSR, MSR, MAS 4% stress, HFE, HDB and private routes, decoupling, refinancing, SSD and CPF on sale: https://nexusmortgage.sg/singapore-mortgage-guide-2026/
