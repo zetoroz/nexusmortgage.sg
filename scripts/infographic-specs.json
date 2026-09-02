@@ -1464,6 +1464,340 @@
     "caption": "The stress instalment, not the actual one, is what the bank approves you against."
   },
   {
+    "out": "income-ceiling-16k-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · HDB Eligibility",
+    "title": "The ceiling moved to S$16,000. One grant ceiling did not.",
+    "sub": "From 24 August 2026 families qualify at S$16,000 and singles at S$8,000. The EHG cap stayed at S$9,000, so the households that gained eligibility gained no grant with it.",
+    "chips": [
+      "Families S$16,000",
+      "Singles S$8,000",
+      "EHG still S$9,000"
+    ],
+    "slug": "hdb-income-ceiling-16000-2026"
+  },
+  {
+    "out": "income-ceiling-16k-ladder",
+    "type": "ladder",
+    "kicker": "From 24 August 2026",
+    "title": "Four ceilings, three of them moved",
+    "source": "Effective 24 August 2026 for HFE applications. The EC figure applies only to units from land tenders closing on or after that date. Extended families are assessed at 1.5x the family ceiling.",
+    "rows": [
+      {
+        "label": "Executive Condominium",
+        "value": "S$18,000",
+        "pct": 100,
+        "note": "was S$16,000"
+      },
+      {
+        "label": "Families and couples",
+        "value": "S$16,000",
+        "pct": 89,
+        "note": "was S$14,000"
+      },
+      {
+        "label": "Enhanced CPF Housing Grant",
+        "value": "S$9,000",
+        "pct": 50,
+        "note": "unchanged",
+        "highlight": true
+      },
+      {
+        "label": "Singles aged 35 and above",
+        "value": "S$8,000",
+        "pct": 44,
+        "note": "was S$7,000"
+      }
+    ],
+    "anchor": "what-changed",
+    "alt": "Bar chart of Singapore housing income ceilings from 24 August 2026 showing EC at S$18,000, families at S$16,000, EHG unchanged at S$9,000 and singles at S$8,000",
+    "caption": "The EHG cap is now S$7,000 below the flat eligibility ceiling.",
+    "slug": "hdb-income-ceiling-16000-2026"
+  },
+  {
+    "out": "income-ceiling-16k-math",
+    "type": "math",
+    "kicker": "Borrowing power, HDB flat on a bank loan",
+    "title": "What the extra S$2,000 of income is worth",
+    "source": "Illustrative. 25-year tenure, MAS 4% floor rate, 30% MSR, no other debt obligations. Your actual quantum depends on the lender assessment and your existing commitments.",
+    "rows": [
+      {
+        "label": "Gross monthly household income",
+        "note": "raised from S$14,000",
+        "value": "S$16,000"
+      },
+      {
+        "label": "MSR cap on the instalment",
+        "note": "30% of gross, up from S$4,200",
+        "op": "×",
+        "value": "S$4,800"
+      },
+      {
+        "label": "Sized at the MAS 4% floor over 25 years",
+        "note": "up from about S$796,000",
+        "op": "=",
+        "value": "~S$909,000"
+      }
+    ],
+    "total": {
+      "label": "Purchase price supported at 75% LTV",
+      "note": "about S$152,000 more than at the old ceiling",
+      "value": "~S$1.21M"
+    },
+    "anchor": "borrowing-power",
+    "alt": "Worked calculation showing S$16,000 income supporting a S$909,000 loan and a S$1.21 million purchase at 75% loan-to-value",
+    "caption": "On BTO this rarely binds. On resale it moves what you can shop for.",
+    "slug": "hdb-income-ceiling-16000-2026"
+  },
+  {
+    "out": "ehg-ceiling-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Housing Grants",
+    "title": "The flat ceiling moved. The grant ceiling did not.",
+    "sub": "The Enhanced CPF Housing Grant is worth up to S$120,000 and still stops at S$9,000, now a full S$7,000 below the flat eligibility ceiling. What that gap really costs, and what it does not.",
+    "chips": [
+      "EHG cap S$9,000",
+      "Up to S$120,000",
+      "Flat ceiling S$16,000"
+    ],
+    "slug": "ehg-income-ceiling-9000-2026"
+  },
+  {
+    "out": "ehg-ceiling-stat",
+    "type": "stat",
+    "kicker": "The gap, in three numbers",
+    "title": "Eligible for the flat, ineligible for the grant",
+    "source": "Family figures. Singles are assessed at S$8,000 for the flat and S$4,500 for the EHG. Effective 24 August 2026.",
+    "tiles": [
+      {
+        "num": "S$16,000",
+        "label": "Flat and HDB loan ceiling",
+        "note": "Raised from S$14,000 on 24 Aug 2026"
+      },
+      {
+        "num": "S$9,000",
+        "label": "EHG income ceiling",
+        "note": "Unchanged, and not raised with it",
+        "highlight": true
+      },
+      {
+        "num": "S$7,000",
+        "label": "The gap between them",
+        "note": "The widest it has ever been"
+      }
+    ],
+    "anchor": "gap",
+    "alt": "Three figures showing the S$16,000 flat ceiling, the S$9,000 EHG ceiling and the S$7,000 gap between them from 24 August 2026",
+    "caption": "The households that gained eligibility gained no EHG with it.",
+    "slug": "ehg-income-ceiling-9000-2026"
+  },
+  {
+    "out": "ehg-ceiling-math",
+    "type": "math",
+    "kicker": "The other side of the grant",
+    "title": "A S$120,000 grant does not stay S$120,000",
+    "source": "Illustrative. Assumes the full family maximum, a 25-year holding period, the HDB concessionary rate at 2.6% p.a. and CPF accrued interest at 2.5% p.a. Your own figures will differ.",
+    "rows": [
+      {
+        "label": "EHG credited to your CPF Ordinary Account",
+        "note": "family maximum",
+        "value": "S$120,000"
+      },
+      {
+        "label": "Loan interest you avoid over 25 years",
+        "note": "at the 2.6% HDB rate",
+        "op": "+",
+        "value": "~S$43,000"
+      },
+      {
+        "label": "CPF accrued interest owed back on sale",
+        "note": "at 2.5% p.a. compounded",
+        "op": "−",
+        "value": "~S$102,000"
+      }
+    ],
+    "total": {
+      "label": "Still clearly worth having",
+      "note": "but it is a subsidy against your retirement account, not a cash gift",
+      "value": "Net positive"
+    },
+    "anchor": "cost",
+    "alt": "Worked calculation showing a S$120,000 EHG grant, S$43,000 of avoided interest and S$102,000 of CPF accrued interest owed back on sale",
+    "caption": "Grants are CPF monies. They come back with accrued interest when you sell.",
+    "slug": "ehg-income-ceiling-9000-2026"
+  },
+  {
+    "out": "en-bloc-threshold-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Property Market",
+    "title": "En bloc at 65%. Proposed, not passed.",
+    "sub": "The Land Titles (Strata) (Amendment) Bill 2026 would cut consent to 70% at 40 years and 65% at 60. It also raises the requisition bar to 35% and halves the signature window.",
+    "chips": [
+      "First Reading 4 Aug 2026",
+      "70% at 40 years",
+      "65% at 60 years"
+    ],
+    "slug": "en-bloc-consent-threshold-2026"
+  },
+  {
+    "out": "en-bloc-threshold-ladder",
+    "type": "ladder",
+    "kicker": "Proposed consent thresholds",
+    "title": "The older the estate, the lower the bar",
+    "source": "Proposed under the Land Titles (Strata) (Amendment) Bill 2026, introduced 4 August 2026. Not yet law. Existing thresholds of 90% and 80% remain in force until the Bill is passed.",
+    "rows": [
+      {
+        "label": "Under 10 years",
+        "value": "90%",
+        "pct": 100,
+        "note": "unchanged"
+      },
+      {
+        "label": "10 to 39 years",
+        "value": "80%",
+        "pct": 89,
+        "note": "unchanged"
+      },
+      {
+        "label": "40 to 59 years",
+        "value": "70%",
+        "pct": 78,
+        "note": "was 80%",
+        "highlight": true
+      },
+      {
+        "label": "60 years and above",
+        "value": "65%",
+        "pct": 72,
+        "note": "was 80%",
+        "highlight": true
+      }
+    ],
+    "anchor": "proposed",
+    "alt": "Proposed Singapore en bloc consent thresholds by age of development: 90% under 10 years, 80% at 10 to 39 years, 70% at 40 to 59 years and 65% at 60 years and above",
+    "caption": "Newer stock is untouched. The change targets 1970s and 1980s estates.",
+    "slug": "en-bloc-consent-threshold-2026"
+  },
+  {
+    "out": "en-bloc-proceeds-math",
+    "type": "math",
+    "kicker": "A S$2.0M unit, bought in 2005",
+    "title": "The headline price is not the cash",
+    "source": "Illustrative. Assumes S$350,000 of CPF withdrawn, accrued interest at 2.5% p.a. compounded over 21 years, and S$180,000 outstanding on the mortgage. Before agent commission and legal fees.",
+    "rows": [
+      {
+        "label": "Collective sale price for the unit",
+        "value": "S$2,000,000"
+      },
+      {
+        "label": "Outstanding mortgage discharged",
+        "note": "to the lender",
+        "op": "−",
+        "value": "S$180,000"
+      },
+      {
+        "label": "CPF principal plus accrued interest",
+        "note": "back to your CPF Ordinary Account",
+        "op": "−",
+        "value": "S$588,000"
+      }
+    ],
+    "total": {
+      "label": "Cash that actually reaches your bank account",
+      "note": "the CPF refund is still yours, but it is not spendable cash",
+      "value": "~S$1.23M"
+    },
+    "anchor": "proceeds",
+    "alt": "Worked example showing a S$2 million en bloc sale reduced by a S$180,000 mortgage and a S$588,000 CPF refund to about S$1.23 million in cash",
+    "caption": "Owners routinely budget the CPF refund as if it were cash. It is not.",
+    "slug": "en-bloc-consent-threshold-2026"
+  },
+  {
+    "out": "nov-2026-bto-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · BTO",
+    "title": "November BTO. September deadline.",
+    "sub": "About 7,960 flats across six towns, moved from October so households newly eligible at S$16,000 could apply. Supporting documents for the HFE letter are due 25 September 2026.",
+    "chips": [
+      "~7,960 flats",
+      "Six towns",
+      "HFE by 25 Sep"
+    ],
+    "slug": "november-2026-bto-hfe-deadline"
+  },
+  {
+    "out": "nov-2026-bto-timeline",
+    "type": "timeline",
+    "kicker": "The dates that decide it",
+    "title": "From the ceiling change to key collection",
+    "source": "HFE processing runs up to 21 working days in ordinary conditions and longer before a major launch. The letter is valid for 9 months and HDB does not extend it.",
+    "steps": [
+      {
+        "when": "24 Aug 2026",
+        "label": "Ceiling to S$16,000",
+        "note": "Families, HDB loan, CPF grant"
+      },
+      {
+        "when": "25 Sep 2026",
+        "label": "HFE documents due",
+        "note": "The date that binds",
+        "highlight": true
+      },
+      {
+        "when": "Nov 2026",
+        "label": "BTO exercise",
+        "note": "~7,960 flats, six towns"
+      },
+      {
+        "when": "Feb 2027",
+        "label": "Extra ballot chances",
+        "note": "One per child, no cap"
+      },
+      {
+        "when": "2030+",
+        "label": "Key collection",
+        "note": "When the loan is actually taken"
+      }
+    ],
+    "anchor": "moved",
+    "alt": "Timeline from the 24 August 2026 income ceiling change through the 25 September HFE deadline, the November 2026 BTO exercise, February 2027 ballot changes and key collection from 2030",
+    "caption": "The launch is in November. The decision point is in September.",
+    "slug": "november-2026-bto-hfe-deadline"
+  },
+  {
+    "out": "nov-2026-bto-split",
+    "type": "split",
+    "kicker": "The decision most buyers are not making",
+    "title": "Ballot in November, or wait for February?",
+    "source": "From the February 2027 exercise, first-timer families get one additional ballot chance per Singapore Citizen child aged 18 and below, with no cap.",
+    "sides": [
+      {
+        "head": "Apply in November 2026",
+        "sub": "If a specific project is the one you want",
+        "points": [
+          "Toa Payoh West beside Caldecott will not reappear",
+          "Standard ballot chances, no child uplift yet",
+          "Three months earlier to key collection",
+          "Costs you a first-timer attempt if unsuccessful"
+        ]
+      },
+      {
+        "head": "Wait for February 2027",
+        "sub": "If you have children and are flexible on location",
+        "points": [
+          "One extra ballot chance per child, no cap",
+          "Two children means three chances instead of one",
+          "Different towns, different competition",
+          "Three more months of market movement"
+        ]
+      }
+    ],
+    "anchor": "wait",
+    "alt": "Two-column comparison of applying for the November 2026 BTO exercise versus waiting for February 2027 when families gain one extra ballot chance per child",
+    "caption": "A family with two children triples its chances by waiting one exercise.",
+    "slug": "november-2026-bto-hfe-deadline"
+  },
+  {
     "out": "hdb-loan-salary-hero",
     "type": "hero",
     "kicker": "Nexus Mortgage SG · HDB Loans",
