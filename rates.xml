@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Tue, 08 Sep 2026 05:44:27 GMT</lastBuildDate>
+<lastBuildDate>Wed, 09 Sep 2026 05:49:03 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
-<title>Current Compounded SORA — 1M 1.32% | 3M 1.20%</title>
+<title>Current Compounded SORA — 1M 1.31% | 3M 1.20%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-current-2026-09-07</guid>
-<pubDate>Tue, 08 Sep 2026 05:44:27 GMT</pubDate>
-<description>Latest published Compounded SORA values per MAS. As of 2026-09-07.</description>
+<guid isPermaLink="false">nexus-current-2026-09-08</guid>
+<pubDate>Wed, 09 Sep 2026 05:49:03 GMT</pubDate>
+<description>Latest published Compounded SORA values per MAS. As of 2026-09-08.</description>
+</item>
+<item>
+<title>SORA update: sora1m 1.3162→1.3086</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Wed, 09 Sep 2026 05:49:03 GMT</guid>
+<pubDate>Wed, 09 Sep 2026 05:49:03 GMT</pubDate>
+<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.3162,&quot;to&quot;:1.3086,&quot;delta&quot;:-0.008}}</description>
 </item>
 <item>
 <title>SORA update: sora1m 1.3266→1.3162, sora3m 1.1994→1.2003</title>
@@ -217,13 +224,6 @@
 <guid isPermaLink="false">nexus-rates-Mon, 03 Aug 2026 04:33:42 GMT</guid>
 <pubDate>Mon, 03 Aug 2026 04:33:42 GMT</pubDate>
 <description>{&quot;sora1m&quot;:{&quot;from&quot;:1.1883,&quot;to&quot;:1.1454,&quot;delta&quot;:-0.043},&quot;sora3m&quot;:{&quot;from&quot;:1.1528,&quot;to&quot;:1.1354,&quot;delta&quot;:-0.017}}</description>
-</item>
-<item>
-<title>SORA refresh — no change.</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Sun, 02 Aug 2026 04:28:07 GMT</guid>
-<pubDate>Sun, 02 Aug 2026 04:28:07 GMT</pubDate>
-<description>{}</description>
 </item>
 </channel>
 </rss>
