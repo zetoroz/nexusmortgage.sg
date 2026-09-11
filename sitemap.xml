@@ -227,6 +227,12 @@
 
   <!-- Blog posts (live, sorted by recency) -->
   <url>
+    <loc>https://nexusmortgage.sg/blog/hdb-loan-how-much-can-i-borrow-2026/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://nexusmortgage.sg/blog/november-2026-bto-hfe-deadline/</loc>
     <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
