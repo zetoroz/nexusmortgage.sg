@@ -1,5 +1,18 @@
 [
   {
+    "generatedAt": "2026-09-15T05:58:27.764Z",
+    "source": "MAS",
+    "asOfSora": "2026-09-14",
+    "refRateChanges": {
+      "sora1m": {
+        "from": 1.2664,
+        "to": 1.2636,
+        "delta": -0.003
+      }
+    },
+    "summary": "SORA update: sora1m 1.2664→1.2636"
+  },
+  {
     "generatedAt": "2026-09-14T05:56:58.500Z",
     "source": "MAS",
     "asOfSora": "2026-09-11",
