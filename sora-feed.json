@@ -2,16 +2,16 @@
   "publisher": "Nexus Mortgage SG",
   "url": "https://nexusmortgage.sg/",
   "license": "Reference data sourced from Monetary Authority of Singapore (MAS).",
-  "asOfSora": "2026-09-15",
+  "asOfSora": "2026-09-16",
   "sora": {
-    "compounded_1m_pct": 1.2571,
-    "compounded_3m_pct": 1.1984
+    "compounded_1m_pct": 1.2479,
+    "compounded_3m_pct": 1.2007
   },
   "typicalSpreadPct": 0.8,
   "masStressTestFloorPct": 4,
   "hdbConcessionaryPct": 2.6,
   "derived": {
-    "effectiveSora3mPlusSpreadPct": 1.998
+    "effectiveSora3mPlusSpreadPct": 2.001
   },
-  "updatedAt": "2026-09-16T05:47:57.527Z"
+  "updatedAt": "2026-09-17T05:54:12.853Z"
 }
