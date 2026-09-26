@@ -89,6 +89,7 @@ ADS-QUICK-WINS.md
 scripts/__pycache__/
 CANNIBALIZATION-AUDIT-*.md
 *-AUDIT-*.md
+*-ANALYSIS-*.md
 scripts/meta-leads.gs
 
 # Source brochure material — copyrighted, do NOT publish (developer e-brochure PDFs, floor/site plans)
