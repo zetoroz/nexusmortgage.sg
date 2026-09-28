@@ -2114,5 +2114,92 @@
     "alt": "Bar chart comparing monthly instalments on S$500,000: S$2,674 on an HDB loan, S$2,390 refinanced at 1.40% and S$1,976 refinanced and extended to 25 years",
     "caption": "Refinancing needs a clean credit record. Do it before arrears, not after.",
     "slug": "cant-pay-home-loan-singapore"
+  },
+  {
+    "out": "divorce-home-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Divorce and Property",
+    "title": "Sell it or keep it. Then get off the old loan.",
+    "sub": "Who can keep an HDB flat, how CPF refunds are ordered, when stamp duty is remitted, and why an outstanding joint loan caps the next home loan at 45%.",
+    "chips": [
+      "HDB retention rules",
+      "CPF refund first",
+      "Stamp duty remission"
+    ],
+    "slug": "divorce-property-home-loan-singapore"
+  },
+  {
+    "out": "divorce-home-buyout-math",
+    "type": "math",
+    "kicker": "Keeping the home on one income",
+    "title": "What the retaining spouse has to finance",
+    "source": "Illustrative. S$700,000 joint loan outstanding, CPF refund including accrued interest, and a court-ordered cash payment. At a 4% stress rate over 25 years the new loan tests at about S$4,856 a month, needing roughly S$8,800 of monthly income under TDSR.",
+    "rows": [
+      {
+        "label": "Redeem the joint loan",
+        "note": "outstanding balance",
+        "value": "S$700,000"
+      },
+      {
+        "label": "Refund ex-spouse's CPF",
+        "note": "with accrued interest",
+        "op": "+",
+        "value": "S$180,000"
+      },
+      {
+        "label": "Cash under the court order",
+        "note": "to the outgoing spouse",
+        "op": "+",
+        "value": "S$100,000"
+      },
+      {
+        "label": "Own CPF Ordinary Account",
+        "note": "applied to the purchase",
+        "op": "−",
+        "value": "S$60,000"
+      }
+    ],
+    "total": {
+      "label": "New loan in one name",
+      "note": "assessed on one income",
+      "value": "S$920,000"
+    },
+    "anchor": "loan",
+    "alt": "Worked sum of a divorce buyout: S$700,000 loan redemption, S$180,000 CPF refund and S$100,000 cash, less S$60,000 CPF, needing a S$920,000 sole-name loan",
+    "caption": "The stress test on one income, not the current rate, decides whether keeping the home works.",
+    "slug": "divorce-property-home-loan-singapore"
+  },
+  {
+    "out": "divorce-home-ltv-split",
+    "type": "split",
+    "kicker": "The outgoing spouse's next home",
+    "title": "Still on the old loan, or off it first",
+    "source": "MAS Notice 632 counts outstanding housing loans, including joint ones. Illustrated on a S$1.2M purchase, standard tenure.",
+    "sides": [
+      {
+        "head": "Still on the joint loan",
+        "sub": "Treated as a second housing loan",
+        "points": [
+          "Maximum LTV 45%",
+          "Loan up to S$540,000",
+          "At least 25% in cash",
+          "ABSD if you still own a share"
+        ]
+      },
+      {
+        "head": "Off the loan and title first",
+        "sub": "A first housing loan again",
+        "points": [
+          "Maximum LTV 75%",
+          "Loan up to S$900,000",
+          "As little as 5% in cash",
+          "No ABSD from the old home"
+        ]
+      }
+    ],
+    "anchor": "next",
+    "alt": "Comparison of the next home loan for a divorced spouse: 45% LTV while still on the joint loan versus 75% LTV once off the loan and title",
+    "caption": "Get off the title and the loan, then buy. The order is worth S$360,000 of borrowing here.",
+    "slug": "divorce-property-home-loan-singapore"
   }
 ]
