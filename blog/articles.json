@@ -1,5 +1,29 @@
 [
  {
+  "slug": "cant-pay-home-loan-singapore",
+  "url": "/blog/cant-pay-home-loan-singapore/",
+  "status": "scheduled",
+  "title": "Can't Pay Your Home Loan? What Happens, and What to Do First",
+  "excerpt": "What the bank and HDB actually do when mortgage payments stop, stage by stage. The five levers that lower an instalment, HDB's hardship schemes and the refinance trade-off, when insurance pays, and why selling on your own terms beats a mortgagee sale.",
+  "tag": "Home Loans",
+  "date": "6 October 2026",
+  "readTime": "9 min read",
+  "thumbnail": "blog-images/cant-pay-loan-thumb.webp",
+  "thumbnailAlt": "Timeline of Singapore mortgage arrears from a missed payment to a mortgagee sale, and the levers to stop it"
+ },
+ {
+  "slug": "industrial-property-loan-singapore-2026",
+  "url": "/blog/industrial-property-loan-singapore-2026/",
+  "status": "scheduled",
+  "title": "Industrial Property Loans in Singapore: The Lease Sets the Loan",
+  "excerpt": "How banks finance B1 and B2 industrial property in 2026. Why the remaining lease caps your tenure and can double the instalment, the cash you need with no CPF, JTC's transfer approvals, and the three-year SSD that commercial buyers never pay.",
+  "tag": "Commercial & Business",
+  "date": "1 October 2026",
+  "readTime": "9 min read",
+  "thumbnail": "blog-images/industrial-loan-thumb.webp",
+  "thumbnailAlt": "Industrial property loan in Singapore: tenure against remaining lease, LTV and JTC rules"
+ },
+ {
   "slug": "hdb-loan-how-much-can-i-borrow-2026",
   "url": "/blog/hdb-loan-how-much-can-i-borrow-2026/",
   "status": "live",

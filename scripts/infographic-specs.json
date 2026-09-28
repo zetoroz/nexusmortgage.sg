@@ -1951,5 +1951,168 @@
     "alt": "Breakdown of the roughly S$186,200 needed at purchase for a S$674,000 HDB resale flat: 25% downpayment, buyer stamp duty, and legal and valuation fees",
     "caption": "Two buyers on S$8,000 accumulate that much CPF OA in roughly eight years.",
     "slug": "hdb-loan-how-much-can-i-borrow-2026"
+  },
+  {
+    "out": "industrial-loan-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Industrial Property",
+    "title": "On industrial property, the lease sets the loan.",
+    "sub": "Banks cap the tenure well inside the remaining lease, CPF is off the table, JTC approves the buyer, and SSD still applies for three years. What that does to a B1 or B2 purchase.",
+    "chips": [
+      "LTV 60% to 80%",
+      "No CPF, no ABSD",
+      "SSD for 3 years"
+    ],
+    "slug": "industrial-property-loan-singapore-2026"
+  },
+  {
+    "out": "industrial-loan-tenure-ladder",
+    "type": "ladder",
+    "kicker": "Same unit, same loan, same rate",
+    "title": "A shorter lease can double the instalment",
+    "source": "Illustrative. S$1,125,000 loan (75% of S$1.5M) at 2.0% p.a. The bank sets the tenure against the remaining lease, not your preference.",
+    "rows": [
+      {
+        "label": "25-year tenure",
+        "value": "S$4,768/mo",
+        "pct": 46
+      },
+      {
+        "label": "20-year tenure",
+        "value": "S$5,691/mo",
+        "pct": 55
+      },
+      {
+        "label": "15-year tenure",
+        "value": "S$7,239/mo",
+        "pct": 70
+      },
+      {
+        "label": "10-year tenure",
+        "value": "S$10,352/mo",
+        "pct": 100,
+        "highlight": true
+      }
+    ],
+    "anchor": "lease",
+    "alt": "Bar chart of monthly instalments on a S$1,125,000 industrial loan at 2% over 25, 20, 15 and 10 years, rising from S$4,768 to S$10,352",
+    "caption": "Check the lease expiry before you negotiate the price. It decides the tenure.",
+    "slug": "industrial-property-loan-singapore-2026"
+  },
+  {
+    "out": "industrial-loan-cash-math",
+    "type": "math",
+    "kicker": "The cash side of a S$1.5M B1 unit",
+    "title": "No CPF means every line is cash",
+    "source": "Illustrative, at 75% LTV. GST applies only if the seller is GST-registered and is reclaimable later by a GST-registered buyer. Excludes legal and valuation fees.",
+    "rows": [
+      {
+        "label": "Downpayment",
+        "note": "25% of S$1.5M",
+        "value": "S$375,000"
+      },
+      {
+        "label": "Buyer's Stamp Duty",
+        "note": "non-residential tiers",
+        "op": "+",
+        "value": "S$44,600"
+      },
+      {
+        "label": "GST at 9%",
+        "note": "if the seller is GST-registered",
+        "op": "+",
+        "value": "S$135,000"
+      }
+    ],
+    "total": {
+      "label": "Cash needed up front",
+      "note": "S$419,600 where no GST applies",
+      "value": "S$554,600"
+    },
+    "anchor": "cash",
+    "alt": "Worked sum of the cash needed for a S$1.5M industrial unit: S$375,000 downpayment, S$44,600 BSD and S$135,000 GST, totalling S$554,600",
+    "caption": "GST can be reclaimed, but the bank does not lend against it. Fund it up front.",
+    "slug": "industrial-property-loan-singapore-2026"
+  },
+  {
+    "out": "cant-pay-loan-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Home Loans",
+    "title": "Can't pay the home loan? Move before the second missed payment.",
+    "sub": "What the bank and HDB actually do when payments stop, the five levers that lower an instalment, and why selling on your own terms beats a mortgagee sale.",
+    "chips": [
+      "Call early",
+      "Five levers",
+      "Sell before the bank does"
+    ],
+    "slug": "cant-pay-home-loan-singapore"
+  },
+  {
+    "out": "cant-pay-loan-timeline",
+    "type": "timeline",
+    "kicker": "How arrears escalate",
+    "title": "From one missed payment to a mortgagee sale",
+    "source": "General outline. Timing varies by lender and case, and typically runs over months of sustained arrears. Every stage still has an exit; the early ones are cheaper.",
+    "steps": [
+      {
+        "when": "Stage 1",
+        "label": "Missed payment",
+        "note": "Late charges, reminders, credit bureau record"
+      },
+      {
+        "when": "Stage 2",
+        "label": "Arrears build",
+        "note": "Easiest point to restructure"
+      },
+      {
+        "when": "Stage 3",
+        "label": "Letter of demand",
+        "note": "Full loan recalled"
+      },
+      {
+        "when": "Stage 4",
+        "label": "Statutory notice",
+        "note": "One month's notice under the Land Titles Act"
+      },
+      {
+        "when": "Stage 5",
+        "label": "Possession and sale",
+        "note": "Auction or private treaty",
+        "highlight": true
+      }
+    ],
+    "anchor": "timeline",
+    "alt": "Five-stage timeline of Singapore mortgage arrears from a missed payment to a letter of demand, statutory notice and mortgagee sale",
+    "caption": "Your leverage is strongest at stage one, before anything formal has happened.",
+    "slug": "cant-pay-home-loan-singapore"
+  },
+  {
+    "out": "cant-pay-loan-levers",
+    "type": "ladder",
+    "kicker": "Two levers, S$500,000 balance",
+    "title": "Refinance and extend: about S$700 a month lower",
+    "source": "Illustrative. S$500,000 outstanding. HDB concessionary rate 2.60%; bank fixed package 1.40%. Tenure extension is subject to age limits and raises total interest.",
+    "rows": [
+      {
+        "label": "HDB loan, 20 years left",
+        "value": "S$2,674/mo",
+        "pct": 100
+      },
+      {
+        "label": "Bank loan at 1.40%, 20 years",
+        "value": "S$2,390/mo",
+        "pct": 89
+      },
+      {
+        "label": "Bank loan at 1.40%, 25 years",
+        "value": "S$1,976/mo",
+        "pct": 74,
+        "highlight": true
+      }
+    ],
+    "anchor": "levers",
+    "alt": "Bar chart comparing monthly instalments on S$500,000: S$2,674 on an HDB loan, S$2,390 refinanced at 1.40% and S$1,976 refinanced and extended to 25 years",
+    "caption": "Refinancing needs a clean credit record. Do it before arrears, not after.",
+    "slug": "cant-pay-home-loan-singapore"
   }
 ]
