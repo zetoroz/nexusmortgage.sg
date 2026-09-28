@@ -2201,5 +2201,239 @@
     "alt": "Comparison of the next home loan for a divorced spouse: 45% LTV while still on the joint loan versus 75% LTV once off the loan and title",
     "caption": "Get off the title and the loan, then buy. The order is worth S$360,000 of borrowing here.",
     "slug": "divorce-property-home-loan-singapore"
+  },
+  {
+    "out": "personal-loan-limits-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Personal Loans",
+    "title": "Your income sets the ceiling, not the advert.",
+    "sub": "The MAS limits on personal loans per bank and across all banks, the licensed moneylender caps, and what a personal loan quietly does to your next home loan.",
+    "chips": [
+      "S$20,000 income floor",
+      "4x per bank",
+      "12x across all banks"
+    ],
+    "slug": "personal-loan-how-much-can-i-borrow-singapore"
+  },
+  {
+    "out": "personal-loan-limits-stat",
+    "type": "stat",
+    "kicker": "The three numbers that cap you",
+    "title": "How much a personal loan can be",
+    "source": "MAS rules for banks and other regulated lenders. 4x applies from S$30,000 to below S$120,000 a year; below S$30,000 it is 2x. The 12x limit counts interest-bearing balances only.",
+    "tiles": [
+      {
+        "num": "S$20,000",
+        "label": "Minimum annual income",
+        "note": "S$30,000 for a credit card"
+      },
+      {
+        "num": "4x",
+        "label": "Monthly income, per bank",
+        "note": "For incomes S$30,000 to below S$120,000",
+        "highlight": true
+      },
+      {
+        "num": "12x",
+        "label": "Monthly income, all lenders",
+        "note": "Suspension after 3 months over"
+      }
+    ],
+    "anchor": "perbank",
+    "alt": "Three figures summarising Singapore personal loan limits: S$20,000 minimum income, 4 times monthly income per bank, and 12 times monthly income across all lenders",
+    "caption": "An existing credit card limit at the same bank uses up the same room.",
+    "slug": "personal-loan-how-much-can-i-borrow-singapore"
+  },
+  {
+    "out": "personal-loan-limits-tdsr",
+    "type": "ladder",
+    "kicker": "The cost the adverts leave out",
+    "title": "Each S$1 of instalment removes S$189 of home loan",
+    "source": "Illustrative. Home loan capacity lost under the 55% TDSR at the MAS 4% stress rate over 25 years, assuming the personal loan is your only other debt.",
+    "rows": [
+      {
+        "label": "S$300 a month personal loan",
+        "value": "−S$56,800",
+        "pct": 30
+      },
+      {
+        "label": "S$500 a month personal loan",
+        "value": "−S$94,700",
+        "pct": 50
+      },
+      {
+        "label": "S$1,000 a month personal loan",
+        "value": "−S$189,500",
+        "pct": 100,
+        "highlight": true
+      }
+    ],
+    "anchor": "homeloan",
+    "alt": "Bar chart of home loan capacity lost to personal loan instalments: about S$56,800 for S$300 a month, S$94,700 for S$500 and S$189,500 for S$1,000",
+    "caption": "Planning to buy property? Clear or shorten the personal loan first.",
+    "slug": "personal-loan-how-much-can-i-borrow-singapore"
+  },
+  {
+    "out": "personal-loan-eir-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Personal Loans",
+    "title": "A 3% personal loan costs about 5.6%.",
+    "sub": "Flat rates charge interest on the full amount for the whole term. How to read the EIR, why fees hit short loans hardest, and the four numbers to get in writing.",
+    "chips": [
+      "EIR ~2x flat rate",
+      "Fees hurt short loans",
+      "Longer costs more"
+    ],
+    "slug": "personal-loan-flat-rate-vs-eir-singapore"
+  },
+  {
+    "out": "personal-loan-eir-math",
+    "type": "compare",
+    "kicker": "Same headline rate, S$10,000 over 5 years",
+    "title": "Flat 3% charges nearly twice the interest",
+    "cols": [
+      "Flat rate 3%",
+      "Monthly rest 3%"
+    ],
+    "source": "Our illustrative calculations, equal monthly instalments, no fees. The flat-rate loan works out to an EIR of about 5.6%.",
+    "rows": [
+      {
+        "label": "Monthly instalment",
+        "cells": [
+          "S$191.67",
+          "S$179.69"
+        ]
+      },
+      {
+        "label": "Total interest",
+        "cells": [
+          "S$1,500",
+          "about S$781"
+        ]
+      },
+      {
+        "label": "Interest charged on",
+        "cells": [
+          "Original S$10,000",
+          "What you still owe"
+        ]
+      },
+      {
+        "label": "Effective rate",
+        "cells": [
+          "about 5.6%",
+          "3%"
+        ]
+      }
+    ],
+    "anchor": "example",
+    "alt": "Comparison of a S$10,000 loan at 3% flat and 3% monthly rest over five years: S$1,500 of interest versus about S$781",
+    "caption": "The advertised number is the same. The cost is not.",
+    "slug": "personal-loan-flat-rate-vs-eir-singapore"
+  },
+  {
+    "out": "personal-loan-eir-fees",
+    "type": "ladder",
+    "kicker": "A 1% processing fee on a 3% flat loan",
+    "title": "The shorter the loan, the more the fee costs",
+    "source": "Our illustrative calculations on S$10,000, fee deducted upfront. Without the fee the EIR is about 5.5% to 5.7% at every tenure.",
+    "rows": [
+      {
+        "label": "5-year loan",
+        "value": "6.1% EIR",
+        "pct": 66
+      },
+      {
+        "label": "3-year loan",
+        "value": "6.4% EIR",
+        "pct": 70
+      },
+      {
+        "label": "1-year loan",
+        "value": "7.4% EIR",
+        "pct": 100,
+        "highlight": true
+      }
+    ],
+    "anchor": "fees",
+    "alt": "Bar chart of the EIR on a 3% flat personal loan with a 1% fee: about 6.1% over five years, 6.4% over three years and 7.4% over one year",
+    "caption": "A fee waiver is worth most on a short loan.",
+    "slug": "personal-loan-flat-rate-vs-eir-singapore"
+  },
+  {
+    "out": "debt-consolidation-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Personal Loans",
+    "title": "Past 12x your income, one door stays open.",
+    "sub": "The banks' Debt Consolidation Plan, and how it compares with a balance transfer, a personal loan, a licensed moneylender and refinancing against your home.",
+    "chips": [
+      "DCP above 12x",
+      "Cards closed, 1x line",
+      "Home equity: cheapest, riskiest"
+    ],
+    "slug": "debt-consolidation-plan-singapore"
+  },
+  {
+    "out": "debt-consolidation-thresholds",
+    "type": "timeline",
+    "kicker": "Interest-bearing unsecured debt, in months of income",
+    "title": "Which doors close, and when",
+    "source": "MAS rules for banks and other regulated lenders. Only interest-bearing balances count; secured loans such as a home loan do not.",
+    "steps": [
+      {
+        "when": "Below 6x",
+        "label": "Most options open",
+        "note": "Balance transfer or personal loan"
+      },
+      {
+        "when": "Above 6x",
+        "label": "New credit restricted",
+        "note": "Nothing that lifts total limits above 12x"
+      },
+      {
+        "when": "Above 12x",
+        "label": "Borrowing limit breached",
+        "note": "Facilities suspended after 3 months"
+      },
+      {
+        "when": "DCP",
+        "label": "One loan, one bank",
+        "note": "Other cards closed; 1x monthly income line",
+        "highlight": true
+      }
+    ],
+    "anchor": "where",
+    "alt": "Timeline of Singapore unsecured debt thresholds: below 6 times income most options open, above 6 times new credit restricted, above 12 times facilities suspended, and the Debt Consolidation Plan",
+    "caption": "The DCP exists for the point where every other door has closed.",
+    "slug": "debt-consolidation-plan-singapore"
+  },
+  {
+    "out": "debt-consolidation-moneylender",
+    "type": "stat",
+    "kicker": "Licensed moneylender caps on a S$10,000 loan",
+    "title": "The caps still allow the cost to double",
+    "source": "Ministry of Law regulatory maximums, not typical pricing. Late fees are capped separately at S$60 a month, and all charges together cannot exceed the principal.",
+    "tiles": [
+      {
+        "num": "4%",
+        "label": "Interest a month",
+        "note": "Up to S$400 a month on S$10,000"
+      },
+      {
+        "num": "S$1,000",
+        "label": "Admin fee, upfront",
+        "note": "Capped at 10% of the principal"
+      },
+      {
+        "num": "S$10,000",
+        "label": "Total charges allowed",
+        "note": "Equal to what you borrowed",
+        "highlight": true
+      }
+    ],
+    "anchor": "moneylender",
+    "alt": "Three figures showing licensed moneylender caps on a S$10,000 loan: 4% interest a month, a S$1,000 admin fee and total charges of up to S$10,000",
+    "caption": "Borrowing from a moneylender to repay a bank rarely consolidates anything.",
+    "slug": "debt-consolidation-plan-singapore"
   }
 ]
