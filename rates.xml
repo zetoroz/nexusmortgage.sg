@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Tue, 29 Sep 2026 06:42:03 GMT</lastBuildDate>
+<lastBuildDate>Wed, 30 Sep 2026 06:27:25 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
 <title>Current Compounded SORA — 1M 1.25% | 3M 1.23%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-current-2026-09-28</guid>
-<pubDate>Tue, 29 Sep 2026 06:42:03 GMT</pubDate>
-<description>Latest published Compounded SORA values per MAS. As of 2026-09-28.</description>
+<guid isPermaLink="false">nexus-current-2026-09-29</guid>
+<pubDate>Wed, 30 Sep 2026 06:27:25 GMT</pubDate>
+<description>Latest published Compounded SORA values per MAS. As of 2026-09-29.</description>
+</item>
+<item>
+<title>SORA update: sora1m 1.2513→1.2519, sora3m 1.2298→1.2312</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Wed, 30 Sep 2026 06:27:25 GMT</guid>
+<pubDate>Wed, 30 Sep 2026 06:27:25 GMT</pubDate>
+<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.2513,&quot;to&quot;:1.2519,&quot;delta&quot;:0.001},&quot;sora3m&quot;:{&quot;from&quot;:1.2298,&quot;to&quot;:1.2312,&quot;delta&quot;:0.001}}</description>
 </item>
 <item>
 <title>SORA update: sora1m 1.2505→1.2513</title>
@@ -217,13 +224,6 @@
 <guid isPermaLink="false">nexus-rates-Mon, 31 Aug 2026 06:49:20 GMT</guid>
 <pubDate>Mon, 31 Aug 2026 06:49:20 GMT</pubDate>
 <description>{&quot;sora1m&quot;:{&quot;from&quot;:1.2123,&quot;to&quot;:1.2543,&quot;delta&quot;:0.042},&quot;sora3m&quot;:{&quot;from&quot;:1.1628,&quot;to&quot;:1.1805,&quot;delta&quot;:0.018}}</description>
-</item>
-<item>
-<title>SORA refresh — no change.</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Sun, 30 Aug 2026 06:21:26 GMT</guid>
-<pubDate>Sun, 30 Aug 2026 06:21:26 GMT</pubDate>
-<description>{}</description>
 </item>
 </channel>
 </rss>
