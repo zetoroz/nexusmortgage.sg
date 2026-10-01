@@ -227,6 +227,12 @@
 
   <!-- Blog posts (live, sorted by recency) -->
   <url>
+    <loc>https://nexusmortgage.sg/blog/industrial-property-loan-singapore-2026/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://nexusmortgage.sg/blog/personal-loan-how-much-can-i-borrow-singapore/</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
