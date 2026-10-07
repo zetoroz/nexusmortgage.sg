@@ -2,8 +2,8 @@
   "source": "Urban Redevelopment Authority (URA) Data Service, PMI_Resi_Transaction",
   "attribution": "Contains information from URA accessed via the URA Data Service.",
   "note": "Aggregated caveat data. Indicative only, not a valuation.",
-  "generatedAt": "2026-10-03T06:02:35.862Z",
-  "asOf": "2026-10-03",
+  "generatedAt": "2026-10-07T06:51:13.153Z",
+  "asOf": "2026-10-07",
   "priceIndex": {
     "source": "URA Private Residential Property Price Index via data.gov.sg",
     "basis": "Base quarter 2009-Q1 = 100. Stratified hedonic regression (quality- and mix-adjusted).",
@@ -184,8 +184,8 @@
       "district": "19",
       "segment": "OCR",
       "medianPsf": 1667,
-      "medianPrice": 1750000,
-      "units": 2748
+      "medianPrice": 1743880,
+      "units": 2744
     },
     {
       "district": "20",
@@ -199,7 +199,7 @@
       "segment": "RCR",
       "medianPsf": 2200,
       "medianPrice": 2330000,
-      "units": 952
+      "units": 951
     },
     {
       "district": "22",
@@ -282,14 +282,14 @@
       "units": 5031,
       "segments": {
         "CCR": {
-          "medianPsf": 2296,
-          "medianPrice": 2880000,
-          "units": 738
+          "medianPsf": 2299,
+          "medianPrice": 2868200,
+          "units": 736
         },
         "RCR": {
-          "medianPsf": 1934,
+          "medianPsf": 1932,
           "medianPrice": 1800000,
-          "units": 1237
+          "units": 1239
         },
         "OCR": {
           "medianPsf": 1535,
@@ -325,7 +325,7 @@
       "quarter": "2024Q2",
       "medianPsf": 1709,
       "medianPrice": 1715012,
-      "units": 5812,
+      "units": 5811,
       "segments": {
         "CCR": {
           "medianPsf": 2147,
@@ -340,7 +340,7 @@
         "OCR": {
           "medianPsf": 1491,
           "medianPrice": 1528000,
-          "units": 3488
+          "units": 3487
         }
       }
     },
@@ -371,12 +371,12 @@
       "quarter": "2024Q4",
       "medianPsf": 2057,
       "medianPrice": 1880000,
-      "units": 8500,
+      "units": 8499,
       "segments": {
         "CCR": {
-          "medianPsf": 2254,
-          "medianPrice": 2540000,
-          "units": 773
+          "medianPsf": 2249,
+          "medianPrice": 2530000,
+          "units": 772
         },
         "RCR": {
           "medianPsf": 2460,
@@ -420,14 +420,14 @@
       "units": 5952,
       "segments": {
         "CCR": {
-          "medianPsf": 2219,
+          "medianPsf": 2218,
           "medianPrice": 2900000,
-          "units": 686
+          "units": 684
         },
         "RCR": {
           "medianPsf": 2337,
-          "medianPrice": 1934400,
-          "units": 2139
+          "medianPrice": 1935950,
+          "units": 2141
         },
         "OCR": {
           "medianPsf": 1577,
@@ -439,8 +439,8 @@
     {
       "quarter": "2025Q3",
       "medianPsf": 2060,
-      "medianPrice": 1875000,
-      "units": 8534,
+      "medianPrice": 1874100,
+      "units": 8530,
       "segments": {
         "CCR": {
           "medianPsf": 2973,
@@ -450,12 +450,12 @@
         "RCR": {
           "medianPsf": 2342,
           "medianPrice": 2080000,
-          "units": 2406
+          "units": 2405
         },
         "OCR": {
           "medianPsf": 1763,
           "medianPrice": 1679000,
-          "units": 4491
+          "units": 4488
         }
       }
     },
@@ -486,22 +486,22 @@
       "quarter": "2026Q1",
       "medianPsf": 1969,
       "medianPrice": 1998888,
-      "units": 6880,
+      "units": 6879,
       "segments": {
         "CCR": {
-          "medianPsf": 2944,
-          "medianPrice": 2638000,
-          "units": 1324
+          "medianPsf": 2946,
+          "medianPrice": 2633000,
+          "units": 1322
         },
         "RCR": {
-          "medianPsf": 2216,
+          "medianPsf": 2217,
           "medianPrice": 2220000,
-          "units": 1393
+          "units": 1395
         },
         "OCR": {
           "medianPsf": 1806,
           "medianPrice": 1808000,
-          "units": 4163
+          "units": 4162
         }
       }
     },
