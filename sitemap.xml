@@ -227,6 +227,12 @@
 
   <!-- Blog posts (live, sorted by recency) -->
   <url>
+    <loc>https://nexusmortgage.sg/blog/debt-consolidation-plan-singapore/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://nexusmortgage.sg/blog/cant-pay-home-loan-singapore/</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
