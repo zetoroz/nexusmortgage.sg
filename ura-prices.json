@@ -2,8 +2,8 @@
   "source": "Urban Redevelopment Authority (URA) Data Service, PMI_Resi_Transaction",
   "attribution": "Contains information from URA accessed via the URA Data Service.",
   "note": "Aggregated caveat data. Indicative only, not a valuation.",
-  "generatedAt": "2026-10-07T06:51:13.153Z",
-  "asOf": "2026-10-07",
+  "generatedAt": "2026-10-10T06:41:36.555Z",
+  "asOf": "2026-10-10",
   "priceIndex": {
     "source": "URA Private Residential Property Price Index via data.gov.sg",
     "basis": "Base quarter 2009-Q1 = 100. Stratified hedonic regression (quality- and mix-adjusted).",
@@ -15,266 +15,243 @@
     "qoqPct": 0.5,
     "yoyPct": 2.91
   },
-  "latestQuarter": "2026Q2",
-  "totalUnitsLatestQuarter": 7272,
+  "latestQuarter": "2026Q3",
+  "totalUnitsLatestQuarter": 5420,
   "medianTransacted": {
     "note": "Median transacted PSF from URA caveats. Mix-affected and NOT a price index. For price movement use priceIndex (official URA PPI).",
-    "medianPsf": 1990,
-    "medianPsfQoqPct": 1.07,
-    "medianPsfYoyPct": 7.51
+    "medianPsf": 1964,
+    "medianPsfQoqPct": -1.36,
+    "medianPsfYoyPct": -4.66
   },
   "bySegment": {
     "CCR": {
       "name": "Core Central Region",
-      "medianPsf": 2269,
-      "medianPrice": 2900000,
-      "units": 793
+      "medianPsf": 2589,
+      "medianPrice": 2822000,
+      "units": 924
     },
     "RCR": {
       "name": "Rest of Central Region",
-      "medianPsf": 2280,
-      "medianPrice": 2064000,
-      "units": 1775
+      "medianPsf": 2203,
+      "medianPrice": 2118000,
+      "units": 1506
     },
     "OCR": {
       "name": "Outside Central Region",
-      "medianPsf": 1826,
-      "medianPrice": 1924000,
-      "units": 4704
+      "medianPsf": 1683,
+      "medianPrice": 1805000,
+      "units": 2990
     }
   },
   "bySaleType": {
     "New Sale": {
-      "medianPsf": 2280,
-      "medianPrice": 2037000,
-      "units": 2328
+      "medianPsf": 2525,
+      "medianPrice": 2342500,
+      "units": 1275
     },
     "Resale": {
-      "medianPsf": 1710,
-      "medianPrice": 1980000,
-      "units": 4765
+      "medianPsf": 1745,
+      "medianPrice": 1870000,
+      "units": 4027
     },
     "Sub Sale": {
-      "medianPsf": 2413,
-      "medianPrice": 2168000,
-      "units": 179
+      "medianPsf": 2352,
+      "medianPrice": 2150000,
+      "units": 118
     }
   },
   "byDistrict": [
     {
       "district": "01",
       "segment": "RCR",
-      "medianPsf": 2773,
-      "medianPrice": 2104100,
-      "units": 409
+      "medianPsf": 2780,
+      "medianPrice": 2094151,
+      "units": 433
     },
     {
       "district": "02",
       "segment": "CCR",
-      "medianPsf": 2933,
-      "medianPrice": 1716000,
-      "units": 345
+      "medianPsf": 2935,
+      "medianPrice": 1708888,
+      "units": 354
     },
     {
       "district": "03",
       "segment": "RCR",
-      "medianPsf": 2827,
-      "medianPrice": 2225000,
-      "units": 2138
+      "medianPsf": 2802,
+      "medianPrice": 2259000,
+      "units": 1780
     },
     {
       "district": "04",
       "segment": "RCR",
-      "medianPsf": 1819,
-      "medianPrice": 2800000,
-      "units": 315
+      "medianPsf": 1804,
+      "medianPrice": 2750000,
+      "units": 299
     },
     {
       "district": "05",
-      "segment": "RCR",
-      "medianPsf": 2193,
-      "medianPrice": 1925000,
-      "units": 2272
+      "segment": "OCR",
+      "medianPsf": 2147,
+      "medianPrice": 1945000,
+      "units": 1879
     },
     {
       "district": "07",
       "segment": "CCR",
-      "medianPsf": 2311,
-      "medianPrice": 1850000,
-      "units": 177
+      "medianPsf": 2323,
+      "medianPrice": 1864000,
+      "units": 170
     },
     {
       "district": "08",
       "segment": "RCR",
-      "medianPsf": 1818,
-      "medianPrice": 1688000,
-      "units": 215
+      "medianPsf": 1913,
+      "medianPrice": 1750000,
+      "units": 218
     },
     {
       "district": "09",
       "segment": "CCR",
-      "medianPsf": 3026,
-      "medianPrice": 2395000,
-      "units": 1946
+      "medianPsf": 2847,
+      "medianPrice": 2602000,
+      "units": 1246
     },
     {
       "district": "10",
       "segment": "CCR",
-      "medianPsf": 2787,
-      "medianPrice": 2850000,
-      "units": 2048
+      "medianPsf": 2742,
+      "medianPrice": 3000000,
+      "units": 1804
     },
     {
       "district": "11",
       "segment": "CCR",
-      "medianPsf": 2165,
-      "medianPrice": 3000000,
-      "units": 544
+      "medianPsf": 2526,
+      "medianPrice": 2830000,
+      "units": 778
     },
     {
       "district": "12",
       "segment": "RCR",
-      "medianPsf": 1795,
-      "medianPrice": 1740000,
-      "units": 456
+      "medianPsf": 1821,
+      "medianPrice": 1710000,
+      "units": 437
     },
     {
       "district": "13",
       "segment": "RCR",
-      "medianPsf": 2022,
-      "medianPrice": 2000000,
-      "units": 492
+      "medianPsf": 2035,
+      "medianPrice": 2080000,
+      "units": 473
     },
     {
       "district": "14",
       "segment": "RCR",
-      "medianPsf": 1815,
-      "medianPrice": 1620000,
-      "units": 866
+      "medianPsf": 1795,
+      "medianPrice": 1640000,
+      "units": 808
     },
     {
       "district": "15",
       "segment": "RCR",
-      "medianPsf": 2318,
-      "medianPrice": 2938000,
-      "units": 2034
+      "medianPsf": 2311,
+      "medianPrice": 2900000,
+      "units": 1971
     },
     {
       "district": "16",
       "segment": "OCR",
-      "medianPsf": 2425,
-      "medianPrice": 2024000,
-      "units": 1834
+      "medianPsf": 2446,
+      "medianPrice": 2028000,
+      "units": 1830
     },
     {
       "district": "17",
       "segment": "OCR",
-      "medianPsf": 1476,
-      "medianPrice": 1858000,
-      "units": 1315
+      "medianPsf": 1683,
+      "medianPrice": 1861000,
+      "units": 1342
     },
     {
       "district": "18",
       "segment": "OCR",
-      "medianPsf": 1718,
-      "medianPrice": 1720000,
-      "units": 1781
+      "medianPsf": 1710,
+      "medianPrice": 1745000,
+      "units": 1766
     },
     {
       "district": "19",
       "segment": "OCR",
-      "medianPsf": 1667,
-      "medianPrice": 1743880,
-      "units": 2744
+      "medianPsf": 1674,
+      "medianPrice": 1775000,
+      "units": 2708
     },
     {
       "district": "20",
       "segment": "RCR",
-      "medianPsf": 2027,
-      "medianPrice": 2359000,
-      "units": 641
+      "medianPsf": 2038,
+      "medianPrice": 2450000,
+      "units": 634
     },
     {
       "district": "21",
       "segment": "RCR",
-      "medianPsf": 2200,
-      "medianPrice": 2330000,
-      "units": 951
+      "medianPsf": 2252,
+      "medianPrice": 2270900,
+      "units": 925
     },
     {
       "district": "22",
       "segment": "OCR",
-      "medianPsf": 1612,
-      "medianPrice": 1700000,
-      "units": 542
+      "medianPsf": 1605,
+      "medianPrice": 1715000,
+      "units": 535
     },
     {
       "district": "23",
       "segment": "OCR",
-      "medianPsf": 1584,
-      "medianPrice": 1509000,
-      "units": 1261
+      "medianPsf": 1595,
+      "medianPrice": 1510000,
+      "units": 1196
     },
     {
       "district": "24",
       "segment": "OCR",
-      "medianPsf": 1994,
-      "medianPrice": 1726000,
-      "units": 1465
+      "medianPsf": 2098,
+      "medianPrice": 1767000,
+      "units": 968
     },
     {
       "district": "25",
       "segment": "OCR",
-      "medianPsf": 1226,
-      "medianPrice": 1290000,
-      "units": 310
+      "medianPsf": 1248,
+      "medianPrice": 1370000,
+      "units": 302
     },
     {
       "district": "26",
       "segment": "OCR",
-      "medianPsf": 2168,
-      "medianPrice": 1923000,
-      "units": 1224
+      "medianPsf": 2324,
+      "medianPrice": 2308888,
+      "units": 626
     },
     {
       "district": "27",
       "segment": "OCR",
-      "medianPsf": 1486,
-      "medianPrice": 1527000,
-      "units": 1083
+      "medianPsf": 1398,
+      "medianPrice": 1525000,
+      "units": 775
     },
     {
       "district": "28",
       "segment": "OCR",
-      "medianPsf": 1561,
-      "medianPrice": 2080000,
-      "units": 523
+      "medianPsf": 1576,
+      "medianPrice": 2320000,
+      "units": 564
     }
   ],
   "byQuarter": [
-    {
-      "quarter": "2023Q3",
-      "medianPsf": 1772,
-      "medianPrice": 1655000,
-      "units": 6307,
-      "segments": {
-        "RCR": {
-          "medianPsf": 2270,
-          "medianPrice": 1888000,
-          "units": 1997
-        },
-        "OCR": {
-          "medianPsf": 1480,
-          "medianPrice": 1461000,
-          "units": 3538
-        },
-        "CCR": {
-          "medianPsf": 2283,
-          "medianPrice": 2470000,
-          "units": 772
-        }
-      }
-    },
     {
       "quarter": "2023Q4",
       "medianPsf": 1758,
@@ -485,8 +462,8 @@
     {
       "quarter": "2026Q1",
       "medianPsf": 1969,
-      "medianPrice": 1998888,
-      "units": 6879,
+      "medianPrice": 1998200,
+      "units": 6876,
       "segments": {
         "CCR": {
           "medianPsf": 2946,
@@ -501,15 +478,15 @@
         "OCR": {
           "medianPsf": 1806,
           "medianPrice": 1808000,
-          "units": 4162
+          "units": 4159
         }
       }
     },
     {
       "quarter": "2026Q2",
-      "medianPsf": 1990,
+      "medianPsf": 1991,
       "medianPrice": 2008000,
-      "units": 7272,
+      "units": 7270,
       "segments": {
         "CCR": {
           "medianPsf": 2269,
@@ -522,9 +499,32 @@
           "units": 1775
         },
         "OCR": {
-          "medianPsf": 1826,
+          "medianPsf": 1825,
           "medianPrice": 1924000,
-          "units": 4704
+          "units": 4702
+        }
+      }
+    },
+    {
+      "quarter": "2026Q3",
+      "medianPsf": 1964,
+      "medianPrice": 2035000,
+      "units": 5420,
+      "segments": {
+        "CCR": {
+          "medianPsf": 2589,
+          "medianPrice": 2822000,
+          "units": 924
+        },
+        "RCR": {
+          "medianPsf": 2203,
+          "medianPrice": 2118000,
+          "units": 1506
+        },
+        "OCR": {
+          "medianPsf": 1683,
+          "medianPrice": 1805000,
+          "units": 2990
         }
       }
     }

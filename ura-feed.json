@@ -3,7 +3,7 @@
   "url": "https://nexusmortgage.sg/",
   "license": "Contains information from URA accessed via the URA Data Service.",
   "disclaimer": "Aggregated URA caveat data. Indicative only, not a property valuation.",
-  "latestQuarter": "2026Q2",
+  "latestQuarter": "2026Q3",
   "priceIndex": {
     "source": "URA Private Residential Property Price Index via data.gov.sg",
     "basis": "Base quarter 2009-Q1 = 100. Stratified hedonic regression (quality- and mix-adjusted).",
@@ -16,34 +16,30 @@
   },
   "medianTransacted": {
     "note": "Median transacted PSF from URA caveats. Mix-affected and NOT a price index. For price movement use priceIndex (official URA PPI).",
-    "median_psf_sgd": 1990,
-    "units_transacted": 7272
+    "median_psf_sgd": 1964,
+    "units_transacted": 5420
   },
   "byMarketSegment": {
     "CCR": {
       "name": "Core Central Region",
-      "median_psf_sgd": 2269,
-      "median_price_sgd": 2900000,
-      "units": 793
+      "median_psf_sgd": 2589,
+      "median_price_sgd": 2822000,
+      "units": 924
     },
     "RCR": {
       "name": "Rest of Central Region",
-      "median_psf_sgd": 2280,
-      "median_price_sgd": 2064000,
-      "units": 1775
+      "median_psf_sgd": 2203,
+      "median_price_sgd": 2118000,
+      "units": 1506
     },
     "OCR": {
       "name": "Outside Central Region",
-      "median_psf_sgd": 1826,
-      "median_price_sgd": 1924000,
-      "units": 4704
+      "median_psf_sgd": 1683,
+      "median_price_sgd": 1805000,
+      "units": 2990
     }
   },
   "quarterlyMedianPsf": [
-    {
-      "quarter": "2023Q3",
-      "median_psf_sgd": 1772
-    },
     {
       "quarter": "2023Q4",
       "median_psf_sgd": 1758
@@ -86,8 +82,12 @@
     },
     {
       "quarter": "2026Q2",
-      "median_psf_sgd": 1990
+      "median_psf_sgd": 1991
+    },
+    {
+      "quarter": "2026Q3",
+      "median_psf_sgd": 1964
     }
   ],
-  "updatedAt": "2026-10-07T06:51:13.289Z"
+  "updatedAt": "2026-10-10T06:41:36.683Z"
 }
