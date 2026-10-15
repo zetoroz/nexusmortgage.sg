@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Wed, 14 Oct 2026 05:56:38 GMT</lastBuildDate>
+<lastBuildDate>Thu, 15 Oct 2026 05:42:12 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
 <title>Current Compounded SORA — 1M 1.29% | 3M 1.24%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-current-2026-10-13</guid>
-<pubDate>Wed, 14 Oct 2026 05:56:38 GMT</pubDate>
-<description>Latest published Compounded SORA values per MAS. As of 2026-10-13.</description>
+<guid isPermaLink="false">nexus-current-2026-10-14</guid>
+<pubDate>Thu, 15 Oct 2026 05:42:12 GMT</pubDate>
+<description>Latest published Compounded SORA values per MAS. As of 2026-10-14.</description>
+</item>
+<item>
+<title>SORA update: sora1m 1.2894→1.2911, sora3m 1.2366→1.2389</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Thu, 15 Oct 2026 05:42:12 GMT</guid>
+<pubDate>Thu, 15 Oct 2026 05:42:12 GMT</pubDate>
+<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.2894,&quot;to&quot;:1.2911,&quot;delta&quot;:0.002},&quot;sora3m&quot;:{&quot;from&quot;:1.2366,&quot;to&quot;:1.2389,&quot;delta&quot;:0.002}}</description>
 </item>
 <item>
 <title>SORA update: sora1m 1.2911→1.2894</title>
@@ -217,13 +224,6 @@
 <guid isPermaLink="false">nexus-rates-Tue, 15 Sep 2026 05:58:27 GMT</guid>
 <pubDate>Tue, 15 Sep 2026 05:58:27 GMT</pubDate>
 <description>{&quot;sora1m&quot;:{&quot;from&quot;:1.2664,&quot;to&quot;:1.2636,&quot;delta&quot;:-0.003}}</description>
-</item>
-<item>
-<title>SORA update: sora1m 1.2925→1.2664, sora3m 1.1986→1.1975</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Mon, 14 Sep 2026 05:56:58 GMT</guid>
-<pubDate>Mon, 14 Sep 2026 05:56:58 GMT</pubDate>
-<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.2925,&quot;to&quot;:1.2664,&quot;delta&quot;:-0.026},&quot;sora3m&quot;:{&quot;from&quot;:1.1986,&quot;to&quot;:1.1975,&quot;delta&quot;:-0.001}}</description>
 </item>
 </channel>
 </rss>
