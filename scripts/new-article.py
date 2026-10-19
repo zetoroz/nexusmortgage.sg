@@ -85,7 +85,9 @@ h = sub1(r'(<meta property="og:url" content=".*?">)',
 # ---- Article schema ------------------------------------------------------
 art = {
     "@context": "https://schema.org", "@type": "Article",
-    "headline": A.H1, "datePublished": A.DATE_ISO, "dateModified": A.DATE_ISO,
+    # DATE_MODIFIED lets a rewrite keep its original publish date.
+    "headline": A.H1, "datePublished": A.DATE_ISO,
+    "dateModified": getattr(A, "DATE_MODIFIED", A.DATE_ISO),
     "inLanguage": "en-SG", "articleSection": A.SECTION, "wordCount": A.WORDS,
     "description": A.DESC,
     "mainEntityOfPage": {"@type": "WebPage", "@id": URL},

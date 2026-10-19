@@ -632,106 +632,107 @@
   },
   {
     "out": "thomson-reserve-cash-tiers",
-    "slug": "thomson-reserve-financing-2026",
     "type": "compare",
-    "kicker": "Thomson Reserve · Budgeting before pricing",
-    "title": "What each price band asks for up front",
+    "kicker": "Thomson Reserve · Starting prices",
+    "title": "What each unit type needs before the bank lends",
     "cols": [
-      "S$1.5M",
-      "S$2.0M",
-      "S$2.5M",
-      "S$3.0M"
+      "2-Bedroom",
+      "3-Bedroom",
+      "4-Bedroom"
     ],
-    "source": "Indicative only. Pricing is not confirmed; figures assume a 75% LTV first housing loan.",
     "rows": [
       {
-        "label": "5% cash at OTP",
+        "label": "Starting price",
         "cells": [
-          "S$75,000",
-          "S$100,000",
-          "S$125,000",
-          "S$150,000"
+          "S$1.544M",
+          "S$2.503M",
+          "S$3.388M"
         ]
       },
       {
-        "label": "25% down in total",
+        "label": "Booking fee, 5% cash",
         "cells": [
-          "S$375,000",
-          "S$500,000",
-          "S$625,000",
-          "S$750,000"
+          "S$77,200",
+          "S$125,150",
+          "S$169,400"
         ]
       },
       {
-        "label": "Loan at 75%",
+        "label": "At S&P, 15% cash or CPF",
         "cells": [
-          "S$1.125M",
-          "S$1.50M",
-          "S$1.875M",
-          "S$2.25M"
+          "S$231,600",
+          "S$375,450",
+          "S$508,200"
         ]
       },
       {
         "label": "Buyer's Stamp Duty",
         "cells": [
-          "~S$44,600",
-          "~S$69,600",
-          "~S$94,600",
-          "~S$119,600"
+          "S$46,800",
+          "S$94,750",
+          "S$142,880"
         ]
       },
       {
-        "label": "Gross income needed",
+        "label": "Loan at 75%",
         "cells": [
-          "~S$9,800/mo",
-          "~S$13,000/mo",
-          "~S$16,300/mo",
-          "~S$19,500/mo"
+          "S$1.158M",
+          "S$1.877M",
+          "S$2.541M"
+        ]
+      },
+      {
+        "label": "Income to pass the stress test",
+        "cells": [
+          "S$10,052/mo",
+          "S$16,295/mo",
+          "S$22,057/mo"
         ]
       }
     ],
-    "anchor": "budget",
-    "alt": "Table of cash, downpayment, loan and stamp duty across S$1.5M to S$3M price bands at Thomson Reserve",
-    "caption": "Work backwards from the income floor, not forwards from the unit you like."
+    "source": "Developers' starting prices, 15 Oct 2026. Singapore Citizen, first property, no other debt, 75% LTV, 4% stress rate, 30 years, 55% TDSR. ABSD extra for other profiles.",
+    "anchor": "cash",
+    "alt": "Table of booking fee, S&P payment, stamp duty, loan and income needed for Thomson Reserve two-, three- and four-bedroom units at their starting prices",
+    "caption": "The 5% booking fee is the only part that must be cash on the day. The stress test decides the rest.",
+    "slug": "thomson-reserve-financing-2026"
   },
   {
     "out": "thomson-progressive-timeline",
-    "slug": "thomson-reserve-financing-2026",
     "type": "timeline",
-    "kicker": "Buildings under construction",
-    "title": "Progressive payments draw the loan down slowly",
-    "source": "Interest accrues only on what has been drawn, so early instalments are small and rise through construction.",
+    "kicker": "Thomson Reserve · Progressive payments",
+    "title": "From booking day to keys: when each payment falls",
+    "source": "Expected TOP 2H 2030 and vacant possession by 28 Feb 2031, per the developers. Construction stage dates depend on progress. Interest is charged only on the amount drawn.",
     "steps": [
       {
-        "when": "Day 0",
-        "label": "OTP booking fee",
+        "when": "31 Oct 2026",
+        "label": "Booking (OTP)",
         "note": "5% of price, in cash"
       },
       {
-        "when": "Week 8",
-        "label": "S&P exercise",
-        "note": "15%, cash or CPF"
+        "when": "Within 8 weeks",
+        "label": "S&P exercised",
+        "note": "15%, cash or CPF; stamp duty in 14 days"
       },
       {
-        "when": "Month 6",
-        "label": "Foundation",
-        "note": "10%, first loan drawdown"
+        "when": "During construction",
+        "label": "Foundation to roads",
+        "note": "45% in stages; loan starts drawing"
       },
       {
-        "when": "Month 12",
-        "label": "RC framework",
-        "note": "10%"
+        "when": "2H 2030",
+        "label": "TOP",
+        "note": "25%, the largest single drawdown"
       },
       {
-        "when": "Month 18–36",
-        "label": "Walls to roads",
-        "note": "5% at each stage",
-        "highlight": true
+        "when": "After TOP",
+        "label": "CSC",
+        "note": "Final 15%"
       }
     ],
     "anchor": "progressive",
-    "alt": "Timeline of progressive payment stages for a Singapore building-under-construction purchase",
-    "caption": "Interest accrues only on what has been drawn, so the early instalments are small."
+    "alt": "Timeline of Thomson Reserve progressive payments from the 31 October 2026 booking day to TOP in the second half of 2030 and CSC",
+    "caption": "Instalments start small and step up sharply at TOP, when a quarter of the price is drawn at once.",
+    "slug": "thomson-reserve-financing-2026"
   },
   {
     "out": "hdb-waitout-what-changed",
@@ -2435,5 +2436,18 @@
     "alt": "Three figures showing licensed moneylender caps on a S$10,000 loan: 4% interest a month, a S$1,000 admin fee and total charges of up to S$10,000",
     "caption": "Borrowing from a moneylender to repay a bank rarely consolidates anything.",
     "slug": "debt-consolidation-plan-singapore"
+  },
+  {
+    "out": "thomson-reserve-launch-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · New Launch",
+    "title": "Thomson Reserve: from S$2,608 psf. Booking day 31 October.",
+    "sub": "What each unit type needs in cash, stamp duty and income, and how the loan is drawn down to TOP in the second half of 2030.",
+    "chips": [
+      "2-bedroom from S$1.544M",
+      "1,268 units, 99-year",
+      "Calculator inside"
+    ],
+    "slug": "thomson-reserve-financing-2026"
   }
 ]
