@@ -1,5 +1,23 @@
 [
   {
+    "generatedAt": "2026-10-19T05:53:51.446Z",
+    "source": "MAS",
+    "asOfSora": "2026-10-16",
+    "refRateChanges": {
+      "sora1m": {
+        "from": 1.3007,
+        "to": 1.3201,
+        "delta": 0.019
+      },
+      "sora3m": {
+        "from": 1.2418,
+        "to": 1.2492,
+        "delta": 0.007
+      }
+    },
+    "summary": "SORA update: sora1m 1.3007→1.3201, sora3m 1.2418→1.2492"
+  },
+  {
     "generatedAt": "2026-10-18T05:34:38.903Z",
     "source": "MAS",
     "asOfSora": "2026-10-15",
@@ -12109,21 +12127,6 @@
   },
   {
     "generatedAt": "2026-07-18T03:57:31.696124+00:00",
-    "asOf": "11 May 2026",
-    "xlsxFingerprint": "506e84c9ef9d",
-    "packageCount": 106,
-    "refRates": {
-      "sora1m": 1.1775,
-      "sora3m": 1.1324,
-      "fhr6": 0.8,
-      "asOfSora": "2026-07-16"
-    },
-    "refRateChanges": {},
-    "packageChanges": [],
-    "summary": "No material changes."
-  },
-  {
-    "generatedAt": "2026-07-19T04:23:38.497505+00:00",
     "asOf": "11 May 2026",
     "xlsxFingerprint": "506e84c9ef9d",
     "packageCount": 106,
