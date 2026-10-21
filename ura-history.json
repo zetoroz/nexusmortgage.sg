@@ -1,5 +1,16 @@
 [
   {
+    "generatedAt": "2026-10-21T05:43:45.657Z",
+    "source": "URA",
+    "latestQuarter": "2026Q3",
+    "priceIndexQuarter": "2026Q2",
+    "priceIndex": 219.4,
+    "qoqPct": 0.5,
+    "yoyPct": 2.91,
+    "medianPsf": 1959,
+    "summary": "URA PPI 2026Q2: 219.4 (+0.5% QoQ, +2.91% YoY)"
+  },
+  {
     "generatedAt": "2026-10-17T05:19:36.864Z",
     "source": "URA",
     "latestQuarter": "2026Q3",
