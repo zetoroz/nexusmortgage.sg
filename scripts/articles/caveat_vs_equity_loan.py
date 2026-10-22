@@ -215,17 +215,13 @@ BODY = r'''
 '''
 
 IMAGES = [
- {'out': 'caveat-vs-equity-hero',
-  'type': 'hero',
-  'kicker': 'Nexus Mortgage SG · Refinancing & Equity',
+ {'out': 'caveat-vs-equity-hero', 'type': 'hero', 'style': 'b',
+  'kicker': 'Refinancing & Equity',
   'title': 'Caveat loan or equity loan: priced by the month, or by the year',
-  'sub': 'Two ways to borrow against property you own: how much each lends, how fast, and when the speed '
-         'is worth paying for.',
-  'chips': ['Bank: weeks, home-loan rates', 'Caveat: days, monthly rates', 'Worked example on S$2M']},
+  'num': '12x', 'numlabel': 'What a rate charged monthly costs against the same rate charged yearly'},
 
- {'out': 'caveat-vs-equity-mwl',
-  'type': 'math',
-  'kicker': 'Bank equity loan · private condo',
+ {'out': 'caveat-vs-equity-mwl', 'type': 'math', 'style': 'b',
+  'kicker': 'Bank equity loan',
   'title': 'How much a bank will lend against a S$2M condo',
   'source': 'Owner with no other housing loan. Total borrowing reaches 75% of value, above 50%, so TDSR applies '
             'and income must support the full mortgage at the stress-test rate.',
@@ -238,18 +234,15 @@ IMAGES = [
          'leaves a S$500,000 maximum bank equity loan',
   'caption': 'The CPF you used comes off the top, and most owners underestimate it.'},
 
- {'out': 'caveat-vs-equity-cost',
-  'type': 'split',
-  'kicker': 'S$300,000 for six months, interest only',
-  'title': 'What the speed costs',
+ {'out': 'caveat-vs-equity-cost', 'type': 'stat', 'style': 'b',
+  'kicker': 'The cost of speed',
+  'title': 'S$300,000 for six months, interest only',
+  'tiles': [{'head': 'Bank equity loan', 'num': 'S$3,000', 'label': 'Interest, about', 'note': 'At 2% a year|Takes weeks, runs for years'},
+            {'head': 'Caveat loan', 'num': 'S$36,000', 'label': 'Interest', 'note': 'At 2% a month|Takes days, runs for months', 'highlight': True}],
   'source': 'Illustrative rates of 2% a year and 2% a month, before legal and valuation fees. Actual rates '
             'depend on the borrower and lender.',
-  'sides': [{'head': 'Bank equity loan', 'sub': 'Priced by the year',
-             'points': ['About S$3,000 interest', 'Takes weeks', 'Runs for years', 'TDSR above 50% of value']},
-            {'head': 'Caveat loan', 'sub': 'Priced by the month',
-             'points': ['S$36,000 interest', 'Takes days', 'Runs for months', 'Needs a clear exit']}],
   'anchor': 'cost',
-  'alt': 'Comparison of borrowing S$300,000 for six months: about S$3,000 interest on a bank equity loan at 2% a '
-         'year versus S$36,000 on a caveat loan at 2% a month',
+  'alt': 'Borrowing S$300,000 for six months: about S$3,000 interest on a bank equity loan at 2% a year versus '
+         'S$36,000 on a caveat loan at 2% a month',
   'caption': 'A monthly rate costs about twelve times the same number charged yearly.'},
 ]

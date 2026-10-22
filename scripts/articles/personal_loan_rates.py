@@ -195,22 +195,18 @@ BODY = r'''
 '''
 
 IMAGES = [
- {'out': 'personal-loan-rates-hero',
-  'type': 'hero',
-  'kicker': 'Nexus Mortgage SG · Personal Loans',
+ {'out': 'personal-loan-rates-hero', 'type': 'hero', 'style': 'b',
+  'kicker': 'Personal Loans',
   'title': "Personal loan rates, bank by bank: why 'from 1%' is not your rate",
-  'sub': 'Advertised flat rates and EIRs at the main banks, the fees that change the real cost, and what a '
-         'personal loan does to your next home loan.',
-  'chips': ['From 0.90% to 1.98% flat', 'Compare on the EIR', 'S$500/mo costs ~S$94,700 of home loan']},
+  'num': '5.47%', 'numlabel': "The EIR in DBS's own worked example, against a headline rate of 1.48%"},
 
- {'out': 'personal-loan-rates-table',
-  'type': 'compare',
-  'kicker': 'Advertised personal loan rates · as at 21 Oct 2026',
+ {'out': 'personal-loan-rates-table', 'type': 'compare', 'style': 'b',
+  'kicker': 'Advertised rates · as at 21 Oct 2026',
   'title': 'The lowest rates each bank advertises',
   'cols': ['SC CashOne', 'UOB', 'Trust', 'HSBC', 'DBS', 'OCBC*'],
   'rows': [{'label': 'Flat rate from', 'cells': ['0.90%', '1.00%', '1.00%', '1.30%', '1.48%', '1.98%']},
-           {'label': 'EIR from', 'cells': ['1.75%', '1.93%', '2.28%', '2.50%', '3.22%', '4.19%']},
-           {'label': 'Fee noted', 'cells': ['S$199 a year', 'No processing', '0.88% first year', 'No processing', '1% processing', 'See bank']}],
+           {'label': 'EIR from', 'cells': ['1.75%', '1.93%', '2.28%', '2.50%', '3.22%', '4.19%'], 'highlight': True},
+           {'label': 'Fees', 'cells': ['S$199 a year', 'None', '0.88% year 1', 'None', '1% upfront', 'See bank']}],
   'source': "Best-case advertised rates from the banks' pages and MoneySmart, 21 Oct 2026. Rates are personalised "
             'and change often. *OCBC Cash-on-Instalments, for OCBC card or EasiCredit holders.',
   'anchor': 'rates',
@@ -218,13 +214,12 @@ IMAGES = [
          '1.00%, Trust 1.00%, HSBC 1.30%, DBS 1.48% and OCBC 1.98% flat, with EIRs from 1.75% to 4.19%',
   'caption': 'These are floors. The rate you are offered depends on your income and credit.'},
 
- {'out': 'personal-loan-rates-cost',
-  'type': 'compare',
+ {'out': 'personal-loan-rates-cost', 'type': 'compare', 'style': 'b',
   'kicker': 'S$30,000 over three years',
   'title': 'Close instalments, very different totals',
   'cols': ['1.00%, no fee', '1.48% + 1% fee', '1.99% + 1% fee', '5.50% + 2% fee'],
   'rows': [{'label': 'Monthly instalment', 'cells': ['S$858', 'S$870', 'S$883', 'S$971']},
-           {'label': 'Interest and fees', 'cells': ['S$900', 'S$1,632', 'S$2,091', 'S$5,550']},
+           {'label': 'Interest and fees', 'cells': ['S$900', 'S$1,632', 'S$2,091', 'S$5,550'], 'highlight': True},
            {'label': 'EIR (our calculation)', 'cells': ['~1.95%', '~3.56%', '~4.56%', '~12.23%']}],
   'source': 'Illustrative flat-rate loans of S$30,000 over 36 months. Banks may calculate EIR slightly differently.',
   'anchor': 'cost',

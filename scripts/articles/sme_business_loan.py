@@ -209,33 +209,27 @@ BODY = r'''
 '''
 
 IMAGES = [
- {'out': 'sme-loan-hero',
-  'type': 'hero',
-  'kicker': 'Nexus Mortgage SG · SME Lending',
-  'title': 'SME business loans: what 0.35% a month really costs',
-  'sub': 'The EFS working capital loan, the 70% government risk share until March 2027, and when borrowing '
-         'against property is the cheaper route.',
-  'chips': ['Up to S$500,000 under EFS', '70% risk share to Mar 2027', '0.35%/mo is about 8% EIR']},
+ {'out': 'sme-loan-hero', 'type': 'hero', 'style': 'b',
+  'kicker': 'SME Lending',
+  'title': 'SME business loans: what a monthly rate really costs',
+  'num': '8%', 'numlabel': 'The real yearly cost of a loan quoted at 0.35% a month'},
 
- {'out': 'sme-loan-flat-vs-eir',
-  'type': 'compare',
+ {'out': 'sme-loan-flat-vs-eir', 'type': 'stat', 'style': 'b',
   'kicker': 'SME loan pricing',
-  'title': 'A monthly flat rate costs nearly double as an EIR',
-  'cols': ['0.35%/mo', '0.75%/mo', '1.00%/mo', '1.50%/mo'],
-  'rows': [{'label': 'Per year, flat', 'cells': ['4.2%', '9.0%', '12.0%', '18.0%']},
-           {'label': 'Monthly instalment', 'cells': ['S$3,128', 'S$3,528', 'S$3,778', 'S$4,278']},
-           {'label': 'Total interest', 'cells': ['S$12,600', 'S$27,000', 'S$36,000', 'S$54,000']},
-           {'label': 'Effective rate (EIR)', 'cells': ['~8.2%', '~17.5%', '~23.4%', '~35.3%']}],
-  'source': 'Illustrative. S$100,000 over 36 months at the flat monthly rates shown, no fees. A 2% processing '
-            'fee lifts the 0.35% EIR to about 9.7%.',
+  'title': 'Quoted monthly, the real rate is nearly double',
+  'sub': 'S$100,000 over three years',
+  'tiles': [{'head': '0.35% a month', 'num': '8.2%', 'label': 'Effective rate', 'note': 'S$3,128 a month|S$12,600 interest', 'highlight': True},
+            {'head': '0.75% a month', 'num': '17.5%', 'label': 'Effective rate', 'note': 'S$3,528 a month|S$27,000 interest'},
+            {'head': '1.00% a month', 'num': '23.4%', 'label': 'Effective rate', 'note': 'S$3,778 a month|S$36,000 interest'},
+            {'head': '1.50% a month', 'num': '35.3%', 'label': 'Effective rate', 'note': 'S$4,278 a month|S$54,000 interest'}],
+  'source': 'Illustrative flat-rate loans, no fees. A 2% processing fee lifts the 0.35% example to about 9.7%.',
   'anchor': 'pricing',
-  'alt': 'Table converting SME loan flat monthly rates of 0.35%, 0.75%, 1% and 1.5% into instalments, total '
-         'interest and effective interest rates on S$100,000 over three years',
+  'alt': 'SME loan flat monthly rates of 0.35%, 0.75%, 1% and 1.5% shown as effective rates of 8.2%, 17.5%, 23.4% '
+         'and 35.3% on S$100,000 over three years',
   'caption': 'Compare offers on the EIR including fees, never on the monthly headline rate.'},
 
- {'out': 'sme-loan-efs-terms',
-  'type': 'stat',
-  'kicker': 'Enterprise Financing Scheme · SME Working Capital Loan',
+ {'out': 'sme-loan-efs-terms', 'type': 'stat', 'style': 'b',
+  'kicker': 'Enterprise Financing Scheme',
   'title': 'The government-backed working capital loan in 2026',
   'tiles': [{'num': 'S$500,000', 'label': 'Maximum per borrower', 'note': 'Repaid over up to 5 years'},
             {'num': '70%', 'label': 'Government risk share', 'note': '1 Sep 2026 to 31 Mar 2027', 'highlight': True},

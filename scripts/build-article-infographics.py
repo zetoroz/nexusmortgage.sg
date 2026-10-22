@@ -331,7 +331,137 @@ TEMPLATES = {
 }
 
 
+# ---------------------------------------------------------------------------
+# Style B (adopted 22 Oct 2026). Dan rejected the gradient/chip house style as
+# generic; B is flat navy and gold blocks, a strict grid, one big number, DM
+# Sans only, and nothing decorative that carries no data. A spec opts in with
+# "style": "b"; the type names stay the same so the insert scripts still place
+# heroes and inline cards correctly.
+# ---------------------------------------------------------------------------
+B_CSS = brand("""
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+@font-face{font-family:'DM Sans';src:url('/fonts/dm-sans.woff2') format('woff2');font-weight:400 700;font-display:block}
+html,body{width:1344px;height:768px;overflow:hidden}
+body{background:#fff;color:$NAVY;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.pg{width:1344px;height:768px;padding:64px 72px 48px;display:flex;flex-direction:column}
+.k{font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:$GOLD;margin-bottom:14px}
+h2{font-size:40px;font-weight:700;letter-spacing:-.02em;line-height:1.1;max-width:1150px}
+.sub{font-size:18px;color:#5a6a82;margin-top:10px}
+.bd{flex:1;display:flex;flex-direction:column;justify-content:center}
+.ft{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;font-size:14px;color:#8090a6;line-height:1.45}
+.ft .m{white-space:nowrap;font-weight:600;color:#5a6a82}
+""")
+
+
+def _b_page(spec, inner, extra_css=""):
+    k = f'<div class="k">{_shell(spec["kicker"])}</div>' if spec.get("kicker") else ""
+    sub = f'<div class="sub">{_shell(spec["sub"])}</div>' if spec.get("sub") else ""
+    src = _shell(spec.get("source", ""))
+    return (f"<!DOCTYPE html><html><head><meta charset='utf-8'><style>{B_CSS}{brand(extra_css)}</style></head>"
+            f'<body><div class="pg">{k}<h2>{_shell(spec["title"])}</h2>{sub}'
+            f'<div class="bd">{inner}</div><div class="ft"><span>{src}</span><span class="m">nexusmortgage.sg</span></div>'
+            f"</div></body></html>")
+
+
+def b_hero(s):
+    """Navy title panel left, gold panel with the one number that matters right."""
+    css = brand("""
+body{display:grid;grid-template-columns:760px 584px}
+.l{background:$NAVY;color:#fff;padding:72px 64px;display:flex;flex-direction:column;justify-content:space-between}
+.hk{font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:$GOLD}
+.ht{font-size:52px;font-weight:700;line-height:1.08;letter-spacing:-.02em}
+.by{font-size:16px;color:#9fb0c8}
+.r{background:$GOLD;color:$NAVY;padding:72px 56px;display:flex;flex-direction:column;justify-content:center}
+.n{font-weight:700;letter-spacing:-.05em;line-height:.9}
+.nl{font-size:22px;font-weight:600;margin-top:24px;line-height:1.35;max-width:460px}
+""")
+    num = str(s["num"])
+    size = 210 if len(num) <= 3 else 170 if len(num) <= 5 else 132 if len(num) <= 7 else 104
+    return (f"<!DOCTYPE html><html><head><meta charset='utf-8'><style>{B_CSS}{css}</style></head><body>"
+            f'<div class="l"><div class="hk">{_shell(s.get("kicker", ""))}</div><div class="ht">{_shell(s["title"])}</div>'
+            f'<div class="by">Nexus Mortgage &middot; nexusmortgage.sg</div></div>'
+            f'<div class="r"><div class="n" style="font-size:{size}px">{_shell(num)}</div>'
+            f'<div class="nl">{_shell(s["numlabel"])}</div></div></body></html>')
+
+
+def b_stat(s):
+    """Columns under a heavy top rule, each with one big number. tiles: [{num,label,note?,head?,highlight?}]"""
+    n = len(s["tiles"])
+    big = 96 if n <= 2 else 84 if n <= 4 else 64
+    # Shrink so the longest number fits its column (DM Sans bold digits run ~0.6em wide).
+    col_w = (1200 - 24 * (n - 1)) / n
+    longest = max(len(str(t["num"])) for t in s["tiles"])
+    big = int(min(big, col_w / (0.62 * longest)))
+    css = f"""
+.cols{{display:grid;grid-template-columns:repeat({n},1fr);gap:24px}}
+.c{{border-top:6px solid $NAVY;padding-top:22px}}
+.c.hl{{border-color:$GOLD}}
+.q{{font-size:18px;font-weight:600;color:#5a6a82;min-height:24px}}
+.e{{font-size:{big}px;font-weight:700;letter-spacing:-.04em;margin:8px 0 6px;line-height:1}}
+.el{{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#5a6a82}}
+.d{{font-size:17px;margin-top:18px;line-height:1.55;color:#33415a}}
+"""
+    cells = ""
+    for t in s["tiles"]:
+        hl = " hl" if t.get("highlight") else ""
+        head = f'<div class="q">{_shell(t["head"])}</div>' if t.get("head") else ""
+        note = f'<div class="d">{_shell(t["note"]).replace("|", "<br>")}</div>' if t.get("note") else ""
+        cells += (f'<div class="c{hl}">{head}<div class="e">{_shell(t["num"])}</div>'
+                  f'<div class="el">{_shell(t["label"])}</div>{note}</div>')
+    return _b_page(s, f'<div class="cols">{cells}</div>', css)
+
+
+def b_compare(s):
+    """Plain table: heavy rule under the header, hairlines between rows, bold numbers."""
+    css = """
+table{width:100%;border-collapse:collapse;font-size:25px}
+th{font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:#5a6a82;font-weight:700;text-align:right;
+   padding:0 0 14px 16px;border-bottom:4px solid $NAVY}
+td{padding:24px 0 24px 16px;border-bottom:1px solid #dfe4ec;text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left;padding-left:0}
+td:first-child{font-weight:600;color:#5a6a82}
+tr.hl td{color:$NAVY;font-weight:700}
+tr.hl td:not(:first-child){color:$GOLD}
+"""
+    fs = 25 if len(s["cols"]) <= 4 else 21
+    css += f"table{{font-size:{fs}px;table-layout:fixed}} th,td{{white-space:nowrap}} th:first-child{{width:{26 if len(s['cols']) <= 4 else 18}%}}"
+    head = "".join(f"<th>{_shell(c)}</th>" for c in s["cols"])
+    body = ""
+    for r in s["rows"]:
+        hl = ' class="hl"' if r.get("highlight") else ""
+        body += f'<tr{hl}><td>{_shell(r["label"])}</td>' + "".join(f"<td>{_shell(c)}</td>" for c in r["cells"]) + "</tr>"
+    return _b_page(s, f"<table><tr><th></th>{head}</tr>{body}</table>", css)
+
+
+def b_math(s):
+    """Worked sum: rows with right-aligned values, total in a flat navy bar."""
+    css = """
+.row{display:grid;grid-template-columns:40px 1fr auto;align-items:baseline;padding:14px 0;border-bottom:1px solid #dfe4ec}
+.op{font-size:28px;font-weight:700;color:$GOLD}
+.lb{font-size:22px;font-weight:600}.nt{font-size:16px;color:#5a6a82;margin-top:4px}
+.v{font-size:34px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tot{display:flex;justify-content:space-between;align-items:center;background:$NAVY;color:#fff;padding:22px 28px;margin-top:22px}
+.tot .lb{font-size:22px}.tot .nt{color:#9fb0c8}.tot .v{font-size:48px;color:$GOLD}
+"""
+    rows = ""
+    for r in s["rows"]:
+        rows += (f'<div class="row"><div class="op">{_shell(r.get("op", ""))}</div>'
+                 f'<div><div class="lb">{_shell(r["label"])}</div><div class="nt">{_shell(r.get("note", ""))}</div></div>'
+                 f'<div class="v">{_shell(r["value"])}</div></div>')
+    t = s["total"]
+    tot = (f'<div class="tot"><div><div class="lb">{_shell(t["label"])}</div><div class="nt">{_shell(t.get("note", ""))}</div></div>'
+           f'<div class="v">{_shell(t["value"])}</div></div>')
+    return _b_page(s, rows + tot, css)
+
+
+B_TEMPLATES = {"hero": b_hero, "stat": b_stat, "compare": b_compare, "math": b_math}
+
+
 def build_html(spec):
+    if spec.get("style") == "b":
+        if spec["type"] not in B_TEMPLATES:
+            raise SystemExit(f'style b has no "{spec["type"]}" template ({spec["out"]})')
+        return B_TEMPLATES[spec["type"]](spec)
     css, inner = TEMPLATES[spec["type"]](spec)
     if spec["type"] == "hero":
         return (
