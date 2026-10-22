@@ -633,6 +633,7 @@
   {
     "out": "thomson-reserve-cash-tiers",
     "type": "compare",
+    "style": "b",
     "kicker": "Thomson Reserve · Starting prices",
     "title": "What each unit type needs before the bank lends",
     "cols": [
@@ -687,7 +688,8 @@
           "S$10,052/mo",
           "S$16,295/mo",
           "S$22,057/mo"
-        ]
+        ],
+        "highlight": true
       }
     ],
     "source": "Developers' starting prices, 15 Oct 2026. Singapore Citizen, first property, no other debt, 75% LTV, 4% stress rate, 30 years, 55% TDSR. ABSD extra for other profiles.",
@@ -699,6 +701,7 @@
   {
     "out": "thomson-progressive-timeline",
     "type": "timeline",
+    "style": "b",
     "kicker": "Thomson Reserve · Progressive payments",
     "title": "From booking day to keys: when each payment falls",
     "source": "Expected TOP 2H 2030 and vacant possession by 28 Feb 2031, per the developers. Construction stage dates depend on progress. Interest is charged only on the amount drawn.",
@@ -721,7 +724,8 @@
       {
         "when": "2H 2030",
         "label": "TOP",
-        "note": "25%, the largest single drawdown"
+        "note": "25%, the largest single drawdown",
+        "highlight": true
       },
       {
         "when": "After TOP",
@@ -2440,7 +2444,10 @@
   {
     "out": "thomson-reserve-launch-hero",
     "type": "hero",
-    "kicker": "Nexus Mortgage SG · New Launch",
+    "style": "b",
+    "num": "S$77,200",
+    "numlabel": "In cash on booking day for the starting 2‑bedroom at S$1.544M",
+    "kicker": "New Launch · Thomson Reserve",
     "title": "Thomson Reserve: from S$2,608 psf. Booking day 31 October.",
     "sub": "What each unit type needs in cash, stamp duty and income, and how the loan is drawn down to TOP in the second half of 2030.",
     "chips": [

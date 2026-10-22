@@ -436,15 +436,16 @@ BODY = r'''
 
 IMAGES = [
  {'out': 'thomson-reserve-launch-hero',
-  'type': 'hero',
-  'kicker': 'Nexus Mortgage SG · New Launch',
+  'type': 'hero', 'style': 'b',
+  'num': 'S$77,200', 'numlabel': 'In cash on booking day for the starting 2‑bedroom at S$1.544M',
+  'kicker': 'New Launch · Thomson Reserve',
   'title': 'Thomson Reserve: from S$2,608 psf. Booking day 31 October.',
   'sub': 'What each unit type needs in cash, stamp duty and income, and how the loan is drawn down to '
          'TOP in the second half of 2030.',
   'chips': ['2-bedroom from S$1.544M', '1,268 units, 99-year', 'Calculator inside']},
 
  {'out': 'thomson-reserve-cash-tiers',
-  'type': 'compare',
+  'type': 'compare', 'style': 'b',
   'kicker': 'Thomson Reserve · Starting prices',
   'title': 'What each unit type needs before the bank lends',
   'cols': ['2-Bedroom', '3-Bedroom', '4-Bedroom'],
@@ -453,7 +454,7 @@ IMAGES = [
            {'label': 'At S&P, 15% cash or CPF', 'cells': ['S$231,600', 'S$375,450', 'S$508,200']},
            {'label': "Buyer's Stamp Duty", 'cells': ['S$46,800', 'S$94,750', 'S$142,880']},
            {'label': 'Loan at 75%', 'cells': ['S$1.158M', 'S$1.877M', 'S$2.541M']},
-           {'label': 'Income to pass the stress test', 'cells': ['S$10,052/mo', 'S$16,295/mo', 'S$22,057/mo']}],
+           {'label': 'Income to pass the stress test', 'cells': ['S$10,052/mo', 'S$16,295/mo', 'S$22,057/mo'], 'highlight': True}],
   'source': "Developers' starting prices, 15 Oct 2026. Singapore Citizen, first property, no other debt, "
             '75% LTV, 4% stress rate, 30 years, 55% TDSR. ABSD extra for other profiles.',
   'anchor': 'cash',
@@ -462,7 +463,7 @@ IMAGES = [
   'caption': 'The 5% booking fee is the only part that must be cash on the day. The stress test decides the rest.'},
 
  {'out': 'thomson-progressive-timeline',
-  'type': 'timeline',
+  'type': 'timeline', 'style': 'b',
   'kicker': 'Thomson Reserve · Progressive payments',
   'title': 'From booking day to keys: when each payment falls',
   'source': 'Expected TOP 2H 2030 and vacant possession by 28 Feb 2031, per the developers. Construction '
@@ -470,7 +471,7 @@ IMAGES = [
   'steps': [{'when': '31 Oct 2026', 'label': 'Booking (OTP)', 'note': '5% of price, in cash'},
             {'when': 'Within 8 weeks', 'label': 'S&P exercised', 'note': '15%, cash or CPF; stamp duty in 14 days'},
             {'when': 'During construction', 'label': 'Foundation to roads', 'note': '45% in stages; loan starts drawing'},
-            {'when': '2H 2030', 'label': 'TOP', 'note': '25%, the largest single drawdown'},
+            {'when': '2H 2030', 'label': 'TOP', 'note': '25%, the largest single drawdown', 'highlight': True},
             {'when': 'After TOP', 'label': 'CSC', 'note': 'Final 15%'}],
   'anchor': 'progressive',
   'alt': 'Timeline of Thomson Reserve progressive payments from the 31 October 2026 booking day to TOP '

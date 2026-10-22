@@ -424,6 +424,8 @@ tr.hl td{color:$NAVY;font-weight:700}
 tr.hl td:not(:first-child){color:$GOLD}
 """
     fs = 25 if len(s["cols"]) <= 4 else 21
+    if len(s["rows"]) > 4:  # long tables: tighter rows so the header clears the title
+        css += "td{padding-top:13px;padding-bottom:13px}"
     css += f"table{{font-size:{fs}px;table-layout:fixed}} th,td{{white-space:nowrap}} th:first-child{{width:{26 if len(s['cols']) <= 4 else 18}%}}"
     head = "".join(f"<th>{_shell(c)}</th>" for c in s["cols"])
     body = ""
@@ -454,7 +456,29 @@ def b_math(s):
     return _b_page(s, rows + tot, css)
 
 
-B_TEMPLATES = {"hero": b_hero, "stat": b_stat, "compare": b_compare, "math": b_math}
+def b_timeline(s):
+    """Steps left to right under a continuous rule. steps: [{when,label,note?,highlight?}]"""
+    n = len(s["steps"])
+    css = f"""
+.tl{{display:grid;grid-template-columns:repeat({n},1fr);gap:0;border-top:6px solid $NAVY}}
+.st{{padding:22px 22px 0 0;position:relative}}
+.st::before{{content:'';position:absolute;top:-15px;left:0;width:24px;height:24px;background:$NAVY}}
+.st.hl::before{{background:$GOLD}}
+.w{{font-size:{30 if n <= 5 else 24}px;font-weight:700;letter-spacing:-.02em;line-height:1.1}}
+.st.hl .w{{color:$GOLD}}
+.lb{{font-size:18px;font-weight:700;margin-top:12px}}
+.nt{{font-size:16px;color:#5a6a82;margin-top:8px;line-height:1.45}}
+"""
+    steps = ""
+    for st in s["steps"]:
+        hl = " hl" if st.get("highlight") else ""
+        note = f'<div class="nt">{_shell(st["note"])}</div>' if st.get("note") else ""
+        steps += (f'<div class="st{hl}"><div class="w">{_shell(st["when"])}</div>'
+                  f'<div class="lb">{_shell(st["label"])}</div>{note}</div>')
+    return _b_page(s, f'<div class="tl">{steps}</div>', css)
+
+
+B_TEMPLATES = {"hero": b_hero, "stat": b_stat, "compare": b_compare, "math": b_math, "timeline": b_timeline}
 
 
 def build_html(spec):
