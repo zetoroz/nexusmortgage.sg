@@ -2449,5 +2449,296 @@
       "Calculator inside"
     ],
     "slug": "thomson-reserve-financing-2026"
+  },
+  {
+    "out": "sme-loan-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · SME Lending",
+    "title": "SME business loans: what 0.35% a month really costs",
+    "sub": "The EFS working capital loan, the 70% government risk share until March 2027, and when borrowing against property is the cheaper route.",
+    "chips": [
+      "Up to S$500,000 under EFS",
+      "70% risk share to Mar 2027",
+      "0.35%/mo is about 8% EIR"
+    ],
+    "slug": "sme-business-loan-singapore-2026"
+  },
+  {
+    "out": "sme-loan-flat-vs-eir",
+    "type": "compare",
+    "kicker": "SME loan pricing",
+    "title": "A monthly flat rate costs nearly double as an EIR",
+    "cols": [
+      "0.35%/mo",
+      "0.75%/mo",
+      "1.00%/mo",
+      "1.50%/mo"
+    ],
+    "rows": [
+      {
+        "label": "Per year, flat",
+        "cells": [
+          "4.2%",
+          "9.0%",
+          "12.0%",
+          "18.0%"
+        ]
+      },
+      {
+        "label": "Monthly instalment",
+        "cells": [
+          "S$3,128",
+          "S$3,528",
+          "S$3,778",
+          "S$4,278"
+        ]
+      },
+      {
+        "label": "Total interest",
+        "cells": [
+          "S$12,600",
+          "S$27,000",
+          "S$36,000",
+          "S$54,000"
+        ]
+      },
+      {
+        "label": "Effective rate (EIR)",
+        "cells": [
+          "~8.2%",
+          "~17.5%",
+          "~23.4%",
+          "~35.3%"
+        ]
+      }
+    ],
+    "source": "Illustrative. S$100,000 over 36 months at the flat monthly rates shown, no fees. A 2% processing fee lifts the 0.35% EIR to about 9.7%.",
+    "anchor": "pricing",
+    "alt": "Table converting SME loan flat monthly rates of 0.35%, 0.75%, 1% and 1.5% into instalments, total interest and effective interest rates on S$100,000 over three years",
+    "caption": "Compare offers on the EIR including fees, never on the monthly headline rate.",
+    "slug": "sme-business-loan-singapore-2026"
+  },
+  {
+    "out": "sme-loan-efs-terms",
+    "type": "stat",
+    "kicker": "Enterprise Financing Scheme · SME Working Capital Loan",
+    "title": "The government-backed working capital loan in 2026",
+    "tiles": [
+      {
+        "num": "S$500,000",
+        "label": "Maximum per borrower",
+        "note": "Repaid over up to 5 years"
+      },
+      {
+        "num": "70%",
+        "label": "Government risk share",
+        "note": "1 Sep 2026 to 31 Mar 2027",
+        "highlight": true
+      },
+      {
+        "num": "30%",
+        "label": "Minimum local shareholding",
+        "note": "Held by Singaporeans or PRs"
+      }
+    ],
+    "source": "Enterprise Singapore. Standard risk share 50% (70% for young enterprises). Rates set by each participating lender. The business repays 100% of the loan.",
+    "anchor": "efs",
+    "alt": "EFS SME working capital loan terms: up to S$500,000 over five years, 70% government risk share until 31 March 2027, 30% local shareholding required",
+    "caption": "The risk share helps lenders approve; it does not reduce what the business owes.",
+    "slug": "sme-business-loan-singapore-2026"
+  },
+  {
+    "out": "caveat-vs-equity-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Refinancing & Equity",
+    "title": "Caveat loan or equity loan: priced by the month, or by the year",
+    "sub": "Two ways to borrow against property you own: how much each lends, how fast, and when the speed is worth paying for.",
+    "chips": [
+      "Bank: weeks, home-loan rates",
+      "Caveat: days, monthly rates",
+      "Worked example on S$2M"
+    ],
+    "slug": "caveat-loan-vs-equity-loan-singapore"
+  },
+  {
+    "out": "caveat-vs-equity-mwl",
+    "type": "math",
+    "kicker": "Bank equity loan · private condo",
+    "title": "How much a bank will lend against a S$2M condo",
+    "source": "Owner with no other housing loan. Total borrowing reaches 75% of value, above 50%, so TDSR applies and income must support the full mortgage at the stress-test rate.",
+    "rows": [
+      {
+        "label": "75% of valuation",
+        "note": "S$2,000,000 condo",
+        "value": "S$1,500,000"
+      },
+      {
+        "label": "Outstanding mortgage",
+        "note": "still owed to the bank",
+        "op": "−",
+        "value": "S$800,000"
+      },
+      {
+        "label": "CPF used",
+        "note": "principal plus accrued interest",
+        "op": "−",
+        "value": "S$200,000"
+      }
+    ],
+    "total": {
+      "label": "Maximum withdrawable loan",
+      "note": "from a bank",
+      "value": "S$500,000"
+    },
+    "anchor": "example",
+    "alt": "Worked sum: 75% of a S$2,000,000 condo is S$1,500,000, less S$800,000 mortgage and S$200,000 CPF, leaves a S$500,000 maximum bank equity loan",
+    "caption": "The CPF you used comes off the top, and most owners underestimate it.",
+    "slug": "caveat-loan-vs-equity-loan-singapore"
+  },
+  {
+    "out": "caveat-vs-equity-cost",
+    "type": "split",
+    "kicker": "S$300,000 for six months, interest only",
+    "title": "What the speed costs",
+    "source": "Illustrative rates of 2% a year and 2% a month, before legal and valuation fees. Actual rates depend on the borrower and lender.",
+    "sides": [
+      {
+        "head": "Bank equity loan",
+        "sub": "Priced by the year",
+        "points": [
+          "About S$3,000 interest",
+          "Takes weeks",
+          "Runs for years",
+          "TDSR above 50% of value"
+        ]
+      },
+      {
+        "head": "Caveat loan",
+        "sub": "Priced by the month",
+        "points": [
+          "S$36,000 interest",
+          "Takes days",
+          "Runs for months",
+          "Needs a clear exit"
+        ]
+      }
+    ],
+    "anchor": "cost",
+    "alt": "Comparison of borrowing S$300,000 for six months: about S$3,000 interest on a bank equity loan at 2% a year versus S$36,000 on a caveat loan at 2% a month",
+    "caption": "A monthly rate costs about twelve times the same number charged yearly.",
+    "slug": "caveat-loan-vs-equity-loan-singapore"
+  },
+  {
+    "out": "personal-loan-rates-hero",
+    "type": "hero",
+    "kicker": "Nexus Mortgage SG · Personal Loans",
+    "title": "Personal loan rates, bank by bank: why 'from 1%' is not your rate",
+    "sub": "Advertised flat rates and EIRs at the main banks, the fees that change the real cost, and what a personal loan does to your next home loan.",
+    "chips": [
+      "From 0.90% to 1.98% flat",
+      "Compare on the EIR",
+      "S$500/mo costs ~S$94,700 of home loan"
+    ],
+    "slug": "personal-loan-interest-rates-singapore-2026"
+  },
+  {
+    "out": "personal-loan-rates-table",
+    "type": "compare",
+    "kicker": "Advertised personal loan rates · as at 21 Oct 2026",
+    "title": "The lowest rates each bank advertises",
+    "cols": [
+      "SC CashOne",
+      "UOB",
+      "Trust",
+      "HSBC",
+      "DBS",
+      "OCBC*"
+    ],
+    "rows": [
+      {
+        "label": "Flat rate from",
+        "cells": [
+          "0.90%",
+          "1.00%",
+          "1.00%",
+          "1.30%",
+          "1.48%",
+          "1.98%"
+        ]
+      },
+      {
+        "label": "EIR from",
+        "cells": [
+          "1.75%",
+          "1.93%",
+          "2.28%",
+          "2.50%",
+          "3.22%",
+          "4.19%"
+        ]
+      },
+      {
+        "label": "Fee noted",
+        "cells": [
+          "S$199 a year",
+          "No processing",
+          "0.88% first year",
+          "No processing",
+          "1% processing",
+          "See bank"
+        ]
+      }
+    ],
+    "source": "Best-case advertised rates from the banks' pages and MoneySmart, 21 Oct 2026. Rates are personalised and change often. *OCBC Cash-on-Instalments, for OCBC card or EasiCredit holders.",
+    "anchor": "rates",
+    "alt": "Table of advertised personal loan rates in Singapore as at 21 October 2026: Standard Chartered 0.90%, UOB 1.00%, Trust 1.00%, HSBC 1.30%, DBS 1.48% and OCBC 1.98% flat, with EIRs from 1.75% to 4.19%",
+    "caption": "These are floors. The rate you are offered depends on your income and credit.",
+    "slug": "personal-loan-interest-rates-singapore-2026"
+  },
+  {
+    "out": "personal-loan-rates-cost",
+    "type": "compare",
+    "kicker": "S$30,000 over three years",
+    "title": "Close instalments, very different totals",
+    "cols": [
+      "1.00%, no fee",
+      "1.48% + 1% fee",
+      "1.99% + 1% fee",
+      "5.50% + 2% fee"
+    ],
+    "rows": [
+      {
+        "label": "Monthly instalment",
+        "cells": [
+          "S$858",
+          "S$870",
+          "S$883",
+          "S$971"
+        ]
+      },
+      {
+        "label": "Interest and fees",
+        "cells": [
+          "S$900",
+          "S$1,632",
+          "S$2,091",
+          "S$5,550"
+        ]
+      },
+      {
+        "label": "EIR (our calculation)",
+        "cells": [
+          "~1.95%",
+          "~3.56%",
+          "~4.56%",
+          "~12.23%"
+        ]
+      }
+    ],
+    "source": "Illustrative flat-rate loans of S$30,000 over 36 months. Banks may calculate EIR slightly differently.",
+    "anchor": "cost",
+    "alt": "Cost of a S$30,000 personal loan over three years at four flat rates: monthly instalments of S$858 to S$971 but total interest and fees from S$900 to S$5,550",
+    "caption": "Compare on the total cost and the EIR, not the monthly instalment.",
+    "slug": "personal-loan-interest-rates-singapore-2026"
   }
 ]
