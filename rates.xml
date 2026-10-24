@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Fri, 23 Oct 2026 05:50:48 GMT</lastBuildDate>
+<lastBuildDate>Sat, 24 Oct 2026 05:33:34 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
 <title>Current Compounded SORA — 1M 1.34% | 3M 1.26%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
 <guid isPermaLink="false">nexus-current-2026-10-22</guid>
-<pubDate>Fri, 23 Oct 2026 05:50:48 GMT</pubDate>
+<pubDate>Sat, 24 Oct 2026 05:33:34 GMT</pubDate>
 <description>Latest published Compounded SORA values per MAS. As of 2026-10-22.</description>
+</item>
+<item>
+<title>SORA refresh — no change.</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Sat, 24 Oct 2026 05:33:33 GMT</guid>
+<pubDate>Sat, 24 Oct 2026 05:33:33 GMT</pubDate>
+<description>{}</description>
 </item>
 <item>
 <title>SORA update: sora1m 1.3325→1.3433, sora3m 1.2553→1.2568</title>
@@ -217,13 +224,6 @@
 <guid isPermaLink="false">nexus-rates-Thu, 24 Sep 2026 05:57:23 GMT</guid>
 <pubDate>Thu, 24 Sep 2026 05:57:23 GMT</pubDate>
 <description>{&quot;sora1m&quot;:{&quot;from&quot;:1.2298,&quot;to&quot;:1.2234,&quot;delta&quot;:-0.006},&quot;sora3m&quot;:{&quot;from&quot;:1.22,&quot;to&quot;:1.221,&quot;delta&quot;:0.001}}</description>
-</item>
-<item>
-<title>SORA update: sora1m 1.2346→1.2298, sora3m 1.2191→1.22</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Wed, 23 Sep 2026 05:40:58 GMT</guid>
-<pubDate>Wed, 23 Sep 2026 05:40:58 GMT</pubDate>
-<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.2346,&quot;to&quot;:1.2298,&quot;delta&quot;:-0.005},&quot;sora3m&quot;:{&quot;from&quot;:1.2191,&quot;to&quot;:1.22,&quot;delta&quot;:0.001}}</description>
 </item>
 </channel>
 </rss>
