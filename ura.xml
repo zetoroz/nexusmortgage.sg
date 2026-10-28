@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/ura.xml" rel="self" type="application/rss+xml"/>
 <description>Median PSF and quarterly movement for Singapore private residential property, aggregated from URA caveat data.</description>
 <language>en-sg</language>
-<lastBuildDate>Sat, 24 Oct 2026 05:23:29 GMT</lastBuildDate>
+<lastBuildDate>Wed, 28 Oct 2026 06:37:52 GMT</lastBuildDate>
 <ttl>1440</ttl>
 <item>
 <title>URA Private Residential PPI 2026Q2: 219.4 (+0.5% QoQ)</title>
 <link>https://nexusmortgage.sg/singapore-property-price-index/</link>
 <guid isPermaLink="false">nexus-ura-current-2026Q3</guid>
-<pubDate>Sat, 24 Oct 2026 05:23:29 GMT</pubDate>
+<pubDate>Wed, 28 Oct 2026 06:37:52 GMT</pubDate>
 <description>Contains information from URA accessed via the URA Data Service. Indicative only, not a valuation.</description>
+</item>
+<item>
+<title>URA PPI 2026Q2: 219.4 (+0.5% QoQ, +2.91% YoY)</title>
+<link>https://nexusmortgage.sg/singapore-property-price-index/</link>
+<guid isPermaLink="false">nexus-ura-2026Q3-1958</guid>
+<pubDate>Wed, 28 Oct 2026 06:37:51 GMT</pubDate>
+<description>Median PSF S$1958, QoQ 0.5%, YoY 2.91%</description>
 </item>
 <item>
 <title>URA PPI 2026Q2: 219.4 (+0.5% QoQ, +2.91% YoY)</title>
