@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Tue, 27 Oct 2026 06:04:57 GMT</lastBuildDate>
+<lastBuildDate>Wed, 28 Oct 2026 06:43:31 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
-<title>Current Compounded SORA — 1M 1.35% | 3M 1.27%</title>
+<title>Current Compounded SORA — 1M 1.34% | 3M 1.27%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-current-2026-10-26</guid>
-<pubDate>Tue, 27 Oct 2026 06:04:57 GMT</pubDate>
-<description>Latest published Compounded SORA values per MAS. As of 2026-10-26.</description>
+<guid isPermaLink="false">nexus-current-2026-10-27</guid>
+<pubDate>Wed, 28 Oct 2026 06:43:31 GMT</pubDate>
+<description>Latest published Compounded SORA values per MAS. As of 2026-10-27.</description>
+</item>
+<item>
+<title>SORA update: sora1m 1.3515→1.3367</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Wed, 28 Oct 2026 06:43:31 GMT</guid>
+<pubDate>Wed, 28 Oct 2026 06:43:31 GMT</pubDate>
+<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.3515,&quot;to&quot;:1.3367,&quot;delta&quot;:-0.015}}</description>
 </item>
 <item>
 <title>SORA update: sora1m 1.3587→1.3515, sora3m 1.266→1.2671</title>
@@ -217,13 +224,6 @@
 <guid isPermaLink="false">nexus-rates-Mon, 28 Sep 2026 06:30:07 GMT</guid>
 <pubDate>Mon, 28 Sep 2026 06:30:07 GMT</pubDate>
 <description>{&quot;sora1m&quot;:{&quot;from&quot;:1.2264,&quot;to&quot;:1.2505,&quot;delta&quot;:0.024},&quot;sora3m&quot;:{&quot;from&quot;:1.2251,&quot;to&quot;:1.2302,&quot;delta&quot;:0.005}}</description>
-</item>
-<item>
-<title>SORA refresh — no change.</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Sun, 27 Sep 2026 06:25:10 GMT</guid>
-<pubDate>Sun, 27 Sep 2026 06:25:10 GMT</pubDate>
-<description>{}</description>
 </item>
 </channel>
 </rss>
