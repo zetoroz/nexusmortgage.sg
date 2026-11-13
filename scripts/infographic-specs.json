@@ -703,16 +703,16 @@
     "type": "timeline",
     "style": "b",
     "kicker": "Thomson Reserve · Progressive payments",
-    "title": "From booking day to keys: when each payment falls",
+    "title": "From booking to keys: when each payment falls",
     "source": "Expected TOP 2H 2030 and vacant possession by 28 Feb 2031, per the developers. Construction stage dates depend on progress. Interest is charged only on the amount drawn.",
     "steps": [
       {
-        "when": "31 Oct 2026",
+        "when": "30 to 31 Oct 2026",
         "label": "Booking (OTP)",
         "note": "5% of price, in cash"
       },
       {
-        "when": "Within 8 weeks",
+        "when": "By about 26 Dec 2026",
         "label": "S&P exercised",
         "note": "15%, cash or CPF; stamp duty in 14 days"
       },
@@ -734,7 +734,7 @@
       }
     ],
     "anchor": "progressive",
-    "alt": "Timeline of Thomson Reserve progressive payments from the 31 October 2026 booking day to TOP in the second half of 2030 and CSC",
+    "alt": "Timeline of Thomson Reserve progressive payments from the 30 to 31 October 2026 launch to TOP in the second half of 2030 and CSC",
     "caption": "Instalments start small and step up sharply at TOP, when a quarter of the price is drawn at once.",
     "slug": "thomson-reserve-financing-2026"
   },
@@ -2445,14 +2445,14 @@
     "out": "thomson-reserve-launch-hero",
     "type": "hero",
     "style": "b",
-    "num": "S$77,200",
-    "numlabel": "In cash on booking day for the starting 2‑bedroom at S$1.544M",
+    "num": "90.1%",
+    "numlabel": "Of 1,268 units sold over the launch weekend, at an average of S$2,900 psf",
     "kicker": "New Launch · Thomson Reserve",
-    "title": "Thomson Reserve: from S$2,608 psf. Booking day 31 October.",
+    "title": "Thomson Reserve after launch: what buyers pay next",
     "sub": "What each unit type needs in cash, stamp duty and income, and how the loan is drawn down to TOP in the second half of 2030.",
     "chips": [
-      "2-bedroom from S$1.544M",
-      "1,268 units, 99-year",
+      "1,143 units sold",
+      "3- and 4-bed sold out",
       "Calculator inside"
     ],
     "slug": "thomson-reserve-financing-2026"

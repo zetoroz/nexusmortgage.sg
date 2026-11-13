@@ -1,25 +1,25 @@
 SLUG = "thomson-reserve-financing-2026"
-TITLE = "Thomson Reserve Price, Launch and Financing Calculator 2026 | Nexus"
-DESC = ("Thomson Reserve launches 31 Oct 2026 from S$2,608 psf: 2-bedroom from S$1.544M. Cash, stamp duty, "
-        "income needed and progressive payments, with a calculator.")
-OG_TITLE = "Thomson Reserve Launch: Prices From S$2,608 psf, and What Each Unit Needs to Finance"
-OG_DESC = ("2-bedroom from S$1.544M, 3-bedroom from S$2.503M, 4-bedroom from S$3.388M. Booking day is 31 October "
-           "2026. The cash, stamp duty and income each one needs, with a calculator for your own numbers.")
-KEYWORDS = ("Thomson Reserve, Thomson Reserve price, Thomson Reserve launch, Thomson Reserve price list, "
+TITLE = "Thomson Reserve Launch Results, Prices and Financing Calculator 2026 | Nexus"
+DESC = ("Thomson Reserve sold 1,143 of 1,268 units at launch, averaging S$2,900 psf. Cash, stamp duty and "
+        "income for the remaining 2-bedrooms, what buyers who booked pay next, with a calculator.")
+OG_TITLE = "Thomson Reserve Sold 90% at Launch: What Buyers Pay Next, and What the Remaining Units Need"
+OG_DESC = ("1,143 of 1,268 units sold on launch weekend at an average S$2,900 psf; every 3- and 4-bedroom is gone. "
+           "The cash, stamp duty and income each unit needs, with a calculator for your own numbers.")
+KEYWORDS = ("Thomson Reserve, Thomson Reserve price, Thomson Reserve launch, Thomson Reserve sold, Thomson Reserve balance units, Thomson Reserve price list, "
             "Thomson Reserve psf, Thomson Reserve calculator, former Thomson View, Upper Thomson new launch, "
             "District 20 new launch 2026, Bright Hill Drive condo, HDB upgrader ABSD, BUC progressive payment")
 SECTION = "New Launch & Private"
-DATE_HUMAN = "Updated 19 October 2026"
+DATE_HUMAN = "Updated 14 November 2026"
 DATE_ISO = "2026-07-21"
-DATE_MODIFIED = "2026-10-19"
-READ_TIME = "11-minute read"
-WORDS = 2700
-H1 = "Thomson Reserve Launch: Prices, Cash and Income Needed, With a Calculator"
+DATE_MODIFIED = "2026-11-14"
+READ_TIME = "12-minute read"
+WORDS = 3000
+H1 = "Thomson Reserve After Launch: Prices, Cash and Income Needed, With a Calculator"
 BREADCRUMB_NAME = "Thomson Reserve Launch and Financing"
 
 OG_IMAGE = "https://nexusmortgage.sg/blog/blog-images/thomson-reserve-launch-hero.png"
-OG_IMAGE_ALT = ("Thomson Reserve launch: prices from S$2,608 psf, 2-bedroom from S$1.544M, booking day "
-                "31 October 2026")
+OG_IMAGE_ALT = ("Thomson Reserve launch: 90.1% of 1,268 units sold on launch weekend at an average "
+                "S$2,900 psf")
 OG_IMAGE_W = 1344
 OG_IMAGE_H = 768
 OG_IMAGE_TYPE = "image/png"
@@ -29,10 +29,15 @@ FAQ = [
   "The developers' launch release of 15 October 2026 gives prices from S$2,608 psf. Starting prices are "
   "S$1.544 million for a two-bedroom of 592 sq ft, S$2.503 million for a three-bedroom of 947 sq ft and "
   "S$3.388 million for a four-bedroom of 1,238 sq ft. These are the lowest prices in each type; higher "
-  "floors, better stacks and the larger Premium and Suite layouts cost more. The full price list is "
-  "released for booking day on 31 October 2026."),
- ("When does Thomson Reserve launch, and when is it completed?",
-  "Public previews began on 17 October 2026 and booking day is 31 October 2026. The developers expect the "
+  "floors, better stacks and the larger Premium and Suite layouts cost more. The units sold at launch on "
+  "31 October 2026 averaged S$2,900 psf, according to the developers."),
+ ("When did Thomson Reserve launch, and how many units were sold?",
+  "Bookings opened with a VIP preview on 30 October 2026 and the public launch on 31 October 2026. The "
+  "developers reported 1,143 of the 1,268 units sold (90.1%) over that weekend at an average of S$2,900 psf, "
+  "including every three- and four-bedroom unit. About 125 units were left: some 123 smaller two-bedrooms "
+  "and two five-bedroom suites."),
+ ("When will Thomson Reserve be completed?",
+  "The developers expect the "
   "Temporary Occupation Permit in the second half of 2030, and the expected date of vacant possession is "
   "28 February 2031. The 99-year lease started on 14 July 2026."),
  ("How much income do I need to buy a two-bedroom at Thomson Reserve?",
@@ -40,7 +45,7 @@ FAQ = [
   "rate, which over 30 years gives an instalment of about S$5,528 a month. Under the 55% TDSR limit that "
   "needs gross income of about S$10,052 a month, before any car loan, card or other monthly debt, which "
   "comes off the same 55%."),
- ("How much cash do I need on booking day?",
+ ("How much cash do I need to book a unit?",
   "The booking fee is 5% of the price and must be paid in cash: S$77,200 on the S$1.544 million "
   "two-bedroom. A further 15% is due within eight weeks of the option date and can be paid in cash or "
   "CPF, and Buyer's Stamp Duty is due within 14 days of the sale and purchase agreement. For a Singapore "
@@ -67,13 +72,14 @@ FAQ = [
 BODY = r'''
   <div class="short-answer">
     <div class="sa-title">Short answer</div>
-    <p>Thomson Reserve is priced <strong>from S$2,608 psf</strong>. Starting prices are <strong>S$1.544M for a two-bedroom</strong>, <strong>S$2.503M for a three-bedroom</strong> and <strong>S$3.388M for a four-bedroom</strong>. Previews opened on 17 October and <strong>booking day is 31 October 2026</strong>, with TOP expected in the second half of 2030. On the starting two-bedroom, a Singapore Citizen buying a first home needs <strong>S$77,200 in cash on booking day</strong>, about <strong>S$355,600</strong> in cash and CPF by the S&amp;P stage including stamp duty, and roughly <strong>S$10,050 a month in income</strong> to pass the bank's stress test. Use the <a href="#calculator">calculator</a> below for your own unit and profile.</p>
+    <p>Thomson Reserve <strong>sold 1,143 of its 1,268 units (90.1%)</strong> over its 30 and 31 October 2026 launch, at an <strong>average of S$2,900 psf</strong>, the developers reported. Every three- and four-bedroom unit went; about <strong>125 units were left</strong>, nearly all smaller two-bedrooms. Prices started <strong>from S$2,608 psf</strong>, or <strong>S$1.544M for a 592 sq ft two-bedroom</strong>. On that unit, a Singapore Citizen buying a first home needs <strong>S$77,200 in cash</strong> to book, about <strong>S$355,600</strong> in cash and CPF by the S&amp;P stage including stamp duty, and roughly <strong>S$10,050 a month in income</strong> to pass the bank's stress test. If you booked at launch, the 15% and the S&amp;P fall due <strong>by about 25 to 26 December 2026</strong>. Use the <a href="#calculator">calculator</a> below for your own unit and profile.</p>
   </div>
 
   <div class="toc">
     <div class="toc-title">In this article</div>
     <ol>
       <li><a href="#facts">The launch facts</a></li>
+      <li><a href="#results">How the launch went</a></li>
       <li><a href="#prices">Prices and unit mix</a></li>
       <li><a href="#calculator">Thomson Reserve calculator</a></li>
       <li><a href="#cash">Cash and stamp duty by unit type</a></li>
@@ -81,12 +87,12 @@ BODY = r'''
       <li><a href="#upgraders">HDB upgraders: ABSD and the second loan</a></li>
       <li><a href="#progressive">Progressive payments to 2031</a></li>
       <li><a href="#rate">The rate during construction</a></li>
-      <li><a href="#booking">Before booking day</a></li>
+      <li><a href="#booked">If you booked, and if you are still buying</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ol>
   </div>
 
-  <p>We first wrote about Thomson Reserve in July, when it was still a pre-launch with no price. The developers have now published their launch details, so this guide is rewritten around the real numbers. It is about the financing side: what each unit type costs to buy, what the bank will lend, and what has to be in place before you book. It is not a recommendation to buy, and we are not the developer's sales team.</p>
+  <p>We first wrote about Thomson Reserve in July, when it was still a pre-launch with no price, and rewrote it in October around the developers' launch numbers. It launched on 31 October 2026, so this update adds how the launch went and what comes next. It is about the financing side: what each unit costs to buy, what the bank will lend, what buyers who booked must pay over the next eight weeks, and what a remaining unit needs. It is not a recommendation to buy, and we are not the developer's sales team.</p>
 
   <h2 id="facts">The Launch Facts</h2>
 
@@ -101,17 +107,41 @@ BODY = r'''
       <tr><td>Site</td><td>51,567 sqm, plot ratio 2.1; towers cover 12% of the site</td></tr>
       <tr><td>Transport</td><td>Sheltered link to Upper Thomson MRT (Thomson-East Coast Line); Bright Hill interchange with the Cross Island Line one stop away</td></tr>
       <tr><td>Previews</td><td>From 17 October 2026</td></tr>
-      <tr><td>Booking day</td><td>31 October 2026</td></tr>
+      <tr><td>Launch</td><td>VIP preview 30 October 2026; public launch 31 October 2026</td></tr>
       <tr><td>Expected TOP</td><td>Second half of 2030</td></tr>
       <tr><td>Expected vacant possession</td><td>28 February 2031</td></tr>
     </tbody>
   </table>
 
-  <p>Interest is high. The Edge Singapore reported 11,800 visitors on the first weekend of the public preview. Visitors are not buyers, but a crowded launch means the better stacks go early, so it pays to have your financing settled before you walk in rather than after.</p>
+  <h2 id="results">How the Launch Went</h2>
+
+  <p>Demand ran well ahead of supply. EdgeProp reported over 3,300 cheques for the 1,268 units, a subscription of more than 2.6 times, after about 32,000 people visited the showflat over two preview weekends. In a joint statement, the developers said <strong>1,143 units (90.1%) were sold</strong> across the VIP preview on 30 October and the public launch on 31 October, at an <strong>average of S$2,900 psf</strong>. That made it the best-selling launch of 2026 by units sold.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>Unit type</th><th>Units</th><th>Sold at launch</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2-Bedroom and 2-Bedroom Premium</td><td>516</td><td>393 (76%)</td></tr>
+      <tr><td>2-Bedroom Premium + Study</td><td>200</td><td>All 200</td></tr>
+      <tr><td>3-Bedroom, all layouts</td><td>350</td><td>All 350</td></tr>
+      <tr><td>4-Bedroom, all layouts</td><td>174</td><td>All 174</td></tr>
+      <tr><td>5-Bedroom Suite</td><td>28</td><td>26</td></tr>
+      <tr><td><strong>Total</strong></td><td><strong>1,268</strong></td><td><strong>1,143 (90.1%)</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p>Three things stand out for anyone financing a unit here:</p>
+
+  <ul>
+    <li><strong>The average was well above the starting price.</strong> S$2,900 psf is about 11% above the S$2,608 psf headline. At that average, a 592 sq ft two-bedroom would be about S$1.72M and a 678 sq ft Premium about S$1.97M. Run the calculator at the price on your own unit's line of the price list, not the headline.</li>
+    <li><strong>Prices reported were after discounts.</strong> The highest reported prices, S$5.98M (S$3,306 psf) for a 30th-floor five-bedroom suite and S$4.56M (S$3,334 psf) for a four-bedroom Premium, were both after a 6% plus 2% discount. A bank values a new launch off the price you actually pay, so the discounted figure is what your loan is based on.</li>
+    <li><strong>Mostly own-stay buyers.</strong> The developers said most buyers were Singaporeans buying for their own stay and investment. Huttons estimated about 90% were owner-occupiers, around 70% gave private addresses and 30% HDB addresses, and 215 units went to multiple purchases such as families buying together.</li>
+  </ul>
 
   <h2 id="prices">Prices and Unit Mix</h2>
 
-  <p>The developers have published three starting prices. Each is the cheapest unit of its type, so most units will cost more.</p>
+  <p>Before launch the developers published three starting prices. Each was the cheapest unit of its type, so most units cost more, and the three- and four-bedroom types are now sold out.</p>
 
   <table class="compare-table">
     <thead>
@@ -144,7 +174,7 @@ BODY = r'''
     </tbody>
   </table>
 
-  <p>Only 100 units are the 592 sq ft two-bedroom that sets the S$1.544M headline. If you are budgeting for a two-bedroom, run the calculator at the price of the layout you actually want, and expect the Premium layouts and higher floors to sit above the starting figure.</p>
+  <p>Only 100 units were the 592 sq ft two-bedroom that set the S$1.544M headline. The roughly 123 units left after launch are two-bedrooms without a study, from the 592 sq ft and 678 sq ft layouts, plus two five-bedroom suites. If you are looking at one of them, ask for its current price, which may have moved since launch, and run the calculator at that figure.</p>
 
   <h2 id="calculator">Thomson Reserve Calculator</h2>
 
@@ -174,8 +204,8 @@ BODY = r'''
     <div class="tr-row"><label for="tr-unit">Unit type</label>
       <select id="tr-unit" aria-label="Unit type">
         <option value="1544000">2-Bedroom, from S$1.544M</option>
-        <option value="2503000">3-Bedroom, from S$2.503M</option>
-        <option value="3388000">4-Bedroom, from S$3.388M</option>
+        <option value="2503000">3-Bedroom, from S$2.503M (sold out)</option>
+        <option value="3388000">4-Bedroom, from S$3.388M (sold out)</option>
         <option value="custom">Price from the price list</option>
       </select></div>
     <div class="tr-row"><label for="tr-price">Purchase price (S$)</label><input id="tr-price" type="text" inputmode="numeric" value="1,544,000" aria-label="Purchase price"></div>
@@ -198,7 +228,7 @@ BODY = r'''
     <div class="tr-row"><label for="tr-age">Age (income-weighted average if buying jointly)</label><input id="tr-age" type="text" inputmode="numeric" value="35" aria-label="Age"></div>
     <div class="tr-row"><label for="tr-income">Gross monthly income, all borrowers (S$)</label><input id="tr-income" type="text" inputmode="numeric" value="12,000" aria-label="Gross monthly income"></div>
     <div class="tr-row"><label for="tr-debt">Other monthly debts: car, cards, loans (S$)</label><input id="tr-debt" type="text" inputmode="numeric" value="0" aria-label="Other monthly debts"></div>
-    <div class="tr-row"><label for="tr-rate">Interest rate you expect (% p.a.)</label><input id="tr-rate" type="text" inputmode="decimal" value="1.45" aria-label="Interest rate"></div>
+    <div class="tr-row"><label for="tr-rate">Interest rate you expect (% p.a.)</label><input id="tr-rate" type="text" inputmode="decimal" value="1.55" aria-label="Interest rate"></div>
 
     <div class="tr-out">
       <h3>The loan</h3>
@@ -207,7 +237,7 @@ BODY = r'''
       <div class="tr-line tr-key"><span>Maximum loan</span><strong id="tr-loan">&ndash;</strong></div>
 
       <h3>What you pay before the bank lends</h3>
-      <div class="tr-line"><span>Booking fee on 31 Oct (5%, cash)</span><strong id="tr-otp">&ndash;</strong></div>
+      <div class="tr-line"><span>Booking fee at the option (5%, cash)</span><strong id="tr-otp">&ndash;</strong></div>
       <div class="tr-line"><span>Within 8 weeks of the option (cash or CPF)</span><strong id="tr-sp">&ndash;</strong></div>
       <div class="tr-line"><span id="tr-restlbl">Rest of the downpayment</span><strong id="tr-rest">&ndash;</strong></div>
       <div class="tr-line"><span>Buyer's Stamp Duty</span><strong id="tr-bsd">&ndash;</strong></div>
@@ -281,7 +311,7 @@ BODY = r'''
     $('tr-price').addEventListener('input',function(){$('tr-unit').value='custom';run();});
     ['tr-buyer','tr-loans','tr-age','tr-income','tr-debt','tr-rate'].forEach(function(id){$(id).addEventListener('input',run);$(id).addEventListener('change',run);});
     run();
-    fetch('/rates.json').then(function(r){return r.json();}).then(function(d){var s=d&&d.refRates&&d.refRates.sora3m;if(s>0&&$('tr-rate').value==='1.45'){$('tr-rate').value=(s+.20).toFixed(2);run();}}).catch(function(){});
+    fetch('/rates.json').then(function(r){return r.json();}).then(function(d){var s=d&&d.refRates&&d.refRates.sora3m;if(s>0&&$('tr-rate').value==='1.55'){$('tr-rate').value=(s+.20).toFixed(2);run();}}).catch(function(){});
   })();
   </script>
 
@@ -290,12 +320,12 @@ BODY = r'''
   <p>A new launch is paid in stages under the progressive payment scheme. The first 20% comes from you before the bank lends anything:</p>
 
   <ul>
-    <li><strong>5% booking fee</strong> when you take the option to purchase on booking day. This part must be cash.</li>
-    <li><strong>15% within eight weeks</strong> of the option date, when you exercise the sale and purchase agreement. Cash, CPF, or both.</li>
+    <li><strong>5% booking fee</strong> when you take the option to purchase. This part must be cash.</li>
+    <li><strong>15% within eight weeks</strong> of the option date, when you exercise the sale and purchase agreement. Cash, CPF, or both. For an option taken on 30 or 31 October 2026, that is about 25 or 26 December 2026; your option states the exact date.</li>
     <li><strong>Buyer's Stamp Duty within 14 days</strong> of the S&amp;P, and ABSD in the same window if it applies.</li>
   </ul>
 
-  <p>On a first housing loan at 75% LTV, the remaining 5% of the downpayment is collected at the first construction stage, and the bank starts paying the developer after that. For a Singapore Citizen buying a first property, the starting price of each type works out like this:</p>
+  <p>On a first housing loan at 75% LTV, the remaining 5% of the downpayment is collected at the first construction stage, and the bank starts paying the developer after that. For a Singapore Citizen buying a first property, the starting price of each type works out like this. The three- and four-bedrooms are sold out, but the figures still apply to anyone who booked one at or near those prices:</p>
 
   <table class="compare-table">
     <thead>
@@ -330,11 +360,11 @@ BODY = r'''
 
   <p>Those figures assume no other debts and a 30-year tenure. Two things push them up. Any car loan, card balance or personal loan instalment comes off the same 55%. And the tenure must end by age 65 to keep the 75% LTV, so a borrower aged 40 gets 25 years, not 30, and a higher instalment on the same loan. The calculator handles both.</p>
 
-  <p class="pullquote">&ldquo;The stress test, not the price list, is usually what decides which unit you can book. Know your number before preview day, not on it.&rdquo;</p>
+  <p class="pullquote">&ldquo;The stress test, not the price list, is usually what decides which unit you can book. Know your number before you sign, not after.&rdquo;</p>
 
   <h2 id="upgraders">HDB Upgraders: ABSD and the Second Loan</h2>
 
-  <p>Thomson Reserve will draw a lot of HDB upgraders, and they face two separate issues that are easy to mix up.</p>
+  <p>Huttons estimated that about 30% of launch buyers gave HDB addresses. Upgraders face two separate issues that are easy to mix up.</p>
 
   <p><strong>ABSD.</strong> If you keep your flat while you buy, Thomson Reserve is your second residential property. A Singapore Citizen pays 20% ABSD: S$308,800 on the starting two-bedroom. A married couple with at least one Singapore Citizen who buy jointly can claim it back if they sell the flat within six months of Thomson Reserve's TOP or CSC, whichever is earlier. TOP is expected in the second half of 2030, so that is a long runway, but you still need the ABSD in hand at the S&amp;P stage. Check your eligibility against IRAS's conditions before you book.</p>
 
@@ -342,7 +372,7 @@ BODY = r'''
 
   <h2 id="progressive">Progressive Payments to 2031</h2>
 
-  <p>Under the progressive payment scheme the bank pays the developer stage by stage as the building goes up, and you pay interest only on what has been drawn. Instalments start small and rise towards TOP. On the S$1.544M two-bedroom with a 75% loan, at an illustrative 1.44% over 30 years:</p>
+  <p>Under the progressive payment scheme the bank pays the developer stage by stage as the building goes up, and you pay interest only on what has been drawn. Instalments start small and rise towards TOP. On the S$1.544M two-bedroom with a 75% loan, at an illustrative 1.55% over 30 years:</p>
 
   <table class="compare-table">
     <thead>
@@ -350,15 +380,15 @@ BODY = r'''
     </thead>
     <tbody>
       <tr><td>Booking and S&amp;P</td><td>20%</td><td>none</td><td>none</td></tr>
-      <tr><td>Foundation</td><td>10%</td><td>S$77,200</td><td>about S$264</td></tr>
-      <tr><td>Reinforced concrete</td><td>10%</td><td>S$231,600</td><td>about S$793</td></tr>
-      <tr><td>Walls, ceiling, doors and windows, car park and roads</td><td>5% each</td><td>up to S$540,400</td><td>up to about S$1,850</td></tr>
-      <tr><td>TOP, expected 2H 2030</td><td>25%</td><td>S$926,400</td><td>about S$3,171</td></tr>
-      <tr><td>CSC</td><td>15%</td><td>S$1,158,000</td><td>about S$3,963</td></tr>
+      <tr><td>Foundation</td><td>10%</td><td>S$77,200</td><td>about S$268</td></tr>
+      <tr><td>Reinforced concrete</td><td>10%</td><td>S$231,600</td><td>about S$805</td></tr>
+      <tr><td>Walls, ceiling, doors and windows, car park and roads</td><td>5% each</td><td>up to S$540,400</td><td>up to about S$1,878</td></tr>
+      <tr><td>TOP, expected 2H 2030</td><td>25%</td><td>S$926,400</td><td>about S$3,219</td></tr>
+      <tr><td>CSC</td><td>15%</td><td>S$1,158,000</td><td>about S$4,024</td></tr>
     </tbody>
   </table>
 
-  <p>The 1.44% is 3M SORA of 1.24% on 15 October 2026 plus a 0.20% spread, which is what several banks offered on loans above S$1M for uncompleted properties in mid-2026. It is an illustration, not a quote, and SORA will move before 2030. What does not change is the shape: the large step comes at TOP, when 25% of the price is drawn at once. That is also when an upgrader typically needs to sell the HDB flat. See our <a href="/blog/new-launch-financing-singapore/">new launch financing guide</a> for how the stages work in general.</p>
+  <p>The 1.55% is 3M SORA of 1.35% on 12 November 2026 plus a 0.20% spread, which is what several banks offered on loans above S$1M for uncompleted properties in mid-2026. It is an illustration, not a quote, and SORA will move before 2030. What does not change is the shape: the large step comes at TOP, when 25% of the price is drawn at once. That is also when an upgrader typically needs to sell the HDB flat. See our <a href="/blog/new-launch-financing-singapore/">new launch financing guide</a> for how the stages work in general.</p>
 
   <h2 id="rate">The Rate During Construction</h2>
 
@@ -372,31 +402,36 @@ BODY = r'''
 
   <p>Our <a href="/blog/fixed-vs-floating-home-loan-singapore/">fixed vs floating guide</a> covers the choice you will face at TOP, and <a href="/sora-rates-singapore/">today's SORA</a> is on our rates page.</p>
 
-  <h2 id="booking">Before Booking Day</h2>
+  <h2 id="booked">If You Booked, and If You Are Still Buying</h2>
+
+  <p><strong>If you booked at launch</strong>, the next eight weeks are where the money moves:</p>
 
   <ul class="checklist">
-    <li><strong>Get an In-Principle Approval</strong> for the loan size you need, ideally from more than one bank. It confirms your TDSR and loan limit before you commit the booking fee. See <a href="/blog/ipa-mortgage-broker-singapore/">how an IPA works</a>.</li>
-    <li><strong>Have the 5% ready in cash</strong>, usually as a cashier's order, for the unit price you are aiming at, plus some headroom for a higher floor.</li>
-    <li><strong>Check your CPF Ordinary Account</strong> balance and how much of the next 15% and the stamp duty it can cover. Private property has CPF usage limits tied to valuation and remaining lease.</li>
-    <li><strong>If you own an HDB flat</strong>, decide now whether you will sell before or after TOP, and whether any HDB loan will be cleared first. That decides your LTV and your ABSD.</li>
-    <li><strong>Put any car loan or card debt into the sums.</strong> Every dollar of monthly debt reduces the loan you can get.</li>
-    <li><strong>Know your walk-away price.</strong> Set it from the calculator before the preview, not at the sales table.</li>
+    <li><strong>Get the loan approved before you exercise.</strong> The developer sends the S&amp;P, and you must exercise it with the 15% within eight weeks of the option date. Once you exercise, you are committed to the purchase, so have a formal letter of offer, not just an In-Principle Approval, in hand before then. See <a href="/blog/ipa-mortgage-broker-singapore/">how an IPA works</a>.</li>
+    <li><strong>Line up the 15% and the stamp duty.</strong> Check how much your CPF Ordinary Account can cover; private property has CPF usage limits tied to valuation and remaining lease. Buyer's Stamp Duty, and ABSD if it applies, is due within 14 days of the S&amp;P.</li>
+    <li><strong>Compare packages, not just your developer's panel bank.</strong> Spreads on loans for uncompleted properties vary by bank, and a lock-in that ends before TOP keeps your options open in 2030.</li>
+    <li><strong>If you own an HDB flat</strong>, settle now whether you will sell before or after TOP, and whether any HDB loan will be cleared first. That decides your LTV and your ABSD, and it is easier to fix before the S&amp;P than after.</li>
   </ul>
+
+  <p><strong>If you are looking at a remaining unit</strong>, the same groundwork applies before you take an option: an In-Principle Approval for the loan size you need, the 5% ready in cash, any car loan or card debt in the sums, and a walk-away price set from the calculator at the unit's actual price.</p>
 
   <p>If you want a second pair of eyes on the numbers, <a href="/contact/">get in touch</a>. We compare packages across the banks for new launches at no cost to you.</p>
 
   <h2 id="faq">Frequently Asked Questions</h2>
 
   <div class="faq-q">What is the price of Thomson Reserve?</div>
-  <p>From S$2,608 psf. Starting prices are S$1.544M for a 592 sq ft two-bedroom, S$2.503M for a 947 sq ft three-bedroom and S$3.388M for a 1,238 sq ft four-bedroom. Those are the cheapest units of each type; the full list is out for booking day on 31 October 2026.</p>
+  <p>From S$2,608 psf. Starting prices are S$1.544M for a 592 sq ft two-bedroom, S$2.503M for a 947 sq ft three-bedroom and S$3.388M for a 1,238 sq ft four-bedroom. Those were the cheapest units of each type. The units sold at launch averaged S$2,900 psf, according to the developers.</p>
 
-  <div class="faq-q">When does Thomson Reserve launch, and when is it completed?</div>
-  <p>Previews began on 17 October 2026 and booking day is 31 October 2026. TOP is expected in the second half of 2030, with vacant possession expected by 28 February 2031.</p>
+  <div class="faq-q">When did Thomson Reserve launch, and how many units were sold?</div>
+  <p>Bookings opened on 30 October (VIP preview) and 31 October 2026 (public launch). The developers reported 1,143 of 1,268 units sold (90.1%) at an average of S$2,900 psf, including every three- and four-bedroom. About 125 were left, almost all smaller two-bedrooms.</p>
+
+  <div class="faq-q">When will Thomson Reserve be completed?</div>
+  <p>TOP is expected in the second half of 2030, with vacant possession expected by 28 February 2031.</p>
 
   <div class="faq-q">How much income do I need to buy a two-bedroom at Thomson Reserve?</div>
   <p>At S$1.544M with a 75% loan over 30 years, the bank's 4% stress test gives an instalment of about S$5,528 a month, which needs about S$10,052 of gross monthly income under the 55% TDSR, before other debts.</p>
 
-  <div class="faq-q">How much cash do I need on booking day?</div>
+  <div class="faq-q">How much cash do I need to book a unit?</div>
   <p>The 5% booking fee in cash: S$77,200 on the starting two-bedroom. A further 15% follows within eight weeks in cash or CPF, plus stamp duty within 14 days of the S&amp;P. For a Citizen's first home that is about S$355,600 by the S&amp;P stage.</p>
 
   <div class="faq-q">I own an HDB flat. Can I buy at Thomson Reserve?</div>
@@ -423,13 +458,15 @@ BODY = r'''
     <em>This article is general information on financing a purchase at Thomson Reserve. It is not financial,
     legal or tax advice, not a recommendation to buy, and not an offer of credit. Nexus Mortgage is not
     connected to the developer. Prices are the developers' published starting prices; actual unit prices
-    are set by the price list on booking day. Loan, stamp duty and income figures assume the price shown, a
+    are set by the developer's price list and may have changed since launch. Launch sales figures are as
+    reported by the developers and the press. Loan, stamp duty and income figures assume the price shown, a
     first housing loan at 75% LTV over 30 years, no other debts and the 4% residential stress rate, unless
     stated. Instalments during construction are illustrative and use an assumed rate. LTV, TDSR, ABSD and
     CPF rules are set by MAS, IRAS and the CPF Board and may change; confirm them for your circumstances.
-    Current as at 19 October 2026. Sources:
+    Current as at 14 November 2026. Sources:
     <a href="https://www.capitaland.com/content/dam/capitaland-newsroom/International/2026/october/thomson-reserve-launch/news-release-uol-cld-unveil-thomson-reserve.pdf" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">UOL Group and CapitaLand Development launch release and factsheet, 15 October 2026</a>,
-    <a href="https://www.theedgesingapore.com/cityandcountry/new-launches/thomson-reserve-draws-11800-visitors-start-public-preview-ahead-oct-31" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">The Edge Singapore: preview attendance</a>,
+    <a href="https://sg.news.yahoo.com/thomson-launch-sales-hit-over-160831361.html" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">EdgeProp: launch sales of 1,143 units at S$2,900 psf, 31 October 2026</a>,
+    <a href="https://www.99.co/singapore/insider/thomson-reserve-launch-sales/" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">99.co: launch sales by unit type</a>,
     <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/buyer's-stamp-duty-(bsd)" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">IRAS: Buyer's Stamp Duty</a>,
     <a href="https://www.mas.gov.sg/regulation/notices/notice-632" target="_blank" rel="noopener" style="color:rgba(196,151,59,.5);">MAS Notice 632</a>.</em></p>
 '''
@@ -437,12 +474,12 @@ BODY = r'''
 IMAGES = [
  {'out': 'thomson-reserve-launch-hero',
   'type': 'hero', 'style': 'b',
-  'num': 'S$77,200', 'numlabel': 'In cash on booking day for the starting 2‑bedroom at S$1.544M',
+  'num': '90.1%', 'numlabel': 'Of 1,268 units sold over the launch weekend, at an average of S$2,900 psf',
   'kicker': 'New Launch · Thomson Reserve',
-  'title': 'Thomson Reserve: from S$2,608 psf. Booking day 31 October.',
+  'title': 'Thomson Reserve after launch: what buyers pay next',
   'sub': 'What each unit type needs in cash, stamp duty and income, and how the loan is drawn down to '
          'TOP in the second half of 2030.',
-  'chips': ['2-bedroom from S$1.544M', '1,268 units, 99-year', 'Calculator inside']},
+  'chips': ['1,143 units sold', '3- and 4-bed sold out', 'Calculator inside']},
 
  {'out': 'thomson-reserve-cash-tiers',
   'type': 'compare', 'style': 'b',
@@ -465,16 +502,16 @@ IMAGES = [
  {'out': 'thomson-progressive-timeline',
   'type': 'timeline', 'style': 'b',
   'kicker': 'Thomson Reserve · Progressive payments',
-  'title': 'From booking day to keys: when each payment falls',
+  'title': 'From booking to keys: when each payment falls',
   'source': 'Expected TOP 2H 2030 and vacant possession by 28 Feb 2031, per the developers. Construction '
             'stage dates depend on progress. Interest is charged only on the amount drawn.',
-  'steps': [{'when': '31 Oct 2026', 'label': 'Booking (OTP)', 'note': '5% of price, in cash'},
-            {'when': 'Within 8 weeks', 'label': 'S&P exercised', 'note': '15%, cash or CPF; stamp duty in 14 days'},
+  'steps': [{'when': '30 to 31 Oct 2026', 'label': 'Booking (OTP)', 'note': '5% of price, in cash'},
+            {'when': 'By about 26 Dec 2026', 'label': 'S&P exercised', 'note': '15%, cash or CPF; stamp duty in 14 days'},
             {'when': 'During construction', 'label': 'Foundation to roads', 'note': '45% in stages; loan starts drawing'},
             {'when': '2H 2030', 'label': 'TOP', 'note': '25%, the largest single drawdown', 'highlight': True},
             {'when': 'After TOP', 'label': 'CSC', 'note': 'Final 15%'}],
   'anchor': 'progressive',
-  'alt': 'Timeline of Thomson Reserve progressive payments from the 31 October 2026 booking day to TOP '
+  'alt': 'Timeline of Thomson Reserve progressive payments from the 30 to 31 October 2026 launch to TOP '
          'in the second half of 2030 and CSC',
   'caption': 'Instalments start small and step up sharply at TOP, when a quarter of the price is drawn at once.'},
 ]
