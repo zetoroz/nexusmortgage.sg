@@ -11,6 +11,7 @@ KEYWORDS = ("personal loan interest rate Singapore, best personal loan Singapore
 SECTION = "Personal Loans"
 DATE_HUMAN = "12 November 2026"
 DATE_ISO = "2026-11-12"
+DATE_MODIFIED = "2026-11-14"
 READ_TIME = "8-minute read"
 WORDS = 1900
 H1 = "Personal Loan Interest Rates in Singapore: Bank by Bank, With the Real Cost"
@@ -24,8 +25,8 @@ OG_IMAGE_TYPE = "image/png"
 
 FAQ = [
  ("Which bank has the lowest personal loan interest rate in Singapore?",
-  "On advertised rates as at 21 October 2026, Standard Chartered CashOne was lowest at 0.90% a year flat (EIR from "
-  "1.75%), followed by UOB and Trust at 1.00%, HSBC at 1.30%, DBS at 1.48% and OCBC's card-holder loan at 1.98%. These "
+  "On advertised rates as at 14 November 2026, Standard Chartered CashOne was lowest at 0.90% a year flat (EIR from "
+  "1.75%), followed by UOB, Trust and DBS at 1.00%, HSBC at 1.30% and OCBC's card-holder loan at 1.98%. These "
   "are the lowest rates each bank offers to its strongest applicants; the rate you are offered depends on your income and credit profile."),
  ("What is the difference between the interest rate and the EIR on a personal loan?",
   "Banks advertise a flat rate, charged on the full original loan for the whole tenure even though you repay it "
@@ -34,7 +35,7 @@ FAQ = [
  ("Why is the rate I am offered higher than the advertised rate?",
   "Advertised rates are 'from' rates for the best profiles: higher incomes, clean credit and often existing "
   "customers. Banks personalise the rate, so a lower income or other borrowing usually means a higher rate. DBS's "
-  "own worked example uses 1.99% plus a 1% processing fee, an EIR of 5.47%, against its headline 1.48%."),
+  "own worked example, S$10,000 over 12 months at 1.00% plus a 1% processing fee, is an EIR of 3.67%."),
  ("What fees should I look out for on a personal loan?",
   "Processing fees taken from the loan, annual fees on some revolving-style loans, early termination fees if you "
   "repay early, and late payment charges. DBS, for example, charges S$250 to terminate a personal loan early, and "
@@ -52,7 +53,7 @@ FAQ = [
 BODY = r'''
   <div class="short-answer">
     <div class="sa-title">Short answer</div>
-    <p>As at 21 October 2026, the main banks advertised personal loans from <strong>0.90% to 1.98% a year flat</strong>, which is an <strong>EIR from about 1.75% to 4.19%</strong>. Those are best-case rates. Your offer depends on your income and credit, and fees change the real cost: DBS's own example at 1.99% plus a 1% fee is an <strong>EIR of 5.47%</strong>. Always compare on the <strong>EIR including fees</strong>, and if you plan to buy or refinance a home soon, remember the instalment <strong>cuts your home loan by far more</strong> than it costs.</p>
+    <p>As at 14 November 2026, the main banks advertised personal loans from <strong>0.90% to 1.98% a year flat</strong>, which is an <strong>EIR from about 1.75% to 4.19%</strong>. Those are best-case rates. Your offer depends on your income and credit, and fees change the real cost: DBS's own example, S$10,000 over 12 months at 1.00% plus a 1% fee, is an <strong>EIR of 3.67%</strong>. Always compare on the <strong>EIR including fees</strong>, and if you plan to buy or refinance a home soon, remember the instalment <strong>cuts your home loan by far more</strong> than it costs.</p>
   </div>
 
   <div class="toc">
@@ -72,7 +73,7 @@ BODY = r'''
 
   <h2 id="rates">Advertised Rates, Bank by Bank</h2>
 
-  <p>The lowest rates each bank advertised as at 21 October 2026. Rates and promotions change often, so check the bank before you apply.</p>
+  <p>The lowest rates each bank advertised as at 14 November 2026. Rates and promotions change often, so check the bank before you apply.</p>
 
   <table class="compare-table">
     <thead>
@@ -82,8 +83,8 @@ BODY = r'''
       <tr><td>Standard Chartered CashOne</td><td>0.90% p.a.</td><td>1.75% p.a.</td><td>S$199 annual fee (EIR 2.15% with it, on S$20,000 over 5 years)</td></tr>
       <tr><td>UOB Personal Loan</td><td>1.00% p.a.</td><td>1.93% p.a.</td><td>No processing fee (per MoneySmart)</td></tr>
       <tr><td>Trust Instant Loan</td><td>1.00% p.a.</td><td>2.28% p.a.</td><td>EIR includes a 0.88% first-year annual fee</td></tr>
+      <tr><td>DBS / POSB Personal Loan</td><td>1.00% p.a.</td><td>2.32% p.a.</td><td>1% processing fee; S$250 early termination</td></tr>
       <tr><td>HSBC Personal Loan</td><td>1.30% p.a.</td><td>2.50% p.a.</td><td>Promotional rate; zero processing fee</td></tr>
-      <tr><td>DBS / POSB Personal Loan</td><td>1.48% p.a.</td><td>3.22% p.a.</td><td>1% processing fee; S$250 early termination</td></tr>
       <tr><td>OCBC Cash-on-Instalments</td><td>1.98% p.a.</td><td>4.19% p.a.</td><td>OCBC credit card or EasiCredit holders only</td></tr>
     </tbody>
   </table>
@@ -96,7 +97,7 @@ BODY = r'''
 
   <p>Every rate in that table is a &ldquo;from&rdquo; rate: the lowest the bank offers, to its strongest applicants. Banks personalise the rate on your income, your credit report, your existing borrowing and often whether you already bank with them.</p>
 
-  <p>DBS shows the gap in its own worked example: a S$3,000 loan over 12 months at <strong>1.99% plus a 1% processing fee</strong> is an <strong>EIR of 5.47%</strong>, against its headline 1.48% and EIR of 3.22%. A smaller loan, a shorter tenure and a fixed fee all push the effective rate up.</p>
+  <p>DBS shows the gap in its own worked example: a S$10,000 loan over 12 months at <strong>1.00% plus a 1% processing fee</strong> is an <strong>EIR of 3.67%</strong>, against the headline EIR of 2.32% for the same rate and fee. A smaller loan, a shorter tenure and a fixed fee all push the effective rate up.</p>
 
   <p>There are also hard limits on how much each bank can lend you, set by MAS on your income: 2 months' income if you earn S$20,000 to below S$30,000 a year, 4 months' from S$30,000 to below S$120,000. Our <a href="/blog/personal-loan-how-much-can-i-borrow-singapore/">personal loan limits guide</a> covers them in full.</p>
 
@@ -152,13 +153,13 @@ BODY = r'''
   <h2 id="faq">Frequently Asked Questions</h2>
 
   <div class="faq-q">Which bank has the lowest personal loan interest rate in Singapore?</div>
-  <p>As at 21 October 2026, Standard Chartered CashOne at 0.90% a year flat (EIR from 1.75%), then UOB and Trust at 1.00%, HSBC at 1.30%, DBS at 1.48% and OCBC (card holders) at 1.98%. These are best-case rates; yours depends on your profile.</p>
+  <p>As at 14 November 2026, Standard Chartered CashOne at 0.90% a year flat (EIR from 1.75%), then UOB, Trust and DBS at 1.00%, HSBC at 1.30% and OCBC (card holders) at 1.98%. These are best-case rates; yours depends on your profile.</p>
 
   <div class="faq-q">What is the difference between the interest rate and the EIR on a personal loan?</div>
   <p>The flat rate is charged on the original loan for the whole tenure. The EIR is the true annual cost on the balance you owe, including fees, and is roughly double. Compare on the EIR.</p>
 
   <div class="faq-q">Why is the rate I am offered higher than the advertised rate?</div>
-  <p>Advertised rates are for the strongest applicants. DBS's own example uses 1.99% plus a 1% fee, an EIR of 5.47%, against its headline 1.48%.</p>
+  <p>Advertised rates are for the strongest applicants. DBS's own example, S$10,000 over 12 months at 1.00% plus a 1% fee, is an EIR of 3.67%, against its headline EIR of 2.32%.</p>
 
   <div class="faq-q">What fees should I look out for on a personal loan?</div>
   <p>Processing fees, annual fees on some products, early termination fees (S$250 at DBS) and late payment charges. Standard Chartered CashOne has a S$199 annual fee.</p>
@@ -183,8 +184,8 @@ BODY = r'''
   <p style="font-size: .8rem; color: rgba(232,227,218,.35); line-height: 1.6;">
     <em>This article is general information on personal loans in Singapore. It is not financial advice and not an
     offer of credit. Nexus Mortgage does not provide personal loans; BizSaver is a Nexus partner and Nexus may benefit
-    from that relationship. Advertised rates are the lowest each bank published as at 21 October 2026, from the banks'
-    own pages and MoneySmart's comparison updated 21 October 2026; rates are personalised and change often, so confirm
+    from that relationship. Advertised rates are the lowest each bank published as at 14 November 2026, from the banks'
+    own pages and MoneySmart's comparison, rechecked 14 November 2026; rates are personalised and change often, so confirm
     with the bank. The S$30,000 table is our own illustrative calculation over 36 months; banks' published EIRs may use
     slightly different methods. The home loan figure assumes a 4% stress rate over 25 years and no other debt. Current
     as at November 2026. Sources:
@@ -198,20 +199,20 @@ IMAGES = [
  {'out': 'personal-loan-rates-hero', 'type': 'hero', 'style': 'b',
   'kicker': 'Personal Loans',
   'title': "Personal loan rates, bank by bank: why 'from 1%' is not your rate",
-  'num': '5.47%', 'numlabel': "The EIR in DBS's own worked example, against a headline rate of 1.48%"},
+  'num': '3.67%', 'numlabel': "The EIR in DBS's own worked example for a loan advertised at 1.00% a year"},
 
  {'out': 'personal-loan-rates-table', 'type': 'compare', 'style': 'b',
-  'kicker': 'Advertised rates · as at 21 Oct 2026',
+  'kicker': 'Advertised rates · as at 14 Nov 2026',
   'title': 'The lowest rates each bank advertises',
-  'cols': ['SC CashOne', 'UOB', 'Trust', 'HSBC', 'DBS', 'OCBC*'],
-  'rows': [{'label': 'Flat rate from', 'cells': ['0.90%', '1.00%', '1.00%', '1.30%', '1.48%', '1.98%']},
-           {'label': 'EIR from', 'cells': ['1.75%', '1.93%', '2.28%', '2.50%', '3.22%', '4.19%'], 'highlight': True},
-           {'label': 'Fees', 'cells': ['S$199 a year', 'None', '0.88% year 1', 'None', '1% upfront', 'See bank']}],
-  'source': "Best-case advertised rates from the banks' pages and MoneySmart, 21 Oct 2026. Rates are personalised "
+  'cols': ['SC CashOne', 'UOB', 'Trust', 'DBS', 'HSBC', 'OCBC*'],
+  'rows': [{'label': 'Flat rate from', 'cells': ['0.90%', '1.00%', '1.00%', '1.00%', '1.30%', '1.98%']},
+           {'label': 'EIR from', 'cells': ['1.75%', '1.93%', '2.28%', '2.32%', '2.50%', '4.19%'], 'highlight': True},
+           {'label': 'Fees', 'cells': ['S$199 a year', 'None', '0.88% year 1', '1% upfront', 'None', 'See bank']}],
+  'source': "Best-case advertised rates from the banks' pages and MoneySmart, 14 Nov 2026. Rates are personalised "
             'and change often. *OCBC Cash-on-Instalments, for OCBC card or EasiCredit holders.',
   'anchor': 'rates',
-  'alt': 'Table of advertised personal loan rates in Singapore as at 21 October 2026: Standard Chartered 0.90%, UOB '
-         '1.00%, Trust 1.00%, HSBC 1.30%, DBS 1.48% and OCBC 1.98% flat, with EIRs from 1.75% to 4.19%',
+  'alt': 'Table of advertised personal loan rates in Singapore as at 14 November 2026: Standard Chartered 0.90%, UOB '
+         '1.00%, Trust 1.00%, DBS 1.00%, HSBC 1.30% and OCBC 1.98% flat, with EIRs from 1.75% to 4.19%',
   'caption': 'These are floors. The rate you are offered depends on your income and credit.'},
 
  {'out': 'personal-loan-rates-cost', 'type': 'compare', 'style': 'b',

@@ -2616,22 +2616,22 @@
     "style": "b",
     "kicker": "Personal Loans",
     "title": "Personal loan rates, bank by bank: why 'from 1%' is not your rate",
-    "num": "5.47%",
-    "numlabel": "The EIR in DBS's own worked example, against a headline rate of 1.48%",
+    "num": "3.67%",
+    "numlabel": "The EIR in DBS's own worked example for a loan advertised at 1.00% a year",
     "slug": "personal-loan-interest-rates-singapore-2026"
   },
   {
     "out": "personal-loan-rates-table",
     "type": "compare",
     "style": "b",
-    "kicker": "Advertised rates · as at 21 Oct 2026",
+    "kicker": "Advertised rates · as at 14 Nov 2026",
     "title": "The lowest rates each bank advertises",
     "cols": [
       "SC CashOne",
       "UOB",
       "Trust",
-      "HSBC",
       "DBS",
+      "HSBC",
       "OCBC*"
     ],
     "rows": [
@@ -2641,8 +2641,8 @@
           "0.90%",
           "1.00%",
           "1.00%",
+          "1.00%",
           "1.30%",
-          "1.48%",
           "1.98%"
         ]
       },
@@ -2652,8 +2652,8 @@
           "1.75%",
           "1.93%",
           "2.28%",
+          "2.32%",
           "2.50%",
-          "3.22%",
           "4.19%"
         ],
         "highlight": true
@@ -2664,15 +2664,15 @@
           "S$199 a year",
           "None",
           "0.88% year 1",
-          "None",
           "1% upfront",
+          "None",
           "See bank"
         ]
       }
     ],
-    "source": "Best-case advertised rates from the banks' pages and MoneySmart, 21 Oct 2026. Rates are personalised and change often. *OCBC Cash-on-Instalments, for OCBC card or EasiCredit holders.",
+    "source": "Best-case advertised rates from the banks' pages and MoneySmart, 14 Nov 2026. Rates are personalised and change often. *OCBC Cash-on-Instalments, for OCBC card or EasiCredit holders.",
     "anchor": "rates",
-    "alt": "Table of advertised personal loan rates in Singapore as at 21 October 2026: Standard Chartered 0.90%, UOB 1.00%, Trust 1.00%, HSBC 1.30%, DBS 1.48% and OCBC 1.98% flat, with EIRs from 1.75% to 4.19%",
+    "alt": "Table of advertised personal loan rates in Singapore as at 14 November 2026: Standard Chartered 0.90%, UOB 1.00%, Trust 1.00%, DBS 1.00%, HSBC 1.30% and OCBC 1.98% flat, with EIRs from 1.75% to 4.19%",
     "caption": "These are floors. The rate you are offered depends on your income and credit.",
     "slug": "personal-loan-interest-rates-singapore-2026"
   },
