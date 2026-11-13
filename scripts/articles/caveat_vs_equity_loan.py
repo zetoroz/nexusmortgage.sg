@@ -1,5 +1,5 @@
 SLUG = "caveat-loan-vs-equity-loan-singapore"
-TITLE = "Caveat Loan vs Equity Loan Singapore: Borrowing Against Your Property | Nexus"
+TITLE = "Caveat Loan vs Equity Loan Singapore: Cost and Speed"
 DESC = ("Caveat loan or bank equity loan? How much each lends against your property, how fast, what it costs, "
         "and when a caveat loan is worth paying for. With a worked example on a S$2M condo.")
 OG_TITLE = "Caveat Loan vs Equity Loan: Two Ways to Borrow Against Your Property"

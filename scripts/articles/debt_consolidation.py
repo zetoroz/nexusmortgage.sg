@@ -1,5 +1,5 @@
 SLUG = "debt-consolidation-plan-singapore"
-TITLE = "Debt Consolidation Plan Singapore 2026: DCP vs Balance Transfer vs Loan | Nexus"
+TITLE = "Debt Consolidation Plan Singapore 2026: DCP vs Alternatives"
 DESC = ("Who qualifies for the Debt Consolidation Plan, what it does to your cards, and how it compares with a "
         "balance transfer, a personal loan, a licensed moneylender and refinancing against your home.")
 OG_TITLE = "Debt Consolidation in Singapore: DCP, Balance Transfer, Loan or Home Equity?"
@@ -165,6 +165,8 @@ BODY = r'''
       <tr><td>Licensed moneylender</td><td>Rarely the right answer</td><td>Up to 4% a month plus fees</td></tr>
     </tbody>
   </table>
+
+  <p>If you are weighing a DCP against a single personal loan, our <a href="/blog/personal-loan-interest-rates-singapore-2026/">personal loan rates by bank</a> lists what each bank advertises.</p>
 
   <h2 id="faq">Frequently Asked Questions</h2>
 

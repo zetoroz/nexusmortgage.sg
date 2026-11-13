@@ -1,5 +1,5 @@
 SLUG = "divorce-property-home-loan-singapore"
-TITLE = "Divorce and Your Home in Singapore: HDB, Condo, CPF and the Loan | Nexus"
+TITLE = "Divorce and Your Home in Singapore: HDB, CPF and the Loan"
 DESC = ("What happens to an HDB flat or private home in a Singapore divorce: sell or keep, who can retain an HDB "
         "flat, CPF refunds, stamp duty remission, and refinancing the loan onto one income.")
 OG_TITLE = "Divorce and the Home Loan: Selling, Keeping, and Getting Your Name Off the Loan"

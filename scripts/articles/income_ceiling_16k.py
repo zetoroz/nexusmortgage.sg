@@ -1,5 +1,5 @@
 SLUG = "hdb-income-ceiling-16000-2026"
-TITLE = "HDB Income Ceiling S$16,000 from 24 Aug 2026: What Changes | Nexus"
+TITLE = "HDB Income Ceiling S$16,000 from 24 Aug 2026: What Changes"
 DESC = ("The HDB income ceiling rose to S$16,000 for families and S$8,000 for singles on 24 August 2026. "
         "What it unlocks, what it does to your borrowing power, and the one grant ceiling that did not move.")
 OG_TITLE = "HDB Income Ceiling Raised to S$16,000: What It Actually Changes for Your Loan"

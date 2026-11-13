@@ -1,5 +1,5 @@
 SLUG = "sme-business-loan-singapore-2026"
-TITLE = "SME Business Loans Singapore 2026: EFS, Rates and How Much You Can Borrow | Nexus"
+TITLE = "SME Business Loans Singapore 2026: EFS, Rates, How Much"
 DESC = ("SME business loans in Singapore: the EFS working capital loan up to S$500,000 with a 70% government "
         "risk share until March 2027, what a monthly rate really costs, and what lenders ask for.")
 OG_TITLE = "SME Business Loans in Singapore: What 0.35% a Month Really Costs"

@@ -1,5 +1,5 @@
 SLUG = "thomson-reserve-financing-2026"
-TITLE = "Thomson Reserve Launch Results, Prices and Financing Calculator 2026 | Nexus"
+TITLE = "Thomson Reserve: Launch Results, Prices and Calculator"
 DESC = ("Thomson Reserve sold 1,143 of 1,268 units at launch, averaging S$2,900 psf. Cash, stamp duty and "
         "income for the remaining 2-bedrooms, what buyers who booked pay next, with a calculator.")
 OG_TITLE = "Thomson Reserve Sold 90% at Launch: What Buyers Pay Next, and What the Remaining Units Need"

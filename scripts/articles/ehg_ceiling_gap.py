@@ -1,5 +1,5 @@
 SLUG = "ehg-income-ceiling-9000-2026"
-TITLE = "EHG Income Ceiling Still S$9,000 in 2026: What It Costs | Nexus"
+TITLE = "EHG Income Ceiling Still S$9,000 in 2026: What It Costs"
 DESC = ("The flat ceiling rose to S$16,000 on 24 August 2026. The Enhanced CPF Housing Grant ceiling did not "
         "move off S$9,000. What the EHG is really worth, and what crossing the line actually costs you.")
 OG_TITLE = "The EHG Ceiling Stayed at S$9,000: What That Actually Costs You"

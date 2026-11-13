@@ -1,5 +1,5 @@
 SLUG = "personal-loan-interest-rates-singapore-2026"
-TITLE = "Personal Loan Interest Rates Singapore 2026: Bank by Bank, EIR and Fees | Nexus"
+TITLE = "Personal Loan Interest Rates Singapore 2026: Bank by Bank"
 DESC = ("Personal loan rates in Singapore compared bank by bank: advertised flat rates and EIRs, the fees that "
         "change the real cost, why the rate you get may differ, and what a loan does to your home loan.")
 OG_TITLE = "Personal Loan Rates in Singapore: Bank by Bank, and Why 'From 1%' Is Not Your Rate"

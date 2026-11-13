@@ -1,5 +1,5 @@
 SLUG = "personal-loan-how-much-can-i-borrow-singapore"
-TITLE = "How Much Can I Borrow on a Personal Loan in Singapore? 2026 Limits | Nexus"
+TITLE = "How Much Can I Borrow on a Personal Loan in Singapore?"
 DESC = ("The MAS rules that cap a personal loan in Singapore: the S$20,000 income floor, 2x or 4x monthly income "
         "per bank, the 12x limit across all banks, and what a personal loan does to your home loan.")
 OG_TITLE = "How Much Can You Borrow on a Personal Loan in Singapore?"
@@ -156,6 +156,8 @@ BODY = r'''
   </table>
 
   <p>If a property purchase is anywhere in your next year or two, sequence it deliberately. Clearing or shortening a personal loan before you apply for a home loan can restore a surprising amount of borrowing power. Our <a href="/blog/tdsr-msr-explained/">TDSR and MSR guide</a> shows the full calculation, and we are happy to run your numbers before you commit to either loan.</p>
+
+  <p>Once you know your limit, our <a href="/blog/personal-loan-interest-rates-singapore-2026/">personal loan interest rates by bank</a> shows what each lender advertises.</p>
 
   <h2 id="faq">Frequently Asked Questions</h2>
 

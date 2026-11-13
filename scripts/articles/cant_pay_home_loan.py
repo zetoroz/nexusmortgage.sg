@@ -1,5 +1,5 @@
 SLUG = "cant-pay-home-loan-singapore"
-TITLE = "Can't Pay Your Home Loan in Singapore? What Happens and What to Do | Nexus"
+TITLE = "Can't Pay Your Home Loan in Singapore? What to Do"
 DESC = ("Falling behind on a mortgage in Singapore: what the bank or HDB does month by month, the options that "
         "cut your instalment, when a mortgagee sale happens, and why selling yourself beats being sold.")
 OG_TITLE = "Can't Pay Your Home Loan? What Happens, and What to Do First"

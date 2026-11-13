@@ -1,5 +1,5 @@
 SLUG = "personal-loan-flat-rate-vs-eir-singapore"
-TITLE = "Personal Loan Flat Rate vs EIR in Singapore: The Real Cost | Nexus"
+TITLE = "Personal Loan Flat Rate vs EIR in Singapore: Real Cost"
 DESC = ("Why a 3% flat-rate personal loan really costs around 5.6% a year, how processing fees push the EIR higher "
         "on short loans, and the four numbers to compare before you sign.")
 OG_TITLE = "Flat Rate vs EIR: What a Personal Loan Really Costs"
@@ -123,6 +123,8 @@ BODY = r'''
   </ol>
 
   <p>Promotional cashback can be real value, but only compare it after you have compared EIR. A cashback worth S$100 does not make up for an EIR two points higher on a S$20,000 loan.</p>
+
+  <p>For the rates each bank advertises today, with their EIRs, see our <a href="/blog/personal-loan-interest-rates-singapore-2026/">personal loan interest rates by bank</a>.</p>
 
   <h2 id="faq">Frequently Asked Questions</h2>
 

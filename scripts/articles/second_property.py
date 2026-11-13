@@ -1,5 +1,5 @@
 SLUG = "second-property-loan-ltv-singapore"
-TITLE = "Second Property Loan Singapore: LTV, Cash &amp; TDSR (2026) | Nexus"
+TITLE = "Second Property Loan Singapore: LTV, Cash &amp; TDSR (2026)"
 DESC = ("How much can you borrow on a second property in Singapore? LTV drops to 45%, the cash downpayment "
         "rises to 25%, and TDSR still applies at the 4% floor. The full 2026 numbers, with a worked example.")
 OG_TITLE = "Second Property Loan in Singapore: What You Can Actually Borrow (2026)"

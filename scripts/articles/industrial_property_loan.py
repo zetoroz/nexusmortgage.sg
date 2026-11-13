@@ -1,5 +1,5 @@
 SLUG = "industrial-property-loan-singapore-2026"
-TITLE = "Industrial Property Loan Singapore 2026: LTV, Tenure &amp; JTC Rules | Nexus"
+TITLE = "Industrial Property Loan Singapore 2026: LTV and JTC Rules"
 DESC = ("How banks finance B1 and B2 industrial property in Singapore in 2026: why the remaining lease sets "
         "your tenure, the cash you need with no CPF, JTC transfer approvals, and the SSD commercial buyers never pay.")
 OG_TITLE = "Industrial Property Loans in Singapore: The Lease Sets the Loan"
@@ -178,6 +178,8 @@ BODY = r'''
   </ol>
 
   <p>Because appetite for industrial risk varies by bank and shifts quarter to quarter, the most useful thing you can do before committing to a purchase is put the same case in front of several lenders at once. That is what an <a href="/services/commercial-property-loan/">industrial and commercial loan review</a> with us does, and it costs you nothing: banks pay the brokerage on disbursement.</p>
+
+  <p>For shops, offices and other commercial property, see our <a href="/blog/commercial-property-loan-singapore-2026/">commercial property loan guide</a>.</p>
 
   <h2 id="faq">Frequently Asked Questions</h2>
 
