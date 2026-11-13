@@ -177,7 +177,7 @@ BODY = r'''
     <li><strong>The relationship.</strong> Deposits and an existing operating account with the lender genuinely move pricing on business lending.</li>
   </ol>
 
-  <p>Because appetite for industrial risk varies by bank and shifts quarter to quarter, the most useful thing you can do before committing to a purchase is put the same case in front of several lenders at once. That is what an <a href="/services/commercial-property-loan/">industrial and commercial loan review</a> with us does, and it costs you nothing: banks pay the brokerage on disbursement.</p>
+  <p>Because appetite for industrial risk varies by bank and shifts quarter to quarter, the most useful thing you can do before committing to a purchase is put the same case in front of several lenders at once. That is what an <a href="/contact/">industrial and commercial loan review</a> with us does, and it costs you nothing: banks pay the brokerage on disbursement.</p>
 
   <p>For shops, offices and other commercial property, see our <a href="/blog/commercial-property-loan-singapore-2026/">commercial property loan guide</a>.</p>
 
