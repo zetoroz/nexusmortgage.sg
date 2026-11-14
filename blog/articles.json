@@ -1,5 +1,29 @@
 [
  {
+  "slug": "property-valuation-singapore",
+  "url": "/blog/property-valuation-singapore/",
+  "status": "scheduled",
+  "title": "Property Valuation in Singapore: How It Caps Your Loan, and What to Do When It Comes In Low",
+  "excerpt": "Your loan and your CPF follow the lower of the price or the valuation. How HDB's Request for Value and bank valuations work, what cash over valuation costs, and what to do when a valuation comes in low.",
+  "tag": "Buying & Valuation",
+  "date": "29 November 2026",
+  "readTime": "8 min read",
+  "thumbnail": "blog-images/property-valuation-thumb.webp",
+  "thumbnailAlt": "Property valuation in Singapore: your loan follows the lower of price or valuation"
+ },
+ {
+  "slug": "hdb-loan-eligibility-2026",
+  "url": "/blog/hdb-loan-eligibility-2026/",
+  "status": "scheduled",
+  "title": "HDB Loan Eligibility 2026: Who Qualifies, Rule by Rule, and the HFE Letter",
+  "excerpt": "The six conditions for an HDB housing loan in 2026, from HDB's own rules: citizenship, the S$16,000 income ceiling, the 30-month private property rule, the two-loan limit, the credit check, and the HFE letter that confirms it all.",
+  "tag": "HDB & Eligibility",
+  "date": "19 November 2026",
+  "readTime": "9 min read",
+  "thumbnail": "blog-images/hdb-loan-eligibility-thumb.webp",
+  "thumbnailAlt": "HDB loan eligibility in 2026: the six conditions for an HDB concessionary loan"
+ },
+ {
   "slug": "personal-loan-interest-rates-singapore-2026",
   "url": "/blog/personal-loan-interest-rates-singapore-2026/",
   "status": "live",

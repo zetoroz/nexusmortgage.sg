@@ -2723,5 +2723,204 @@
     "alt": "Cost of a S$30,000 personal loan over three years at four flat rates: monthly instalments of S$858 to S$971 but total interest and fees from S$900 to S$5,550",
     "caption": "Compare on the total cost and the EIR, not the monthly instalment.",
     "slug": "personal-loan-interest-rates-singapore-2026"
+  },
+  {
+    "out": "hdb-loan-eligibility-hero",
+    "type": "hero",
+    "style": "b",
+    "kicker": "HDB Loans",
+    "title": "HDB loan eligibility in 2026, rule by rule",
+    "num": "30",
+    "numlabel": "Months since selling private property before you can take an HDB loan",
+    "slug": "hdb-loan-eligibility-2026"
+  },
+  {
+    "out": "hdb-loan-eligibility-conditions",
+    "type": "compare",
+    "style": "b",
+    "kicker": "HDB housing loan · 2026",
+    "title": "Six conditions, all of them must be met",
+    "cols": [
+      "The rule"
+    ],
+    "rows": [
+      {
+        "label": "Citizenship",
+        "cells": [
+          "At least 1 Singapore Citizen"
+        ]
+      },
+      {
+        "label": "Income ceiling",
+        "cells": [
+          "S$16,000 families, S$8,000 singles"
+        ],
+        "highlight": true
+      },
+      {
+        "label": "Private property",
+        "cells": [
+          "None owned; none sold in 30 months"
+        ]
+      },
+      {
+        "label": "Non-residential",
+        "cells": [
+          "Up to 1 per household"
+        ]
+      },
+      {
+        "label": "Past HDB loans",
+        "cells": [
+          "Fewer than 2"
+        ]
+      },
+      {
+        "label": "Credit check",
+        "cells": [
+          "Pass, and be working"
+        ]
+      }
+    ],
+    "source": "HDB: Housing Loan from HDB, November 2026. Extended families S$24,000. Applies to everyone in the HFE application.",
+    "anchor": "conditions",
+    "alt": "Table of the six HDB housing loan eligibility conditions in 2026: citizenship, income ceiling, private property, non-residential property, previous HDB loans and credit assessment",
+    "caption": "Every applicant and occupier in the HFE application is checked against all six.",
+    "slug": "hdb-loan-eligibility-2026"
+  },
+  {
+    "out": "hdb-loan-eligibility-second",
+    "type": "compare",
+    "style": "b",
+    "kicker": "Second HDB loan",
+    "title": "What HDB counts before it lends again",
+    "cols": [
+      "What you keep"
+    ],
+    "rows": [
+      {
+        "label": "Cash proceeds",
+        "cells": [
+          "Higher of S$25,000 or 50%"
+        ]
+      },
+      {
+        "label": "CPF refund",
+        "cells": [
+          "Up to S$20,000 in your OA"
+        ],
+        "highlight": true
+      },
+      {
+        "label": "Buy before you sell",
+        "cells": [
+          "Commercial rate until sold"
+        ]
+      }
+    ],
+    "source": "HDB: conditions for a second HDB housing loan. The commercial rate converts to the concessionary rate once the old flat is disposed of within 6 months.",
+    "anchor": "second",
+    "alt": "What HDB lets you keep from the sale of your last flat before granting a second HDB loan: the higher of S$25,000 or 50% of cash proceeds, and up to S$20,000 of CPF refund",
+    "caption": "The second loan is smaller than most upgraders expect, because the last flat pays first.",
+    "slug": "hdb-loan-eligibility-2026"
+  },
+  {
+    "out": "property-valuation-hero",
+    "type": "hero",
+    "style": "b",
+    "kicker": "Buying & Valuation",
+    "title": "The valuer, not the price, sets your loan",
+    "num": "S$37,500",
+    "numlabel": "Extra cash up front when a S$550,000 flat is valued at S$500,000",
+    "slug": "property-valuation-singapore"
+  },
+  {
+    "out": "property-valuation-example",
+    "type": "compare",
+    "style": "b",
+    "kicker": "Worked example · 75% loan",
+    "title": "A S$50,000 valuation gap, followed through",
+    "cols": [
+      "Valued at price",
+      "Valued S$50k below"
+    ],
+    "rows": [
+      {
+        "label": "Agreed price",
+        "cells": [
+          "S$550,000",
+          "S$550,000"
+        ]
+      },
+      {
+        "label": "Valuation",
+        "cells": [
+          "S$550,000",
+          "S$500,000"
+        ]
+      },
+      {
+        "label": "Loan (75% of lower)",
+        "cells": [
+          "S$412,500",
+          "S$375,000"
+        ]
+      },
+      {
+        "label": "You fund, before stamp duty",
+        "cells": [
+          "S$137,500",
+          "S$175,000"
+        ],
+        "highlight": true
+      }
+    ],
+    "source": "Illustrative. First housing loan at 75% LTV on the lower of price or valuation. On HDB resale, the S$50,000 above valuation is cash over valuation and must be cash.",
+    "anchor": "example",
+    "alt": "Worked example: a S$550,000 flat valued at S$500,000 gets a S$375,000 loan instead of S$412,500, and the buyer funds S$175,000 instead of S$137,500",
+    "caption": "The loan shrinks by three-quarters of the gap, and you fund the gap itself.",
+    "slug": "property-valuation-singapore"
+  },
+  {
+    "out": "property-valuation-hdb",
+    "type": "compare",
+    "style": "b",
+    "kicker": "HDB resale · Request for Value",
+    "title": "The HDB valuation timeline",
+    "cols": [
+      "What happens"
+    ],
+    "rows": [
+      {
+        "label": "Option period",
+        "cells": [
+          "21 calendar days from the OTP"
+        ]
+      },
+      {
+        "label": "Request for Value",
+        "cells": [
+          "By the next working day, S$120"
+        ],
+        "highlight": true
+      },
+      {
+        "label": "Outcome",
+        "cells": [
+          "Usually within 10 working days"
+        ]
+      },
+      {
+        "label": "Valid for",
+        "cells": [
+          "3 months"
+        ]
+      }
+    ],
+    "source": "HDB: Request for Value for a Resale Flat. Not needed if you pay with cash only, no CPF and no loan.",
+    "anchor": "hdb",
+    "alt": "HDB resale valuation timeline: 21-day option period, Request for Value by the next working day for S$120, outcome usually within 10 working days, valid for 3 months",
+    "caption": "You see HDB's value before you exercise the OTP, so a low number still leaves room to walk away.",
+    "slug": "property-valuation-singapore"
   }
 ]
