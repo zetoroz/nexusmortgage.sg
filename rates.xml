@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Wed, 18 Nov 2026 08:20:14 GMT</lastBuildDate>
+<lastBuildDate>Thu, 19 Nov 2026 08:32:03 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
-<title>Current Compounded SORA — 1M 1.54% | 3M 1.37%</title>
+<title>Current Compounded SORA — 1M 1.55% | 3M 1.37%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-current-2026-11-17</guid>
-<pubDate>Wed, 18 Nov 2026 08:20:14 GMT</pubDate>
-<description>Latest published Compounded SORA values per MAS. As of 2026-11-17.</description>
+<guid isPermaLink="false">nexus-current-2026-11-18</guid>
+<pubDate>Thu, 19 Nov 2026 08:32:03 GMT</pubDate>
+<description>Latest published Compounded SORA values per MAS. As of 2026-11-18.</description>
+</item>
+<item>
+<title>SORA update: sora1m 1.544→1.5473</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Thu, 19 Nov 2026 08:32:03 GMT</guid>
+<pubDate>Thu, 19 Nov 2026 08:32:03 GMT</pubDate>
+<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.544,&quot;to&quot;:1.5473,&quot;delta&quot;:0.003}}</description>
 </item>
 <item>
 <title>SORA update: sora1m 1.5368→1.544, sora3m 1.3684→1.372</title>
@@ -217,13 +224,6 @@
 <guid isPermaLink="false">nexus-rates-Sat, 17 Oct 2026 05:24:46 GMT</guid>
 <pubDate>Sat, 17 Oct 2026 05:24:46 GMT</pubDate>
 <description>{}</description>
-</item>
-<item>
-<title>SORA update: sora1m 1.2911→1.3007, sora3m 1.2389→1.2418</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Fri, 16 Oct 2026 05:37:41 GMT</guid>
-<pubDate>Fri, 16 Oct 2026 05:37:41 GMT</pubDate>
-<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.2911,&quot;to&quot;:1.3007,&quot;delta&quot;:0.01},&quot;sora3m&quot;:{&quot;from&quot;:1.2389,&quot;to&quot;:1.2418,&quot;delta&quot;:0.003}}</description>
 </item>
 </channel>
 </rss>
