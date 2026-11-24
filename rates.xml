@@ -6,14 +6,21 @@
 <atom:link href="https://nexusmortgage.sg/rates.xml" rel="self" type="application/rss+xml"/>
 <description>Daily Singapore SORA (1M, 3M Compounded) and bank mortgage rate snapshots. Source: MAS.</description>
 <language>en-sg</language>
-<lastBuildDate>Mon, 23 Nov 2026 08:45:02 GMT</lastBuildDate>
+<lastBuildDate>Tue, 24 Nov 2026 10:45:09 GMT</lastBuildDate>
 <ttl>720</ttl>
 <item>
 <title>Current Compounded SORA — 1M 1.55% | 3M 1.38%</title>
 <link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-current-2026-11-20</guid>
-<pubDate>Mon, 23 Nov 2026 08:45:02 GMT</pubDate>
-<description>Latest published Compounded SORA values per MAS. As of 2026-11-20.</description>
+<guid isPermaLink="false">nexus-current-2026-11-23</guid>
+<pubDate>Tue, 24 Nov 2026 10:45:09 GMT</pubDate>
+<description>Latest published Compounded SORA values per MAS. As of 2026-11-23.</description>
+</item>
+<item>
+<title>SORA update: sora1m 1.5495→1.5527, sora3m 1.3761→1.3791</title>
+<link>https://nexusmortgage.sg/mortgage-rates/</link>
+<guid isPermaLink="false">nexus-rates-Tue, 24 Nov 2026 10:45:09 GMT</guid>
+<pubDate>Tue, 24 Nov 2026 10:45:09 GMT</pubDate>
+<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.5495,&quot;to&quot;:1.5527,&quot;delta&quot;:0.003},&quot;sora3m&quot;:{&quot;from&quot;:1.3761,&quot;to&quot;:1.3791,&quot;delta&quot;:0.003}}</description>
 </item>
 <item>
 <title>SORA update: sora1m 1.5531→1.5495, sora3m 1.3725→1.3761</title>
@@ -217,13 +224,6 @@
 <guid isPermaLink="false">nexus-rates-Thu, 22 Oct 2026 05:52:09 GMT</guid>
 <pubDate>Thu, 22 Oct 2026 05:52:09 GMT</pubDate>
 <description>{&quot;sora1m&quot;:{&quot;from&quot;:1.3228,&quot;to&quot;:1.3325,&quot;delta&quot;:0.01},&quot;sora3m&quot;:{&quot;from&quot;:1.2532,&quot;to&quot;:1.2553,&quot;delta&quot;:0.002}}</description>
-</item>
-<item>
-<title>SORA update: sora1m 1.319→1.3228, sora3m 1.2505→1.2532</title>
-<link>https://nexusmortgage.sg/mortgage-rates/</link>
-<guid isPermaLink="false">nexus-rates-Wed, 21 Oct 2026 05:49:23 GMT</guid>
-<pubDate>Wed, 21 Oct 2026 05:49:23 GMT</pubDate>
-<description>{&quot;sora1m&quot;:{&quot;from&quot;:1.319,&quot;to&quot;:1.3228,&quot;delta&quot;:0.004},&quot;sora3m&quot;:{&quot;from&quot;:1.2505,&quot;to&quot;:1.2532,&quot;delta&quot;:0.003}}</description>
 </item>
 </channel>
 </rss>
