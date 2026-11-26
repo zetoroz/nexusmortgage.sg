@@ -1,5 +1,23 @@
 [
   {
+    "generatedAt": "2026-11-26T09:15:52.885Z",
+    "source": "MAS",
+    "asOfSora": "2026-11-25",
+    "refRateChanges": {
+      "sora1m": {
+        "from": 1.556,
+        "to": 1.56,
+        "delta": 0.004
+      },
+      "sora3m": {
+        "from": 1.382,
+        "to": 1.3869,
+        "delta": 0.005
+      }
+    },
+    "summary": "SORA update: sora1m 1.556→1.56, sora3m 1.382→1.3869"
+  },
+  {
     "generatedAt": "2026-11-25T09:41:13.730Z",
     "source": "MAS",
     "asOfSora": "2026-11-24",
@@ -6487,20 +6505,5 @@
       }
     ],
     "summary": "33 year1Rate"
-  },
-  {
-    "generatedAt": "2026-06-15T06:29:23.146010+00:00",
-    "asOf": "11 May 2026",
-    "xlsxFingerprint": "506e84c9ef9d",
-    "packageCount": 106,
-    "refRates": {
-      "sora1m": 1.0451,
-      "sora3m": 1.0757,
-      "fhr6": 0.8,
-      "asOfSora": "2026-06-11"
-    },
-    "refRateChanges": {},
-    "packageChanges": [],
-    "summary": "No material changes."
   }
 ]
